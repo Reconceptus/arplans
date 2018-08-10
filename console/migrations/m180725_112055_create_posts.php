@@ -15,6 +15,12 @@ class m180725_112055_create_posts extends Migration
             [
                 'id'         => $this->primaryKey()->unsigned(),
                 'slug'       => $this->string()->notNull(),
+                'name'         => $this->string()->notNull(),
+                'preview_text' => $this->string(500)->notNull(),
+                'text'         => $this->text()->notNull(),
+                'title'        => $this->string(),
+                'keywords'     => $this->string(),
+                'description'  => $this->string(),
                 'author_id'  => $this->integer()->notNull(),
                 'image'      => $this->string(),
                 'created_at' => $this->dateTime(),
@@ -23,18 +29,6 @@ class m180725_112055_create_posts extends Migration
                 'sort'       => $this->integer(),
             ]
         );
-
-        $this->createTable('postLang', [
-            'id'           => $this->primaryKey()->unsigned(),
-            'name'         => $this->string()->notNull(),
-            'preview_text' => $this->string(500)->notNull(),
-            'text'         => $this->text()->notNull(),
-            'title'        => $this->string(),
-            'keywords'     => $this->string(),
-            'description'  => $this->string(),
-            'language'     => $this->string(6),
-            'post_id'      => $this->integer()->unsigned()
-        ]);
 
         $this->createTable(
             'tag',
@@ -75,11 +69,8 @@ class m180725_112055_create_posts extends Migration
         $this->addForeignKey('FK_post_tag_tag', 'post_tag', 'tag_id', 'tag', 'id');
         $this->addForeignKey('FK_comment_author', 'comment', 'author_id', 'user', 'id');
         $this->addForeignKey('FK_comment_post', 'comment', 'post_id', 'post', 'id');
-        $this->addForeignKey('FK_postLang_post', 'postLang', 'post_id', 'post', 'id', 'CASCADE', 'CASCADE');
 
         $this->createIndex('I_post_author', 'post', 'author_id');
-        $this->createIndex('I_post_name', 'postLang', 'name');
-        $this->createIndex('I_post_lang', 'postLang', 'language');
         $this->createIndex('I_tag_lang', 'tag', 'language');
         $this->createIndex('U_tag_name', 'tag', 'name', true);
         $this->createIndex('U_post_slug', 'post', 'slug', true);
