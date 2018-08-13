@@ -13,32 +13,32 @@ class m180724_110516_create_roles_and_permissions extends Migration
 
         // создать разрешения
         $posts = $auth->createPermission('posts');
-        $posts->description = 'Edit posts';
+        $posts->description = 'Посты';
         $auth->add($posts);
 
         $pages = $auth->createPermission('pages');
-        $pages->description = 'Edit pages';
+        $pages->description = 'Страницы';
         $auth->add($pages);
 
         $adminPanel = $auth->createPermission('adminPanel');
-        $adminPanel->description = 'Access to admin panel';
+        $adminPanel->description = 'Доступ к админке';
         $auth->add($adminPanel);
 
         $users = $auth->createPermission('users');
-        $users->description = 'Edit users';
+        $users->description = 'Пользователи';
         $auth->add($users);
 
         // создаем роли
         $user = $auth->createRole('user');
-        $user->description = 'User';
+        $user->description = 'Пользователь';
         $auth->add($user);
 
         $manager = $auth->createRole('manager');
-        $manager->description = 'Manager';
+        $manager->description = 'Менеджер';
         $auth->add($manager);
 
         $admin = $auth->createRole('admin');
-        $admin->description = 'Admin';
+        $admin->description = 'Администратор';
         $auth->add($admin);
 
         // делаем наследование

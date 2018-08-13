@@ -16,13 +16,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 
-$this->title = 'Edit role ' . $role->description
+$this->title = 'Редактирование роли ' . $role->description
 ?>
 <h1><?= $this->title ?></h1>
 <? ActiveForm::begin() ?>
 <div class="roles-form">
     <div class="form-group">
-        <label class="control-label">Role name</label>
+        <label class="control-label">Описание роли</label>
         <?= Html::textInput('role[description]', $role->description ?: Yii::$app->request->post('role')['description'], ["class" => "form-control"]) ?>
     </div>
     <? if (array_key_exists('description', $errors) && is_array($errors['description'])): ?>
@@ -32,11 +32,11 @@ $this->title = 'Edit role ' . $role->description
     <? endif ?>
 
     <? if ($isNewModel): ?>
-        <div class="form-group" style="margin-left:30px">
-            <label class="control-label">Code</label>
+        <div class="form-group">
+            <label class="control-label">Код</label>
             <?= Html::textInput('role[code]', Yii::$app->request->post('role')['code'], ["class" => "form-control"]) ?>
         </div>
-        <? if (is_array($errors['code'])): ?>
+        <? if (array_key_exists('code', $errors) && is_array($errors['code'])): ?>
             <? foreach ($errors['code'] as $error): ?>
                 <br><?= $error ?>
             <? endforeach ?>

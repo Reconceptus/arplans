@@ -184,7 +184,7 @@ class PageController extends AdminController
      */
     public function findModel($id)
     {
-        if (($model = Page::find()->where(['id' => $id])->multilingual()->one()) !== null) {
+        if (($model = Page::find()->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
