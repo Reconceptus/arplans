@@ -34,8 +34,7 @@ class BlogController extends Controller
         if (array_key_exists('tag', $get)) {
             $tag = $get['tag'];
         }
-        $query = Post::find()->localized(Yii::$app->language)->alias('p')
-            ->innerJoin(PostLang::tableName() . ' pl', 'pl.post_id=p.id');
+        $query = Post::find()->alias('p');
         if (!empty($tag)) {
             $query->innerJoin(PostTag::tableName() . ' pt', 'p.id = pt.post_id')
                 ->innerJoin(Tag::tableName() . ' t', 'pt.tag_id = t.id');
@@ -44,13 +43,11 @@ class BlogController extends Controller
         if (!empty($tag)) {
             $query->andWhere(['t.name' => $tag]);
         }
-        $query->andWhere([
-            'and',
-            ['pl.language' => Yii::$app->language],
-            ['!=', 'pl.name', '']
-        ]);
+        $query->andWhere(['!=', 'p.name', '']);
 
-        $tags = Tag::find()->where(['language' => Yii::$app->language])->limit(5)->all();
+        $tags = Tag::find()->alias('t')
+            ->joinWith('posts')
+            ->where(['status' => Post::STATUS_PUBLISHED])->limit(10)->all();
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
@@ -72,11 +69,11 @@ class BlogController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Post::find()->where(['slug' => $slug])->localized(Yii::$app->language)->one();
+        $model = Post::find()->where(['slug' => $slug])->one();
         if (!$model) {
             throw new NotFoundHttpException('Post not found');
         }
-        $tags = ArrayHelper::map($model->getLangTags(Yii::$app->language)->all(), 'id', 'name');
+        $tags = ArrayHelper::map($model->getTags()->all(), 'id', 'name');
         $comment = new Comment();
         return $this->render('view', ['model' => $model, 'tags' => $tags, 'newComment' => $comment]);
     }
@@ -112,18 +109,15 @@ class BlogController extends Controller
                 }
             }
         }
-        return ['status' => 'fail', 'message' => !empty($model) ? $model->errors[0] : 'Error adding comment'];
+        return ['status' => 'fail', 'message' => !empty($model) ? $model->errors[0] : 'Ошибка при добавлении коммента'];
     }
 
     public function actionSearch(string $q)
     {
         $query = Post::find()->alias('p')
-            ->innerJoin(PostLang::tableName() . ' pl', 'p.id=pl.post_id')
-            ->localized(Yii::$app->language)
-            ->where(['pl.language' => Yii::$app->language])
-            ->andWhere(['like', 'pl.name', $q])
-            ->orWhere(['like', 'pl.preview_text', $q])
-            ->orWhere(['like', 'pl.text', $q]);
+            ->andWhere(['like', 'p.name', $q])
+            ->orWhere(['like', 'p.preview_text', $q])
+            ->orWhere(['like', 'p.text', $q]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);

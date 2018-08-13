@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 169 169">
+    <g shape-rendering="geometricPrecision"
+       image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+    <path d="m85 152c19 0 36-7 48-19 13-13 20-30 20-48 0-19-7-36-20-48-12-12-29-20-48-20-19 0-37 8-49 20-12 12-20 29-20 48 0 18 8 35 20 48 12 12 30 19 49 19m-9-25v-34h-34v-17h34v-33h17v33h34v17h-34v34h-17m9 42c47 0 85-38 85-84 0-47-38-85-85-85-48 0-86 38-86 85 0 46 38 84 86 84"
+          fill="currentColor"/></g>
+</svg>
