@@ -7,31 +7,34 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'id'                  => 'app-frontend',
+    'name'                => 'Arplans',
+    'sourceLanguage'      => 'ru',
+    'language'            => 'ru',
+    'basePath'            => dirname(__DIR__),
+    'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'components' => [
-        'request' => [
+    'components'          => [
+        'request'      => [
             'csrfParam' => '_csrf-frontend',
         ],
-        'authManager' => [
+        'authManager'  => [
             'class' => 'yii\rbac\DbManager',
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
+        'user'         => [
+            'identityClass'   => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie'  => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
-        'session' => [
+        'session'      => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -39,12 +42,26 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'urlManager' => [
+        'urlManager'   => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+            'showScriptName'  => false,
+            'rules'           => [
+                'blog/add-comment'             => 'blog/add-comment',
+                'blog/search'                  => 'blog/search',
+                'blog/index'                   => 'blog/index',
+                'blog/test'                    => 'blog/test',
+                'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/view',
+                'blog'                         => 'blog/index',
+                'admin'                        => 'admin',
+                'site'                         => 'site',
+                '<slug:[a-zA-Z0-9\_\-]+>'      => 'page/view',
             ],
         ],
     ],
-    'params' => $params,
+    'modules'             => [
+        'admin' => [
+            'class' => 'frontend\modules\admin\Admin',
+        ],
+    ],
+    'params'              => $params,
 ];
