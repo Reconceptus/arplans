@@ -104,7 +104,7 @@
             </div>
             <div class="footer-main--logo">
                 <a href="index.html">
-                    <img src="assets/svg/partials/logo-mini.svg" alt="ARPLANS">
+                    <img src="/svg/partials/logo-mini.svg" alt="ARPLANS">
                 </a>
             </div>
         </div>
