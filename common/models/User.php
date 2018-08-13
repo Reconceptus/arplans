@@ -18,10 +18,12 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property integer $partner_id
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
  * @property Profile $profile
+ * @property Partner $partner
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -54,9 +56,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'email'], 'string'],
+            [['partner_id'], 'integer'],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['partner_id'], 'exist', 'skipOnError' => true, 'targetClass' => Partner::className(), 'targetAttribute' => ['partner_id' => 'id']],
         ];
     }
 
@@ -206,5 +210,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProfile()
     {
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPartner()
+    {
+        return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
     }
 }

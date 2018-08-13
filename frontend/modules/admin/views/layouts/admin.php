@@ -29,7 +29,7 @@ AdminAsset::register($this);
         <div class="container-fluid">
             <div class="col-sm-3 col-md-2 sidebar">
                 <div class="sidebar-header">
-                    <?=Html::a('<div class="logo"><img src="/svg/icons/logo-light.svg" alt="ORWAY" width="154" height="35"></div>',\yii\helpers\Url::to('/'))?>
+                    <?=Html::a('<div class="logo"><img src="/svg/partials/logo.svg" alt="arplans" width="154" height="35"></div>',\yii\helpers\Url::to('/'))?>
                 </div>
                 <?= \frontend\modules\admin\widgets\menu\Menu::widget() ?>
             </div>
