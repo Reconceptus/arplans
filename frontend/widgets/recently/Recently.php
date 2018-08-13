@@ -6,11 +6,11 @@
  * Time: 10:35
  */
 
-namespace frontend\widgets\related;
+namespace frontend\widgets\recently;
 
 use yii\base\Widget;
 
-class Related extends Widget
+class Recently extends Widget
 {
     public $viewName = 'index';
 

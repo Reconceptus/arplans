@@ -92,6 +92,6 @@ $this->title = 'Блог';
             'nextPageCssClass'   => 'next',
         ]) ?>
     </div>
-    <?= \frontend\widgets\related\Related::widget() ?>
+    <?= \frontend\widgets\recently\Recently::widget() ?>
 </div>
 

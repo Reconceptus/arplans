@@ -9,6 +9,18 @@ use Yii;
  *
  * @property int $id
  * @property int $user_id
+ * @property string $last_name
+ * @property string $first_name
+ * @property string $patronymic
+ * @property string $fio
+ * @property string $image
+ * @property string $phone
+ * @property string $email
+ * @property string $city
+ * @property string $address
+ * @property int $type
+ * @property string $organization
+ * @property string $position
  *
  * @property User $user
  */
@@ -29,7 +41,9 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             [['user_id'], 'required'],
-            [['user_id'], 'integer'],
+            [['user_id', 'type'], 'integer'],
+            [['image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
+            [['last_name', 'first_name', 'patronymic', 'fio', 'phone', 'email', 'city', 'address', 'organization', 'position'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -40,8 +54,20 @@ class Profile extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'      => 'ID',
-            'user_id' => 'User ID',
+            'id'           => 'ID',
+            'user_id'      => 'User ID',
+            'last_name'    => 'Фамилия',
+            'first_name'   => 'Имя',
+            'patronymic'   => 'Отчество',
+            'fio'          => 'ФИО',
+            'image'        => 'Фото',
+            'phone'        => 'Телефон',
+            'email'        => 'Email',
+            'city'         => 'Город',
+            'address'      => 'Адрес',
+            'type'         => 'Тип',
+            'organization' => 'Организация',
+            'position'     => 'Должность',
         ];
     }
 

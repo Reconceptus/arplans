@@ -13,8 +13,20 @@ class m180808_130911_create_profiles extends Migration
     public function safeUp()
     {
         $this->createTable('profile', [
-            'id'      => $this->primaryKey()->unsigned(),
-            'user_id' => $this->integer()->notNull(),
+            'id'           => $this->primaryKey()->unsigned(),
+            'user_id'      => $this->integer()->notNull(),
+            'last_name'    => $this->string(),
+            'first_name'   => $this->string(),
+            'patronymic'   => $this->string(),
+            'fio'          => $this->string(),
+            'image'        => $this->string(),
+            'phone'        => $this->string(),
+            'email'        => $this->string(),
+            'city'         => $this->string(),
+            'address'      => $this->string(),
+            'type'         => $this->smallInteger(1),
+            'organization' => $this->string(),
+            'position'     => $this->string()
         ]);
 
         $this->addForeignKey(
@@ -26,6 +38,8 @@ class m180808_130911_create_profiles extends Migration
             'CASCADE',
             'CASCADE'
         );
+
+        $this->db->createCommand("INSERT INTO profile (user_id, email, fio) VALUES (1,'suhov.a.s@yandex.ru', 'Админ')")->execute();
     }
 
     /**

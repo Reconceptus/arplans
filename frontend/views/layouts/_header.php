@@ -52,8 +52,8 @@
         <div class="content content--lg">
             <div class="header-main--wrap">
                 <div class="header-main--logo">
-                    <a href="index.html">
-                        <img src="assets/svg/partials/logo.svg" alt="ARPLANS">
+                    <a href="/">
+                        <img src="/svg/partials/logo.svg" alt="ARPLANS">
                     </a>
                 </div>
                 <div class="header-main--nav">
