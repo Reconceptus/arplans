@@ -35,9 +35,9 @@ $this->title = $model->title;
                     <h1 class="title"><?= $model->name ?></h1>
                     <div class="auth">
                         <div class="ava">
-                            <img src="assets/images/people/ava01.jpg" alt="director">
+                            <?= Html::img($model->author->profile->image ?? Yii::$app->params['defaultAvatar']) ?>
                         </div>
-                        <span class="name"><?= $model->author->username ?></span>
+                        <span class="name"><?= $model->author->profile->fio ?></span>
                         <time class="date"><?= date('d M Y', strtotime($model->created_at)) ?></time>
                     </div>
                 </div>
