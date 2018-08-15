@@ -13,9 +13,9 @@ class Module extends \yii\base\Module
 {
     public function init()
     {
-        $name = explode('/', $_SERVER['REQUEST_URI'])[1];
-        $path = str_replace('Module', '', $this->className()) . "{$name}\\";
-        $this->controllerNamespace = "{$path}controllers";
+//        $name = explode('/', $_SERVER['REQUEST_URI'])[1];
+//        $path = str_replace('Module', '', $this->className()) . "{$name}\\";
+//        $this->controllerNamespace = "{$path}controllers";
         parent::init();
     }
 }

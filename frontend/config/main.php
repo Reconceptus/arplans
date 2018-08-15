@@ -53,7 +53,7 @@ return [
                 'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/view',
                 'blog'                         => 'blog/index',
                 'admin'                        => 'admin',
-                'admin/shop'                   => 'admin',
+//                'admin/shop'                   => 'admin',
                 'shop'                         => 'shop',
                 'site'                         => 'site',
                 '<slug:[a-zA-Z0-9\_\-]+>'      => 'page/view',

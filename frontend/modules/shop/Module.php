@@ -6,10 +6,17 @@
  * Time: 13:11
  */
 
-namespace modules\shop;
+namespace frontend\modules\shop;
 
 
-class Module extends \modules\Module
+class Module extends \frontend\modules\Module
 {
+    public $controllerNamespace = 'frontend\modules\shop\admin\controllers';
 
+    public function init()
+    {
+        parent::init();
+
+        // custom initialization code goes here
+    }
 }

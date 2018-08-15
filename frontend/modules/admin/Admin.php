@@ -2,10 +2,12 @@
 
 namespace frontend\modules\admin;
 
+use frontend\modules\Module;
+
 /**
  * admin module definition class
  */
-class Admin extends \yii\base\Module
+class Admin extends Module
 {
 	/**
 	 * @var string
