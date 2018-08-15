@@ -146,6 +146,15 @@ class m180813_142614_create_shop_tables_1 extends Migration
             [Translit::encodestring('Бани'), 'Бани'],
         ];
         $this->batchInsert('shop_category', ['slug', 'name'], $categories);
+
+        $this->insert('module', ['name' => 'shop', 'title' => 'Магазин']);
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='shop'")->execute();
+        $shopModules = [
+            ['category', 'Категории', $id],
+            ['item', 'Товары', $id],
+            ['order', 'Заказы', $id],
+        ];
+        $this->batchInsert('module', ['name', 'title', 'parent_id'], $shopModules);
     }
 
     /**

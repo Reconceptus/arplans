@@ -6,47 +6,42 @@
  * Time: 12:12
  */
 
-namespace modules\admin\controllers;
+namespace modules\blog\admin\controllers;
 
-use common\models\Post;
+use common\models\Page;
 use Imagine\Image\Box;
+use modules\admin\controllers\AdminController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
-use yii\widgets\ActiveForm;
 
-class PostsController extends AdminController
+class PageController extends AdminController
 {
-    /**
-     * @return array
-     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['access'] = [
-            'class'        => AccessControl::className(),
+            'class' => AccessControl::className(),
             'denyCallback' => function ($rule, $action) {
                 return $this->redirect('/');
             },
-            'rules'        => [
+            'rules' => [
                 [
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'posts',
+                        'pages',
                     ],
                 ],
             ],
         ];
         return $behaviors;
     }
-
     /**
      * @return array
      */
@@ -73,7 +68,7 @@ class PostsController extends AdminController
      */
     public function actionIndex()
     {
-        $query = Post::find();
+        $query = Page::find();
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -92,7 +87,7 @@ class PostsController extends AdminController
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new Page();
         return $this->modify($model);
     }
 
@@ -109,22 +104,15 @@ class PostsController extends AdminController
     }
 
     /**
-     * @param $model Post
-     * @return string|array
+     * @param $model Page
+     * @return string
      */
     public function modify($model)
     {
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
             // Добавляем автора и дату создания
-            if ($model->isNewRecord) {
-                $model->author_id = Yii::$app->user->id;
-            }
             if (!$model->created_at) {
                 $model->created_at = date('Y-m-d H:i:s');
             }
@@ -142,6 +130,8 @@ class PostsController extends AdminController
                     $model->image = '/uploads/images/post-preview/' . $path . $fileName;
                     $photo = Image::getImagine()->open($dir . $path . $fileName);
                     $photo->thumbnail(new Box(800, 800))->save($dir . $path . $fileName, ['quality' => 90]);
+                }else{
+                    var_dump($model->errors);
                 }
             } elseif (array_key_exists('old-image', $post) && $post['old-image']) {
                 $model->image = $post['old-image'];
@@ -149,24 +139,17 @@ class PostsController extends AdminController
             if ($model->isNewRecord && $model->validate()) {
                 $model->save();
             }
-            // Обновляем теги
-            $tags = $post['tags'];
-            if ($model->isNewRecord) {
-                $model->save();
-            }
-            $model->updateTags($tags);
             $model->updated_at = date('Y-m-d H:i:s');
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Post created successfully');
+                Yii::$app->session->setFlash('success', 'Page created successfully');
             } else {
-                Yii::$app->session->setFlash('danger', 'Error creating post');
+                Yii::$app->session->setFlash('danger', 'Error creating page');
             }
-            return $this->redirect(Url::to(['posts/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['page/update', 'id' => $model->id]));
         }
-        $tags = implode(', ', ArrayHelper::map($model->getTags()->all(), 'id', 'name'));
+
         return $this->render('_form', [
             'model' => $model,
-            'tags' =>$tags
         ]);
     }
 
@@ -178,16 +161,16 @@ class PostsController extends AdminController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
-        $postId = (int)$get['postId'];
-        if ($postId) {
-            $post = Post::findOne($postId);
-            if ($post && $post->image) {
-                $fileName = '@webroot' . $post->image;
+        $pageId = (int)$get['pageId'];
+        if ($pageId) {
+            $page = Page::findOne($pageId);
+            if ($page && $page->image) {
+                $fileName = '@webroot' . $page->image;
                 if (file_exists($fileName)) {
                     unlink($fileName);
                 }
-                $post->image = null;
-                if ($post->save()) {
+                $page->image = null;
+                if ($page->save()) {
                     return ['status' => 'success'];
                 }
             }
@@ -197,12 +180,12 @@ class PostsController extends AdminController
 
     /**
      * @param $id
-     * @return Post|null
+     * @return Page|null
      * @throws NotFoundHttpException
      */
     public function findModel($id)
     {
-        if (($model = Post::find()->where(['id' => $id])->one()) !== null) {
+        if (($model = Page::find()->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

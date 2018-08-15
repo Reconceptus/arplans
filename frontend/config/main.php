@@ -46,26 +46,33 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-                'blog/add-comment'             => 'blog/add-comment',
-                'blog/search'                  => 'blog/search',
-                'blog/index'                   => 'blog/index',
-                'blog/test'                    => 'blog/test',
-                'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/view',
-                'blog'                         => 'blog/index',
-                'admin'                        => 'admin',
-//                'admin/shop'                   => 'admin',
-                'shop'                         => 'shop',
-                'site'                         => 'site',
-                '<slug:[a-zA-Z0-9\_\-]+>'      => 'page/view',
+                'site'                                                                  => 'site',
+                'blog/add-comment'                                                      => 'blog/add-comment',
+                'blog/search'                                                           => 'blog/search',
+                'blog/index'                                                            => 'blog/index',
+                'blog/test'                                                             => 'blog/test',
+                'blog/<slug:[a-zA-Z0-9\_\-]+>'                                          => 'blog/view',
+                'blog'                                                                  => 'blog/index',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                               => '<module>',
+                'admin'                                                                 => 'blog/page',
+                'shop'                                                                  => 'shop',
+                '<slug:[a-zA-Z0-9\_\-]+>'                                               => 'page/view',
             ],
         ],
     ],
     'modules'             => [
-        'admin' => [
+        'admins' => [
             'class' => 'modules\admin\Module',
         ],
-        'shop'  => [
+        'shop'   => [
             'class' => 'modules\shop\Module',
+        ],
+        'blog'   => [
+            'class' => 'modules\blog\Module',
+        ],
+        'user'   => [
+            'class' => 'modules\user\Module',
         ],
     ],
     'params'              => $params,

@@ -24,7 +24,7 @@ class PageController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Page::find()->where(['slug' => $slug])->localized(Yii::$app->language)->one();
+        $model = Page::find()->where(['slug' => $slug])->one();
         if (!$model) {
             throw new NotFoundHttpException('Page not found');
         }

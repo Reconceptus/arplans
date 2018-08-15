@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m180725_112055_create_posts
  */
-class m180725_112055_create_posts extends Migration
+class m180725_112055_create_blog_tables extends Migration
 {
 
     public function safeUp()
@@ -13,20 +13,20 @@ class m180725_112055_create_posts extends Migration
         $this->createTable(
             'post',
             [
-                'id'         => $this->primaryKey()->unsigned(),
-                'slug'       => $this->string()->notNull(),
+                'id'           => $this->primaryKey()->unsigned(),
+                'slug'         => $this->string()->notNull(),
                 'name'         => $this->string()->notNull(),
                 'preview_text' => $this->string(500)->notNull(),
                 'text'         => $this->text()->notNull(),
                 'title'        => $this->string(),
                 'keywords'     => $this->string(),
                 'description'  => $this->string(),
-                'author_id'  => $this->integer()->notNull(),
-                'image'      => $this->string(),
-                'created_at' => $this->dateTime(),
-                'updated_at' => $this->dateTime(),
-                'status'     => $this->smallInteger(1),
-                'sort'       => $this->integer(),
+                'author_id'    => $this->integer()->notNull(),
+                'image'        => $this->string(),
+                'created_at'   => $this->dateTime(),
+                'updated_at'   => $this->dateTime(),
+                'status'       => $this->smallInteger(1),
+                'sort'         => $this->integer(),
             ]
         );
 
@@ -64,6 +64,19 @@ class m180725_112055_create_posts extends Migration
             ]
         );
 
+        $this->createTable('page', [
+            'id'          => $this->primaryKey()->unsigned(),
+            'slug'        => $this->string(),
+            'image'       => $this->string(),
+            'name'        => $this->string()->notNull(),
+            'text'        => $this->text()->notNull(),
+            'title'       => $this->string(),
+            'keywords'    => $this->string(),
+            'description' => $this->string(),
+            'created_at'  => $this->dateTime(),
+            'updated_at'  => $this->dateTime(),
+        ]);
+
         $this->addForeignKey('FK_post_author', 'post', 'author_id', 'user', 'id');
         $this->addForeignKey('FK_post_tag_post', 'post_tag', 'post_id', 'post', 'id');
         $this->addForeignKey('FK_post_tag_tag', 'post_tag', 'tag_id', 'tag', 'id');
@@ -74,6 +87,15 @@ class m180725_112055_create_posts extends Migration
         $this->createIndex('I_tag_lang', 'tag', 'language');
         $this->createIndex('U_tag_name', 'tag', 'name', true);
         $this->createIndex('U_post_slug', 'post', 'slug', true);
+
+        $this->insert('module', ['name' => 'blog', 'title' => 'Блог']);
+
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='blog'")->execute();
+        $blogModules = [
+            ['post', 'Статьи', $id],
+            ['page', 'Страницы', $id],
+        ];
+        $this->batchInsert('module', ['name', 'title', 'parent_id'], $blogModules);
     }
 
     public function safeDown()
@@ -84,6 +106,7 @@ class m180725_112055_create_posts extends Migration
         $this->dropForeignKey('FK_comment_author', 'comment');
         $this->dropForeignKey('FK_comment_post', 'comment');
 
+        $this->dropTable('page');
         $this->dropTable('comment');
         $this->dropTable('post_tag');
         $this->dropTable('tag');

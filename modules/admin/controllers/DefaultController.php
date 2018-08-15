@@ -15,6 +15,6 @@ class DefaultController extends AdminController
 	 */
 	public function actionIndex()
 	{
-		return $this->redirect('/admin/posts');
+		return $this->render('index');
 	}
 }

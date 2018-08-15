@@ -14,36 +14,6 @@ use yii\helpers\Url;
 ?>
 
 <ul class="side-menu">
-    <li>
-        <? if (Yii::$app->user->can('posts')): ?>
-        <span class="module">Блог</span>
-        <ul class="module-items">
-            <li>
-                <?= Html::a('Посты', Url::to('/admin/posts')) ?>
-            </li>
-        <? endif; ?>
-        <? if (Yii::$app->user->can('pages')): ?>
-            <li>
-                <?= Html::a('Страницы', Url::to('/admin/page')) ?>
-            </li>
-        <? endif; ?>
-        </ul>
-    </li>
-
-    <? if (Yii::$app->user->can('users')): ?>
-    <li>
-        <span class="module">Пользователи</span>
-        <ul class="module-items">
-            <li>
-                <?= Html::a('Пользователи', Url::to('/admin/user')) ?>
-            </li>
-            <li>
-                <?= Html::a('Роли', Url::to('/admin/role')) ?>
-            </li>
-        </ul>
-    </li>
-    <? endif; ?>
-
     <? foreach ($modules as $module): ?>
         <?
         if (!Yii::$app->user->can($module['name'])) {

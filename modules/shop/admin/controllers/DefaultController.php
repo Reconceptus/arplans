@@ -1,8 +1,8 @@
 <?php
 
-namespace frontend\modules\shop\admin\controllers;
+namespace modules\shop\admin\controllers;
 
-use frontend\modules\admin\controllers\AdminController;
+use modules\admin\controllers\AdminController;
 
 /**
  * Default controller for the `admin` module

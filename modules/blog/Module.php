@@ -6,12 +6,12 @@
  * Time: 13:11
  */
 
-namespace modules\shop;
+namespace modules\blog;
 
 
 class Module extends \modules\Module
 {
-    public $controllerNamespace = 'modules\shop\admin\controllers';
+    public $controllerNamespace = 'modules\blog\admin\controllers';
 
     public function init()
     {

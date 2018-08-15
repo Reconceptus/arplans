@@ -6,8 +6,9 @@
  * Time: 12:12
  */
 
-namespace modules\admin\controllers;
+namespace modules\user\admin\controllers;
 
+use modules\admin\controllers\AdminController;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\HttpException;

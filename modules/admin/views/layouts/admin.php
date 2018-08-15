@@ -29,12 +29,12 @@ AdminAsset::register($this);
         <div class="container-fluid">
             <div class="col-sm-3 col-md-2 sidebar">
                 <div class="sidebar-header">
-                    <?=Html::a('<div class="logo"><img src="/svg/partials/logo.svg" alt="arplans" width="154" height="35"></div>',\yii\helpers\Url::to('/'))?>
+                    <?= Html::a('<div class="logo"><img src="/svg/partials/logo.svg" alt="arplans" width="154" height="35"></div>', \yii\helpers\Url::to('/')) ?>
                 </div>
                 <?= \modules\admin\widgets\menu\Menu::widget() ?>
             </div>
             <div class="admin-content">
-                <?= $this->render('/service/_flashes') ?>
+                <?= \frontend\widgets\flashes\Flashes::widget() ?>
                 <?= $content ?>
             </div>
         </div>

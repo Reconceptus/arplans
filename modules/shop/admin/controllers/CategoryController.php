@@ -127,7 +127,7 @@ class CategoryController extends AdminController
         if ($categoryId) {
             $category = Category::findOne($categoryId);
             if ($category && $category->image) {
-                $fileName = '@webroot' . $category->image->file;
+                $fileName = '@webroot' . $category->image;
                 if (file_exists($fileName)) {
                     unlink($fileName);
                 }

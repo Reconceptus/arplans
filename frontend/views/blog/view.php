@@ -25,7 +25,7 @@ $this->title = $model->title;
                 <div class="fixed-scrollbar">
                     <div class="fixing">
                         <div class="article-page--sidebar">
-                            <?= \frontend\widgets\finished\Finished::widget() ?>
+                            <?= \frontend\widgets\finished\Flashes::widget() ?>
                         </div>
                     </div>
                 </div>

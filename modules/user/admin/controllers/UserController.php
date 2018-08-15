@@ -6,10 +6,11 @@
  * Time: 12:12
  */
 
-namespace modules\admin\controllers;
+namespace modules\user\admin\controllers;
 
 use common\models\Profile;
 use common\models\User;
+use modules\admin\controllers\AdminController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;

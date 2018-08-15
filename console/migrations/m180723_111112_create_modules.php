@@ -1,6 +1,5 @@
 <?php
 
-use common\models\Partner;
 use yii\db\Migration;
 
 /**
@@ -19,15 +18,6 @@ class m180723_111112_create_modules extends Migration
             'title'     => $this->string(),
             'parent_id' => $this->integer()->unsigned()
         ]);
-
-        $this->insert('module', ['name' => 'shop', 'title' => 'Магазин']);
-        $id = $this->db->createCommand("SELECT id FROM module WHERE name='shop'")->execute();
-        $shopModules = [
-            ['category', 'Категории', $id],
-            ['item', 'Товары', $id],
-            ['order', 'Заказы', $id],
-        ];
-        $this->batchInsert('module', ['name', 'title', 'parent_id'], $shopModules);
     }
 
     /**
