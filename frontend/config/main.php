@@ -62,10 +62,10 @@ return [
     ],
     'modules'             => [
         'admin' => [
-            'class' => 'frontend\modules\admin\Admin',
+            'class' => 'modules\admin\Module',
         ],
         'shop'  => [
-            'class' => 'frontend\modules\shop\Module',
+            'class' => 'modules\shop\Module',
         ],
     ],
     'params'              => $params,

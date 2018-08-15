@@ -13,30 +13,15 @@ class m180813_142614_create_shop_tables_1 extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('image', [
-            'id'   => $this->primaryKey()->unsigned(),
-            'file' => $this->string()->notNull()
-        ]);
-
         $this->createTable('shop_category', [
             'id'          => $this->primaryKey()->unsigned(),
             'slug'        => $this->string()->notNull(),
             'name'        => $this->string()->notNull(),
             'description' => $this->text(),
-            'image_id'    => $this->integer()->unsigned(),
+            'image'       => $this->string(),
             'sort'        => $this->integer()->defaultValue(200),
             'is_active'   => $this->smallInteger(1)->defaultValue(1)
         ]);
-
-        $this->addForeignKey(
-            'FK_category_image_image',
-            'shop_category',
-            'image_id',
-            'image',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
 
         $this->createIndex('U_category_slug', 'shop_category', 'slug', true);
         $this->createIndex('U_category_name', 'shop_category', 'name', true);
@@ -139,9 +124,9 @@ class m180813_142614_create_shop_tables_1 extends Migration
 
 
         $this->createTable('shop_item_image', [
-            'id'       => $this->primaryKey()->unsigned(),
-            'item_id'  => $this->integer()->unsigned()->notNull(),
-            'image_id' => $this->integer()->unsigned()->notNull()
+            'id'      => $this->primaryKey()->unsigned(),
+            'item_id' => $this->integer()->unsigned()->notNull(),
+            'file'    => $this->string()
         ]);
         $this->addForeignKey(
             'FK_item_image_item',
@@ -152,15 +137,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'RESTRICT',
             'CASCADE'
         );
-        $this->addForeignKey(
-            'FK_item_image_image',
-            'shop_item_image',
-            'image_id',
-            'image',
-            'id',
-            'RESTRICT',
-            'CASCADE'
-        );
+
         $categories = [
             [Translit::encodestring('Деревянные'), 'Деревянные дома'],
             [Translit::encodestring('Каменные'), 'Каменные дома'],
@@ -176,13 +153,11 @@ class m180813_142614_create_shop_tables_1 extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('FK_item_image_image', 'shop_item_image');
         $this->dropForeignKey('FK_item_image_item', 'shop_item_image');
         $this->dropForeignKey('FK_item_category', 'shop_item');
         $this->dropForeignKey('FK_catalog_item_catalog', 'shop_catalog_item');
         $this->dropForeignKey('FK_catalog_category_category', 'shop_catalog_category');
         $this->dropForeignKey('FK_catalog_category_catalog', 'shop_catalog_category');
-        $this->dropForeignKey('FK_category_image_image', 'shop_category');
 
         $this->dropTable('shop_item_image');
         $this->dropTable('shop_item');
