@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 
-namespace modules\user\admin\controllers;
+namespace modules\users\admin\controllers;
 
 use common\models\Profile;
 use common\models\User;
@@ -31,7 +31,7 @@ class UserController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'users',
+                        'users_user',
                     ],
                 ],
             ],

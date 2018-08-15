@@ -43,7 +43,7 @@ class m180808_130911_create_profiles extends Migration
 
         $this->insert('module', ['name' => 'users', 'title' => 'Пользователи и роли']);
 
-        $id = $this->db->createCommand("SELECT id FROM module WHERE name='users'")->execute();
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='users'")->queryScalar();
         $usersModules = [
             ['user', 'Пользователи', $id],
             ['role', 'Роли', $id],

@@ -6,7 +6,7 @@
  * Time: 12:12
  */
 
-namespace modules\user\admin\controllers;
+namespace modules\users\admin\controllers;
 
 use modules\admin\controllers\AdminController;
 use Yii;
@@ -30,7 +30,7 @@ class RoleController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'users',
+                        'users_role',
                     ],
                 ],
             ],

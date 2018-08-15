@@ -32,7 +32,7 @@ use yii\helpers\Url;
                         Html::addCssClass($options, 'active');
                         ?>
                         <li>
-                            <?= Html::a($item['title'], Url::to('/admin/' . $item['name']), ['class' => $class]) ?>
+                            <?= Html::a($item['title'], Url::to('/admin/modules/' . $item['name']), ['class' => $class]) ?>
                         </li>
                     <? endforeach ?>
                 </ul>

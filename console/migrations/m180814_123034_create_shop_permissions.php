@@ -15,21 +15,27 @@ class m180814_123034_create_shop_permissions extends Migration
         $auth = Yii::$app->authManager;
 
         // создать разрешения
-        $posts = $auth->createPermission('shop_category');
-        $posts->description = 'Категории товаров';
-        $auth->add($posts);
+        $shop = $auth->createPermission('shop');
+        $shop->description = 'Доступ к админке магазин';
+        $auth->add($shop);
 
-        $pages = $auth->createPermission('shop_item');
-        $pages->description = 'Товары';
-        $auth->add($pages);
+        $category = $auth->createPermission('shop_category');
+        $category->description = 'Категории товаров';
+        $auth->add($category);
 
-        $adminPanel = $auth->createPermission('shop');
-        $adminPanel->description = 'Доступ к админке магазин';
-        $auth->add($adminPanel);
+        $item = $auth->createPermission('shop_item');
+        $item->description = 'Товары';
+        $auth->add($item);
 
-        $users = $auth->createPermission('shop_order');
-        $users->description = 'Заказы';
-        $auth->add($users);
+        $order = $auth->createPermission('shop_order');
+        $order->description = 'Заказы';
+        $auth->add($order);
+
+        $admin = $auth->getRole('admin');
+        $auth->addChild($admin, $shop);
+        $auth->addChild($admin, $category);
+        $auth->addChild($admin, $item);
+        $auth->addChild($admin, $order);
     }
 
     /**
@@ -37,6 +43,6 @@ class m180814_123034_create_shop_permissions extends Migration
      */
     public function safeDown()
     {
-       return true;
+        return true;
     }
 }

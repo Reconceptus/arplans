@@ -148,7 +148,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->batchInsert('shop_category', ['slug', 'name'], $categories);
 
         $this->insert('module', ['name' => 'shop', 'title' => 'Магазин']);
-        $id = $this->db->createCommand("SELECT id FROM module WHERE name='shop'")->execute();
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='shop'")->queryScalar();
         $shopModules = [
             ['category', 'Категории', $id],
             ['item', 'Товары', $id],

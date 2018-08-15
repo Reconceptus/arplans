@@ -90,7 +90,7 @@ class m180725_112055_create_blog_tables extends Migration
 
         $this->insert('module', ['name' => 'blog', 'title' => 'Блог']);
 
-        $id = $this->db->createCommand("SELECT id FROM module WHERE name='blog'")->execute();
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='blog'")->queryScalar();
         $blogModules = [
             ['post', 'Статьи', $id],
             ['page', 'Страницы', $id],

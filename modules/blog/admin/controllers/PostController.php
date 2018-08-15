@@ -40,7 +40,7 @@ class PostController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'posts',
+                        'blog_post',
                     ],
                 ],
             ],

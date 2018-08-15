@@ -35,7 +35,7 @@ class PageController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'pages',
+                        'blog_page',
                     ],
                 ],
             ],
