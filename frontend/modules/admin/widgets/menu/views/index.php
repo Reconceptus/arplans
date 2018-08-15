@@ -9,24 +9,66 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/* @var $modules array */
+/* @var $selected array */
 ?>
-<ul class="side-menu-list">
-    <? if (Yii::$app->user->can('posts')): ?>
-        <li>
-            <?= Html::a('Technology', Url::to('/admin/posts')) ?>
-        </li>
-    <? endif; ?>
-    <? if (Yii::$app->user->can('pages')): ?>
-        <li>
-            <?= Html::a('Materials', Url::to('/admin/page')) ?>
-        </li>
-    <? endif; ?>
+
+<ul class="side-menu">
+    <li>
+        <? if (Yii::$app->user->can('posts')): ?>
+        <span class="module">Блог</span>
+        <ul class="module-items">
+            <li>
+                <?= Html::a('Посты', Url::to('/admin/posts')) ?>
+            </li>
+        <? endif; ?>
+        <? if (Yii::$app->user->can('pages')): ?>
+            <li>
+                <?= Html::a('Страницы', Url::to('/admin/page')) ?>
+            </li>
+        <? endif; ?>
+        </ul>
+    </li>
+
     <? if (Yii::$app->user->can('users')): ?>
-        <li>
-            <?= Html::a('Users', Url::to('/admin/user')) ?>
-        </li>
-        <li>
-            <?= Html::a('Roles', Url::to('/admin/role')) ?>
-        </li>
+    <li>
+        <span class="module">Пользователи</span>
+        <ul class="module-items">
+            <li>
+                <?= Html::a('Пользователи', Url::to('/admin/user')) ?>
+            </li>
+            <li>
+                <?= Html::a('Роли', Url::to('/admin/role')) ?>
+            </li>
+        </ul>
+    </li>
     <? endif; ?>
+
+    <? foreach ($modules as $module): ?>
+        <?
+        if (!Yii::$app->user->can($module['name'])) {
+            continue;
+        }
+        ?>
+        <li>
+            <? if (array_key_exists('items', $module) && is_array($module['items'])): ?>
+                <span class="module"><?= $module['title'] ?></span>
+                <ul class="module-items">
+                    <? foreach ($module['items'] as $item): ?>
+                        <?
+                        if (!Yii::$app->user->can(str_replace('/', '_', $item['name']))) continue;
+                        $options = ['class' => ''];
+                        $class = isset($selected['modules']) && isset($selected['controller']) && $item['name'] === $module['name'] . '/' . $selected['controller'] ? 'active' : '';
+                        Html::addCssClass($options, 'active');
+                        ?>
+                        <li>
+                            <?= Html::a($item['title'], Url::to('/admin/' . $item['name']), ['class' => $class]) ?>
+                        </li>
+                    <? endforeach ?>
+                </ul>
+            <? else: ?>
+                <a href="/admin/modules/<?= $module['module'] ?>"><?= $module['title'] ?></a>
+            <? endif ?>
+        </li>
+    <? endforeach ?>
 </ul>

@@ -53,6 +53,8 @@ return [
                 'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/view',
                 'blog'                         => 'blog/index',
                 'admin'                        => 'admin',
+                'admin/shop'                   => 'admin',
+                'shop'                         => 'shop',
                 'site'                         => 'site',
                 '<slug:[a-zA-Z0-9\_\-]+>'      => 'page/view',
             ],
@@ -61,6 +63,9 @@ return [
     'modules'             => [
         'admin' => [
             'class' => 'frontend\modules\admin\Admin',
+        ],
+        'shop'  => [
+            'class' => 'frontend\modules\shop\Module',
         ],
     ],
     'params'              => $params,

@@ -54,6 +54,7 @@ class m180724_110516_create_roles_and_permissions extends Migration
         $userAdmin = new \common\models\User();
         $userAdmin->setPassword('111111');
         $userAdmin->username = 'admin';
+        $userAdmin->partner_id = 1;
         $userAdmin->email = 'suhov.a.s@yandex.ru';
         $userAdmin->status = \common\models\User::STATUS_ACTIVE;
         $userAdmin->generateAuthKey();

@@ -8,6 +8,10 @@ body {
     text-decoration: none;
 }
 
+ul{
+    list-style: none;
+}
+
 .sidebar {
     background-color: #17191f;
     min-height: 100%;
@@ -137,7 +141,7 @@ body {
     margin: 10px 0;
 }
 
-.side-menu-list li{
+.side-menu li{
     margin-bottom: 15px;
 }
 
@@ -155,4 +159,9 @@ body {
 
 .roles-form{
     margin-bottom: 15px;
+}
+
+.module-items{
+    list-style: square;
+    margin: 5px 0;
 }

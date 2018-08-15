@@ -4,9 +4,9 @@ use common\models\Partner;
 use yii\db\Migration;
 
 /**
- * Class m180813_132521_create_partners
+ * Class m180723_111111_create_partners
  */
-class m180813_132521_create_partners extends Migration
+class m180723_111111_create_partners extends Migration
 {
     /**
      * {@inheritdoc}
@@ -35,11 +35,6 @@ class m180813_132521_create_partners extends Migration
             $arplans->name = 'Arplans';
             $arplans->save();
         }
-        $user = \common\models\User::findOne(['id' => 1]);
-        if ($user) {
-            $user->partner_id = $arplans->id;
-            $user->save();
-        }
     }
 
     /**
@@ -47,8 +42,7 @@ class m180813_132521_create_partners extends Migration
      */
     public function safeDown()
     {
-        echo "m180813_132521_create_partners cannot be reverted.\n";
-
-        return false;
+        $this->dropForeignKey('FK_user_partner_id', 'user');
+        $this->dropTable('partner');
     }
 }
