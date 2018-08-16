@@ -1,5 +1,5 @@
 <?php
-namespace extensions\modules\shop\models;
+namespace common\models;
 
 trait Translit {
     public static function encodestring($st)

@@ -40,6 +40,15 @@ class m180808_130911_create_profiles extends Migration
         );
 
         $this->db->createCommand("INSERT INTO profile (user_id, email, fio) VALUES (1,'suhov.a.s@yandex.ru', 'Админ')")->execute();
+
+        $this->insert('module', ['name' => 'users', 'title' => 'Пользователи и роли']);
+
+        $id = $this->db->createCommand("SELECT id FROM module WHERE name='users'")->queryScalar();
+        $usersModules = [
+            ['user', 'Пользователи', $id],
+            ['role', 'Роли', $id],
+        ];
+        $this->batchInsert('module', ['name', 'title', 'parent_id'], $usersModules);
     }
 
     /**

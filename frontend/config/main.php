@@ -46,21 +46,41 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-                'blog/add-comment'             => 'blog/add-comment',
-                'blog/search'                  => 'blog/search',
-                'blog/index'                   => 'blog/index',
-                'blog/test'                    => 'blog/test',
-                'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/view',
-                'blog'                         => 'blog/index',
-                'admin'                        => 'admin',
-                'site'                         => 'site',
-                '<slug:[a-zA-Z0-9\_\-]+>'      => 'page/view',
+                'site'                                                                                            => 'site',
+                'admin'                                                                                           => 'blog/page',
+
+                'shop'                                                                                            => 'shop/catalog',
+
+                'blog/add-comment'                                                                                => 'blog/post/add-comment',
+                'blog/search'                                                                                     => 'blog/post/search',
+                'blog/index'                                                                                      => 'blog/post/index',
+                'blog/test'                                                                                       => 'blog/post/test',
+                'blog/<slug:[a-zA-Z0-9\_\-]+>'                                                                    => 'blog/post/view',
+                'blog'                                                                                            => 'blog/post/index',
+
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
+
+                '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
+                '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
+                '<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>/blog',
+                '<slug:[a-zA-Z0-9\_\-]+>'                                                                         => 'page/view',
             ],
         ],
     ],
     'modules'             => [
-        'admin' => [
-            'class' => 'frontend\modules\admin\Admin',
+        'admins' => [
+            'class' => 'modules\admin\Module',
+        ],
+        'shop'   => [
+            'class' => 'modules\shop\Module',
+        ],
+        'blog'   => [
+            'class' => 'modules\blog\Module',
+        ],
+        'users'   => [
+            'class' => 'modules\users\Module',
         ],
     ],
     'params'              => $params,

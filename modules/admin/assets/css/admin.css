@@ -1,0 +1,171 @@
+body {
+    background-color: #FFF;
+    font-family: Noto, sans-serif;
+    font-weight: 400;
+}
+
+.a {
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+.sidebar {
+    background-color: #17191f;
+    min-height: 100%;
+    position: fixed;
+    width: 240px;
+    color: #fff;
+}
+
+.sidebar a {
+    color: #FFF;
+}
+
+.sidebar-header {
+    height: 200px;
+}
+
+.logo {
+    margin: auto;
+    width: 155px;
+    margin-top: 40px;
+}
+
+.admin-content {
+    padding: 10px 10px 10px 250px;
+    max-width: 1250px;
+}
+
+.post-list-image-preview {
+    width: 100px;
+    height: 70px;
+}
+
+.btn-admin {
+    background-color: #17191f;
+    color: #FFF;
+}
+
+.btn-admin.disabled {
+    background-color: #999999;
+}
+
+.buttons-panel {
+    width: 285px;
+    height: 55px;
+    background-color: #EEEEEE;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.buttons-panel button {
+    margin: 10px;
+}
+
+.save-post {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+}
+
+#wr-tabs {
+    width: 950px;
+}
+
+#wr-tabs .tabs {
+    background-color: #fff;
+    margin-bottom: 3px;
+}
+
+#wr-tabs .tabs:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+#wr-tabs .tabs .tab {
+    float: left;
+    cursor: pointer;
+    border-right: 1px solid #f2f4f9;
+    padding: 10px 20px;
+}
+
+#wr-tabs .tabs .tab:last-child {
+    border-right: none;
+}
+
+#wr-tabs .tabs .tab:hover,
+#wr-tabs .tabs .tab.active {
+    background-color: #333333;
+    color: #1d7ee4;
+}
+
+#wr-tabs .content-tabs {
+    background-color: #fff;
+}
+
+#wr-tabs .content-tabs .tab-cont {
+    display: none;
+    padding: 15px 10px;
+}
+
+#wr-tabs .content-tabs .tab-cont.active {
+    display: block;
+}
+
+.preview-image {
+    margin-bottom: 10px;
+}
+
+.go-site {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.table-post-name:hover {
+    font-weight: bold;
+}
+
+.posts-table tbody td:nth-child(4) {
+    font-weight: bold;
+}
+
+.add-big-button{
+    margin: 10px 0;
+}
+
+.side-menu li{
+    margin-bottom: 15px;
+}
+
+.role-checkbox{
+    float: left;
+}
+
+.checkbox-label{
+    margin-left: 5px;
+}
+
+.permissions-list{
+    margin: 25px 0;
+}
+
+.roles-form{
+    margin-bottom: 15px;
+}
+
+.module-items{
+    list-style: square;
+    margin: 5px 0;
+}
+
+.checkbox-panel{
+    margin-top: 20px;
+}

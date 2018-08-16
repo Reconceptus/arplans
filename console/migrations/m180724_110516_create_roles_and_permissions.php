@@ -12,21 +12,21 @@ class m180724_110516_create_roles_and_permissions extends Migration
         $auth = Yii::$app->authManager;
 
         // создать разрешения
-        $posts = $auth->createPermission('posts');
-        $posts->description = 'Посты';
-        $auth->add($posts);
-
-        $pages = $auth->createPermission('pages');
-        $pages->description = 'Страницы';
-        $auth->add($pages);
-
         $adminPanel = $auth->createPermission('adminPanel');
         $adminPanel->description = 'Доступ к админке';
         $auth->add($adminPanel);
 
-        $users = $auth->createPermission('users');
-        $users->description = 'Пользователи';
+        $userPermission = $auth->createPermission('users');
+        $userPermission->description = 'Доступ к админке пользователей';
+        $auth->add($userPermission);
+
+        $users = $auth->createPermission('users_user');
+        $users->description = 'Управление пользователями';
         $auth->add($users);
+
+        $roles = $auth->createPermission('users_role');
+        $roles->description = 'Управление ролями';
+        $auth->add($roles);
 
         // создаем роли
         $user = $auth->createRole('user');
@@ -43,17 +43,16 @@ class m180724_110516_create_roles_and_permissions extends Migration
 
         // делаем наследование
         $auth->addChild($manager, $adminPanel);
-        $auth->addChild($manager, $posts);
-        $auth->addChild($manager, $pages);
         $auth->addChild($admin, $adminPanel);
-        $auth->addChild($admin, $posts);
-        $auth->addChild($admin, $pages);
+        $auth->addChild($admin, $userPermission);
         $auth->addChild($admin, $users);
+        $auth->addChild($admin, $roles);
 
         // создаем админского пользователя
         $userAdmin = new \common\models\User();
         $userAdmin->setPassword('111111');
         $userAdmin->username = 'admin';
+        $userAdmin->partner_id = 1;
         $userAdmin->email = 'suhov.a.s@yandex.ru';
         $userAdmin->status = \common\models\User::STATUS_ACTIVE;
         $userAdmin->generateAuthKey();
