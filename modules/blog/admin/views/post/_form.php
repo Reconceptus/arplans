@@ -27,14 +27,14 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
     'options' => ['enctype' => 'multipart/form-data'],
 ]); ?>
 <div class="post-form">
-    <?= Html::hiddenInput('old-image', $model->image) ?>
+    <?= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
     <?= $form->field($model, 'slug', ['enableAjaxValidation' => true]) ?>
     <?= $form->field($model, 'status')->dropDownList([Post::STATUS_PUBLISHED => 'опубликована', Post::STATUS_NOT_PUBLISHED => 'скрыта']) ?>
     <div class="preview-image-block" data-id="<?= $model->id ?>">
         <?
         if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
             echo Html::img($model->image, ['class' => 'img-responsive preview-image']);
-            echo Html::button('delete image', ['class' => 'btn btn-admin js-delete-preview']);
+            echo Html::button('Удалить изображение', ['class' => 'btn btn-admin js-delete-preview']);
         }
         ?>
         <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
@@ -50,7 +50,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
         'settings' => [
             'lang'                     => 'ru',
             'minHeight'                => 200,
-            'imageUpload'              => Url::to(['posts/image-upload']),
+            'imageUpload'              => Url::to(['post/image-upload']),
             'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
             'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'link', 'image'],
             'plugins'                  => [
@@ -71,5 +71,5 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
 <? ActiveForm::end() ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord || !$model->status ? 'Пост еще не был опубликован' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
-    <?= Html::a('Go to post', Url::to('/blog/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
+    <?= Html::a('Посмотреть пост', Url::to('/blog/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

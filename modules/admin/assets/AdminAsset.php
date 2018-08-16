@@ -25,7 +25,7 @@ class AdminAsset extends AssetBundle
         'js/script.js'
     ];
     public $depends = [
-//        'frontend\assets\AppAsset',
+        'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 }

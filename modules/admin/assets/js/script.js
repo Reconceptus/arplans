@@ -6,7 +6,7 @@ $(function () {
         var postId = container.data('id');
         $.ajax({
             type: 'GET',
-            url: '/admin/posts/delete-preview-image',
+            url: '/admin/modules/blog/post/delete-preview-image',
             data: {
                 postId: postId
             },
@@ -14,6 +14,7 @@ $(function () {
                 if (data.status === 'success') {
                     container.find('.preview-image').remove();
                     button.remove();
+                    $('.old-image-input').val('');
                 }
             }
         });
@@ -25,7 +26,7 @@ $(function () {
         var postId = container.data('id');
         $.ajax({
             type: 'GET',
-            url: '/admin/page/delete-preview-image',
+            url: '/admin/modules/blog/page/delete-preview-image',
             data: {
                 postId: postId
             },

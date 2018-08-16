@@ -43,7 +43,7 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Create post', Url::to('/admin/posts/create'), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Создать пост', Url::to('/admin/modules/blog/post/create'), ['class' => 'btn btn-admin add-big-button']) ?>
     <div class="posts-table">
         <?= \yii\grid\GridView::widget(
             [
@@ -57,4 +57,4 @@ $columns = [
         );
         ?>
     </div>
-<?= Html::a('Go to site', Url::to('/blog'), ['target' => '_blank', 'class' => 'btn btn-admin go-site']) ?>
+<?= Html::a('Посмотреть блог', Url::to('/blog'), ['target' => '_blank', 'class' => 'btn btn-admin go-site']) ?>

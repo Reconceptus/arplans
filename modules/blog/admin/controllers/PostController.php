@@ -162,7 +162,7 @@ class PostController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Error creating post');
             }
-            return $this->redirect(Url::to(['posts/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['post/update', 'id' => $model->id]));
         }
         $tags = implode(', ', ArrayHelper::map($model->getTags()->all(), 'id', 'name'));
         return $this->render('_form', [
@@ -183,7 +183,7 @@ class PostController extends AdminController
         if ($postId) {
             $post = Post::findOne($postId);
             if ($post && $post->image) {
-                $fileName = '@webroot' . $post->image;
+                $fileName = Yii::getAlias('@webroot') . $post->image;
                 if (file_exists($fileName)) {
                     unlink($fileName);
                 }
