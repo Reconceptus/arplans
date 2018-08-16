@@ -27,7 +27,6 @@ class ItemImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id'], 'required'],
             [['item_id'], 'integer'],
             [['file'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],

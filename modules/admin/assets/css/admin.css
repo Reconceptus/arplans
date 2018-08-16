@@ -54,7 +54,7 @@ ul{
 }
 
 .buttons-panel {
-    width: 265px;
+    width: 285px;
     height: 55px;
     background-color: #EEEEEE;
     position: fixed;
@@ -164,4 +164,8 @@ ul{
 .module-items{
     list-style: square;
     margin: 5px 0;
+}
+
+.checkbox-panel{
+    margin-top: 20px;
 }

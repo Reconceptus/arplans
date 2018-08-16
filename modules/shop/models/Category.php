@@ -2,6 +2,8 @@
 
 namespace modules\shop\models;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "shop_category".
  *
@@ -18,6 +20,9 @@ namespace modules\shop\models;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    const IS_ACTIVE = 1;
+    const IS_NOT_ACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -48,13 +53,13 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'slug' => 'Slug',
-            'name' => 'Name',
-            'description' => 'Description',
-            'image' => 'Image',
-            'sort' => 'Sort',
-            'is_active' => 'Is Active',
+            'id'          => 'ID',
+            'slug'        => 'Url',
+            'name'        => 'Название',
+            'description' => 'Описание',
+            'image'       => 'Изображение',
+            'sort'        => 'Сортировка',
+            'is_active'   => 'Активна',
         ];
     }
 
@@ -72,5 +77,17 @@ class Category extends \yii\db\ActiveRecord
     public function getItems()
     {
         return $this->hasMany(Item::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * Получаем лист категорий
+     * @return array
+     */
+    public static function getList()
+    {
+        $cache = \Yii::$app->cache;
+        return $cache->getOrSet('categories-list', function ($cache) {
+            return ArrayHelper::map(self::find()->where(['is_active' => self::IS_ACTIVE])->all(), 'id', 'name');
+        }, 1000);
     }
 }

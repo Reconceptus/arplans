@@ -137,7 +137,7 @@ class PostController extends AdminController
                 if ($model->validate(['image'])) {
                     $dir = Yii::getAlias('@webroot/uploads/images/post-preview/');
                     $path = date('ymdHis', strtotime($model->created_at)) . '/';
-                    $this->createDirectory($dir . $path);
+                    \common\models\Image::createDirectory($dir . $path);
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/images/post-preview/' . $path . $fileName;
@@ -207,17 +207,6 @@ class PostController extends AdminController
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    /**
-     * Если директории не существует, то создает ее
-     * @param $path
-     */
-    public function createDirectory($path)
-    {
-        if (!file_exists($path)) {
-            mkdir($path, 0775, true);
         }
     }
 }

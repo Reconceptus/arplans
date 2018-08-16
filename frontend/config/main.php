@@ -48,16 +48,20 @@ return [
             'rules'           => [
                 'site'                                                                                            => 'site',
                 'admin'                                                                                           => 'blog/page',
-                'shop'                                                                                            => 'shop',
+
+                'shop'                                                                                            => 'shop/catalog',
+
                 'blog/add-comment'                                                                                => 'blog/post/add-comment',
                 'blog/search'                                                                                     => 'blog/post/search',
                 'blog/index'                                                                                      => 'blog/post/index',
                 'blog/test'                                                                                       => 'blog/post/test',
                 'blog/<slug:[a-zA-Z0-9\_\-]+>'                                                                    => 'blog/post/view',
                 'blog'                                                                                            => 'blog/post/index',
+
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
+
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 '<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>/blog',

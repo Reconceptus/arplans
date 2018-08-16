@@ -9,13 +9,17 @@
 namespace modules\shop\admin\controllers;
 
 
+use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
+use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class CategoryController extends AdminController
 {
@@ -51,8 +55,8 @@ class CategoryController extends AdminController
         return [
             'image-upload' => [
                 'class'            => 'vova07\imperavi\actions\UploadFileAction',
-                'url'              => '/uploads/images/posts', // Directory URL address, where files are stored.
-                'path'             => '@webroot/uploads/images/posts', // Or absolute path to directory where files are stored.
+                'url'              => '/uploads/images/shop/category', // Directory URL address, where files are stored.
+                'path'             => '@webroot/uploads/images/shop/category', // Or absolute path to directory where files are stored.
                 'translit'         => true,
                 'validatorOptions' => [
                     'maxWidth'  => 1200,
@@ -74,7 +78,7 @@ class CategoryController extends AdminController
                 'query' => $query,
                 'sort'  => [
                     'defaultOrder' => [
-                        'created_at' => SORT_DESC
+                        'name' => SORT_ASC
                     ]
                 ],
             ]
@@ -110,8 +114,42 @@ class CategoryController extends AdminController
      */
     public function modify($model)
     {
+        $post = Yii::$app->request->post();
+
+        if ($model->load($post)) {
+
+            // Загружаем картинки
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image && $image->tempName) {
+                $model->image = $image;
+                if ($model->validate(['image'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/shop/category/');
+                    $path = date('ymdHis') . '/';
+                    \common\models\Image::createDirectory($dir . $path);
+                    $fileName = $model->image->baseName . '.' . $model->image->extension;
+                    $model->image->saveAs($dir . $path . $fileName);
+                    $model->image = '/uploads/shop/category/' . $path . $fileName;
+                    $photo = Image::getImagine()->open($dir . $path . $fileName);
+                    $photo->thumbnail(new Box(400, 400))->save($dir . $path . $fileName, ['quality' => 90]);
+                }else{
+                    var_dump($model->errors);
+                }
+            } elseif (array_key_exists('old-image', $post) && $post['old-image']) {
+                $model->image = $post['old-image'];
+            }
+            if ($model->isNewRecord && $model->validate()) {
+                $model->save();
+            }
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', 'Категория создана успешно');
+            } else {
+                Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
+            }
+            return $this->redirect(Url::to(['category/update', 'id' => $model->id]));
+        }
+
         return $this->render('_form', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
@@ -151,17 +189,6 @@ class CategoryController extends AdminController
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    /**
-     * Если директории не существует, то создает ее
-     * @param $path
-     */
-    public function createDirectory($path)
-    {
-        if (!file_exists($path)) {
-            mkdir($path, 0775, true);
         }
     }
 }

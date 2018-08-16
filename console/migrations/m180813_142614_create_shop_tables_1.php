@@ -88,12 +88,14 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'category_id'   => $this->integer()->unsigned(),
             'slug'          => $this->string(),
             'name'          => $this->string(),
+            'description'   => $this->string(),
             'video'         => $this->string(),
+            'price'         => $this->integer(),
             'discount'      => $this->integer(),
-            'preview_id'    => $this->integer()->unsigned(),
             'live_area'     => $this->integer(),
             'common_area'   => $this->integer(),
             'useful_area'   => $this->integer(),
+            'image_id'      => $this->integer()->unsigned(),
             'one_floor'     => $this->smallInteger(1),
             'two_floor'     => $this->smallInteger(1),
             'mansard'       => $this->smallInteger(1),
@@ -109,6 +111,9 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'sauna'         => $this->smallInteger(1),
             'gas_boiler'    => $this->smallInteger(1),
             'is_new'        => $this->smallInteger(1),
+            'is_active'     => $this->smallInteger(1),
+            'is_deleted'    => $this->smallInteger(1),
+            'sort'          => $this->integer()
         ]);
         $this->createIndex('U_item_slug', 'shop_item', 'slug', true);
         $this->createIndex('U_item_name', 'shop_item', 'name', false);
@@ -125,8 +130,9 @@ class m180813_142614_create_shop_tables_1 extends Migration
 
         $this->createTable('shop_item_image', [
             'id'      => $this->primaryKey()->unsigned(),
-            'item_id' => $this->integer()->unsigned()->notNull(),
-            'file'    => $this->string()
+            'item_id' => $this->integer()->unsigned(),
+            'file'    => $this->string(),
+            'sort'    => $this->integer()
         ]);
         $this->addForeignKey(
             'FK_item_image_item',
@@ -134,7 +140,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'item_id',
             'shop_item',
             'id',
-            'RESTRICT',
+            'CASCADE',
             'CASCADE'
         );
 
