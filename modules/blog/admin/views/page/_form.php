@@ -15,20 +15,20 @@ use yii\widgets\ActiveForm;
 /* @var $model \common\models\Page */
 /* @var $tags array */
 
-$this->title = $model->isNewRecord ? 'Create page' : 'Edit page';
+$this->title = $model->isNewRecord ? 'Создание страницы' : 'Редактирование страницы';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 ?>
 <h1><?= $this->title ?></h1>
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
-    <?= Html::hiddenInput('old-image', $model->image) ?>
+    <?= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
     <?= $form->field($model, 'slug') ?>
     <div class="preview-image-block" data-id="<?= $model->id ?>">
         <?
         if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
             echo Html::img($model->image, ['class' => 'img-responsive preview-image']);
-            echo Html::button('delete image', ['class' => 'btn btn-admin js-delete-preview-page']);
+            echo Html::button('удалить изображение', ['class' => 'btn btn-admin js-delete-preview-page']);
         }
         ?>
         <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
@@ -41,7 +41,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             'lang'                     => Yii::$app->language,
             'minHeight'                => 200,
             'imageUpload'              => Url::to(['page/image-upload']),
-            'imageUploadErrorCallback' => new JsExpression('function (response) { alert("An error occurred during the upload process! Max image width 1200px. Max image height 1000px."); }'),
+            'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
             'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'orderedlist', 'link', 'image'],
             'plugins'                  => [
                 'fullscreen',
@@ -56,9 +56,9 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </div>
 </div>
 
-<?= Html::submitButton('Save', ['class' => 'btn btn-admin save-post']) ?>
+<?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
-<div class="buttons-panel" title="<?= $model->isNewRecord ? 'The page was not published' : '' ?>">
+<div class="buttons-panel" title="<?= $model->isNewRecord ? 'Страница еще не опубликована' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
-    <?= Html::a('Go to page', Url::to('/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
+    <?= Html::a('На сайт', Url::to('/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

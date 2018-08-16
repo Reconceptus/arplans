@@ -4,7 +4,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Materials';
+$this->title = 'Страницы';
 
 $columns = [
     [
@@ -30,7 +30,7 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Create page', Url::to('/admin/page/create'), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Добавить страницу', Url::to('/admin/modules/blog/page/create'), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,

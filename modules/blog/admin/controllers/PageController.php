@@ -141,9 +141,9 @@ class PageController extends AdminController
             }
             $model->updated_at = date('Y-m-d H:i:s');
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Page created successfully');
+                Yii::$app->session->setFlash('success', 'Страница создана успешно');
             } else {
-                Yii::$app->session->setFlash('danger', 'Error creating page');
+                Yii::$app->session->setFlash('danger', 'Ошибка при создании страницы');
             }
             return $this->redirect(Url::to(['page/update', 'id' => $model->id]));
         }
@@ -165,7 +165,7 @@ class PageController extends AdminController
         if ($pageId) {
             $page = Page::findOne($pageId);
             if ($page && $page->image) {
-                $fileName = '@webroot' . $page->image;
+                $fileName = Yii::getAlias('@webroot') . $page->image;
                 if (file_exists($fileName)) {
                     unlink($fileName);
                 }
