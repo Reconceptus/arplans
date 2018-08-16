@@ -72,9 +72,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $id = Yii::$app->db->createCommand("SELECT id FROM module WHERE name='shop'")->queryScalar();
-        var_dump($id);
-        return $this->render('index');
+        return $this->redirect('/blog');
     }
 
     /**

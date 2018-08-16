@@ -70,7 +70,7 @@ class PostController extends Controller
         $slug = Yii::$app->request->get('slug');
         $model = Post::find()->where(['slug' => $slug])->one();
         if (!$model) {
-            throw new NotFoundHttpException('Post not found');
+            throw new NotFoundHttpException('Статья не найдена');
         }
         $tags = ArrayHelper::map($model->getTags()->all(), 'id', 'name');
         $comment = new Comment();
