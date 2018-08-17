@@ -28,7 +28,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
             <div class="upload-input">
-                <?= Html::fileInput('ItemImage[image]',['class'=>'item-image-input']) ?>
+                <?= Html::fileInput('ItemImage[image]','',['class'=>'item-image-input']) ?>
             </div>
             <div class="upload-button">
                 <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
