@@ -57,6 +57,7 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'slug', 'category_id'], 'required'],
             [['category_id', 'price', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video'], 'string', 'max' => 255],
             [['description'], 'string'],

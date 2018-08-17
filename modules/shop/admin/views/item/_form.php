@@ -18,12 +18,30 @@ $this->title = $model->isNewRecord ? 'Добавление товара' : 'Ре
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 ?>
 <h1><?= $this->title ?></h1>
+<div class="images-block">
+    <div class="images-panel">
+        <? foreach ($model->images as $image): ?>
+            <?= $this->render('_image', ['model' => $image]) ?>
+        <? endforeach; ?>
+    </div>
+    <div class="clearfix"></div>
+    <form name="uploader" enctype="multipart/form-data" method="POST">
+        <div class="upload">
+            <div class="upload-input">
+                <?= Html::fileInput('ItemImage[image]',['class'=>'item-image-input']) ?>
+            </div>
+            <div class="upload-button">
+                <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
+            </div>
+        </div>
+    </form>
+</div>
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-5">
-            <?= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
+            <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
             <? if ($model->isNewRecord): ?>
                 <?= $form->field($model, 'category_id')->dropDownList(Category::getList()) ?>
             <? endif; ?>
@@ -32,14 +50,14 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'description')->textarea() ?>
             <?= $form->field($model, 'video') ?>
-            <?= $form->field($model, 'price') ?>
+            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
         </div>
         <div class="col-md-5">
+            <?= $form->field($model, 'price') ?>
             <?= $form->field($model, 'discount') ?>
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'common_area') ?>
             <?= $form->field($model, 'useful_area') ?>
-            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
         </div>
     </div>

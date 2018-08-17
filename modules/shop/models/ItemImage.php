@@ -7,7 +7,8 @@ namespace modules\shop\models;
  *
  * @property string $id
  * @property string $item_id
- * @property string $file
+ * @property string $image
+ * @property string $thumb
  *
  * @property Item $item
  */
@@ -28,7 +29,7 @@ class ItemImage extends \yii\db\ActiveRecord
     {
         return [
             [['item_id'], 'integer'],
-            [['file'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
+            [['image', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];
     }
@@ -41,7 +42,8 @@ class ItemImage extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'item_id' => 'Товар',
-            'file' => 'Файл',
+            'image' => 'Файл',
+            'thumb' => 'Thumb',
         ];
     }
 

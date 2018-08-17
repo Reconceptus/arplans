@@ -8,7 +8,7 @@ body {
     text-decoration: none;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
@@ -137,35 +137,84 @@ ul{
     font-weight: bold;
 }
 
-.add-big-button{
+.add-big-button {
     margin: 10px 0;
 }
 
-.side-menu li{
+.side-menu li {
     margin-bottom: 15px;
 }
 
-.role-checkbox{
+.role-checkbox {
     float: left;
 }
 
-.checkbox-label{
+.checkbox-label {
     margin-left: 5px;
 }
 
-.permissions-list{
+.permissions-list {
     margin: 25px 0;
 }
 
-.roles-form{
+.roles-form {
     margin-bottom: 15px;
 }
 
-.module-items{
+.module-items {
     list-style: square;
     margin: 5px 0;
 }
 
-.checkbox-panel{
+.checkbox-panel {
     margin-top: 20px;
+}
+
+.img-admin {
+    height: 100px;
+}
+
+.images-block {
+    margin-bottom: 30px;
+}
+
+.image-admin-preview {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    position: relative;
+}
+
+.js-image-admin-delete {
+    position: absolute;
+    right: 3px;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+.js-set-default-image, .js-image-admin-delete {
+    display: none;
+}
+
+.js-set-default-image, .default-image {
+    position: absolute;
+    left: 3px;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+.image-admin-preview:hover .js-set-default-image, .image-admin-preview:hover .js-image-admin-delete{
+    display: block;
+}
+
+.image-admin-preview
+.default-image {
+    color: green;
+    border: 2px solid green;
+}
+
+.upload-input {
+    width: 300px;
+    float: left;
+    padding-top: 10px;
 }
