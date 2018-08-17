@@ -131,7 +131,8 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->createTable('shop_item_image', [
             'id'      => $this->primaryKey()->unsigned(),
             'item_id' => $this->integer()->unsigned(),
-            'file'    => $this->string(),
+            'image'    => $this->string(),
+            'thumb'    => $this->string(),
             'sort'    => $this->integer()
         ]);
         $this->addForeignKey(
