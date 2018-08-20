@@ -72,7 +72,7 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Add user', Url::to(['/admin/user/create', 'back' => Yii::$app->request->absoluteUrl]), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Add user', Url::to(['/admin/modules/users/user/create', 'back' => Yii::$app->request->absoluteUrl]), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= GridView::widget([
     'id'           => 'user-list',
     'dataProvider' => $dataProvider,
