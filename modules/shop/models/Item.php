@@ -43,6 +43,12 @@ namespace modules\shop\models;
  */
 class Item extends \yii\db\ActiveRecord
 {
+    const IS_ACTIVE = 1;
+    const IS_NOT_ACTIVE = 0;
+
+    const IS_DELETED = 1;
+    const IS_NOT_DELETED = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -127,5 +133,21 @@ class Item extends \yii\db\ActiveRecord
     public function getImage()
     {
         return $this->hasOne(ItemImage::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * Получаем основное фото товара
+     * @return string
+     */
+    public function getMainImage()
+    {
+        if ($this->image_id) {
+            $image = $this->image->image;
+        } elseif($this->images) {
+            $image = $this->images[0]->image;
+        }else{
+            $image = \Yii::$app->params['defaultImage'];
+        }
+        return $image;
     }
 }
