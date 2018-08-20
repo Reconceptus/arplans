@@ -19,8 +19,11 @@ class Share extends Widget
 
     public function run()
     {
-        $neighbors = Post::getNeighbors($this->model->id);
-        $content = $this->render($this->viewName, ['prev' => $neighbors['prev'], 'next' => $neighbors['next'], 'model' => $this->model]);
+        $neighbors = $this->viewName === 'blog' ? Post::getNeighbors($this->model->id) : null;
+        $content = $this->render($this->viewName, [
+            'prev'  => $neighbors ? $neighbors['prev'] : null,
+            'next'  => $neighbors ? $neighbors['next'] : null,
+            'model' => $this->model]);
 
         return $content;
     }

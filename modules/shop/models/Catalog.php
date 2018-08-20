@@ -20,6 +20,7 @@ namespace modules\shop\models;
  */
 class Catalog extends \yii\db\ActiveRecord
 {
+    const VIEW_CHECKBOX = 1;
     /**
      * {@inheritdoc}
      */

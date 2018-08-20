@@ -111,9 +111,9 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'sauna'         => $this->smallInteger(1),
             'gas_boiler'    => $this->smallInteger(1),
             'is_new'        => $this->smallInteger(1),
-            'is_active'     => $this->smallInteger(1),
-            'is_deleted'    => $this->smallInteger(1),
-            'sort'          => $this->integer()
+            'is_active'     => $this->smallInteger(1)->defaultValue(1),
+            'is_deleted'    => $this->smallInteger(1)->defaultValue(0),
+            'sort'          => $this->integer()->defaultValue(200)
         ]);
         $this->createIndex('U_item_slug', 'shop_item', 'slug', true);
         $this->createIndex('U_item_name', 'shop_item', 'name', false);
@@ -131,8 +131,8 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->createTable('shop_item_image', [
             'id'      => $this->primaryKey()->unsigned(),
             'item_id' => $this->integer()->unsigned(),
-            'image'    => $this->string(),
-            'thumb'    => $this->string(),
+            'image'   => $this->string(),
+            'thumb'   => $this->string(),
             'sort'    => $this->integer()
         ]);
         $this->addForeignKey(
