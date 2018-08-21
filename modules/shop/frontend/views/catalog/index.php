@@ -13,7 +13,7 @@ use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
 /* @var $dataProvider ActiveDataProvider */
-/* @var $category_id integer */
+/* @var $category \modules\shop\models\Category */
 ?>
 
     <div class="section bg-head">
@@ -25,7 +25,7 @@ use yii\widgets\ListView;
         <div class="content content--lg">
             <div class="custom-row filter-row show-more-parent">
                 <?= \modules\shop\widgets\filters\Filters::widget([
-                    'category_id' => $category_id
+                    'category_id' => $category->id
                 ]) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
@@ -92,22 +92,16 @@ use yii\widgets\ListView;
             </div>
         </div>
     </div>
+<? if ($category->description): ?>
     <div class="section info-box ">
         <div class="content content--md">
             <div class="ready-projects--info">
-                <h3 class="title">Проекты Арпланс</h3>
+                <h3 class="title"><?= $category->name ?></h3>
                 <div class="info-box--text">
-                    <p>В этом блоке 3 стиля: основной, <a href="#">ссылка</a>, <strong>болд</strong>. Не обязательное
-                        поле для текстового описания. ARPLANS.RU — сервис готовых архитектурных проектов загородных
-                        домов, коттеджей, бань. По нашим проектам многократно производилось строительство, а качество
-                        чертежей проектной документации проверено временем и репутацией разработчиков. Все проекты
-                        созданы опытными и высококвалифицированны архитекторами и инженерами ARPLANS.</p>
-                    <p>Здесь рыба. Сервис готовых архитектурных проектов загородных домов, коттеджей, бань. По нашим
-                        проектам многократно производилось строительство, а качество чертежей проектной документации
-                        проверено временем и репутацией разработчиков. Все проекты созданы опытными и
-                        высококвалифицированны архитекторами и инженерами ARPLANS.</p>
+                    <?= $category->description ?>
                 </div>
             </div>
         </div>
     </div>
+<? endif; ?>
 <?= Recently::widget() ?>

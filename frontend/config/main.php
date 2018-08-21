@@ -46,17 +46,19 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
             'rules'           => [
-                'site'                                                                                            => 'site',
-                'admin'                                                                                           => 'blog/page',
+                'site'  => 'site',
+                'admin' => 'blog/page',
 
-                'shop'                                                                                            => 'shop/catalog',
+                'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
+                'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog',
+                'shop'                                                     => 'shop/catalog',
 
-                'blog/add-comment'                                                                                => 'blog/post/add-comment',
-                'blog/search'                                                                                     => 'blog/post/search',
-                'blog/index'                                                                                      => 'blog/post/index',
-                'blog/test'                                                                                       => 'blog/post/test',
-                'blog/<slug:[a-zA-Z0-9\_\-]+>'                                                                    => 'blog/post/view',
-                'blog'                                                                                            => 'blog/post/index',
+                'blog/add-comment'             => 'blog/post/add-comment',
+                'blog/search'                  => 'blog/post/search',
+                'blog/index'                   => 'blog/post/index',
+                'blog/test'                    => 'blog/post/test',
+                'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/post/view',
+                'blog'                         => 'blog/post/index',
 
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
@@ -65,7 +67,7 @@ return [
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 '<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>/blog',
-                '<slug:[a-zA-Z0-9\_\-]+>'                                                                         => 'page/view',
+                '<slug:[a-zA-Z0-9\_\-]+>'                                                           => 'page/view',
             ],
         ],
     ],
@@ -79,7 +81,7 @@ return [
         'blog'   => [
             'class' => 'modules\blog\Module',
         ],
-        'users'   => [
+        'users'  => [
             'class' => 'modules\users\Module',
         ],
     ],
