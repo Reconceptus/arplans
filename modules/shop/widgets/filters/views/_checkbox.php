@@ -14,22 +14,15 @@
         <span class="show-more"></span>
     </div>
     <div class="catalog-filters--main show-more-hidden" style="display: block;">
-        <
-        <div class="form-row-element">
-            <div class="check">
-                <label>
-                    <input type="checkbox">
-                    <span>из бруса</span>
-                </label>
+        <? foreach ($catalog->catalogItems as $catalogItem): ?>
+            <div class="form-row-element">
+                <div class="check">
+                    <label>
+                        <input type="checkbox">
+                        <span><?= $catalogItem->name ?></span>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="form-row-element">
-            <div class="check">
-                <label>
-                    <input type="checkbox">
-                    <span>из бревна</span>
-                </label>
-            </div>
-        </div>
+        <? endforeach; ?>
     </div>
 </div>
