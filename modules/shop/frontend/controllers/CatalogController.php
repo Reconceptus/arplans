@@ -19,7 +19,10 @@ class CatalogController extends Controller
 
     public function actionIndex()
     {
-        $category = \Yii::$app->request->get('category');
+        $get = \Yii::$app->request->get();
+
+        // Определяем категорию
+        $category = isset($get['category']) ? $get['category'] : '';
         if (!$category) {
             $category = Category::find()->where(['is_active' => Category::IS_ACTIVE])->one();
         } else {
@@ -28,17 +31,23 @@ class CatalogController extends Controller
         if (!$category) {
             throw new NotFoundHttpException();
         }
-        $query = Item::find()->where(['category_id' => $category->id])
-            ->andWhere(['is_active' => Item::IS_ACTIVE])
-            ->andWhere(['is_deleted' => Item::IS_NOT_DELETED]);
+
+        $query = Item::getFilteredQuery($category, $get);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
 
+        // получаем данные для фильтров-слайдеров
+        $commonArea = [
+            'min' => \Yii::$app->db->createCommand("SELECT MIN(common_area) FROM shop_item WHERE category_id=" . $category->id)->queryScalar(),
+            'max' => \Yii::$app->db->createCommand("SELECT MAX(common_area) FROM shop_item WHERE category_id=" . $category->id)->queryScalar()
+        ];
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'category'     => $category
+            'category'     => $category,
+            'commonArea'   => $commonArea
         ]);
     }
-
 }

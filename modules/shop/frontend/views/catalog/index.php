@@ -14,18 +14,20 @@ use yii\widgets\ListView;
 
 /* @var $dataProvider ActiveDataProvider */
 /* @var $category \modules\shop\models\Category */
+/* @var $commonArea array */
 ?>
 
     <div class="section bg-head">
         <div class="content content--lg">
-            <div class="bg-head--main gradient"><h1 class="title title-lg">Проекты деревянных домов</h1></div>
+            <div class="bg-head--main gradient"><h1 class="title title-lg"><?= $category->name ?></h1></div>
         </div>
     </div>
     <div class="section">
         <div class="content content--lg">
             <div class="custom-row filter-row show-more-parent">
                 <?= \modules\shop\widgets\filters\Filters::widget([
-                    'category_id' => $category->id
+                    'category'   => $category,
+                    'commonArea' => $commonArea
                 ]) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">

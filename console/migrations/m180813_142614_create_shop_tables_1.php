@@ -27,42 +27,26 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->createIndex('U_category_name', 'shop_category', 'name', true);
 
         $this->createTable('shop_catalog', [
-            'id'        => $this->primaryKey()->unsigned(),
-            'slug'      => $this->string(),
-            'name'      => $this->string()->notNull(),
-            'type'      => $this->smallInteger(1),
-            'view_type' => $this->smallInteger(1),
-            'cart'      => $this->smallInteger(1),
-            'order'     => $this->smallInteger(1),
-            'filter'    => $this->smallInteger(1),
-            'sort'      => $this->integer()->defaultValue(200)
+            'id'          => $this->primaryKey()->unsigned(),
+            'category_id' => $this->integer()->unsigned()->defaultValue(null),
+            'slug'        => $this->string(),
+            'name'        => $this->string()->notNull(),
+            'type'        => $this->smallInteger(1),
+            'view_type'   => $this->smallInteger(1),
+            'cart'        => $this->smallInteger(1),
+            'order'       => $this->smallInteger(1),
+            'filter'      => $this->smallInteger(1),
+            'sort'        => $this->integer()->defaultValue(200)
         ]);
         $this->createIndex('U_catalog_slug', 'shop_catalog', 'slug', true);
         $this->createIndex('U_catalog_name', 'shop_catalog', 'name', true);
 
-
-        $this->createTable('shop_catalog_category', [
-            'id'          => $this->primaryKey()->unsigned(),
-            'catalog_id'  => $this->integer()->unsigned(),
-            'category_id' => $this->integer()->unsigned()
-        ]);
         $this->addForeignKey(
-            'FK_catalog_category_catalog',
-            'shop_catalog_category',
-            'catalog_id',
+            'FK_catalog_category',
             'shop_catalog',
-            'id',
-            'CASCADE',
-            'CASCADE'
-        );
-        $this->addForeignKey(
-            'FK_catalog_category_category',
-            'shop_catalog_category',
             'category_id',
             'shop_category',
-            'id',
-            'CASCADE',
-            'CASCADE'
+            'id'
         );
 
         $this->createTable('shop_catalog_item', [
@@ -92,6 +76,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'video'         => $this->string(),
             'price'         => $this->integer(),
             'discount'      => $this->integer(),
+            'rooms'         => $this->smallInteger(1),
             'live_area'     => $this->integer(),
             'common_area'   => $this->integer(),
             'useful_area'   => $this->integer(),

@@ -15,8 +15,8 @@ use yii\helpers\ArrayHelper;
  * @property int $sort
  * @property int $is_active
  *
- * @property CatalogCategory[] $shopCatalogCategories
- * @property Item[] $shopItems
+ * @property Catalog[] $catalogs
+ * @property Item[] $items
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -66,9 +66,9 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCatalogCategories()
+    public function getCatalogs()
     {
-        return $this->hasMany(CatalogCategory::className(), ['category_id' => 'id']);
+        return $this->hasMany(Catalog::className(), ['category_id' => 'id']);
     }
 
     /**

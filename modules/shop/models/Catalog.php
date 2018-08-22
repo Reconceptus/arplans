@@ -8,6 +8,7 @@ namespace modules\shop\models;
  * @property string $id
  * @property string $slug
  * @property string $name
+ * @property int $category_id
  * @property int $type
  * @property int $view_type
  * @property int $cart
@@ -15,12 +16,13 @@ namespace modules\shop\models;
  * @property int $filter
  * @property int $sort
  *
- * @property CatalogCategory[] $catalogCategories
  * @property CatalogItem[] $catalogItems
+ * @property Category $category
  */
 class Catalog extends \yii\db\ActiveRecord
 {
     const VIEW_CHECKBOX = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -36,10 +38,11 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['type', 'view_type', 'cart', 'order', 'filter', 'sort'], 'integer'],
+            [['type', 'view_type', 'cart', 'order', 'filter', 'sort', 'category_id'], 'integer'],
             [['slug', 'name'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['slug'], 'unique'],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
@@ -49,24 +52,17 @@ class Catalog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'        => 'ID',
-            'slug'      => 'Url',
-            'name'      => 'Название',
-            'type'      => 'Тип',
-            'view_type' => 'Вид отображения',
-            'cart'      => 'Показывать в корзине',
-            'order'     => 'Показывать в заказе',
-            'filter'    => 'Показывать в фильтрах',
-            'sort'      => 'Сортировка',
+            'id'          => 'ID',
+            'category_id' => 'Категория',
+            'slug'        => 'Url',
+            'name'        => 'Название',
+            'type'        => 'Тип',
+            'view_type'   => 'Вид отображения',
+            'cart'        => 'Показывать в корзине',
+            'order'       => 'Показывать в заказе',
+            'filter'      => 'Показывать в фильтрах',
+            'sort'        => 'Сортировка',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCatalogCategories()
-    {
-        return $this->hasMany(CatalogCategory::className(), ['catalog_id' => 'id']);
     }
 
     /**
@@ -75,5 +71,26 @@ class Catalog extends \yii\db\ActiveRecord
     public function getCatalogItems()
     {
         return $this->hasMany(CatalogItem::className(), ['catalog_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * Возвращает все каталоги относящиеся к категории, включая общие
+     * @param $category_id
+     * @return array|Catalog[]|Category[]|\yii\db\ActiveRecord[]
+     */
+    public static function getCategoryCatalogs($category_id)
+    {
+        $catalogs = self::find()
+            ->where(['category_id' => $category_id])
+            ->orWhere(['is', 'category_id', null])->all();
+        return $catalogs;
     }
 }
