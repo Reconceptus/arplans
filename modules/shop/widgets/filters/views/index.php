@@ -79,6 +79,8 @@ $get = Yii::$app->request->get();
                                                 </label>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="form-row-col col-50">
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
@@ -88,9 +90,6 @@ $get = Yii::$app->request->get();
                                                 </label>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-row-col col-50">
-
                                     </div>
                                 </div>
                             </div>
