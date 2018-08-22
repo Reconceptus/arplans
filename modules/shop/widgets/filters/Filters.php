@@ -17,7 +17,8 @@ use yii\db\Query;
 class Filters extends Widget
 {
     public $viewName = 'index';
-    public $category_id;
+    public $category;
+    public $commonArea;
 
     public function run()
     {
@@ -27,8 +28,9 @@ class Filters extends Widget
             ->from('shop_catalog')
             ->innerJoin('shop_catalog_item', 'shop_catalog_item.catalog_id = shop_catalog.id')
             ->innerJoin('shop_item_option', 'shop_catalog.id = shop_item_option.catalog_id and shop_catalog_item.id = shop_item_option.catalog_item_id')
-            ->innerJoin('shop_item', 'shop_item_option.item_id = shop_item.id and shop_item.category_id =' . $this->category_id)
-            ->where(['shop_item.is_active' => Item::IS_ACTIVE]);
+            ->innerJoin('shop_item', 'shop_item_option.item_id = shop_item.id and shop_item.category_id =' . $this->category->id)
+            ->where(['shop_item.is_active' => Item::IS_ACTIVE])
+            ->andWhere(['or', 'shop_catalog.category_id IS NULL', 'shop_catalog.category_id = ' . $this->category->id]);
         $ids = [-1];
 
         $dbIds = $query->createCommand()->queryAll();
@@ -41,7 +43,10 @@ class Filters extends Widget
             ->where(['filter' => 1])
             ->andWhere(['in', 'id', $dbIds])
             ->all();
-        $content = $this->render($this->viewName, ['filters' => $filters]);
+        $content = $this->render($this->viewName, [
+            'filters'    => $filters,
+            'commonArea' => $this->commonArea
+        ]);
         return $content;
     }
 }

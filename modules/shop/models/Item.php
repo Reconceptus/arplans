@@ -3,6 +3,8 @@
 namespace modules\shop\models;
 
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the model class for table "shop_item".
  *
@@ -15,6 +17,7 @@ namespace modules\shop\models;
  * @property int $price
  * @property int $discount
  * @property int $image_id
+ * @property int $rooms
  * @property int $live_area
  * @property int $common_area
  * @property int $useful_area
@@ -64,7 +67,7 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'slug', 'category_id'], 'required'],
-            [['category_id', 'price', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
+            [['category_id', 'price', 'rooms', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug'], 'unique'],
@@ -87,6 +90,7 @@ class Item extends \yii\db\ActiveRecord
             'image_id'      => 'Превью',
             'price'         => 'Цена',
             'discount'      => 'Скидка',
+            'rooms'         => 'Количество комнат',
             'live_area'     => 'Жилая площадь',
             'common_area'   => 'Общая площадь',
             'useful_area'   => 'Полезная площадь',
@@ -143,11 +147,90 @@ class Item extends \yii\db\ActiveRecord
     {
         if ($this->image_id) {
             $image = $this->image->image;
-        } elseif($this->images) {
+        } elseif ($this->images) {
             $image = $this->images[0]->image;
-        }else{
+        } else {
             $image = \Yii::$app->params['defaultImage'];
         }
         return $image;
+    }
+
+
+    public static function getFilteredQuery(Category $category, array $get)
+    {
+        // Делаем выборку товаров
+        $query = Item::find()->alias('i')
+            ->innerJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
+            ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
+            ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
+            ->where(['i.category_id' => $category->id])
+            ->andWhere(['i.is_active' => Item::IS_ACTIVE])
+            ->andWhere(['i.is_deleted' => Item::IS_NOT_DELETED]);
+
+        // Фильтруем их по get параметрам
+        // Убираем из параметров категорию
+        if (isset($get['category'])) {
+            unset($get['category']);
+        }
+
+        // Этажи
+        if (isset($get['floors']) && is_array($get['floors'])) {
+            $floors[] = 'or';
+            foreach ($get['floors'] as $k => $floor) {
+                $floors[] = ['>', 'i.'.$k, 0];
+            }
+            $query->andWhere($floors);
+            unset($get['floors']);
+        }
+
+        // Бесплатные проекты
+        if (isset($get['free'])) {
+            $query->andWhere(['i.price' => 0]);
+            unset($get['free']);
+        }
+
+        // По количеству комнат
+        if (isset($get['rooms'])) {
+            $query->andWhere(['rooms' => intval($get['rooms'])]);
+        }
+
+        // По минимальной площади
+        if (isset($get['minarea'])) {
+            $query->andWhere(['>', 'i.common_area', intval($get['minarea'])]);
+            unset($get['minarea']);
+        }
+
+        // по максимальной площади
+        if (isset($get['maxarea'])) {
+            $query->andWhere(['<', 'i.common_area', intval($get['maxarea'])]);
+            unset($get['maxarea']);
+        }
+
+        // По остальным параметрам
+        $query = self::addConditions($query, $get);
+
+        return $query;
+    }
+
+    /**
+     * Добавляем условия по чекбоксам свойств товара к выборке
+     * @param ActiveQuery $query
+     * @param array $get
+     * @return ActiveQuery
+     */
+    public static function addConditions(ActiveQuery $query, array $get)
+    {
+        foreach ($get as $key => $item) {
+            if (!is_array($item)) {
+                $query->andWhere(['>', $key, 0]);
+            } else {
+                $values = [];
+                foreach ($item as $k => $value) {
+                    $values[] = $k;
+                }
+                $query->andWhere(['io.catalog_id' => $key])->andWhere(['in', 'io.catalog_item_id', $values]);
+            }
+        }
+        return $query;
     }
 }

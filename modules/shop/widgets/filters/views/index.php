@@ -9,6 +9,9 @@
 use modules\shop\models\Catalog;
 
 /* @var $filters Catalog[] */
+/* @var $commonArea array */
+
+$get = Yii::$app->request->get();
 ?>
 <div class="custom-row-col col-sidebar">
     <div class="btn-box multiple">
@@ -21,7 +24,7 @@ use modules\shop\models\Catalog;
         <div class="modal-bg close"></div>
         <div class="fixing">
             <div class="catalog-filters scrolled">
-                <form action="#">
+                <form action="">
                     <div class="filter-form">
                         <? foreach ($filters as $catalog): ?>
                             <? if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
@@ -39,9 +42,11 @@ use modules\shop\models\Catalog;
                                         <div id="keypress" class="range-field"></div>
                                         <div class="range-inputs">
                                             от
-                                            <input type="text" id="input-with-keypress-0">
+                                            <input type="text" name="minarea" id="input-with-keypress-0"
+                                                   value="<?= isset($get['minarea']) ? $get['minarea'] : '' ?>">
                                             до
-                                            <input type="text" id="input-with-keypress-1">
+                                            <input type="text" name="maxarea" id="input-with-keypress-1"
+                                                   value="<?= isset($get['maxarea']) ? $get['maxarea'] : '' ?>">
                                             м<sup>2</sup>
                                         </div>
                                     </div>
@@ -59,7 +64,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="floors[one_floor]" <?= isset($get['floors']['one_floor']) ? 'checked' : '' ?>>
                                                     <span>1-этажные</span>
                                                 </label>
                                             </div>
@@ -67,16 +73,9 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="floors[two_floor]" <?= isset($get['floors']['two_floor']) ? 'checked' : '' ?>>
                                                     <span>2-этажные</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row-element">
-                                            <div class="check">
-                                                <label>
-                                                    <input type="checkbox">
-                                                    <span>с мансардой</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -85,16 +84,9 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
-                                                    <span>с цоколем</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row-element">
-                                            <div class="check">
-                                                <label>
-                                                    <input type="checkbox">
-                                                    <span>с подвалом</span>
+                                                    <input type="checkbox"
+                                                           name="floors[mansard]" <?= isset($get['floors']['mansard']) ? 'checked' : '' ?>>
+                                                    <span>с мансардой</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -137,23 +129,28 @@ use modules\shop\models\Catalog;
                                 <div class="form-row-element">
                                     <div class="radio-flex">
                                         <label>
-                                            <input type="radio" name="rooms">
+                                            <input type="radio" name="rooms"
+                                                   value="2" <?= isset($get['mansard']) && $get['mansard'] == 2 ? 'checked' : '' ?>>
                                             <span>2</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms">
+                                            <input type="radio" name="rooms"
+                                                   value="3" <?= isset($get['mansard']) && $get['mansard'] == 3 ? 'checked' : '' ?>>
                                             <span>3</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms">
+                                            <input type="radio" name="rooms"
+                                                   value="4" <?= isset($get['mansard']) && $get['mansard'] == 4 ? 'checked' : '' ?>>
                                             <span>4</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms">
+                                            <input type="radio" name="rooms"
+                                                   value="5" <?= isset($get['mansard']) && $get['mansard'] == 5 ? 'checked' : '' ?>>
                                             <span>5</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms">
+                                            <input type="radio" name="rooms"
+                                                   value="6" <?= isset($get['mansard']) && $get['mansard'] == 6 ? 'checked' : '' ?>>
                                             <span>6+</span>
                                         </label>
                                     </div>
@@ -171,7 +168,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="garage" <?= isset($get['garage']) ? 'checked' : '' ?>>
                                                     <span>гараж</span>
                                                 </label>
                                             </div>
@@ -179,7 +177,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="double_garage" <?= isset($get['double_garage']) ? 'checked' : '' ?>>
                                                     <span>гараж на 2 места</span>
                                                 </label>
                                             </div>
@@ -187,7 +186,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="second_light" <?= isset($get['second_light']) ? 'checked' : '' ?>>
                                                     <span>второй свет</span>
                                                 </label>
                                             </div>
@@ -195,8 +195,18 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="sauna" <?= isset($get['sauna']) ? 'checked' : '' ?>>
                                                     <span>сауна</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row-element">
+                                            <div class="check">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="tent" <?= isset($get['tent']) ? 'checked' : '' ?>>
+                                                    <span>навес</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -205,15 +215,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
-                                                    <span>навес</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row-element">
-                                            <div class="check">
-                                                <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="terrace" <?= isset($get['terrace']) ? 'checked' : '' ?>>
                                                     <span>терасса</span>
                                                 </label>
                                             </div>
@@ -221,7 +224,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="balcony" <?= isset($get['balcony']) ? 'checked' : '' ?>>
                                                     <span>балкон</span>
                                                 </label>
                                             </div>
@@ -229,8 +233,27 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="pool" <?= isset($get['pool']) ? 'checked' : '' ?>>
                                                     <span>бассейн</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row-element">
+                                            <div class="check">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="pedestal" <?= isset($get['pedestal']) ? 'checked' : '' ?>>
+                                                    <span>с цоколем</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row-element">
+                                            <div class="check">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           name="cellar" <?= isset($get['cellar']) ? 'checked' : '' ?>>
+                                                    <span>с подвалом</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -249,7 +272,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="is_new" <?= isset($get['is_new']) ? 'checked' : '' ?>>
                                                     <span>новинки</span>
                                                 </label>
                                             </div>
@@ -257,7 +281,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="discount" <?= isset($get['discount']) ? 'checked' : '' ?>>
                                                     <span>скидки</span>
                                                 </label>
                                             </div>
@@ -267,7 +292,8 @@ use modules\shop\models\Catalog;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox">
+                                                    <input type="checkbox"
+                                                           name="free" <?= isset($get['free']) ? 'checked' : '' ?>>
                                                     <span>бесплатно</span>
                                                 </label>
                                             </div>
@@ -277,6 +303,7 @@ use modules\shop\models\Catalog;
                                 </div>
                             </div>
                         </div>
+                        <button type="submit">Применить</button>
                         <div class="reset">
                             <button type="reset">
                                 <span>&times;</span>

@@ -57,16 +57,7 @@
                     </a>
                 </div>
                 <div class="header-main--nav">
-                    <nav>
-                        <ul>
-                            <li><a href="#" class="">Деревянные дома</a></li>
-                            <li><a href="#" class="">Каменные дома</a></li>
-                            <li><a href="#" class="">Каркасные дома</a></li>
-                            <li><a href="#" class="">Комбинированные дома</a></li>
-                            <li><a href="#" class="">Бани</a></li>
-                            <li><a href="#" class="">Индивидуальный проект</a></li>
-                        </ul>
-                    </nav>
+                    <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top']) ?>
                 </div>
                 <div class="header-main--stats">
                     <a href="#" class="stats stats-likes">
