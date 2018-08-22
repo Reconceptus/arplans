@@ -46,7 +46,7 @@ $this->title = $model->title;
                         <?= $model->text ?>
                     </div>
                 </div>
-                <?= \frontend\widgets\share\Share::widget(['model' => $model]) ?>
+                <?= \frontend\widgets\share\Share::widget(['model' => $model, 'viewName' => 'blog']) ?>
             </div>
         </div>
     </div>
