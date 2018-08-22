@@ -27,6 +27,10 @@ class m180814_123034_create_shop_permissions extends Migration
         $item->description = 'Товары';
         $auth->add($item);
 
+        $catalog = $auth->createPermission('shop_catalog');
+        $catalog->description = 'Фильтры';
+        $auth->add($catalog);
+
         $order = $auth->createPermission('shop_order');
         $order->description = 'Заказы';
         $auth->add($order);
@@ -36,6 +40,7 @@ class m180814_123034_create_shop_permissions extends Migration
         $auth->addChild($admin, $category);
         $auth->addChild($admin, $item);
         $auth->addChild($admin, $order);
+        $auth->addChild($admin, $catalog);
     }
 
     /**
