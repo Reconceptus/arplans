@@ -203,7 +203,7 @@ ul {
     cursor: pointer;
 }
 
-.image-admin-preview:hover .js-set-default-image, .image-admin-preview:hover .js-image-admin-delete{
+.image-admin-preview:hover .js-set-default-image, .image-admin-preview:hover .js-image-admin-delete {
     display: block;
 }
 
@@ -217,4 +217,36 @@ ul {
     width: 300px;
     float: left;
     padding-top: 10px;
+}
+
+.filter-panel {
+    height: 200px;
+    margin-left: 0;
+}
+
+.filter-panel .filter{
+    float: left;
+    width: 200px;
+    height: 40px;
+    border: 1px solid #3c3c3c;
+    border-radius: 10px;
+    text-align: center;
+    margin-right: 10px;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.filter-panel .filter:hover {
+    background-color: #B8B8B8;
+    border: none;
+}
+
+.filter-panel .add{
+    width: 40px;
+    border-radius: 20px;
+    background-color: #17191f;
+    color: #FFF;
+}
+.filter-panel a{
+    color: #000;
 }

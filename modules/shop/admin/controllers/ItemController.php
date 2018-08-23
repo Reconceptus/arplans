@@ -108,7 +108,7 @@ class ItemController extends AdminController
                             $image->item_id = $model->id;
                             $image->image = $newImage;
                             if (!$image->save()) {
-                                throw new Exception($model->errors[0]);
+                                throw new Exception('Ошибка сохранения изображения');
                             };
                         }
                     }

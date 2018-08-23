@@ -38,8 +38,8 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'filter'      => $this->smallInteger(1),
             'sort'        => $this->integer()->defaultValue(200)
         ]);
-        $this->createIndex('U_catalog_slug', 'shop_catalog', 'slug', true);
-        $this->createIndex('U_catalog_name', 'shop_catalog', 'name', true);
+        $this->createIndex('U_catalog_slug', 'shop_catalog', ['category_id', 'slug'], true);
+        $this->createIndex('U_catalog_name', 'shop_catalog', ['category_id', 'name'], true);
 
         $this->addForeignKey(
             'FK_catalog_category',
@@ -145,8 +145,21 @@ class m180813_142614_create_shop_tables_1 extends Migration
             ['category', 'Категории', $id],
             ['item', 'Товары', $id],
             ['order', 'Заказы', $id],
+            ['catalog', 'Фильтры', $id],
         ];
         $this->batchInsert('module', ['name', 'title', 'parent_id'], $shopModules);
+        $catalogs = [
+            [1, 1, 'walls', 'Материал стен'],
+            [2, 2, 'walls', 'Материал стен']
+        ];
+        $this->batchInsert('shop_catalog', ['id', 'category_id', 'slug', 'name'], $catalogs);
+        $catalogItems = [
+            [1, 'brus', 'Из бруса'],
+            [1, 'lumber', 'Из дерева'],
+            [2, 'block', 'Из блоков'],
+            [2, 'brick', 'Из кирпича']
+        ];
+        $this->batchInsert('shop_catalog_item', ['catalog_id', 'slug', 'name'], $catalogItems);
     }
 
     /**
