@@ -6,13 +6,13 @@
  * Time: 14:25
  */
 
-use modules\shop\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 
 /* @var $model \modules\shop\models\Item */
+/* @var $catalogs \modules\shop\models\Catalog[] */
 
 $this->title = $model->isNewRecord ? 'Добавление товара' : 'Редактирование товара';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
@@ -28,7 +28,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
             <div class="upload-input">
-                <?= Html::fileInput('ItemImage[image]','',['class'=>'item-image-input']) ?>
+                <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
             </div>
             <div class="upload-button">
                 <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
@@ -42,15 +42,28 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     <div class="row">
         <div class="col-md-5">
             <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
-            <? if ($model->isNewRecord): ?>
-                <?= $form->field($model, 'category_id')->dropDownList(Category::getList()) ?>
-            <? endif; ?>
 
+            <?= $form->field($model, 'category_id')->hiddenInput()->label(false) ?>
             <?= $form->field($model, 'slug') ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'description')->textarea() ?>
             <?= $form->field($model, 'video') ?>
-            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
+            <? foreach ($catalogs as $catalog): ?>
+                <?
+                $iOid =  $model->getItemOptionCatalogItemId($catalog->id);
+                $items = \yii\helpers\ArrayHelper::map($catalog->catalogItems, 'id', 'name')
+                ?>
+                <? if ($catalog->catalogItems): ?>
+                    <div class="form-group">
+                        <label class="control-label"><?= $catalog->name ?></label>
+                        <?= Html::dropDownList(
+                            'Catalogs[' . $catalog->id . ']',
+                            $iOid,
+                            $items,
+                            ['prompt' => 'Не выбрано', 'class' => 'form-control']) ?>
+                    </div>
+                <? endif; ?>
+            <? endforeach; ?>
         </div>
         <div class="col-md-5">
             <?= $form->field($model, 'price') ?>
@@ -59,6 +72,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= $form->field($model, 'common_area') ?>
             <?= $form->field($model, 'useful_area') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
+            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
         </div>
     </div>
 

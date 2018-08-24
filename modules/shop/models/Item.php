@@ -124,6 +124,14 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return ActiveQuery
+     */
+    public function getItemOptions()
+    {
+        return $this->hasMany(ItemOption::className(), ['item_id' => 'id']);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getImages()
@@ -177,7 +185,7 @@ class Item extends \yii\db\ActiveRecord
         if (isset($get['floors']) && is_array($get['floors'])) {
             $floors[] = 'or';
             foreach ($get['floors'] as $k => $floor) {
-                $floors[] = ['>', 'i.'.$k, 0];
+                $floors[] = ['>', 'i.' . $k, 0];
             }
             $query->andWhere($floors);
             unset($get['floors']);
@@ -232,5 +240,18 @@ class Item extends \yii\db\ActiveRecord
             }
         }
         return $query;
+    }
+
+    /**
+     * @param $catalog_id
+     * @return int|mixed|null
+     */
+    public function getItemOptionCatalogItemId($catalog_id)
+    {
+        $io = ItemOption::find()->where(['catalog_id' => $catalog_id, 'item_id' => $this->id])->one();
+        if ($io) {
+            return $io->catalog_item_id;
+        }
+        return null;
     }
 }

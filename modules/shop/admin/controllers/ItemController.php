@@ -11,8 +11,11 @@ namespace modules\shop\admin\controllers;
 
 use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
+use modules\shop\models\Catalog;
+use modules\shop\models\Category;
 use modules\shop\models\Item;
 use modules\shop\models\ItemImage;
+use modules\shop\models\ItemOption;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
@@ -49,13 +52,23 @@ class ItemController extends AdminController
         return $behaviors;
     }
 
-    /**
-     * Вывод списка товаров
-     * @return string
-     */
     public function actionIndex()
     {
-        $query = Item::find();
+        $query = Category::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider]);
+    }
+
+    /**
+     * Вывод списка товаров
+     * @param $category_id
+     * @return string
+     */
+    public function actionCategory($category_id)
+    {
+        $query = Item::find()->where(['category_id' => $category_id]);
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -65,16 +78,18 @@ class ItemController extends AdminController
                 ],
             ]
         );
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('category', ['dataProvider' => $dataProvider]);
     }
 
     /**
      * Создание нового товара
+     * @param $category_id integer
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate(int $category_id)
     {
         $model = new Item();
+        $model->category_id = $category_id;
         return $this->modify($model);
     }
 
@@ -121,11 +136,38 @@ class ItemController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
+            if (isset($post['Catalogs'])) {
+                foreach ($post['Catalogs'] as $k => $val) {
+                    if ($val) {
+                        $io = ItemOption::find()->where(['catalog_id' => $k])->andWhere(['item_id' => $model->id])->one();
+                        if ($io) {
+                            if ($val != $io->catalog_item_id) {
+                                $io->catalog_item_id = $val;
+                                $io->save();
+                            }
+                        } else {
+                            $io = new ItemOption();
+                            $io->item_id = $model->id;
+                            $io->catalog_id = $k;
+                            $io->catalog_item_id = $val;
+                            $io->save();
+                        }
+                    }else{
+                        $io = ItemOption::find()->where(['catalog_id' => $k])->andWhere(['item_id' => $model->id])->one();
+                        if($io){
+                            $io->delete();
+                        }
+                    }
+                }
+            }
+
             return $this->redirect(Url::to(['item/update', 'id' => $model->id]));
         }
+        $catalogs = Catalog::getCategoryCatalogs($model->category_id);
 
         return $this->render('_form', [
-            'model' => $model,
+            'model'    => $model,
+            'catalogs' => $catalogs
         ]);
     }
 
