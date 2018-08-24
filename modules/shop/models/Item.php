@@ -167,7 +167,7 @@ class Item extends \yii\db\ActiveRecord
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
-        $query = Item::find()->alias('i')
+        $query = Item::find()->alias('i')->distinct()
             ->innerJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
             ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
             ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
@@ -198,8 +198,13 @@ class Item extends \yii\db\ActiveRecord
         }
 
         // По количеству комнат
-        if (isset($get['rooms'])) {
-            $query->andWhere(['rooms' => intval($get['rooms'])]);
+        if (isset($get['rooms']) && is_array($get['rooms'])) {
+            $rooms[] = 'or';
+            foreach ($get['rooms'] as $k => $room) {
+                $rooms[] = ['i.rooms'=> $k];
+            }
+            $query->andWhere($rooms);
+            unset($get['rooms']);
         }
 
         // По минимальной площади

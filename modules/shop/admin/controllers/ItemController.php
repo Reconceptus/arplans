@@ -68,7 +68,7 @@ class ItemController extends AdminController
      */
     public function actionCategory($category_id)
     {
-        $query = Item::find()->where(['category_id' => $category_id]);
+        $query = Item::find()->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -152,9 +152,9 @@ class ItemController extends AdminController
                             $io->catalog_item_id = $val;
                             $io->save();
                         }
-                    }else{
+                    } else {
                         $io = ItemOption::find()->where(['catalog_id' => $k])->andWhere(['item_id' => $model->id])->one();
-                        if($io){
+                        if ($io) {
                             $io->delete();
                         }
                     }

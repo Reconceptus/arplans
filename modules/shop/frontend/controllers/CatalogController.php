@@ -10,6 +10,7 @@ namespace modules\shop\frontend\controllers;
 
 use modules\shop\models\Category;
 use modules\shop\models\Item;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -49,5 +50,14 @@ class CatalogController extends Controller
             'category'     => $category,
             'commonArea'   => $commonArea
         ]);
+    }
+
+    public function actionView()
+    {
+        $model = Item::find()->where(['slug'=>Yii::$app->request->get('slug'), 'is_active'=>Item::IS_ACTIVE, 'is_deleted'=>Item::IS_NOT_DELETED])->one();
+        if(!$model){
+            throw new NotFoundHttpException('Товар не найден');
+        }
+        return $this->render('view', ['model'=>$model]);
     }
 }

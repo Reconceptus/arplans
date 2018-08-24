@@ -12,6 +12,7 @@ use modules\shop\models\Catalog;
 /* @var $commonArea array */
 
 $get = Yii::$app->request->get();
+$rooms = isset($get['rooms'])?$get['rooms']:null;
 ?>
 <div class="custom-row-col col-sidebar">
     <div class="btn-box multiple">
@@ -129,28 +130,28 @@ $get = Yii::$app->request->get();
                                 <div class="form-row-element">
                                     <div class="radio-flex">
                                         <label>
-                                            <input type="radio" name="rooms"
-                                                   value="2" <?= isset($get['mansard']) && $get['mansard'] == 2 ? 'checked' : '' ?>>
+                                            <input type="checkbox" name="rooms[2]"
+                                                   value="2" <?= isset($rooms[2]) ? 'checked' : '' ?>>
                                             <span>2</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms"
-                                                   value="3" <?= isset($get['mansard']) && $get['mansard'] == 3 ? 'checked' : '' ?>>
+                                            <input type="checkbox" name="rooms[3]"
+                                                   value="3" <?= isset($rooms[3])  ? 'checked' : '' ?>>
                                             <span>3</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms"
-                                                   value="4" <?= isset($get['mansard']) && $get['mansard'] == 4 ? 'checked' : '' ?>>
+                                            <input type="checkbox" name="rooms[4]"
+                                                   value="4" <?= isset($rooms[4]) ? 'checked' : '' ?>>
                                             <span>4</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms"
-                                                   value="5" <?= isset($get['mansard']) && $get['mansard'] == 5 ? 'checked' : '' ?>>
+                                            <input type="checkbox" name="rooms[5]"
+                                                   value="5" <?= isset($rooms[5]) ? 'checked' : '' ?>>
                                             <span>5</span>
                                         </label>
                                         <label>
-                                            <input type="radio" name="rooms"
-                                                   value="6" <?= isset($get['mansard']) && $get['mansard'] == 6 ? 'checked' : '' ?>>
+                                            <input type="checkbox" name="rooms[6]"
+                                                   value="6" <?= isset($rooms[6]) ? 'checked' : '' ?>>
                                             <span>6+</span>
                                         </label>
                                     </div>
