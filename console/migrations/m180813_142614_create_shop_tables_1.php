@@ -56,7 +56,6 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'name'       => $this->string()->unsigned(),
             'sort'       => $this->integer()
         ]);
-        $this->createIndex('U_catalog_item_slug', 'shop_catalog_item', 'slug', true);
         $this->addForeignKey(
             'FK_catalog_item_catalog',
             'shop_catalog_item',
@@ -72,11 +71,13 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'category_id'   => $this->integer()->unsigned(),
             'slug'          => $this->string(),
             'name'          => $this->string(),
-            'description'   => $this->string(),
+            'description'   => $this->text(),
+            'build_price'   => $this->text(),
             'video'         => $this->string(),
             'price'         => $this->integer(),
             'discount'      => $this->integer(),
             'rooms'         => $this->smallInteger(1),
+            'bathrooms'     => $this->smallInteger(1),
             'live_area'     => $this->integer(),
             'common_area'   => $this->integer(),
             'useful_area'   => $this->integer(),
@@ -116,6 +117,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->createTable('shop_item_image', [
             'id'      => $this->primaryKey()->unsigned(),
             'item_id' => $this->integer()->unsigned(),
+            'type'    => $this->smallInteger(),
             'image'   => $this->string(),
             'thumb'   => $this->string(),
             'sort'    => $this->integer()
@@ -150,16 +152,65 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->batchInsert('module', ['name', 'title', 'parent_id'], $shopModules);
         $catalogs = [
             [1, 1, 'walls', 'Материал стен'],
-            [2, 2, 'walls', 'Материал стен']
+            [2, 2, 'walls', 'Материал стен'],
+            [3, null, 'size', 'Габариты'],
+            [4, null, 'base', 'Фундамент'],
+            [5, null, 'roof', 'Тип кровли'],
+            [6, null, 'slab', 'Перекрытия 1 этажа'],
         ];
         $this->batchInsert('shop_catalog', ['id', 'category_id', 'slug', 'name'], $catalogs);
         $catalogItems = [
-            [1, 'brus', 'Из бруса'],
-            [1, 'lumber', 'Из дерева'],
-            [2, 'block', 'Из блоков'],
-            [2, 'brick', 'Из кирпича']
+            [1, 'brus', 'Из бруса', 1],
+            [1, 'lumber', 'Из дерева', 2],
+            [2, 'block', 'Из блоков', 1],
+            [2, 'brick', 'Из кирпича', 2],
+            [3, '', '12х12', 1],
+            [3, '', '11х11', 2],
+            [3, '', '11х12', 3],
+            [3, '', '10х10', 4],
+            [3, '', '10х11', 5],
+            [3, '', '10х12', 6],
+            [3, '', '9х9', 7],
+            [3, '', '9х10', 8],
+            [3, '', '9х11', 9],
+            [3, '', '9х12', 10],
+            [3, '', '8х8', 11],
+            [3, '', '8х9', 12],
+            [3, '', '8х10', 13],
+            [3, '', '8х11', 14],
+            [3, '', '8х12', 15],
+            [3, '', '7х7', 16],
+            [3, '', '7х8', 17],
+            [3, '', '7х9', 18],
+            [3, '', '7х10', 19],
+            [3, '', '7х11', 20],
+            [3, '', '7х12', 21],
+            [3, '', '6х6', 22],
+            [3, '', '6х7', 23],
+            [3, '', '6х8', 24],
+            [3, '', '6х9', 25],
+            [3, '', '6х10', 26],
+            [3, '', '6х11', 27],
+            [3, '', '6х12', 28],
+            [3, '', '5х5', 29],
+            [3, '', '5х6', 30],
+            [3, '', '5х7', 31],
+            [3, '', '5х8', 32],
+            [3, '', '5х9', 33],
+            [4, '', 'свайно-ростверковый', 1],
+            [4, '', 'монолитная плита', 2],
+            [4, '', 'ленточный сборно-железобетонный', 3],
+            [4, '', 'ленточный монолитный', 4],
+            [4, '', 'винтовые сваи', 5],
+            [5, '', 'мягкая кровля', 1],
+            [5, '', 'металлочерепица', 2],
+            [5, '', 'ондулин', 1],
+            [5, '', 'натуральная черепица', 1],
+            [6, '', 'ж/б плиты', 1],
+            [6, '', 'монолитное', 2],
+            [6, '', 'по деревянным балкам', 3],
         ];
-        $this->batchInsert('shop_catalog_item', ['catalog_id', 'slug', 'name'], $catalogItems);
+        $this->batchInsert('shop_catalog_item', ['catalog_id', 'slug', 'name', 'sort'], $catalogItems);
     }
 
     /**

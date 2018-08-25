@@ -71,7 +71,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getCatalogItems()
     {
-        return $this->hasMany(CatalogItem::className(), ['catalog_id' => 'id']);
+        return $this->hasMany(CatalogItem::className(), ['catalog_id' => 'id'])->orderBy(['sort' => SORT_ASC]);
     }
 
     /**

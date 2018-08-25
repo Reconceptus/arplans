@@ -33,7 +33,7 @@ class CatalogController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $query = Item::getFilteredQuery($category, $get);
+        $query = Item::getFilteredQuery($category, $get)->orderBy(['sort' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query
@@ -54,10 +54,10 @@ class CatalogController extends Controller
 
     public function actionView()
     {
-        $model = Item::find()->where(['slug'=>Yii::$app->request->get('slug'), 'is_active'=>Item::IS_ACTIVE, 'is_deleted'=>Item::IS_NOT_DELETED])->one();
-        if(!$model){
+        $model = Item::find()->where(['slug' => Yii::$app->request->get('slug'), 'is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED])->one();
+        if (!$model) {
             throw new NotFoundHttpException('Товар не найден');
         }
-        return $this->render('view', ['model'=>$model]);
+        return $this->render('view', ['model' => $model]);
     }
 }

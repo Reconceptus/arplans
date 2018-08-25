@@ -122,6 +122,21 @@ class ItemController extends AdminController
                             $image = new ItemImage();
                             $image->item_id = $model->id;
                             $image->image = $newImage;
+                            $image->type = ItemImage::TYPE_PHOTO;
+                            if (!$image->save()) {
+                                throw new Exception('Ошибка сохранения изображения');
+                            };
+                        }
+                    }
+                }
+                if (isset($post['new-plans'])) {
+                    $newPlans = explode(':', $post['new-images']);
+                    foreach ($newPlans as $newPlan) {
+                        if ($newPlan) {
+                            $image = new ItemImage();
+                            $image->item_id = $model->id;
+                            $image->image = $newPlan;
+                            $image->type = ItemImage::TYPE_PLAN;
                             if (!$image->save()) {
                                 throw new Exception('Ошибка сохранения изображения');
                             };
@@ -192,7 +207,8 @@ class ItemController extends AdminController
                 $photo = Image::getImagine()->open($dir . $path . $fileName);
                 $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
                 if (file_exists($dir . $path . $fileName)) {
-                    return ['status' => 'success', 'file' => $model->image, 'block' => $this->renderAjax('_image', ['model' => $model])];
+                    $type = Yii::$app->request->post('type');
+                    return ['status' => 'success', 'file' => $model->image, 'type' => $type, 'block' => $this->renderAjax('_image', ['model' => $model])];
                 }
             }
         }

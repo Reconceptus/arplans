@@ -2,28 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: borod
- * Date: 20.08.2018
- * Time: 9:45
+ * Date: 24.08.2018
+ * Time: 11:27
  */
 
 use modules\shop\models\Catalog;
 
-/* @var $filters Catalog[] */
 /* @var $category \modules\shop\models\Category */
-/* @var $commonArea array */
-
-$get = Yii::$app->request->get();
-$rooms = isset($get['rooms']) ? $get['rooms'] : null;
+/* @var  $filters \modules\shop\models\Catalog[] */
 ?>
 <div class="custom-row-col col-sidebar">
-    <div class="btn-box multiple">
-        <button class="btn btn--lt show-modal-filter">показать фильтры</button>
-        <div class="show-more btn btn--sort mobile-show">
-            <span>Сортировать</span>
-        </div>
-    </div>
-    <div class="fixed-scrollbar modal-filter">
-        <div class="modal-bg close"></div>
+    <div class="fixed-scrollbar">
         <div class="fixing">
             <div class="catalog-filters scrolled">
                 <form action="/shop/<?= $category->slug ?>">
@@ -44,11 +33,9 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                         <div id="keypress" class="range-field"></div>
                                         <div class="range-inputs">
                                             от
-                                            <input type="text" name="minarea" id="input-with-keypress-0"
-                                                   value="<?= isset($get['minarea']) ? $get['minarea'] : '' ?>">
+                                            <input type="text" id="input-with-keypress-0">
                                             до
-                                            <input type="text" name="maxarea" id="input-with-keypress-1"
-                                                   value="<?= isset($get['maxarea']) ? $get['maxarea'] : '' ?>">
+                                            <input type="text" id="input-with-keypress-1">
                                             м<sup>2</sup>
                                         </div>
                                     </div>

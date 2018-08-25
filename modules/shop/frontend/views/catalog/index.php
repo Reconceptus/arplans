@@ -27,7 +27,7 @@ use yii\widgets\ListView;
             <div class="custom-row filter-row show-more-parent">
                 <?= \modules\shop\widgets\filters\Filters::widget([
                     'category'   => $category,
-                    'commonArea' => $commonArea
+                    'commonArea' => $commonArea,
                 ]) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
