@@ -28,11 +28,6 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
             <div class="catalog-filters scrolled">
                 <form action="/shop/<?= $category->slug ?>">
                     <div class="filter-form">
-                        <? foreach ($filters as $catalog): ?>
-                            <? if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
-                                <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
-                            <? endif; ?>
-                        <? endforeach; ?>
                         <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Общая площадь</h3>
@@ -163,7 +158,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                             <div class="check">
                                                 <label>
                                                     <input type="checkbox"
-                                                           name="second_light" <?= isset($get['second_light']) ? 'checked' : '' ?>>
+                                                           name="second_light" <?= isset($get['light2']) ? 'checked' : '' ?>>
                                                     <span>второй свет</span>
                                                 </label>
                                             </div>
@@ -237,6 +232,11 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 </div>
                             </div>
                         </div>
+                        <? foreach ($filters as $catalog): ?>
+                            <? if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
+                                <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
+                            <? endif; ?>
+                        <? endforeach; ?>
                         <div class="catalog-filters--section show-more-parent">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Подборки</h3>

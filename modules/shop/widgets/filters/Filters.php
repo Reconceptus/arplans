@@ -26,9 +26,9 @@ class Filters extends Widget
         $query->distinct(true)
             ->select('shop_catalog.id')
             ->from('shop_catalog')
-            ->innerJoin('shop_catalog_item', 'shop_catalog_item.catalog_id = shop_catalog.id')
+            ->innerJoin('shop_catalog_item', 'shop_catalog.id = shop_catalog_item.catalog_id')
             ->innerJoin('shop_item_option', 'shop_catalog.id = shop_item_option.catalog_id and shop_catalog_item.id = shop_item_option.catalog_item_id')
-            ->innerJoin('shop_item', 'shop_item_option.item_id = shop_item.id and shop_item.category_id =' . $this->category->id)
+            ->innerJoin('shop_item', 'shop_item.id = shop_item_option.item_id and shop_item.category_id =' . $this->category->id)
             ->where(['shop_item.is_active' => Item::IS_ACTIVE])
             ->andWhere(['or', 'shop_catalog.category_id IS NULL', 'shop_catalog.category_id = ' . $this->category->id]);
         $ids = [-1];
@@ -42,11 +42,12 @@ class Filters extends Widget
             ->distinct(true)
             ->where(['filter' => 1])
             ->andWhere(['in', 'id', $dbIds])
+            ->orderBy(['sort' => SORT_ASC])
             ->all();
         $content = $this->render($this->viewName, [
             'filters'    => $filters,
             'commonArea' => $this->commonArea,
-            'category' => $this->category
+            'category'   => $this->category
         ]);
         return $content;
     }
