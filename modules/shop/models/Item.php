@@ -171,7 +171,7 @@ class Item extends \yii\db\ActiveRecord
     {
         // Делаем выборку товаров
         $query = Item::find()->alias('i')->distinct()
-            ->innerJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
+            ->leftJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
             ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
             ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
             ->where(['i.category_id' => $category->id])
