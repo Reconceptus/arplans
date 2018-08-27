@@ -117,7 +117,7 @@
             <div class="custom-row">
                 <div class="custom-row-col col-50">
                     <h4 class="title">Стоимость строительства "коробки"</h4>
-                    <?= $model->build_price?>
+                    <?= $model->build_price ?>
                     <div class="estimate">
                         <a href="#" class="btn-add"><span>Получить точную смету</span></a>
                     </div>
