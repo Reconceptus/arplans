@@ -12,7 +12,6 @@ namespace modules\shop\admin\controllers;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Catalog;
 use modules\shop\models\CatalogItem;
-use modules\shop\models\ItemImage;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
@@ -161,28 +160,11 @@ class CatalogController extends AdminController
 
         if ($model->load($post)) {
             if ($model->save()) {
-                if (isset($post['new-images'])) {
-                    $newImages = explode(':', $post['new-images']);
-                    foreach ($newImages as $newImage) {
-                        if ($newImage) {
-                            $image = new ItemImage();
-                            $image->item_id = $model->id;
-                            $image->image = $newImage;
-                            if (!$image->save()) {
-                                throw new Exception($model->errors[0]);
-                            };
-                        }
-                    }
-                }
-                if (!$model->image_id) {
-                    $model->image_id = $model->images ? $model->images[0]->id : null;
-                    $model->save();
-                }
-                Yii::$app->session->setFlash('success', 'Товар добавлен успешно');
+                Yii::$app->session->setFlash('success', 'Фильтр добавлен успешно');
             } else {
-                Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
+                Yii::$app->session->setFlash('danger', 'Ошибка при создании фильтра');
             }
-            return $this->redirect(Url::to(['item/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['catalog/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [
