@@ -1,1 +1,4 @@
 /* common styles */
+.show-more-hidden {
+    display: block;
+}

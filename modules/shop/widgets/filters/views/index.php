@@ -33,12 +33,12 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
                             <? endif; ?>
                         <? endforeach; ?>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Общая площадь</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row-element">
                                     <div class="range">
                                         <div id="keypress" class="range-field"></div>
@@ -55,12 +55,12 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Этажность</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row">
                                     <div class="form-row-col col-50">
                                         <div class="form-row-element">
@@ -96,38 +96,12 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
-                            <div class="catalog-filters--head">
-                                <h3 class="form-title">Габариты</h3>
-                                <span class="show-more"></span>
-                            </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
-                                <div class="form-row-element">
-                                    <div class="range-inputs">
-                                        <span style="width: 75px;">Длина:</span>
-                                        <input type="text">
-                                        -
-                                        <input type="text">
-                                        м
-                                    </div>
-                                </div>
-                                <div class="form-row-element">
-                                    <div class="range-inputs">
-                                        <span style="width: 75px;">Ширина:</span>
-                                        <input type="text">
-                                        -
-                                        <input type="text">
-                                        м
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Количество комнат</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row-element">
                                     <div class="radio-flex">
                                         <label>
@@ -159,49 +133,12 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
-                            <div class="catalog-filters--head">
-                                <h3 class="form-title">Количество санузлов</h3>
-                                <span class="show-more"></span>
-                            </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
-                                <div class="form-row-element">
-                                    <div class="radio-flex">
-                                        <label>
-                                            <input type="checkbox" name="bath[1]"
-                                                   value="1" <?= isset($bath[1]) ? 'checked' : '' ?>>
-                                            <span>1</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="bath[2]"
-                                                   value="2" <?= isset($bath[2]) ? 'checked' : '' ?>>
-                                            <span>2</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="bath[3]"
-                                                   value="3" <?= isset($bath[3]) ? 'checked' : '' ?>>
-                                            <span>3</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="bath[4]"
-                                                   value="4" <?= isset($bath[4]) ? 'checked' : '' ?>>
-                                            <span>4</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="bath[5]"
-                                                   value="5" <?= isset($bath[5]) ? 'checked' : '' ?>>
-                                            <span>5</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Удобства</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row">
                                     <div class="form-row-col col-50">
                                         <div class="form-row-element">

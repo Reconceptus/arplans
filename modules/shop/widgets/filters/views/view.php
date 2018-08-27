@@ -22,12 +22,12 @@ use modules\shop\models\Catalog;
                                 <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
                             <? endif; ?>
                         <? endforeach; ?>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Общая площадь</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row-element">
                                     <div class="range">
                                         <div id="keypress" class="range-field"></div>
@@ -42,12 +42,12 @@ use modules\shop\models\Catalog;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Этажность</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row">
                                     <div class="form-row-col col-50">
                                         <div class="form-row-element">
@@ -83,38 +83,12 @@ use modules\shop\models\Catalog;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
-                            <div class="catalog-filters--head">
-                                <h3 class="form-title">Габариты</h3>
-                                <span class="show-more"></span>
-                            </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
-                                <div class="form-row-element">
-                                    <div class="range-inputs">
-                                        <span style="width: 75px;">Длина:</span>
-                                        <input type="text">
-                                        -
-                                        <input type="text">
-                                        м
-                                    </div>
-                                </div>
-                                <div class="form-row-element">
-                                    <div class="range-inputs">
-                                        <span style="width: 75px;">Ширина:</span>
-                                        <input type="text">
-                                        -
-                                        <input type="text">
-                                        м
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Количество комнат</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row-element">
                                     <div class="radio-flex">
                                         <label>
@@ -146,12 +120,12 @@ use modules\shop\models\Catalog;
                                 </div>
                             </div>
                         </div>
-                        <div class="catalog-filters--section show-more-parent">
+                        <div class="catalog-filters--section show-more-parent show">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Удобства</h3>
                                 <span class="show-more"></span>
                             </div>
-                            <div class="catalog-filters--main show-more-hidden" style="display: none;">
+                            <div class="catalog-filters--main show-more-hidden">
                                 <div class="form-row">
                                     <div class="form-row-col col-50">
                                         <div class="form-row-element">
