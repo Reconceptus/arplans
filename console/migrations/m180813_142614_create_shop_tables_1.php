@@ -31,11 +31,11 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'category_id' => $this->integer()->unsigned()->defaultValue(null),
             'slug'        => $this->string(),
             'name'        => $this->string()->notNull(),
-            'type'        => $this->smallInteger(1),
-            'view_type'   => $this->smallInteger(1),
-            'cart'        => $this->smallInteger(1),
-            'order'       => $this->smallInteger(1),
-            'filter'      => $this->smallInteger(1),
+            'type'        => $this->smallInteger(1)->defaultValue(1),
+            'view_type'   => $this->smallInteger(1)->defaultValue(1),
+            'cart'        => $this->smallInteger(1)->defaultValue(1),
+            'order'       => $this->smallInteger(1)->defaultValue(1),
+            'filter'      => $this->smallInteger(1)->defaultValue(1),
             'sort'        => $this->integer()->defaultValue(200)
         ]);
         $this->createIndex('U_catalog_slug', 'shop_catalog', ['category_id', 'slug'], true);
