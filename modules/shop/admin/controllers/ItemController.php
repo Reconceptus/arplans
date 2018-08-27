@@ -130,7 +130,7 @@ class ItemController extends AdminController
                     }
                 }
                 if (isset($post['new-plans'])) {
-                    $newPlans = explode(':', $post['new-images']);
+                    $newPlans = explode(':', $post['new-plans']);
                     foreach ($newPlans as $newPlan) {
                         if ($newPlan) {
                             $image = new ItemImage();
@@ -143,7 +143,7 @@ class ItemController extends AdminController
                         }
                     }
                 }
-                if (!$model->image_id) {
+                if (!$model->image) {
                     $model->image_id = $model->images ? $model->images[0]->id : null;
                     $model->save();
                 }
@@ -230,11 +230,11 @@ class ItemController extends AdminController
             $item = Item::find()->where(['image_id' => $get['id']])->one();
             if ($model) {
                 $fileName = Yii::getAlias('@webroot') . $model->image;
-                if (file_exists($fileName)) {
+                if (file_exists($fileName) && is_file($fileName)) {
                     unlink($fileName);
                 }
                 $thumbName = Yii::getAlias('@webroot') . $model->thumb;
-                if (file_exists($thumbName)) {
+                if (file_exists($thumbName) && is_file($thumbName)) {
                     unlink($thumbName);
                 }
                 $model->delete();
