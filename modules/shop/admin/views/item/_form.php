@@ -37,6 +37,7 @@ $bathrooms = [
 <h1><?= $this->title ?></h1>
 <!--Фото товара-->
 <div class="images-block">
+    <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
         <? foreach ($model->images as $image): ?>
             <? if ($image->type == \modules\shop\models\ItemImage::TYPE_PHOTO): ?>
@@ -47,7 +48,7 @@ $bathrooms = [
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
-            <?= Html::hiddenInput('type',\modules\shop\models\ItemImage::TYPE_PHOTO) ?>
+            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PHOTO) ?>
             <div class="upload-input">
                 <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
             </div>
@@ -59,6 +60,7 @@ $bathrooms = [
 </div>
 <!--План товара-->
 <div class="images-block">
+    <p style="font-weight: bold">План</p>
     <div class="images-panel">
         <? foreach ($model->images as $image): ?>
             <? if ($image->type == \modules\shop\models\ItemImage::TYPE_PLAN): ?>
@@ -69,7 +71,7 @@ $bathrooms = [
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
-            <?= Html::hiddenInput('type',\modules\shop\models\ItemImage::TYPE_PLAN) ?>
+            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PLAN) ?>
             <div class="upload-input">
                 <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
             </div>
@@ -148,24 +150,27 @@ $bathrooms = [
                 'video'
             ],
         ]]) ?>
-
+    <p style="font-weight: bold">Этажность</p>
+    <div class="checkbox-panel row">
+        <div class="col-sm-4"><?= $form->field($model, 'one_floor')->checkbox() ?></div>
+        <div class="col-sm-4"><?= $form->field($model, 'two_floor')->checkbox() ?></div>
+        <div class="col-sm-4"> <?= $form->field($model, 'mansard')->checkbox() ?></div>
+    </div>
+    <p style="font-weight: bold">Удобства</p>
     <div class="checkbox-panel row">
         <div class="col-sm-4">
-            <?= $form->field($model, 'one_floor')->checkbox() ?>
-            <?= $form->field($model, 'two_floor')->checkbox() ?>
-            <?= $form->field($model, 'mansard')->checkbox() ?>
             <?= $form->field($model, 'pedestal')->checkbox() ?>
             <?= $form->field($model, 'cellar')->checkbox() ?>
-        </div>
-        <div class="col-sm-4">
             <?= $form->field($model, 'garage')->checkbox() ?>
             <?= $form->field($model, 'double_garage')->checkbox() ?>
+        </div>
+        <div class="col-sm-4">
             <?= $form->field($model, 'tent')->checkbox() ?>
             <?= $form->field($model, 'terrace')->checkbox() ?>
             <?= $form->field($model, 'balcony')->checkbox() ?>
+            <?= $form->field($model, 'light2')->checkbox() ?>
         </div>
         <div class="col-sm-4">
-            <?= $form->field($model, 'light2')->checkbox() ?>
             <?= $form->field($model, 'pool')->checkbox() ?>
             <?= $form->field($model, 'sauna')->checkbox() ?>
             <?= $form->field($model, 'gas_boiler')->checkbox() ?>
