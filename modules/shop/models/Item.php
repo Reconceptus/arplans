@@ -13,6 +13,7 @@ use yii\db\ActiveQuery;
  * @property string $slug
  * @property string $name
  * @property string $description
+ * @property string $build_price
  * @property string $video
  * @property int $price
  * @property int $discount
@@ -148,6 +149,22 @@ class Item extends \yii\db\ActiveRecord
     public function getImage()
     {
         return $this->hasOne(ItemImage::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * @return array|Item[]|\yii\db\ActiveRecord[]
+     */
+    public function getPhotos()
+    {
+        return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_PHOTO])->all();
+    }
+
+    /**
+     * @return array|Item[]|\yii\db\ActiveRecord[]
+     */
+    public function getPlans()
+    {
+        return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_PLAN])->all();
     }
 
     /**

@@ -15,7 +15,7 @@ $mainImage = $model->image;
         <div class="project-gallery">
             <div class="gallery-list-wrap">
                 <div class="gallery-list">
-                    <? foreach ($model->images as $k => $image): ?>
+                    <? foreach ($model->getPhotos() as $k => $image): ?>
                         <div class="item" data-num="<?= $k + 1 ?>">
                             <figure style="background-image: url(<?= $image->image ?>)"></figure>
                         </div>
