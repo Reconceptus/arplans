@@ -45,7 +45,8 @@ class Filters extends Widget
             ->all();
         $content = $this->render($this->viewName, [
             'filters'    => $filters,
-            'commonArea' => $this->commonArea
+            'commonArea' => $this->commonArea,
+            'category' => $this->category
         ]);
         return $content;
     }

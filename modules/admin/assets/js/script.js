@@ -56,7 +56,7 @@ $(function () {
     // загрузка картинок товара
     $("form[name='uploader']").submit(function (e) {
         var formData = new FormData($(this)[0]);
-
+        var container = $(this).closest('.images-block');
         $.ajax({
             url: '/admin/modules/shop/item/upload',
             type: "POST",
@@ -64,10 +64,16 @@ $(function () {
             async: false,
             success: function (result) {
                 if (result.status === 'success') {
-                    $('.images-panel').append(result.block);
-                    var urls = $('.new-images-input').attr("value");
-                    urls += ':' + result.file;
-                    $('.new-images-input').attr('value', urls);
+                    container.find('.images-panel').append(result.block);
+                    if (result.type === '1') {
+                        var urls = $('.new-images-input').attr("value");
+                        urls += ':' + result.file;
+                        $('.new-images-input').attr('value', urls);
+                    } else {
+                        var urls = $('.new-plans-input').attr("value");
+                        urls += ':' + result.file;
+                        $('.new-plans-input').attr('value', urls);
+                    }
                 }
             },
             error: function () {
@@ -120,4 +126,47 @@ $(function () {
             }
         });
     })
+
+    $(document).on('click', '.js-save-catalog', function () {
+        var button = $(this);
+        var container = button.closest('.catalog-panel');
+        var ok = true;
+        var category = container.find('.cat-category').val();
+        var name = container.find('.cat-name').val();
+        var slug = container.find('.cat-slug').val();
+        var sort = container.find('.cat-sort').val();
+        $('div.help-block').each(function (i) {
+            if ($(this).text() !== '') {
+                ok = false;
+            }
+        });
+        if (name && slug && sort && ok) {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/modules/shop/catalog/save-catalog',
+                data: {
+                    category: category,
+                    name: name,
+                    slug: slug,
+                    sort: sort
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        button.remove();
+                        $('.filter-panel').removeClass('hidden');
+                        $('#catalog-id-span').attr('data-id', data.id);
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+    })
+
+    $(document).on('click', '.js-add-filter', function () {
+        var id = $('#catalog-id-span').attr('data-id');
+        if (id) {
+            window.location.href = "add-item?id=" + id;
+        }
+    });
 });

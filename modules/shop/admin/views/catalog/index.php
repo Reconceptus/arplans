@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: borod
- * Date: 23.08.2018
- * Time: 14:34
+ * Date: 16.08.2018
+ * Time: 12:44
  */
+
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-
-$this->title = 'Выберите категорию товара';
+$this->title = 'Фильтры';
 
 $columns = [
     [
@@ -19,11 +19,10 @@ $columns = [
         'options' => ['style' => 'width:40px'],
     ],
     [
-        'attribute' => 'image',
+        'attribute' => 'category_id',
         'format'    => 'html',
-        'options'   => ['style' => 'width:100px'],
         'value'     => function ($model) {
-            return $model->image ? Html::img($model->image, ['class' => 'post-list-image-preview']) : '';
+            return $model->category_id ? $model->category->name : 'Все категории';
         }
     ],
     [
@@ -37,12 +36,12 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-
+<?= Html::a('Добавить фильтр', Url::to('/admin/modules/shop/catalog/create'), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['category', 'category_id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['update', 'id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns

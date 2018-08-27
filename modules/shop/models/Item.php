@@ -18,6 +18,7 @@ use yii\db\ActiveQuery;
  * @property int $discount
  * @property int $image_id
  * @property int $rooms
+ * @property int $bathrooms
  * @property int $live_area
  * @property int $common_area
  * @property int $useful_area
@@ -42,6 +43,7 @@ use yii\db\ActiveQuery;
  *
  * @property Category $category
  * @property ItemImage $image
+ * @property ItemOption[] $itemOptions
  * @property ItemImage[] $images
  */
 class Item extends \yii\db\ActiveRecord
@@ -67,7 +69,7 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'slug', 'category_id'], 'required'],
-            [['category_id', 'price', 'rooms', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
+            [['category_id', 'price', 'rooms', 'bathrooms', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug'], 'unique'],
@@ -91,6 +93,7 @@ class Item extends \yii\db\ActiveRecord
             'price'         => 'Цена',
             'discount'      => 'Скидка',
             'rooms'         => 'Количество комнат',
+            'bathrooms'     => 'Количество санузлов',
             'live_area'     => 'Жилая площадь',
             'common_area'   => 'Общая площадь',
             'useful_area'   => 'Полезная площадь',
@@ -121,6 +124,14 @@ class Item extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getItemOptions()
+    {
+        return $this->hasMany(ItemOption::className(), ['item_id' => 'id']);
     }
 
     /**
@@ -159,7 +170,7 @@ class Item extends \yii\db\ActiveRecord
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
-        $query = Item::find()->alias('i')
+        $query = Item::find()->alias('i')->distinct()
             ->innerJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
             ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
             ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
@@ -177,7 +188,7 @@ class Item extends \yii\db\ActiveRecord
         if (isset($get['floors']) && is_array($get['floors'])) {
             $floors[] = 'or';
             foreach ($get['floors'] as $k => $floor) {
-                $floors[] = ['>', 'i.'.$k, 0];
+                $floors[] = ['>', 'i.' . $k, 0];
             }
             $query->andWhere($floors);
             unset($get['floors']);
@@ -190,8 +201,23 @@ class Item extends \yii\db\ActiveRecord
         }
 
         // По количеству комнат
-        if (isset($get['rooms'])) {
-            $query->andWhere(['rooms' => intval($get['rooms'])]);
+        if (isset($get['rooms']) && is_array($get['rooms'])) {
+            $rooms[] = 'or';
+            foreach ($get['rooms'] as $k => $room) {
+                $rooms[] = ['i.rooms' => $k];
+            }
+            $query->andWhere($rooms);
+            unset($get['rooms']);
+        }
+
+        // По количеству санузлов
+        if (isset($get['bath']) && is_array($get['bath'])) {
+            $rooms[] = 'or';
+            foreach ($get['bath'] as $k => $room) {
+                $rooms[] = ['i.bathrooms' => $k];
+            }
+            $query->andWhere($rooms);
+            unset($get['bath']);
         }
 
         // По минимальной площади
@@ -210,6 +236,27 @@ class Item extends \yii\db\ActiveRecord
         $query = self::addConditions($query, $get);
 
         return $query;
+    }
+
+    /**
+     * Получаем массив с удобствами
+     * @return array
+     */
+    public function getComfort()
+    {
+        $comfort = [];
+        if ($this->pedestal) $comfort[] = 'цоколь';
+        if ($this->cellar) $comfort[] = 'чердак';
+        if ($this->garage) $comfort[] = 'гараж';
+        if ($this->double_garage) $comfort[] = 'гараж на 2 авто';
+        if ($this->tent) $comfort[] = 'навес';
+        if ($this->terrace) $comfort[] = 'терасса';
+        if ($this->balcony) $comfort[] = 'балкон';
+        if ($this->light2) $comfort[] = 'второй свет';
+        if ($this->pool) $comfort[] = 'бассейн';
+        if ($this->sauna) $comfort[] = 'сауна';
+        if ($this->gas_boiler) $comfort[] = 'газовая котельная';
+        return $comfort;
     }
 
     /**
@@ -232,5 +279,18 @@ class Item extends \yii\db\ActiveRecord
             }
         }
         return $query;
+    }
+
+    /**
+     * @param $catalog_id
+     * @return int|mixed|null
+     */
+    public function getItemOptionCatalogItemId($catalog_id)
+    {
+        $io = ItemOption::find()->where(['catalog_id' => $catalog_id, 'item_id' => $this->id])->one();
+        if ($io) {
+            return $io->catalog_item_id;
+        }
+        return null;
     }
 }

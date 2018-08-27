@@ -37,11 +37,12 @@ class Catalog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['slug', 'name'], 'required'],
             [['type', 'view_type', 'cart', 'order', 'filter', 'sort', 'category_id'], 'integer'],
             [['slug', 'name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
-            [['slug'], 'unique'],
+            ['slug', 'match', 'pattern' => '/^[a-z]\w*$/i'],
+            [['category_id', 'slug'], 'unique', 'targetAttribute' => ['category_id', 'slug'], 'message' => 'Комбинация выбранной категории и такого URL уже существует'],
+            [['category_id', 'name'], 'unique', 'targetAttribute' => ['category_id', 'name'], 'message' => 'Комбинация выбранной категории и такого названия уже существует'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -70,7 +71,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getCatalogItems()
     {
-        return $this->hasMany(CatalogItem::className(), ['catalog_id' => 'id']);
+        return $this->hasMany(CatalogItem::className(), ['catalog_id' => 'id'])->orderBy(['sort' => SORT_ASC]);
     }
 
     /**

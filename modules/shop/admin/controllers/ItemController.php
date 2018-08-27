@@ -11,8 +11,11 @@ namespace modules\shop\admin\controllers;
 
 use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
+use modules\shop\models\Catalog;
+use modules\shop\models\Category;
 use modules\shop\models\Item;
 use modules\shop\models\ItemImage;
+use modules\shop\models\ItemOption;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
@@ -49,13 +52,23 @@ class ItemController extends AdminController
         return $behaviors;
     }
 
-    /**
-     * Вывод списка товаров
-     * @return string
-     */
     public function actionIndex()
     {
-        $query = Item::find();
+        $query = Category::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider]);
+    }
+
+    /**
+     * Вывод списка товаров
+     * @param $category_id
+     * @return string
+     */
+    public function actionCategory($category_id)
+    {
+        $query = Item::find()->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -65,16 +78,18 @@ class ItemController extends AdminController
                 ],
             ]
         );
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('category', ['dataProvider' => $dataProvider]);
     }
 
     /**
      * Создание нового товара
+     * @param $category_id integer
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate(int $category_id)
     {
         $model = new Item();
+        $model->category_id = $category_id;
         return $this->modify($model);
     }
 
@@ -107,13 +122,28 @@ class ItemController extends AdminController
                             $image = new ItemImage();
                             $image->item_id = $model->id;
                             $image->image = $newImage;
+                            $image->type = ItemImage::TYPE_PHOTO;
                             if (!$image->save()) {
-                                throw new Exception($model->errors[0]);
+                                throw new Exception('Ошибка сохранения изображения');
                             };
                         }
                     }
                 }
-                if (!$model->image_id) {
+                if (isset($post['new-plans'])) {
+                    $newPlans = explode(':', $post['new-plans']);
+                    foreach ($newPlans as $newPlan) {
+                        if ($newPlan) {
+                            $image = new ItemImage();
+                            $image->item_id = $model->id;
+                            $image->image = $newPlan;
+                            $image->type = ItemImage::TYPE_PLAN;
+                            if (!$image->save()) {
+                                throw new Exception('Ошибка сохранения изображения');
+                            };
+                        }
+                    }
+                }
+                if (!$model->image) {
                     $model->image_id = $model->images ? $model->images[0]->id : null;
                     $model->save();
                 }
@@ -121,11 +151,38 @@ class ItemController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
+            if (isset($post['Catalogs'])) {
+                foreach ($post['Catalogs'] as $k => $val) {
+                    if ($val) {
+                        $io = ItemOption::find()->where(['catalog_id' => $k])->andWhere(['item_id' => $model->id])->one();
+                        if ($io) {
+                            if ($val != $io->catalog_item_id) {
+                                $io->catalog_item_id = $val;
+                                $io->save();
+                            }
+                        } else {
+                            $io = new ItemOption();
+                            $io->item_id = $model->id;
+                            $io->catalog_id = $k;
+                            $io->catalog_item_id = $val;
+                            $io->save();
+                        }
+                    } else {
+                        $io = ItemOption::find()->where(['catalog_id' => $k])->andWhere(['item_id' => $model->id])->one();
+                        if ($io) {
+                            $io->delete();
+                        }
+                    }
+                }
+            }
+
             return $this->redirect(Url::to(['item/update', 'id' => $model->id]));
         }
+        $catalogs = Catalog::getCategoryCatalogs($model->category_id);
 
         return $this->render('_form', [
-            'model' => $model,
+            'model'    => $model,
+            'catalogs' => $catalogs
         ]);
     }
 
@@ -150,7 +207,8 @@ class ItemController extends AdminController
                 $photo = Image::getImagine()->open($dir . $path . $fileName);
                 $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
                 if (file_exists($dir . $path . $fileName)) {
-                    return ['status' => 'success', 'file' => $model->image, 'block' => $this->renderAjax('_image', ['model' => $model])];
+                    $type = Yii::$app->request->post('type');
+                    return ['status' => 'success', 'file' => $model->image, 'type' => $type, 'block' => $this->renderAjax('_image', ['model' => $model])];
                 }
             }
         }
@@ -172,11 +230,11 @@ class ItemController extends AdminController
             $item = Item::find()->where(['image_id' => $get['id']])->one();
             if ($model) {
                 $fileName = Yii::getAlias('@webroot') . $model->image;
-                if (file_exists($fileName)) {
+                if (file_exists($fileName) && is_file($fileName)) {
                     unlink($fileName);
                 }
                 $thumbName = Yii::getAlias('@webroot') . $model->thumb;
-                if (file_exists($thumbName)) {
+                if (file_exists($thumbName) && is_file($thumbName)) {
                     unlink($thumbName);
                 }
                 $model->delete();

@@ -6,7 +6,8 @@ namespace modules\shop\models;
  * This is the model class for table "shop_item_image".
  *
  * @property string $id
- * @property string $item_id
+ * @property int $item_id
+ * @property int $type
  * @property string $image
  * @property string $thumb
  *
@@ -14,6 +15,8 @@ namespace modules\shop\models;
  */
 class ItemImage extends \yii\db\ActiveRecord
 {
+    const TYPE_PHOTO = 1;
+    const TYPE_PLAN = 2;
     /**
      * {@inheritdoc}
      */
@@ -28,7 +31,7 @@ class ItemImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id'], 'integer'],
+            [['item_id', 'type'], 'integer'],
             [['image', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];
@@ -40,10 +43,11 @@ class ItemImage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'      => 'ID',
             'item_id' => 'Товар',
-            'image' => 'Файл',
-            'thumb' => 'Thumb',
+            'type'    => 'Тип',
+            'image'   => 'Файл',
+            'thumb'   => 'Thumb',
         ];
     }
 
