@@ -229,7 +229,9 @@ class Item extends \yii\db\ActiveRecord
 
         // По минимальной площади
         if (isset($get['minarea'])) {
-            $query->andWhere(['>=', 'i.common_area', intval($get['minarea'])]);
+            if ($get['minarea'] != 40) {
+                $query->andWhere(['>=', 'i.common_area', intval($get['minarea'])]);
+            }
             unset($get['minarea']);
         }
 
