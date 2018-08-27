@@ -293,3 +293,4 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
         </div>
     </div>
 </div>
+<?=$this->render('_js')?>

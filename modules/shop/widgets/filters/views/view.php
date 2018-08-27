@@ -280,3 +280,4 @@ use modules\shop\models\Catalog;
         </div>
     </div>
 </div>
+<?=$this->render('_js')?>
