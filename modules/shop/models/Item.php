@@ -227,16 +227,6 @@ class Item extends \yii\db\ActiveRecord
             unset($get['rooms']);
         }
 
-        // По количеству санузлов
-        if (isset($get['bath']) && is_array($get['bath'])) {
-            $rooms[] = 'or';
-            foreach ($get['bath'] as $k => $room) {
-                $rooms[] = ['i.bathrooms' => $k];
-            }
-            $query->andWhere($rooms);
-            unset($get['bath']);
-        }
-
         // По минимальной площади
         if (isset($get['minarea'])) {
             $query->andWhere(['>', 'i.common_area', intval($get['minarea'])]);
