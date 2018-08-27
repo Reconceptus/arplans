@@ -91,7 +91,8 @@ class Catalog extends \yii\db\ActiveRecord
     {
         $catalogs = self::find()
             ->where(['category_id' => $category_id])
-            ->orWhere(['is', 'category_id', null])->all();
+            ->orWhere(['is', 'category_id', null])
+            ->orderBy(['sort' => SORT_ASC])->all();
         return $catalogs;
     }
 }

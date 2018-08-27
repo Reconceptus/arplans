@@ -90,10 +90,21 @@ $bathrooms = [
             <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
             <?= Html::hiddenInput('new-plans', '', ['class' => 'new-plans-input']) ?>
 
-            <?= $form->field($model, 'category_id')->hiddenInput()->label(false) ?>
-            <?= $form->field($model, 'slug') ?>
+            <span class="hidden"><?= $form->field($model, 'category_id')->hiddenInput()->label(false) ?></span>
             <?= $form->field($model, 'name') ?>
+            <?= $form->field($model, 'slug') ?>
+            <?= $form->field($model, 'is_active')->checkbox() ?>
+            <?= $form->field($model, 'price') ?>
+            <?= $form->field($model, 'discount') ?>
+            <?= $form->field($model, 'live_area') ?>
+            <?= $form->field($model, 'common_area') ?>
+            <?= $form->field($model, 'useful_area') ?>
+        </div>
+        <div class="col-md-5">
+            <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
+            <?= $form->field($model, 'bathrooms')->dropDownList($bathrooms) ?>
             <?= $form->field($model, 'video') ?>
+            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <? foreach ($catalogs as $catalog): ?>
                 <?
                 $iOid = $model->getItemOptionCatalogItemId($catalog->id);
@@ -110,17 +121,6 @@ $bathrooms = [
                     </div>
                 <? endif; ?>
             <? endforeach; ?>
-        </div>
-        <div class="col-md-5">
-            <?= $form->field($model, 'price') ?>
-            <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
-            <?= $form->field($model, 'bathrooms')->dropDownList($bathrooms) ?>
-            <?= $form->field($model, 'discount') ?>
-            <?= $form->field($model, 'live_area') ?>
-            <?= $form->field($model, 'common_area') ?>
-            <?= $form->field($model, 'useful_area') ?>
-            <?= $form->field($model, 'is_active')->checkbox() ?>
-            <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
         </div>
     </div>
     <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
