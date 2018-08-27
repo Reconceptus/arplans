@@ -145,7 +145,7 @@ use modules\shop\models\Catalog;
                                             <div class="check">
                                                 <label>
                                                     <input type="checkbox"
-                                                           name="second_light" <?= isset($get['light2']) ? 'checked' : '' ?>>
+                                                           name="light2" <?= isset($get['light2']) ? 'checked' : '' ?>>
                                                     <span>второй свет</span>
                                                 </label>
                                             </div>
