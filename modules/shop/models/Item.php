@@ -93,6 +93,7 @@ class Item extends \yii\db\ActiveRecord
             'image_id'      => 'Превью',
             'price'         => 'Цена',
             'discount'      => 'Скидка',
+            'build_price'   => 'Цена строительства',
             'rooms'         => 'Количество комнат',
             'bathrooms'     => 'Количество санузлов',
             'live_area'     => 'Жилая площадь',
