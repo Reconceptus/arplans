@@ -12,8 +12,8 @@
     <div class="content content--lg">
         <div class="custom-row">
             <?= \modules\shop\widgets\filters\Filters::widget([
-                    'viewName' => 'view',
-                    'category' => $model->category
+                'viewName' => 'view',
+                'category' => $model->category
             ]) ?>
             <div class="custom-row-col col-elastic">
 
@@ -67,3 +67,8 @@
                                     href="#">каталог</a>.</p>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</div>
