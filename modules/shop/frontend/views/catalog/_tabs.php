@@ -33,12 +33,11 @@
                 <div class="custom-row-col col-50">
                     <div class="tab-main-slider" data-owl="plans">
                         <ul class="owl-carousel">
-                            <li class="plan-item">
-                                <img src="assets/images/plans/plan01.png" alt="plan">
-                            </li>
-                            <li class="plan-item">
-                                <img src="assets/images/plans/plan02.jpg" alt="plan">
-                            </li>
+                            <? foreach ($model->getPlans() as $k => $plan): ?>
+                                <li class="plan-item">
+                                    <img src="<?= $plan->image ?>" alt="plan">
+                                </li>
+                            <? endforeach; ?>
                         </ul>
                     </div>
                 </div>
@@ -118,16 +117,7 @@
             <div class="custom-row">
                 <div class="custom-row-col col-50">
                     <h4 class="title">Стоимость строительства "коробки"</h4>
-                    <p>Фундамент (ростверк со сваями), стены, перекрытия и крыши утепленные.</p>
-                    <ul>
-                        <li>Оцилиндрованное бревно — от 1 785 680 руб</li>
-                        <li>Профилированный брус — от 2 205 840 руб</li>
-                        <li>Клееный брус — от 2 731040 руб</li>
-                        <li>Каркас — от 1 575 600 руб</li>
-                        <li>Газобетон (пеноблок, газосиликат) — от 2 205 840 руб</li>
-                        <li>Керамический блок — от 2 520 960 руб</li>
-                        <li>Кирпич — 2 626 000 руб</li>
-                    </ul>
+                    <?= $model->build_price?>
                     <div class="estimate">
                         <a href="#" class="btn-add"><span>Получить точную смету</span></a>
                     </div>
@@ -154,7 +144,7 @@
         </div>
         <div class="tab-section tab-3d tab04">
             <div class="tour">
-                <iframe src="assets/frames/pano-tour"></iframe>
+                <iframe src=""></iframe>
             </div>
         </div>
         <div class="tab-section tab-objects tab05">
