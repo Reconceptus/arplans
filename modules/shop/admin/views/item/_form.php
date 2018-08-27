@@ -99,10 +99,10 @@ $bathrooms = [
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'common_area') ?>
             <?= $form->field($model, 'useful_area') ?>
-        </div>
-        <div class="col-md-5">
             <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
             <?= $form->field($model, 'bathrooms')->dropDownList($bathrooms) ?>
+        </div>
+        <div class="col-md-5">
             <?= $form->field($model, 'video') ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <? foreach ($catalogs as $catalog): ?>
@@ -121,6 +121,33 @@ $bathrooms = [
                     </div>
                 <? endif; ?>
             <? endforeach; ?>
+        </div>
+    </div>
+    <p style="font-weight: bold">Этажность</p>
+    <div class="checkbox-panel row">
+        <div class="col-sm-4"><?= $form->field($model, 'one_floor')->checkbox() ?></div>
+        <div class="col-sm-4"><?= $form->field($model, 'two_floor')->checkbox() ?></div>
+        <div class="col-sm-4"> <?= $form->field($model, 'mansard')->checkbox() ?></div>
+    </div>
+    <p style="font-weight: bold">Удобства</p>
+    <div class="checkbox-panel row">
+        <div class="col-sm-4">
+            <?= $form->field($model, 'pedestal')->checkbox() ?>
+            <?= $form->field($model, 'cellar')->checkbox() ?>
+            <?= $form->field($model, 'garage')->checkbox() ?>
+            <?= $form->field($model, 'double_garage')->checkbox() ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model, 'tent')->checkbox() ?>
+            <?= $form->field($model, 'terrace')->checkbox() ?>
+            <?= $form->field($model, 'balcony')->checkbox() ?>
+            <?= $form->field($model, 'light2')->checkbox() ?>
+        </div>
+        <div class="col-sm-4">
+            <?= $form->field($model, 'pool')->checkbox() ?>
+            <?= $form->field($model, 'sauna')->checkbox() ?>
+            <?= $form->field($model, 'gas_boiler')->checkbox() ?>
+            <?= $form->field($model, 'is_new')->checkbox() ?>
         </div>
     </div>
     <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
@@ -150,33 +177,6 @@ $bathrooms = [
                 'video'
             ],
         ]]) ?>
-    <p style="font-weight: bold">Этажность</p>
-    <div class="checkbox-panel row">
-        <div class="col-sm-4"><?= $form->field($model, 'one_floor')->checkbox() ?></div>
-        <div class="col-sm-4"><?= $form->field($model, 'two_floor')->checkbox() ?></div>
-        <div class="col-sm-4"> <?= $form->field($model, 'mansard')->checkbox() ?></div>
-    </div>
-    <p style="font-weight: bold">Удобства</p>
-    <div class="checkbox-panel row">
-        <div class="col-sm-4">
-            <?= $form->field($model, 'pedestal')->checkbox() ?>
-            <?= $form->field($model, 'cellar')->checkbox() ?>
-            <?= $form->field($model, 'garage')->checkbox() ?>
-            <?= $form->field($model, 'double_garage')->checkbox() ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'tent')->checkbox() ?>
-            <?= $form->field($model, 'terrace')->checkbox() ?>
-            <?= $form->field($model, 'balcony')->checkbox() ?>
-            <?= $form->field($model, 'light2')->checkbox() ?>
-        </div>
-        <div class="col-sm-4">
-            <?= $form->field($model, 'pool')->checkbox() ?>
-            <?= $form->field($model, 'sauna')->checkbox() ?>
-            <?= $form->field($model, 'gas_boiler')->checkbox() ?>
-            <?= $form->field($model, 'is_new')->checkbox() ?>
-        </div>
-    </div>
 
 </div>
 
