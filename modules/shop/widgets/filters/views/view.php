@@ -10,6 +10,7 @@ use modules\shop\models\Catalog;
 
 /* @var $category \modules\shop\models\Category */
 /* @var  $filters \modules\shop\models\Catalog[] */
+$get = Yii::$app->request->get(1);
 ?>
 <div class="custom-row-col col-sidebar">
     <div class="fixed-scrollbar">

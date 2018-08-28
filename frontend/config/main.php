@@ -60,14 +60,13 @@ return [
                 'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/post/view',
                 'blog'                         => 'blog/post/index',
 
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
-
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 '<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>/blog',
                 '<slug:[a-zA-Z0-9\_\-]+>'                                                           => 'page/view',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
             ],
         ],
     ],

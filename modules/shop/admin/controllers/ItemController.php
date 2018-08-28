@@ -127,7 +127,7 @@ class ItemController extends AdminController
                     var_dump($model->errors);
                 }
             }
-            if (!$model->project && $model->oldAttributes['project']) {
+            if (!$model->project && isset($model->oldAttributes['project'])) {
                 $model->project = $model->oldAttributes['project'];
             }
             if ($model->save()) {

@@ -36,7 +36,10 @@ class CatalogController extends Controller
         $query = Item::getFilteredQuery($category, $get)->orderBy(['sort' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 2,
+            ],
         ]);
 
         // получаем данные для фильтров-слайдеров
