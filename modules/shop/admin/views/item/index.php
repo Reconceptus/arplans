@@ -42,7 +42,7 @@ $columns = [
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['category', 'category_id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/item/category', 'category_id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns

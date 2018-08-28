@@ -206,7 +206,7 @@ class ItemController extends AdminController
                 }
             }
 
-            return $this->redirect(Url::to(['item/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/shop/item/update', 'id' => $model->id]));
         }
         $catalogs = Catalog::getCategoryCatalogs($model->category_id);
 

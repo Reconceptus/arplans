@@ -32,13 +32,19 @@ class CatalogController extends Controller
         if (!$category) {
             throw new NotFoundHttpException();
         }
-
+        if (isset($get['page'])) {
+            unset($get['page']);
+        }
+        if (isset($get['per-page'])) {
+            unset($get['per-page']);
+        }
         $query = Item::getFilteredQuery($category, $get)->orderBy(['sort' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'pagination' => [
-                'pageSize' => 2,
+                'pageSize'        => Yii::$app->request->get('per-page'),
+                'defaultPageSize' => 2,
             ],
         ]);
 

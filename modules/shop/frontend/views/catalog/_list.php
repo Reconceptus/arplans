@@ -7,9 +7,13 @@
  */
 
 /* @var  $model \modules\shop\models\Item */
+$get = Yii::$app->request->get();
+if(isset($get['category'])){
+    unset($get['category']);
+}
 ?>
 <div class="projects-item--wrap">
-    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, Yii::$app->request->get()]) ?>"
+    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get]) ?>"
        class="projects-item--preview">
         <div class="bg"
              style="background-image: url(<?= $model->getMainImage() ?>)"></div>
