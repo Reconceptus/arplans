@@ -19,7 +19,9 @@ use yii\widgets\ListView;
 
     <div class="section bg-head">
         <div class="content content--lg">
-            <div class="bg-head--main gradient"><h1 class="title title-lg"><?= $category->name ?></h1></div>
+            <div class="bg-head--main gradient">
+                <h1 class="title title-lg"><?= $category->name ?></h1>
+            </div>
         </div>
     </div>
     <div class="section">

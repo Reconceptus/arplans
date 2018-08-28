@@ -10,6 +10,7 @@ use modules\shop\models\Catalog;
 
 /* @var $category \modules\shop\models\Category */
 /* @var  $filters \modules\shop\models\Catalog[] */
+$get = Yii::$app->request->get(1);
 ?>
 <div class="custom-row-col col-sidebar">
     <div class="fixed-scrollbar">
@@ -266,10 +267,10 @@ use modules\shop\models\Catalog;
                             </div>
                         </div>
                         <div class="reset">
-                            <button type="reset">
+                            <a href="/<?=\yii\helpers\Url::to(Yii::$app->request->getPathInfo())?>">
                                 <span>&times;</span>
                                 сбросить фильтр
-                            </button>
+                            </a>
                         </div>
                         <div class="submit">
                             <button class="btn-square-min">показать</button>

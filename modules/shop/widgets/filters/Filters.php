@@ -44,6 +44,7 @@ class Filters extends Widget
             ->andWhere(['in', 'id', $dbIds])
             ->orderBy(['sort' => SORT_ASC])
             ->all();
+
         $content = $this->render($this->viewName, [
             'filters'    => $filters,
             'commonArea' => $this->commonArea,

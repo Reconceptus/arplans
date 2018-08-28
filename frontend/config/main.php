@@ -50,8 +50,9 @@ return [
                 'admin' => 'blog/page',
 
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
-                'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog',
+                'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog/index',
                 'shop'                                                     => 'shop/catalog',
+                'shop/catalog'                                                     => 'shop/catalog',
 
                 'blog/add-comment'             => 'blog/post/add-comment',
                 'blog/search'                  => 'blog/post/search',
@@ -60,14 +61,14 @@ return [
                 'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/post/view',
                 'blog'                         => 'blog/post/index',
 
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
-
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 '<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>/blog',
                 '<slug:[a-zA-Z0-9\_\-]+>'                                                           => 'page/view',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
+                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
+                'shop'
             ],
         ],
     ],

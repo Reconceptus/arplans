@@ -60,7 +60,7 @@ class CatalogController extends AdminController
                 'sort'  => [
                     'defaultOrder' => [
                         'id' => SORT_ASC
-                    ]
+                    ],
                 ],
             ]
         );

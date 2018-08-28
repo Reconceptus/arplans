@@ -7,9 +7,14 @@
  */
 
 /* @var  $model \modules\shop\models\Item */
+$get = Yii::$app->request->get();
+if(isset($get['category'])){
+    unset($get['category']);
+}
 ?>
 <div class="projects-item--wrap">
-    <a href="<?=\yii\helpers\Url::to('/shop/'.$model->category->slug.'/'.$model->slug)?>" class="projects-item--preview">
+    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get]) ?>"
+       class="projects-item--preview">
         <div class="bg"
              style="background-image: url(<?= $model->getMainImage() ?>)"></div>
         <? if ($model->is_new): ?>
@@ -43,7 +48,8 @@
             <div class="price"><?= $model->discount ? $model->price - $model->discount : $model->price ?>&#8381;
             </div>
         </div>
-        <a href="<?=\yii\helpers\Url::to('/shop/'.$model->category->slug.'/'.$model->slug)?>" class="icon-like liked">
+        <a href="<?= \yii\helpers\Url::to('/shop/' . $model->category->slug . '/' . $model->slug) ?>"
+           class="icon-like liked">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                      xlink:href="#icon-heart-like"/>
