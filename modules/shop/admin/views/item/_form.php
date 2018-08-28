@@ -124,13 +124,13 @@ $bathrooms = [
             <? endforeach; ?>
         </div>
     </div>
-    <p style="font-weight: bold">Этажность</p>
+    <p style="font-weight: bold; margin-top: 30px;">Этажность</p>
     <div class="checkbox-panel row">
         <div class="col-sm-4"><?= $form->field($model, 'one_floor')->checkbox() ?></div>
         <div class="col-sm-4"><?= $form->field($model, 'two_floor')->checkbox() ?></div>
         <div class="col-sm-4"> <?= $form->field($model, 'mansard')->checkbox() ?></div>
     </div>
-    <p style="font-weight: bold">Удобства</p>
+    <p style="font-weight: bold; margin-top: 30px;">Удобства</p>
     <div class="checkbox-panel row">
         <div class="col-sm-4">
             <?= $form->field($model, 'pedestal')->checkbox() ?>

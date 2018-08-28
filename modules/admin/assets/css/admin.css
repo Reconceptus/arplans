@@ -168,6 +168,7 @@ ul {
 
 .checkbox-panel {
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .img-admin {
@@ -175,6 +176,7 @@ ul {
 }
 
 .images-block {
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -224,7 +226,7 @@ ul {
     margin-left: 0;
 }
 
-.filter-panel .filter{
+.filter-panel .filter {
     float: left;
     width: 200px;
     height: 40px;
@@ -241,12 +243,19 @@ ul {
     border: none;
 }
 
-.filter-panel .add{
+.filter-panel .add {
     width: 40px;
     border-radius: 20px;
     background-color: #17191f;
     color: #FFF;
 }
-.filter-panel a{
+
+.filter-panel a {
     color: #000;
 }
+
+.project-block {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
