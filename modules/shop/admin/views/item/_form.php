@@ -89,6 +89,7 @@ $bathrooms = [
         <div class="col-md-5">
             <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
             <?= Html::hiddenInput('new-plans', '', ['class' => 'new-plans-input']) ?>
+            <?= Html::hiddenInput('new-ready', '', ['class' => 'new-ready-input']) ?>
 
             <span class="hidden"><?= $form->field($model, 'category_id')->hiddenInput()->label(false) ?></span>
             <?= $form->field($model, 'name') ?>
@@ -177,11 +178,44 @@ $bathrooms = [
                 'video'
             ],
         ]]) ?>
-
+    <div class="project-block">
+        <? if ($model->project): ?>
+            <div class="old-project">
+                <p style="font-weight: bold">Проект</p>
+                <?= Html::a('Скачать', Url::to($model->project), ['class' => 'btn btn-admin']) ?>
+                <div class="js-show-project-field btn btn-admin">Заменить</div>
+            </div>
+        <? endif; ?>
+        <div class="item-project-field" <?= $model->project ? 'style="display:none;"' : '' ?>>
+            <?= $form->field($model, 'project')->fileInput() ?>
+        </div>
+    </div>
 </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
+<div class="images-block">
+    <p style="font-weight: bold">Готовые проекты</p>
+    <div class="images-panel">
+        <? foreach ($model->images as $image): ?>
+            <? if ($image->type == \modules\shop\models\ItemImage::TYPE_READY): ?>
+                <?= $this->render('_image', ['model' => $image]) ?>
+            <? endif; ?>
+        <? endforeach; ?>
+    </div>
+    <div class="clearfix"></div>
+    <form name="uploader" enctype="multipart/form-data" method="POST">
+        <div class="upload">
+            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_READY) ?>
+            <div class="upload-input">
+                <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
+            </div>
+            <div class="upload-button">
+                <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
+            </div>
+        </div>
+    </form>
+</div>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Товар еще не добавлен' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайт', Url::to('/shop/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>

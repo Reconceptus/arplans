@@ -19,8 +19,10 @@ class Module extends \yii\base\Module
         }
         $path = str_replace('Module', '', $this->className()) . "{$name}";
         $this->controllerNamespace = "{$path}\\controllers";
-        $this->viewPath = $this->basePath.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.'views';
-        $this->layoutPath = '@modules/admin/views/layouts';
+        $this->viewPath = $this->basePath . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'views';
+        if ($name === 'admin') {
+            $this->layoutPath = '@modules/admin/views/layouts';
+        }
         parent::init();
     }
 }

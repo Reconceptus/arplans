@@ -114,6 +114,22 @@ class ItemController extends AdminController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
+            $project = UploadedFile::getInstance($model, 'project');
+            if ($project && $project->tempName) {
+                $model->project = $project;
+                if ($model->validate(['project'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/shop/project/');
+                    \common\models\Image::createDirectory($dir . $model->id . '/');
+                    $fileName = 'project.' . $model->project->extension;
+                    $model->project->saveAs($dir . $model->id . '/' . $fileName);
+                    $model->project = '/uploads/shop/project/' . $model->id . '/' . $fileName;
+                } else {
+                    var_dump($model->errors);
+                }
+            }
+            if (!$model->project && $model->oldAttributes['project']) {
+                $model->project = $model->oldAttributes['project'];
+            }
             if ($model->save()) {
                 if (isset($post['new-images'])) {
                     $newImages = explode(':', $post['new-images']);
@@ -137,6 +153,20 @@ class ItemController extends AdminController
                             $image->item_id = $model->id;
                             $image->image = $newPlan;
                             $image->type = ItemImage::TYPE_PLAN;
+                            if (!$image->save()) {
+                                throw new Exception('Ошибка сохранения изображения');
+                            };
+                        }
+                    }
+                }
+                if (isset($post['new-ready'])) {
+                    $newPlans = explode(':', $post['new-ready']);
+                    foreach ($newPlans as $newPlan) {
+                        if ($newPlan) {
+                            $image = new ItemImage();
+                            $image->item_id = $model->id;
+                            $image->image = $newPlan;
+                            $image->type = ItemImage::TYPE_READY;
                             if (!$image->save()) {
                                 throw new Exception('Ошибка сохранения изображения');
                             };

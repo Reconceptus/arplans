@@ -69,10 +69,14 @@ $(function () {
                         var urls = $('.new-images-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-images-input').attr('value', urls);
-                    } else {
+                    } else if(result.type==='2') {
                         var urls = $('.new-plans-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-plans-input').attr('value', urls);
+                    } else{
+                        var urls = $('.new-ready-input').attr("value");
+                        urls += ':' + result.file;
+                        $('.new-ready-input').attr('value', urls);
                     }
                 }
             },
@@ -168,5 +172,10 @@ $(function () {
         if (id) {
             window.location.href = "add-item?id=" + id;
         }
+    });
+
+    $(document).on('click', '.js-show-project-field', function () {
+        $('.old-project').hide();
+        $('.item-project-field').show();
     });
 });

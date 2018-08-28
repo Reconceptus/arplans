@@ -15,6 +15,7 @@ use yii\db\ActiveQuery;
  * @property string $description
  * @property string $build_price
  * @property string $video
+ * @property string $project
  * @property int $price
  * @property int $discount
  * @property int $image_id
@@ -74,6 +75,7 @@ class Item extends \yii\db\ActiveRecord
             [['slug', 'name', 'video'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug'], 'unique'],
+            [['project'], 'file', 'extensions' => 'png, jpg, gif, pdf'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
@@ -90,6 +92,7 @@ class Item extends \yii\db\ActiveRecord
             'name'          => 'Название',
             'description'   => 'Описание',
             'video'         => 'Видео',
+            'project'       => 'Проект',
             'image_id'      => 'Превью',
             'price'         => 'Цена',
             'discount'      => 'Скидка',
@@ -164,6 +167,14 @@ class Item extends \yii\db\ActiveRecord
      * @return array|Item[]|\yii\db\ActiveRecord[]
      */
     public function getPlans()
+    {
+        return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_PLAN])->all();
+    }
+
+    /**
+     * @return array|Item[]|\yii\db\ActiveRecord[]
+     */
+    public function getReady()
     {
         return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_PLAN])->all();
     }
