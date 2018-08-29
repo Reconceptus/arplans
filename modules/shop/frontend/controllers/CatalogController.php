@@ -43,21 +43,15 @@ class CatalogController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize'        => Yii::$app->request->get('per-page'),
+                'pageSize'        => 6,
                 'defaultPageSize' => 2,
             ],
         ]);
 
-        // получаем данные для фильтров-слайдеров
-        $commonArea = [
-            'min' => \Yii::$app->db->createCommand("SELECT MIN(common_area) FROM shop_item WHERE category_id=" . $category->id)->queryScalar(),
-            'max' => \Yii::$app->db->createCommand("SELECT MAX(common_area) FROM shop_item WHERE category_id=" . $category->id)->queryScalar()
-        ];
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'category'     => $category,
-            'commonArea'   => $commonArea
+            'favorites'    => Yii::$app->user->identity->getFavoriteIds()
         ]);
     }
 

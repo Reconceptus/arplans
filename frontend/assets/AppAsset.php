@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'js/jquery.mCustomScrollbar.concat.min.js',
         'js/jquery.validate.min.js',
         'js/main.min.js',
+        'js/script.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

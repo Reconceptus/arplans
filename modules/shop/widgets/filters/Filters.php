@@ -18,7 +18,6 @@ class Filters extends Widget
 {
     public $viewName = 'index';
     public $category;
-    public $commonArea;
 
     public function run()
     {
@@ -47,7 +46,6 @@ class Filters extends Widget
 
         $content = $this->render($this->viewName, [
             'filters'    => $filters,
-            'commonArea' => $this->commonArea,
             'category'   => $this->category
         ]);
         return $content;

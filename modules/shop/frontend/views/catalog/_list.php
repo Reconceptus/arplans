@@ -7,8 +7,9 @@
  */
 
 /* @var  $model \modules\shop\models\Item */
+/* @var  $favorites array */
 $get = Yii::$app->request->get();
-if(isset($get['category'])){
+if (isset($get['category'])) {
     unset($get['category']);
 }
 ?>
@@ -18,7 +19,7 @@ if(isset($get['category'])){
         <div class="bg"
              style="background-image: url(<?= $model->getMainImage() ?>)"></div>
         <? if ($model->is_new): ?>
-            <div class="hash">
+            <div clasфs="hash">
                 <span class="new">новинка</span>
             </div>
         <? endif; ?>
@@ -48,8 +49,8 @@ if(isset($get['category'])){
             <div class="price"><?= $model->discount ? $model->price - $model->discount : $model->price ?>&#8381;
             </div>
         </div>
-        <a href="<?= \yii\helpers\Url::to('/shop/' . $model->category->slug . '/' . $model->slug) ?>"
-           class="icon-like liked">
+        <a class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+           data-id="<?= $model->id ?>">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                      xlink:href="#icon-heart-like"/>

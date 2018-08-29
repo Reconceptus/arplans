@@ -10,7 +10,6 @@ use modules\shop\models\Catalog;
 
 /* @var $filters Catalog[] */
 /* @var $category \modules\shop\models\Category */
-/* @var $commonArea array */
 
 $get = Yii::$app->request->get();
 $rooms = isset($get['rooms']) ? $get['rooms'] : null;
