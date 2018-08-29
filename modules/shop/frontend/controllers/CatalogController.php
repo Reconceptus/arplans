@@ -43,7 +43,7 @@ class CatalogController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize'        => Yii::$app->request->get('per-page'),
+                'pageSize'        => 6,
                 'defaultPageSize' => 2,
             ],
         ]);

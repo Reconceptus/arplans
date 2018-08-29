@@ -2,10 +2,12 @@
 
 namespace common\models;
 
+use modules\shop\models\Favorite;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -218,5 +220,21 @@ class User extends ActiveRecord implements IdentityInterface
     public function getPartner()
     {
         return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|array
+     */
+    public function getFavorite()
+    {
+        return $this->hasMany(Favorite::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getFavoriteIds()
+    {
+        return ArrayHelper::map($this->getFavorite(),'item_id', 'id');
     }
 }
