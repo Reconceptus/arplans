@@ -14,6 +14,7 @@ namespace modules\shop\models;
  * @property int $cart
  * @property int $order
  * @property int $filter
+ * @property int $basic
  * @property int $sort
  *
  * @property CatalogItem[] $catalogItems
@@ -38,7 +39,7 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             [['slug', 'name'], 'required'],
-            [['type', 'view_type', 'cart', 'order', 'filter', 'sort', 'category_id'], 'integer'],
+            [['type', 'view_type', 'cart', 'order', 'filter', 'basic', 'sort', 'category_id'], 'integer'],
             [['slug', 'name'], 'string', 'max' => 255],
             ['slug', 'match', 'pattern' => '/^[a-z]\w*$/i'],
             [['category_id', 'slug'], 'unique', 'targetAttribute' => ['category_id', 'slug'], 'message' => 'Комбинация выбранной категории и такого URL уже существует'],
@@ -62,6 +63,7 @@ class Catalog extends \yii\db\ActiveRecord
             'cart'        => 'Показывать в корзине',
             'order'       => 'Показывать в заказе',
             'filter'      => 'Показывать в фильтрах',
+            'basic'        => 'Показывать в основном',
             'sort'        => 'Сортировка',
         ];
     }

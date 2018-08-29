@@ -145,7 +145,7 @@ class CategoryController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
-            return $this->redirect(Url::to(['category/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/module/shop/category/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [

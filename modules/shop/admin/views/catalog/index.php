@@ -41,7 +41,7 @@ $columns = [
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['update', 'id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/catalog/update', 'id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns

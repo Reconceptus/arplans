@@ -38,6 +38,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= $form->field($model, 'name')->textInput(['class' => 'cat-name form-control']) ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number', 'class' => 'cat-sort form-control']) ?>
             <?= $form->field($model, 'filter')->checkbox() ?>
+            <?= $form->field($model, 'basic')->checkbox() ?>
             <? if ($model->isNewRecord): ?>
                 <div class="btn btn-admin js-save-catalog">Сохранить</div>
             <? else: ?>
