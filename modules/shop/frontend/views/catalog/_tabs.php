@@ -139,7 +139,7 @@
                             <div class="projects-item--wrap">
                                 <a href="#" class="projects-item--preview">
                                     <div class="bg"
-                                         style="background-image: url('assets/images/items/item01.jpg')"></div>
+                                         style="background-image: url(<?= $readyImage->image ?>)"></div>
                                 </a>
                             </div>
                         </li>
