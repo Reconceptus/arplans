@@ -31,7 +31,12 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update} {delete}',
+        'template' => '{delete}',
+        'buttons' => [
+            'delete' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/admin/modules/shop/category/delete', 'id' => $model->id]);
+            }
+        ],
         'options'  => ['style' => 'width:100px']
     ]
 ];

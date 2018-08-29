@@ -109,6 +109,24 @@ class CategoryController extends AdminController
     }
 
     /**
+     * Удаление категории
+     * @param $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete($id)
+    {
+        $model = Category::findOne(['id' => $id]);
+        if (!$model) {
+            throw new NotFoundHttpException();
+        }
+        $model->delete();
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    /**
      * @param $model Category
      * @return string|array
      */
@@ -131,7 +149,7 @@ class CategoryController extends AdminController
                     $model->image = '/uploads/shop/category/' . $path . $fileName;
                     $photo = Image::getImagine()->open($dir . $path . $fileName);
                     $photo->thumbnail(new Box(400, 400))->save($dir . $path . $fileName, ['quality' => 90]);
-                }else{
+                } else {
                     var_dump($model->errors);
                 }
             } elseif (array_key_exists('old-image', $post) && $post['old-image']) {
@@ -145,7 +163,7 @@ class CategoryController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
-            return $this->redirect(Url::to(['/admin/module/shop/category/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/shop/category/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [
