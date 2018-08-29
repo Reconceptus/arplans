@@ -176,7 +176,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getReady()
     {
-        return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_PLAN])->all();
+        return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_READY])->all();
     }
 
     /**
