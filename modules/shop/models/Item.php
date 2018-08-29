@@ -223,6 +223,17 @@ class Item extends \yii\db\ActiveRecord
             unset($get['floors']);
         }
 
+        // Со скидкой
+        if (isset($get['discount'])) {
+            $query->andWhere(['>', 'i.discount', 0]);
+            unset($get['discount']);
+        }
+
+        // Новинки
+        if (isset($get['is_new'])) {
+            $query->andWhere(['i.is_new' => 1]);
+        }
+
         // Бесплатные проекты
         if (isset($get['free'])) {
             $query->andWhere(['i.price' => 0]);
