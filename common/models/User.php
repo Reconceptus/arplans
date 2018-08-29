@@ -225,9 +225,9 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery|array
      */
-    public function getFavorite()
+    public function getFavorites()
     {
-        return $this->hasMany(Favorite::className(), ['user_id' => 'id']);
+        return $this->hasMany(Favorite::className(), ['user_id' => 'id'])->all();
     }
 
     /**
@@ -235,6 +235,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getFavoriteIds()
     {
-        return ArrayHelper::map($this->getFavorite(),'item_id', 'id');
+        $favorites = $this->getFavorites();
+        return ArrayHelper::map($favorites,'item_id', 'id');
     }
 }

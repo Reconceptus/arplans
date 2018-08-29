@@ -33,6 +33,7 @@ class Favorite extends \yii\db\ActiveRecord
             [['user_id', 'item_id'], 'integer'],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id', 'item_id'], 'unique', 'targetAttribute' => ['user_id', 'item_id'], 'message' => 'Товар уже в избранных у этого пользователя'],
         ];
     }
 
