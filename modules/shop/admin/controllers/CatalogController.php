@@ -164,7 +164,7 @@ class CatalogController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании фильтра');
             }
-            return $this->redirect(Url::to(['catalog/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/shop/catalog/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [
