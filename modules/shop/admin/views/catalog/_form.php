@@ -52,7 +52,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <h3>Добавить варианты значений</h3>
         <? foreach ($model->catalogItems as $catalogItem): ?>
             <div class="filter" data-id="<?= $catalogItem->id ?>">
-                <?= Html::a('<span>' . $catalogItem->name . '</span>', Url::to(['catalog/update-item', 'id' => $catalogItem->id])) ?>
+                <?= Html::a('<span>' . $catalogItem->name . '</span>', Url::to(['/admin/modules/shop/catalog/update-item', 'id' => $catalogItem->id])) ?>
             </div>
         <? endforeach; ?>
         <div class="filter add js-add-filter">

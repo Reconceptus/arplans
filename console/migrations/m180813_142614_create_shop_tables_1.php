@@ -157,6 +157,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
             [4, null, 'base', 'Фундамент'],
             [5, null, 'roof', 'Тип кровли'],
             [6, null, 'slab', 'Перекрытия 1 этажа'],
+            [7, null, 'slab2', 'Перекрытия 2 этажа'],
         ];
         $this->batchInsert('shop_catalog', ['id', 'category_id', 'slug', 'name'], $catalogs);
         $catalogItems = [
@@ -209,6 +210,9 @@ class m180813_142614_create_shop_tables_1 extends Migration
             [6, '', 'ж/б плиты', 1],
             [6, '', 'монолитное', 2],
             [6, '', 'по деревянным балкам', 3],
+            [7, '', 'ж/б плиты', 1],
+            [7, '', 'монолитное', 2],
+            [7, '', 'по деревянным балкам', 3],
         ];
         $this->batchInsert('shop_catalog_item', ['catalog_id', 'slug', 'name', 'sort'], $catalogItems);
     }
