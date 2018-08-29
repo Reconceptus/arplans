@@ -49,10 +49,12 @@
                                 <td><?= $model->category->name ?></td>
                             </tr>
                             <? foreach ($model->itemOptions as $io): ?>
-                                <tr>
-                                    <td class="name"><?= $io->catalog->name ?></td>
-                                    <td><?= $io->catalogItem->name ?></td>
-                                </tr>
+                                <? if ($io->catalog->basic): ?>
+                                    <tr>
+                                        <td class="name"><?= $io->catalog->name ?></td>
+                                        <td><?= $io->catalogItem->name ?></td>
+                                    </tr>
+                                <? endif; ?>
                             <? endforeach; ?>
                             <tr>
                                 <td class="name">
@@ -64,43 +66,25 @@
                                     <span>общая: <?= $model->common_area ?>м<sup>2</sup></span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="name">Этажность</td>
-                                <?
-                                $floors = [];
-                                if ($model->one_floor) $floors[] = '1';
-                                if ($model->two_floor) $floors[] = '2';
-                                if ($model->mansard) $floors[] = 'мансарда';
-                                ?>
-                                <td><?= implode(', ', $floors) ?></td>
-                            </tr>
-                            <tr>
-                                <td class="name">Габариты</td>
-                                <td>7,5м на 10м</td>
-                            </tr>
+                            <?
+                            $floors = [];
+                            if ($model->one_floor) $floors[] = '1';
+                            if ($model->two_floor) $floors[] = '2';
+                            if ($model->mansard) $floors[] = 'мансарда';
+                            ?>
+                            <? if ($floors): ?>
+                                <tr>
+                                    <td class="name">Этажность</td>
+                                    <td><?= implode(', ', $floors) ?></td>
+                                </tr>
+                            <? endif; ?>
                             <tr>
                                 <td class="name">Количество комнат</td>
                                 <td><?= $model->rooms ?></td>
                             </tr>
                             <tr>
-                                <td class="name">Тип фундамента</td>
-                                <td>ленточный</td>
-                            </tr>
-                            <tr>
-                                <td class="name">Перекрытия 1-го этажа</td>
-                                <td>по деревянным балкам</td>
-                            </tr>
-                            <tr>
-                                <td class="name">Перекрытия 2-го этажа</td>
-                                <td>по деревянным балкам</td>
-                            </tr>
-                            <tr>
-                                <td class="name">Тип кровли</td>
-                                <td>скатная</td>
-                            </tr>
-                            <tr>
                                 <td class="name">Количество с/у</td>
-                                <td>2</td>
+                                <td><?= $model->bathrooms ?></td>
                             </tr>
                             <tr>
                                 <td class="name">Удобства</td>
@@ -150,60 +134,16 @@
         <div class="tab-section tab-objects tab05">
             <div class="tab-objects-slider" data-owl="objects">
                 <ul class="owl-carousel">
-                    <li class="object-item">
-                        <div class="projects-item--wrap">
-                            <a href="#" class="projects-item--preview">
-                                <div class="bg" style="background-image: url('assets/images/items/item01.jpg')"></div>
-                                <div class="data">
-                                    <div class="data-details">
-                                        <span class="index">K-232</span>
-                                        <span class="cost">Стоимость проекта: 25&nbsp;000&nbsp;&#8381;</span>
-                                    </div>
-                                    <ul class="info">
-                                        <li>
-                                            <span class="head">Жилая</span>
-                                            <span>82 м<sup>2</sup></span>
-                                        </li>
-                                        <li>
-                                            <span class="head">Полезная</span>
-                                            <span>140 м<sup>2</sup></span>
-                                        </li>
-                                        <li>
-                                            <span class="head">Общая</span>
-                                            <span>260 м<sup>2</sup></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="object-item">
-                        <div class="projects-item--wrap">
-                            <a href="#" class="projects-item--preview">
-                                <div class="bg" style="background-image: url('assets/images/items/item02.jpg')"></div>
-                                <div class="data">
-                                    <div class="data-details">
-                                        <span class="index">K-232</span>
-                                        <span class="cost">Стоимость проекта: 25&nbsp;000&nbsp;&#8381;</span>
-                                    </div>
-                                    <ul class="info">
-                                        <li>
-                                            <span class="head">Жилая</span>
-                                            <span>82 м<sup>2</sup></span>
-                                        </li>
-                                        <li>
-                                            <span class="head">Полезная</span>
-                                            <span>140 м<sup>2</sup></span>
-                                        </li>
-                                        <li>
-                                            <span class="head">Общая</span>
-                                            <span>260 м<sup>2</sup></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+                    <? foreach ($model->getReady() as $readyImage): ?>
+                        <li class="object-item">
+                            <div class="projects-item--wrap">
+                                <a href="#" class="projects-item--preview">
+                                    <div class="bg"
+                                         style="background-image: url('assets/images/items/item01.jpg')"></div>
+                                </a>
+                            </div>
+                        </li>
+                    <? endforeach; ?>
                 </ul>
             </div>
         </div>
