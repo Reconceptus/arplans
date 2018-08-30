@@ -6,12 +6,12 @@
  * Time: 16:24
  */
 
-namespace modules\shop\widgets\like;
+namespace modules\shop\widgets\about;
 
 
 use yii\base\Widget;
 
-class Like extends Widget
+class About extends Widget
 {
     public $viewName = 'index';
 
