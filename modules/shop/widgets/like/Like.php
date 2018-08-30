@@ -13,7 +13,7 @@ use yii\base\Widget;
 
 class Like extends Widget
 {
-    private $viewName;
+    private $viewName = 'index';
 
     public function run()
     {
