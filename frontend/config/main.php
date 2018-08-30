@@ -49,6 +49,7 @@ return [
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
                 'favorite/add'                                             => 'shop/favorite/add',
+                'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
                 'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog/index',
                 'shop'                                                     => 'shop/catalog',

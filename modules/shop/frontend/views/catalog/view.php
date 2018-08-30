@@ -6,6 +6,9 @@
  * Time: 10:08
  */
 
+use frontend\widgets\recently\Recently;
+use modules\shop\widgets\like\Like;
+
 /* @var $model \modules\shop\models\Item */
 ?>
 <div class="section project-page">
@@ -62,7 +65,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+<?= Like::widget() ?>
+<?= Recently::widget() ?>
