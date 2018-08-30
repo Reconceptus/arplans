@@ -56,6 +56,7 @@ class Item extends \yii\db\ActiveRecord
     const IS_DELETED = 1;
     const IS_NOT_DELETED = 0;
 
+    const IS_NEW = 1;
     /**
      * {@inheritdoc}
      */

@@ -57,10 +57,12 @@ class CompilationController extends Controller
             'query' => $query
         ]);
         $description = Config::getValue('compilation_free_description');
+        $name = Config::getValue('compilation_free_name');
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->identity->getFavoriteIds(),
-            'description'  => $description
+            'description'  => $description,
+            'name'         => $name
         ]);
     }
 }
