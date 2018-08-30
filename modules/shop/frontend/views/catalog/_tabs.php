@@ -80,7 +80,7 @@
                             <? endif; ?>
                             <tr>
                                 <td class="name">Количество комнат</td>
-                                <td><?= $model->rooms ?></td>
+                                <td><?= $model->rooms == 6 ? '6+' : $model->rooms ?></td>
                             </tr>
                             <tr>
                                 <td class="name">Количество с/у</td>
