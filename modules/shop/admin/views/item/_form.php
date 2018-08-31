@@ -108,7 +108,8 @@ $bathrooms = [
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <? foreach ($catalogs as $catalog): ?>
                 <?
-                $iOid = $model->getItemOptionCatalogItemId($catalog->id);
+                $iO = $model->getItemOptionCatalogItem($catalog->id);
+                $iOid = $iO ? $iO->id : null;
                 $items = \yii\helpers\ArrayHelper::map($catalog->catalogItems, 'id', 'name')
                 ?>
                 <? if ($catalog->catalogItems): ?>

@@ -8,6 +8,7 @@
 
 namespace modules\shop\frontend\controllers;
 
+use modules\shop\models\Catalog;
 use modules\shop\models\Favorite;
 use modules\shop\models\Item;
 use yii\data\ActiveDataProvider;
@@ -22,13 +23,14 @@ class FavoriteController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-            $query = Favorite::find()->alias('f')
-                ->innerJoin(Item::tableName() . ' i', 'f.item_id=i.id')
-                ->where(['f.user_id' => \Yii::$app->user->id, 'i.active' => Item::IS_ACTIVE, 'i.deleted' => Item::IS_NOT_DELETED]);
+            $query = Item::find()->alias('i')
+                ->innerJoin(Favorite::tableName() . ' f', 'f.item_id=i.id')
+                ->where(['f.user_id' => \Yii::$app->user->id, 'i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
             $dataProvider = new ActiveDataProvider([
                 'query' => $query
             ]);
-            return $this->render('index', ['dataProvider' => $dataProvider]);
+            $sizeCatalog = Catalog::findOne(['slug' => 'size']);
+            return $this->render('index', ['dataProvider' => $dataProvider, 'sizeCatalog' => $sizeCatalog]);
         }
     }
 
@@ -42,19 +44,21 @@ class FavoriteController extends Controller
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
-        $model = Favorite::find()->where(['item_id' => intval($get['id']), 'user_id' => \Yii::$app->user->id])->one();
         $fav = false;
-        if (!$model && isset($get['fav']) && $get['fav'] === 'true') {
-            $model = new Favorite();
-            $model->item_id = intval($get['id']);
-            $model->user_id = \Yii::$app->user->id;
-            if ($model->save()) {
+        if (!\Yii::$app->user->isGuest) {
+            $model = Favorite::find()->where(['item_id' => intval($get['id']), 'user_id' => \Yii::$app->user->id])->one();
+            if (!$model && isset($get['fav']) && $get['fav'] === 'true') {
+                $model = new Favorite();
+                $model->item_id = intval($get['id']);
+                $model->user_id = \Yii::$app->user->id;
+                if ($model->save()) {
+                    $fav = true;
+                }
+            } else if ($model && isset($get['fav']) && $get['fav'] === 'true') {
                 $fav = true;
+            } else if ($model && isset($get['fav']) && $get['fav'] === 'false') {
+                $model->delete();
             }
-        } else if ($model && isset($get['fav']) && $get['fav'] === 'true') {
-            $fav = true;
-        } else if ($model && isset($get['fav']) && $get['fav'] === 'false') {
-            $model->delete();
         }
         return ['fav' => $fav];
     }

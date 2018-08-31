@@ -4,7 +4,7 @@ $(function () {
         var button = $(this);
         $.ajax({
             type: 'GET',
-            url: '/favorite/add',
+            url: '/shop/favorite/add',
             data: {
                 id: button.data('id'),
                 fav: !button.hasClass('liked')
