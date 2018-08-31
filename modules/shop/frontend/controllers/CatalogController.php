@@ -51,7 +51,7 @@ class CatalogController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'category'     => $category,
-            'favorites'    => Yii::$app->user->identity->getFavoriteIds()
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds()
         ]);
     }
 

@@ -9,14 +9,34 @@
 namespace modules\shop\frontend\controllers;
 
 use modules\shop\models\Favorite;
+use modules\shop\models\Item;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\Response;
 
 class FavoriteController extends Controller
 {
     /**
+     * @return string
+     */
+    public function actionIndex()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            $query = Favorite::find()->alias('f')
+                ->innerJoin(Item::tableName() . ' i', 'f.item_id=i.id')
+                ->where(['f.user_id' => \Yii::$app->user->id, 'i.active' => Item::IS_ACTIVE, 'i.deleted' => Item::IS_NOT_DELETED]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query
+            ]);
+            return $this->render('index', ['dataProvider' => $dataProvider]);
+        }
+    }
+
+    /**
      * Добавляем/удаляем товар в избранное
      * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionAdd()
     {
@@ -31,9 +51,9 @@ class FavoriteController extends Controller
             if ($model->save()) {
                 $fav = true;
             }
-        } else if($model && isset($get['fav']) && $get['fav'] === 'true') {
+        } else if ($model && isset($get['fav']) && $get['fav'] === 'true') {
             $fav = true;
-        }else if($model && isset($get['fav']) && $get['fav']=== 'false'){
+        } else if ($model && isset($get['fav']) && $get['fav'] === 'false') {
             $model->delete();
         }
         return ['fav' => $fav];

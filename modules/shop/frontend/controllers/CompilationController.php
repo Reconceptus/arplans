@@ -28,7 +28,7 @@ class CompilationController extends Controller
 
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
-            'favorites'    => Yii::$app->user->identity->getFavoriteIds(),
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
             'name'         => $name
         ]);
@@ -44,7 +44,7 @@ class CompilationController extends Controller
         $name = Config::getValue('compilation_discount_name');
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
-            'favorites'    => Yii::$app->user->identity->getFavoriteIds(),
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
             'name'         => $name
         ]);
@@ -60,7 +60,7 @@ class CompilationController extends Controller
         $name = Config::getValue('compilation_free_name');
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
-            'favorites'    => Yii::$app->user->identity->getFavoriteIds(),
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
             'name'         => $name
         ]);
