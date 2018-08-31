@@ -18,7 +18,7 @@ $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
         <div class="compare-table--part part-project">
             <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug]) ?>"
                class="projects-item--preview">
-                <div class="bg" style="background-image: url('assets/images/items/item08.jpg')"></div>
+                <div class="bg" style="background-image: url('<?= $model->getMainImage() ?>')"></div>
                 <? if ($model->is_new): ?>
                     <div class="hash">
                         <span class="new">новинка</span>
