@@ -16,14 +16,16 @@ class Item extends Widget
     public $viewName = 'index';
     public $model;
     public $get;
-    public $favorites;
+    public $favorites = [];
+    public $sizeCatalog;
 
     public function run()
     {
         $content = $this->render($this->viewName, [
-            'model'     => $this->model,
-            'get'       => $this->get,
-            'favorites' => $this->favorites
+            'model'       => $this->model,
+            'get'         => $this->get,
+            'favorites'   => $this->favorites,
+            'sizeCatalog' => $this->sizeCatalog
         ]);
         return $content;
     }

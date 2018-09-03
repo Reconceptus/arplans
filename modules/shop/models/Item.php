@@ -57,6 +57,7 @@ class Item extends \yii\db\ActiveRecord
     const IS_NOT_DELETED = 0;
 
     const IS_NEW = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -318,13 +319,16 @@ class Item extends \yii\db\ActiveRecord
 
     /**
      * @param $catalog_id
-     * @return int|mixed|null
+     * @return CatalogItem|mixed|null
      */
-    public function getItemOptionCatalogItemId($catalog_id)
+    public function getItemOptionCatalogItem(int $catalog_id)
     {
-        $io = ItemOption::find()->where(['catalog_id' => $catalog_id, 'item_id' => $this->id])->one();
-        if ($io) {
-            return $io->catalog_item_id;
+        if ($catalog_id) {
+            $io = ItemOption::find()->where(['catalog_id' => $catalog_id, 'item_id' => $this->id])->one();
+            /* @var $io ItemOption */
+            if ($io) {
+                return $io->catalogItem;
+            }
         }
         return null;
     }

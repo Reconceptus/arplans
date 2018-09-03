@@ -48,7 +48,10 @@ return [
             'rules'           => [
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
-                'favorite/add'                                             => 'shop/favorite/add',
+                'shop/favorite/add'                                             => 'shop/favorite/add',
+                'shop/favorite'                                                 => 'shop/favorite/index',
+                'shop/cart/add'                                                 => 'shop/cart/add',
+                'shop/cart'                                                 => 'shop/cart/index',
                 'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
                 'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog/index',

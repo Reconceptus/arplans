@@ -60,22 +60,7 @@
                     <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top']) ?>
                 </div>
                 <div class="header-main--stats">
-                    <a href="#" class="stats stats-likes">
-                        <span>34</span>
-                        <i class="icon-likes">
-                            <svg xmlns="http://www.w3.org/2000/svg">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart"/>
-                            </svg>
-                        </i>
-                    </a>
-                    <a href="#" class="stats stats-prods">
-                        <span>10</span>
-                        <i class="icon-basket">
-                            <svg xmlns="http://www.w3.org/2000/svg">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-basket"/>
-                            </svg>
-                        </i>
-                    </a>
+                    <?=\modules\shop\widgets\cart\Cart::widget()?>
                     <div class="burger desktop-hidden">
                         <span></span>
                         <span></span>

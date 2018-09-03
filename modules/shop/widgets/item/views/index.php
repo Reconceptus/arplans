@@ -65,6 +65,6 @@ use modules\shop\models\Item;
                      xlink:href="#icon-heart-like"/>
             </svg>
         </a>
-        <a href="#" class="basket btn-small">в корзину</a>
+        <a class="basket btn-small js-to-cart" data-id="<?=$model->id?>">в корзину</a>
     </div>
 </div>
