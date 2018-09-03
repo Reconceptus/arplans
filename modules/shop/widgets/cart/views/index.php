@@ -9,7 +9,7 @@
 /* @var $cartCount int */
 /* @var $favoriteCount int */
 ?>
-<a href="/shop/favorites" class="stats stats-likes">
+<a href="/shop/favorite" class="stats stats-likes">
     <span><?= intval($favoriteCount) ?></span>
     <i class="icon-likes">
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
         </svg>
     </i>
 </a>
-<a href="#" class="stats stats-prods">
+<a href="/shop/cart" class="stats stats-prods">
     <span><?= intval($cartCount) ?></span>
     <i class="icon-basket">
         <svg xmlns="http://www.w3.org/2000/svg">

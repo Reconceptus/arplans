@@ -72,7 +72,36 @@ class Cart extends \yii\db\ActiveRecord
 
     public static function countGoods(string $cartGuid)
     {
-        $query = Yii::$app->db->createCommand("SELECT sum(count) FROM ".Cart::tableName()." WHERE guid = '{$cartGuid}'");
+        $query = Yii::$app->db->createCommand("SELECT sum(count) FROM " . Cart::tableName() . " WHERE guid = '{$cartGuid}'");
         return $query->queryScalar();
+    }
+
+    /**
+     * Устанавливает идентификатор корзины
+     * @return mixed|string
+     * @throws \yii\base\Exception
+     */
+    public static function setGuid()
+    {
+        if (isset(Yii::$app->request->cookies['cart'])) {
+            $cart = Yii::$app->request->cookies['cart'];
+            $cart = $cart ? $cart->value : null;
+        }
+        if (!isset($cart)) {
+            if (!Yii::$app->user->isGuest) {
+                $cartGuid = self::findOne(['user_id' => Yii::$app->user->id]);
+                if ($cartGuid) {
+                    $cart = $cartGuid->guid;
+                }
+            }
+        }
+        if (!isset($cart)) {
+            $cart = Yii::$app->security->generateRandomString();
+            Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                'name'  => 'cart',
+                'value' => $cart
+            ]));
+        }
+        return $cart;
     }
 }

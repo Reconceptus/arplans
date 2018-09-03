@@ -20,16 +20,11 @@ class Cart extends Widget
 
     public function run()
     {
-        if (isset(Yii::$app->request->cookies['cart'])) {
-            $cart = Yii::$app->request->cookies['cart'];
-        }
-        if (!isset($cart)) {
-            $cart = Yii::$app->security->generateRandomString();
-            Yii::$app->response->cookies->add(new \yii\web\Cookie([
-                'name'  => 'cart',
-                'value' => $cart
-            ]));
-            Yii::$app->params['cart'] = $cart;
+        $cart = CartModel::setGuid();
+
+        if (!Yii::$app->user->isGuest && $cart) {
+            Yii::$app->db->createCommand('UPDATE shop_cart SET user_id=' . Yii::$app->user->id . ' WHERE guid="' . $cart . '" AND user_id IS null')->execute();
+            Yii::$app->db->createCommand('UPDATE shop_cart SET guid="' . $cart . '" WHERE user_id=' . Yii::$app->user->id)->execute();
         }
 
         $cartCount = CartModel::countGoods($cart);

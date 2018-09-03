@@ -89,7 +89,7 @@ $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
                     <div class="price"><?= intval($model->price) - intval($model->discount) ?> &#8381;</div>
                 </div>
                 <div class="btns">
-                    <a href="#" class="basket btn-small">в корзину</a>
+                    <a class="basket btn-small js-to-cart" data-id="<?=$model->id?>">в корзину</a>
                     <button class="compare-table--remove">
                         <i class="icon-remove">
                             <svg xmlns="http://www.w3.org/2000/svg">
