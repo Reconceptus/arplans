@@ -15,6 +15,9 @@ $(function () {
                 } else {
                     button.removeClass('liked');
                 }
+                var count = parseInt($('#count-favorite').text(), 10);
+                var add = parseInt(data.counter, 10);
+                $('#count-favorite').text(add + count);
             }
         });
     })
@@ -30,7 +33,7 @@ $(function () {
             success: function (data) {
                 if (data.status === 'success') {
                     var count = $('#count-basket').text();
-                    count = parseInt(count,10);
+                    count = parseInt(count, 10);
                     count++;
                     $('#count-basket').text(count)
                 }

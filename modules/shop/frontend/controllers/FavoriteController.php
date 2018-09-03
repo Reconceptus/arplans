@@ -42,6 +42,7 @@ class FavoriteController extends Controller
      */
     public function actionAdd()
     {
+        $addCounter = 0;
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
         $fav = false;
@@ -52,14 +53,16 @@ class FavoriteController extends Controller
                 $model->item_id = intval($get['id']);
                 $model->user_id = \Yii::$app->user->id;
                 if ($model->save()) {
+                    $addCounter = 1;
                     $fav = true;
                 }
             } else if ($model && isset($get['fav']) && $get['fav'] === 'true') {
                 $fav = true;
             } else if ($model && isset($get['fav']) && $get['fav'] === 'false') {
                 $model->delete();
+                $addCounter = -1;
             }
         }
-        return ['fav' => $fav];
+        return ['fav' => $fav, 'counter' => $addCounter];
     }
 }
