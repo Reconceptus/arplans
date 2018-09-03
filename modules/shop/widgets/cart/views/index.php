@@ -10,7 +10,7 @@
 /* @var $favoriteCount int */
 ?>
 <a href="/shop/favorite" class="stats stats-likes">
-    <span><?= intval($favoriteCount) ?></span>
+    <span id="count-favorite"><?= intval($favoriteCount) ?></span>
     <i class="icon-likes">
         <svg xmlns="http://www.w3.org/2000/svg">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart"/>
@@ -18,7 +18,7 @@
     </i>
 </a>
 <a href="/shop/cart" class="stats stats-prods">
-    <span><?= intval($cartCount) ?></span>
+    <span id="count-basket"><?= intval($cartCount) ?></span>
     <i class="icon-basket">
         <svg xmlns="http://www.w3.org/2000/svg">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-basket"/>

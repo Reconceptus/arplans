@@ -35,6 +35,7 @@ class Cart extends \yii\db\ActiveRecord
         return [
             [['user_id', 'item_id', 'count'], 'integer'],
             [['guid'], 'string', 'max' => 255],
+            [['user_id', 'item_id'], 'unique', 'targetAttribute' => ['user_id', 'item_id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
