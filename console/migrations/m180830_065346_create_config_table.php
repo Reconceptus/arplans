@@ -28,7 +28,7 @@ class m180830_065346_create_config_table extends Migration
             ['Заголовок подборки проектов со скидкой', 'compilation_discount_name', ''],
         ];
 
-        Yii::$app->db->createCommand()->batchInsert('config', ['name', 'slug', 'description'], $values)->execute();
+        Yii::$app->db->createCommand()->batchInsert('config', ['name', 'slug', 'value'], $values)->execute();
     }
 
     /**
