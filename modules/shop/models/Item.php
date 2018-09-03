@@ -4,6 +4,7 @@ namespace modules\shop\models;
 
 
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "shop_item".
@@ -331,5 +332,29 @@ class Item extends \yii\db\ActiveRecord
             }
         }
         return null;
+    }
+
+    /**
+     * @param $slug string
+     * @return ItemOption|ActiveRecord
+     */
+    public function getIO($slug)
+    {
+        return ItemOption::find()->alias('io')
+            ->innerJoin(Item::tableName() . ' i', 'io.item_id=i.id')
+            ->innerJoin(Catalog::tableName() . ' c', 'io.catalog_id=c.id')
+            ->where(['c.slug' => $slug, 'i.id' => $this->id])
+            ->andWhere(['or', ['c.category_id' => $this->category_id], ['is', 'c.category_id', null]])
+            ->one();
+    }
+
+    /**
+     * @param $slug
+     * @return string
+     */
+    public function getCatalogValue($slug)
+    {
+        $io = $this->getIO($slug);
+        return $io ? $io->catalogItem->name : '';
     }
 }
