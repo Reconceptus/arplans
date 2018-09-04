@@ -317,7 +317,7 @@ class ItemController extends AdminController
                     $newIo->item_id = $newModel->id;
                     $newIo->save();
                 }
-                foreach ($model->images as $image){
+                foreach ($model->images as $image) {
                     $newImage = new ItemImage();
                     $newImage->setAttributes($image->attributes);
                     $newImage->item_id = $newModel->id;
@@ -325,7 +325,7 @@ class ItemController extends AdminController
                 }
             }
         }
-        return $this->redirect(Yii::$app->request->getReferrer());
+        return $this->redirect(['/admin/modules/shop/item/category', 'category_id' => $model->category_id]);
     }
 
 
