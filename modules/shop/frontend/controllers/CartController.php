@@ -29,6 +29,11 @@ class CartController extends Controller
         return $this->render('index', ['models' => $models]);
     }
 
+    /**
+     * Добавляем товар в корзину
+     * @return array
+     * @throws \yii\base\Exception
+     */
     public function actionAdd()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
@@ -67,5 +72,25 @@ class CartController extends Controller
             $status = 'fail';
         }
         return ['status' => $status, 'message' => $message];
+    }
+
+    /**
+     * Удаляем товар из корзины
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete()
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = \Yii::$app->request->get();
+        if (isset($get['id'])) {
+            $model = Cart::findOne(['id' => intval($get['id'])]);
+            if ($model) {
+                $model->delete();
+                return ['status' => 'success'];
+            }
+        }
+        return ['status' => 'fail'];
     }
 }

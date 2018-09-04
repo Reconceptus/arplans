@@ -60,7 +60,7 @@ $item = $model->item;
                                 </svg>
                             </i>
                         </span>
-                        <input class="result" readonly value="1" min="1">
+                        <input class="result album-num" readonly value="1" min="1">
                         <span class="plus">
                             <i class="icon icon-plus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +82,7 @@ $item = $model->item;
                 </div>
                 <div class="btns">
                     <button class="compare-table--remove">
-                        <i class="icon-remove">
+                        <i class="icon-remove js-delete-cart-item" data-id="<?= $model->id ?>">
                             <svg xmlns="http://www.w3.org/2000/svg">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                      xlink:href="#icon-remove"/>

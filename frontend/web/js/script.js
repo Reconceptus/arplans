@@ -41,4 +41,21 @@ $(function () {
             }
         });
     })
+
+    $(document).on('click', '.js-delete-cart-item', function () {
+        var button = $(this);
+        var container = button.closest('.compare-table--item');
+        $.ajax({
+            type: 'GET',
+            url: '/shop/cart/delete',
+            data: {
+                id: button.data('id')
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    container.remove();
+                }
+            }
+        });
+    })
 });

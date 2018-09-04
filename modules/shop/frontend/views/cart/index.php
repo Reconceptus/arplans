@@ -17,53 +17,51 @@
         <div class="custom-row">
             <div class="custom-row-col col-elastic">
                 <div class="basket-form">
-                    <form action="#">
-                        <div>
-                            <section class="compare filter-form">
-                                <div class="compare-table">
-                                    <div class="compare-table--header">
-                                        <div class="compare-table--part part-project">
-                                            <a href="javascript:void(0);">
-                                                Проект
-                                            </a>
-                                        </div>
-                                        <div class="compare-table--part">
-                                            <a href="javascript:void(0);">
-                                                Артикул
-                                            </a>
-                                        </div>
-                                        <div class="compare-table--part">
-                                            <a href="javascript:void(0);">
-                                                Площадь
-                                            </a>
-                                        </div>
-                                        <div class="compare-table--part">
-                                            <a href="javascript:void(0);">
-                                                Материал
-                                            </a>
-                                        </div>
-                                        <div class="compare-table--part part-count">
-                                            <a href="javascript:void(0);">
-                                                Количество альбомов
-                                            </a>
-                                        </div>
-                                        <div class="compare-table--part part-cost">
-                                            <a href="javascript:void(0);">
-                                                Стоимость
-                                            </a>
-                                        </div>
+                    <div>
+                        <section class="compare filter-form">
+                            <div class="compare-table">
+                                <div class="compare-table--header">
+                                    <div class="compare-table--part part-project">
+                                        <a href="javascript:void(0);">
+                                            Проект
+                                        </a>
                                     </div>
-                                    <div class="compare-table--main">
-                                        <? foreach ($models as $model): ?>
-                                            <?= $this->render('_list', ['model' => $model]) ?>
-                                        <? endforeach; ?>
+                                    <div class="compare-table--part">
+                                        <a href="javascript:void(0);">
+                                            Артикул
+                                        </a>
+                                    </div>
+                                    <div class="compare-table--part">
+                                        <a href="javascript:void(0);">
+                                            Площадь
+                                        </a>
+                                    </div>
+                                    <div class="compare-table--part">
+                                        <a href="javascript:void(0);">
+                                            Материал
+                                        </a>
+                                    </div>
+                                    <div class="compare-table--part part-count">
+                                        <a href="javascript:void(0);">
+                                            Количество альбомов
+                                        </a>
+                                    </div>
+                                    <div class="compare-table--part part-cost">
+                                        <a href="javascript:void(0);">
+                                            Стоимость
+                                        </a>
                                     </div>
                                 </div>
-                            </section>
-                        </div>
-                        <?= $this->render('_additional') ?>
-                        <?= $this->render('_orderdata') ?>
-                    </form>
+                                <div class="compare-table--main">
+                                    <? foreach ($models as $model): ?>
+                                        <?= $this->render('_list', ['model' => $model]) ?>
+                                    <? endforeach; ?>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <?= $this->render('_additional') ?>
+                    <?= $this->render('_orderdata') ?>
                 </div>
             </div>
             <?= $this->render('_sidebar') ?>
