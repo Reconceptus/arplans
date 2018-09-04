@@ -303,6 +303,31 @@ class ItemController extends AdminController
         return ['status' => 'fail'];
     }
 
+    public function actionClone(int $id)
+    {
+        $model = self::findModel($id);
+        if ($model) {
+            $newModel = new Item();
+            $newModel->setAttributes($model->attributes);
+            $newModel->slug = $newModel->slug . rand();
+            if ($newModel->save()) {
+                foreach ($model->itemOptions as $io) {
+                    $newIo = new ItemOption();
+                    $newIo->setAttributes($io->attributes);
+                    $newIo->item_id = $newModel->id;
+                    $newIo->save();
+                }
+                foreach ($model->images as $image){
+                    $newImage = new ItemImage();
+                    $newImage->setAttributes($image->attributes);
+                    $newImage->item_id = $newModel->id;
+                    $newImage->save();
+                }
+            }
+        }
+        return $this->redirect(Yii::$app->request->getReferrer());
+    }
+
 
     /**
      * @param $id
@@ -317,5 +342,4 @@ class ItemController extends AdminController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }
