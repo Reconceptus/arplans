@@ -4,6 +4,7 @@ namespace modules\shop\models;
 
 
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "shop_item".
@@ -73,7 +74,10 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'slug', 'category_id'], 'required'],
-            [['category_id', 'price', 'rooms', 'bathrooms', 'discount', 'live_area', 'common_area', 'useful_area', 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
+            [['price', 'discount'], 'number'],
+            [['category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
+                'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace',
+                'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video'], 'string', 'max' => 255],
             [['description', 'build_price'], 'string'],
             [['slug'], 'unique'],
@@ -331,5 +335,29 @@ class Item extends \yii\db\ActiveRecord
             }
         }
         return null;
+    }
+
+    /**
+     * @param $slug string
+     * @return ItemOption|ActiveRecord
+     */
+    public function getIO($slug)
+    {
+        return ItemOption::find()->alias('io')
+            ->innerJoin(Item::tableName() . ' i', 'io.item_id=i.id')
+            ->innerJoin(Catalog::tableName() . ' c', 'io.catalog_id=c.id')
+            ->where(['c.slug' => $slug, 'i.id' => $this->id])
+            ->andWhere(['or', ['c.category_id' => $this->category_id], ['is', 'c.category_id', null]])
+            ->one();
+    }
+
+    /**
+     * @param $slug
+     * @return string
+     */
+    public function getCatalogValue($slug)
+    {
+        $io = $this->getIO($slug);
+        return $io ? $io->catalogItem->name : '';
     }
 }
