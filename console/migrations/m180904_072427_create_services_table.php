@@ -13,12 +13,13 @@ class m180904_072427_create_services_table extends Migration
     public function safeUp()
     {
         $this->createTable('shop_service', [
-            'id'          => $this->primaryKey()->unsigned(),
-            'name'        => $this->string(),
-            'slug'        => $this->string(),
-            'description' => $this->text(),
-            'price'       => $this->decimal(14, 2),
-            'in_cart'     => $this->boolean()
+            'id'           => $this->primaryKey()->unsigned(),
+            'name'         => $this->string(),
+            'slug'         => $this->string(),
+            'preview_text' => $this->string(800),
+            'description'  => $this->text(),
+            'price'        => $this->decimal(14, 2),
+            'in_cart'      => $this->boolean()
         ]);
 
         $this->createTable('shop_order', [
