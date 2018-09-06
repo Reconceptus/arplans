@@ -9,7 +9,8 @@ namespace modules\shop\models;
  * @property string $name
  * @property string $slug
  * @property string $description
- * @property string $price
+ * @property string $preview_text
+ * @property float $price
  * @property int $in_cart
  *
  * @property OrderService[] $shopOrderServices
@@ -31,7 +32,7 @@ class Service extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'string'],
+            [['description', 'preview_text'], 'string'],
             [['price'], 'number'],
             [['in_cart'], 'integer'],
             [['name', 'slug'], 'string', 'max' => 255],
@@ -45,11 +46,12 @@ class Service extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'description' => 'Description',
-            'price' => 'Price',
-            'in_cart' => 'In Cart',
+            'name' => 'Название',
+            'preview_text' => 'Превью',
+            'slug' => 'Url',
+            'description' => 'Описание',
+            'price' => 'Цена',
+            'in_cart' => 'Отображать в корзине',
         ];
     }
 

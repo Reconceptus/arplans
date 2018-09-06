@@ -40,7 +40,7 @@ $item = $model->item;
                 <div class="form-row-element">
                     <div class="check">
                         <label>
-                            <input type="checkbox" name="material[<?= $item->id ?>]">
+                            <input type="checkbox" class="order-change-materials">
                             <span>*Изменить материал</span>
                         </label>
                     </div>
@@ -52,7 +52,7 @@ $item = $model->item;
             <div class="projects-item--info">
                 <div class="album-head">**Количество альбомов</div>
                 <div class="form-row-element">
-                    <div class="counter">
+                    <div class="counter js-counter" data-id="<?=$model->id?>">
                         <span class="minus">
                             <i class="icon icon-minus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +60,8 @@ $item = $model->item;
                                 </svg>
                             </i>
                         </span>
-                        <input class="result album-num" readonly value="1" min="1">
+                        <input class="result album-num" readonly value="<?= $model->count ?>" min="1"
+                               data-id="<?= $item->id ?>">
                         <span class="plus">
                             <i class="icon icon-plus">
                                 <svg xmlns="http://www.w3.org/2000/svg">

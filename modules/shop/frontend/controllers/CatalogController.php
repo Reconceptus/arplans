@@ -17,7 +17,10 @@ use yii\web\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
-
+    /**
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionIndex()
     {
         $get = \Yii::$app->request->get();
@@ -61,6 +64,9 @@ class CatalogController extends Controller
         if (!$model) {
             throw new NotFoundHttpException('Товар не найден');
         }
-        return $this->render('view', ['model' => $model]);
+        return $this->render('view', [
+            'model' => $model,
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds()
+        ]);
     }
 }

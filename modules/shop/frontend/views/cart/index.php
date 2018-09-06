@@ -7,6 +7,8 @@
  */
 
 /* @var $models \modules\shop\widgets\cart\Cart[] */
+/* @var $services \modules\shop\models\Service[] */
+/* @var $user \common\models\User*/
 ?>
 
 <div class="section basket-order">
@@ -60,8 +62,8 @@
                             </div>
                         </section>
                     </div>
-                    <?= $this->render('_additional') ?>
-                    <?= $this->render('_orderdata') ?>
+                    <?= $this->render('_additional', ['services' => $services]) ?>
+                    <?= $this->render('_orderdata', ['models' => $models, 'user' => $user]) ?>
                 </div>
             </div>
             <?= $this->render('_sidebar') ?>

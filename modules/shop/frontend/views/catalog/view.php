@@ -10,6 +10,7 @@ use frontend\widgets\recently\Recently;
 use modules\shop\widgets\like\Like;
 
 /* @var $model \modules\shop\models\Item */
+/* @var $favorites array */
 ?>
 <div class="section project-page">
     <div class="content content--lg">
@@ -22,7 +23,7 @@ use modules\shop\widgets\like\Like;
 
                 <div class="project-page--head custom-row">
                     <?= $this->render('_photos', ['model' => $model]) ?>
-                    <?= $this->render('_info', ['model' => $model]) ?>
+                    <?= $this->render('_info', ['model' => $model, 'favorites' => $favorites]) ?>
                 </div>
                 <div class="project-page--info temp">
                     <div class="data">

@@ -9,7 +9,10 @@
 namespace modules\shop\frontend\controllers;
 
 
+use common\models\User;
 use modules\shop\models\Cart;
+use modules\shop\models\Order;
+use modules\shop\models\Service;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -25,8 +28,17 @@ class CartController extends Controller
     {
         $guid = Cart::setGuid();
         $models = Cart::find()->where(['guid' => $guid])->all();
+        $services = Service::find()->all();
+        $user = null;
+        if (!Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->identity;
+        }
 
-        return $this->render('index', ['models' => $models]);
+        return $this->render('index', [
+            'models'   => $models,
+            'services' => $services,
+            'user'     => $user
+        ]);
     }
 
     /**
@@ -92,5 +104,44 @@ class CartController extends Controller
             }
         }
         return ['status' => 'fail'];
+    }
+
+    /**
+     * @return array
+     * @throws \yii\base\Exception
+     */
+    public function actionOrder()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        $info = $get['info'];
+        $amount = 0;
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+            if (Yii::$app->user->isGuest) {
+                $password = Yii::$app->security->generateRandomString(8);
+                $user = User::createUser($info['email'], $password, $info['fio'], $info['phone'], $info['country'], $info['city'], $info['address']);
+                User::sendRegLetter($user);
+            } else {
+                $user = Yii::$app->user->identity;
+            }
+            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village']);
+            if ($order) {
+                $amount += $order->addItems($get['items']);
+                if (isset($get['services'])) {
+                    $amount += $order->addServices($get['services']);
+                }
+            }
+            $order->price = $amount;
+            if ($order->save()) {
+                Cart::clearUserCart($user->id);
+                $transaction->commit();
+                return ['status' => 'success', 'orderId' => $order->id];
+            }
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return ['status' => 'fail'];
+        }
     }
 }

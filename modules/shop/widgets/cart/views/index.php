@@ -9,6 +9,7 @@
 /* @var $cartCount int */
 /* @var $favoriteCount int */
 ?>
+<?if(!Yii::$app->user->isGuest):?>
 <a href="/shop/favorite" class="stats stats-likes">
     <span id="count-favorite"><?= intval($favoriteCount) ?></span>
     <i class="icon-likes">
@@ -17,6 +18,9 @@
         </svg>
     </i>
 </a>
+<?else:?>
+<?=\yii\helpers\Html::a('Войти',\yii\helpers\Url::to('/site/login'))?>
+<?endif;?>
 <a href="/shop/cart" class="stats stats-prods">
     <span id="count-basket"><?= intval($cartCount) ?></span>
     <i class="icon-basket">

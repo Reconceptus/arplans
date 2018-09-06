@@ -10,6 +10,8 @@ namespace modules\shop\admin\controllers;
 
 
 use modules\admin\controllers\AdminController;
+use modules\shop\models\Order;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 
 class OrderController extends AdminController
@@ -38,8 +40,15 @@ class OrderController extends AdminController
         return $behaviors;
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = Order::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 }

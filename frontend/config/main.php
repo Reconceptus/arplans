@@ -52,6 +52,7 @@ return [
                 'shop/favorite'                                            => 'shop/favorite/index',
                 'shop/cart/delete'                                         => 'shop/cart/delete',
                 'shop/cart/add'                                            => 'shop/cart/add',
+                'shop/cart/order'                                            => 'shop/cart/order',
                 'shop/cart'                                                => 'shop/cart/index',
                 'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',

@@ -21,8 +21,8 @@ class m180808_130911_create_profiles extends Migration
             'fio'          => $this->string(),
             'image'        => $this->string(),
             'phone'        => $this->string(),
-            'email'        => $this->string(),
             'city'         => $this->string(),
+            'country'      => $this->string(),
             'address'      => $this->string(),
             'type'         => $this->smallInteger(1),
             'organization' => $this->string(),
@@ -39,7 +39,7 @@ class m180808_130911_create_profiles extends Migration
             'CASCADE'
         );
 
-        $this->db->createCommand("INSERT INTO profile (user_id, email, fio) VALUES (1,'suhov.a.s@yandex.ru', 'Админ')")->execute();
+        $this->db->createCommand("INSERT INTO profile (user_id, fio, phone, country, city, address) VALUES (1, 'Админ', '79991112233', 'Админия', 'Админск', 'ул. Админская д.404')")->execute();
 
         $this->insert('module', ['name' => 'users', 'title' => 'Пользователи и роли']);
 
