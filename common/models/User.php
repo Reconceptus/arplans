@@ -8,6 +8,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\IdentityInterface;
 
 /**
@@ -236,6 +237,48 @@ class User extends ActiveRecord implements IdentityInterface
     public function getFavoriteIds()
     {
         $favorites = $this->getFavorites();
-        return ArrayHelper::map($favorites,'item_id', 'id');
+        return ArrayHelper::map($favorites, 'item_id', 'id');
+    }
+
+    /**
+     * Создание пользователя
+     * @param $email
+     * @param $password
+     * @param $fio
+     * @param $phone
+     * @param $country
+     * @param $city
+     * @param $address
+     * @return User
+     */
+    public static function createUser($email, $password, $fio, $phone, $country, $city, $address)
+    {
+        $user = new self();
+        $user->email = $email;
+        $user->username = $email;
+        $user->setPassword($password);
+        $user->generateAuthKey();
+        if ($user->save()) {
+            $profile = new Profile();
+            $profile->user_id = $user->id;
+            $profile->fio = Html::encode($fio);
+            $profile->phone = Html::encode($phone);
+            $profile->country = Html::encode($country);
+            $profile->city = Html::encode($city);
+            $profile->address = Html::encode($address);
+            if ($profile->save()) {
+                return $user;
+            }
+        }
+        return null;
+    }
+
+    public static function sendRegLetter($user)
+    {
+        Yii::$app->mailer->compose('registration', ['model' => $user])
+            ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+            ->setTo($user->email)
+            ->setSubject('Вы зарегистрированы на сайте ' . Yii::$app->name)
+            ->send();
     }
 }

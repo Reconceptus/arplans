@@ -60,7 +60,7 @@
                     <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top']) ?>
                 </div>
                 <div class="header-main--stats">
-                    <?=\modules\shop\widgets\cart\Cart::widget()?>
+                    <?= \modules\shop\widgets\cart\Cart::widget() ?>
                     <div class="burger desktop-hidden">
                         <span></span>
                         <span></span>
@@ -96,34 +96,34 @@
                     </ul>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">Контакты</a>
-                            </span>
+                    <span>
+                        <a href="#">Контакты</a>
+                    </span>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">Консультация</a>
-                            </span>
+                    <span>
+                        <a href="#">Консультация</a>
+                    </span>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">О нас</a>
-                            </span>
+                    <span>
+                        <a href="#">О нас</a>
+                    </span>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">Сотрудничество</a>
-                            </span>
+                    <span>
+                        <a href="#">Сотрудничество</a>
+                    </span>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">Коттеджные поселки России</a>
-                            </span>
+                    <span>
+                        <a href="#">Коттеджные поселки России</a>
+                    </span>
                 </li>
                 <li>
-                            <span>
-                                <a href="#">Строители и магазины</a>
-                            </span>
+                    <span>
+                        <a href="#">Строители и магазины</a>
+                    </span>
                 </li>
             </ul>
         </nav>

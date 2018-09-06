@@ -7,6 +7,7 @@
  */
 
 /* @var $model \modules\shop\models\Item */
+/* @var $favorites array */
 ?>
 
 <div class="custom-row-col col-33">
@@ -25,8 +26,9 @@
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <a href="#" class="btn-square-min">Купить проект</a>
-                    <a href="#" class="icon-liked">
+                    <a class="btn-square-min js-to-cart" data-id="<?= $model->id ?>">Купить проект</a>
+                    <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+                       data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xlink:href="#icon-heart"/>

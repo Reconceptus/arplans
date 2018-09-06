@@ -28,7 +28,7 @@ $(function () {
             type: 'GET',
             url: '/shop/cart/add',
             data: {
-                id: button.data('id'),
+                id: button.data('id')
             },
             success: function (data) {
                 if (data.status === 'success') {
@@ -41,4 +41,88 @@ $(function () {
             }
         });
     })
+
+    $(document).on('click', '.js-delete-cart-item', function () {
+        var button = $(this);
+        var container = button.closest('.compare-table--item');
+        $.ajax({
+            type: 'GET',
+            url: '/shop/cart/delete',
+            data: {
+                id: button.data('id')
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    var count = $('#count-basket').text();
+                    count = parseInt(count, 10);
+                    count--;
+                    $('#count-basket').text(count);
+                    container.remove();
+                }
+            }
+        });
+    })
+    $(document).on('click', '.js-counter', function () {
+        var container = $(this);
+        var num = container.find('.album-num');
+        var id = container.data('id');
+
+    })
+
+    $(document).on('click', '.js-order', function () {
+        var button = $(this);
+        var items = [];
+        var services = [];
+        var reEmail = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,5}$/i;
+        $('.album-num').each(function (index, item) {
+            items.push({
+                id: $(item).attr('data-id'),
+                count: item.value,
+                change: $(item).closest('.compare-table--item').find('.order-change-materials').prop('checked') ? 1 : 0
+            })
+        });
+        $('.cart-service').each(function (index, item) {
+            if ($(item).prop('checked')) {
+                services.push($(item).attr('data-id'));
+            }
+        });
+        var info = {
+            'fio': $('#order-fio').val(),
+            'phone': $('#order-phone').val(),
+            'email': $('#order-email').val(),
+            'country': $('#order-country').val(),
+            'city': $('#order-city').val(),
+            'address': $('#order-address').val(),
+            'village': $('#order-village').val(),
+            'accept': $('#order-accept').prop('checked') ? 1 : 0
+        };
+        console.log(info);
+        if (!info.accept) {
+            alert('Подтвердите согласие на использование персональных данных');
+            return false;
+        }
+        if (!reEmail.test(info.email)) {
+            alert('Email, указанный вами, некорректен');
+            return false;
+        }
+        if (!info.fio || !info.phone || !info.email || !info.city || !info.address) {
+            alert('Заполнены не все поля');
+            return false;
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/shop/cart/order',
+            data: {
+                items: items,
+                info: info,
+                services: services
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    alert('Заказ оформлен');
+                }
+            }
+        });
+    })
+
 });

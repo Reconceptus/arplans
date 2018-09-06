@@ -118,7 +118,7 @@ class CategoryController extends AdminController
      */
     public function actionDelete($id)
     {
-        $model = Category::findOne(['id' => $id]);
+        $model = $this->findModel($id);
         if (!$model) {
             throw new NotFoundHttpException();
         }

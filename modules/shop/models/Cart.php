@@ -105,4 +105,13 @@ class Cart extends \yii\db\ActiveRecord
         }
         return $cart;
     }
+
+    /**
+     * @param $userId
+     * @return int
+     */
+    public static function clearUserCart($userId)
+    {
+        return self::deleteAll(['user_id'=>$userId]);
+    }
 }

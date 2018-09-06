@@ -360,4 +360,24 @@ class Item extends \yii\db\ActiveRecord
         $io = $this->getIO($slug);
         return $io ? $io->catalogItem->name : '';
     }
+
+    /**
+     * Находит активный товар
+     * @param $id
+     * @return array|null|ActiveRecord|Item
+     */
+    public static function findActive($id)
+    {
+        return self::find()->where(['id' => intval($id), 'is_active' => self::IS_ACTIVE, 'is_deleted' => self::IS_NOT_DELETED])->one();
+    }
+
+    /**
+     * Цена со скидкой
+     * @return int
+     */
+    public function getPrice()
+    {
+        $price = $this->price - $this->discount;
+        return $price >= 0 ? $price : 0;
+    }
 }

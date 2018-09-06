@@ -3,6 +3,6 @@
     display: block;
 }
 
-.projects-item .btn-small {
+.projects-item .btn-small, .btn-square-min, .icon-liked {
     cursor: pointer;
 }
