@@ -17,12 +17,17 @@ if (isset($get['category'])) {
     unset($get['category']);
 }
 ?>
-<div class="section projects mobile-hidden ">
-    <div class="content content--lg">
+<div class="section projects">
+    <div class="content content--lg mobile-hidden">
         <div class="projects-filters">
-            <?= Html::a('скидки', Url::to('/shop/compilation/discount'), ['class' => 'projects-filters--item']) ?>
-            <?= Html::a('новые проекты', Url::to('/shop/compilation/new'), ['class' => 'projects-filters--item current']) ?>
-            <?= Html::a('бесплатно', Url::to('/shop/compilation/free'), ['class' => 'projects-filters--item']) ?>
+            <?= Html::a('скидки', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter'=>"1"]) ?>
+            <?= Html::a('новые проекты', 'javascript:void(0);', ['class' => 'projects-filters--item current', 'data-filter'=>"2"]) ?>
+            <?= Html::a('бесплатно','javascript:void(0);' , ['class' => 'projects-filters--item', 'data-filter'=>"3"]) ?>
+        </div>
+    </div>
+    <div class="content content--lg active" data-filter-box="2">
+        <div class="projects-filters mobile-show">
+            <div class="projects-filters--item current">новые проекты</div>
         </div>
         <div class="projects-list col-4">
             <? foreach ($models['new'] as $model): ?>
@@ -39,4 +44,41 @@ if (isset($get['category'])) {
             <?= Html::a('все новые проекты', Url::to('/shop/compilation/new'), ['class' => 'btn btn--lt']) ?>
         </div>
     </div>
+    <div class="content content--lg" data-filter-box="1">
+        <div class="projects-filters mobile-show">
+            <div class="projects-filters--item current">Скидки</div>
+        </div>
+        <div class="projects-list col-4">
+            <? foreach ($models['discount'] as $model): ?>
+                <div class="projects-item">
+                    <?= \modules\shop\widgets\item\Item::widget([
+                        'model'     => $model,
+                        'get'       => $get,
+                        'favorites' => $favorites
+                    ]) ?>
+                </div>
+            <? endforeach; ?>
+        </div>
+        <div class="btn-box">
+            <?= Html::a('все проекты со скидкой', Url::to('/shop/compilation/discount'), ['class' => 'btn btn--lt']) ?>
+        </div>
+    </div>
+    <div class="content content--lg" data-filter-box="3">
+        <div class="projects-filters mobile-show">
+            <div class="projects-filters--item current">Бесплатно</div>
+        </div>
+        <div class="projects-list col-4">
+            <? foreach ($models['free'] as $model): ?>
+                <div class="projects-item">
+                    <?= \modules\shop\widgets\item\Item::widget([
+                        'model'     => $model,
+                        'get'       => $get,
+                        'favorites' => $favorites
+                    ]) ?>
+                </div>
+            <? endforeach; ?>
+        </div>
+        <div class="btn-box">
+            <?= Html::a('все бесплатные проекты', Url::to('/shop/compilation/discount'), ['class' => 'btn btn--lt']) ?>
+        </div>
 </div>
