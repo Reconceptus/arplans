@@ -100,10 +100,13 @@ $bathrooms = [
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'common_area') ?>
             <?= $form->field($model, 'useful_area') ?>
-            <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
-            <?= $form->field($model, 'bathrooms')->dropDownList($bathrooms) ?>
+            <?= $form->field($model, 'seo_title') ?>
+            <?= $form->field($model, 'seo_keywords') ?>
+            <?= $form->field($model, 'seo_description') ?>
         </div>
         <div class="col-md-5">
+            <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
+            <?= $form->field($model, 'bathrooms')->dropDownList($bathrooms) ?>
             <?= $form->field($model, 'video') ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <? foreach ($catalogs as $catalog): ?>
