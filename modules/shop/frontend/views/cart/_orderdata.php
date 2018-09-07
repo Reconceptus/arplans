@@ -61,7 +61,7 @@ $totalSum = 0;
                 <div class="form-row-col col-50">
                     <div class="form-row-element">
                         <div class="textarea">
-                            <textarea cols="30" rows="3" placeholder="Опишите ваш поселок"
+                            <textarea cols="30" rows="3" placeholder="Дополнительная информация"
                                       id="order-village"></textarea>
                         </div>
                     </div>

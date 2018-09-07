@@ -11,6 +11,10 @@ use modules\shop\widgets\like\Like;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
+
+$this->title = $model->seo_title;
+$this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
 <div class="section project-page">
     <div class="content content--lg">

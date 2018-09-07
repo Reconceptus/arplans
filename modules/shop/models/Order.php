@@ -27,9 +27,9 @@ use yii\helpers\Html;
  *
  * @property PaymentSystem $payment
  * @property User $user
- * @property OrderItem[] $shopOrderItems
+ * @property OrderItem[] $orderItems
  * @property Item[] $items
- * @property OrderService[] $shopOrderServices
+ * @property OrderService[] $orderServices
  * @property Service[] $services
  */
 class Order extends \yii\db\ActiveRecord
@@ -68,19 +68,19 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id'         => 'ID',
-            'user_id'    => 'User ID',
-            'status'     => 'Status',
-            'comment'    => 'Comment',
-            'fio'        => 'Fio',
-            'phone'      => 'Phone',
+            'user_id'    => 'Покупатель',
+            'status'     => 'Статус',
+            'comment'    => 'Комментарий (виден только админу)',
+            'fio'        => 'ФИО',
+            'phone'      => 'Телефон',
             'email'      => 'Email',
-            'country'    => 'Country',
-            'city'       => 'City',
-            'address'    => 'Address',
-            'village'    => 'Village',
-            'payment_id' => 'Payment ID',
-            'price'      => 'Price',
-            'created_at' => 'Created At',
+            'country'    => 'Страна',
+            'city'       => 'Город',
+            'address'    => 'Адрес',
+            'village'    => 'Дополнительная информация',
+            'payment_id' => 'Платежная система',
+            'price'      => 'Цена',
+            'created_at' => 'Дата',
             'updated_at' => 'Updated At',
         ];
     }
@@ -104,7 +104,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getShopOrderItems()
+    public function getOrderItems()
     {
         return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
     }
@@ -120,7 +120,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getShopOrderServices()
+    public function getOrderServices()
     {
         return $this->hasMany(OrderService::className(), ['order_id' => 'id']);
     }

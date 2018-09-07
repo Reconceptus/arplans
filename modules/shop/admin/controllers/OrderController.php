@@ -13,6 +13,7 @@ use modules\admin\controllers\AdminController;
 use modules\shop\models\Order;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 class OrderController extends AdminController
 {
@@ -50,5 +51,19 @@ class OrderController extends AdminController
             'query' => $query
         ]);
         return $this->render('index', ['dataProvider' => $dataProvider]);
+    }
+
+    /**
+     * @param int $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate(int $id)
+    {
+        $model = Order::findOne(['id' => $id]);
+        if (!$model) {
+            throw new NotFoundHttpException();
+        }
+        return $this->render('form', ['model' => $model]);
     }
 }
