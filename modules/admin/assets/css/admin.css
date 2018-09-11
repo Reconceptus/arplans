@@ -259,3 +259,13 @@ ul {
     margin-bottom: 30px;
 }
 
+.file-preview{
+    width: 100px;
+    height: 100px;
+}
+
+.file-admin{
+    position: absolute;
+    left: 0;
+    opacity: 0.2;
+}
