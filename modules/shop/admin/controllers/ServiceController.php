@@ -12,6 +12,7 @@ namespace modules\shop\admin\controllers;
 use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Service;
+use modules\shop\models\ServiceBenefit;
 use modules\shop\models\ServiceFile;
 use modules\shop\models\ServiceImage;
 use Yii;
@@ -19,6 +20,7 @@ use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
@@ -159,6 +161,21 @@ class ServiceController extends AdminController
                         }
                     }
                 }
+                if (isset($post['new-benefits'])) {
+                    $newBenefits = explode('~', $post['new-benefits']);
+                    foreach ($newBenefits as $newBenefit) {
+                        if ($newBenefit) {
+                            $data = explode('|',$newBenefit);
+                            $benefit = new ServiceBenefit();
+                            $benefit->service_id = $model->id;
+                            $benefit->name = $data[0];
+                            $benefit->text = $data[1];
+                            if (!$benefit->save()) {
+                                throw new Exception('Ошибка сохранения изображения');
+                            };
+                        }
+                    }
+                }
                 Yii::$app->session->setFlash('success', 'Услуга добавлена успешно');
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при добавлении услуги');
@@ -193,7 +210,7 @@ class ServiceController extends AdminController
                 $dir = Yii::getAlias('@webroot/uploads/service/' . $type . '/');
                 $path = date('ymdHis') . '/';
                 \common\models\Image::createDirectory($dir . $path);
-                $fileName = $model->file->baseName . '.' . $model->file->extension;
+                $fileName = str_replace(' ', '_', $model->file->baseName) . '.' . $model->file->extension;
                 $model->file->saveAs($dir . $path . $fileName);
                 $model->file = '/uploads/service/' . $type . '/' . $path . $fileName;
                 if ($type === Service::TYPE_IMAGE) {
@@ -206,6 +223,25 @@ class ServiceController extends AdminController
             }
         }
         return ['status' => 'fail', 'message' => ' Ошибка при загрузке'];
+    }
+
+    /**
+     * @return array
+     */
+    public function actionAddBenefit()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        if (isset($get['name']) && isset($get['text']) && isset($get['service_id'])) {
+            $model = new ServiceBenefit();
+            $model->name = Html::encode($get['name']);
+            $model->text = Html::encode($get['text']);
+            $model->service_id = intval($get['service_id']);
+            if ($model->save()) {
+                return ['status' => 'success', 'block' => $this->renderAjax('_benefit', ['model' => $model])];
+            }
+        }
+        return ['status' => 'fail', 'message'=>'Ошибка при добавлении'];
     }
 
     /**

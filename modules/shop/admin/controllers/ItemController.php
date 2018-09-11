@@ -231,7 +231,7 @@ class ItemController extends AdminController
                 $dir = Yii::getAlias('@webroot/uploads/shop/item/');
                 $path = date('ymdHis') . '/';
                 \common\models\Image::createDirectory($dir . $path);
-                $fileName = $model->image->baseName . '.' . $model->image->extension;
+                $fileName = str_replace(' ', '_', $model->image->baseName) . '.' . $model->image->extension;
                 $model->image->saveAs($dir . $path . $fileName);
                 $model->image = '/uploads/shop/item/' . $path . $fileName;
                 $photo = Image::getImagine()->open($dir . $path . $fileName);
