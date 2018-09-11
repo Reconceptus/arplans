@@ -9,15 +9,21 @@
 namespace modules\shop\admin\controllers;
 
 
+use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Service;
+use modules\shop\models\ServiceFile;
+use modules\shop\models\ServiceImage;
 use Yii;
+use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
+use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class ServiceController extends AdminController
 {
@@ -127,16 +133,79 @@ class ServiceController extends AdminController
 
         if ($model->load($post)) {
             if ($model->save()) {
+                if (isset($post['new-images'])) {
+                    $newImages = explode(':', $post['new-images']);
+                    foreach ($newImages as $newImage) {
+                        if ($newImage) {
+                            $image = new ServiceImage();
+                            $image->service_id = $model->id;
+                            $image->file = $newImage;
+                            if (!$image->save()) {
+                                throw new Exception('Ошибка сохранения изображения');
+                            };
+                        }
+                    }
+                }
+                if (isset($post['new-files'])) {
+                    $newFiles = explode(':', $post['new-files']);
+                    foreach ($newFiles as $newFile) {
+                        if ($newFile) {
+                            $file = new ServiceFile();
+                            $file->service_id = $model->id;
+                            $file->file = $newFile;
+                            if (!$file->save()) {
+                                throw new Exception('Ошибка сохранения файла');
+                            };
+                        }
+                    }
+                }
                 Yii::$app->session->setFlash('success', 'Услуга добавлена успешно');
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при добавлении услуги');
             }
-            return $this->redirect(Url::to(['/admin/modules/shop/category/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/shop/service/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Загрузка файлов по ajax
+     * @return array
+     */
+    public function actionUpload()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $type = Yii::$app->request->post('type');
+        if ($type === Service::TYPE_IMAGE) {
+            $model = new ServiceImage();
+            $view = '_image';
+        } else {
+            $model = new ServiceFile();
+            $view = '_file';
+        }
+        $file = UploadedFile::getInstance($model, 'file');
+        if ($file && $file->tempName) {
+            $model->file = $file;
+            if ($model->validate(['file'])) {
+                $dir = Yii::getAlias('@webroot/uploads/service/' . $type . '/');
+                $path = date('ymdHis') . '/';
+                \common\models\Image::createDirectory($dir . $path);
+                $fileName = $model->file->baseName . '.' . $model->file->extension;
+                $model->file->saveAs($dir . $path . $fileName);
+                $model->file = '/uploads/service/' . $type . '/' . $path . $fileName;
+                if ($type === Service::TYPE_IMAGE) {
+                    $photo = Image::getImagine()->open($dir . $path . $fileName);
+                    $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
+                }
+                if (file_exists($dir . $path . $fileName)) {
+                    return ['status' => 'success', 'file' => $model->file, 'type' => $type, 'block' => $this->renderAjax($view, ['model' => $model])];
+                }
+            }
+        }
+        return ['status' => 'fail', 'message' => ' Ошибка при загрузке'];
     }
 
     /**

@@ -18,8 +18,15 @@ $this->title = $model->isNewRecord ? 'Добавление услуги' : 'Ре
 ?>
     <h1><?= $this->title ?></h1>
 
+<?= $this->render('_images', ['model' => $model]) ?>
+<?= $this->render('_files', ['model' => $model]) ?>
+<?= $this->render('_benefits', ['model' => $model]) ?>
+
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="post-form">
+        <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
+        <?= Html::hiddenInput('new-files', '', ['class' => 'new-files-input']) ?>
+        <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
         <?= $form->field($model, 'slug') ?>
 
         <?= $form->field($model, 'name') ?>

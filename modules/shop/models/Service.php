@@ -8,6 +8,8 @@ namespace modules\shop\models;
  * @property int $id
  * @property string $name
  * @property string $slug
+ * @property string $time
+ * @property string $short_description
  * @property string $description
  * @property string $preview_text
  * @property float $price
@@ -15,9 +17,15 @@ namespace modules\shop\models;
  *
  * @property OrderService[] $shopOrderServices
  * @property Order[] $orders
+ * @property ServiceImage[] $images
+ * @property ServiceFile[] $files
+ * @property ServiceBenefit[] $benefits
  */
 class Service extends \yii\db\ActiveRecord
 {
+    const TYPE_IMAGE = 'image';
+    const TYPE_FILE = 'file';
+
     /**
      * {@inheritdoc}
      */
@@ -35,7 +43,7 @@ class Service extends \yii\db\ActiveRecord
             [['description', 'preview_text'], 'string'],
             [['price'], 'number'],
             [['in_cart'], 'integer'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['name', 'slug', 'time', 'short_description'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,13 +53,15 @@ class Service extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название',
-            'preview_text' => 'Превью',
-            'slug' => 'Url',
-            'description' => 'Описание',
-            'price' => 'Цена',
-            'in_cart' => 'Отображать в корзине',
+            'id'                => 'ID',
+            'name'              => 'Название',
+            'preview_text'      => 'Превью',
+            'slug'              => 'Url',
+            'short_description' => 'Вводный текст',
+            'description'       => 'Описание',
+            'time'              => 'Срок',
+            'price'             => 'Цена',
+            'in_cart'           => 'Отображать в корзине',
         ];
     }
 
@@ -69,5 +79,29 @@ class Service extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['id' => 'order_id'])->viaTable('shop_order_service', ['service_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(ServiceImage::className(), ['service_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(ServiceFile::className(), ['service_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBenefits()
+    {
+        return $this->hasMany(ServiceBenefit::className(), ['service_id' => 'id']);
     }
 }
