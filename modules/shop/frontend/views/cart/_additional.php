@@ -27,7 +27,7 @@
                         <div class="add-service--main show-more-hidden">
                             <div class="add-service--main-text">
                                 <p><?= $service->preview_text ?></p>
-                                <p class="link"><a href="#">Подробней</a></p>
+                                <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробней</a></p>
                             </div>
                         </div>
                     </div>

@@ -48,6 +48,7 @@ return [
             'rules'           => [
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
+                'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',
                 'shop/favorite/add'                                        => 'shop/favorite/add',
                 'shop/favorite'                                            => 'shop/favorite/index',
                 'shop/cart/delete'                                         => 'shop/cart/delete',
