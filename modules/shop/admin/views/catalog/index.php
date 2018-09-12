@@ -30,7 +30,7 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update} {delete}',
+        'template' => '{delete}',
         'options'  => ['style' => 'width:100px']
     ]
 ];
