@@ -69,11 +69,11 @@ $(function () {
                         var urls = $('.new-images-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-images-input').attr('value', urls);
-                    } else if(result.type==='2') {
+                    } else if (result.type === '2') {
                         var urls = $('.new-plans-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-plans-input').attr('value', urls);
-                    } else{
+                    } else {
                         var urls = $('.new-ready-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-ready-input').attr('value', urls);
@@ -107,7 +107,7 @@ $(function () {
                         var urls = $('.new-images-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-images-input').attr('value', urls);
-                    } else if(result.type==='file') {
+                    } else if (result.type === 'file') {
                         var urls = $('.new-files-input').attr("value");
                         urls += ':' + result.file;
                         $('.new-files-input').attr('value', urls);
@@ -211,5 +211,20 @@ $(function () {
     $(document).on('click', '.js-show-project-field', function () {
         $('.old-project').hide();
         $('.item-project-field').show();
+    });
+
+    $(document).on('click', '.js-add-benefit', function () {
+        var button = $(this);
+        var container = button.closest('.benefit-form');
+        var name = container.find('.benefit-title').val();
+        var text = container.find('.benefit-text').val();
+        if (name && text) {
+            var data = $('.new-benefits-input').attr("value");
+            data += '~' + name + '|' + text;
+            $('.new-benefits-input').attr('value', data);
+            $('.benefits').append('<div class="benefit"><div class="title">' + name + '</div><div class="text">' + text + '</div></div>');
+            $('.benefit-title').val('');
+            $('.benefit-text').val('');
+        }
     });
 });

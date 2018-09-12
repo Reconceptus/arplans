@@ -9,6 +9,9 @@
 /* @var $cartCount int */
 /* @var $favoriteCount int */
 ?>
+<? if(Yii::$app->user->can('adminPanel')):?>
+    <?=\yii\helpers\Html::a('Админка',\yii\helpers\Url::to('/admin'))?>
+<? endif;?>
 <?if(!Yii::$app->user->isGuest):?>
 <a href="/shop/favorite" class="stats stats-likes">
     <span id="count-favorite"><?= intval($favoriteCount) ?></span>

@@ -31,7 +31,11 @@ $this->title = $model->isNewRecord ? 'Добавление услуги' : 'Ре
 
         <?= $form->field($model, 'name') ?>
 
+        <?= $form->field($model, 'time') ?>
+
         <?= $form->field($model, 'preview_text') ?>
+
+        <?= $form->field($model, 'short_description') ?>
 
         <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
             'settings' => [
