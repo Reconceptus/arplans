@@ -55,7 +55,7 @@ class Service extends \yii\db\ActiveRecord
         return [
             'id'                => 'ID',
             'name'              => 'Название',
-            'preview_text'      => 'Превью',
+            'preview_text'      => 'Краткое описание',
             'slug'              => 'Url',
             'short_description' => 'Вводный текст',
             'description'       => 'Описание',
