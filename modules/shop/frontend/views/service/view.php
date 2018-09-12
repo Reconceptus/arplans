@@ -88,5 +88,5 @@
         <? endif; ?>
     </div>
 
-<?= \modules\shop\widgets\services\Services::widget(['model' => $model]) ?>
+<?= \modules\shop\widgets\services\Services::widget(['id' => $model->id]) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>

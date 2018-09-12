@@ -15,11 +15,11 @@ use yii\base\Widget;
 class Services extends Widget
 {
     public $viewName = 'another';
-    public $model;
+    public $id = 0;
 
     public function run()
     {
-        $services = Service::find()->where(['!=', 'id', $this->model->id])->all();
+        $services = Service::find()->where(['!=', 'id', $this->id])->all();
         $content = $this->render($this->viewName, ['models' => $services]);
         return $content;
     }

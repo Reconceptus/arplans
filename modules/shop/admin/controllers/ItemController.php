@@ -9,7 +9,6 @@
 namespace modules\shop\admin\controllers;
 
 
-use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Catalog;
 use modules\shop\models\Category;
@@ -21,7 +20,6 @@ use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -234,8 +232,8 @@ class ItemController extends AdminController
                 $fileName = str_replace(' ', '_', $model->image->baseName) . '.' . $model->image->extension;
                 $model->image->saveAs($dir . $path . $fileName);
                 $model->image = '/uploads/shop/item/' . $path . $fileName;
-                $photo = Image::getImagine()->open($dir . $path . $fileName);
-                $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
+//                $photo = Image::getImagine()->open($dir . $path . $fileName);
+//                $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
                 if (file_exists($dir . $path . $fileName)) {
                     $type = Yii::$app->request->post('type');
                     return ['status' => 'success', 'file' => $model->image, 'type' => $type, 'block' => $this->renderAjax('_image', ['model' => $model])];
