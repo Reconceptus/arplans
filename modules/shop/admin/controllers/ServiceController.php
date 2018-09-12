@@ -9,7 +9,6 @@
 namespace modules\shop\admin\controllers;
 
 
-use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Service;
 use modules\shop\models\ServiceBenefit;
@@ -22,7 +21,6 @@ use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -214,8 +212,8 @@ class ServiceController extends AdminController
                 $model->file->saveAs($dir . $path . $fileName);
                 $model->file = '/uploads/service/' . $type . '/' . $path . $fileName;
                 if ($type === Service::TYPE_IMAGE) {
-                    $photo = Image::getImagine()->open($dir . $path . $fileName);
-                    $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
+//                    $photo = Image::getImagine()->open($dir . $path . $fileName);
+//                    $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
                 }
                 if (file_exists($dir . $path . $fileName)) {
                     return ['status' => 'success', 'file' => $model->file, 'type' => $type, 'block' => $this->renderAjax($view, ['model' => $model])];
