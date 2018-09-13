@@ -12,17 +12,7 @@
                         <ul>
                             <li><a href="#" class="">Консультация</a></li>
                             <li><a href="#" class="">О нас</a></li>
-                            <li class="has-drop">
-                                <a href="#" class="">Услуги+</a>
-                                <div class="header-top--drop">
-                                    <a href="#">Индивидуальное проектирование</a>
-                                    <a href="#">Адаптация фундамента</a>
-                                    <a href="#">Разработка раздела игр</a>
-                                    <a href="#">Посадка дома на участок</a>
-                                    <a href="#">Разработка паспорта проекта</a>
-
-                                </div>
-                            </li>
+                            <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'top']) ?>
                             <li><a href="#" class="">Сотрудничество</a></li>
                             <li><a href="#" class="">Коттеджные поселки России</a></li>
                             <li><a href="#" class="">Строители и магазины</a></li>

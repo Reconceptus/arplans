@@ -14,13 +14,17 @@ use yii\base\Widget;
 
 class Services extends Widget
 {
-    public $viewName = 'another';
+    public $viewName = 'index';
     public $id = 0;
 
     public function run()
     {
-        $services = Service::find()->where(['!=', 'id', $this->id])->all();
-        $content = $this->render($this->viewName, ['models' => $services]);
+        $cache = \Yii::$app->cache;
+
+        $content = $cache->getOrSet('services_'.$this->viewName.'_'.$this->id, function ($cache) {
+            $services = Service::find()->where(['!=', 'id', $this->id])->all();
+            return $this->render($this->viewName, ['models' => $services]);
+        }, 1000);
         return $content;
     }
 }
