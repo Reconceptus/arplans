@@ -61,7 +61,8 @@ $(function () {
                 }
             }
         });
-    })
+    });
+
     $(document).on('click', '.js-counter', function () {
         var container = $(this);
         var num = container.find('.album-num');
@@ -120,6 +121,27 @@ $(function () {
             success: function (data) {
                 if (data.status === 'success') {
                     alert('Заказ оформлен');
+                }
+            }
+        });
+    })
+
+    $(document).on('click', '.js-delete-favorite-item', function () {
+        var button = $(this);
+        var container = button.closest('.compare-table--item');
+        $.ajax({
+            type: 'GET',
+            url: '/shop/favorite/delete',
+            data: {
+                id: button.data('id')
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    var count = $('#count-favorite').text();
+                    count = parseInt(count, 10);
+                    count--;
+                    $('#count-favorite').text(count);
+                    container.remove();
                 }
             }
         });

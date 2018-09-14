@@ -65,4 +65,23 @@ class FavoriteController extends Controller
         }
         return ['fav' => $fav, 'counter' => $addCounter];
     }
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete()
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = \Yii::$app->request->get('id');
+        if ($id) {
+            $model = Favorite::findOne(['item_id' => $id, 'user_id'=>\Yii::$app->user->id]);
+            if ($model) {
+                $model->delete();
+                return ['status' => 'success'];
+            }
+        }
+        return ['status' => 'fail'];
+    }
 }
