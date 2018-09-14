@@ -19,6 +19,7 @@ use yii\helpers\ArrayHelper;
  * @property string $created_at
  * @property string $updated_at
  * @property int $status
+ * @property int $on_main
  * @property int $sort
  *
  * @property Comment[] $comments
@@ -47,7 +48,7 @@ class Post extends \yii\db\ActiveRecord
             [['slug'], 'unique'],
             [['slug', 'name', 'text', 'author_id'], 'required'],
             [['text'], 'string'],
-            [['author_id', 'status', 'sort'], 'integer'],
+            [['author_id', 'status', 'sort', 'on_main'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['slug', 'name', 'title', 'keywords', 'description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -61,19 +62,20 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'           => 'ID',
-            'slug'         => 'Url',
-            'name'         => 'Заголовок',
-            'text'         => 'Текст',
-            'title'        => 'Title',
-            'keywords'     => 'Keywords',
-            'description'  => 'Description',
-            'author_id'    => 'Автор',
-            'image'        => 'Изображение',
-            'created_at'   => 'Добавлено',
-            'updated_at'   => 'Изменено',
-            'status'       => 'Статус',
-            'sort'         => 'Сортировка',
+            'id'          => 'ID',
+            'slug'        => 'Url',
+            'name'        => 'Заголовок',
+            'text'        => 'Текст',
+            'title'       => 'Title',
+            'keywords'    => 'Keywords',
+            'description' => 'Description',
+            'author_id'   => 'Автор',
+            'image'       => 'Изображение',
+            'created_at'  => 'Добавлено',
+            'updated_at'  => 'Изменено',
+            'status'      => 'Статус',
+            'sort'        => 'Сортировка',
+            'on_main'     => 'Вывести на главную',
         ];
     }
 

@@ -20,7 +20,7 @@ class FromBlog extends Widget
 
     public function run()
     {
-        $models = Post::find()->where(['status' => Post::STATUS_PUBLISHED])->limit($this->limit)->all();
+        $models = Post::find()->where(['status' => Post::STATUS_PUBLISHED, 'on_main' => 1])->limit($this->limit)->all();
         $tags = Tag::find()->alias('t')
             ->joinWith('posts')
             ->where(['status' => Post::STATUS_PUBLISHED])->limit(10)->all();
