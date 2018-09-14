@@ -74,7 +74,6 @@ return [
                 '<slug:[a-zA-Z0-9\_\-]+>'                                                                         => 'page/view',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
-                'admin/modules/<module:[a-zA-Z0-9\_\-]+>'                                                         => '<module>',
                 'shop'
             ],
         ],
