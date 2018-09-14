@@ -32,11 +32,23 @@ $columns = [
         'attribute' => 'created_at',
         'options'   => ['style' => 'width:100px']
     ],
-    [
-        'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update}   {delete}',
-        'options'  => ['style' => 'width:100px']
-    ]
+//    [
+//        'class'    => 'yii\grid\ActionColumn',
+//        'template' => '{delete}',
+//        'options'  => ['style' => 'width:100px'],
+//        'buttons'  => [
+//            'delete' => function ($url, $model) {
+//                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
+//                    '/admin/modules/blog/post/delete',
+//                    'id'   => $model->id,
+//                    'back' => Yii::$app->request->absoluteUrl
+//                ]), [
+//                    'data-method'  => 'post',
+//                    'data-confirm' => 'Вы действительно хотите удалить этот товар?'
+//                ]);
+//            }
+//        ]
+//    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>

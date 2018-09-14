@@ -196,6 +196,22 @@ class PostController extends AdminController
 
     /**
      * @param $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException]
+     */
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        if ($model) {
+            $model->delete();
+        }
+        return $this->redirect(Yii::$app->request->get('back'));
+    }
+
+    /**
+     * @param $id
      * @return Post|null
      * @throws NotFoundHttpException
      */

@@ -21,6 +21,7 @@ use yii\helpers\ArrayHelper;
  * @property int $status
  * @property int $on_main
  * @property int $sort
+ * @property int $to_menu
  *
  * @property Comment[] $comments
  * @property User $author
@@ -48,7 +49,7 @@ class Post extends \yii\db\ActiveRecord
             [['slug'], 'unique'],
             [['slug', 'name', 'text', 'author_id'], 'required'],
             [['text'], 'string'],
-            [['author_id', 'status', 'sort', 'on_main'], 'integer'],
+            [['author_id', 'status', 'sort', 'on_main', 'to_menu'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['slug', 'name', 'title', 'keywords', 'description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -76,6 +77,7 @@ class Post extends \yii\db\ActiveRecord
             'status'      => 'Статус',
             'sort'        => 'Сортировка',
             'on_main'     => 'Вывести на главную',
+            'to_menu'     => 'Вывести в футер',
         ];
     }
 

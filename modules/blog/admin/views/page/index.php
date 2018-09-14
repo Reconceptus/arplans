@@ -8,8 +8,8 @@ $this->title = 'Страницы';
 
 $columns = [
     [
-        'class' => 'yii\grid\SerialColumn',
-        'options'   => ['style' => 'width:40px'],
+        'class'   => 'yii\grid\SerialColumn',
+        'options' => ['style' => 'width:40px'],
     ],
     [
         'attribute' => 'image',
@@ -22,11 +22,23 @@ $columns = [
     [
         'attribute' => 'name',
     ],
-    [
-        'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update} {delete}',
-        'options'  => ['style' => 'width:100px']
-    ]
+//    [
+//        'class'    => 'yii\grid\ActionColumn',
+//        'template' => '{delete}',
+//        'options'  => ['style' => 'width:100px'],
+//        'buttons'  => [
+//            'delete' => function ($url, $model) {
+//                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
+//                    '/admin/modules/blog/page/delete',
+//                    'id'   => $model->id,
+//                    'back' => Yii::$app->request->absoluteUrl
+//                ]), [
+//                    'data-method'  => 'post',
+//                    'data-confirm' => 'Вы действительно хотите удалить этот товар?'
+//                ]);
+//            }
+//        ]
+//    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>
