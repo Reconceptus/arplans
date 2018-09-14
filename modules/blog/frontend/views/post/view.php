@@ -38,7 +38,7 @@ $this->title = $model->title;
                             <?= Html::img($model->author->profile->image ?? Yii::$app->params['defaultAvatar']) ?>
                         </div>
                         <span class="name"><?= $model->author->profile->fio ?></span>
-                        <time class="date"><?= date('d M Y', strtotime($model->created_at)) ?></time>
+                        <time class="date"><?= \common\helpers\DateTimeHelper::getDateRuFormat($model->created_at) ?></time>
                     </div>
                 </div>
                 <div class="article-page--main">
