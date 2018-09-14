@@ -12,14 +12,14 @@ class m180914_072741_add_is_deleted_column extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('shop_service', 'is_active', $this->boolean());
-        $this->addColumn('shop_service', 'is_deleted', $this->boolean());
+        $this->addColumn('shop_service', 'is_active', $this->boolean()->defaultValue(1));
+        $this->addColumn('shop_service', 'is_deleted', $this->boolean()->defaultValue(0));
 
-        $this->addColumn('partner', 'is_active', $this->boolean());
-        $this->addColumn('partner', 'is_deleted', $this->boolean());
+        $this->addColumn('partner', 'is_active', $this->boolean()->defaultValue(1));
+        $this->addColumn('partner', 'is_deleted', $this->boolean()->defaultValue(0));
 
-        $this->addColumn('village', 'is_active', $this->boolean());
-        $this->addColumn('village', 'is_deleted', $this->boolean());
+        $this->addColumn('village', 'is_active', $this->boolean()->defaultValue(1));
+        $this->addColumn('village', 'is_deleted', $this->boolean()->defaultValue(0));
     }
 
     /**
