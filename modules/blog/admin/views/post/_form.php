@@ -40,7 +40,6 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
         <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
     </div>
     <?= $form->field($model, 'name') ?>
-    <?= $form->field($model, 'preview_text')->textarea(['maxlength' => 500, 'rows' => 3]) ?>
     <div class="form-group field-post-slug">
         <label class="control-label" for="tags">Теги (через запятую)</label>
         <?= Html::input('string', 'tags[ru]', $tags, ['class' => 'form-control', 'id' => 'tags']) ?>
