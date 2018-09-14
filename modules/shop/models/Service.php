@@ -14,6 +14,8 @@ namespace modules\shop\models;
  * @property string $preview_text
  * @property float $price
  * @property int $in_cart
+ * @property int $is_active
+ * @property int $is_deleted
  *
  * @property OrderService[] $shopOrderServices
  * @property Order[] $orders
@@ -42,7 +44,7 @@ class Service extends \yii\db\ActiveRecord
         return [
             [['description', 'preview_text'], 'string'],
             [['price'], 'number'],
-            [['in_cart'], 'integer'],
+            [['in_cart', 'is_active', 'is_deleted'], 'integer'],
             [['slug', 'name'], 'unique'],
             [['name', 'slug', 'time', 'short_description'], 'string', 'max' => 255],
         ];
@@ -63,6 +65,8 @@ class Service extends \yii\db\ActiveRecord
             'time'              => 'Срок',
             'price'             => 'Цена',
             'in_cart'           => 'Отображать в корзине',
+            'is_active'         => 'Активна',
+            'is_deleted'        => 'Удалена',
         ];
     }
 
