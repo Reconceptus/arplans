@@ -160,12 +160,12 @@ class PostController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Error creating post');
             }
-            return $this->redirect(Url::to(['post/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/blog/post/update', 'id' => $model->id]));
         }
         $tags = implode(', ', ArrayHelper::map($model->getTags()->all(), 'id', 'name'));
         return $this->render('_form', [
             'model' => $model,
-            'tags' =>$tags
+            'tags'  => $tags
         ]);
     }
 
