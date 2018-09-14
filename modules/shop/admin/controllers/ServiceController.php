@@ -124,6 +124,25 @@ class ServiceController extends AdminController
     }
 
     /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteBenefit()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = intval(Yii::$app->request->get('id'));
+        if ($id) {
+            $model = ServiceBenefit::findOne(['id' => $id]);
+            if ($model) {
+                $model->delete();
+                return ['status' => 'success'];
+            }
+        }
+        return ['status' => 'fail', 'message' => 'Ошибка при удалении'];
+    }
+
+    /**
      * @param $model ActiveRecord|Service
      * @return string|array
      */
@@ -163,7 +182,7 @@ class ServiceController extends AdminController
                     $newBenefits = explode('~', $post['new-benefits']);
                     foreach ($newBenefits as $newBenefit) {
                         if ($newBenefit) {
-                            $data = explode('|',$newBenefit);
+                            $data = explode('|', $newBenefit);
                             $benefit = new ServiceBenefit();
                             $benefit->service_id = $model->id;
                             $benefit->name = $data[0];
@@ -239,7 +258,7 @@ class ServiceController extends AdminController
                 return ['status' => 'success', 'block' => $this->renderAjax('_benefit', ['model' => $model])];
             }
         }
-        return ['status' => 'fail', 'message'=>'Ошибка при добавлении'];
+        return ['status' => 'fail', 'message' => 'Ошибка при добавлении'];
     }
 
     /**
