@@ -50,10 +50,11 @@ return [
                 'admin'                                                    => 'blog/page',
                 'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',
                 'shop/favorite/add'                                        => 'shop/favorite/add',
+                'shop/favorite/delete'                                     => 'shop/favorite/delete',
                 'shop/favorite'                                            => 'shop/favorite/index',
                 'shop/cart/delete'                                         => 'shop/cart/delete',
                 'shop/cart/add'                                            => 'shop/cart/add',
-                'shop/cart/order'                                            => 'shop/cart/order',
+                'shop/cart/order'                                          => 'shop/cart/order',
                 'shop/cart'                                                => 'shop/cart/index',
                 'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
@@ -79,19 +80,19 @@ return [
         ],
     ],
     'modules'             => [
-        'admins' => [
+        'admins'  => [
             'class' => 'modules\admin\Module',
         ],
-        'shop'   => [
+        'shop'    => [
             'class' => 'modules\shop\Module',
         ],
-        'partner'   => [
+        'partner' => [
             'class' => 'modules\shop\Module',
         ],
-        'blog'   => [
+        'blog'    => [
             'class' => 'modules\blog\Module',
         ],
-        'users'  => [
+        'users'   => [
             'class' => 'modules\users\Module',
         ],
     ],
