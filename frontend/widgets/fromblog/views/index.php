@@ -31,6 +31,7 @@
                     </ul>
                 </div>
                 <div class="blog-hashes">
+                    <?= \yii\helpers\Html::a('Все статьи', \yii\helpers\Url::to(['/blog']), ['class' => 'btn-small']) ?>
                     <? foreach ($tags as $tag): ?>
                         <?= \yii\helpers\Html::a($tag->name, \yii\helpers\Url::to(['/blog/index', 'tag' => $tag->name]), ['class' => 'btn-small']) ?>
                     <? endforeach; ?>
