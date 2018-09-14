@@ -106,8 +106,13 @@ class UserController extends AdminController
                 $userRole = Yii::$app->request->post('userRole');
 
             if ($model->load(Yii::$app->request->post())) {
+                if ($model->email && !$model->username) {
+                    $model->username = $model->email;
+                }
                 $model->auth_key = Yii::$app->security->generateRandomString();
-                $model->setPassword(Yii::$app->request->post('password'));
+                if (Yii::$app->request->post('password')) {
+                    $model->setPassword(Yii::$app->request->post('password'));
+                }
                 if ($model->save()) {
                     if ($oldRole !== $userRole) {
                         $auth->revokeAll($model->id);

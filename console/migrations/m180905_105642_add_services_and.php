@@ -24,7 +24,7 @@ class m180905_105642_add_services_and extends Migration
         $auth->add($service);
 
         $config = $auth->createPermission('shop_config');
-        $config->description = 'Категории товаров';
+        $config->description = 'Параметры';
         $auth->add($config);
 
 
