@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use modules\partner\models\Partner;
 use modules\shop\models\Favorite;
 use Yii;
 use yii\base\NotSupportedException;
@@ -251,7 +252,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @param $address
      * @return User
      */
-    public static function createUser($email, $password, $fio, $phone, $country, $city, $address)
+    public static function createUser($email, $password, $fio, $phone, $country, $city, $address, $last_name = '', $first_name = '', $patronymic = '')
     {
         $user = new self();
         $user->email = $email;
@@ -266,6 +267,9 @@ class User extends ActiveRecord implements IdentityInterface
             $profile->country = Html::encode($country);
             $profile->city = Html::encode($city);
             $profile->address = Html::encode($address);
+            $profile->last_name = Html::encode($last_name);
+            $profile->first_name = Html::encode($first_name);
+            $profile->patronymic = Html::encode($patronymic);
             if ($profile->save()) {
                 return $user;
             }

@@ -81,15 +81,7 @@
                         <li><a href="#">Гарантии и безопасность</a></li>
                     </ul>
                 </section>
-                <section class="section">
-                    <h4 class="title">Услуги</h4>
-                    <ul>
-                        <li><a href="#">Адаптация фундаментов</a></li>
-                        <li><a href="#">Разработка раздела ИР</a></li>
-                        <li><a href="#">Посадка дома на участок</a></li>
-                        <li><a href="#">Разработка паспорта проекта</a></li>
-                    </ul>
-                </section>
+                <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'bottom']) ?>
                 <section class="section">
                     <h4 class="title">Arplans</h4>
                     <ul>
@@ -109,7 +101,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-bottom--copyright">© 2008-2018 ARPLANCE готовые проекты домов и индивидуальное проектирование</div>
+            <div class="footer-bottom--copyright">© 2008-2018 ARPLANCE готовые проекты домов и индивидуальное
+                проектирование
+            </div>
             <div class="footer-bottom--auth">Сделано <a href="http://reconcept.ru" target="_blank">Reconcept</a></div>
         </div>
     </div>

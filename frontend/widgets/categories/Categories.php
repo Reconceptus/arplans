@@ -15,18 +15,15 @@ use yii\base\Widget;
 class Categories extends Widget
 {
     public $viewName = 'top';
-    public $models;
 
     public function run()
     {
-        if(!$this->models){
-            $this->models = Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
-        }
         $cache = \Yii::$app->cache;
 
-        $content = $cache->getOrSet('categories', function ($cache) {
-            return $this->render($this->viewName, ['models' => $this->models]);
-        },1000);
+        $content = $cache->getOrSet('categories_' . $this->viewName, function ($cache) {
+            $models = Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
+            return $this->render($this->viewName, ['models' => $models]);
+        }, 1000);
 
         return $content;
     }

@@ -86,6 +86,9 @@ return [
         'shop'   => [
             'class' => 'modules\shop\Module',
         ],
+        'partner'   => [
+            'class' => 'modules\shop\Module',
+        ],
         'blog'   => [
             'class' => 'modules\blog\Module',
         ],

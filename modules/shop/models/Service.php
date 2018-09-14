@@ -43,6 +43,7 @@ class Service extends \yii\db\ActiveRecord
             [['description', 'preview_text'], 'string'],
             [['price'], 'number'],
             [['in_cart'], 'integer'],
+            [['slug', 'name'], 'unique'],
             [['name', 'slug', 'time', 'short_description'], 'string', 'max' => 255],
         ];
     }

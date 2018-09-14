@@ -42,24 +42,11 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update}',
-        'buttons'  => [
-            'update' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to([
-                    'update',
-                    'id'   => $model->id,
-                    'back' => Yii::$app->request->absoluteUrl
-                ]));
-            }
-        ]
-    ],
-    [
-        'class'    => 'yii\grid\ActionColumn',
         'template' => '{delete}',
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
-                    'delete',
+                    '/admin/modules/users/user/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -76,6 +63,9 @@ $columns = [
 <?= GridView::widget([
     'id'           => 'user-list',
     'dataProvider' => $dataProvider,
+    'rowOptions'   => function ($model, $key, $index, $grid) {
+        return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/users/user/update', 'id' => $model->id, 'back' => Yii::$app->request->absoluteUrl]) . '"'];
+    },
     'layout'       => '{items}{pager}',
     'columns'      => $columns,
     'pager'        => [
