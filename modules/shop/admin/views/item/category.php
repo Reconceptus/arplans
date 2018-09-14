@@ -37,8 +37,20 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update} {delete}',
-        'options'  => ['style' => 'width:100px']
+        'template' => '{delete}',
+        'options'  => ['style' => 'width:100px'],
+        'buttons'  => [
+            'delete' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
+                    '/admin/modules/shop/item/delete',
+                    'id'   => $model->id,
+                    'back' => Yii::$app->request->absoluteUrl
+                ]), [
+                    'data-method'  => 'post',
+                    'data-confirm' => 'Вы действительно хотите удалить этот товар?'
+                ]);
+            }
+        ]
     ]
 ];
 ?>

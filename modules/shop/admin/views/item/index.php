@@ -29,11 +29,6 @@ $columns = [
     [
         'attribute' => 'name',
     ],
-    [
-        'class'    => 'yii\grid\ActionColumn',
-        'template' => '{update} {delete}',
-        'options'  => ['style' => 'width:100px']
-    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>
