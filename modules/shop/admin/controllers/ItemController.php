@@ -301,6 +301,26 @@ class ItemController extends AdminController
         return ['status' => 'fail'];
     }
 
+    /**
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionDelete()
+    {
+        $model = $this->findModel(Yii::$app->request->get('id'));
+        $model->is_deleted = Item::IS_DELETED;
+        if ($model->save()) {
+            return $this->redirect(Yii::$app->request->get('back'));
+        }
+        throw new \yii\base\Exception('Ошибка при удалении товара');
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws NotFoundHttpException
+     */
     public function actionClone(int $id)
     {
         $model = self::findModel($id);
@@ -329,7 +349,7 @@ class ItemController extends AdminController
 
     /**
      * @param $id
-     * @return Item|null
+     * @return Item|null/ActiveRecord
      * @throws NotFoundHttpException
      */
     public function findModel($id)
