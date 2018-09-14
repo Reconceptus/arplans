@@ -41,4 +41,5 @@ use yii\helpers\Url;
             <? endif ?>
         </li>
     <? endforeach ?>
+    <?= Html::a('Выход', Url::to(['/site/logout', 'toLogin' => true])) ?>
 </ul>
