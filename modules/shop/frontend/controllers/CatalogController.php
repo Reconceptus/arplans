@@ -65,8 +65,23 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('Товар не найден');
         }
         return $this->render('view', [
-            'model' => $model,
-            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds()
+            'model'     => $model,
+            'favorites' => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds()
         ]);
+    }
+
+    public function actionDownload()
+    {
+        $id = Yii::$app->request->get('id');
+        $model = Item::findOne(['id' => $id]);
+        if ($model->getPrice() === 0) {
+            $fileName = Yii::getAlias('@webroot') . $model->project;
+            $extArr = explode('.', $model->project);
+            $ext = end($extArr);
+            if ($model->project && file_exists($fileName)) {
+                header("Content-Disposition: attachment; filename='project_" . $model->slug . "." . $ext . "';");
+                echo file_get_contents($fileName);
+            }
+        }
     }
 }

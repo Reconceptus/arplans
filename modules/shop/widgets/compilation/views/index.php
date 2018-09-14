@@ -79,6 +79,6 @@ if (isset($get['category'])) {
             <? endforeach; ?>
         </div>
         <div class="btn-box">
-            <?= Html::a('все бесплатные проекты', Url::to('/shop/compilation/discount'), ['class' => 'btn btn--lt']) ?>
+            <?= Html::a('все бесплатные проекты', Url::to('/shop/compilation/free'), ['class' => 'btn btn--lt']) ?>
         </div>
 </div>
