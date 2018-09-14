@@ -9,14 +9,12 @@
 namespace modules\shop\admin\controllers;
 
 
-use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -109,24 +107,6 @@ class CategoryController extends AdminController
     }
 
     /**
-     * Удаление категории
-     * @param $id
-     * @return Response
-     * @throws NotFoundHttpException
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
-     */
-    public function actionDelete($id)
-    {
-        $model = $this->findModel($id);
-        if (!$model) {
-            throw new NotFoundHttpException();
-        }
-        $model->delete();
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    /**
      * @param $model Category
      * @return string|array
      */
@@ -147,8 +127,8 @@ class CategoryController extends AdminController
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/shop/category/' . $path . $fileName;
-                    $photo = Image::getImagine()->open($dir . $path . $fileName);
-                    $photo->thumbnail(new Box(400, 400))->save($dir . $path . $fileName, ['quality' => 90]);
+//                    $photo = Image::getImagine()->open($dir . $path . $fileName);
+//                    $photo->thumbnail(new Box(400, 400))->save($dir . $path . $fileName, ['quality' => 90]);
                 } else {
                     var_dump($model->errors);
                 }

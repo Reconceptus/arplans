@@ -9,13 +9,11 @@
 namespace modules\blog\admin\controllers;
 
 use common\models\Page;
-use Imagine\Image\Box;
 use modules\admin\controllers\AdminController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -128,8 +126,8 @@ class PageController extends AdminController
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/images/post-preview/' . $path . $fileName;
-                    $photo = Image::getImagine()->open($dir . $path . $fileName);
-                    $photo->thumbnail(new Box(800, 800))->save($dir . $path . $fileName, ['quality' => 90]);
+//                    $photo = Image::getImagine()->open($dir . $path . $fileName);
+//                    $photo->thumbnail(new Box(800, 800))->save($dir . $path . $fileName, ['quality' => 90]);
                 }else{
                     var_dump($model->errors);
                 }
