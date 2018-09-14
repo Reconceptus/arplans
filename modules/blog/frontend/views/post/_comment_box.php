@@ -11,7 +11,7 @@
     <div class="comment-head">
         <div class="comment-user-data">
             <div class="comment-name"><?= $model->name ?></div>
-            <div class="comment-date"><?= date('d M Y', strtotime($model->created_at)) ?></div>
+            <div class="comment-date"><?= \common\helpers\DateTimeHelper::getDateRuFormat($model->created_at) ?></div>
         </div>
         <div class="comment-reply"></div>
     </div>
