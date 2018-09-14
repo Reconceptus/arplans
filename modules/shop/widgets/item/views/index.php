@@ -55,7 +55,7 @@ use modules\shop\models\Item;
             <? if ($model->discount): ?>
                 <div class="price old"><?= $model->price ?> &#8381;</div>
             <? endif; ?>
-            <div class="price"><?= $model->discount ? $model->price - $model->discount : $model->price ?>&#8381;
+            <div class="price"><?= $model->getPrice() ?>&#8381;
             </div>
         </div>
         <a class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"

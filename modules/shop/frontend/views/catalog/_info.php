@@ -6,8 +6,12 @@
  * Time: 12:07
  */
 
+use yii\helpers\Html;
+
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
+
+$price = $model->getPrice();
 ?>
 
 <div class="custom-row-col col-33">
@@ -15,7 +19,7 @@
         <div class="main-data">
             <div class="index"><?= $model->name ?></div>
             <div class="price">
-                <div class="current-price"><?= $model->discount ? $model->price - $model->discount : $model->price ?>
+                <div class="current-price"><?= $price ?>
                     &#8381;
                 </div>
                 <? if ($model->discount): ?>
@@ -26,7 +30,11 @@
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <a class="btn-square-min js-to-cart" data-id="<?= $model->id ?>">Купить проект</a>
+                    <? if ($price || !$model->project): ?>
+                        <?= Html::a('Купить проект', '', ['class' => 'btn-square-min js-to-cart', 'data-id' => $model->id]) ?>
+                    <? else: ?>
+                        <?= Html::a('Скачать проект', \yii\helpers\Url::to(['/shop/download', 'id'=>$model->id]), ['class' => 'btn-square-min', 'data-id' => $model->id]) ?>
+                    <? endif; ?>
                     <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -35,15 +43,17 @@
                         </svg>
                     </a>
                 </div>
-                <div class="feature">
-                    <i class="icon-feature">
-                        <svg xmlns="http://www.w3.org/2000/svg">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="#icon-feature"/>
-                        </svg>
-                    </i>
-                    <span>Замена материала стен и зеркальное отображение бесплатно</span>
-                </div>
+                <? if ($price > 0): ?>
+                    <div class="feature">
+                        <i class="icon-feature">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xlink:href="#icon-feature"/>
+                            </svg>
+                        </i>
+                        <span>Замена материала стен и зеркальное отображение бесплатно</span>
+                    </div>
+                <? endif; ?>
             </div>
             <div class="data-col">
                 <div class="info">
