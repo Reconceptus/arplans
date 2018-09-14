@@ -29,9 +29,6 @@ $columns = [
         }
     ],
     [
-        'attribute' => 'preview_text'
-    ],
-    [
         'attribute' => 'created_at',
         'options'   => ['style' => 'width:100px']
     ],

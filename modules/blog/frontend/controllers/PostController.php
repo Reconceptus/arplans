@@ -115,7 +115,6 @@ class PostController extends Controller
     {
         $query = Post::find()->alias('p')
             ->andWhere(['like', 'p.name', $q])
-            ->orWhere(['like', 'p.preview_text', $q])
             ->orWhere(['like', 'p.text', $q]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query

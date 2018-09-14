@@ -21,7 +21,7 @@ $item = $model->item;
         <div class="compare-table--part part-articul">
             <div class="projects-item--part-title">Артикул</div>
             <div class="projects-item--info">
-                <a href="#" class="projects-item--articul"><?= $item->name ?></a>
+                <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--articul"><?= $item->name ?></a>
             </div>
         </div>
         <div class="compare-table--part">

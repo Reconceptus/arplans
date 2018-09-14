@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -11,7 +10,6 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property string $slug
  * @property string $name
- * @property string $preview_text
  * @property string $text
  * @property string $title
  * @property string $keywords
@@ -47,12 +45,11 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['slug'], 'unique'],
-            [['slug', 'name', 'preview_text', 'text', 'author_id'], 'required'],
+            [['slug', 'name', 'text', 'author_id'], 'required'],
             [['text'], 'string'],
             [['author_id', 'status', 'sort'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['slug', 'name', 'title', 'keywords', 'description'], 'string', 'max' => 255],
-            [['preview_text'], 'string', 'max' => 500],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
         ];
@@ -67,7 +64,6 @@ class Post extends \yii\db\ActiveRecord
             'id'           => 'ID',
             'slug'         => 'Url',
             'name'         => 'Заголовок',
-            'preview_text' => 'Текст превью',
             'text'         => 'Текст',
             'title'        => 'Title',
             'keywords'     => 'Keywords',
