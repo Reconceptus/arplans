@@ -47,7 +47,7 @@
                     </a>
                 </div>
                 <div class="header-main--nav">
-                    <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top']) ?>
+                    <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top', 'showServices' => 1]) ?>
                 </div>
                 <div class="header-main--stats">
                     <?= \modules\shop\widgets\cart\Cart::widget() ?>
