@@ -90,7 +90,7 @@
                         <li><a href="#">Клуб партнеров</a></li>
                         <li><a href="#">Коттеджные поселки</a></li>
                         <li><a href="#">Сотрудничество</a></li>
-                        <li><a href="#">Блог</a></li>
+                        <li><?= \yii\helpers\Html::a('Блог', \yii\helpers\Url::to('/blog')) ?></li>
                     </ul>
                 </section>
             </div>
