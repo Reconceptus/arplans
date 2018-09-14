@@ -41,6 +41,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
     </div>
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'on_main')->checkbox() ?>
+    <?= $form->field($model, 'to_menu')->checkbox() ?>
     <div class="form-group field-post-slug">
         <label class="control-label" for="tags">Теги (через запятую)</label>
         <?= Html::input('string', 'tags[ru]', $tags, ['class' => 'form-control', 'id' => 'tags']) ?>

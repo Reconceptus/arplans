@@ -71,16 +71,7 @@
                         <li><a href="#">Как купить проект</a></li>
                     </ul>
                 </section>
-                <section class="section">
-                    <h4 class="title">проектирование</h4>
-                    <ul>
-                        <li><a href="#">О готовых проектах</a></li>
-                        <li><a href="#">Все о согласовании проектов</a></li>
-                        <li><a href="#">Реализация</a></li>
-                        <li><a href="#">Что входит в проект</a></li>
-                        <li><a href="#">Гарантии и безопасность</a></li>
-                    </ul>
-                </section>
+                <?= \frontend\widgets\posts\Posts::widget(['viewName' => 'footer']) ?>
                 <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'bottom']) ?>
                 <section class="section">
                     <h4 class="title">Arplans</h4>
