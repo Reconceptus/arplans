@@ -29,16 +29,6 @@ $columns = [
     [
         'attribute' => 'name',
     ],
-    [
-        'class'    => 'yii\grid\ActionColumn',
-        'template' => '{delete}',
-        'buttons' => [
-            'delete' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/admin/modules/shop/category/delete', 'id' => $model->id]);
-            }
-        ],
-        'options'  => ['style' => 'width:100px']
-    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>

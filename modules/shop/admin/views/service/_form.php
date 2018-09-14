@@ -54,6 +54,7 @@ $this->title = $model->isNewRecord ? 'Добавление услуги' : 'Ре
         <?= $form->field($model, 'price')->textInput(['type' => 'number']) ?>
 
         <?= $form->field($model, 'in_cart')->checkbox() ?>
+        <?= $form->field($model, 'is_active')->checkbox() ?>
     </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin']) ?>
