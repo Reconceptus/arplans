@@ -213,6 +213,30 @@ $(function () {
         $('.item-project-field').show();
     });
 
+    $(document).on('click', '.js-benefit', function () {
+        var button = $(this);
+        var id = button.attr('data-id');
+        if (id) {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/modules/shop/service/delete-benefit',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        var container = button.closest('.benefit');
+                        container.remove();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        } else {
+            alert('Это преимущество не может быть удалено до того, как вы сохраните изменения в услуге')
+        }
+    });
+
     $(document).on('click', '.js-add-benefit', function () {
         var button = $(this);
         var container = button.closest('.benefit-form');
