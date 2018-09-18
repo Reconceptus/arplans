@@ -19,6 +19,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -221,26 +222,49 @@ class ItemController extends AdminController
     public function actionUpload()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $model = new ItemImage();
-        $image = UploadedFile::getInstance($model, 'image');
-        if ($image && $image->tempName) {
-            $model->image = $image;
-            if ($model->validate(['image'])) {
-                $dir = Yii::getAlias('@webroot/uploads/shop/item/');
-                $path = date('ymdHis') . '/';
-                \common\models\Image::createDirectory($dir . $path);
-                $fileName = str_replace(' ', '_', $model->image->baseName) . '.' . $model->image->extension;
-                $model->image->saveAs($dir . $path . $fileName);
+        if (empty($_FILES['images'])) {
+            return ['success' => 'fail', 'message' => 'Не найдены файлы для загрузки'];
+        }
+
+        $images = $_FILES['images'];
+        $success = null;
+        $paths = [];
+        $blocks = [];
+        $fullPaths = [];
+        $filenames = $images['name'];
+        $dir = Yii::getAlias('@webroot/uploads/shop/item/');
+        $path = date('ymdHis') . '/';
+        if (!is_dir($dir . $path)) {
+            FileHelper::createDirectory($dir . $path);
+        }
+
+        for ($i = 0; $i < count($filenames); $i++) {
+            $fileName = str_replace(' ', '_', $filenames[$i]);
+            $target = $dir . $path . $fileName;
+            if (move_uploaded_file($images['tmp_name'][$i], $target)) {
+                $success = true;
+                $paths[] = '/uploads/shop/item/' . $path . $fileName;
+                $fullPaths[] = $dir . $path . $fileName;
+                $model = new ItemImage();
                 $model->image = '/uploads/shop/item/' . $path . $fileName;
-//                $photo = Image::getImagine()->open($dir . $path . $fileName);
-//                $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
-                if (file_exists($dir . $path . $fileName)) {
-                    $type = Yii::$app->request->post('type');
-                    return ['status' => 'success', 'file' => $model->image, 'type' => $type, 'block' => $this->renderAjax('_image', ['model' => $model])];
-                }
+                $blocks[] = $this->renderAjax('_image', ['model' => $model]);
+            } else {
+                $success = false;
+                break;
             }
         }
-        return ['status' => 'fail', 'message' => ' Ошибка при загрузке изображения'];
+        if ($success === true) {
+            $output = ['status' => 'success', 'files' => $paths, 'type' => Yii::$app->request->post('type'), 'blocks' => $blocks];
+        } elseif ($success === false) {
+            $output = ['status' => 'fail', 'message' => 'Ошибка при загрузке файлов, обратитесь к разработчику'];
+            foreach ($fullPaths as $file) {
+                unlink($file);
+            }
+        } else {
+            $output = ['status' => 'fail', 'message' => 'Файлы не были загружены.'];
+        }
+
+        return $output;
     }
 
     /**
