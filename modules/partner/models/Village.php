@@ -15,6 +15,7 @@ use common\models\Region;
  * @property string $url
  * @property string $price_list
  * @property string $logo
+ * @property int $image_id
  * @property int $region_id
  * @property int $electric
  * @property int $gas
@@ -35,11 +36,18 @@ use common\models\Region;
  * @property int $reservoir
  *
  * @property Region $region
+ * @property VillageImage $image
  * @property VillageBenefit[] $villageBenefits
- * @property VillageImage[] $villageImages
+ * @property VillageImage[] $images
  */
 class Village extends \yii\db\ActiveRecord
 {
+    const IS_ACTIVE = 1;
+    const IS_NOT_ACTIVE = 0;
+
+    const IS_DELETED = 1;
+    const IS_NOT_DELETED = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -54,8 +62,9 @@ class Village extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
-            [['name', 'slug', 'address', 'phones', 'url', 'price_list', 'logo'], 'string', 'max' => 255],
+            [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
+            [['name', 'slug', 'address', 'phones', 'url', 'price_list'], 'string', 'max' => 255],
+            [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
@@ -66,32 +75,33 @@ class Village extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'address' => 'Address',
-            'phones' => 'Phones',
-            'url' => 'Url',
-            'price_list' => 'Price List',
-            'logo' => 'Logo',
-            'region_id' => 'Region ID',
-            'electric' => 'Electric',
-            'gas' => 'Gas',
-            'water' => 'Water',
-            'internet' => 'Internet',
-            'gas_boiler' => 'Gas Boiler',
-            'territory_control' => 'Territory Control',
-            'fire_alarm' => 'Fire Alarm',
-            'security_alarm' => 'Security Alarm',
-            'shop' => 'Shop',
-            'children_club' => 'Children Club',
-            'sports_center' => 'Sports Center',
-            'sports_ground' => 'Sports Ground',
-            'golf_club' => 'Golf Club',
-            'beach' => 'Beach',
-            'life_service' => 'Life Service',
-            'forest' => 'Forest',
-            'reservoir' => 'Reservoir',
+            'id'                => 'ID',
+            'name'              => 'Название',
+            'slug'              => 'Slug',
+            'address'           => 'Адрес',
+            'phones'            => 'Телефоны',
+            'url'               => 'Сайт',
+            'price_list'        => 'Прайслист',
+            'logo'              => 'Логотип',
+            'image_id'          => 'Основное изображение',
+            'region_id'         => 'Регион',
+            'electric'          => 'Электроснабжение',
+            'gas'               => 'Газоснабжение',
+            'water'             => 'Водоснабжение',
+            'internet'          => 'Интернет',
+            'gas_boiler'        => 'Газовая котельная',
+            'territory_control' => 'Охрана территории и подъездов',
+            'fire_alarm'        => 'Противопожарная сигнализация',
+            'security_alarm'    => 'Охранная сигнализация',
+            'shop'              => 'Магазины',
+            'children_club'     => 'Детский клуб',
+            'sports_center'     => 'Спортивно-оздоровительный комплекс',
+            'sports_ground'     => 'Спортивные площадки',
+            'golf_club'         => 'Гольф-клуб',
+            'beach'             => 'Пляж',
+            'life_service'      => 'Служба быта',
+            'forest'            => 'Лесозона',
+            'reservoir'         => 'Водоем',
         ];
     }
 
@@ -114,8 +124,89 @@ class Village extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVillageImages()
+    public function getImages()
     {
         return $this->hasMany(VillageImage::className(), ['village_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|VillageImage
+     */
+    public function getImage()
+    {
+        return $this->hasOne(VillageImage::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getMainImage()
+    {
+        if ($this->image_id) {
+            $image = $this->image->file;
+        } elseif ($this->images) {
+            $image = $this->images[0]->file;
+        } else {
+            $image = '';
+        }
+        return $image;
+    }
+
+    /**
+     * @param array $get
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getFilteredQuery(array $get)
+    {
+        // Делаем выборку товаров
+        $query = self::find()->alias('v')->distinct()
+            ->andWhere(['v.is_active' => self::IS_ACTIVE])
+            ->andWhere(['v.is_deleted' => self::IS_NOT_DELETED]);
+
+        // Фильтруем их по get параметрам
+
+        // Регион
+        if (isset($get['region'])) {
+            $query->andWhere(['v.region_id' => intval($get['region'])]);
+            unset($get['region']);
+        }
+
+        if (isset($get['networks']) && is_array($get['networks'])) {
+            $build[] = 'or';
+            foreach ($get['networks'] as $k => $item) {
+                $build[] = ['v.'.$k => 1];
+            }
+            $query->andWhere($build);
+            unset($get['networks']);
+        }
+
+        if (isset($get['safety']) && is_array($get['safety'])) {
+            $work[] = 'or';
+            foreach ($get['safety'] as $k => $item) {
+                $work[] = ['v.'.$k => 1];
+            }
+            $query->andWhere($work);
+            unset($get['safety']);
+        }
+
+        if (isset($get['infra']) && is_array($get['infra'])) {
+            $mat[] = 'or';
+            foreach ($get['infra'] as $k => $item) {
+                $mat[] = ['v.'.$k => 1];
+            }
+            $query->andWhere($mat);
+            unset($get['infra']);
+        }
+
+        if (isset($get['eco']) && is_array($get['eco'])) {
+            $mat[] = 'or';
+            foreach ($get['eco'] as $k => $item) {
+                $mat[] = ['v.'.$k => 1];
+            }
+            $query->andWhere($mat);
+            unset($get['eco']);
+        }
+
+        return $query;
     }
 }

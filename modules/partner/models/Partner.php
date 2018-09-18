@@ -12,6 +12,11 @@ use common\models\User;
  * @property string $name
  * @property string $url
  * @property string $slug
+ * @property string $address
+ * @property string $phones
+ * @property string $price_list
+ * @property string $logo
+ * @property int $image_id
  * @property int $region_id
  * @property int $glued_timber
  * @property int $profiled_timber
@@ -33,12 +38,19 @@ use common\models\User;
  * @property int $any_region
  *
  * @property Region $region
+ * @property PartnerImage $image
  * @property PartnerBenefit[] $benefits
  * @property PartnerImage[] $images
  * @property User[] $users
  */
 class Partner extends \yii\db\ActiveRecord
 {
+    const IS_ACTIVE = 1;
+    const IS_NOT_ACTIVE = 0;
+
+    const IS_DELETED = 1;
+    const IS_NOT_DELETED = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -53,9 +65,10 @@ class Partner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
-            [['name', 'url', 'slug'], 'string', 'max' => 255],
+            [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
+            [['address', 'phones', 'price_list', 'name', 'url', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
+            [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
@@ -70,7 +83,12 @@ class Partner extends \yii\db\ActiveRecord
             'name'            => 'Наименование',
             'url'             => 'Сайт',
             'slug'            => 'Код',
+            'image_id'        => 'Основное изображение',
             'region_id'       => 'Регион',
+            'address'         => 'Адрес',
+            'logo'            => 'Логотип',
+            'phones'          => 'Телефоны',
+            'price_list'      => 'Прайслист',
             'glued_timber'    => 'Из клееного бруса',
             'profiled_timber' => 'Из профилированного бруса',
             'wooden_frame'    => 'На основе деревянного каркаса',
@@ -122,5 +140,77 @@ class Partner extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['partner_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|PartnerImage
+     */
+    public function getImage()
+    {
+        return $this->hasOne(PartnerImage::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getMainImage()
+    {
+        if ($this->image_id) {
+            $image = $this->image->file;
+        } elseif ($this->images) {
+            $image = $this->images[0]->file;
+        } else {
+            $image = '';
+        }
+        return $image;
+    }
+
+    /**
+     * @param array $get
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getFilteredQuery(array $get)
+    {
+        // Делаем выборку товаров
+        $query = self::find()->alias('p')->distinct()
+            ->andWhere(['p.is_active' => self::IS_ACTIVE])
+            ->andWhere(['p.is_deleted' => self::IS_NOT_DELETED]);
+
+        // Фильтруем их по get параметрам
+
+        // Регион
+        if (isset($get['region'])) {
+            $query->andWhere(['p.region_id' => intval($get['region'])]);
+            unset($get['region']);
+        }
+
+        if (isset($get['build']) && is_array($get['build'])) {
+            $build[] = 'or';
+            foreach ($get['build'] as $k => $item) {
+                $build[] = ['p.'.$k => 1];
+            }
+            $query->andWhere($build);
+            unset($get['build']);
+        }
+
+        if (isset($get['works']) && is_array($get['works'])) {
+            $work[] = 'or';
+            foreach ($get['works'] as $k => $item) {
+                $work[] = ['p.'.$k => 1];
+            }
+            $query->andWhere($work);
+            unset($get['works']);
+        }
+
+        if (isset($get['mat']) && is_array($get['mat'])) {
+            $mat[] = 'or';
+            foreach ($get['mat'] as $k => $item) {
+                $mat[] = ['p.'.$k => 1];
+            }
+            $query->andWhere($mat);
+            unset($get['mat']);
+        }
+
+        return $query;
     }
 }

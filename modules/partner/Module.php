@@ -11,7 +11,7 @@ namespace modules\partner;
 
 class Module extends \modules\Module
 {
-    public $controllerNamespace = 'modules\shop\admin\controllers';
+    public $controllerNamespace = 'modules\partner\admin\controllers';
 
     public function init()
     {
