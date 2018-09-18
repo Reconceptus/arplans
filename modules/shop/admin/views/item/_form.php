@@ -50,7 +50,7 @@ $bathrooms = [
         <div class="upload">
             <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PHOTO) ?>
             <div class="upload-input">
-                <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
+                <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>
             <div class="upload-button">
                 <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
@@ -73,7 +73,7 @@ $bathrooms = [
         <div class="upload">
             <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PLAN) ?>
             <div class="upload-input">
-                <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
+                <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>
             <div class="upload-button">
                 <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
@@ -212,7 +212,7 @@ $bathrooms = [
         <div class="upload">
             <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_READY) ?>
             <div class="upload-input">
-                <?= Html::fileInput('ItemImage[image]', '', ['class' => 'item-image-input']) ?>
+                <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>
             <div class="upload-button">
                 <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>

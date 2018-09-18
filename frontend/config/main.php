@@ -63,6 +63,11 @@ return [
                 'shop'                                                     => 'shop/catalog',
                 'shop/catalog'                                             => 'shop/catalog',
 
+                'village'                         => 'partner/village/index',
+                'village/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/village/view',
+                'partner/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/partner/view',
+                'partner'                         => 'partner/partner/index',
+
                 'blog/add-comment'             => 'blog/post/add-comment',
                 'blog/search'                  => 'blog/post/search',
                 'blog/index'                   => 'blog/post/index',
@@ -88,7 +93,7 @@ return [
             'class' => 'modules\shop\Module',
         ],
         'partner' => [
-            'class' => 'modules\shop\Module',
+            'class' => 'modules\partner\Module',
         ],
         'blog'    => [
             'class' => 'modules\blog\Module',

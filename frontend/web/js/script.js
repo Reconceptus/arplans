@@ -147,4 +147,14 @@ $(function () {
         });
     })
 
+    $(document).on('click', '.main-checkbox', function () {
+        var button = $(this);
+        var container = button.closest('.catalog-filters--section');
+        if (button.prop('checked') === true) {
+            container.find('input:checkbox').prop('checked',true);
+        }else{
+            container.find('input:checkbox').prop('checked',false);
+        }
+    })
+
 });

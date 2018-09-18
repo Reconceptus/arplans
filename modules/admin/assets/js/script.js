@@ -1,3 +1,11 @@
+function saveWays(arr, urls) {
+    'use strict';
+    arr.forEach(function (item, i, arr) {
+        urls += ':' + item;
+    });
+    return urls
+}
+
 $(function () {
     'use strict';
     $(document).on('click', '.js-delete-preview', function () {
@@ -64,18 +72,22 @@ $(function () {
             async: false,
             success: function (result) {
                 if (result.status === 'success') {
-                    container.find('.images-panel').append(result.block);
+                    var panel = container.find('.images-panel').append(result.block);
+                    var blocks = result.blocks;
+                    blocks.forEach(function (item, i, blocks) {
+                        panel.append(item);
+                    });
                     if (result.type === '1') {
                         var urls = $('.new-images-input').attr("value");
-                        urls += ':' + result.file;
+                        urls = saveWays(result.files, urls);
                         $('.new-images-input').attr('value', urls);
                     } else if (result.type === '2') {
                         var urls = $('.new-plans-input').attr("value");
-                        urls += ':' + result.file;
+                        urls = saveWays(result.files, urls);
                         $('.new-plans-input').attr('value', urls);
                     } else {
                         var urls = $('.new-ready-input').attr("value");
-                        urls += ':' + result.file;
+                        urls = saveWays(result.files, urls);
                         $('.new-ready-input').attr('value', urls);
                     }
                 }
