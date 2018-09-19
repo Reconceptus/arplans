@@ -21,6 +21,10 @@ use common\models\Region;
  * @property int $region_id
  * @property int $electric
  * @property int $gas
+ * @property string $description
+ * @property string $seo_description
+ * @property string $seo_title
+ * @property string $seo_keywords
  * @property int $water
  * @property int $internet
  * @property int $gas_boiler
@@ -65,7 +69,8 @@ class Village extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
-            [['name', 'slug', 'address', 'phones', 'url', 'price_list'], 'string', 'max' => 255],
+            [['name', 'slug', 'address', 'phones', 'url', 'price_list', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
+            [['description'], 'string'],
             [['lat', 'lng'], 'string', 'max' => 10],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
@@ -80,6 +85,10 @@ class Village extends \yii\db\ActiveRecord
         return [
             'id'                => 'ID',
             'name'              => 'Название',
+            'description'       => 'Описание',
+            'seo_description'   => 'Описание (SEO)',
+            'seo_title'         => 'Заголовок (SEO)',
+            'seo_keywords'      => 'Ключевые слова (SEO)',
             'slug'              => 'Slug',
             'address'           => 'Адрес',
             'phones'            => 'Телефоны',

@@ -16,6 +16,10 @@ use common\models\User;
  * @property string $phones
  * @property string $price_list
  * @property string $logo
+ * @property string $description
+ * @property string $seo_description
+ * @property string $seo_title
+ * @property string $seo_keywords
  * @property int $image_id
  * @property int $region_id
  * @property int $glued_timber
@@ -66,7 +70,8 @@ class Partner extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
-            [['address', 'phones', 'name', 'url', 'slug'], 'string', 'max' => 255],
+            [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
+            [['description'], 'string'],
             [['slug'], 'unique'],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['price_list'], 'file', 'maxSize' => 1024 * 1024 * 3],
@@ -80,17 +85,21 @@ class Partner extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => 'ID',
-            'name'       => 'Наименование',
-            'url'        => 'Сайт',
-            'slug'       => 'Код',
-            'image_id'   => 'Основное изображение',
-            'region_id'  => 'Регион',
-            'address'    => 'Адрес',
-            'logo'       => 'Логотип',
-            'phones'     => 'Телефоны',
-            'price_list' => 'Прайслист',
-            'is_active'  => 'Активен',
+            'id'              => 'ID',
+            'name'            => 'Наименование',
+            'description'     => 'Описание',
+            'seo_description' => 'Описание (SEO)',
+            'seo_title'       => 'Заголовок (SEO)',
+            'seo_keywords'    => 'Ключевые слова (SEO)',
+            'url'             => 'Сайт',
+            'slug'            => 'Код',
+            'image_id'        => 'Основное изображение',
+            'region_id'       => 'Регион',
+            'address'         => 'Адрес',
+            'logo'            => 'Логотип',
+            'phones'          => 'Телефоны',
+            'price_list'      => 'Прайслист',
+            'is_active'       => 'Активен',
 
             'glued_timber'    => 'Из клееного бруса',
             'profiled_timber' => 'Из профилированного бруса',

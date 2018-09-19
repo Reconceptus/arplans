@@ -20,7 +20,7 @@ $this->title = $model->isNewRecord ? 'Добавление услуги' : 'Ре
 
 <?= $this->render('_images', ['model' => $model]) ?>
 <?= $this->render('_files', ['model' => $model]) ?>
-<?= $this->render('_benefits', ['model' => $model]) ?>
+<?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="post-form">

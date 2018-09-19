@@ -11,6 +11,7 @@ namespace modules\partner\admin\controllers;
 
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Partner;
+use modules\partner\models\PartnerBenefit;
 use modules\partner\models\PartnerImage;
 use Yii;
 use yii\base\Exception;
@@ -18,6 +19,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -160,6 +162,21 @@ class PartnerController extends AdminController
                         }
                     }
                 }
+                if (isset($post['new-benefits'])) {
+                    $newBenefits = explode('~', $post['new-benefits']);
+                    foreach ($newBenefits as $newBenefit) {
+                        if ($newBenefit) {
+                            $data = explode('|', $newBenefit);
+                            $benefit = new PartnerBenefit();
+                            $benefit->partner_id = $model->id;
+                            $benefit->name = $data[0];
+                            $benefit->text = $data[1];
+                            if (!$benefit->save()) {
+                                throw new Exception('Ошибка сохранения');
+                            };
+                        }
+                    }
+                }
                 if (!$model->image) {
                     $model->image_id = $model->images ? $model->images[0]->id : null;
                     $model->save();
@@ -176,6 +193,42 @@ class PartnerController extends AdminController
         return $this->render('_form', [
             'model' => $model,
         ]);
+    }
+
+    public function actionAddBenefit()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        if (isset($get['name']) && isset($get['text']) && isset($get['partner_id'])) {
+            $model = new PartnerBenefit();
+            $model->name = Html::encode($get['name']);
+            $model->text = Html::encode($get['text']);
+            $model->partner_id = intval($get['partner_id']);
+            if ($model->save()) {
+                return ['status' => 'success', 'block' => $this->renderAjax('_benefit', ['model' => $model])];
+            }
+        }
+        return ['status' => 'fail', 'message' => 'Ошибка при добавлении'];
+    }
+
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteBenefit()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = intval(Yii::$app->request->get('id'));
+        if ($id) {
+            $model = PartnerBenefit::findOne(['id' => $id]);
+            if ($model) {
+                $model->delete();
+                return ['status' => 'success'];
+            }
+        }
+        return ['status' => 'fail', 'message' => 'Ошибка при удалении'];
     }
 
     /**

@@ -7,9 +7,11 @@
  */
 
 use common\models\Region;
+use vova07\imperavi\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 
@@ -20,7 +22,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 ?>
 <h1><?= $this->title ?></h1>
 <!--Фото товара-->
-<div class="images-block">
+<div class="images-block" data-type="partner/partner">
     <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
         <? foreach ($model->images as $image): ?>
@@ -41,14 +43,29 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </form>
 </div>
 
+<?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-5">
             <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
+            <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'url') ?>
+            <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
+                'settings' => [
+                    'lang'                     => 'ru',
+                    'minHeight'                => 200,
+                    'imageUpload'              => Url::to(['post/image-upload']),
+                    'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
+                    'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
+                    'plugins'                  => [
+                        'fullscreen',
+                        'imagemanager',
+                        'video'
+                    ],
+                ]]) ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
             <?= $form->field($model, 'region_id')->dropDownList(ArrayHelper::map(Region::find()->all(), 'id', 'name'), ['prompt' => '']) ?>
             <?= $form->field($model, 'address') ?>
@@ -116,7 +133,11 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <?= $form->field($model, 'any_region')->checkbox() ?>
     </div>
 </div>
-
+<div class="post-form">
+    <?= $form->field($model, 'seo_title') ?>
+    <?= $form->field($model, 'seo_keywords') ?>
+    <?= $form->field($model, 'seo_description') ?>
+</div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
 

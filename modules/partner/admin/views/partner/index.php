@@ -33,7 +33,11 @@ $columns = [
         'attribute' => 'url',
     ],
     [
-        'attribute' => 'region',
+        'attribute' => 'region_id',
+        'format'    => 'html',
+        'value'     => function ($model) {
+            return $model->region_id ? $model->region->name : '';
+        }
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
