@@ -74,7 +74,7 @@ class Partner extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['slug'], 'unique'],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
-            [['price_list'], 'file', 'maxSize' => 1024 * 1024 * 3],
+            [['price_list'], 'file'],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
     }

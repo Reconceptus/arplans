@@ -43,7 +43,7 @@ use common\models\Region;
  *
  * @property Region $region
  * @property VillageImage $image
- * @property VillageBenefit[] $villageBenefits
+ * @property VillageBenefit[] $benefits
  * @property VillageImage[] $images
  */
 class Village extends \yii\db\ActiveRecord
@@ -69,9 +69,10 @@ class Village extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
-            [['name', 'slug', 'address', 'phones', 'url', 'price_list', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
+            [['name', 'slug', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['lat', 'lng'], 'string', 'max' => 10],
+            [['price_list'], 'file'],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
@@ -91,20 +92,24 @@ class Village extends \yii\db\ActiveRecord
             'seo_keywords'      => 'Ключевые слова (SEO)',
             'slug'              => 'Slug',
             'address'           => 'Адрес',
-            'phones'            => 'Телефоны',
+            'phones'            => 'Телефоны (через запятую)',
             'url'               => 'Сайт',
             'price_list'        => 'Прайслист',
             'logo'              => 'Логотип',
             'image_id'          => 'Основное изображение',
             'region_id'         => 'Регион',
+            'is_active'         => 'Активен',
+
             'electric'          => 'Электроснабжение',
             'gas'               => 'Газоснабжение',
             'water'             => 'Водоснабжение',
             'internet'          => 'Интернет',
             'gas_boiler'        => 'Газовая котельная',
+
             'territory_control' => 'Охрана территории и подъездов',
             'fire_alarm'        => 'Противопожарная сигнализация',
             'security_alarm'    => 'Охранная сигнализация',
+
             'shop'              => 'Магазины',
             'children_club'     => 'Детский клуб',
             'sports_center'     => 'Спортивно-оздоровительный комплекс',
@@ -112,10 +117,12 @@ class Village extends \yii\db\ActiveRecord
             'golf_club'         => 'Гольф-клуб',
             'beach'             => 'Пляж',
             'life_service'      => 'Служба быта',
+
             'forest'            => 'Лесозона',
             'reservoir'         => 'Водоем',
-            'lat'               => 'Широта',
-            'lng'               => 'Долгота',
+
+            'lat'               => 'Широта (в формате 55.555555)',
+            'lng'               => 'Долгота (в формате 55.555555)',
         ];
     }
 
@@ -130,7 +137,7 @@ class Village extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVillageBenefits()
+    public function getBenefits()
     {
         return $this->hasMany(VillageBenefit::className(), ['village_id' => 'id']);
     }
