@@ -6,7 +6,7 @@
  * Time: 17:19
  */
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $query */
 
 $this->title = 'Клуб АРПЛАНС: строители и материалы';
 ?>
@@ -51,7 +51,7 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
                                 </form>
                             </div>
                             <div class="map-box--field">
-                                <?= \modules\partner\widgets\villages\Villages::widget(['viewName' => 'both', 'dataProvider' => $dataProvider]) ?>
+                                <?= \modules\partner\widgets\villages\Villages::widget(['viewName' => 'both', 'query' => $query]) ?>
                             </div>
                         </div>
                     </div>

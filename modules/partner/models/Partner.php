@@ -155,7 +155,7 @@ class Partner extends \yii\db\ActiveRecord
      */
     public function getMainImage()
     {
-        if ($this->image_id) {
+        if ($this->image) {
             $image = $this->image->file;
         } elseif ($this->images) {
             $image = $this->images[0]->file;

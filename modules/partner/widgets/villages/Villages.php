@@ -10,15 +10,23 @@ namespace modules\partner\widgets\villages;
 
 
 use yii\base\Widget;
+use yii\data\ActiveDataProvider;
 
 class Villages extends Widget
 {
     public $viewName = 'index';
-    public $dataProvider;
+    public $query = null;
 
     public function run()
     {
-        $content = $this->render($this->viewName, ['dataProvider' => $this->dataProvider]);
+        $models = [];
+        if ($this->viewName !== 'index') {
+            $models = $this->query->all();
+        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $this->query
+        ]);
+        $content = $this->render($this->viewName, ['dataProvider' => $dataProvider, 'models' => $models]);
         return $content;
     }
 }

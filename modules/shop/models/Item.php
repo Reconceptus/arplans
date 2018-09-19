@@ -197,7 +197,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getMainImage()
     {
-        if ($this->image_id) {
+        if ($this->image) {
             $image = $this->image->image;
         } elseif ($this->images) {
             $image = $this->images[0]->image;
