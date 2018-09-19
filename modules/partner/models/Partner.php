@@ -66,9 +66,10 @@ class Partner extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
-            [['address', 'phones', 'price_list', 'name', 'url', 'slug'], 'string', 'max' => 255],
+            [['address', 'phones', 'name', 'url', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
+            [['price_list'], 'file', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
     }
@@ -89,6 +90,7 @@ class Partner extends \yii\db\ActiveRecord
             'logo'            => 'Логотип',
             'phones'          => 'Телефоны',
             'price_list'      => 'Прайслист',
+
             'glued_timber'    => 'Из клееного бруса',
             'profiled_timber' => 'Из профилированного бруса',
             'wooden_frame'    => 'На основе деревянного каркаса',
@@ -97,14 +99,17 @@ class Partner extends \yii\db\ActiveRecord
             'combined'        => 'Комбинированные дома',
             'brick'           => 'Из блоков и кирпича',
             'block'           => 'Из газобетонных блоков',
+
             'finishing'       => 'Отделочные',
             'santech'         => 'Сантехнические',
             'electric'        => 'Электромонтажные',
+
             'wooden'          => 'Деревянные',
             'stone'           => 'Каменные',
             'roof'            => 'Кровельные',
             'windows'         => 'Окна и двери',
             'stretch_ceiling' => 'Натяжные потолки',
+
             'surround_region' => 'Возможен выезд в соседний регион',
             'any_region'      => 'Возможен выезд в любую часть России',
         ];
