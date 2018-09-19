@@ -11,7 +11,7 @@ use yii\helpers\Url;
 
 /* @var $roles array */
 
-$this->title = "Roles";
+$this->title = "Роли";
 $i = 0;
 ?>
 <h1><?= $this->title ?></h1>
