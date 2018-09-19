@@ -97,7 +97,7 @@ class Partner extends \yii\db\ActiveRecord
             'region_id'       => 'Регион',
             'address'         => 'Адрес',
             'logo'            => 'Логотип',
-            'phones'          => 'Телефоны',
+            'phones'          => 'Телефоны (через запятую)',
             'price_list'      => 'Прайслист',
             'is_active'       => 'Активен',
 
