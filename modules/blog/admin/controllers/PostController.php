@@ -14,6 +14,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -135,7 +136,7 @@ class PostController extends AdminController
                 if ($model->validate(['image'])) {
                     $dir = Yii::getAlias('@webroot/uploads/images/post-preview/');
                     $path = date('ymdHis', strtotime($model->created_at)) . '/';
-                    \common\models\Image::createDirectory($dir . $path);
+                    FileHelper::createDirectory($dir . $path);
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/images/post-preview/' . $path . $fileName;
