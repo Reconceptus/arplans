@@ -14,15 +14,15 @@ class m180913_131255_add_partner_permissions extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        $partnerPanel = $auth->createPermission('partnerPanel');
+        $partnerPanel = $auth->createPermission('partner');
         $partnerPanel->description = 'Доступ к админке партнеров';
         $auth->add($partnerPanel);
 
-        $partner = $auth->createPermission('partner');
+        $partner = $auth->createPermission('partner_partner');
         $partner->description = 'Управление партнерами';
         $auth->add($partner);
 
-        $village = $auth->createPermission('village');
+        $village = $auth->createPermission('partner_village');
         $village->description = 'Управление поселками';
         $auth->add($village);
 

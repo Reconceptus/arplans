@@ -128,7 +128,7 @@ class RoleController extends AdminController
                     }
                 }
 
-                $this->redirect(['index']);
+                $this->redirect(['/admin/modules/users/role/index']);
             }
         }
 
