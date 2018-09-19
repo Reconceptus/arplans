@@ -92,8 +92,8 @@ $(function () {
                     }
                 }
             },
-            error: function () {
-                alert('Ошибка при загрузке файла');
+            error: function (result) {
+                alert(result.message);
             },
             cache: false,
             contentType: false,

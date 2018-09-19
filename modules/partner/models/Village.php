@@ -15,6 +15,8 @@ use common\models\Region;
  * @property string $url
  * @property string $price_list
  * @property string $logo
+ * @property string $lat
+ * @property string $lng
  * @property int $image_id
  * @property int $region_id
  * @property int $electric
@@ -64,6 +66,7 @@ class Village extends \yii\db\ActiveRecord
         return [
             [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
             [['name', 'slug', 'address', 'phones', 'url', 'price_list'], 'string', 'max' => 255],
+            [['lat', 'lng'], 'string', 'max' => 10],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
         ];
@@ -102,6 +105,8 @@ class Village extends \yii\db\ActiveRecord
             'life_service'      => 'Служба быта',
             'forest'            => 'Лесозона',
             'reservoir'         => 'Водоем',
+            'lat'               => 'Широта',
+            'lng'               => 'Долгота',
         ];
     }
 
@@ -142,7 +147,7 @@ class Village extends \yii\db\ActiveRecord
      */
     public function getMainImage()
     {
-        if ($this->image_id) {
+        if ($this->image) {
             $image = $this->image->file;
         } elseif ($this->images) {
             $image = $this->images[0]->file;
@@ -174,7 +179,7 @@ class Village extends \yii\db\ActiveRecord
         if (isset($get['networks']) && is_array($get['networks'])) {
             $build[] = 'or';
             foreach ($get['networks'] as $k => $item) {
-                $build[] = ['v.'.$k => 1];
+                $build[] = ['v.' . $k => 1];
             }
             $query->andWhere($build);
             unset($get['networks']);
@@ -183,7 +188,7 @@ class Village extends \yii\db\ActiveRecord
         if (isset($get['safety']) && is_array($get['safety'])) {
             $work[] = 'or';
             foreach ($get['safety'] as $k => $item) {
-                $work[] = ['v.'.$k => 1];
+                $work[] = ['v.' . $k => 1];
             }
             $query->andWhere($work);
             unset($get['safety']);
@@ -192,7 +197,7 @@ class Village extends \yii\db\ActiveRecord
         if (isset($get['infra']) && is_array($get['infra'])) {
             $mat[] = 'or';
             foreach ($get['infra'] as $k => $item) {
-                $mat[] = ['v.'.$k => 1];
+                $mat[] = ['v.' . $k => 1];
             }
             $query->andWhere($mat);
             unset($get['infra']);
@@ -201,7 +206,7 @@ class Village extends \yii\db\ActiveRecord
         if (isset($get['eco']) && is_array($get['eco'])) {
             $mat[] = 'or';
             foreach ($get['eco'] as $k => $item) {
-                $mat[] = ['v.'.$k => 1];
+                $mat[] = ['v.' . $k => 1];
             }
             $query->andWhere($mat);
             unset($get['eco']);

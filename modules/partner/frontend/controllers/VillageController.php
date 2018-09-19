@@ -11,7 +11,6 @@ namespace modules\partner\frontend\controllers;
 use modules\partner\models\Partner;
 use modules\partner\models\Village;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -25,10 +24,7 @@ class VillageController extends Controller
     {
         $get = Yii::$app->request->get();
         $query = Village::getFilteredQuery($get);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['query' => $query]);
     }
 
     /**
