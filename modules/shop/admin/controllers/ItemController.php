@@ -118,7 +118,7 @@ class ItemController extends AdminController
                 $model->project = $project;
                 if ($model->validate(['project'])) {
                     $dir = Yii::getAlias('@webroot/uploads/shop/project/');
-                    \common\models\Image::createDirectory($dir . $model->id . '/');
+                    FileHelper::createDirectory($dir . $model->id . '/');
                     $fileName = 'project.' . $model->project->extension;
                     $model->project->saveAs($dir . $model->id . '/' . $fileName);
                     $model->project = '/uploads/shop/project/' . $model->id . '/' . $fileName;

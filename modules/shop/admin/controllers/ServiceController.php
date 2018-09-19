@@ -19,7 +19,7 @@ use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
-use yii\helpers\Html;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -227,7 +227,7 @@ class ServiceController extends AdminController
             if ($model->validate(['file'])) {
                 $dir = Yii::getAlias('@webroot/uploads/service/' . $type . '/');
                 $path = date('ymdHis') . '/';
-                \common\models\Image::createDirectory($dir . $path);
+                FileHelper::createDirectory($dir . $path);
                 $fileName = str_replace(' ', '_', $model->file->baseName) . '.' . $model->file->extension;
                 $model->file->saveAs($dir . $path . $fileName);
                 $model->file = '/uploads/service/' . $type . '/' . $path . $fileName;
@@ -241,25 +241,6 @@ class ServiceController extends AdminController
             }
         }
         return ['status' => 'fail', 'message' => ' Ошибка при загрузке'];
-    }
-
-    /**
-     * @return array
-     */
-    public function actionAddBenefit()
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $get = Yii::$app->request->get();
-        if (isset($get['name']) && isset($get['text']) && isset($get['service_id'])) {
-            $model = new ServiceBenefit();
-            $model->name = Html::encode($get['name']);
-            $model->text = Html::encode($get['text']);
-            $model->service_id = intval($get['service_id']);
-            if ($model->save()) {
-                return ['status' => 'success', 'block' => $this->renderAjax('_benefit', ['model' => $model])];
-            }
-        }
-        return ['status' => 'fail', 'message' => 'Ошибка при добавлении'];
     }
 
     /**

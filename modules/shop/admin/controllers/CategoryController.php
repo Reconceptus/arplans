@@ -14,6 +14,7 @@ use modules\shop\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -123,7 +124,7 @@ class CategoryController extends AdminController
                 if ($model->validate(['image'])) {
                     $dir = Yii::getAlias('@webroot/uploads/shop/category/');
                     $path = date('ymdHis') . '/';
-                    \common\models\Image::createDirectory($dir . $path);
+                    FileHelper::createDirectory($dir . $path);
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/shop/category/' . $path . $fileName;

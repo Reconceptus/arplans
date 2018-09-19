@@ -19,7 +19,6 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
-use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -120,7 +119,7 @@ class PartnerController extends AdminController
                 $model->logo = $logo;
                 if ($model->validate(['logo'])) {
                     $dir = Yii::getAlias('@webroot/uploads/partner/logo/');
-                    \common\models\Image::createDirectory($dir . $model->id . '/');
+                    FileHelper::createDirectory($dir . $model->id . '/');
                     $fileName = 'logo.' . $model->logo->extension;
                     $model->logo->saveAs($dir . $model->id . '/' . $fileName);
                     $model->logo = '/uploads/partner/logo/' . $model->id . '/' . $fileName;
@@ -136,7 +135,7 @@ class PartnerController extends AdminController
                 $model->price_list = $price;
                 if ($model->validate(['price_list'])) {
                     $dir = Yii::getAlias('@webroot/uploads/partner/price/');
-                    \common\models\Image::createDirectory($dir . $model->id . '/');
+                    FileHelper::createDirectory($dir . $model->id . '/');
                     $fileName = 'pricelist.' . $model->price_list->extension;
                     $model->price_list->saveAs($dir . $model->id . '/' . $fileName);
                     $model->price_list = '/uploads/partner/price/' . $model->id . '/' . $fileName;
@@ -194,23 +193,6 @@ class PartnerController extends AdminController
             'model' => $model,
         ]);
     }
-
-    public function actionAddBenefit()
-    {
-        Yii::$app->response->format = Response::FORMAT_JSON;
-        $get = Yii::$app->request->get();
-        if (isset($get['name']) && isset($get['text']) && isset($get['partner_id'])) {
-            $model = new PartnerBenefit();
-            $model->name = Html::encode($get['name']);
-            $model->text = Html::encode($get['text']);
-            $model->partner_id = intval($get['partner_id']);
-            if ($model->save()) {
-                return ['status' => 'success', 'block' => $this->renderAjax('_benefit', ['model' => $model])];
-            }
-        }
-        return ['status' => 'fail', 'message' => 'Ошибка при добавлении'];
-    }
-
 
     /**
      * @return array

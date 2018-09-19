@@ -13,6 +13,7 @@ use modules\admin\controllers\AdminController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -24,11 +25,11 @@ class PageController extends AdminController
     {
         $behaviors = parent::behaviors();
         $behaviors['access'] = [
-            'class' => AccessControl::className(),
+            'class'        => AccessControl::className(),
             'denyCallback' => function ($rule, $action) {
                 return $this->redirect('/');
             },
-            'rules' => [
+            'rules'        => [
                 [
                     'actions' => [],
                     'allow'   => true,
@@ -40,6 +41,7 @@ class PageController extends AdminController
         ];
         return $behaviors;
     }
+
     /**
      * @return array
      */
@@ -122,13 +124,13 @@ class PageController extends AdminController
                 if ($model->validate(['image'])) {
                     $dir = Yii::getAlias('@webroot/uploads/images/post-preview/');
                     $path = date('ymdHis', strtotime($model->created_at)) . '/';
-                    \common\models\Image::createDirectory($dir . $path);
+                    FileHelper::createDirectory($dir . $path);
                     $fileName = $model->image->baseName . '.' . $model->image->extension;
                     $model->image->saveAs($dir . $path . $fileName);
                     $model->image = '/uploads/images/post-preview/' . $path . $fileName;
 //                    $photo = Image::getImagine()->open($dir . $path . $fileName);
 //                    $photo->thumbnail(new Box(800, 800))->save($dir . $path . $fileName, ['quality' => 90]);
-                }else{
+                } else {
                     var_dump($model->errors);
                 }
             } elseif (array_key_exists('old-image', $post) && $post['old-image']) {
