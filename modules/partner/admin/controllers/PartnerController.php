@@ -59,8 +59,8 @@ class PartnerController extends AdminController
         return [
             'image-upload' => [
                 'class'            => 'vova07\imperavi\actions\UploadFileAction',
-                'url'              => '/uploads/images/shop/category', // Directory URL address, where files are stored.
-                'path'             => '@webroot/uploads/images/shop/category', // Or absolute path to directory where files are stored.
+                'url'              => '/uploads/partner/post', // Directory URL address, where files are stored.
+                'path'             => '@webroot/uploads/partner/post', // Or absolute path to directory where files are stored.
                 'translit'         => true,
                 'validatorOptions' => [
                     'maxWidth'  => 1200,
