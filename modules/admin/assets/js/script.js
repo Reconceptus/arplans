@@ -65,8 +65,12 @@ $(function () {
     $("form[name='uploader']").submit(function (e) {
         var formData = new FormData($(this)[0]);
         var container = $(this).closest('.images-block');
+        var itemType = container.attr('data-type');
+        if (!itemType) {
+            itemType = 'shop/item';
+        }
         $.ajax({
-            url: '/admin/modules/shop/item/upload',
+            url: '/admin/modules/' + itemType + '/upload',
             type: "POST",
             data: formData,
             async: false,
@@ -113,7 +117,6 @@ $(function () {
             async: false,
             success: function (result) {
                 if (result.status === 'success') {
-                    console.log(result);
                     container.find('.images-panel').append(result.block);
                     if (result.type === 'image') {
                         var urls = $('.new-images-input').attr("value");

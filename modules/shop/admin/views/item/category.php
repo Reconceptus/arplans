@@ -23,7 +23,7 @@ $columns = [
         'format'    => 'html',
         'options'   => ['style' => 'width:100px'],
         'value'     => function ($model) {
-            return $model->image_id ? Html::img($model->image->image, ['class' => 'post-list-image-preview']) : '';
+            return $model->image ? Html::img($model->image->image, ['class' => 'post-list-image-preview']) : '';
         }
     ],
     [

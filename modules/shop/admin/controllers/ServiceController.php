@@ -143,8 +143,9 @@ class ServiceController extends AdminController
     }
 
     /**
-     * @param $model ActiveRecord|Service
-     * @return string|array
+     * @param $model Service
+     * @return string|Response
+     * @throws Exception
      */
     public function modify($model)
     {
@@ -188,7 +189,7 @@ class ServiceController extends AdminController
                             $benefit->name = $data[0];
                             $benefit->text = $data[1];
                             if (!$benefit->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
+                                throw new Exception('Ошибка сохранения');
                             };
                         }
                     }

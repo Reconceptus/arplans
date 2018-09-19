@@ -100,9 +100,6 @@ $bathrooms = [
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'common_area') ?>
             <?= $form->field($model, 'useful_area') ?>
-            <?= $form->field($model, 'seo_title') ?>
-            <?= $form->field($model, 'seo_keywords') ?>
-            <?= $form->field($model, 'seo_description') ?>
         </div>
         <div class="col-md-5">
             <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
@@ -219,6 +216,11 @@ $bathrooms = [
             </div>
         </div>
     </form>
+</div>
+<div class="post-form">
+    <?= $form->field($model, 'seo_title') ?>
+    <?= $form->field($model, 'seo_keywords') ?>
+    <?= $form->field($model, 'seo_description') ?>
 </div>
 <?= Html::a('Клонировать', Url::to(['/admin/modules/shop/item/clone', 'id' => $model->id]), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Товар еще не добавлен' : '' ?>">
