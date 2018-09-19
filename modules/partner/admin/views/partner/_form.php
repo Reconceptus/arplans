@@ -43,6 +43,19 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </form>
 </div>
 
+<?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
+    'settings' => [
+        'lang'                     => 'ru',
+        'minHeight'                => 200,
+        'imageUpload'              => Url::to(['post/image-upload']),
+        'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
+        'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
+        'plugins'                  => [
+            'fullscreen',
+            'imagemanager',
+            'video'
+        ],
+    ]]) ?>
 <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -53,19 +66,6 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'url') ?>
-            <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
-                'settings' => [
-                    'lang'                     => 'ru',
-                    'minHeight'                => 200,
-                    'imageUpload'              => Url::to(['post/image-upload']),
-                    'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
-                    'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
-                    'plugins'                  => [
-                        'fullscreen',
-                        'imagemanager',
-                        'video'
-                    ],
-                ]]) ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
             <?= $form->field($model, 'region_id')->dropDownList(ArrayHelper::map(Region::find()->all(), 'id', 'name'), ['prompt' => '']) ?>
             <?= $form->field($model, 'address') ?>
