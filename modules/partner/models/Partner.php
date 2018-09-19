@@ -80,16 +80,17 @@ class Partner extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'              => 'ID',
-            'name'            => 'Наименование',
-            'url'             => 'Сайт',
-            'slug'            => 'Код',
-            'image_id'        => 'Основное изображение',
-            'region_id'       => 'Регион',
-            'address'         => 'Адрес',
-            'logo'            => 'Логотип',
-            'phones'          => 'Телефоны',
-            'price_list'      => 'Прайслист',
+            'id'         => 'ID',
+            'name'       => 'Наименование',
+            'url'        => 'Сайт',
+            'slug'       => 'Код',
+            'image_id'   => 'Основное изображение',
+            'region_id'  => 'Регион',
+            'address'    => 'Адрес',
+            'logo'       => 'Логотип',
+            'phones'     => 'Телефоны',
+            'price_list' => 'Прайслист',
+            'is_active'  => 'Активен',
 
             'glued_timber'    => 'Из клееного бруса',
             'profiled_timber' => 'Из профилированного бруса',
@@ -100,9 +101,9 @@ class Partner extends \yii\db\ActiveRecord
             'brick'           => 'Из блоков и кирпича',
             'block'           => 'Из газобетонных блоков',
 
-            'finishing'       => 'Отделочные',
-            'santech'         => 'Сантехнические',
-            'electric'        => 'Электромонтажные',
+            'finishing' => 'Отделочные',
+            'santech'   => 'Сантехнические',
+            'electric'  => 'Электромонтажные',
 
             'wooden'          => 'Деревянные',
             'stone'           => 'Каменные',
@@ -192,7 +193,7 @@ class Partner extends \yii\db\ActiveRecord
         if (isset($get['build']) && is_array($get['build'])) {
             $build[] = 'or';
             foreach ($get['build'] as $k => $item) {
-                $build[] = ['p.'.$k => 1];
+                $build[] = ['p.' . $k => 1];
             }
             $query->andWhere($build);
             unset($get['build']);
@@ -201,7 +202,7 @@ class Partner extends \yii\db\ActiveRecord
         if (isset($get['works']) && is_array($get['works'])) {
             $work[] = 'or';
             foreach ($get['works'] as $k => $item) {
-                $work[] = ['p.'.$k => 1];
+                $work[] = ['p.' . $k => 1];
             }
             $query->andWhere($work);
             unset($get['works']);
@@ -210,7 +211,7 @@ class Partner extends \yii\db\ActiveRecord
         if (isset($get['mat']) && is_array($get['mat'])) {
             $mat[] = 'or';
             foreach ($get['mat'] as $k => $item) {
-                $mat[] = ['p.'.$k => 1];
+                $mat[] = ['p.' . $k => 1];
             }
             $query->andWhere($mat);
             unset($get['mat']);
