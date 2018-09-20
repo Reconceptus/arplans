@@ -40,6 +40,6 @@ class PartnerController extends Controller
         if (!$model) {
             throw new NotFoundHttpException();
         }
-        $this->render('view', ['model' => $model]);
+        return $this->render('view', ['model' => $model]);
     }
 }

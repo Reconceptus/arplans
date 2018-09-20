@@ -14,7 +14,7 @@ use yii\base\Widget;
 
 class Share extends Widget
 {
-    public $viewName = 'index';
+    public $viewName = '_part';
     public $model;
 
     public function run()
