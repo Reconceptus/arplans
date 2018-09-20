@@ -23,7 +23,6 @@ use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\web\UploadedFile;
 
 class ServiceController extends AdminController
 {
@@ -213,34 +212,61 @@ class ServiceController extends AdminController
     public function actionUpload()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
+        if (empty($_FILES['images'])) {
+            return ['success' => 'fail', 'message' => 'Не найдены файлы для загрузки'];
+        }
         $type = Yii::$app->request->post('type');
+
+        $images = $_FILES['images'];
+        $success = null;
+        $paths = [];
+        $blocks = [];
+        $fullPaths = [];
+        $fileNames = $images['name'];
         if ($type === Service::TYPE_IMAGE) {
-            $model = new ServiceImage();
+            $dirs = 'uploads/service/image/';
             $view = '_image';
         } else {
-            $model = new ServiceFile();
+            $dirs = 'uploads/service/file/';
             $view = '_file';
         }
-        $file = UploadedFile::getInstance($model, 'file');
-        if ($file && $file->tempName) {
-            $model->file = $file;
-            if ($model->validate(['file'])) {
-                $dir = Yii::getAlias('@webroot/uploads/service/' . $type . '/');
-                $path = date('ymdHis') . '/';
-                FileHelper::createDirectory($dir . $path);
-                $fileName = str_replace(' ', '_', $model->file->baseName) . '.' . $model->file->extension;
-                $model->file->saveAs($dir . $path . $fileName);
-                $model->file = '/uploads/service/' . $type . '/' . $path . $fileName;
+        $dir = Yii::getAlias('@webroot/'.$dirs);
+
+        $path = date('ymdHis') . '/';
+        if (!is_dir($dir . $path)) {
+            FileHelper::createDirectory($dir . $path);
+        }
+        for ($i = 0; $i < count($fileNames); $i++) {
+            $fileName = str_replace(' ', '_', $fileNames[$i]);
+            $target = $dir . $path . $fileName;
+            if (move_uploaded_file($images['tmp_name'][$i], $target)) {
+                $success = true;
+                $paths[] = '/'.$dirs . $path . $fileName;
+                $fullPaths[] = $dir . $path . $fileName;
                 if ($type === Service::TYPE_IMAGE) {
-//                    $photo = Image::getImagine()->open($dir . $path . $fileName);
-//                    $photo->thumbnail(new Box(900, 900))->save($dir . $path . $fileName, ['quality' => 90]);
+                    $model = new ServiceImage();
+                }else{
+                    $model = new ServiceFile();
                 }
-                if (file_exists($dir . $path . $fileName)) {
-                    return ['status' => 'success', 'file' => $model->file, 'type' => $type, 'block' => $this->renderAjax($view, ['model' => $model])];
-                }
+                $model->file = '/'.$dirs . $path . $fileName;
+                $blocks[] = $this->renderAjax($view, ['model' => $model]);
+            } else {
+                $success = false;
+                break;
             }
         }
-        return ['status' => 'fail', 'message' => ' Ошибка при загрузке'];
+        if ($success === true) {
+            $output = ['status' => 'success', 'files' => $paths, 'type' => Yii::$app->request->post('type'), 'blocks' => $blocks];
+        } elseif ($success === false) {
+            $output = ['status' => 'fail', 'message' => 'Ошибка при загрузке файлов, обратитесь к разработчику'];
+            foreach ($fullPaths as $file) {
+                unlink($file);
+            }
+        } else {
+            $output = ['status' => 'fail', 'message' => 'Файлы не были загружены.'];
+        }
+
+        return $output;
     }
 
     /**

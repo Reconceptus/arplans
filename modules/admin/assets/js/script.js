@@ -89,6 +89,10 @@ $(function () {
                         var urls = $('.new-plans-input').attr("value");
                         urls = saveWays(result.files, urls);
                         $('.new-plans-input').attr('value', urls);
+                    } else if (result.type === '4') {
+                        var urls = $('.new-files-input').attr("value");
+                        urls = saveWays(result.files, urls);
+                        $('.new-files-input').attr('value', urls);
                     } else {
                         var urls = $('.new-ready-input').attr("value");
                         urls = saveWays(result.files, urls);
@@ -106,38 +110,6 @@ $(function () {
         e.preventDefault();
     });
 
-    // загрузка картинок услуги
-    $("form[name='uploader-service']").submit(function (e) {
-        var formData = new FormData($(this)[0]);
-        var container = $(this).closest('.images-block');
-        $.ajax({
-            url: '/admin/modules/shop/service/upload',
-            type: "POST",
-            data: formData,
-            async: false,
-            success: function (result) {
-                if (result.status === 'success') {
-                    container.find('.images-panel').append(result.block);
-                    if (result.type === 'image') {
-                        var urls = $('.new-images-input').attr("value");
-                        urls += ':' + result.file;
-                        $('.new-images-input').attr('value', urls);
-                    } else if (result.type === 'file') {
-                        var urls = $('.new-files-input').attr("value");
-                        urls += ':' + result.file;
-                        $('.new-files-input').attr('value', urls);
-                    }
-                }
-            },
-            error: function () {
-                alert('Ошибка при загрузке файла');
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-        e.preventDefault();
-    });
 
     $(document).on('click', '.js-image-admin-delete', function () {
         var container = $(this).closest('.image-admin-preview');

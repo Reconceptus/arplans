@@ -18,6 +18,7 @@ class ItemImage extends \yii\db\ActiveRecord
     const TYPE_PHOTO = 1;
     const TYPE_PLAN = 2;
     const TYPE_READY = 3;
+    const TYPE_FILE = 4;
     /**
      * {@inheritdoc}
      */
