@@ -12,6 +12,9 @@ namespace modules\shop\models;
  * @property string $short_description
  * @property string $description
  * @property string $preview_text
+ * @property string $seo_description
+ * @property string $seo_title
+ * @property string $seo_keywords
  * @property float $price
  * @property int $in_cart
  * @property int $is_active
@@ -45,9 +48,9 @@ class Service extends \yii\db\ActiveRecord
         return [
             [['description', 'preview_text'], 'string'],
             [['price'], 'number'],
-            [['in_cart', 'is_active', 'is_deleted','to_main_menu'], 'integer'],
+            [['in_cart', 'is_active', 'is_deleted', 'to_main_menu'], 'integer'],
             [['slug', 'name'], 'unique'],
-            [['name', 'slug', 'time', 'short_description'], 'string', 'max' => 255],
+            [['name', 'slug', 'time', 'short_description', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
         ];
     }
 
@@ -62,6 +65,9 @@ class Service extends \yii\db\ActiveRecord
             'preview_text'      => 'Краткое описание',
             'slug'              => 'Url',
             'short_description' => 'Вводный текст',
+            'seo_description'   => 'Описание (SEO)',
+            'seo_title'         => 'Заголовок (SEO)',
+            'seo_keywords'      => 'Ключевые слова (SEO)',
             'description'       => 'Описание',
             'time'              => 'Срок',
             'price'             => 'Цена',
