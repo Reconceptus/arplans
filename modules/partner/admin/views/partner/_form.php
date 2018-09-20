@@ -43,33 +43,26 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </form>
 </div>
 
-<?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
-
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
-    <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
-        'settings' => [
-            'lang'                     => 'ru',
-            'minHeight'                => 200,
-            'imageUpload'              => Url::to(['partner/image-upload']),
-            'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
-            'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
-            'plugins'                  => [
-                'fullscreen',
-                'imagemanager',
-                'video'
-            ],
-        ]]) ?>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'name') ?>
-            <?= $form->field($model, 'url') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-5">
             <?= $form->field($model, 'region_id')->dropDownList(ArrayHelper::map(Region::find()->all(), 'id', 'name'), ['prompt' => '']) ?>
-            <?= $form->field($model, 'address') ?>
             <?= $form->field($model, 'phones') ?>
+        </div>
+        <div class="col-md-5">
+            <?= $form->field($model, 'address') ?>
+            <?= $form->field($model, 'url') ?>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
             <?= $form->field($model, 'logo')->fileInput(['accept' => 'image/*']) ?>
             <? if ($model->logo): ?>
                 <div class="image-admin-preview">
@@ -90,6 +83,24 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= $form->field($model, 'price_list')->fileInput() ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
+        </div>
+    </div>
+    <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
+        'settings' => [
+            'lang'                     => 'ru',
+            'minHeight'                => 200,
+            'imageUpload'              => Url::to(['partner/image-upload']),
+            'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
+            'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
+            'plugins'                  => [
+                'fullscreen',
+                'imagemanager',
+                'video'
+            ],
+        ]]) ?>
     <p style="font-weight: bold; margin-top: 30px;">Работы</p>
     <div class="checkbox-panel row">
         <div class="col-sm-4"><?= $form->field($model, 'finishing')->checkbox() ?></div>

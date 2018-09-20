@@ -61,7 +61,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <div class="col-md-5">
             <?= $form->field($model, 'address') ?>
             <?= $form->field($model, 'url') ?>
-            <?= $form->field($model, 'long') ?>
+            <?= $form->field($model, 'lng') ?>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-6">
