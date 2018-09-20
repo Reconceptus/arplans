@@ -60,10 +60,15 @@ ul {
     position: fixed;
     right: 10px;
     top: 10px;
+    padding-left: 10px;
 }
 
 .buttons-panel button {
-    margin: 10px;
+    margin: 10px 0;
+}
+
+.buttons-panel a {
+    margin: 10px 0;
 }
 
 .save-post {

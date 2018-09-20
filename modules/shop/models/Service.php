@@ -26,8 +26,8 @@ namespace modules\shop\models;
  */
 class Service extends \yii\db\ActiveRecord
 {
-    const TYPE_IMAGE = 'image';
-    const TYPE_FILE = 'file';
+    const TYPE_IMAGE = 1;
+    const TYPE_FILE = 4;
 
     /**
      * {@inheritdoc}
