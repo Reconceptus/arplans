@@ -78,8 +78,8 @@
                     <ul>
                         <li><a href="#">Все контакты</a></li>
                         <li><a href="#">О компании</a></li>
-                        <li><a href="#">Клуб партнеров</a></li>
-                        <li><a href="#">Коттеджные поселки</a></li>
+                        <li><?= \yii\helpers\Html::a('Клуб партнеров', \yii\helpers\Url::to('/partner')) ?></li>
+                        <li><?= \yii\helpers\Html::a('Коттеджные поселки', \yii\helpers\Url::to('/village')) ?></li>
                         <li><a href="#">Сотрудничество</a></li>
                         <li><?= \yii\helpers\Html::a('Блог', \yii\helpers\Url::to('/blog')) ?></li>
                     </ul>
