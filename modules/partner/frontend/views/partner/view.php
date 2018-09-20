@@ -57,36 +57,7 @@
                         </div>
                         <div class="sharing title-end">
                             <div class="title">Поделиться</div>
-                            <ul>
-                                <li>
-                                    <a href="#" class="ico ico-fb">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-fb"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ico ico-gg">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-gg"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ico ico-vk">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-vk"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ico ico-ok">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-ok"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
+                            <?=\frontend\widgets\share\Share::widget()?>
                         </div>
                     </div>
                 </div>
