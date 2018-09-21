@@ -9,6 +9,7 @@
 namespace modules\shop\frontend\controllers;
 
 
+use common\models\Config;
 use common\models\User;
 use modules\shop\models\Cart;
 use modules\shop\models\Order;
@@ -143,5 +144,29 @@ class CartController extends Controller
             $transaction->rollBack();
             return ['status' => 'fail'];
         }
+    }
+
+    /**
+     * Меняет количество альбомов у товара в заказе
+     * @return array
+     */
+    public function actionChange()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        $albumPrice = Config::getValue('album_price');
+        if (isset($get['id']) && isset($get['count'])) {
+            $model = Cart::findOne(['id' => intval($get['id'])]);
+            $count = intval($get['count']);
+            if ($count >= 1) {
+                $model->count = intval($get['count']);
+            } else {
+                $model->count = 1;
+            }
+            if ($model->save()) {
+                return ['status' => 'success', 'count' => $model->count, 'price' => $model->item->getLotPrice($model->count, $albumPrice)];
+            }
+        }
+        return ['status' => 'fail', 'message' => 'Ошибка при попытке изменить количество'];
     }
 }

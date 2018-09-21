@@ -59,18 +59,45 @@ $(function () {
                     count--;
                     $('#count-basket').text(count);
                     container.remove();
-                    $("li.you-buy[data-id=" + id + "]").remove();
+                    var string = $("li.you-buy[data-id=" + id + "]");
+                    string.remove();
+                    getAmount();
                 }
             }
         });
     });
 
-    $(document).on('click', '.js-counter', function () {
-        var container = $(this);
+    $(document).on('click', '.js-cart-change', function () {
+        var button = $(this);
+        var container = button.closest('.compare-table--section');
         var num = container.find('.album-num');
+        var count = num.val();
+        var minus = $('.minus');
         var id = container.data('id');
-
-    })
+        $.ajax({
+            type: 'GET',
+            url: '/shop/cart/change',
+            data: {
+                id: id,
+                count: count
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    container.find('.price').text(data.price);
+                    var string = $("span.sum[data-id=" + id + "]");
+                    string.text(data.price);
+                    getAmount();
+                    if (data.count === 1) {
+                        minus.addClass('disabled');
+                    } else {
+                        if (minus.hasClass('disabled')) {
+                            minus.removeClass('disabled')
+                        }
+                    }
+                }
+            }
+        });
+    });
 
     $(document).on('click', '.js-order', function () {
         var button = $(this);
@@ -159,4 +186,11 @@ $(function () {
         }
     })
 
+    function getAmount() {
+        var amount = 0.0;
+        $("span.sum").each(function (index, item) {
+            amount += parseFloat($(item).text());
+        });
+        $('#totalsum').text(amount);
+    }
 });

@@ -10,6 +10,7 @@ use modules\shop\models\Cart;
 
 /* @var $models Cart[] */
 /* @var $user \common\models\User */
+/* @var $albumPrice float */
 $totalSum = 0;
 ?>
 <div class="basket-form--section">
@@ -47,12 +48,14 @@ $totalSum = 0;
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <input type="text" placeholder="Город" value="<?= $user ? $user->profile->city : '' ?>" id="order-city">
+                            <input type="text" placeholder="Город" value="<?= $user ? $user->profile->city : '' ?>"
+                                   id="order-city">
                         </div>
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <input type="text" placeholder="Адрес" value="<?= $user ? $user->profile->address : '' ?>" id="order-address">
+                            <input type="text" placeholder="Адрес" value="<?= $user ? $user->profile->address : '' ?>"
+                                   id="order-address">
                         </div>
                     </div>
                 </div>
@@ -87,16 +90,16 @@ $totalSum = 0;
                         <ul>
                             <? foreach ($models as $model) {
                                 $item = $model->item;
-                                $price = $item->price - $item->discount;
+                                $price = $item->getLotPrice($model->count, $albumPrice);
                                 $totalSum += $price;
-                                echo '<li class="you-buy" data-id="' . $model->id . '">Проект ' . $item->name . ' на сумму ' . $price . '</li>';
+                                echo '<li class="you-buy" data-id="' . $model->id . '">Проект ' . $item->name . ' на сумму <span class="sum" data-id="' . $model->id . '">' . $price . '</span></li>';
                             } ?>
                         </ul>
                     </div>
                 </div>
                 <div class="form-row-col col-50">
                     <div class="ordering-submit--title">К оплате:</div>
-                    <div class="ordering-submit--subtitle">товаров на сумму <?= $totalSum ?></div>
+                    <div class="ordering-submit--subtitle">товаров на сумму <span id="totalsum"><?= $totalSum ?></span></div>
                     <div class="form-row-submit">
                         <div class="submit">
                             <button class="btn btn--og js-order">Перейти к оплате <i class="arrow"></i></button>
