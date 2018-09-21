@@ -117,6 +117,8 @@ class UserController extends AdminController
                     if ($oldRole !== $userRole) {
                         $auth->revokeAll($model->id);
                         $auth->assign($roles[$userRole], $model->id);
+                        $model->role = $userRole;
+                        $model->save();
                     }
                 }
 

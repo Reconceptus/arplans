@@ -121,7 +121,7 @@
         <div class="tab-section tab-video tab03">
             <div class="video">
                 <figure>
-                    <iframe width="560" height="315" src="<?= $model->video ?>"
+                    <iframe width="560" height="315" src="<?= str_replace('watch', 'embed', $model->video) ?>"
                             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </figure>
             </div>

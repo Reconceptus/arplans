@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "page".
  *
@@ -50,12 +48,12 @@ class Page extends \yii\db\ActiveRecord
         return [
             'id'          => 'ID',
             'slug'        => 'Slug',
-            'image'       => 'Image',
-            'name'        => 'Name',
-            'text'        => 'Text',
-            'title'       => 'Title',
-            'keywords'    => 'Keywords',
-            'description' => 'Description',
+            'image'       => 'Изображение',
+            'name'        => 'Название',
+            'text'        => 'Текст',
+            'title'       => 'Заголовок (сео)',
+            'keywords'    => 'Keywords (сео)',
+            'description' => 'Описание (сео)',
             'created_at'  => 'Created At',
             'updated_at'  => 'Updated At',
         ];

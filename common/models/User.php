@@ -20,6 +20,7 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
+ * @property string $role
  * @property string $auth_key
  * @property integer $status
  * @property integer $partner_id
@@ -59,7 +60,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email'], 'string'],
+            [['username', 'email', 'role'], 'string'],
             [['partner_id'], 'integer'],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -284,5 +285,16 @@ class User extends ActiveRecord implements IdentityInterface
             ->setTo($user->email)
             ->setSubject('Вы зарегистрированы на сайте ' . Yii::$app->name)
             ->send();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAuthors()
+    {
+        $authors = User::find()->alias('u')->select(['p.fio','u.id'])
+            ->innerJoin(Profile::tableName() . ' p', 'u.id = p.user_id')
+            ->where(['in', 'role', ['admin', 'manager']])->indexBy('id')->column();
+        return $authors;
     }
 }
