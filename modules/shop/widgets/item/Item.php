@@ -18,14 +18,17 @@ class Item extends Widget
     public $get;
     public $favorites = [];
     public $sizeCatalog;
+    public $inCart = [];
 
     public function run()
     {
+        $isInCart = array_key_exists($this->model->id, $this->inCart);
         $content = $this->render($this->viewName, [
             'model'       => $this->model,
             'get'         => $this->get,
             'favorites'   => $this->favorites,
-            'sizeCatalog' => $this->sizeCatalog
+            'sizeCatalog' => $this->sizeCatalog,
+            'isInCart'    => $isInCart
         ]);
         return $content;
     }

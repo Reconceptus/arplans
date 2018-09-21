@@ -15,6 +15,7 @@ use yii\widgets\ListView;
 /* @var $dataProvider ActiveDataProvider */
 /* @var $category \modules\shop\models\Category */
 /* @var $favorites array */
+/* @var $inCart array */
 ?>
 
     <div class="section bg-head">
@@ -28,7 +29,7 @@ use yii\widgets\ListView;
         <div class="content content--lg">
             <div class="custom-row filter-row show-more-parent">
                 <?= \modules\shop\widgets\filters\Filters::widget([
-                    'category'   => $category,
+                    'category' => $category,
                 ]) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
@@ -71,8 +72,8 @@ use yii\widgets\ListView;
                                     'class' => 'projects-item'
                                 ],
                                 'layout'       => "{items}",
-                                'itemView'     => function ($model, $key, $index, $widget) use ($favorites) {
-                                    return $this->render('_list', ['model' => $model, 'favorites' => $favorites]);
+                                'itemView'     => function ($model, $key, $index, $widget) use ($favorites, $inCart) {
+                                    return $this->render('_list', ['model' => $model, 'favorites' => $favorites, 'inCart' => $inCart]);
                                 },
                             ]);
                             ?>
