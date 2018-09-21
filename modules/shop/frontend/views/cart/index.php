@@ -8,9 +8,13 @@
 
 /* @var $models \modules\shop\widgets\cart\Cart[] */
 /* @var $services \modules\shop\models\Service[] */
-/* @var $user \common\models\User*/
-?>
+/* @var $user \common\models\User */
 
+$albumPrice = floatval(\common\models\Config::getValue('album_price'));
+?>
+<script>
+    var albumPrice = <?=$albumPrice?>;
+</script>
 <div class="section basket-order">
     <div class="content content--lg">
         <div class="basket-form--section">
@@ -56,14 +60,14 @@
                                 </div>
                                 <div class="compare-table--main">
                                     <? foreach ($models as $model): ?>
-                                        <?= $this->render('_list', ['model' => $model]) ?>
+                                        <?= $this->render('_list', ['model' => $model, 'albumPrice' => $albumPrice]) ?>
                                     <? endforeach; ?>
                                 </div>
                             </div>
                         </section>
                     </div>
                     <?= $this->render('_additional', ['services' => $services]) ?>
-                    <?= $this->render('_orderdata', ['models' => $models, 'user' => $user]) ?>
+                    <?= $this->render('_orderdata', ['models' => $models, 'user' => $user, 'albumPrice' => $albumPrice]) ?>
                 </div>
             </div>
             <?= $this->render('_sidebar') ?>

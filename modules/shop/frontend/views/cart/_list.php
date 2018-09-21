@@ -6,10 +6,12 @@
  * Time: 12:49
  */
 /* @var $model \modules\shop\models\Cart */
+/* @var $albumPrice float */
 $item = $model->item;
 ?>
+
 <div class="compare-table--item">
-    <div class="compare-table--section">
+    <div class="compare-table--section" data-id="<?= $model->id ?>">
         <div class="compare-table--part part-project">
             <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--preview">
                 <div class="bg" style="background-image: url('<?= $item->getMainImage() ?>')"></div>
@@ -21,7 +23,8 @@ $item = $model->item;
         <div class="compare-table--part part-articul">
             <div class="projects-item--part-title">Артикул</div>
             <div class="projects-item--info">
-                <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--articul"><?= $item->name ?></a>
+                <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>"
+                   class="projects-item--articul"><?= $item->name ?></a>
             </div>
         </div>
         <div class="compare-table--part">
@@ -52,17 +55,17 @@ $item = $model->item;
             <div class="projects-item--info">
                 <div class="album-head">**Количество альбомов</div>
                 <div class="form-row-element">
-                    <div class="counter js-counter" data-id="<?=$model->id?>">
-                        <span class="minus">
+                    <div class="counter">
+                        <span class="minus <?= $model->count <= 1 ? 'disabled' : '' ?> js-cart-change">
                             <i class="icon icon-minus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-count-minus"/>
                                 </svg>
                             </i>
                         </span>
-                        <input class="result album-num" readonly value="<?= $model->count ?>" min="1"
+                        <input class="result album-num" readonly value="<?= $model->count ?>"
                                data-id="<?= $item->id ?>">
-                        <span class="plus">
+                        <span class="plus js-cart-change">
                             <i class="icon icon-plus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-count-plus"/>
@@ -77,7 +80,7 @@ $item = $model->item;
             <div class="projects-item--actions">
                 <div class="price-box">
                     <div class="projects-item--part-title">Стоимость</div>
-                    <div class="price"><?= ($item->price - $item->discount) >= 0 ? $item->price - $item->discount : 0 ?>
+                    <div class="price"><?= $item->getLotPrice($model->count, $albumPrice) ?>
                         &#8381;
                     </div>
                 </div>
