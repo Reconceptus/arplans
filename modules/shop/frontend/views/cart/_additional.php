@@ -25,7 +25,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             </div>
                             <span class="show-more"></span>
                         </div>
-                        <div class="add-service--main show-more-hidden">
+                        <div class="add-service--main show-more-hidden" style="display: none">
                             <div class="add-service--main-text">
                                 <p><?= $service->preview_text ?></p>
                                 <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробней</a></p>
@@ -46,7 +46,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             </div>
                             <span class="show-more"></span>
                         </div>
-                        <div class="add-service--main show-more-hidden">
+                        <div class="add-service--main show-more-hidden" style="display: none">
                             <div class="add-service--main-text">
                                 <p><?= $service->preview_text ?></p>
                                 <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробней</a></p>
