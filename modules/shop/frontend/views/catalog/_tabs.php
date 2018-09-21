@@ -7,6 +7,7 @@
  */
 
 /* @var $model \modules\shop\models\Item */
+$ready = $model->getReady();
 ?>
 
 <div class="project-page--tabs">
@@ -21,9 +22,13 @@
         <ul>
             <li class="tab01"><label for="tab01">Основное</label></li>
             <li class="tab02"><label for="tab02">Стоимость строительства</label></li>
-            <li class="tab03"><label for="tab03">Видеообзор</label></li>
-            <li class="tab04"><label for="tab04">3D-тур</label></li>
-            <li class="tab05"><label for="tab05">Готовые объекты</label></li>
+            <? if ($model->video): ?>
+                <li class="tab03"><label for="tab03">Видеообзор</label></li>
+            <? endif; ?>
+            <!--            <li class="tab04"><label for="tab04">3D-тур</label></li>-->
+            <? if ($ready): ?>
+                <li class="tab05"><label for="tab05">Готовые объекты</label></li>
+            <? endif; ?>
             <li class="tab06"><label for="tab06">Доп. услуги</label></li>
         </ul>
     </nav>
@@ -118,35 +123,39 @@
                 </div>
             </div>
         </div>
-        <div class="tab-section tab-video tab03">
-            <div class="video">
-                <figure>
-                    <iframe width="560" height="315" src="<?= str_replace('watch', 'embed', $model->video) ?>"
-                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </figure>
+        <? if ($model->video): ?>
+            <div class="tab-section tab-video tab03">
+                <div class="video">
+                    <figure>
+                        <iframe width="560" height="315" src="<?= str_replace('watch', 'embed', $model->video) ?>"
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </figure>
+                </div>
             </div>
-        </div>
-        <div class="tab-section tab-3d tab04">
-            <div class="tour">
-                <iframe src=""></iframe>
+        <? endif; ?>
+        <!--        <div class="tab-section tab-3d tab04">-->
+        <!--            <div class="tour">-->
+        <!--                <iframe src=""></iframe>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <? if ($ready): ?>
+            <div class="tab-section tab-objects tab05">
+                <div class="tab-objects-slider" data-owl="objects">
+                    <ul class="owl-carousel">
+                        <? foreach ($ready as $readyImage): ?>
+                            <li class="object-item">
+                                <div class="projects-item--wrap">
+                                    <a href="#" class="projects-item--preview">
+                                        <div class="bg"
+                                             style="background-image: url(<?= $readyImage->image ?>)"></div>
+                                    </a>
+                                </div>
+                            </li>
+                        <? endforeach; ?>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="tab-section tab-objects tab05">
-            <div class="tab-objects-slider" data-owl="objects">
-                <ul class="owl-carousel">
-                    <? foreach ($model->getReady() as $readyImage): ?>
-                        <li class="object-item">
-                            <div class="projects-item--wrap">
-                                <a href="#" class="projects-item--preview">
-                                    <div class="bg"
-                                         style="background-image: url(<?= $readyImage->image ?>)"></div>
-                                </a>
-                            </div>
-                        </li>
-                    <? endforeach; ?>
-                </ul>
-            </div>
-        </div>
+        <? endif; ?>
         <div class="tab-section tab-services tab06">
             <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'index']) ?>
         </div>
