@@ -45,11 +45,12 @@ $(function () {
     $(document).on('click', '.js-delete-cart-item', function () {
         var button = $(this);
         var container = button.closest('.compare-table--item');
+        var id = button.data('id')
         $.ajax({
             type: 'GET',
             url: '/shop/cart/delete',
             data: {
-                id: button.data('id')
+                id: id
             },
             success: function (data) {
                 if (data.status === 'success') {
@@ -58,6 +59,7 @@ $(function () {
                     count--;
                     $('#count-basket').text(count);
                     container.remove();
+                    $("li.you-buy[data-id=" + id + "]").remove();
                 }
             }
         });
@@ -151,9 +153,9 @@ $(function () {
         var button = $(this);
         var container = button.closest('.catalog-filters--section');
         if (button.prop('checked') === true) {
-            container.find('input:checkbox').prop('checked',true);
-        }else{
-            container.find('input:checkbox').prop('checked',false);
+            container.find('input:checkbox').prop('checked', true);
+        } else {
+            container.find('input:checkbox').prop('checked', false);
         }
     })
 
