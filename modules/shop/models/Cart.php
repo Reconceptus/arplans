@@ -4,6 +4,7 @@ namespace modules\shop\models;
 
 use common\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "shop_cart".
@@ -112,6 +113,22 @@ class Cart extends \yii\db\ActiveRecord
      */
     public static function clearUserCart($userId)
     {
-        return self::deleteAll(['user_id'=>$userId]);
+        return self::deleteAll(['user_id' => $userId]);
+    }
+
+    /**
+     * @param bool $active
+     * @return array
+     */
+    public static function getInCart($active = true)
+    {
+        $query = Cart::find()->alias('c');
+        if ($active) {
+            $query->innerJoin(Item::tableName() . ' i', 'i.id = c.item_id')
+                ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
+        }
+        $query->andWhere(['c.user_id' => Yii::$app->user->id]);
+        $models= $query->all();
+        return ArrayHelper::map($models, 'item_id', 'count');
     }
 }

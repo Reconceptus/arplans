@@ -8,6 +8,7 @@
 
 namespace modules\shop\frontend\controllers;
 
+use modules\shop\models\Cart;
 use modules\shop\models\Catalog;
 use modules\shop\models\Favorite;
 use modules\shop\models\Item;
@@ -30,7 +31,7 @@ class FavoriteController extends Controller
                 'query' => $query
             ]);
             $sizeCatalog = Catalog::findOne(['slug' => 'size']);
-            return $this->render('index', ['dataProvider' => $dataProvider, 'sizeCatalog' => $sizeCatalog]);
+            return $this->render('index', ['dataProvider' => $dataProvider, 'sizeCatalog' => $sizeCatalog, 'inCart'=>Cart::getInCart()]);
         }
     }
 

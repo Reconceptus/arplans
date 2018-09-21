@@ -10,6 +10,7 @@ use yii\widgets\ListView;
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $sizeCatalog \modules\shop\models\Catalog */
+/* @var $inCart array */
 ?>
 <div class="section compare compare-page">
     <div class="content content--lg">
@@ -78,8 +79,8 @@ use yii\widgets\ListView;
                             'class' => 'compare-table--item'
                         ],
                         'layout'       => "{items}",
-                        'itemView'     => function ($model, $key, $index, $widget) use ($sizeCatalog) {
-                            return $this->render('_list', ['model' => $model, 'sizeCatalog' => $sizeCatalog]);
+                        'itemView'     => function ($model, $key, $index, $widget) use ($sizeCatalog, $inCart) {
+                            return $this->render('_list', ['model' => $model, 'sizeCatalog' => $sizeCatalog, 'inCart' => $inCart]);
                         },
                     ]);
                     ?>

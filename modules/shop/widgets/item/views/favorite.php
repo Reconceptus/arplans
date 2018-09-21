@@ -9,6 +9,7 @@
 use modules\shop\models\Item;
 
 /* @var $model Item */
+/* @var $isInCart bool */
 /* @var $sizeCatalog \modules\shop\models\Catalog */
 $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
 ?>
@@ -88,8 +89,9 @@ $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
                 <div class="price"><?= intval($model->price) - intval($model->discount) ?> &#8381;</div>
             </div>
             <div class="btns">
-                <a class="basket btn-small js-to-cart" data-id="<?= $model->id ?>">в корзину</a>
-                <button class="compare-table--remove js-delete-favorite-item" data-id="<?=$model->id?>">
+                <a class="basket btn-small  <?= $isInCart ? 'incart' : '' ?> js-to-cart"
+                   data-id="<?= $model->id ?>"><?= $isInCart ? 'в корзине' : 'в корзину' ?></a>
+                <button class="compare-table--remove js-delete-favorite-item" data-id="<?= $model->id ?>">
                     <i class="icon-remove">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-remove"/>

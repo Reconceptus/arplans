@@ -11,6 +11,7 @@ use modules\shop\models\Item;
 /* @var $model Item */
 /* @var $favorites array */
 /* @var $get array */
+/* @var $isInCart bool */
 ?>
 <div class="projects-item--wrap">
     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
@@ -65,6 +66,7 @@ use modules\shop\models\Item;
                      xlink:href="#icon-heart-like"/>
             </svg>
         </a>
-        <a class="basket btn-small js-to-cart" data-id="<?=$model->id?>">в корзину</a>
+        <a class="basket btn-small <?= $isInCart ? 'incart' : '' ?> js-to-cart"
+           data-id="<?= $model->id ?>"><?= $isInCart ? 'в корзине' : 'в корзину' ?></a>
     </div>
 </div>

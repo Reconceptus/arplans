@@ -31,6 +31,8 @@ $(function () {
                 id: button.data('id')
             },
             success: function (data) {
+                button.addClass('incart');
+                button.text('В корзине');
                 if (data.status === 'success') {
                     var count = $('#count-basket').text();
                     count = parseInt(count, 10);

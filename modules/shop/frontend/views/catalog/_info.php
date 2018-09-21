@@ -10,6 +10,7 @@ use yii\helpers\Html;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
+/* @var $isInPrice bool */
 
 $price = $model->getPrice();
 ?>
@@ -30,10 +31,14 @@ $price = $model->getPrice();
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <? if ($price || !$model->project): ?>
-                        <?= Html::a('Купить проект', '', ['class' => 'btn-square-min js-to-cart', 'data-id' => $model->id]) ?>
+                    <? if ($isInCart): ?>
+                        <?= Html::a('Добавлен в корзину', '', ['class' => 'btn-square-min incart js-to-cart', 'data-id' => $model->id]) ?>
                     <? else: ?>
-                        <?= Html::a('Скачать проект', \yii\helpers\Url::to(['/shop/download', 'id'=>$model->id]), ['class' => 'btn-square-min', 'data-id' => $model->id]) ?>
+                        <? if ($price || !$model->project): ?>
+                            <?= Html::a('Купить проект', '', ['class' => 'btn-square-min js-to-cart', 'data-id' => $model->id]) ?>
+                        <? else: ?>
+                            <?= Html::a('Скачать проект', \yii\helpers\Url::to(['/shop/download', 'id' => $model->id]), ['class' => 'btn-square-min', 'data-id' => $model->id]) ?>
+                        <? endif; ?>
                     <? endif; ?>
                     <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">

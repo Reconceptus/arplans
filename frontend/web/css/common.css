@@ -6,3 +6,9 @@
 .projects-item .btn-small, .btn-square-min, .icon-liked {
     cursor: pointer;
 }
+
+.incart{
+    background-color: #346697;
+    border-color: #346697;
+    color: #fff;
+}
