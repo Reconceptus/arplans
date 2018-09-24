@@ -7,6 +7,9 @@
  */
 
 /* @var $model \modules\partner\models\Partner */
+$this->title = $model->seo_title;
+$this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
 
     <div class="section partner-page--head">

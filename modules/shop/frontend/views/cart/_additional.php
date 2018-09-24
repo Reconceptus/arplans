@@ -20,7 +20,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             <div class="check">
                                 <label>
                                     <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                    <span><?= $service->name ?>, <?= $service->price ?>&nbsp;&#8381;</span>
+                                    <?= \yii\helpers\Html::a('<span>' . $service->name . ', ' . $service->price . '&nbsp;&#8381;</span>', \yii\helpers\Url::to('/shop/service/' . $service->slug), ['class'=>'service-link']) ?>
                                 </label>
                             </div>
                             <span class="show-more"></span>
@@ -41,7 +41,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             <div class="check">
                                 <label>
                                     <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                    <span><?= $service->name ?>, <?= $service->price ?>&nbsp;&#8381;</span>
+                                    <?= \yii\helpers\Html::a('<span>' . $service->name . ', ' . $service->price . '&nbsp;&#8381;</span>', \yii\helpers\Url::to('/shop/service/' . $service->slug), ['class'=>'service-link']) ?>
                                 </label>
                             </div>
                             <span class="show-more"></span>

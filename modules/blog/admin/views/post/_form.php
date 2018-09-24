@@ -40,6 +40,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
         <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
     </div>
     <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'author_id')->dropDownList(\common\models\User::getAuthors()) ?>
     <?= $form->field($model, 'on_main')->checkbox() ?>
     <?= $form->field($model, 'to_menu')->checkbox() ?>
     <div class="form-group field-post-slug">
