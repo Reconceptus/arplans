@@ -62,6 +62,13 @@ class Item extends \yii\db\ActiveRecord
 
     const IS_NEW = 1;
 
+    public $cost;
+
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['cost']);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -77,7 +84,8 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'slug', 'category_id'], 'required'],
-            [['price', 'discount'], 'number'],
+            [['cost'], 'safe'],
+            [['price', 'discount', 'cost'], 'number'],
             [['category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
                 'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace',
                 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
@@ -95,43 +103,43 @@ class Item extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'              => 'ID',
-            'category_id'     => 'Категория',
-            'slug'            => 'Url',
-            'name'            => 'Название',
-            'description'     => 'Описание',
-            'video'           => 'Видео',
-            'seo_title'       => 'Заголовок (SEO)',
+            'id' => 'ID',
+            'category_id' => 'Категория',
+            'slug' => 'Url',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'video' => 'Видео',
+            'seo_title' => 'Заголовок (SEO)',
             'seo_description' => 'Описание (SEO)',
-            'seo_keywords'    => 'Ключевые слова (SEO)',
-            'project'         => 'Проект',
-            'image_id'        => 'Превью',
-            'price'           => 'Цена',
-            'discount'        => 'Скидка',
-            'build_price'     => 'Цена строительства',
-            'rooms'           => 'Количество комнат',
-            'bathrooms'       => 'Количество санузлов',
-            'live_area'       => 'Жилая площадь',
-            'common_area'     => 'Общая площадь',
-            'useful_area'     => 'Полезная площадь',
-            'one_floor'       => 'Один этаж',
-            'two_floor'       => 'Два этажа',
-            'mansard'         => 'Мансарда',
-            'pedestal'        => 'Цоколь',
-            'cellar'          => 'Чердак',
-            'garage'          => 'Гараж',
-            'double_garage'   => 'Гараж на 2 авто',
-            'tent'            => 'Навес',
-            'terrace'         => 'Терасса',
-            'balcony'         => 'Балкон',
-            'light2'          => 'Второй свет',
-            'pool'            => 'Бассейк',
-            'sauna'           => 'Сауна',
-            'gas_boiler'      => 'Газовая котельная',
-            'is_new'          => 'Новинка',
-            'is_active'       => 'Активен',
-            'is_deleted'      => 'Удален',
-            'sort'            => 'Сортировка',
+            'seo_keywords' => 'Ключевые слова (SEO)',
+            'project' => 'Проект',
+            'image_id' => 'Превью',
+            'price' => 'Цена',
+            'discount' => 'Скидка',
+            'build_price' => 'Цена строительства',
+            'rooms' => 'Количество комнат',
+            'bathrooms' => 'Количество санузлов',
+            'live_area' => 'Жилая площадь',
+            'common_area' => 'Общая площадь',
+            'useful_area' => 'Полезная площадь',
+            'one_floor' => 'Один этаж',
+            'two_floor' => 'Два этажа',
+            'mansard' => 'Мансарда',
+            'pedestal' => 'Цоколь',
+            'cellar' => 'Чердак',
+            'garage' => 'Гараж',
+            'double_garage' => 'Гараж на 2 авто',
+            'tent' => 'Навес',
+            'terrace' => 'Терасса',
+            'balcony' => 'Балкон',
+            'light2' => 'Второй свет',
+            'pool' => 'Бассейк',
+            'sauna' => 'Сауна',
+            'gas_boiler' => 'Газовая котельная',
+            'is_new' => 'Новинка',
+            'is_active' => 'Активен',
+            'is_deleted' => 'Удален',
+            'sort' => 'Сортировка',
         ];
     }
 
@@ -191,6 +199,11 @@ class Item extends \yii\db\ActiveRecord
         return $this->hasMany(ItemImage::className(), ['item_id' => 'id'])->andWhere(['type' => ItemImage::TYPE_READY])->all();
     }
 
+    public function getCost()
+    {
+        return ($this->price - $this->discount);
+    }
+
     /**
      * Получаем основное фото товара
      * @return string
@@ -208,10 +221,15 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
+    /**
+     * @param Category|ActiveRecord $category
+     * @param array $get
+     * @return ActiveQuery
+     */
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
-        $query = Item::find()->alias('i')->distinct()
+        $query = Item::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')->distinct()
             ->leftJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
             ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
             ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
@@ -276,6 +294,9 @@ class Item extends \yii\db\ActiveRecord
                 $query->andWhere(['<=', 'i.common_area', intval($get['maxarea'])]);
             }
             unset($get['maxarea']);
+        }
+        if (isset($get['sort'])) {
+            unset($get['sort']);
         }
 
         // По остальным параметрам
@@ -396,9 +417,9 @@ class Item extends \yii\db\ActiveRecord
     public function getLotPrice(int $count, $albumPrice)
     {
         $price = $this->getPrice();
-        if($count>1){
+        if ($count > 1) {
             $result = $price + ($count - 1) * (float)$albumPrice;
-        }else{
+        } else {
             $result = $price;
         }
         return $result;

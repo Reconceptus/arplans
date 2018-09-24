@@ -34,16 +34,12 @@ use yii\widgets\ListView;
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
                         <div class="catalog-header show-more-hidden">
-                            <a href="#" class="filter down">
-                                С меньшей ценой вниз
+                            <a href="<?=$dataProvider->sort->createUrl('cost')?>" class="filter down">
+                                По цене
                                 <i class="arrow"></i>
                             </a>
-                            <a href="#" class="filter up">
-                                С большей площадью вверх
-                                <i class="arrow"></i>
-                            </a>
-                            <a href="#" class="filter down">
-                                Новинки вверх
+                            <a href="<?=$dataProvider->sort->createUrl('common_area')?>" class="filter down">
+                                По площади
                                 <i class="arrow"></i>
                             </a>
                         </div>

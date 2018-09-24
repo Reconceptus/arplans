@@ -1,6 +1,5 @@
 <?php
 
-use common\models\Partner;
 use yii\db\Migration;
 
 /**
@@ -28,13 +27,6 @@ class m180723_111111_create_partners extends Migration
             'SET NULL',
             'CASCADE'
         );
-
-        $arplans = Partner::find()->where(['name' => 'Arplans'])->one();
-        if (!$arplans) {
-            $arplans = new Partner();
-            $arplans->name = 'Arplans';
-            $arplans->save();
-        }
     }
 
     /**

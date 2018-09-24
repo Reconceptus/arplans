@@ -42,21 +42,24 @@ class CatalogController extends Controller
         if (isset($get['per-page'])) {
             unset($get['per-page']);
         }
-        $query = Item::getFilteredQuery($category, $get)->orderBy(['sort' => SORT_ASC]);
+        $query = Item::getFilteredQuery($category, $get);
 
         $dataProvider = new ActiveDataProvider([
-            'query'      => $query,
+            'query' => $query,
             'pagination' => [
-                'pageSize'        => 6,
+                'pageSize' => 6,
                 'defaultPageSize' => 2,
             ],
+            'sort' => ['defaultOrder' => ['sort' => SORT_DESC, 'id' => SORT_DESC]
+            ]
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'category'     => $category,
-            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
-            'inCart'    => Cart::getInCart()
+            'category' => $category,
+            'favorites' => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
+            'inCart' => Cart::getInCart(),
+            'sort' => isset($get['sort']) ? $get['sort'] : '',
         ]);
     }
 
@@ -67,9 +70,9 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('Товар не найден');
         }
         return $this->render('view', [
-            'model'     => $model,
+            'model' => $model,
             'favorites' => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
-            'inCart'    => Cart::getInCart()
+            'inCart' => Cart::getInCart()
         ]);
     }
 

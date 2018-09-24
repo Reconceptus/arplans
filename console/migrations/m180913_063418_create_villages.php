@@ -144,7 +144,6 @@ class m180913_063418_create_villages extends Migration
         ]);
         $this->createIndex('U_village_slug', 'region', 'slug', true);
         $this->createIndex('U_village_name', 'region', 'name', true);
-        $this->addForeignKey('FK_village_region', 'village', 'region_id', 'region', 'id');
 
         $this->createTable('village_image', [
             'id'         => $this->primaryKey()->unsigned(),
@@ -153,7 +152,6 @@ class m180913_063418_create_villages extends Migration
             'thumb'      => $this->string(),
             'sort'       => $this->integer()
         ]);
-        $this->addForeignKey('FK_village_image_village', 'village_image', 'village_id', 'village', 'id');
 
         $this->createTable('village_benefit', [
             'id'         => $this->primaryKey()->unsigned(),
@@ -161,8 +159,6 @@ class m180913_063418_create_villages extends Migration
             'name'       => $this->string(),
             'text'       => $this->string(500)
         ]);
-        $this->addForeignKey('FK_village_benefit_village', 'village_benefit', 'village_id', 'village', 'id');
-
 
         $this->addColumn('partner', 'slug', $this->string());
         $this->addColumn('partner', 'region_id', $this->integer()->unsigned());
@@ -189,7 +185,6 @@ class m180913_063418_create_villages extends Migration
         $this->addColumn('partner', 'any_region', $this->boolean());
 
         $this->createIndex('U_partner_slug', 'partner', 'slug', true);
-        $this->addForeignKey('FK_partner_region', 'partner', 'region_id', 'region', 'id');
 
         $this->createTable('partner_image', [
             'id'         => $this->primaryKey()->unsigned(),
@@ -198,7 +193,6 @@ class m180913_063418_create_villages extends Migration
             'thumb'      => $this->string(),
             'sort'       => $this->integer()
         ]);
-        $this->addForeignKey('FK_partner_image_partner', 'partner_image', 'partner_id', 'partner', 'id');
 
         $this->createTable('partner_benefit', [
             'id'         => $this->primaryKey()->unsigned(),
@@ -206,6 +200,12 @@ class m180913_063418_create_villages extends Migration
             'name'       => $this->string(),
             'text'       => $this->string(500)
         ]);
+
+        $this->addForeignKey('FK_partner_image_partner', 'partner_image', 'partner_id', 'partner', 'id');
+        $this->addForeignKey('FK_partner_region', 'partner', 'region_id', 'region', 'id');
+        $this->addForeignKey('FK_village_benefit_village', 'village_benefit', 'village_id', 'village', 'id');
+        $this->addForeignKey('FK_village_region', 'village', 'region_id', 'region', 'id');
+        $this->addForeignKey('FK_village_image_village', 'village_image', 'village_id', 'village', 'id');
         $this->addForeignKey('FK_partner_benefit_partner', 'partner_benefit', 'partner_id', 'partner', 'id');
     }
 
@@ -217,6 +217,9 @@ class m180913_063418_create_villages extends Migration
         $this->dropForeignKey('FK_village_region', 'village');
         $this->dropForeignKey('FK_partner_region', 'partner');
         $this->dropForeignKey('FK_village_image_village', 'village_image');
+        $this->dropForeignKey('FK_partner_image_partner', 'partner_image');
+        $this->dropForeignKey('FK_partner_benefit_partner', 'partner_benefit');
+        $this->dropForeignKey('FK_village_benefit_village', 'village_benefit');
 
         $this->dropColumn('partner', 'slug');
         $this->dropColumn('partner', 'region_id');

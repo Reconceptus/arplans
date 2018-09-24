@@ -18,8 +18,6 @@ class m180917_091217_add_contacts_to_partner extends Migration
         $this->addColumn('partner', 'logo', $this->string());
         $this->addColumn('partner', 'image_id', $this->integer()->unsigned());
         $this->addColumn('village', 'image_id', $this->integer()->unsigned());
-        $this->addForeignKey('FK_partner_image', 'partner', 'image_id', 'partner_image', 'id');
-        $this->addForeignKey('FK_village_image', 'village', 'image_id', 'village_image', 'id');
     }
 
     /**
@@ -27,8 +25,6 @@ class m180917_091217_add_contacts_to_partner extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('FK_partner_image','partner');
-        $this->dropForeignKey('FK_village_image','village');
         $this->dropColumn('partner', 'address');
         $this->dropColumn('partner', 'phone');
         $this->dropColumn('partner', 'price_list');

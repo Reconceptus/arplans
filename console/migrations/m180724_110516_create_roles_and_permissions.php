@@ -9,6 +9,7 @@ class m180724_110516_create_roles_and_permissions extends Migration
 {
     public function safeUp()
     {
+        $this->addColumn('user', 'role', $this->string()->defaultValue('user'));
         $auth = Yii::$app->authManager;
 
         // создать разрешения
@@ -52,11 +53,13 @@ class m180724_110516_create_roles_and_permissions extends Migration
         $userAdmin = new \common\models\User();
         $userAdmin->setPassword('111111');
         $userAdmin->username = 'admin';
-        $userAdmin->partner_id = 1;
+        $userAdmin->role = 'admin';
         $userAdmin->email = 'suhov.a.s@yandex.ru';
         $userAdmin->status = \common\models\User::STATUS_ACTIVE;
         $userAdmin->generateAuthKey();
-        $userAdmin->save();
+        if(!$userAdmin->save()){
+            var_dump($userAdmin->errors);die;
+        }
 
         $auth->assign($admin, $userAdmin->getId());
     }
@@ -66,6 +69,6 @@ class m180724_110516_create_roles_and_permissions extends Migration
      */
     public function safeDown()
     {
-        return true;
+        $this->dropColumn('user', 'role');
     }
 }
