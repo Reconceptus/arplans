@@ -24,7 +24,7 @@ class FavoriteController extends Controller
     public function actionIndex()
     {
         if (!\Yii::$app->user->isGuest) {
-            $query = Item::find()->alias('i')
+            $query = Item::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')
                 ->innerJoin(Favorite::tableName() . ' f', 'f.item_id=i.id')
                 ->where(['f.user_id' => \Yii::$app->user->id, 'i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
             $dataProvider = new ActiveDataProvider([

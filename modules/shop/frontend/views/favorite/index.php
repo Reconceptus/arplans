@@ -7,6 +7,7 @@
  */
 
 use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $sizeCatalog \modules\shop\models\Catalog */
@@ -18,14 +19,15 @@ use yii\widgets\ListView;
         <div class="custom-row">
             <div class="custom-row-col col-elastic">
                 <div class="compare-table">
+                    <?  Pjax::begin(); ?>
                     <div class="compare-table--header">
                         <div class="compare-table--part part-project">
-                            <a href="javascript:void(0);">
+                            <a href="<?=$dataProvider->sort->createUrl('id')?>">
                                 Проект
                             </a>
                         </div>
                         <div class="compare-table--part">
-                            <a href="javascript:void(0);" class="up">
+                            <a href="<?=$dataProvider->sort->createUrl('common_area')?>" class="down">
                                 Площадь
                                 <i class="arrow"></i>
                             </a>
@@ -33,23 +35,20 @@ use yii\widgets\ListView;
                         <div class="compare-table--part">
                             <a href="javascript:void(0);" class="down">
                                 Удобства
-                                <i class="arrow"></i>
                             </a>
                         </div>
                         <div class="compare-table--part part-rooms">
                             <a href="javascript:void(0);" class="down">
                                 Этажи/комнаты
-                                <i class="arrow"></i>
                             </a>
                         </div>
                         <div class="compare-table--part">
                             <a href="javascript:void(0);" class="down">
                                 Тип строения
-                                <i class="arrow"></i>
                             </a>
                         </div>
                         <div class="compare-table--part part-cost">
-                            <a href="javascript:void(0);" class="down">
+                            <a href="<?=$dataProvider->sort->createUrl('cost')?>" class="down">
                                 Стоимость
                                 <i class="arrow"></i>
                             </a>
@@ -83,6 +82,7 @@ use yii\widgets\ListView;
                             return $this->render('_list', ['model' => $model, 'sizeCatalog' => $sizeCatalog, 'inCart' => $inCart]);
                         },
                     ]);
+                    Pjax::end();
                     ?>
                 </div>
             </div>
