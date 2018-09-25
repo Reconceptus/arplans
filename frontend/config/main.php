@@ -16,6 +16,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
         'request'      => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
             'csrfParam' => '_csrf-frontend',
         ],
         'authManager'  => [
@@ -45,7 +48,9 @@ return [
         'urlManager'   => [
             'enablePrettyUrl' => true,
             'showScriptName'  => false,
+            'enableStrictParsing' => true,
             'rules'           => [
+                ['class' => 'yii\rest\UrlRule','pluralize'=>false, 'controller' => 'api/item'],
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
                 'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',
@@ -82,7 +87,8 @@ return [
                 '<slug:[a-zA-Z0-9\_\-]+>'                                                                         => 'page/view',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
-                'shop'
+                'shop',
+                '/'=>'/'
             ],
         ],
     ],
@@ -101,6 +107,9 @@ return [
         ],
         'users'   => [
             'class' => 'modules\users\Module',
+        ],
+        'api'   => [
+            'class' => 'modules\api\v1\Module',
         ],
     ],
     'params'              => $params,

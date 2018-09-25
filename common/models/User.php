@@ -5,7 +5,6 @@ namespace common\models;
 use modules\partner\models\Partner;
 use modules\shop\models\Favorite;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -16,17 +15,17 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $role
- * @property string $auth_key
+ * @property string  $username
+ * @property string  $password_hash
+ * @property string  $password_reset_token
+ * @property string  $email
+ * @property string  $role
+ * @property string  $auth_key
  * @property integer $status
  * @property integer $partner_id
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
+ * @property string  $password write-only password
  * @property Profile $profile
  * @property Partner $partner
  */
@@ -82,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -292,7 +291,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function getAuthors()
     {
-        $authors = User::find()->alias('u')->select(['p.fio','u.id'])
+        $authors = User::find()->alias('u')->select(['p.fio', 'u.id'])
             ->innerJoin(Profile::tableName() . ' p', 'u.id = p.user_id')
             ->where(['in', 'role', ['admin', 'manager']])->indexBy('id')->column();
         return $authors;

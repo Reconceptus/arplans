@@ -90,4 +90,16 @@ class Category extends \yii\db\ActiveRecord
             return ArrayHelper::map(self::find()->where(['is_active' => self::IS_ACTIVE])->all(), 'id', 'name');
         }, 1000);
     }
+
+    /**
+     * Получаем категории для партнера
+     * @return array
+     */
+    public static function getPartnerCategories()
+    {
+        $cache = \Yii::$app->cache;
+        return $cache->getOrSet('categories-list', function ($cache) {
+            return ArrayHelper::map(self::find()->where(['is_active' => self::IS_ACTIVE])->all(), 'id', 'name');
+        }, 1000);
+    }
 }
