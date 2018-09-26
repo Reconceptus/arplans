@@ -26,7 +26,7 @@ class m180917_091217_add_contacts_to_partner extends Migration
     public function safeDown()
     {
         $this->dropColumn('partner', 'address');
-        $this->dropColumn('partner', 'phone');
+        $this->dropColumn('partner', 'phones');
         $this->dropColumn('partner', 'price_list');
         $this->dropColumn('partner', 'logo');
         $this->dropColumn('partner', 'image_id');

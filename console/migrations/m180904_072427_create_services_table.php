@@ -87,9 +87,10 @@ class m180904_072427_create_services_table extends Migration
         $this->dropForeignKey('FK_order_item_item', 'shop_order_item');
         $this->dropForeignKey('FK_order_service_order', 'shop_order_service');
         $this->dropForeignKey('FK_order_service_service', 'shop_order_service');
-        $this->dropTable('shop_services');
+        $this->dropTable('shop_service');
         $this->dropTable('shop_order_service');
         $this->dropTable('shop_order_item');
         $this->dropTable('shop_order');
+        $this->dropTable('payment_system');
     }
 }

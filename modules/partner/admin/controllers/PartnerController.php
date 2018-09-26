@@ -9,6 +9,7 @@
 namespace modules\partner\admin\controllers;
 
 
+use common\models\User;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Partner;
 use modules\partner\models\PartnerBenefit;
@@ -188,9 +189,18 @@ class PartnerController extends AdminController
 
             return $this->redirect(Url::to(['/admin/modules/partner/partner/update', 'id' => $model->id]));
         }
-
+        $users = User::find()->alias('u')->select(['u.username', 'u.id'])
+            ->leftJoin(['p' => Partner::tableName()], 'u.id = p.agent_id')
+            ->where(['is', 'p.agent_id', null])
+            ->andWhere(['not in', 'u.role', ['admin', 'manager']])
+            ->indexBy('id')
+            ->column();
+        if ($model->agent) {
+            $users[$model->agent_id] = $model->agent->username;
+        }
         return $this->render('_form', [
             'model' => $model,
+            'users' => $users
         ]);
     }
 

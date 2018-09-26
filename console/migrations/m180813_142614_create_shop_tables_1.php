@@ -225,15 +225,11 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->dropForeignKey('FK_item_image_item', 'shop_item_image');
         $this->dropForeignKey('FK_item_category', 'shop_item');
         $this->dropForeignKey('FK_catalog_item_catalog', 'shop_catalog_item');
-        $this->dropForeignKey('FK_catalog_category_category', 'shop_catalog_category');
-        $this->dropForeignKey('FK_catalog_category_catalog', 'shop_catalog_category');
 
         $this->dropTable('shop_item_image');
         $this->dropTable('shop_item');
         $this->dropTable('shop_catalog_item');
-        $this->dropTable('shop_catalog_category');
         $this->dropTable('shop_catalog');
         $this->dropTable('shop_category');
-        $this->dropTable('image');
     }
 }

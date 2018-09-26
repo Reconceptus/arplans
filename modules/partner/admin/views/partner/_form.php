@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 
 
 /* @var $model \modules\partner\models\Partner */
+/* @var $users array */
 
 $this->title = $model->isNewRecord ? 'Добавление партнера' : 'Редактирование партнера';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
@@ -51,6 +52,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
+            <?= $form->field($model, 'agent_id')->dropDownList($users, ['prompt' => '']) ?>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-5">

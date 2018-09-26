@@ -22,12 +22,10 @@ use yii\web\IdentityInterface;
  * @property string  $role
  * @property string  $auth_key
  * @property integer $status
- * @property integer $partner_id
  * @property integer $created_at
  * @property integer $updated_at
  * @property string  $password write-only password
  * @property Profile $profile
- * @property Partner $partner
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -60,11 +58,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'email', 'role'], 'string'],
-            [['partner_id'], 'integer'],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            [['partner_id'], 'exist', 'skipOnError' => true, 'targetClass' => Partner::className(), 'targetAttribute' => ['partner_id' => 'id']],
         ];
     }
 
@@ -221,8 +217,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getPartner()
     {
-        return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
+        return $this->hasOne(Partner::className(), ['agent_id' => 'id']);
     }
+
 
     /**
      * @return \yii\db\ActiveQuery|array
@@ -293,7 +290,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $authors = User::find()->alias('u')->select(['p.fio', 'u.id'])
             ->innerJoin(Profile::tableName() . ' p', 'u.id = p.user_id')
-            ->where(['in', 'role', ['admin', 'manager']])->indexBy('id')->column();
+            ->where(['in', 'u.role', ['admin', 'manager']])->indexBy('id')->column();
         return $authors;
     }
 }

@@ -19,10 +19,17 @@ class ItemController extends ActiveController
         return $actions;
     }
 
-    public function actionIndex($category)
+    public function actionIndex()
     {
+        $get = \Yii::$app->request->get();
+        $user = \Yii::$app->user->identity;
+        if (isset($get['category'])) {
+            $category = $get['category'];
+        }else{
+
+        }
         $category = Category::findOne(['id' => $category]);
-        $query = Item::getFilteredQuery($category, \Yii::$app->request->get());
+        $query = Item::getFilteredQuery($category, $get);
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
@@ -36,10 +43,7 @@ class ItemController extends ActiveController
     {
         $query = Item::find()->where(['id' => $id]);
         $dataProvider = new ActiveDataProvider([
-            'query'      => $query,
-            'pagination' => [
-                'defaultPageSize' => 2,
-            ],
+            'query' => $query,
         ]);
         return $dataProvider;
     }
