@@ -22,13 +22,12 @@ class ItemController extends ActiveController
     public function actionIndex()
     {
         $get = \Yii::$app->request->get();
-        $user = \Yii::$app->user->identity;
         if (isset($get['category'])) {
-            $category = $get['category'];
-        }else{
-
+            $category = Category::findOne(['id' => intval($get['category'])]);
+        } else {
+            $categories = \Yii::$app->user->identity->partner->categories;
+            $category = $categories[0];
         }
-        $category = Category::findOne(['id' => $category]);
         $query = Item::getFilteredQuery($category, $get);
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
