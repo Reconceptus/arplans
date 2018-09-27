@@ -32,7 +32,7 @@ class ItemController extends ActiveController
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'defaultPageSize' => 2,
+                'defaultPageSize' => 6,
             ],
         ]);
         return $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category]);
