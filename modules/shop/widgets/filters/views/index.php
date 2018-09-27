@@ -231,11 +231,11 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                 </div>
                             </div>
                         </div>
-<!--                        --><?// foreach ($filters as $catalog): ?>
-<!--                            --><?// if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
-<!--                                --><?//= $this->render('_checkbox', ['catalog' => $catalog]) ?>
-<!--                            --><?// endif; ?>
-<!--                        --><?// endforeach; ?>
+                        <? foreach ($filters as $catalog): ?>
+                            <? if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
+                                <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
+                            <? endif; ?>
+                        <? endforeach; ?>
                         <div class="catalog-filters--section show-more-parent">
                             <div class="catalog-filters--head">
                                 <h3 class="form-title">Подборки</h3>
