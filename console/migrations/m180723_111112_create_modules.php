@@ -25,6 +25,6 @@ class m180723_111112_create_modules extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('modules');
+        $this->dropTable('module');
     }
 }

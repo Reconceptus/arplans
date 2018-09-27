@@ -54,5 +54,7 @@ class m180820_061626_create_item_options extends Migration
         $this->dropForeignKey('FK_item_option_catalog', 'shop_item_option');
         $this->dropForeignKey('FK_item_option_catalog_item', 'shop_item_option');
         $this->dropForeignKey('FK_item_option_item', 'shop_item_option');
+
+        $this->dropTable('shop_item_option');
     }
 }

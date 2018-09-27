@@ -4,48 +4,52 @@ namespace modules\partner\models;
 
 use common\models\Region;
 use common\models\User;
+use modules\shop\models\Category;
 
 /**
  * This is the model class for table "partner".
  *
- * @property int $id
- * @property string $name
- * @property string $url
- * @property string $slug
- * @property string $address
- * @property string $phones
- * @property string $price_list
- * @property string $logo
- * @property string $description
- * @property string $seo_description
- * @property string $seo_title
- * @property string $seo_keywords
- * @property int $image_id
- * @property int $region_id
- * @property int $glued_timber
- * @property int $profiled_timber
- * @property int $wooden_frame
- * @property int $lstk
- * @property int $carcass
- * @property int $combined
- * @property int $brick
- * @property int $block
- * @property int $finishing
- * @property int $santech
- * @property int $electric
- * @property int $wooden
- * @property int $stone
- * @property int $roof
- * @property int $windows
- * @property int $stretch_ceiling
- * @property int $surround_region
- * @property int $any_region
+ * @property int              $id
+ * @property string           $name
+ * @property string           $url
+ * @property string           $slug
+ * @property string           $address
+ * @property string           $phones
+ * @property string           $price_list
+ * @property string           $logo
+ * @property string           $description
+ * @property string           $seo_description
+ * @property string           $seo_title
+ * @property string           $seo_keywords
+ * @property int              $image_id
+ * @property int              $region_id
+ * @property int              $glued_timber
+ * @property int              $profiled_timber
+ * @property int              $wooden_frame
+ * @property int              $lstk
+ * @property int              $carcass
+ * @property int              $combined
+ * @property int              $brick
+ * @property int              $block
+ * @property int              $finishing
+ * @property int              $santech
+ * @property int              $electric
+ * @property int              $wooden
+ * @property int              $stone
+ * @property int              $roof
+ * @property int              $windows
+ * @property int              $stretch_ceiling
+ * @property int              $surround_region
+ * @property int              $any_region
+ * @property int              $agent_id
  *
- * @property Region $region
- * @property PartnerImage $image
+ * @property Region           $region
+ * @property User             $agent
+ * @property PartnerImage     $image
  * @property PartnerBenefit[] $benefits
- * @property PartnerImage[] $images
- * @property User[] $users
+ * @property Category[]       $categories
+ * @property PartnerImage[]   $images
+ * @property User[]           $users
  */
 class Partner extends \yii\db\ActiveRecord
 {
@@ -69,7 +73,7 @@ class Partner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
+            [['image_id', 'agent_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug'], 'unique'],
@@ -95,6 +99,7 @@ class Partner extends \yii\db\ActiveRecord
             'slug'            => 'Код',
             'image_id'        => 'Основное изображение',
             'region_id'       => 'Регион',
+            'agent_id'        => 'Представитель',
             'address'         => 'Адрес',
             'logo'            => 'Логотип',
             'phones'          => 'Телефоны (через запятую)',
@@ -136,6 +141,14 @@ class Partner extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAgent()
+    {
+        return $this->hasOne(User::className(), ['id' => 'agent_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getBenefits()
     {
         return $this->hasMany(PartnerBenefit::className(), ['partner_id' => 'id']);
@@ -150,19 +163,19 @@ class Partner extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasMany(User::className(), ['partner_id' => 'id']);
-    }
-
-    /**
      * @return \yii\db\ActiveQuery|PartnerImage
      */
     public function getImage()
     {
         return $this->hasOne(PartnerImage::className(), ['id' => 'image_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|Category[]
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('partner_category', ['partner_id' => 'id']);
     }
 
     /**
@@ -225,7 +238,6 @@ class Partner extends \yii\db\ActiveRecord
             $query->andWhere($mat);
             unset($get['mat']);
         }
-
         return $query;
     }
 }

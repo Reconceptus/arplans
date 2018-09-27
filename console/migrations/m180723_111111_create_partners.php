@@ -17,16 +17,6 @@ class m180723_111111_create_partners extends Migration
             'name' => $this->string(),
             'url'  => $this->string()
         ]);
-        $this->addColumn('user', 'partner_id', $this->integer()->unsigned());
-        $this->addForeignKey(
-            'FK_user_partner_id',
-            'user',
-            'partner_id',
-            'partner',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
     }
 
     /**
@@ -34,7 +24,6 @@ class m180723_111111_create_partners extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('FK_user_partner_id', 'user');
         $this->dropTable('partner');
     }
 }

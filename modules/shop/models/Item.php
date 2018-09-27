@@ -238,10 +238,10 @@ class Item extends \yii\db\ActiveRecord
             ->andWhere(['i.is_deleted' => Item::IS_NOT_DELETED]);
 
         // Фильтруем их по get параметрам
-        // Убираем из параметров категорию
-        if (isset($get['category'])) {
+        // Убираем из параметров категорию и страницы
             unset($get['category']);
-        }
+            unset($get['page']);
+            unset($get['per-page']);
 
         // Этажи
         if (isset($get['floors']) && is_array($get['floors'])) {
