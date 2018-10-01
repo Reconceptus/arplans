@@ -18,6 +18,7 @@ class Filters extends Widget
 {
     public $viewName = 'index';
     public $category;
+    public $api = false;
 
     public function run()
     {
@@ -44,9 +45,10 @@ class Filters extends Widget
             ->orderBy(['sort' => SORT_ASC])
             ->all();
 
-        $content = $this->render($this->viewName, [
-            'filters'    => $filters,
-            'category'   => $this->category
+
+        $content = $this->render(($this->api ? 'api'.DIRECTORY_SEPARATOR : '') . $this->viewName, [
+            'filters'  => $filters,
+            'category' => $this->category
         ]);
         return $content;
     }

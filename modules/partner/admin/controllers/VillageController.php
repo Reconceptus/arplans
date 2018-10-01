@@ -9,6 +9,7 @@
 namespace modules\partner\admin\controllers;
 
 
+use common\models\Translit;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Village;
 use modules\partner\models\VillageBenefit;
@@ -114,6 +115,9 @@ class VillageController extends AdminController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
+            if (!$model->slug) {
+                $model->slug = Translit::encodestring($model->name);
+            }
             $logo = UploadedFile::getInstance($model, 'logo');
             if ($logo && $logo->tempName) {
                 $model->logo = $logo;

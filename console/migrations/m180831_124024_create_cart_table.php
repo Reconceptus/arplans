@@ -20,7 +20,6 @@ class m180831_124024_create_cart_table extends Migration
             'count'   => $this->integer()->unsigned()
         ]);
 
-        $this->createIndex('U_cart_user_item', 'shop_cart', ['user_id', 'item_id'], true);
         $this->addForeignKey('FK_cart_user', 'shop_cart', 'user_id', 'user', 'id');
         $this->addForeignKey('FK_cart_item', 'shop_cart', 'item_id', 'shop_item', 'id');
     }

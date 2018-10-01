@@ -9,6 +9,7 @@
 namespace modules\shop\admin\controllers;
 
 
+use common\models\Translit;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Catalog;
 use modules\shop\models\Category;
@@ -113,6 +114,9 @@ class ItemController extends AdminController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
+            if (!$model->slug && $model->name) {
+                $model->slug = Translit::encodestring($model->name);
+            }
             $project = UploadedFile::getInstance($model, 'project');
             if ($project && $project->tempName) {
                 $model->project = $project;
@@ -351,6 +355,7 @@ class ItemController extends AdminController
         if ($model) {
             $newModel = new Item();
             $newModel->setAttributes($model->attributes);
+            $newModel->name = $newModel->name . rand();
             $newModel->slug = $newModel->slug . rand();
             if ($newModel->save()) {
                 foreach ($model->itemOptions as $io) {

@@ -32,15 +32,17 @@ $inCart = [];
             <div class="custom-row filter-row show-more-parent">
                 <?= \modules\shop\widgets\filters\Filters::widget([
                     'category' => $category,
+                    'api'      => true,
+                    'viewName' => 'index'
                 ]) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
                         <div class="catalog-header show-more-hidden">
-                            <a href="<?=$dataProvider->sort->createUrl('cost')?>" class="filter down">
+                            <a class="filter down" onclick="addParams({'sort':'cost'})">
                                 По цене
                                 <i class="arrow"></i>
                             </a>
-                            <a href="<?=$dataProvider->sort->createUrl('common_area')?>" class="filter down">
+                            <a class="filter down" onclick="addParams({'sort':'common_area'})">
                                 По площади
                                 <i class="arrow"></i>
                             </a>

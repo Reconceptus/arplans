@@ -9,6 +9,7 @@
 namespace modules\shop\admin\controllers;
 
 
+use common\models\Translit;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Category;
 use Yii;
@@ -116,7 +117,9 @@ class CategoryController extends AdminController
         $post = Yii::$app->request->post();
 
         if ($model->load($post)) {
-
+            if (!$model->slug && $model->name) {
+                $model->slug = Translit::encodestring($model->name);
+            }
             // Загружаем картинки
             $image = UploadedFile::getInstance($model, 'image');
             if ($image && $image->tempName) {

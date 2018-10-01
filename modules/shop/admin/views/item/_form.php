@@ -93,7 +93,6 @@ $bathrooms = [
 
             <span class="hidden"><?= $form->field($model, 'category_id')->hiddenInput()->label(false) ?></span>
             <?= $form->field($model, 'name') ?>
-            <?= $form->field($model, 'slug') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
             <?= $form->field($model, 'price') ?>
             <?= $form->field($model, 'discount') ?>
