@@ -16,7 +16,6 @@ class m180725_112055_create_blog_tables extends Migration
                 'id'           => $this->primaryKey()->unsigned(),
                 'slug'         => $this->string()->notNull(),
                 'name'         => $this->string()->notNull(),
-                'preview_text' => $this->string(500)->notNull(),
                 'text'         => $this->text()->notNull(),
                 'title'        => $this->string(),
                 'keywords'     => $this->string(),
