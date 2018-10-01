@@ -20,7 +20,6 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <?= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
-    <?= $form->field($model, 'slug') ?>
     <div class="preview-image-block" data-id="<?= $model->id ?>">
         <?
         if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {

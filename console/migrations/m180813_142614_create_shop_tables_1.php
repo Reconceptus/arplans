@@ -102,7 +102,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'sort'          => $this->integer()->defaultValue(200)
         ]);
         $this->createIndex('U_item_slug', 'shop_item', 'slug', true);
-        $this->createIndex('U_item_name', 'shop_item', 'name', false);
+        $this->createIndex('U_item_name', 'shop_item', 'name', true);
         $this->addForeignKey(
             'FK_item_category',
             'shop_item',
