@@ -26,8 +26,10 @@ class ItemController extends ActiveController
         $categories = \Yii::$app->user->identity->partner->categories;
         if (isset($get['category'])) {
             $category = Category::findOne(['id' => intval($get['category'])]);
-        } else {
+        } elseif($categories) {
             $category = $categories[0];
+        }else{
+            return ['status'=>'fail','message'=>'Не указаны категории'];
         }
         $partnerCategories = [];
         foreach ($categories as $cat) {
