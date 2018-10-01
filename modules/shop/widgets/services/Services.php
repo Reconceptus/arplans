@@ -21,10 +21,15 @@ class Services extends Widget
     {
         $cache = \Yii::$app->cache;
 
-        $content = $cache->getOrSet('services_'.$this->viewName.'_'.$this->id, function ($cache) {
-            $services = Service::find()->where(['!=', 'id', $this->id])->all();
-            return $this->render($this->viewName, ['models' => $services]);
-        }, 1000);
+        $content = $cache->getOrSet(
+            'services_' . $this->viewName . '_' . $this->id,
+            function ($cache) {
+                $services = Service::find()->where(['!=', 'id', $this->id])->all();
+                if (!$services) {
+                    return '';
+                }
+                return $this->render($this->viewName, ['models' => $services]);
+            }, 1000);
         return $content;
     }
 }
