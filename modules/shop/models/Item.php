@@ -91,7 +91,7 @@ class Item extends \yii\db\ActiveRecord
                 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video', 'seo_title', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
             [['description', 'build_price'], 'string'],
-            [['slug'], 'unique'],
+            [['slug', 'name'], 'unique'],
             [['project'], 'file', 'extensions' => 'png, jpg, gif, pdf'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];

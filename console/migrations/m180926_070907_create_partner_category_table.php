@@ -13,8 +13,9 @@ class m180926_070907_create_partner_category_table extends Migration
     public function safeUp()
     {
         $this->createTable('partner', [
-            'id'          => $this->primaryKey()->unsigned(),
-            'url'  => $this->integer()->unsigned(),
+            'id'       => $this->primaryKey()->unsigned(),
+            'url'      => $this->string(),
+            'name'     => $this->string(),
             'agent_id' => $this->integer()
         ]);
 

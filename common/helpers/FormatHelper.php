@@ -19,12 +19,12 @@ class FormatHelper
      */
     public static function divideArray($array, $keys = false)
     {
-        $count = count($array);
-        $partSize = ceil($count / 2);
-        if ($partSize > 0) {
+        if ($array) {
+            $count = count($array);
+            $partSize = ceil($count / 2);
             return array_chunk($array, $partSize, $keys);
         } else {
-            return $array;
+            return [[], []];
         }
     }
 }
