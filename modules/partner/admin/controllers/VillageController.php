@@ -59,7 +59,7 @@ class VillageController extends AdminController
         return [
             'image-upload' => [
                 'class'            => 'vova07\imperavi\actions\UploadFileAction',
-                'url'              => '/uploads/partner/post', // Directory URL address, where files are stored.
+                'url'              => '/uploads/village/post', // Directory URL address, where files are stored.
                 'path'             => '@webroot/uploads/village/post', // Or absolute path to directory where files are stored.
                 'translit'         => true,
                 'validatorOptions' => [

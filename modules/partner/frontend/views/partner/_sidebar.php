@@ -6,7 +6,7 @@
  * Time: 13:12
  */
 
-/* @var $model \modules\partner\models\Partner */
+/* @var $model \modules\partner\models\Builder */
 ?>
 <div class="custom-row-col col-sidebar tablet-hidden">
     <div class="fixed-scrollbar">

@@ -19,7 +19,9 @@ class m180904_072427_create_services_table extends Migration
             'preview_text' => $this->string(800),
             'description'  => $this->text(),
             'price'        => $this->decimal(14, 2),
-            'in_cart'      => $this->boolean()
+            'in_cart'      => $this->boolean(),
+            'is_active'    => $this->boolean()->defaultValue(1),
+            'is_deleted'   => $this->boolean()->defaultValue(0),
         ]);
 
         $this->createTable('shop_order', [

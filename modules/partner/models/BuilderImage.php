@@ -3,24 +3,24 @@
 namespace modules\partner\models;
 
 /**
- * This is the model class for table "partner_image".
+ * This is the model class for table "builder_image".
  *
  * @property int $id
- * @property int $partner_id
+ * @property int $builder_id
  * @property string $file
  * @property string $thumb
  * @property int $sort
  *
- * @property Partner $partner
+ * @property Builder $builder
  */
-class PartnerImage extends \yii\db\ActiveRecord
+class BuilderImage extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'partner_image';
+        return 'builder_image';
     }
 
     /**
@@ -29,9 +29,9 @@ class PartnerImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['partner_id', 'sort'], 'integer'],
+            [['builder_id', 'sort'], 'integer'],
             [['file', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
-            [['partner_id'], 'exist', 'skipOnError' => true, 'targetClass' => Partner::className(), 'targetAttribute' => ['partner_id' => 'id']],
+            [['builder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Builder::className(), 'targetAttribute' => ['builder_id' => 'id']],
         ];
     }
 
@@ -42,7 +42,7 @@ class PartnerImage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'partner_id' => 'Партнер',
+            'builder_id' => 'Застройщик',
             'file' => 'Фото',
             'thumb' => 'Thumb',
             'sort' => 'Сортировка',
@@ -52,8 +52,8 @@ class PartnerImage extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPartner()
+    public function getBuilder()
     {
-        return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
+        return $this->hasOne(Builder::className(), ['id' => 'builder_id']);
     }
 }

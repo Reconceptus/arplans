@@ -24,7 +24,7 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
     <div class="section">
         <div class="content content--lg">
             <div class="custom-row filter-row">
-                <?= \modules\partner\widgets\filters\Filters::widget(['viewName' => 'partners']) ?>
+                <?= \modules\partner\widgets\filters\Filters::widget(['viewName' => 'builders']) ?>
                 <div class="custom-row-col col-elastic">
                     <div class="map-box">
                         <div class="map-box--main">

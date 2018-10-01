@@ -4,10 +4,9 @@ namespace modules\partner\models;
 
 use common\models\Region;
 use common\models\User;
-use modules\shop\models\Category;
 
 /**
- * This is the model class for table "partner".
+ * This is the model class for table "builder".
  *
  * @property int              $id
  * @property string           $name
@@ -41,17 +40,14 @@ use modules\shop\models\Category;
  * @property int              $stretch_ceiling
  * @property int              $surround_region
  * @property int              $any_region
- * @property int              $agent_id
  *
  * @property Region           $region
- * @property User             $agent
- * @property PartnerImage     $image
- * @property PartnerBenefit[] $benefits
- * @property Category[]       $categories
- * @property PartnerImage[]   $images
+ * @property BuilderImage     $image
+ * @property BuilderBenefit[] $benefits
+ * @property BuilderImage[]   $images
  * @property User[]           $users
  */
-class Partner extends \yii\db\ActiveRecord
+class Builder extends \yii\db\ActiveRecord
 {
     const IS_ACTIVE = 1;
     const IS_NOT_ACTIVE = 0;
@@ -64,7 +60,7 @@ class Partner extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'partner';
+        return 'builder';
     }
 
     /**
@@ -73,7 +69,7 @@ class Partner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'agent_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
+            [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug'], 'unique'],
@@ -99,7 +95,6 @@ class Partner extends \yii\db\ActiveRecord
             'slug'            => 'Код',
             'image_id'        => 'Основное изображение',
             'region_id'       => 'Регион',
-            'agent_id'        => 'Представитель',
             'address'         => 'Адрес',
             'logo'            => 'Логотип',
             'phones'          => 'Телефоны (через запятую)',
@@ -141,17 +136,9 @@ class Partner extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAgent()
-    {
-        return $this->hasOne(User::className(), ['id' => 'agent_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getBenefits()
     {
-        return $this->hasMany(PartnerBenefit::className(), ['partner_id' => 'id']);
+        return $this->hasMany(BuilderBenefit::className(), ['builder_id' => 'id']);
     }
 
     /**
@@ -159,23 +146,15 @@ class Partner extends \yii\db\ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(PartnerImage::className(), ['partner_id' => 'id']);
+        return $this->hasMany(BuilderImage::className(), ['builder_id' => 'id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery|PartnerImage
+     * @return \yii\db\ActiveQuery|BuilderImage
      */
     public function getImage()
     {
-        return $this->hasOne(PartnerImage::className(), ['id' => 'image_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery|Category[]
-     */
-    public function getCategories()
-    {
-        return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('partner_category', ['partner_id' => 'id']);
+        return $this->hasOne(BuilderImage::className(), ['id' => 'image_id']);
     }
 
     /**

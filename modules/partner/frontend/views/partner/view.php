@@ -6,7 +6,7 @@
  * Time: 11:50
  */
 
-/* @var $model \modules\partner\models\Partner */
+/* @var $model \modules\partner\models\Builder */
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
@@ -18,7 +18,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                 <div class="content content--sm">
                     <h1 class="title title-lg"><?=$model->name?></h1>
                 </div>
-                <?= \modules\partner\widgets\slider\Slider::widget(['viewName' => 'partner', 'model' => $model]) ?>
+                <?= \modules\partner\widgets\slider\Slider::widget(['viewName' => 'builder', 'model' => $model]) ?>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
                     <div class="catalog-actions">
                         <div class="page-back">
-                            <a href="/partner">
+                            <a href="/builder">
                             <span class="icon-arrow-left">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-left-long"/>

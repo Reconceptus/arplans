@@ -18,7 +18,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                 <div class="content content--sm">
                     <h1 class="title title-lg"><?= $model->name ?></h1>
                 </div>
-                <?= \modules\partner\widgets\slider\Slider::widget(['viewName' => 'partner', 'model' => $model]) ?>
+                <?= \modules\partner\widgets\slider\Slider::widget(['viewName' => 'builder', 'model' => $model]) ?>
             </div>
         </div>
     </div>

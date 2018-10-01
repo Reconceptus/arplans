@@ -6,17 +6,17 @@
  * Time: 17:32
  */
 /* @var $models \modules\partner\models\Village[] */
-$partners = [];
+$builders = [];
 $coordinates = [];
 ?>
 <div class="view-map" data-map="settlements-map">
     <div class="selected-items">
         <? foreach ($models as $model): ?>
             <?
-            $partners[] = 'partner' . $model->id;
+            $builders[] = 'builder' . $model->id;
             $coordinates[] = ['lat' => $model->lat, 'lng' => $model->lng];
             ?>
-            <div class="partners-list--item map-item" data-item="partner<?= $model->id ?>">
+            <div class="partners-list--item map-item" data-item="builder<?= $model->id ?>">
                 <figure class="bg" style="background-image: url(<?= $model->getMainImage() ?>)"></figure>
                 <div class="partners-list--data">
                     <div class="name"><?= $model->name ?></div>
@@ -101,9 +101,9 @@ $coordinates = [];
                 <?endforeach;?>
             ];
 
-            var partners = [
-                <?foreach ($partners as $partner):?>
-                '<?=$partner?>',
+            var builders = [
+                <?foreach ($builders as $builder):?>
+                '<?=$builder?>',
                 <?endforeach;?>
             ];
 
@@ -113,13 +113,13 @@ $coordinates = [];
                     position: locations[i],
                     map: map,
                     icon: icon,
-                    partner: partners[i]
+                    builder: builders[i]
                 });
                 google.maps.event.addListener(
                     marker,
                     "click",
                     function () {
-                        var $thisMarkerItem = this.partner,
+                        var $thisMarkerItem = this.builder,
                             $thisItem = document.querySelectorAll('[data-item=' + $thisMarkerItem + ']')[0],
                             elems = document.querySelectorAll(".map-item");
 
