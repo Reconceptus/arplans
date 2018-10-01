@@ -72,7 +72,7 @@ class Builder extends \yii\db\ActiveRecord
             [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
-            [['slug'], 'unique'],
+            [['slug', 'name'], 'unique'],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['price_list'], 'file'],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
