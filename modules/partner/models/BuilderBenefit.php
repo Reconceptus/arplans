@@ -3,23 +3,23 @@
 namespace modules\partner\models;
 
 /**
- * This is the model class for table "partner_benefit".
+ * This is the model class for table "builder_benefit".
  *
  * @property int $id
- * @property int $partner_id
+ * @property int $builder_id
  * @property string $name
  * @property string $text
  *
- * @property Partner $partner
+ * @property Builder $builder
  */
-class PartnerBenefit extends \yii\db\ActiveRecord
+class BuilderBenefit extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'partner_benefit';
+        return 'builder_benefit';
     }
 
     /**
@@ -28,10 +28,10 @@ class PartnerBenefit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['partner_id'], 'integer'],
+            [['builder_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['text'], 'string', 'max' => 500],
-            [['partner_id'], 'exist', 'skipOnError' => true, 'targetClass' => Partner::className(), 'targetAttribute' => ['partner_id' => 'id']],
+            [['builder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Builder::className(), 'targetAttribute' => ['builder_id' => 'id']],
         ];
     }
 
@@ -42,7 +42,7 @@ class PartnerBenefit extends \yii\db\ActiveRecord
     {
         return [
             'id'         => 'ID',
-            'partner_id' => 'Партнер',
+            'builder_id' => 'Застройщик',
             'name'       => 'Заголовок',
             'text'       => 'Текст',
         ];
@@ -51,8 +51,8 @@ class PartnerBenefit extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPartner()
+    public function getBuilder()
     {
-        return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
+        return $this->hasOne(Builder::className(), ['id' => 'builder_id']);
     }
 }

@@ -12,9 +12,9 @@ namespace modules\partner\admin\controllers;
 use common\models\Translit;
 use common\models\User;
 use modules\admin\controllers\AdminController;
-use modules\partner\models\Partner;
-use modules\partner\models\PartnerBenefit;
-use modules\partner\models\PartnerImage;
+use modules\partner\models\Builder;
+use modules\partner\models\BuilderBenefit;
+use modules\partner\models\BuilderImage;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
@@ -26,7 +26,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
-class PartnerController extends AdminController
+class BuilderController extends AdminController
 {
     /**
      * @return array
@@ -44,7 +44,7 @@ class PartnerController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'partner_partner',
+                        'partner_builder',
                     ],
                 ],
             ],
@@ -60,8 +60,8 @@ class PartnerController extends AdminController
         return [
             'image-upload' => [
                 'class'            => 'vova07\imperavi\actions\UploadFileAction',
-                'url'              => '/uploads/partner/post', // Directory URL address, where files are stored.
-                'path'             => '@webroot/uploads/partner/post', // Or absolute path to directory where files are stored.
+                'url'              => '/uploads/builder/post', // Directory URL address, where files are stored.
+                'path'             => '@webroot/uploads/builder/post', // Or absolute path to directory where files are stored.
                 'translit'         => true,
                 'validatorOptions' => [
                     'maxWidth'  => 1200,
@@ -77,7 +77,7 @@ class PartnerController extends AdminController
      */
     public function actionIndex()
     {
-        $query = Partner::find()->where(['is_deleted' => Partner::IS_NOT_DELETED]);
+        $query = Builder::find()->where(['is_deleted' => Builder::IS_NOT_DELETED]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
@@ -91,7 +91,7 @@ class PartnerController extends AdminController
      */
     public function actionCreate()
     {
-        $model = new Partner();
+        $model = new Builder();
         return $this->modify($model);
     }
 
@@ -108,7 +108,7 @@ class PartnerController extends AdminController
     }
 
     /**
-     * @param $model Partner
+     * @param $model Builder
      * @return string|Response
      */
     public function modify($model)
@@ -123,11 +123,11 @@ class PartnerController extends AdminController
             if ($logo && $logo->tempName) {
                 $model->logo = $logo;
                 if ($model->validate(['logo'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/partner/logo/');
+                    $dir = Yii::getAlias('@webroot/uploads/builder/logo/');
                     FileHelper::createDirectory($dir . $model->id . '/');
                     $fileName = 'logo.' . $model->logo->extension;
                     $model->logo->saveAs($dir . $model->id . '/' . $fileName);
-                    $model->logo = '/uploads/partner/logo/' . $model->id . '/' . $fileName;
+                    $model->logo = '/uploads/builder/logo/' . $model->id . '/' . $fileName;
                 } else {
                     var_dump($model->errors);
                 }
@@ -139,11 +139,11 @@ class PartnerController extends AdminController
             if ($price && $price->tempName) {
                 $model->price_list = $price;
                 if ($model->validate(['price_list'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/partner/price/');
+                    $dir = Yii::getAlias('@webroot/uploads/builder/price/');
                     FileHelper::createDirectory($dir . $model->id . '/');
                     $fileName = 'pricelist.' . $model->price_list->extension;
                     $model->price_list->saveAs($dir . $model->id . '/' . $fileName);
-                    $model->price_list = '/uploads/partner/price/' . $model->id . '/' . $fileName;
+                    $model->price_list = '/uploads/builder/price/' . $model->id . '/' . $fileName;
                 } else {
                     var_dump($model->errors);
                 }
@@ -157,8 +157,8 @@ class PartnerController extends AdminController
                     $newImages = explode(':', $post['new-images']);
                     foreach ($newImages as $newImage) {
                         if ($newImage) {
-                            $image = new PartnerImage();
-                            $image->partner_id = $model->id;
+                            $image = new BuilderImage();
+                            $image->builder_id = $model->id;
                             $image->file = $newImage;
                             if (!$image->save()) {
                                 throw new Exception('Ошибка сохранения изображения');
@@ -171,8 +171,8 @@ class PartnerController extends AdminController
                     foreach ($newBenefits as $newBenefit) {
                         if ($newBenefit) {
                             $data = explode('|', $newBenefit);
-                            $benefit = new PartnerBenefit();
-                            $benefit->partner_id = $model->id;
+                            $benefit = new BuilderBenefit();
+                            $benefit->builder_id = $model->id;
                             $benefit->name = $data[0];
                             $benefit->text = $data[1];
                             if (!$benefit->save()) {
@@ -191,10 +191,10 @@ class PartnerController extends AdminController
             }
 
 
-            return $this->redirect(Url::to(['/admin/modules/partner/partner/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/partner/builder/update', 'id' => $model->id]));
         }
         $users = User::find()->alias('u')->select(['u.username', 'u.id'])
-            ->leftJoin(['p' => Partner::tableName()], 'u.id = p.agent_id')
+            ->leftJoin(['p' => Builder::tableName()], 'u.id = p.agent_id')
             ->where(['is', 'p.agent_id', null])
             ->andWhere(['not in', 'u.role', ['admin', 'manager']])
             ->indexBy('id')
@@ -218,7 +218,7 @@ class PartnerController extends AdminController
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = intval(Yii::$app->request->get('id'));
         if ($id) {
-            $model = PartnerBenefit::findOne(['id' => $id]);
+            $model = BuilderBenefit::findOne(['id' => $id]);
             if ($model) {
                 $model->delete();
                 return ['status' => 'success'];
@@ -245,7 +245,7 @@ class PartnerController extends AdminController
         $blocks = [];
         $fullPaths = [];
         $fileNames = $images['name'];
-        $dir = Yii::getAlias('@webroot/uploads/partner/item/');
+        $dir = Yii::getAlias('@webroot/uploads/builder/item/');
         $path = date('ymdHis') . '/';
         if (!is_dir($dir . $path)) {
             FileHelper::createDirectory($dir . $path);
@@ -256,10 +256,10 @@ class PartnerController extends AdminController
             $target = $dir . $path . $fileName;
             if (move_uploaded_file($images['tmp_name'][$i], $target)) {
                 $success = true;
-                $paths[] = '/uploads/partner/item/' . $path . $fileName;
+                $paths[] = '/uploads/builder/item/' . $path . $fileName;
                 $fullPaths[] = $dir . $path . $fileName;
-                $model = new PartnerImage();
-                $model->file = '/uploads/partner/item/' . $path . $fileName;
+                $model = new BuilderImage();
+                $model->file = '/uploads/builder/item/' . $path . $fileName;
                 $blocks[] = $this->renderAjax('_image', ['model' => $model]);
             } else {
                 $success = false;
@@ -281,7 +281,7 @@ class PartnerController extends AdminController
     }
 
     /**
-     * Удаление картинки партнера через ajax
+     * Удаление картинки застройщика через ajax
      * @return array
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
@@ -291,8 +291,8 @@ class PartnerController extends AdminController
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
         if (intval($get['id'])) {
-            $model = PartnerImage::findOne(['id' => $get['id']]);
-            $item = Partner::find()->where(['image_id' => $get['id']])->one();
+            $model = BuilderImage::findOne(['id' => $get['id']]);
+            $item = Builder::find()->where(['image_id' => $get['id']])->one();
             if ($model) {
                 $fileName = Yii::getAlias('@webroot') . $model->file;
                 if (file_exists($fileName) && is_file($fileName)) {
@@ -325,9 +325,9 @@ class PartnerController extends AdminController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->get('id');
-        $model = PartnerImage::findOne(['id' => $id]);
+        $model = BuilderImage::findOne(['id' => $id]);
         if ($model) {
-            $item = $model->partner;
+            $item = $model->builder;
             if ($item) {
                 $item->image_id = $model->id;
                 if ($item->save()) {
@@ -346,7 +346,7 @@ class PartnerController extends AdminController
     public function actionDelete()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
-        $model->is_deleted = Partner::IS_DELETED;
+        $model->is_deleted = Builder::IS_DELETED;
         if ($model->save()) {
             return $this->redirect(Yii::$app->request->get('back'));
         }
@@ -356,12 +356,12 @@ class PartnerController extends AdminController
 
     /**
      * @param $id
-     * @return Partner|null|ActiveRecord
+     * @return Builder|null|ActiveRecord
      * @throws NotFoundHttpException
      */
     public function findModel($id)
     {
-        if (($model = Partner::find()->where(['id' => $id])->one()) !== null) {
+        if (($model = Builder::find()->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -9,7 +9,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $model \modules\partner\models\Partner*/
+/* @var $model \modules\partner\models\Builder*/
 ?>
 <div class="section">
     <div class="content content--lg mobile-wide">

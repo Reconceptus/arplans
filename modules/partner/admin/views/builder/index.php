@@ -11,7 +11,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Партнеры';
+$this->title = 'Застройщики';
 
 $columns = [
     [
@@ -46,7 +46,7 @@ $columns = [
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
-                    '/admin/modules/partner/partner/delete',
+                    '/admin/modules/partner/builder/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -59,12 +59,12 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Добавить партнера', Url::to(['/admin/modules/partner/partner/create']), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Добавить застройщика', Url::to(['/admin/modules/partner/builder/create']), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/partner/partner/update', 'id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/partner/builder/update', 'id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns

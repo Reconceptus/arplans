@@ -19,7 +19,7 @@ $get = Yii::$app->request->get();
                     <a href="#" class="btn--lt btn">+ запрос на партнерство</a>
                 </div>
                 <div class="catalog-filters scrolled">
-                    <form action="/partner">
+                    <form action="/builder">
                         <div class="filter-form">
                             <div class="catalog-filters--section show-more-parent show">
                                 <div class="catalog-filters--head">

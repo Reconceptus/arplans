@@ -15,15 +15,15 @@ use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 
-/* @var $model \modules\partner\models\Partner */
+/* @var $model \modules\partner\models\Builder */
 /* @var $users array */
 
-$this->title = $model->isNewRecord ? 'Добавление партнера' : 'Редактирование партнера';
+$this->title = $model->isNewRecord ? 'Добавление застройщика' : 'Редактирование застройщика';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 ?>
 <h1><?= $this->title ?></h1>
 <!--Фото товара-->
-<div class="images-block" data-type="partner/partner">
+<div class="images-block" data-type="partner/builder">
     <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
         <? foreach ($model->images as $image): ?>
@@ -94,7 +94,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         'settings' => [
             'lang'                     => 'ru',
             'minHeight'                => 200,
-            'imageUpload'              => Url::to(['partner/image-upload']),
+            'imageUpload'              => Url::to(['builder/image-upload']),
             'imageUploadErrorCallback' => new JsExpression('function (response) { alert("При загрузке произошла ошибка! Максимальная ширина изображения 1200px, высота - 1000px."); }'),
             'buttons'                  => ['html', 'formatting', 'bold', 'italic', 'deleted', 'unorderedlist', 'link', 'image'],
             'plugins'                  => [
@@ -154,7 +154,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
 
-<div class="buttons-panel" title="<?= $model->isNewRecord ? 'Партнер еще не добавлен' : '' ?>">
+<div class="buttons-panel" title="<?= $model->isNewRecord ? 'Застройщик еще не добавлен' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
-    <?= Html::a('На сайте', Url::to('/partner/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
+    <?= Html::a('На сайте', Url::to('/builder/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

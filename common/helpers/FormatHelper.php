@@ -21,6 +21,10 @@ class FormatHelper
     {
         $count = count($array);
         $partSize = ceil($count / 2);
-        return array_chunk($array, $partSize, $keys);
+        if ($partSize > 0) {
+            return array_chunk($array, $partSize, $keys);
+        } else {
+            return $array;
+        }
     }
 }

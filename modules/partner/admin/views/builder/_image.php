@@ -8,12 +8,12 @@
 
 use yii\helpers\Html;
 
-/* @var $model \modules\partner\models\PartnerImage */
-/* @var $item \modules\partner\models\Partner */
-$item = $model->partner;
+/* @var $model \modules\partner\models\BuilderImage */
+/* @var $item \modules\partner\models\Builder */
+$item = $model->builder;
 ?>
 <div class="image-admin-preview" data-id="<?= isset($model->id) ? $model->id : '' ?>" data-file="<?= $model->file ?>">
-    <? if ($model->id && $model->partner_id): ?>
+    <? if ($model->id && $model->builder_id): ?>
         <? if ($item && $item->image_id === $model->id): ?>
             <div class="default-image">
                 <span class="glyphicon glyphicon-ok" title="Основное изображение"></span>

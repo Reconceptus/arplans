@@ -13,7 +13,7 @@ use yii\base\Widget;
 
 class Slider extends Widget
 {
-    public $viewName = 'partner';
+    public $viewName = 'builder';
     public $model;
 
     public function run()

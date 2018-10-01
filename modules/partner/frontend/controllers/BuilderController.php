@@ -8,14 +8,14 @@
 
 namespace modules\partner\frontend\controllers;
 
-use modules\partner\models\Partner;
+use modules\partner\models\Builder;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 
-class PartnerController extends Controller
+class BuilderController extends Controller
 {
     /**
      * @return string
@@ -23,7 +23,7 @@ class PartnerController extends Controller
     public function actionIndex()
     {
         $get = Yii::$app->request->get();
-        $query = Partner::getFilteredQuery($get);
+        $query = Builder::getFilteredQuery($get);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
@@ -36,7 +36,7 @@ class PartnerController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Partner::findOne(['slug' => $slug, 'is_active' => Partner::IS_ACTIVE, 'is_deleted' => Partner::IS_NOT_DELETED]);
+        $model = Builder::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED]);
         if (!$model) {
             throw new NotFoundHttpException();
         }
