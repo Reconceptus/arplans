@@ -12,7 +12,7 @@ class m180919_115936_add_fields_to_partners extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('partner', 'description', $this->text());
+        $this->addColumn('', 'description', $this->text());
         $this->addColumn('partner', 'seo_description', $this->string());
         $this->addColumn('partner', 'seo_title', $this->string());
         $this->addColumn('partner', 'seo_keywords', $this->string());
