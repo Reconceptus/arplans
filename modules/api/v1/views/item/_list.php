@@ -14,4 +14,4 @@ if (isset($get['category'])) {
     unset($get['category']);
 }
 ?>
-<?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'get' => $get, 'inCart' => $inCart]) ?>
+<?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'get' => $get, 'inCart' => $inCart, 'api' => true]) ?>
