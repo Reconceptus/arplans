@@ -22,9 +22,13 @@ class FormatHelper
         if ($array) {
             $count = count($array);
             $partSize = ceil($count / 2);
-            return array_chunk($array, $partSize, $keys);
+            $result = array_chunk($array, $partSize, $keys);
+            if (!isset($result[1])) {
+                $result[1] = [];
+            }
+            return $result;
         } else {
-            return [[], []];
+            return [[0], [1]];
         }
     }
 }
