@@ -138,6 +138,12 @@ class ItemController extends AdminController
             if (!$model->project && isset($model->oldAttributes['project'])) {
                 $model->project = $model->oldAttributes['project'];
             }
+            if (!$model->price) {
+                $model->price = 0.00;
+            }
+            if (!$model->discount) {
+                $model->discount = 0.00;
+            }
             if ($model->save()) {
                 if (isset($post['new-images'])) {
                     $newImages = explode(':', $post['new-images']);
