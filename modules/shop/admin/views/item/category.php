@@ -8,6 +8,8 @@
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
+/* @var $filterModel \modules\shop\models\Item */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -24,16 +26,19 @@ $columns = [
         'options'   => ['style' => 'width:100px'],
         'value'     => function ($model) {
             return $model->image ? Html::img($model->image->image, ['class' => 'post-list-image-preview']) : '';
-        }
+        },
+        'filter'    => false
     ],
     [
         'attribute' => 'name',
     ],
     [
         'attribute' => 'price',
+        'filter'    => false
     ],
     [
         'attribute' => 'discount',
+        'filter'    => false
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
@@ -59,6 +64,7 @@ $columns = [
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
+        'filterModel'  => $filterModel,
         'rowOptions'   => function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/item/update', 'id' => $model->id]) . '"'];
         },

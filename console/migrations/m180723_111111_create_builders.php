@@ -118,7 +118,7 @@ class m180723_111111_create_builders extends Migration
             'name'            => $this->string(),
             'url'             => $this->string(),
             'is_active'       => $this->boolean()->defaultValue(1),
-            'is_deleted'      => $this->boolean()->defaultValue(1),
+            'is_deleted'      => $this->boolean()->defaultValue(0),
             'slug'            => $this->string(),
             'region_id'       => $this->integer()->unsigned(),
             'glued_timber'    => $this->boolean(),

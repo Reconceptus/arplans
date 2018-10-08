@@ -10,7 +10,6 @@ namespace modules\partner\admin\controllers;
 
 
 use common\models\Translit;
-use common\models\User;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Builder;
 use modules\partner\models\BuilderBenefit;
@@ -78,10 +77,18 @@ class BuilderController extends AdminController
     public function actionIndex()
     {
         $query = Builder::find()->where(['is_deleted' => Builder::IS_NOT_DELETED]);
+        $filterModel = new Builder();
+        $filter = Yii::$app->request->get('Builder');
+        if (isset($filter['name'])) {
+            $query->andFilterWhere(['like', 'name', $filter['name']]);
+        }
+        if (isset($filter['url'])) {
+            $query->andFilterWhere(['like', 'url', $filter['url']]);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
 
@@ -193,18 +200,9 @@ class BuilderController extends AdminController
 
             return $this->redirect(Url::to(['/admin/modules/partner/builder/update', 'id' => $model->id]));
         }
-        $users = User::find()->alias('u')->select(['u.username', 'u.id'])
-            ->leftJoin(['p' => Builder::tableName()], 'u.id = p.agent_id')
-            ->where(['is', 'p.agent_id', null])
-            ->andWhere(['not in', 'u.role', ['admin', 'manager']])
-            ->indexBy('id')
-            ->column();
-        if ($model->agent) {
-            $users[$model->agent_id] = $model->agent->username;
-        }
+
         return $this->render('_form', [
             'model' => $model,
-            'users' => $users
         ]);
     }
 

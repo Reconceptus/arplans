@@ -69,6 +69,11 @@ class ItemController extends AdminController
     public function actionCategory($category_id)
     {
         $query = Item::find()->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
+        $filterModel = new Item();
+        $filter = Yii::$app->request->get('Item');
+        if (isset($filter['name'])) {
+            $query->andFilterWhere(['like', 'name', $filter['name']]);
+        }
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -78,7 +83,7 @@ class ItemController extends AdminController
                 ],
             ]
         );
-        return $this->render('category', ['dataProvider' => $dataProvider]);
+        return $this->render('category', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
     /**

@@ -77,10 +77,18 @@ class VillageController extends AdminController
     public function actionIndex()
     {
         $query = Village::find()->where(['is_deleted' => Village::IS_NOT_DELETED]);
+        $filterModel = new Village();
+        $filter = Yii::$app->request->get('Village');
+        if (isset($filter['name'])) {
+            $query->andFilterWhere(['like', 'name', $filter['name']]);
+        };
+        if(isset($filter['url'])){
+            $query->andFilterWhere(['like', 'url', $filter['url']]);
+        };
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
 

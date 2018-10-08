@@ -8,6 +8,8 @@
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
+/* @var $filterModel \modules\partner\models\Village */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -24,7 +26,8 @@ $columns = [
         'options'   => ['style' => 'width:100px'],
         'value'     => function ($model) {
             return $model->logo ? Html::img($model->logo, ['class' => 'post-list-image-preview']) : '';
-        }
+        },
+        'filter'    => false
     ],
     [
         'attribute' => 'name',
@@ -37,7 +40,8 @@ $columns = [
         'format'    => 'html',
         'value'     => function ($model) {
             return $model->region_id ? $model->region->name : '';
-        }
+        },
+        'filter'    => false
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
@@ -63,6 +67,7 @@ $columns = [
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
+        'filterModel'  => $filterModel,
         'rowOptions'   => function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/partner/village/update', 'id' => $model->id]) . '"'];
         },
