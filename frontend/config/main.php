@@ -55,6 +55,7 @@ return [
                 'admin'                                                    => 'blog/page',
                 'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',
                 'shop/download'                                            => 'shop/catalog/download',
+                'shop/history'                                             => 'shop/catalog/history',
                 'shop/favorite/add'                                        => 'shop/favorite/add',
                 'shop/favorite/delete'                                     => 'shop/favorite/delete',
                 'shop/favorite'                                            => 'shop/favorite/index',

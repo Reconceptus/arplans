@@ -17,7 +17,6 @@ class Recently extends Widget
     public function run()
     {
         $content = $this->render($this->viewName);
-
         return $content;
     }
 }
