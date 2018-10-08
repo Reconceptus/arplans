@@ -17,6 +17,9 @@ $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
+<script>
+    var ITEM_ID = "<?=$model->id?>";
+</script>
 <div class="section project-page">
     <div class="content content--lg">
         <div class="custom-row">
@@ -28,7 +31,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
                 <div class="project-page--head custom-row">
                     <?= $this->render('_photos', ['model' => $model]) ?>
-                    <?= $this->render('_info', ['model' => $model, 'favorites' => $favorites, 'isInCart' =>$isInCart]) ?>
+                    <?= $this->render('_info', ['model' => $model, 'favorites' => $favorites, 'isInCart' => $isInCart]) ?>
                 </div>
                 <div class="project-page--info temp">
                     <div class="data">

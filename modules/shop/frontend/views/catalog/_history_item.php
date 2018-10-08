@@ -1,0 +1,32 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: borod
+ * Date: 08.10.2018
+ * Time: 16:38
+ */
+/* @var $model \modules\shop\models\Item */
+?>
+<li class="projects-item">
+    <a href="#" class="projects-item--wrap">
+        <div class="projects-item--preview">
+            <div class="bg" style="background-image: url('<?= $model->getMainImage() ?>')"></div>
+            <div class="data">
+                <span class="index"><?= $model->name ?></span>
+                <ul class="info">
+                    <li>
+                        <span><?= $model->common_area ?> м<sup>2</sup></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="projects-item--actions">
+            <div class="price"><?= ($model->price - $model->discount) ?> &#8381;</div>
+            <div class="icon-like">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart-like"/>
+                </svg>
+            </div>
+        </div>
+    </a>
+</li>
