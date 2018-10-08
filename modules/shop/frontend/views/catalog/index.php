@@ -16,6 +16,7 @@ use yii\widgets\ListView;
 /* @var $category \modules\shop\models\Category */
 /* @var $favorites array */
 /* @var $inCart array */
+$sort = Yii::$app->request->get('sort');
 ?>
 
     <div class="section bg-head">
@@ -34,11 +35,12 @@ use yii\widgets\ListView;
                 <div class="custom-row-col col-elastic">
                     <div class="catalog">
                         <div class="catalog-header show-more-hidden">
-                            <a href="<?=$dataProvider->sort->createUrl('cost')?>" class="filter down">
+                            <a href="<?= $dataProvider->sort->createUrl('cost') ?>"
+                               class="filter <?= $sort === '-cost' ? 'up' : 'down' ?>">
                                 По цене
                                 <i class="arrow"></i>
                             </a>
-                            <a href="<?=$dataProvider->sort->createUrl('common_area')?>" class="filter down">
+                            <a href="<?= $dataProvider->sort->createUrl('common_area') ?>" class="filter <?= $sort === '-common_area' ? 'up' : 'down' ?>">
                                 По площади
                                 <i class="arrow"></i>
                             </a>
