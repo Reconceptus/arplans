@@ -181,7 +181,7 @@ $bathrooms = [
     <div class="project-block">
         <? if ($model->project): ?>
             <div class="old-project">
-                <p style="font-weight: bold">Проект</p>
+                <p style="font-weight: bold">Бесплатный проект</p>
                 <?= Html::a('Скачать', Url::to($model->project), ['class' => 'btn btn-admin']) ?>
                 <div class="js-show-project-field btn btn-admin">Заменить</div>
             </div>
@@ -195,7 +195,7 @@ $bathrooms = [
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
 <div class="images-block">
-    <p style="font-weight: bold">Готовые проекты</p>
+    <p style="font-weight: bold">Фото готового дома</p>
     <div class="images-panel">
         <? foreach ($model->images as $image): ?>
             <? if ($image->type == \modules\shop\models\ItemImage::TYPE_READY): ?>

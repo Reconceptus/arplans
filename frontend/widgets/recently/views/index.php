@@ -25,12 +25,14 @@
             }
         });
     }
-    if (arr.indexOf(ITEM_ID) === -1) {
-        arr.unshift(ITEM_ID);
-        if (arr.length > 10)
-            arr.pop();
+    if (typeof ITEM_ID !== 'undefined') {
+        if (arr.indexOf(ITEM_ID) === -1) {
+            arr.unshift(ITEM_ID);
+            if (arr.length > 10)
+                arr.pop();
+        }
+        localStorage.setItem('itemHistory', JSON.stringify(arr));
     }
-    localStorage.setItem('itemHistory', JSON.stringify(arr))
 </script>
 <div class="section projects-slider">
 
