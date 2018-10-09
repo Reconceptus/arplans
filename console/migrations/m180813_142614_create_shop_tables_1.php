@@ -162,7 +162,7 @@ class m180813_142614_create_shop_tables_1 extends Migration
         $this->batchInsert('shop_catalog', ['id', 'category_id', 'slug', 'name'], $catalogs);
         $catalogItems = [
             [1, 'brus', 'Из бруса', 1],
-            [1, 'lumber', 'Из дерева', 2],
+            [1, 'lumber', 'Из бревен', 2],
             [2, 'block', 'Из блоков', 1],
             [2, 'brick', 'Из кирпича', 2],
             [3, '', '12х12', 1],
