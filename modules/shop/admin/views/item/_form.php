@@ -19,6 +19,7 @@ use yii\widgets\ActiveForm;
 $this->title = $model->isNewRecord ? 'Добавление товара' : 'Редактирование товара';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 $rooms = [
+    1 => '1',
     2 => '2',
     3 => '3',
     4 => '4',
@@ -99,6 +100,7 @@ $bathrooms = [
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'useful_area') ?>
             <?= $form->field($model, 'common_area') ?>
+            <?= $form->field($model, 'exact_gab') ?>
         </div>
         <div class="col-md-5">
             <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
@@ -223,6 +225,6 @@ $bathrooms = [
 </div>
 <?= Html::a('Клонировать', Url::to(['/admin/modules/shop/item/clone', 'id' => $model->id]), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Товар еще не добавлен' : '' ?>">
-    <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('cancel', Url::to('/admin/modules/shop/item'), ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайте', Url::to('/shop/' . $model->category->slug . '/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

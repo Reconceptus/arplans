@@ -88,6 +88,11 @@ $get = Yii::$app->request->get(1);
                                 <div class="form-row-element">
                                     <div class="radio-flex">
                                         <label>
+                                            <input type="checkbox" name="rooms[1]"
+                                                   value="1" <?= isset($rooms[1]) ? 'checked' : '' ?>>
+                                            <span>1</span>
+                                        </label>
+                                        <label>
                                             <input type="checkbox" name="rooms[2]"
                                                    value="2" <?= isset($rooms[2]) ? 'checked' : '' ?>>
                                             <span>2</span>

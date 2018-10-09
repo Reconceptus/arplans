@@ -153,6 +153,6 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <? ActiveForm::end() ?>
 
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Застройщик еще не добавлен' : '' ?>">
-    <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайте', Url::to('/builder/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>
