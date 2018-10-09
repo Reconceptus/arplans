@@ -224,6 +224,6 @@ $bathrooms = [
 </div>
 <?= Html::a('Клонировать', Url::to(['/admin/modules/shop/item/clone', 'id' => $model->id]), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Товар еще не добавлен' : '' ?>">
-    <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('cancel', Url::to('/admin/modules/shop/item'),['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайте', Url::to('/shop/' . $model->category->slug . '/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

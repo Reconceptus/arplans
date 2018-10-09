@@ -62,6 +62,6 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 </div>
 
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Фильтр еще не добавлен' : '' ?>">
-    <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('Cancel', Url::to('/admin/modules/shop/catalog'), ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайт', Url::to('/shop'), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

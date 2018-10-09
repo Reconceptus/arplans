@@ -43,6 +43,6 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Категория еще не добавлена' : '' ?>">
-    <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('cancel', Url::to('/admin/modules/shop/category'), ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайт', Url::to('/shop/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>
