@@ -71,6 +71,16 @@ $ready = $model->getReady();
                                     <span>общая: <?= $model->common_area ?>м<sup>2</sup></span>
                                 </td>
                             </tr>
+                            <? if ($model->exact_gab): ?>
+                                <tr>
+                                    <td class="name">
+                                        <div class="flex">Точные габариты <i class="icon-sign">i</i></div>
+                                    </td>
+                                    <td>
+                                        <?= $model->exact_gab ?>
+                                    </td>
+                                </tr>
+                            <? endif; ?>
                             <?
                             $floors = [];
                             if ($model->one_floor) $floors[] = '1';

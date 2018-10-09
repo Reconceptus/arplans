@@ -99,6 +99,7 @@ $bathrooms = [
             <?= $form->field($model, 'live_area') ?>
             <?= $form->field($model, 'useful_area') ?>
             <?= $form->field($model, 'common_area') ?>
+            <?= $form->field($model, 'exact_gab') ?>
         </div>
         <div class="col-md-5">
             <?= $form->field($model, 'rooms')->dropDownList($rooms) ?>
