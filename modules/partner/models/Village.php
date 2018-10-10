@@ -7,44 +7,46 @@ use common\models\Region;
 /**
  * This is the model class for table "village".
  *
- * @property int $id
- * @property string $name
- * @property string $slug
- * @property string $address
- * @property string $phones
- * @property string $url
- * @property string $price_list
- * @property string $logo
- * @property string $lat
- * @property string $lng
- * @property int $image_id
- * @property int $region_id
- * @property int $electric
- * @property int $gas
- * @property string $description
- * @property string $seo_description
- * @property string $seo_title
- * @property string $seo_keywords
- * @property int $water
- * @property int $internet
- * @property int $gas_boiler
- * @property int $territory_control
- * @property int $fire_alarm
- * @property int $security_alarm
- * @property int $shop
- * @property int $children_club
- * @property int $sports_center
- * @property int $sports_ground
- * @property int $golf_club
- * @property int $beach
- * @property int $life_service
- * @property int $forest
- * @property int $reservoir
+ * @property int              $id
+ * @property string           $name
+ * @property string           $slug
+ * @property string           $address
+ * @property string           $phones
+ * @property string           $url
+ * @property string           $price_list
+ * @property string           $logo
+ * @property string           $lat
+ * @property string           $lng
+ * @property int              $image_id
+ * @property int              $region_id
+ * @property int              $electric
+ * @property int              $gas
+ * @property string           $description
+ * @property string           $seo_description
+ * @property string           $seo_title
+ * @property string           $seo_keywords
+ * @property int              $water
+ * @property int              $internet
+ * @property int              $gas_boiler
+ * @property int              $territory_control
+ * @property int              $fire_alarm
+ * @property int              $security_alarm
+ * @property int              $shop
+ * @property int              $children_club
+ * @property int              $sports_center
+ * @property int              $sports_ground
+ * @property int              $golf_club
+ * @property int              $beach
+ * @property int              $life_service
+ * @property int              $forest
+ * @property int              $reservoir
+ * @property int              $is_office
+ * @property int              $no_page
  *
- * @property Region $region
- * @property VillageImage $image
+ * @property Region           $region
+ * @property VillageImage     $image
  * @property VillageBenefit[] $benefits
- * @property VillageImage[] $images
+ * @property VillageImage[]   $images
  */
 class Village extends \yii\db\ActiveRecord
 {
@@ -68,7 +70,7 @@ class Village extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir'], 'integer'],
+            [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
             [['name', 'slug', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
@@ -85,45 +87,47 @@ class Village extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'                => 'ID',
-            'name'              => 'Название',
-            'description'       => 'Описание',
-            'seo_description'   => 'Описание (SEO)',
-            'seo_title'         => 'Заголовок (SEO)',
-            'seo_keywords'      => 'Ключевые слова (SEO)',
-            'slug'              => 'Slug',
-            'address'           => 'Адрес',
-            'phones'            => 'Телефоны (через запятую)',
-            'url'               => 'Сайт',
-            'price_list'        => 'Прайслист',
-            'logo'              => 'Логотип',
-            'image_id'          => 'Основное изображение',
-            'region_id'         => 'Регион',
-            'is_active'         => 'Активен',
+            'id'              => 'ID',
+            'name'            => 'Название',
+            'description'     => 'Описание',
+            'seo_description' => 'Описание (SEO)',
+            'seo_title'       => 'Заголовок (SEO)',
+            'seo_keywords'    => 'Ключевые слова (SEO)',
+            'slug'            => 'Slug',
+            'address'         => 'Адрес',
+            'phones'          => 'Телефоны (через запятую)',
+            'url'             => 'Сайт',
+            'price_list'      => 'Прайслист',
+            'logo'            => 'Логотип',
+            'image_id'        => 'Основное изображение',
+            'region_id'       => 'Регион',
+            'is_active'       => 'Активен',
+            'is_office'       => 'Офис продаж',
+            'no_page'         => 'Не создавать страницу',
 
-            'electric'          => 'Электроснабжение',
-            'gas'               => 'Газоснабжение',
-            'water'             => 'Водоснабжение',
-            'internet'          => 'Интернет',
-            'gas_boiler'        => 'Газовая котельная',
+            'electric'   => 'Электроснабжение',
+            'gas'        => 'Газоснабжение',
+            'water'      => 'Водоснабжение',
+            'internet'   => 'Интернет',
+            'gas_boiler' => 'Газовая котельная',
 
             'territory_control' => 'Охрана территории и подъездов',
             'fire_alarm'        => 'Противопожарная сигнализация',
             'security_alarm'    => 'Охранная сигнализация',
 
-            'shop'              => 'Магазины',
-            'children_club'     => 'Детский клуб',
-            'sports_center'     => 'Спортивно-оздоровительный комплекс',
-            'sports_ground'     => 'Спортивные площадки',
-            'golf_club'         => 'Гольф-клуб',
-            'beach'             => 'Пляж',
-            'life_service'      => 'Служба быта',
+            'shop'          => 'Магазины',
+            'children_club' => 'Детский клуб',
+            'sports_center' => 'Спортивно-оздоровительный комплекс',
+            'sports_ground' => 'Спортивные площадки',
+            'golf_club'     => 'Гольф-клуб',
+            'beach'         => 'Пляж',
+            'life_service'  => 'Служба быта',
 
-            'forest'            => 'Лесозона',
-            'reservoir'         => 'Водоем',
+            'forest'    => 'Лесозона',
+            'reservoir' => 'Водоем',
 
-            'lat'               => 'Широта (в формате 55.555555)',
-            'lng'               => 'Долгота (в формате 55.555555)',
+            'lat' => 'Широта (в формате 55.555555)',
+            'lng' => 'Долгота (в формате 55.555555)',
         ];
     }
 
