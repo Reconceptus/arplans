@@ -17,7 +17,9 @@ $models = \common\helpers\FormatHelper::divideArray($models);
                 <div class="text">
                     <?= $model->preview_text ?>
                 </div>
-                <div class="link"><a href="#">Читать полностью</a></div>
+                <div class="link">
+                    <?= \yii\helpers\Html::a('Читать полностью', \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?>
+                </div>
             </article>
         <? endforeach; ?>
     </div>
@@ -28,7 +30,9 @@ $models = \common\helpers\FormatHelper::divideArray($models);
                 <div class="text">
                     <?= $model->preview_text ?>
                 </div>
-                <div class="link"><a href="#">Читать полностью</a></div>
+                <div class="link">
+                    <?= \yii\helpers\Html::a('Читать полностью', \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?>
+                </div>
             </article>
         <? endforeach; ?>
     </div>
