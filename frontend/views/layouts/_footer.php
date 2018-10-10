@@ -21,27 +21,13 @@
 
             <div class="sharing ">
                 <div class="title">Поделиться</div>
-                <?=\frontend\widgets\share\Share::widget()?>
+                <?= \frontend\widgets\share\Share::widget() ?>
             </div>
 
         </div>
         <div class="footer-main">
             <div class="footer-main--nav">
-                <section class="section columns">
-                    <h4 class="title">проекты</h4>
-                    <ul>
-                        <li><a href="#">Деревянные дома</a></li>
-                        <li><a href="#">Каменные дома</a></li>
-                        <li><a href="#">Каркасные дома</a></li>
-                        <li><a href="#">Комбинированные дома</a></li>
-                        <li><a href="#">Бани</a></li>
-                        <li><a href="#">Индивидуальное проектирование</a></li>
-                        <li><a href="#">Новинки</a></li>
-                        <li><a href="#">Скидки</a></li>
-                        <li><a href="#">Бесплатные проекты</a></li>
-                        <li><a href="#">Как купить проект</a></li>
-                    </ul>
-                </section>
+                <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'footer']) ?>
                 <?= \frontend\widgets\posts\Posts::widget(['viewName' => 'footer']) ?>
                 <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'bottom']) ?>
                 <section class="section">
