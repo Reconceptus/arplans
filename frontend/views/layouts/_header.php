@@ -15,7 +15,7 @@
                             <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'top']) ?>
                             <li><a href="#" class="">Сотрудничество</a></li>
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
-                            <li><a href="/partner" class="">Строители и магазины</a></li>
+                            <li><a href="/builder" class="">Строители и магазины</a></li>
                             <li><a href="#" class="">Контакты</a></li>
                         </ul>
                     </nav>
