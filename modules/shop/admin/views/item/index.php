@@ -26,9 +26,7 @@ $columns = [
             return $model->image ? Html::img($model->image, ['class' => 'post-list-image-preview']) : '';
         }
     ],
-    [
-        'attribute' => 'name',
-    ],
+    'name',
 ];
 ?>
     <h1><?= $this->title ?></h1>

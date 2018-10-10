@@ -40,6 +40,7 @@ $columns = [
         'attribute' => 'discount',
         'filter'    => false
     ],
+    'created_at',
     [
         'class'    => 'yii\grid\ActionColumn',
         'template' => '{delete}',
