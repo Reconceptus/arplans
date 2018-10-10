@@ -78,7 +78,7 @@ class ItemController extends AdminController
                 'query' => $query,
                 'sort'  => [
                     'defaultOrder' => [
-                        'id' => SORT_ASC
+                        'created_at' => SORT_DESC
                     ]
                 ],
             ]
