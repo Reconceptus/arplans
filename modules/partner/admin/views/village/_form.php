@@ -51,6 +51,8 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
+            <?= $form->field($model, 'is_office')->checkbox() ?>
+            <?= $form->field($model, 'no_page')->checkbox() ?>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-5">

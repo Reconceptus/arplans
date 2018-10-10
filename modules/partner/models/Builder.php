@@ -40,6 +40,8 @@ use common\models\User;
  * @property int              $stretch_ceiling
  * @property int              $surround_region
  * @property int              $any_region
+ * @property int              $is_office
+ * @property int              $no_page
  *
  * @property Region           $region
  * @property BuilderImage     $image
@@ -69,7 +71,7 @@ class Builder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region'], 'integer'],
+            [['image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region', 'is_office', 'no_page'], 'integer'],
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
@@ -122,6 +124,8 @@ class Builder extends \yii\db\ActiveRecord
 
             'surround_region' => 'Возможен выезд в соседний регион',
             'any_region'      => 'Возможен выезд в любую часть России',
+            'is_office'       => 'Офис продаж',
+            'no_page'         => 'Не создавать страницу'
         ];
     }
 
