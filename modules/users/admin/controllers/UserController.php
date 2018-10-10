@@ -45,8 +45,22 @@ class UserController extends AdminController
      */
     public function actionIndex()
     {
+        $filterModel = new User();
         $query = User::find()->alias('u')
             ->leftJoin(Profile::tableName() . ' p', 'u.id = p.user_id');
+        $filter = Yii::$app->request->get('User');
+        if (isset($filter['username'])) {
+            $query->andFilterWhere(['like', 'username', $filter['username']]);
+        }
+        if (isset($filter['fio'])) {
+            $query->andFilterWhere(['like', 'fio', $filter['fio']]);
+        }
+        if (isset($filter['status'])) {
+            $query->andFilterWhere(['status' => $filter['status']]);
+        }
+        if (isset($filter['role'])) {
+            $query->andFilterWhere(['role' => $filter['role']]);
+        }
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
@@ -56,7 +70,7 @@ class UserController extends AdminController
                 ],
             ]
         );
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
     /**
@@ -155,7 +169,11 @@ class UserController extends AdminController
      */
     public function actionDelete($id, $back)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if ($model) {
+            $model->status = 0;
+            $model->save();
+        }
         return $this->redirect(urldecode($back));
     }
 

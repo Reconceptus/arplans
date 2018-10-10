@@ -293,4 +293,21 @@ class User extends ActiveRecord implements IdentityInterface
             ->where(['in', 'u.role', ['admin', 'manager']])->indexBy('id')->column();
         return $authors;
     }
+
+    /**
+     * Получаем список всех ролей (кроме гостя)
+     * @return array
+     */
+    public static function getAccessTypes() {
+        $auth = Yii::$app->authManager;
+        $roles = $auth->getRoles();
+        $result = [];
+        foreach($roles as $name=>$role){
+            if($name === 'guest')
+                continue;
+            $result[$name] = $role->description;
+        }
+
+        return $result;
+    }
 }
