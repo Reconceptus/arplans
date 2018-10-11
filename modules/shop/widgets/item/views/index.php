@@ -12,23 +12,23 @@ use modules\shop\models\Item;
 /* @var $favorites array */
 /* @var $get array */
 /* @var $isInCart bool */
+$image = $model->getMainImage();
 ?>
 <div class="projects-item--wrap">
     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
        class="projects-item--preview">
-        <div class="bg"
-             style="background-image: url(<?= $model->getMainImage() ?>)"></div>
-            <div class="hash">
-                <? if ($model->is_new): ?>
+        <div class="bg" <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
+        <div class="hash">
+            <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
-                <? endif; ?>
-                <? if ($model->discount): ?>
+            <? endif; ?>
+            <? if ($model->discount): ?>
                 <span class="sale">скидка</span>
-                <? endif; ?>
-                <? if (!$model->price): ?>
+            <? endif; ?>
+            <? if (!$model->price): ?>
                 <span class="free">бесплатно</span>
-                <? endif; ?>
-            </div>
+            <? endif; ?>
+        </div>
         <div class="data">
             <span class="index"><?= $model->name ?></span>
             <ul class="info">

@@ -231,7 +231,7 @@ class Item extends \yii\db\ActiveRecord
         } elseif ($this->images) {
             $image = $this->images[0]->image;
         } else {
-            $image = \Yii::$app->params['defaultImage'];
+            $image = null;
         }
         return $image;
     }
