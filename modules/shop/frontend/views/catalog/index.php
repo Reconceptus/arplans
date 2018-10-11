@@ -75,19 +75,19 @@ $sort = Yii::$app->request->get('sort');
                                 },
                             ]);
                             ?>
-                            <div class="catalog-actions">
-                                <?= LinkPager::widget([
-                                    'pagination'         => $dataProvider->getPagination(),
-                                    'linkOptions'        => ['class' => 'page'],
-                                    'activePageCssClass' => 'current',
-                                    'nextPageLabel'      => '>',
-                                    'prevPageLabel'      => '<',
-                                    'prevPageCssClass'   => 'prev',
-                                    'nextPageCssClass'   => 'next',
-                                ]) ?>
+                        </div>
+                        <div class="catalog-actions">
+                            <?= LinkPager::widget([
+                                'pagination'         => $dataProvider->getPagination(),
+                                'linkOptions'        => ['class' => 'page'],
+                                'activePageCssClass' => 'current',
+                                'nextPageLabel'      => '>',
+                                'prevPageLabel'      => '<',
+                                'prevPageCssClass'   => 'prev',
+                                'nextPageCssClass'   => 'next',
+                            ]) ?>
 
-                                <?= Share::widget(['viewName' => 'catalog']) ?>
-                            </div>
+                            <?= Share::widget(['viewName' => 'catalog']) ?>
                         </div>
                     </div>
                 </div>
