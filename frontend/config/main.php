@@ -73,7 +73,7 @@ return [
                 'village'                         => 'partner/village/index',
                 'village/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/village/view',
                 'builder/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/builder/view',
-                'partner'                         => 'partner/builder/index',
+                'builder'                         => 'partner/builder/index',
 
                 'blog/add-comment'             => 'blog/post/add-comment',
                 'blog/search'                  => 'blog/post/search',
