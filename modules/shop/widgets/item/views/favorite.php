@@ -19,21 +19,17 @@ $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
         <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug]) ?>"
            class="projects-item--preview">
             <div class="bg" style="background-image: url('<?= $model->getMainImage() ?>')"></div>
-            <? if ($model->is_new): ?>
-                <div class="hash">
+            <div class="hash">
+                <? if ($model->is_new): ?>
                     <span class="new">новинка</span>
-                </div>
-            <? endif; ?>
-            <? if ($model->discount): ?>
-                <div class="hash">
+                <? endif; ?>
+                <? if ($model->discount): ?>
                     <span class="sale">скидка</span>
-                </div>
-            <? endif; ?>
-            <? if (!$model->price): ?>
-                <div class="hash">
+                <? endif; ?>
+                <? if (!$model->price): ?>
                     <span class="free">бесплатно</span>
-                </div>
-            <? endif; ?>
+                <? endif; ?>
+            </div>
             <span class="look data">
                     <span class="look-num"><?= $model->name ?></span>
                     <span class="look-text">смотреть</span>

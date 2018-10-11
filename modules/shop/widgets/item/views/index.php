@@ -18,21 +18,17 @@ use modules\shop\models\Item;
        class="projects-item--preview">
         <div class="bg"
              style="background-image: url(<?= $model->getMainImage() ?>)"></div>
-        <? if ($model->is_new): ?>
             <div class="hash">
+                <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
-            </div>
-        <? endif; ?>
-        <? if ($model->discount): ?>
-            <div class="hash">
+                <? endif; ?>
+                <? if ($model->discount): ?>
                 <span class="sale">скидка</span>
-            </div>
-        <? endif; ?>
-        <? if (!$model->price): ?>
-            <div class="hash">
+                <? endif; ?>
+                <? if (!$model->price): ?>
                 <span class="free">бесплатно</span>
+                <? endif; ?>
             </div>
-        <? endif; ?>
         <div class="data">
             <span class="index"><?= $model->name ?></span>
             <ul class="info">

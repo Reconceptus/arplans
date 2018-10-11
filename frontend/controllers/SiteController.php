@@ -160,14 +160,17 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    Yii::$app->mailer->compose('registration', ['model' => $model])
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setTo($user->email)
+                        ->setSubject('Регистрация на сайте ' . Yii::$app->name)
+                        ->send();
                     return $this->goHome();
                 }
             }
         }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
+        return $this->render('signup', ['model' => $model,]);
     }
 
     /**
@@ -175,7 +178,8 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionRequestPasswordReset()
+    public
+    function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -200,7 +204,8 @@ class SiteController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
-    public function actionResetPassword($token)
+    public
+    function actionResetPassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
