@@ -16,6 +16,7 @@ namespace modules\shop\models;
  * @property int $filter
  * @property int $basic
  * @property int $sort
+ * @property int $columns_in_filter
  *
  * @property CatalogItem[] $catalogItems
  * @property Category $category
