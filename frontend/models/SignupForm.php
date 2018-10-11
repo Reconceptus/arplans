@@ -1,15 +1,16 @@
 <?php
+
 namespace frontend\models;
 
-use yii\base\Model;
 use common\models\User;
+use Yii;
+use yii\base\Model;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
-    public $username;
     public $email;
     public $password;
 
@@ -20,16 +21,11 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Пользователь с этим email уже зарегистрирован.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -46,13 +42,18 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
-        $user->username = $this->username;
+        $user->username = $this->email;
         $user->email = $this->email;
+        $user->status = User::STATUS_ACTIVE;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+        if($user->save()){
+            $userRole = Yii::$app->authManager->getRole('user');
+            Yii::$app->authManager->assign($userRole, $user->getId());
+            return $user;
+        }
+        return null;
     }
 }
