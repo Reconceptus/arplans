@@ -13,22 +13,31 @@ class FormatHelper
 {
     /**
      * Делит массив на 2 части
-     * @param $array
-     * @param $keys
+     * @param $array array
+     * @param $numberOfParts integer
+     * @param $keys bool
      * @return array
      */
-    public static function divideArray($array, $keys = false)
+    public static function divideArray($array, $numberOfParts = 2, $keys = false)
     {
         if ($array) {
             $count = count($array);
-            $partSize = ceil($count / 2);
+            $partSize = ceil($count / $numberOfParts);
             $result = array_chunk($array, $partSize, $keys);
-            if (!isset($result[1])) {
-                $result[1] = [];
+            if ($numberOfParts > $count) {
+                foreach ($result as $k => $v) {
+                    if (!isset($result[$k])) {
+                        $result[$k] = [];
+                    }
+                }
             }
             return $result;
         } else {
-            return [[0], [1]];
+            $result = [];
+            for ($i = 0; $i < $numberOfParts; $i++) {
+                $result[$i] = [];
+            }
+            return $result;
         }
     }
 }
