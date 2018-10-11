@@ -24,7 +24,7 @@ class Services extends Widget
         $content = $cache->getOrSet(
             'services_' . $this->viewName . '_' . $this->id,
             function ($cache) {
-                $services = Service::find()->where(['!=', 'id', $this->id])->all();
+                $services = Service::find()->where(['!=', 'id', $this->id])->andWhere(['is_active' => 1])->all();
                 if (!$services) {
                     return '';
                 }
