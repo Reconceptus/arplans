@@ -8,7 +8,7 @@
 
 namespace modules\partner\frontend\controllers;
 
-use modules\partner\models\Partner;
+use modules\partner\models\Builder;
 use modules\partner\models\Village;
 use Yii;
 use yii\web\Controller;
@@ -33,7 +33,7 @@ class VillageController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Village::findOne(['slug' => $slug, 'is_active' => Partner::IS_ACTIVE, 'is_deleted' => Partner::IS_NOT_DELETED]);
+        $model = Village::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED, 'no_page'=>Builder::IS_NOT_ACTIVE]);
         if (!$model) {
             throw new NotFoundHttpException();
         }

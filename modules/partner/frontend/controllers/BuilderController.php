@@ -36,7 +36,7 @@ class BuilderController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Builder::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED]);
+        $model = Builder::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED, 'no_page'=>Builder::IS_NOT_ACTIVE]);
         if (!$model) {
             throw new NotFoundHttpException();
         }

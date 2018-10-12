@@ -13,8 +13,10 @@ $coordinates = [];
     <div class="selected-items">
         <? foreach ($models as $model): ?>
             <?
-            $builders[] = 'builder' . $model->id;
-            $coordinates[] = ['lat' => $model->lat, 'lng' => $model->lng];
+            if ($model->lat && $model->lng) {
+                $builders[] = 'builder' . $model->id;
+                $coordinates[] = ['lat' => $model->lat, 'lng' => $model->lng];
+            }
             ?>
             <div class="partners-list--item map-item" data-item="builder<?= $model->id ?>">
                 <figure class="bg" style="background-image: url(<?= $model->getMainImage() ?>)"></figure>
