@@ -7,6 +7,7 @@
  */
 
 /* @var $model \modules\partner\models\About */
+/* @var $readyProjects \modules\partner\models\AboutReady[] */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -30,6 +31,7 @@ $this->title = 'О компании';
         <div class="col-md-6">
             <?= Html::hiddenInput('old_image', $model->about_main_image) ?>
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
+            <?= Html::hiddenInput('new-ready', '', ['class' => 'new-ready-input']) ?>
             <?= $form->field($model, 'about_title') ?>
             <?= $form->field($model, 'hot_line') ?>
             <?= $form->field($model, 'phone') ?>
@@ -48,9 +50,28 @@ $this->title = 'О компании';
         </div>
     </div>
 
-
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
     <? ActiveForm::end() ?>
+
+    <div class="images-block">
+        <p style="font-weight: bold">Готовые проекты</p>
+        <div class="images-panel">
+            <? foreach ($readyProjects as $project): ?>
+                <?= $this->render('_image', ['model' => $project]) ?>
+            <? endforeach; ?>
+        </div>
+        <div class="clearfix"></div>
+        <form name="uploader" enctype="multipart/form-data" method="POST">
+            <div class="upload">
+                <div class="upload-input">
+                    <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
+                </div>
+                <div class="upload-button">
+                    <?= Html::submitButton('Загрузить фото', ['class' => 'btn btn-admin add-photo']) ?>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <div class="buttons-panel">
         <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>

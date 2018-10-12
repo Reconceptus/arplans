@@ -192,7 +192,7 @@ ul {
     position: relative;
 }
 
-.js-image-admin-delete {
+.js-image-admin-delete, .js-ready-delete {
     position: absolute;
     right: 3px;
     background-color: lightgrey;

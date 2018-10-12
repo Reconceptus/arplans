@@ -12,6 +12,7 @@ namespace modules\partner\admin\controllers;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\About;
 use modules\partner\models\AboutBenefit;
+use modules\partner\models\AboutReady;
 use Yii;
 use yii\base\Exception;
 use yii\filters\AccessControl;
@@ -84,8 +85,21 @@ class AboutController extends AdminController
                     }
                 }
             }
+            if (isset($post['new-ready'])) {
+                $newProjects = explode(':', $post['new-ready']);
+                foreach ($newProjects as $newProject) {
+                    if ($newProject) {
+                        $project = new AboutReady();
+                        $project->file = $newProject;
+                        if (!$project->save()) {
+                            throw new Exception('Ошибка сохранения проекта');
+                        };
+                    }
+                }
+            }
         }
-        return $this->render('index', ['model' => $model]);
+        $readyProjects = AboutReady::find()->all();
+        return $this->render('index', ['model' => $model, 'readyProjects' => $readyProjects]);
     }
 
     /**
@@ -105,5 +119,32 @@ class AboutController extends AdminController
             }
         }
         return ['status' => 'fail', 'message' => 'Ошибка при удалении'];
+    }
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteProject()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        if (intval($get['id'])) {
+            $model = AboutReady::findOne(['id' => $get['id']]);
+            if ($model) {
+                $fileName = Yii::getAlias('@webroot') . $model->file;
+                if (file_exists($fileName) && is_file($fileName)) {
+                    unlink($fileName);
+                }
+                $model->delete();
+            } else {
+                return ['status' => 'fail', 'message' => 'Ошибка при удалении изображеия'];
+            }
+        } elseif (isset($get['file'])) {
+            $fileName = Yii::getAlias('@webroot') . $get['file'];
+            unlink($fileName);
+        }
+        return ['status' => 'success'];
     }
 }
