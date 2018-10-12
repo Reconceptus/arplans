@@ -12,7 +12,7 @@ namespace common\helpers;
 class FormatHelper
 {
     /**
-     * Делит массив на 2 части
+     * Делит массив на $numberOfParts частей
      * @param $array array
      * @param $numberOfParts integer
      * @param $keys bool

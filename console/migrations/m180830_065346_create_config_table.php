@@ -18,17 +18,6 @@ class m180830_065346_create_config_table extends Migration
             'slug'  => $this->string(),
             'value' => $this->text()
         ]);
-
-        $values = [
-            ['Описание подборки бесплатных проектов', 'compilation_free_description', ''],
-            ['Описание подборки новых проектов', 'compilation_new_description', ''],
-            ['Описание подборки проектов со скидкой', 'compilation_discount_description', ''],
-            ['Заголовок подборки бесплатных проектов', 'compilation_free_name', ''],
-            ['Заголовок подборки новых проектов', 'compilation_new_name', ''],
-            ['Заголовок подборки проектов со скидкой', 'compilation_discount_name', ''],
-        ];
-
-        Yii::$app->db->createCommand()->batchInsert('config', ['name', 'slug', 'value'], $values)->execute();
     }
 
     /**

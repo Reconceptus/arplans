@@ -6,11 +6,12 @@
  * Time: 16:38
  */
 /* @var $model \modules\shop\models\Item */
+$image = $model->getMainImage();
 ?>
 <li class="projects-item">
     <a href="#" class="projects-item--wrap">
         <div class="projects-item--preview">
-            <div class="bg" style="background-image: url('<?= $model->getMainImage() ?>')"></div>
+            <div class="bg"  <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
             <div class="data">
                 <span class="index"><?= $model->name ?></span>
                 <ul class="info">
