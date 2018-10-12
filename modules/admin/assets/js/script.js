@@ -200,13 +200,14 @@ $(function () {
         $('.item-project-field').show();
     });
 
-    $(document).on('click', '.js-benefit', function () {
+    $(document).on('click', '.js-delete-benefit', function () {
         var button = $(this);
         var id = button.attr('data-id');
+        var type = button.attr('data-type');
         if (id) {
             $.ajax({
                 type: 'GET',
-                url: '/admin/modules/shop/service/delete-benefit',
+                url: '/admin/modules/' + type + '/delete-benefit',
                 data: {
                     id: id
                 },

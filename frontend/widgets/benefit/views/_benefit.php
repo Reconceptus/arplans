@@ -7,10 +7,13 @@
  */
 
 /* @var $model \modules\shop\models\ServiceBenefit */
+/* @var $type string */
 ?>
 
 <div class="benefit">
-    <div class="js-benefit" data-id="<?= $model->id ?>"><span class="glyphicon glyphicon-trash"></span></div>
+    <div class="js-delete-benefit" data-id="<?= $model->id ?>" data-type="<?= $type ?>">
+        <span class="glyphicon glyphicon-trash"></span>
+    </div>
     <div class="title"><?= $model->name ?></div>
     <div class="text"><?= $model->text ?></div>
 </div>

@@ -28,7 +28,8 @@ $this->title = 'О компании';
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
-            <?=Html::hiddenInput('old_image',$model->about_main_image)?>
+            <?= Html::hiddenInput('old_image', $model->about_main_image) ?>
+            <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= $form->field($model, 'about_title') ?>
             <?= $form->field($model, 'hot_line') ?>
             <?= $form->field($model, 'phone') ?>
@@ -41,11 +42,11 @@ $this->title = 'О компании';
             <?= $form->field($model, 'main_office_address') ?>
         </div>
     </div>
-    <!--    <div class="row">-->
-    <!--        <div class="col-md-6">-->
-    <!--            --><? //= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
-    <!--        </div>-->
-    <!--    </div>-->
+    <div class="row">
+        <div class="col-lg-12">
+            <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model, 'type' => 'partner/about']) ?>
+        </div>
+    </div>
 
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>

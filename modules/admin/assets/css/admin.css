@@ -264,18 +264,18 @@ ul {
     margin-bottom: 30px;
 }
 
-.file-preview{
+.file-preview {
     width: 100px;
     height: 100px;
 }
 
-.file-admin{
+.file-admin {
     position: absolute;
     left: 0;
     opacity: 0.2;
 }
 
-.benefits .benefit{
+.benefits .benefit {
     float: left;
     width: 200px;
     height: 200px;
@@ -288,28 +288,27 @@ ul {
     position: relative;
 }
 
-.js-benefit{
+.js-delete-benefit {
     cursor: pointer;
     position: absolute;
     right: 10px;
     top: 5px;
-
 }
 
-.benefits .benefit:hover{
+.benefits .benefit:hover {
     background-color: #B8B8B8;
     border: none;
 }
 
-.benefit .title{
+.benefit .title {
     font-weight: bold;
 }
 
-.benefit-form{
+.benefit-form {
     margin: 30px 0;
 }
 
-.check-title{
+.check-title {
     font-weight: bold;
     margin-top: 30px;
     margin-left: 15px;

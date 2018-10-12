@@ -87,7 +87,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </div>
     <div class="row">
         <div class="col-md-6">
-            <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
+            <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model, 'type' => 'partner/builder']) ?>
         </div>
     </div>
     <?= $form->field($model, 'description')->textarea()->widget(Widget::className(), [
