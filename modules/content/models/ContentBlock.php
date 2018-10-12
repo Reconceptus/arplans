@@ -8,6 +8,10 @@ namespace modules\content\models;
  * @property integer $id
  * @property string  $slug
  * @property string  $text
+ * @property string  $name
+ * @property string  $page
+ * @property string  $page_title
+ * @property string  $page_url
  * @property string  $language
  */
 class ContentBlock extends \yii\db\ActiveRecord
@@ -29,7 +33,7 @@ class ContentBlock extends \yii\db\ActiveRecord
             [['slug'], 'unique'],
             [['slug'], 'required'],
             [['text'], 'string'],
-            [['slug', 'page', 'page_title'], 'string', 'max' => 255],
+            [['slug', 'page', 'page_title', 'page_url', 'name'], 'string', 'max' => 255],
             [['language'], 'string', 'max' => 6],
         ];
     }

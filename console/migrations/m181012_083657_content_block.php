@@ -17,6 +17,7 @@ class m181012_083657_content_block extends Migration
             'page'       => $this->string(),
             'page_title' => $this->string(),
             'page_url'   => $this->string(),
+            'name'       => $this->string(),
             'slug'       => $this->string(),
             'text'       => $this->text(),
             'language'   => $this->string(6)
@@ -39,7 +40,7 @@ class m181012_083657_content_block extends Migration
             ['contacts', 'Контакты', '/contacts', 'Instagram', 'instagram', '', ''],
             ['contacts', 'Контакты', '/contacts', 'Главный офис', 'main_office_address', '', ''],
         ];
-        Yii::$app->db->createCommand()->batchInsert('content_block', ['name', 'slug', 'value'], $values)->execute();
+        Yii::$app->db->createCommand()->batchInsert('content_block', ['page', 'page_title', 'page_url', 'name', 'slug', 'text', 'language'], $values)->execute();
     }
 
     /**
