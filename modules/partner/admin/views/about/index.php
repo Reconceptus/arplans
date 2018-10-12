@@ -33,6 +33,8 @@ $this->title = 'О компании';
             <?= $form->field($model, 'hot_line') ?>
             <?= $form->field($model, 'phone') ?>
             <?= $form->field($model, 'email') ?>
+        </div>
+        <div class="col-md-6">
             <?= $form->field($model, 'vk') ?>
             <?= $form->field($model, 'fb') ?>
             <?= $form->field($model, 'instagram') ?>
