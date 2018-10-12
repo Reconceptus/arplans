@@ -11,12 +11,12 @@
                     <nav>
                         <ul>
                             <li><a href="#" class="">Консультация</a></li>
-                            <li><a href="#" class="">О нас</a></li>
+                            <li><a href="/about" class="">О нас</a></li>
                             <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'top']) ?>
                             <li><a href="#" class="">Сотрудничество</a></li>
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и магазины</a></li>
-                            <li><a href="#" class="">Контакты</a></li>
+                            <li><a href="/contacts" class="">Контакты</a></li>
                         </ul>
                     </nav>
                     <div class="header-top--search">

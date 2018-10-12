@@ -16,7 +16,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
         'request'      => [
-            'parsers' => [
+            'parsers'   => [
                 'application/json' => 'yii\web\JsonParser',
             ],
             'csrfParam' => '_csrf-frontend',
@@ -46,11 +46,12 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager'   => [
-            'enablePrettyUrl' => true,
-            'showScriptName'  => false,
+            'enablePrettyUrl'     => true,
+            'showScriptName'      => false,
             'enableStrictParsing' => true,
-            'rules'           => [
-                ['class' => 'yii\rest\UrlRule','pluralize'=>false, 'controller' => 'api/item'],
+            'rules'               => [
+                ['class' => 'yii\rest\UrlRule', 'pluralize' => false, 'controller' => 'api/item'],
+                'about'                                                    => 'site/about',
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
                 'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',
@@ -89,7 +90,7 @@ return [
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 'shop',
-                '/'=>'/'
+                '/'                                                                                               => '/'
             ],
         ],
     ],
@@ -109,7 +110,7 @@ return [
         'users'   => [
             'class' => 'modules\users\Module',
         ],
-        'api'   => [
+        'api'     => [
             'class' => 'modules\api\v1\Module',
         ],
     ],
