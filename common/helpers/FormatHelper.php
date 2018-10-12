@@ -24,10 +24,10 @@ class FormatHelper
             $count = count($array);
             $partSize = ceil($count / $numberOfParts);
             $result = array_chunk($array, $partSize, $keys);
-            if ($numberOfParts > $count) {
-                foreach ($result as $k => $v) {
-                    if (!isset($result[$k])) {
-                        $result[$k] = [];
+            if ($numberOfParts > $count && $keys==false) {
+                for ($i=0;$i<$numberOfParts;$i++){
+                    if(!isset($result[$i])){
+                        $result[$i]=[];
                     }
                 }
             }
