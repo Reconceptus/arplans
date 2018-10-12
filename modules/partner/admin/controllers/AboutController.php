@@ -11,12 +11,12 @@ namespace modules\partner\admin\controllers;
 
 use common\models\Translit;
 use modules\admin\controllers\AdminController;
+use modules\partner\models\About;
 use modules\partner\models\Village;
 use modules\partner\models\VillageBenefit;
 use modules\partner\models\VillageImage;
 use Yii;
 use yii\base\Exception;
-use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
@@ -43,7 +43,7 @@ class AboutController extends AdminController
                     'actions' => [],
                     'allow'   => true,
                     'roles'   => [
-                        'partner_village',
+                        'partner_about',
                     ],
                 ],
             ],
@@ -52,43 +52,32 @@ class AboutController extends AdminController
     }
 
     /**
-     * @return array
-     */
-    public function actions()
-    {
-        return [
-            'image-upload' => [
-                'class'            => 'vova07\imperavi\actions\UploadFileAction',
-                'url'              => '/uploads/village/post', // Directory URL address, where files are stored.
-                'path'             => '@webroot/uploads/village/post', // Or absolute path to directory where files are stored.
-                'translit'         => true,
-                'validatorOptions' => [
-                    'maxWidth'  => 1200,
-                    'maxHeight' => 1000
-                ],
-            ],
-            ''
-        ];
-    }
-
-    /**
      * @return string
      */
     public function actionIndex()
     {
-        $query = Village::find()->where(['is_deleted' => Village::IS_NOT_DELETED]);
-        $filterModel = new Village();
-        $filter = Yii::$app->request->get('Village');
-        if (isset($filter['name'])) {
-            $query->andFilterWhere(['like', 'name', $filter['name']]);
-        };
-        if(isset($filter['url'])){
-            $query->andFilterWhere(['like', 'url', $filter['url']]);
-        };
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
+        $model = About::getModel();
+        $post = Yii::$app->request->post();
+        if ($model->load($post)) {
+            $logo = UploadedFile::getInstance($model, 'about_main_image');
+            if ($logo && $logo->tempName) {
+                $model->about_main_image = $logo;
+                if ($model->validate(['about_main_image'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'image.' . $model->about_main_image->extension;
+                    $model->about_main_image->saveAs($dir . '/' . $fileName);
+                    $model->about_main_image = '/uploads/village/item/' . $fileName;
+                } else {
+                    var_dump($model->errors);
+                }
+            }
+            if (!$model->about_main_image && isset($post['old_image'])) {
+                $model->about_main_image = $post['old_image'];
+            }
+            $model->save();
+        }
+        return $this->render('index', ['model' => $model]);
     }
 
 
