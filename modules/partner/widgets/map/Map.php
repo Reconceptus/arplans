@@ -6,13 +6,13 @@
  * Time: 17:33
  */
 
-namespace modules\partner\widgets\villages;
+namespace modules\partner\widgets\map;
 
 
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
-class Villages extends Widget
+class Map extends Widget
 {
     public $viewName = 'index';
     public $query = null;

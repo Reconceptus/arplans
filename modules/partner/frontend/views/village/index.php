@@ -51,7 +51,7 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
                                 </form>
                             </div>
                             <div class="map-box--field">
-                                <?= \modules\partner\widgets\villages\Villages::widget(['viewName' => 'both', 'query' => $query]) ?>
+                                <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'both', 'query' => $query]) ?>
                             </div>
                         </div>
                     </div>

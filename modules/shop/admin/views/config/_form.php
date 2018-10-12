@@ -21,10 +21,8 @@ $this->title = 'Редактирование параметра';
 
         <?= $model->isNewRecord ? $form->field($model, 'slug') : '' ?>
 
-        <?= $form->field($model, 'name') ?>
-
-        <?= $form->field($model, 'value') ?>
+        <?= $form->field($model, 'value')->label($model->name) ?>
     </div>
 
-<?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin']) ?>
+<?= Html::submitButton('Save', ['class' => 'btn btn-admin']) ?>
 <? ActiveForm::end() ?>
