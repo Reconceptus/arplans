@@ -43,8 +43,8 @@ class CatalogController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize'        => 6,
-                'defaultPageSize' => 2,
+                'pageSize'        => 24,
+                'defaultPageSize' => 24,
             ],
             'sort'       => ['defaultOrder' => ['sort' => SORT_DESC, 'id' => SORT_DESC]
             ]
