@@ -7,7 +7,7 @@
  */
 
 use frontend\widgets\recently\Recently;
-use modules\shop\widgets\like\Like;
+use modules\shop\widgets\related\Related;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
@@ -77,5 +77,6 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
         </div>
     </div>
 </div>
-<?= Like::widget() ?>
+
+<?= Related::widget(['model' => $model, 'favorites' => $favorites, 'inCart' => $inCart]) ?>
 <?= Recently::widget() ?>
