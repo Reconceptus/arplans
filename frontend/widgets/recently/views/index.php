@@ -21,6 +21,7 @@
             success: function (data) {
                 if (data.status === 'success') {
                     $('.projects-slider').html(data.html);
+                    project.projectsCarousel();
                 }
             }
         });

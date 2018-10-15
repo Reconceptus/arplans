@@ -6,12 +6,13 @@
  * Time: 11:02
  */
 
-/* @var $model \modules\shop\models\Service */
+/* @var $benefits array */
+/* @var $type string */
 ?>
 <p style="font-weight: bold">Преимущества</p>
 <div class="benefits">
-    <? foreach ($model->benefits as $benefit): ?>
-        <?= $this->render('_benefit', ['model' => $benefit]) ?>
+    <? foreach ($benefits as $benefit): ?>
+        <?= $this->render('_benefit', ['model' => $benefit, 'type' => $type]) ?>
     <? endforeach; ?>
 </div>
 <div class="clearfix"></div>

@@ -110,7 +110,6 @@ $(function () {
         e.preventDefault();
     });
 
-
     $(document).on('click', '.js-image-admin-delete', function () {
         var container = $(this).closest('.image-admin-preview');
         var id = container.data('id');
@@ -131,7 +130,28 @@ $(function () {
                 }
             }
         });
+    });
 
+    $(document).on('click', '.js-ready-delete', function () {
+        var container = $(this).closest('.image-admin-preview');
+        var id = container.data('id');
+        var file = container.data('file');
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/partner/about/delete-project',
+            data: {
+                id: id,
+                file: file
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    container.remove();
+                    var urls = $('.new-images-input').attr("value");
+                    var urlsNew = urls.replace(':' + file, '');
+                    $('.new-images-input').attr('value', urlsNew);
+                }
+            }
+        });
     });
 
     $(document).on('click', '.js-set-default-image', function () {
@@ -200,13 +220,14 @@ $(function () {
         $('.item-project-field').show();
     });
 
-    $(document).on('click', '.js-benefit', function () {
+    $(document).on('click', '.js-delete-benefit', function () {
         var button = $(this);
         var id = button.attr('data-id');
+        var type = button.attr('data-type');
         if (id) {
             $.ajax({
                 type: 'GET',
-                url: '/admin/modules/shop/service/delete-benefit',
+                url: '/admin/modules/' + type + '/delete-benefit',
                 data: {
                     id: id
                 },
