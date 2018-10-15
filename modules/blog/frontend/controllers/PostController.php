@@ -50,7 +50,7 @@ class PostController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize' => 3,
+                'pageSize' => 24,
             ],
             'sort'       => [
                 'defaultOrder' => [
