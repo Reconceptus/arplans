@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-
+/* @var $query*/
 /* @var $model \modules\partner\models\About */
 
 $this->title = 'Contact';
