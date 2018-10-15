@@ -9,7 +9,7 @@
 $image = $model->getMainImage();
 ?>
 <li class="projects-item">
-    <a href="#" class="projects-item--wrap">
+    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>" class="projects-item--wrap">
         <div class="projects-item--preview">
             <div class="bg"  <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
             <div class="data">
