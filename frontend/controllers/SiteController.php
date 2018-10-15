@@ -7,6 +7,10 @@ use frontend\models\ContactForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use modules\partner\models\About;
+use modules\partner\models\AboutBenefit;
+use modules\partner\models\AboutReady;
+use modules\partner\models\Reviews;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
@@ -146,7 +150,18 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $benefits = AboutBenefit::find()->all();
+        $reviews = Reviews::find()->all();
+        $readyProjects = AboutReady::find()->all();
+        $model = About::getModel();
+        $query = About::getFilteredQuery(Yii::$app->request->get());
+        return $this->render('about', [
+            'query'         => $query,
+            'model'         => $model,
+            'benefits'      => $benefits,
+            'reviews'       => $reviews,
+            'readyProjects' => $readyProjects
+        ]);
     }
 
     /**

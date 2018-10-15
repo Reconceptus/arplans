@@ -75,6 +75,7 @@ class Builder extends \yii\db\ActiveRecord
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
+            [['lat', 'lng'], 'string', 'max' => 10],
             [['logo'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['price_list'], 'file'],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
@@ -125,7 +126,10 @@ class Builder extends \yii\db\ActiveRecord
             'surround_region' => 'Возможен выезд в соседний регион',
             'any_region'      => 'Возможен выезд в любую часть России',
             'is_office'       => 'Офис продаж',
-            'no_page'         => 'Не создавать страницу'
+            'no_page'         => 'Не создавать страницу',
+
+            'lat' => 'Широта (в формате 55.555555)',
+            'lng' => 'Долгота (в формате 55.555555)',
         ];
     }
 

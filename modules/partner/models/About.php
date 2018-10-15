@@ -95,4 +95,23 @@ class About extends Model
         }
         return 1;
     }
+
+    /**
+     * @param array $get
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getFilteredQuery(array $get)
+    {
+        // Делаем выборку поселков
+        $query1 = Village::find()->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
+        // Регион
+        if (isset($get['region'])) {
+            $query1->andWhere(['v.region_id' => intval($get['region'])]);
+            unset($get['region']);
+        }
+        $query2 = Builder::find()->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
+
+        $query = $query1->union($query2);
+        return $query;
+    }
 }
