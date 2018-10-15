@@ -145,24 +145,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="map-box--aside">
                     <div class="head">Офисы продаж</div>
                     <div class="addresses scrolled">
-                        <div class="item">
-                            <div class="name">Планета Сервис</div>
-                            <div>г. Коломна, ул.Рионская 55, оф. 303</div>
-                            <div>+7 902 651-11-15</div>
-                            <a href="#" class="on-map">на карте</a>
-                        </div>
-                        <div class="item">
-                            <div class="name">СтроимВместе</div>
-                            <div>г. Нижний Новгород, ул. Симбирская 33/1, левое крыло, оф. 303</div>
-                            <div>+7 902 651-11-15</div>
-                            <a href="#" class="on-map">на карте</a>
-                        </div>
-                        <div class="item">
-                            <div class="name">Delsongo</div>
-                            <div>г. Ростов Великий, ул.Рионская 55, оф. 303</div>
-                            <div>+7 902 651-11-15</div>
-                            <a href="#" class="on-map">на карте</a>
-                        </div>
+                        <? foreach ($query->all() as $office): ?>
+                            <div class="item">
+                                <div class="name"><?=$office->name?></div>
+                                <div><?=$office->address?></div>
+                                <div><?=$office->phones?></div>
+<!--                                <a href="#" class="on-map">на карте</a>-->
+                            </div>
+                        <? endforeach; ?>
                     </div>
                 </div>
             </div>
