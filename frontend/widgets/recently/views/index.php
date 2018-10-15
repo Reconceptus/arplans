@@ -16,7 +16,7 @@
             type: 'GET',
             url: '/shop/history',
             data: {
-                arr: arr.reverse()
+                arr: arr
             },
             success: function (data) {
                 if (data.status === 'success') {
