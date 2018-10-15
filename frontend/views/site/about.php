@@ -117,45 +117,5 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2 class="title">Офисы продаж</h2>
         </div>
     </div>
-    <div class="map-box">
-        <div class="content content--lg">
-            <div class="map-box--wrap">
-                <div class="map-box--main">
-                    <div class="custom-search">
-                        <form action="#">
-                            <div class="custom-search--field">
-                                <div class="custom-search--inputs">
-                                    <div class="input region-dropbox">
-                                        <input type="text" placeholder="Введите регион">
-                                        <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop']) ?>
-                                    </div>
-                                    <button class="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="map-box--field">
-                        <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
-                    </div>
-                </div>
-                <div class="map-box--aside">
-                    <div class="head">Офисы продаж</div>
-                    <div class="addresses scrolled">
-                        <? foreach ($query->all() as $office): ?>
-                            <div class="item">
-                                <div class="name"><?=$office->name?></div>
-                                <div><?=$office->address?></div>
-                                <div><?=$office->phones?></div>
-<!--                                <a href="#" class="on-map">на карте</a>-->
-                            </div>
-                        <? endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
