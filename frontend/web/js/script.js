@@ -1,5 +1,14 @@
 $(function () {
     'use strict';
+
+    function getAmount() {
+        var amount = 0.0;
+        $("span.sum").each(function (index, item) {
+            amount += parseFloat($(item).text());
+        });
+        $('#totalsum').text(amount);
+    }
+
     $(document).on('click', '.js-favor', function () {
         var button = $(this);
         $.ajax({
@@ -128,7 +137,6 @@ $(function () {
             'village': $('#order-village').val(),
             'accept': $('#order-accept').prop('checked') ? 1 : 0
         };
-        console.log(info);
         if (!info.accept) {
             alert('Подтвердите согласие на использование персональных данных');
             return false;
@@ -186,13 +194,17 @@ $(function () {
         } else {
             container.find('input:checkbox').prop('checked', false);
         }
+    });
+
+    $(document).on('click', '.js-submit-contact', function () {
+        var button = $(this);
+        var accept = button.closest('.contact-form').find('.js-accept-contact');
+        if (accept.prop('checked') === true) {
+            $('.contact-form').submit();
+        }else{
+            alert('Необходимо подтвердить согласие на обработку персональных данных');
+        }
     })
 
-    function getAmount() {
-        var amount = 0.0;
-        $("span.sum").each(function (index, item) {
-            amount += parseFloat($(item).text());
-        });
-        $('#totalsum').text(amount);
-    }
+
 });

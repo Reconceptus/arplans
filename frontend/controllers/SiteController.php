@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\LoginForm;
+use common\models\Request;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -14,8 +15,12 @@ use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Response;
+use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
  * Site controller
@@ -126,20 +131,39 @@ class SiteController extends Controller
      */
     public function actionContacts()
     {
+        $request = new Request();
+        if (Yii::$app->request->isAjax && $request->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($request);
+        }
+        if ($request->load(Yii::$app->request->post()) && $request->validate()) {
+            $file = UploadedFile::getInstance($request, 'file');
+            if ($file && $file->tempName) {
+                $request->file = $file;
+                if ($request->validate(['file'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/request/');
+                    $time = time();
+                    $path = $dir . $time . '/';
+                    FileHelper::createDirectory($path);
+                    $fileName = $request->file->name;
+                    $request->file->saveAs($path . $fileName);
+                    $request->file = '/uploads/request/' . $time . '/' . $fileName;
+                }
+            }
+            if ($request->save()) {
+                Yii::$app->mailer->compose('request', ['model' => $request])
+                    ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+                    ->setTo(Yii::$app->params['supportEmail'])
+                    ->setSubject('Новый комментарий')->send();
+            }
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         $model = About::getModel();
-//        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-//            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-//                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-//            } else {
-//                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-//            }
-//
-//            return $this->refresh();
-//        }
         $query = About::getFilteredQuery(Yii::$app->request->get());
         return $this->render('contacts', [
-            'model' => $model,
-            'query' => $query
+            'model'   => $model,
+            'request' => $request,
+            'query'   => $query
         ]);
     }
 

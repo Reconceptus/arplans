@@ -1,8 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $query */
+/* @var $request \common\models\Request */
 /* @var $model \modules\partner\models\About */
 
 $this->title = 'Contact';
@@ -42,9 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </li>
                                     <li>
                                         <div class="dd socials">
-                                            <a href="<?= $model->vk ?>">Вконтакте</a>
-                                            <a href="<?= $model->fb ?>">Facebook</a><br/>
-                                            <a href="<?= $model->instagram ?>">Instagram</a>
+                                            <a href="<?= $model->vk ?>" target="_blank">Вконтакте</a>
+                                            <a href="<?= $model->fb ?>" target="_blank">Facebook</a><br/>
+                                            <a href="<?= $model->instagram ?>" target="_blank">Instagram</a>
                                         </div>
                                         <div class="dt">официальные страницы</div>
                                     </li>
@@ -57,87 +62,93 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form>
-                            <div class="contact-form--wrap">
-                                <div class="contact-form--main custom-form">
-                                    <div class="form-row stretched">
-                                        <div class="form-row-col col-66">
-                                            <div class="form-row-element to-stretch">
-                                                <div class="textarea">
-                                                <textarea cols="30" rows="3" placeholder="Ваш вопрос"
-                                                          name="question"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row-col col-33">
-                                            <div class="form-row-element">
-                                                <div class="input">
-                                                    <input type="text" placeholder="*Ваше имя" name="name">
-                                                </div>
-                                            </div>
-                                            <div class="form-row-element">
-                                                <div class="input">
-                                                    <input type="text" placeholder="*Ваш телефон" name="phone">
-                                                </div>
-                                            </div>
-                                            <div class="form-row-element">
-                                                <div class="input">
-                                                    <input type="text" placeholder="*Ваш e-mail" name="mail">
-                                                </div>
+                        <? $form = ActiveForm::begin([
+                            'method'  => 'post',
+                            'options' => ['enctype' => 'multipart/form-data'],
+                            'id'      => 'contact-form'
+                        ]); ?>
+                        <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
+                        <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CONTACT) ?>
+                        <div class="contact-form--wrap">
+                            <div class="contact-form--main custom-form">
+                                <div class="form-row stretched">
+                                    <div class="form-row-col col-66">
+                                        <div class="form-row-element to-stretch">
+                                            <div class="textarea">
+                                                <?= Html::activeTextarea($request, 'text', ['placeholder' => '*Ваш вопрос', 'cols' => 30, 'rows' => 3]) ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row centered">
-                                        <div class="form-row-col col-66">
-                                            <div class="form-row-element">
-                                                <div class="form-text">
-                                                    <p>*Обязательные поля</p>
-                                                </div>
+                                    <div class="form-row-col col-33">
+                                        <div class="form-row-element">
+                                            <div class="input">
+                                                <?= Html::activeTextInput($request, 'name', ['placeholder' => '*Ваше имя']) ?>
                                             </div>
                                         </div>
-                                        <div class="form-row-col col-33">
-                                            <div class="form-row-element">
-                                                <div class="file">
-                                                    <input type="file" id="fileUpload">
-                                                    <label for="fileUpload">
-                                                        <i class="icon-loadFile">
-                                                            <svg xmlns="http://www.w3.org/2000/svg">
-                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                     xlink:href="#icon-file-change"/>
-                                                            </svg>
-                                                        </i>
-                                                        <span id="fileName"
-                                                              data-default="Прикрепить файл">Прикрепить файл</span>
-                                                    </label>
-                                                    <i id="fileRemove" class="remove hide">&times;</i>
-                                                </div>
+                                        <div class="form-row-element">
+                                            <div class="input">
+                                                <?= Html::activeTextInput($request, 'phone', ['placeholder' => '*Ваш телефон']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-row-element">
+                                            <div class="input">
+                                                <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="contact-form--submit">
-                                    <div class="form-row centered">
-                                        <div class="form-row-col col-33">
-                                            <div class="form-row-element">
-                                                <div class="check">
-                                                    <label>
-                                                        <input type="checkbox" name="processing_agree">
-                                                        <span>Согласен на обработку персональных данных</span>
-                                                    </label>
-                                                </div>
+                                <div class="form-row centered">
+                                    <div class="form-row-col col-66">
+                                        <div class="form-row-element">
+                                            <div class="form-text">
+                                                <p>*Обязательные поля</p>
                                             </div>
                                         </div>
-                                        <div class="form-row-col col-66">
-                                            <div class="form-row-submit">
-                                                <div class="submit">
-                                                    <button class="btn btn--lt">Отправить</button>
-                                                </div>
+                                    </div>
+                                    <div class="form-row-col col-33">
+                                        <div class="form-row-element">
+                                            <div class="file">
+                                                <?= Html::activeFileInput($request, 'file', ['id' => 'fileUpload']) ?>
+                                                <input type="file" id="fileUpload">
+                                                <label for="fileUpload">
+                                                    <i class="icon-loadFile">
+                                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                 xlink:href="#icon-file-change"/>
+                                                        </svg>
+                                                    </i>
+                                                    <span id="fileName"
+                                                          data-default="Прикрепить файл">Прикрепить файл</span>
+                                                </label>
+                                                <i id="fileRemove" class="remove hide">&times;</i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="contact-form--submit">
+                                <div class="form-row centered">
+                                    <div class="form-row-col col-33">
+                                        <div class="form-row-element">
+                                            <div class="check">
+                                                <label>
+                                                    <?= Html::activeCheckbox($request, 'accept', ['label' => false, 'class' => 'js-accept-contact']) ?>
+                                                    <span>Согласен на обработку персональных данных</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row-col col-66">
+                                        <div class="form-row-submit">
+                                            <div class="submit">
+                                                <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt js-submit-contact']) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <? ActiveForm::end() ?>
                     </div>
                 </div>
 
