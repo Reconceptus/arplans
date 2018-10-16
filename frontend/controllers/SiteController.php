@@ -153,8 +153,8 @@ class SiteController extends Controller
             }
             if ($model->save()) {
                 Yii::$app->mailer->compose('request', ['model' => $model])
-                    ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                    ->setTo(Yii::$app->params['supportEmail'])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo(Yii::$app->params['adminEmail'])
                     ->setSubject('Новый комментарий')->send();
                 return ['status'=>'success', 'message'=>'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
@@ -188,8 +188,8 @@ class SiteController extends Controller
             }
             if ($request->save()) {
                 Yii::$app->mailer->compose('request', ['model' => $request])
-                    ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                    ->setTo(Yii::$app->params['supportEmail'])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo(Yii::$app->params['adminEmail'])
                     ->setSubject('Новый комментарий')->send();
             }
             return $this->redirect(Yii::$app->request->referrer);
@@ -260,8 +260,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
+                return $this->refresh();
             } else {
                 Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
             }

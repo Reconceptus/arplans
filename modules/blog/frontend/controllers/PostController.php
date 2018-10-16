@@ -99,8 +99,8 @@ class PostController extends Controller
                 $model->post_id = $article->id;
                 if ($model->save()) {
                     Yii::$app->mailer->compose(Yii::$app->language . '/new-comment', ['model' => $model])
-                        ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
-                        ->setTo(Yii::$app->params['supportEmail'])
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setTo(Yii::$app->params['adminEmail'])
                         ->setSubject('Новый комментарий')
                         ->send();
                     $commentBox = $this->renderPartial('_comment_box', ['model' => $model]);

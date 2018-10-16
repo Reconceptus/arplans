@@ -277,7 +277,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function sendRegLetter($user)
     {
         Yii::$app->mailer->compose('registration', ['model' => $user])
-            ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
             ->setTo($user->email)
             ->setSubject('Вы зарегистрированы на сайте ' . Yii::$app->name)
             ->send();
