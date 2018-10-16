@@ -6,8 +6,7 @@
  * Time: 11:44
  */
 
-?>
-<script>
+$js = <<<JS
     var arr = [];
     var itemHistory = localStorage.getItem('itemHistory');
     if (itemHistory !== undefined && itemHistory) {
@@ -34,7 +33,10 @@
         }
         localStorage.setItem('itemHistory', JSON.stringify(arr));
     }
-</script>
+JS;
+
+$this->registerJs($js);
+?>
 <div class="section projects-slider">
 
 </div>

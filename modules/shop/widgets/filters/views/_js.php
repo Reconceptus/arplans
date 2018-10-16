@@ -5,10 +5,9 @@
  * Date: 27.08.2018
  * Time: 15:29
  */
-?>
-<!--script-->
 
-<script>
+
+$js = <<<JS
     (function () {
         var keypressSlider = document.getElementById('keypress'),
             input0 = document.getElementById('input-with-keypress-0'),
@@ -63,4 +62,6 @@
             });
         });
     }())
-</script>
+JS;
+
+$this->registerJs($js);
