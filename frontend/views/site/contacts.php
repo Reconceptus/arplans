@@ -63,9 +63,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="contact-form">
                         <? $form = ActiveForm::begin([
+                            'action'  => '/site/contacts',
                             'method'  => 'post',
                             'options' => ['enctype' => 'multipart/form-data'],
-                            'id'      => 'contact-form'
                         ]); ?>
                         <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                         <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CONTACT) ?>
@@ -109,7 +109,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="form-row-element">
                                             <div class="file">
                                                 <?= Html::activeFileInput($request, 'file', ['id' => 'fileUpload']) ?>
-                                                <input type="file" id="fileUpload">
                                                 <label for="fileUpload">
                                                     <i class="icon-loadFile">
                                                         <svg xmlns="http://www.w3.org/2000/svg">
