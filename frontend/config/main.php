@@ -53,6 +53,7 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'pluralize' => false, 'controller' => 'api/item'],
                 'about'                                                    => 'site/about',
                 'contacts'                                                 => 'site/contacts',
+                'site/request'                                                 => 'site/request',
                 'site'                                                     => 'site',
                 'admin'                                                    => 'blog/page',
                 'shop/service/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/service/view',

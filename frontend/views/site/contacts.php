@@ -63,36 +63,37 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="contact-form">
                         <? $form = ActiveForm::begin([
-                            'action'  => '/site/contacts',
                             'method'  => 'post',
                             'options' => ['enctype' => 'multipart/form-data'],
+                            'id'      => 'contacts-form',
                         ]); ?>
                         <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                         <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CONTACT) ?>
+                        <?= Html::hiddenInput('Request[contact]', '-') ?>
                         <div class="contact-form--wrap">
                             <div class="contact-form--main custom-form">
                                 <div class="form-row stretched">
                                     <div class="form-row-col col-66">
                                         <div class="form-row-element to-stretch">
                                             <div class="textarea">
-                                                <?= Html::activeTextarea($request, 'text', ['placeholder' => '*Ваш вопрос', 'cols' => 30, 'rows' => 3]) ?>
+                                                <?= $form->field($request, 'text')->textarea(['placeholder' => '*Ваш вопрос', 'cols' => 30, 'rows' => 3])->label(false) ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= Html::activeTextInput($request, 'name', ['placeholder' => '*Ваше имя']) ?>
+                                                <?= $form->field($request, 'name')->textInput(['placeholder' => '*Ваше имя'])->label(false) ?>
                                             </div>
                                         </div>
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= Html::activeTextInput($request, 'phone', ['placeholder' => '*Ваш телефон']) ?>
+                                                <?= $form->field($request, 'phone')->textInput(['placeholder' => '*Ваш телефон'])->label(false) ?>
                                             </div>
                                         </div>
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
+                                                <?= $form->field($request, 'email')->textInput(['placeholder' => '*Ваш e-mail'])->label(false) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="file">
-                                                <?= Html::activeFileInput($request, 'file', ['id' => 'customFileUpload']) ?>
+                                                <?= $form->field($request, 'file')->fileInput(['id' => 'customFileUpload']) ?>
                                                 <label for="customFileUpload">
                                                     <i class="icon-loadFile">
                                                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-66">
                                         <div class="form-row-submit">
                                             <div class="submit">
-                                                <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt js-submit-contact']) ?>
+                                                <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt']) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -162,3 +163,37 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
+<?php
+$js = <<<JS
+    var files; 
+    $('#contacts-form input[type=file]').on('change', function(){
+        files = this.files;
+    });
+
+     $('#contacts-form').on('beforeSubmit', function(){
+	 var data = $(this);
+	 if( typeof files !== 'undefined' ){
+	    $.each( files, function( key, value ){
+		    data.append( key, value );
+	    });
+	 }
+	 
+	 formData = new FormData(data.get(0));
+	 // return false;
+	 $.ajax({
+	  contentType: false, 
+      processData: false,
+	    url: '/site/request',
+	    type: 'POST',
+	    data: formData,
+	    success: function(res){
+	      if(res.status==='success'){
+	          alert(res.message);
+	      }
+	    },
+	 });
+	 return false;
+     });
+JS;
+
+$this->registerJs($js);

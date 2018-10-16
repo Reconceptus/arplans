@@ -50,7 +50,7 @@ class Request extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text'], 'required'],
+            [['text', 'name', 'contact', 'email', 'phone'], 'required'],
             [['text'], 'string'],
             [['file'], 'file', 'extensions' => 'png, jpg, gif, pdf, xls, xlsx, doc, docx, odt, zip, rar, 7z'],
             [['type'], 'integer'],

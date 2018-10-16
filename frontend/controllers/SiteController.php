@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -72,6 +73,15 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        if ($action->id == 'request') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
     /**
      * Displays homepage.
      *
@@ -120,6 +130,38 @@ class SiteController extends Controller
             return $this->redirect('/site/login');
         }
         return $this->goHome();
+    }
+
+    public function actionRequest()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = new Request();
+        $post = Yii::$app->request->post();
+        if (Yii::$app->request->isAjax && $model->load($post)) {
+            $file = UploadedFile::getInstance($model, 'file');
+            if ($file && $file->tempName) {
+                $model->file = $file;
+                if ($model->validate(['file'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/request/');
+                    $time = time();
+                    $path = $dir . $time . '/';
+                    FileHelper::createDirectory($path);
+                    $fileName = $model->file->name;
+                    $model->file->saveAs($path . $fileName);
+                    $model->file = '/uploads/request/' . $time . '/' . $fileName;
+                }
+            }
+            if ($model->save()) {
+                Yii::$app->mailer->compose('request', ['model' => $model])
+                    ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name])
+                    ->setTo(Yii::$app->params['supportEmail'])
+                    ->setSubject('Новый комментарий')->send();
+                return ['status'=>'success', 'message'=>'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
+            } else {
+                return ['status'=>'fail'];
+            }
+        }
+
     }
 
     /**
