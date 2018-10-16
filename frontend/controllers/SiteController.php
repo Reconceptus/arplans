@@ -18,9 +18,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\web\UploadedFile;
-use yii\widgets\ActiveForm;
 
 /**
  * Site controller
@@ -132,10 +130,6 @@ class SiteController extends Controller
     public function actionContacts()
     {
         $request = new Request();
-        if (Yii::$app->request->isAjax && $request->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($request);
-        }
         if ($request->load(Yii::$app->request->post()) && $request->validate()) {
             $file = UploadedFile::getInstance($request, 'file');
             if ($file && $file->tempName) {
