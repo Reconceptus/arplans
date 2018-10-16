@@ -6,39 +6,6 @@
  * Time: 15:29
  */
 ?>
-<script>
-
-    $('[data-modal="consultation"] form').validate({
-        onfocusout: false,
-        ignore: ".ignore",
-        rules: {
-            name: {required: true},
-            message: {required: true}
-        },
-        messages: {
-            name: {required: ""},
-            message: {required: ""}
-        },
-        errorClass: 'invalid',
-        highlight: function(element, errorClass) {
-            $(element).closest('.form-row-element').addClass(errorClass);
-        },
-        unhighlight: function(element, errorClass) {
-            $(element).closest('.form-row-element').removeClass(errorClass)
-        },
-        errorPlacement: $.noop,
-        submitHandler:function (form) {
-            $('[data-modal="consultation"]').addClass('successful');
-            // if (form.valid()){
-            //     form.submit();
-            // }
-            return false;
-        }
-    })
-
-</script>
-
-
 <!--script-->
 
 <script>

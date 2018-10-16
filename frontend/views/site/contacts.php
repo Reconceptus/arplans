@@ -108,18 +108,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="file">
-                                                <?= Html::activeFileInput($request, 'file', ['id' => 'fileUpload']) ?>
-                                                <label for="fileUpload">
+                                                <?= Html::activeFileInput($request, 'file', ['id' => 'customFileUpload']) ?>
+                                                <label for="customFileUpload">
                                                     <i class="icon-loadFile">
                                                         <svg xmlns="http://www.w3.org/2000/svg">
                                                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                                                  xlink:href="#icon-file-change"/>
                                                         </svg>
                                                     </i>
-                                                    <span id="fileName"
+                                                    <span id="customFileName"
                                                           data-default="Прикрепить файл">Прикрепить файл</span>
                                                 </label>
-                                                <i id="fileRemove" class="remove hide">&times;</i>
+                                                <i id="customFileRemove" class="remove hide">&times;</i>
                                             </div>
                                         </div>
                                     </div>
