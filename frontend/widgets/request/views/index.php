@@ -36,16 +36,16 @@ use yii\widgets\ActiveForm;
                     </div>
                     <div class="form-row-element">
                         <div class="file">
-                            <?= Html::activeFileInput($model, 'file', ['id' => 'fileUpload']) ?>
-                            <label for="fileUpload">
+                            <?= Html::activeFileInput($model, 'file', ['id' => 'supportFileUpload']) ?>
+                            <label for="supportFileUpload">
                                 <i class="icon-loadFile">
                                     <svg xmlns="http://www.w3.org/2000/svg">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-file-change"/>
                                     </svg>
                                 </i>
-                                <span id="fileName" data-default="Прикрепить файл">Прикрепить файл</span>
+                                <span id="supportFileName" data-default="Прикрепить файл">Прикрепить файл</span>
                             </label>
-                            <i id="fileRemove" class="remove hide">&times;</i>
+                            <i id="supportFileRemove" class="remove hide">&times;</i>
                         </div>
                     </div>
                 </div>
