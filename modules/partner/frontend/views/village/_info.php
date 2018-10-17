@@ -32,12 +32,12 @@ use yii\helpers\Url;
                     <div class="cell cell-contacts">
                         <p>&nbsp;</p>
                         <p><?= $model->url ?></p>
-                        <?= Html::a('сайт', Url::to($model->url)) ?>
+                        <?= Html::a('сайт', Url::to($model->url),['target'=>'_blank']) ?>
                     </div>
                     <? if ($model->price_list) : ?>
                         <div class="cell cell-contacts">
                             <p><strong>Цены</strong></p>
-                            <?= Html::a('скачать прайс', Url::to($model->price_list)) ?>
+                            <?= Html::a('скачать прайс', Url::to($model->price_list),['target'=>'_blank']) ?>
                         </div>
                     <? endif; ?>
                 </div>
