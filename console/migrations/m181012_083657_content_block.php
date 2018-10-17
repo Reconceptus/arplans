@@ -36,6 +36,7 @@ class m181012_083657_content_block extends Migration
             ['contacts', 'Контакты', '/contacts', 'Телефон', 'phone', '+7 (903) 825-07-96', ''],
             ['contacts', 'Контакты', '/contacts', 'Email', 'email', 'arplans@yandex.ru', ''],
             ['contacts', 'Контакты', '/contacts', 'Вконтакте', 'vk', '', ''],
+            ['contacts', 'Контакты', '/contacts', 'Отзывы Вконтакте', 'vk_reviews', '', ''],
             ['contacts', 'Контакты', '/contacts', 'Facebook', 'fb', '', ''],
             ['contacts', 'Контакты', '/contacts', 'Instagram', 'instagram', '', ''],
             ['contacts', 'Контакты', '/contacts', 'Главный офис', 'main_office_address', '', ''],

@@ -16,6 +16,7 @@ use yii\web\NotFoundHttpException;
  * @property string $phone
  * @property string $email
  * @property string $vk
+ * @property string $vk_reviews
  * @property string $fb
  * @property string $instagram
  * @property string $main_office_address
@@ -28,6 +29,7 @@ class About extends Model
     public $phone;
     public $email;
     public $vk;
+    public $vk_reviews;
     public $fb;
     public $instagram;
     public $main_office_address;
@@ -38,7 +40,7 @@ class About extends Model
     public function rules()
     {
         return [
-            [['about_title', 'hot_line', 'phone', 'email', 'vk', 'fb', 'instagram', 'main_office_address'], 'string', 'max' => 255],
+            [['about_title', 'hot_line', 'phone', 'email', 'vk', 'vk_reviews', 'fb', 'instagram', 'main_office_address'], 'string', 'max' => 255],
             [['about_main_image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
         ];
     }
@@ -56,6 +58,7 @@ class About extends Model
             'phone'               => 'Телефон',
             'email'               => 'Email',
             'vk'                  => 'Вконтакте',
+            'vk_reviews'          => 'Отзывы Вконтакте',
             'fb'                  => 'Facebook',
             'instagram'           => 'Instagram',
             'main_office_address' => 'Адрес главного оффиса',
