@@ -10,7 +10,7 @@
 /* @var $services \modules\shop\models\Service[] */
 /* @var $user \common\models\User */
 
-$albumPrice = floatval(\common\models\Config::getValue('album_price'));
+$albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
 ?>
 <script>
     var albumPrice = <?=$albumPrice?>;
