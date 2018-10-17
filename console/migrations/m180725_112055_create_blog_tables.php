@@ -13,19 +13,19 @@ class m180725_112055_create_blog_tables extends Migration
         $this->createTable(
             'post',
             [
-                'id'           => $this->primaryKey()->unsigned(),
-                'slug'         => $this->string()->notNull(),
-                'name'         => $this->string()->notNull(),
-                'text'         => $this->text()->notNull(),
-                'title'        => $this->string(),
-                'keywords'     => $this->string(),
-                'description'  => $this->string(),
-                'author_id'    => $this->integer()->notNull(),
-                'image'        => $this->string(),
-                'created_at'   => $this->dateTime(),
-                'updated_at'   => $this->dateTime(),
-                'status'       => $this->smallInteger(1),
-                'sort'         => $this->integer(),
+                'id'          => $this->primaryKey()->unsigned(),
+                'slug'        => $this->string()->notNull(),
+                'name'        => $this->string()->notNull(),
+                'text'        => $this->text()->notNull(),
+                'title'       => $this->string(),
+                'keywords'    => $this->string(),
+                'description' => $this->string(),
+                'author_id'   => $this->integer()->notNull(),
+                'image'       => $this->string(),
+                'created_at'  => $this->dateTime(),
+                'updated_at'  => $this->dateTime(),
+                'status'      => $this->smallInteger(1),
+                'sort'        => $this->integer(),
             ]
         );
 
@@ -77,8 +77,8 @@ class m180725_112055_create_blog_tables extends Migration
         ]);
 
         $this->addForeignKey('FK_post_author', 'post', 'author_id', 'user', 'id');
-        $this->addForeignKey('FK_post_tag_post', 'post_tag', 'post_id', 'post', 'id');
-        $this->addForeignKey('FK_post_tag_tag', 'post_tag', 'tag_id', 'tag', 'id');
+        $this->addForeignKey('FK_post_tag_post', 'post_tag', 'post_id', 'post', 'id', 'cascade', 'cascade');
+        $this->addForeignKey('FK_post_tag_tag', 'post_tag', 'tag_id', 'tag', 'id', 'cascade', 'cascade');
         $this->addForeignKey('FK_comment_author', 'comment', 'author_id', 'user', 'id');
         $this->addForeignKey('FK_comment_post', 'comment', 'post_id', 'post', 'id');
 
