@@ -53,7 +53,7 @@
                     </ul>
                 <? endif; ?>
                 <div class="custom-list--info">
-                    <div class="price"><?= $model->price ?> &#8381;</div>
+                    <div class="price"><?= intval($model->price) ?> &#8381;</div>
                     <p><strong>Срок:</strong> <?= $model->time ?></p>
                     <a href="#" class="order btn-square-min">Заказать услугу</a>
                 </div>
