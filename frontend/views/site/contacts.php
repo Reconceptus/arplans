@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="file">
-                                                <?= $form->field($request, 'file')->fileInput(['id' => 'customFileUpload']) ?>
+                                                <?= $form->field($request, 'file')->fileInput(['id' => 'customFileUpload'])->label(false) ?>
                                                 <label for="customFileUpload">
                                                     <i class="icon-loadFile">
                                                         <svg xmlns="http://www.w3.org/2000/svg">

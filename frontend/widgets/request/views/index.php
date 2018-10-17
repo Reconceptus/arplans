@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
                     </div>
                     <div class="form-row-element">
                         <div class="file">
-                            <?= $form->field($model, 'file')->fileInput(['id' => 'supportFileUpload']) ?>
+                            <?= $form->field($model, 'file')->fileInput(['id' => 'supportFileUpload'])->label(false) ?>
                             <label for="supportFileUpload">
                                 <i class="icon-loadFile">
                                     <svg xmlns="http://www.w3.org/2000/svg">
