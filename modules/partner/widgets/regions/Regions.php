@@ -10,6 +10,8 @@ namespace modules\partner\widgets\regions;
 
 
 use common\models\Region;
+use modules\partner\models\Builder;
+use modules\partner\models\Village;
 use yii\base\Widget;
 
 class Regions extends Widget
@@ -18,7 +20,11 @@ class Regions extends Widget
 
     public function run()
     {
-        $regions = Region::find()->all();
-        return $this->render($this->viewName, ['models' => $regions]);
+        $query1 = Region::find()->distinct()->alias('r');
+        $query1 = $query1->innerJoin(['b' => Builder::tableName()], 'r.id=b.region_id');
+        $query2 = Region::find()->distinct()->alias('r');
+        $query2 = $query2->innerJoin(['v' => Village::tableName()], 'r.id=v.region_id');
+        $query = $query1->union($query2);
+        return $this->render($this->viewName, ['models' => $query->all()]);
     }
 }
