@@ -42,7 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="form-row-element">
                                 <div class="form-text">
                                     <p>Если вы забыли пароль, то
-                                        можете <?= Html::a('сбросить его', ['site/request-password-reset']) ?>.</p>
+                                        можете <?= Html::a('сбросить его', ['/site/request-password-reset']) ?>.</p>
+                                </div>
+                            </div>
+                            <div class="form-row-element">
+                                <div class="form-text">
+                                    <p>Не зарегистрированы? <?= Html::a('регистрация тут', ['/site/signup']) ?>.</p>
                                 </div>
                             </div>
                         </div>
