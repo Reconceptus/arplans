@@ -15,7 +15,7 @@
                     <a href="tel:88002001714">8 800 200-17-14</a>
                 </div>
                 <div class="consultation">
-                    <a href="#" class="btn btn--round">Консультация</a>
+                    <a href="#" class="btn btn--round show-modal" data-modal="consultation">Консультация</a>
                 </div>
             </div>
 
