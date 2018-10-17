@@ -2,6 +2,8 @@
 
 namespace modules\content\models;
 
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "content_block".
  *
@@ -51,5 +53,25 @@ class ContentBlock extends \yii\db\ActiveRecord
             'text'       => 'Текст',
             'language'   => 'Язык',
         ];
+    }
+
+    /**
+     * @param $slug
+     * @return ContentBlock|null|ActiveRecord
+     */
+    public static function getOption(string $slug)
+    {
+        $model = self::find()->where(['slug' => $slug])->one();
+        return $model;
+    }
+
+    /**
+     * @param $slug
+     * @return null|string
+     */
+    public static function getValue(string $slug)
+    {
+        $model = self::getOption($slug);
+        return $model ? $model->text : null;
     }
 }

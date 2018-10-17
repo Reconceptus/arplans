@@ -146,9 +146,9 @@ use yii\helpers\Url;
                             творчества! </p>
                     </div>
                     <div class="blog-hashes">
-                        <a href="#" class="btn-small">о компании</a>
+                        <a href="/about" class="btn-small">о компании</a>
                         <a href="#" class="btn-small">сотрудничество</a>
-                        <a href="#" class="btn-small">живые отзывы вконтакте</a>
+                        <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="btn-small">живые отзывы вконтакте</a>
                     </div>
                 </div>
             </div>
