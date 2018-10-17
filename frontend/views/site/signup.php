@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                             <div class="form-row-element">
                                 <div class="input">
-                                    <?= Html::activePasswordInput($model, 'password', ['placeholder' => '*Пароль']) ?>
+                                    <?= Html::activePasswordInput($model, 'password', ['placeholder' => '*Пароль (не менее 6 знаков)']) ?>
                                 </div>
                             </div>
                         </div>
