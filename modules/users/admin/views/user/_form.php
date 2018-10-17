@@ -21,21 +21,21 @@ $this->title = 'Edit ' . $model->username
 <h1><?= $this->title ?></h1>
 
 <?php $form = ActiveForm::begin(); ?>
-<?= $form->field($model, 'email') ?>
+<?= $form->field($model, 'email')->textInput(['required' => true]) ?>
 
 <div class="form-group">
     <?= Html::label('Пароль', 'password-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('password', '', ['class' => 'form-control', 'id' => 'password-field']) ?>
+    <?= Html::textInput('password', '', ['class' => 'form-control', 'id' => 'password-field' . $model->isNewRecord ? ', "required" => true' : '']) ?>
 </div>
 
 <div class="form-group">
     <?= Html::label('Фамилия', 'last_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[last_name]', $model->profile ? $model->profile->last_name : '', ['class' => 'form-control', 'id' => 'last_name-field']) ?>
+    <?= Html::textInput('Profile[last_name]', $model->profile ? $model->profile->last_name : '', ['class' => 'form-control', 'id' => 'last_name-field', 'required' => true]) ?>
 </div>
 
 <div class="form-group">
     <?= Html::label('Имя', 'first_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[first_name]', $model->profile ? $model->profile->first_name : '', ['class' => 'form-control', 'id' => 'first_name-field']) ?>
+    <?= Html::textInput('Profile[first_name]', $model->profile ? $model->profile->first_name : '', ['class' => 'form-control', 'id' => 'first_name-field', 'required' => true]) ?>
 </div>
 
 <div class="form-group">
@@ -45,7 +45,7 @@ $this->title = 'Edit ' . $model->username
 
 <div class="form-group">
     <?= Html::label('ФИО', 'fio-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[fio]', $model->profile ? $model->profile->fio : '', ['class' => 'form-control', 'id' => 'fio-field']) ?>
+    <?= Html::textInput('Profile[fio]', $model->profile ? $model->profile->fio : '', ['class' => 'form-control', 'id' => 'fio-field', 'required' => true]) ?>
 </div>
 
 <div class="form-group">
