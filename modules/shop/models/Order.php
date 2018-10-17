@@ -2,6 +2,7 @@
 
 namespace modules\shop\models;
 
+use common\models\Config;
 use common\models\PaymentSystem;
 use common\models\User;
 use yii\helpers\Html;
@@ -175,7 +176,7 @@ class Order extends \yii\db\ActiveRecord
         foreach ($data as $item) {
             $itemModel = Item::findActive($item['id']);
             if ($itemModel) {
-                $albumPrice = intval(Config::getValue('album_price'));
+                $albumPrice = intval(Config::getValue('albumPrice'));
                 $itemPrice = $itemModel->getPrice();
                 $price = $itemPrice + $albumPrice * (intval($item['count']) > 0 ? intval($item['count']) - 1 : 0);
                 $orderItem = new OrderItem();

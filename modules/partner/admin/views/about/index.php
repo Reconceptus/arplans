@@ -39,6 +39,7 @@ $this->title = 'О компании';
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'vk') ?>
+            <?= $form->field($model, 'vk_reviews') ?>
             <?= $form->field($model, 'fb') ?>
             <?= $form->field($model, 'instagram') ?>
             <?= $form->field($model, 'main_office_address') ?>

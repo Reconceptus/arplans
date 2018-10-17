@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Config;
 use common\models\LoginForm;
 use common\models\Request;
 use frontend\models\PasswordResetRequestForm;
@@ -154,7 +155,7 @@ class SiteController extends Controller
             if ($model->save()) {
                 Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo(Yii::$app->params['adminEmail'])
+                    ->setTo(Config::getValue('requestEmail'))
                     ->setSubject('Новый комментарий')->send();
                 return ['status'=>'success', 'message'=>'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
@@ -189,7 +190,7 @@ class SiteController extends Controller
             if ($request->save()) {
                 Yii::$app->mailer->compose('request', ['model' => $request])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo(Yii::$app->params['adminEmail'])
+                    ->setTo(Config::getValue('requestEmail'))
                     ->setSubject('Новый комментарий')->send();
             }
             return $this->redirect(Yii::$app->request->referrer);

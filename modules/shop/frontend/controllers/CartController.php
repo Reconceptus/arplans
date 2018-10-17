@@ -154,7 +154,7 @@ class CartController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
-        $albumPrice = Config::getValue('album_price');
+        $albumPrice = Config::getValue('albumPrice');
         if (isset($get['id']) && isset($get['count'])) {
             $model = Cart::findOne(['id' => intval($get['id'])]);
             $count = intval($get['count']);
