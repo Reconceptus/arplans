@@ -10,6 +10,7 @@ namespace modules\blog\frontend\controllers;
 
 
 use common\models\Comment;
+use common\models\Config;
 use common\models\Post;
 use common\models\PostTag;
 use common\models\Tag;
@@ -100,7 +101,7 @@ class PostController extends Controller
                 if ($model->save()) {
                     Yii::$app->mailer->compose(Yii::$app->language . '/new-comment', ['model' => $model])
                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                        ->setTo(Yii::$app->params['adminEmail'])
+                        ->setTo(Config::getValue('requestEmail'))
                         ->setSubject('Новый комментарий')
                         ->send();
                     $commentBox = $this->renderPartial('_comment_box', ['model' => $model]);

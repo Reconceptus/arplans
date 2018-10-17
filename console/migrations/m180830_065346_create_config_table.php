@@ -18,6 +18,11 @@ class m180830_065346_create_config_table extends Migration
             'slug'  => $this->string(),
             'value' => $this->text()
         ]);
+        $values = [
+            ['Цена дополнительного альбома', 'albumPrice', '2000'],
+            ['Почта для заявок с сайта', 'requestEmail', 'krogantz@yandex.ru'],
+        ];
+        Yii::$app->db->createCommand()->batchInsert('config', ['name', 'slug', 'value'], $values)->execute();
     }
 
     /**

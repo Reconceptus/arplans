@@ -12,11 +12,6 @@ class m180905_105642_add_services_and extends Migration
      */
     public function safeUp()
     {
-        $values = [
-            ['Цена дополнительного альбома', 'album_price', '2000'],
-        ];
-        Yii::$app->db->createCommand()->batchInsert('config', ['name', 'slug', 'value'], $values)->execute();
-
         $auth = Yii::$app->authManager;
 
         $service = $auth->createPermission('shop_service');
