@@ -6,8 +6,10 @@
  * Time: 17:47
  */
 /* @var $model \common\models\Request */
+/* @var $type integer */
 ?>
-<h2>Новое сообщение пользователя</h2>
+
+<h2><?= $type == 2 ? 'Запрос на добавление поселка' : 'Новое сообщение пользователя' ?></h2>
 <? if ($model->type === \common\models\Request::PAGE_OTHER): ?>
     <p>Контактная информация: <?= $model->contact ?></p>
 <? else: ?>

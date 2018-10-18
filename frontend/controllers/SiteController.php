@@ -176,23 +176,15 @@ class SiteController extends Controller
         $request = new Request();
         if ($request->load(Yii::$app->request->post()) && $request->validate()) {
             $file = UploadedFile::getInstance($request, 'file');
-            if ($file && $file->tempName) {
-                $request->file = $file;
-                if ($request->validate(['file'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/request/');
-                    $time = time();
-                    $path = $dir . $time . '/';
-                    FileHelper::createDirectory($path);
-                    $fileName = $request->file->name;
-                    $request->file->saveAs($path . $fileName);
-                    $request->file = '/uploads/request/' . $time . '/' . $fileName;
-                }
-            }
             if ($request->save()) {
-                Yii::$app->mailer->compose('request', ['model' => $request])
+                $mail = Yii::$app->mailer->compose('request', ['model' => $request, 'type' => Yii::$app->request->post('type')])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новый комментарий')->send();
+                    ->setSubject('Новый запрос');
+                if ($file) {
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                }
+                $mail->send();
             }
             return $this->redirect(Yii::$app->request->referrer);
         }

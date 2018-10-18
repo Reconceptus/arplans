@@ -334,7 +334,7 @@ $js=<<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           $('.contact-form').addClass('successful');
+           $('.request-form').addClass('successful');
            if (form.valid()){
                form.submit();
            }

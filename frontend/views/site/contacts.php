@@ -76,24 +76,29 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-66">
                                         <div class="form-row-element to-stretch">
                                             <div class="textarea">
-                                                <?= $form->field($request, 'text')->textarea(['placeholder' => '*Ваш вопрос', 'cols' => 30, 'rows' => 3])->label(false) ?>
+                                                <?= Html::activeTextarea($request, 'text', ['placeholder' => '*Ваш вопрос', 'cols' => 30, 'rows' => 3]) ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= $form->field($request, 'name')->textInput(['placeholder' => '*Ваше имя'])->label(false) ?>
+                                                <?= Html::activeTextInput($request, 'name', ['placeholder' => '*Ваше имя']) ?>
                                             </div>
                                         </div>
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= $form->field($request, 'phone')->textInput(['placeholder' => '*Ваш телефон'])->label(false) ?>
+                                                <?= Html::activeTextInput($request, 'phone', ['placeholder' => '*Ваш телефон']) ?>
                                             </div>
                                         </div>
                                         <div class="form-row-element">
                                             <div class="input">
-                                                <?= $form->field($request, 'email')->textInput(['placeholder' => '*Ваш e-mail'])->label(false) ?>
+                                                <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-row-element">
+                                            <div class="input">
+                                                <?= Html::dropDownList('type', null, [0 => '', 1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +114,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="form-row-col col-33">
                                         <div class="form-row-element">
                                             <div class="file">
-                                                <?= $form->field($request, 'file')->fileInput(['id' => 'customFileUpload'])->label(false) ?>
+                                                <?= Html::activeFileInput($request, 'file', ['id' => 'customFileUpload']) ?>
+                                                <!--                                                --><?//= $form->field($request, 'file')->fileInput(['id' => 'customFileUpload'])->label(false) ?>
                                                 <label for="customFileUpload">
                                                     <i class="icon-loadFile">
                                                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <?= Html::activeCheckbox($request, 'accept', ['label' => false, 'class' => 'js-accept-contact']) ?>
+                                                    <input type="checkbox" name="Request[accept]">
                                                     <span>Согласен на обработку персональных данных</span>
                                                 </label>
                                             </div>
@@ -165,35 +171,37 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <?php
 $js = <<<JS
-    var files; 
-    $('#contacts-form input[type=file]').on('change', function(){
-        files = this.files;
-    });
-
-     $('#contacts-form').on('beforeSubmit', function(){
-	 var data = $(this);
-	 if( typeof files !== 'undefined' ){
-	    $.each( files, function( key, value ){
-		    data.append( key, value );
-	    });
-	 }
-	 
-	 formData = new FormData(data.get(0));
-	 // return false;
-	 $.ajax({
-	  contentType: false, 
-      processData: false,
-	    url: '/site/request',
-	    type: 'POST',
-	    data: formData,
-	    success: function(res){
-	      if(res.status==='success'){
-	          alert(res.message);
-	      }
-	    },
-	 });
-	 return false;
-     });
+       $('.contact-form form').validate({
+        onfocusout: false,
+        ignore: ".ignore",
+        rules: {
+            'Request[text]': {required: true},
+            'Request[name]': {required: true},
+            'Request[email]': {required: true},
+            'Request[accept]': {required: true}
+        },
+        messages: {
+           'Request[text]': {required: ""},
+           'Request[name]': {required: ""},
+           'Request[email]': {required: ""},
+           'Request[accept]': {required: ""}
+        },
+        errorClass: 'invalid',
+        highlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').addClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').removeClass(errorClass)
+        },
+        errorPlacement: $.noop,
+        submitHandler:function (form) {
+           $('.contact-form').addClass('successful');
+           if (form.valid()){
+               form.submit();
+           }
+            return false;
+        }
+    })
 JS;
 
 $this->registerJs($js);
