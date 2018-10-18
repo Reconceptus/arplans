@@ -21,7 +21,7 @@ use yii\helpers\Url;
                 </section>
                 <div class="actions">
                     <?= Html::a('каталог проектов', Url::to('/shop'), ['class' => 'btn btn--lt']) ?>
-                    <?= Html::a('консультация', Url::to('/shop'), ['class' => 'btn btn--dk show-modal', 'data-modal' => 'consultation']) ?>
+                    <?= Html::a('консультация', Url::to('#'), ['class' => 'btn btn--dk show-modal', 'data-modal' => 'consultation']) ?>
                 </div>
             </div>
         </div>

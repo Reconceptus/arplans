@@ -8,11 +8,13 @@
 
 namespace modules\partner\frontend\controllers;
 
+use common\models\Config;
 use modules\partner\models\Builder;
 use modules\partner\models\Village;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 
 class VillageController extends Controller
@@ -33,10 +35,27 @@ class VillageController extends Controller
     public function actionView()
     {
         $slug = Yii::$app->request->get('slug');
-        $model = Village::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED, 'no_page'=>Builder::IS_NOT_ACTIVE]);
+        $model = Village::findOne(['slug' => $slug, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED, 'no_page' => Builder::IS_NOT_ACTIVE]);
         if (!$model) {
             throw new NotFoundHttpException();
         }
         return $this->render('view', ['model' => $model]);
+    }
+
+    public function actionAdd()
+    {
+        $post = Yii::$app->request->post();
+        if ($post) {
+            if (isset($post['processing_agree']) && $post['processing_agree'] === 'on') {
+                $file = UploadedFile::getInstanceByName('file');
+                Yii::$app->mailer->compose('add-village', ['model' => $post])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo(Config::getValue('requestEmail'))
+                    ->setSubject('Новая заявка о добавлении поселка')
+                    ->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName.'.'.$file->extension])
+                    ->send();
+            }
+        }
+        return $this->render('add');
     }
 }
