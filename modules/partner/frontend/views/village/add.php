@@ -301,16 +301,29 @@
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <?
 $js=<<<JS
- $('[data-modal="consultation"] form').validate({
+ 
+    $('.request-form form').validate({
         onfocusout: false,
         ignore: ".ignore",
         rules: {
             name: {required: true},
-            message: {required: true}
+            phone: {required: true},
+            mail: {required: true},
+            city_name: {required: true},
+            region: {required: true},
+            nearest_city: {required: true},
+            description: {required: true},
+            processing_agree: {required: true}
         },
         messages: {
             name: {required: ""},
-            message: {required: ""}
+            phone: {required: ""},
+            mail: {required: ""},
+            city_name: {required: ""},
+            region: {required: ""},
+            nearest_city: {required: ""},
+            description: {required: ""},
+            processing_agree: {required: ""}
         },
         errorClass: 'invalid',
         highlight: function(element, errorClass) {
@@ -321,10 +334,10 @@ $js=<<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-            $('[data-modal="consultation"]').addClass('successful');
-            // if (form.valid()){
-            //     form.submit();
-            // }
+//            $('.contact-form').addClass('successful');
+//            if (form.valid()){
+//                form.submit();
+//            }
             return false;
         }
     })
