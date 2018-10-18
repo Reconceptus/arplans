@@ -19,7 +19,5 @@
 <? endif; ?>
 <h2>Текст</h2>
 <p><?= $model->text ?></p>
-<? if ($model->file): ?>
-    К письму приложен файл: <a href="<?= Yii::$app->request->getHostInfo() . $model->file ?>">скачать</a>
-<? endif; ?>
+
 Запрос поступил со страницы <a href="<?= $model->url ?>"><?= $model->url ?></a>
