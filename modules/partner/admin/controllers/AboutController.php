@@ -63,8 +63,6 @@ class AboutController extends AdminController
                     $fileName = 'image.' . $model->about_main_image->extension;
                     $model->about_main_image->saveAs($dir . '/' . $fileName);
                     $model->about_main_image = '/uploads/village/item/' . $fileName;
-                } else {
-                    var_dump($model->errors);
                 }
             }
             if (!$model->about_main_image && isset($post['old_image'])) {
