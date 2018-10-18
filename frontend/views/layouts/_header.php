@@ -13,7 +13,7 @@
                             <li><a href="#" class="show-modal " data-modal="consultation">Консультация</a></li>
                             <li><a href="/about" class="">О нас</a></li>
                             <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'top']) ?>
-                            <li><a href="#" class="">Сотрудничество</a></li>
+                            <li><a href="/collaboration" class="">Сотрудничество</a></li>
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и магазины</a></li>
                             <li><a href="/contacts" class="">Контакты</a></li>
@@ -102,7 +102,7 @@
                 </li>
                 <li>
                     <span>
-                        <a href="#">Сотрудничество</a>
+                        <a href="/collaboration">Сотрудничество</a>
                     </span>
                 </li>
                 <li>

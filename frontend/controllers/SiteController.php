@@ -11,6 +11,7 @@ use frontend\models\SignupForm;
 use modules\partner\models\About;
 use modules\partner\models\AboutBenefit;
 use modules\partner\models\AboutReady;
+use modules\partner\models\Collaboration;
 use modules\partner\models\Reviews;
 use Yii;
 use yii\base\InvalidParamException;
@@ -157,9 +158,9 @@ class SiteController extends Controller
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
                     ->setSubject('Новый комментарий')->send();
-                return ['status'=>'success', 'message'=>'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
+                return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
-                return ['status'=>'fail'];
+                return ['status' => 'fail'];
             }
         }
 
@@ -222,6 +223,19 @@ class SiteController extends Controller
             'benefits'      => $benefits,
             'reviews'       => $reviews,
             'readyProjects' => $readyProjects
+        ]);
+    }
+
+    /**
+     * Displays collaboration page.
+     *
+     * @return mixed
+     */
+    public function actionCollaboration()
+    {
+        $model = Collaboration::getModel();
+        return $this->render('collaboration', [
+            'model' => $model
         ]);
     }
 
