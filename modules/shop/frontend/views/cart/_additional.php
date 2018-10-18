@@ -21,10 +21,10 @@ if ($services) {
                                 <div class="check">
                                     <label>
                                         <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                        <?= \yii\helpers\Html::a('<span>' . $service->name . ', ' . $service->price . '&nbsp;&#8381;</span>', \yii\helpers\Url::to('/shop/service/' . $service->slug), ['class' => 'service-link']) ?>
+                                        <span><?=$service->name?>, <?=$service->price?> &nbsp;&#8381;</span>
                                     </label>
                                 </div>
-                                <span class="show-more"></span>
+                                <?= \yii\helpers\Html::a('<span class="show-more"></span>', \yii\helpers\Url::to('/shop/service/' . $service->slug), ['class' => 'service-link']) ?>
                             </div>
                             <div class="add-service--main show-more-hidden" style="display: none">
                                 <div class="add-service--main-text">
