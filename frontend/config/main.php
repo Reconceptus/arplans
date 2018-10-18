@@ -75,6 +75,7 @@ return [
                 'shop/catalog'                                             => 'shop/catalog',
 
                 'village'                         => 'partner/village/index',
+                'village/add'                     => 'partner/village/add',
                 'village/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/village/view',
                 'builder/<slug:[a-zA-Z0-9\_\-]+>' => 'partner/builder/view',
                 'builder'                         => 'partner/builder/index',
