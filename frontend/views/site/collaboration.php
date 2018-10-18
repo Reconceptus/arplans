@@ -62,7 +62,7 @@ $manager = $model->getManager();
                                 <p><?= $model->collaboration_text_1 ?></p>
                             </div>
                             <div class="item-action">
-                                <a href="#" class="btn-add"><span>Запрос на партнерство</span></a>
+                                <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Запрос на партнерство</span></a>
                             </div>
                         </div>
                         <div class="item">
@@ -75,8 +75,8 @@ $manager = $model->getManager();
                                 <p><?= $model->collaboration_text_2 ?></p>
                             </div>
                             <div class="item-action">
-                                <a href="#" class="btn-add"><span>Запрос на партнерство</span></a>
-                                <a href="#" class="btn-add"><span>Добавить свой поселок</span></a>
+                                <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Запрос на партнерство</span></a>
+                                <a href="/village/add" class="btn-add"><span>Добавить свой поселок</span></a>
                             </div>
                         </div>
                         <div class="item">
@@ -89,7 +89,7 @@ $manager = $model->getManager();
                                 <p><?= $model->collaboration_text_3 ?></p>
                             </div>
                             <div class="item-action">
-                                <a href="#" class="btn-add"><span>Запрос на партнерство</span></a>
+                                <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Запрос на партнерство</span></a>
                             </div>
                         </div>
                     </div>

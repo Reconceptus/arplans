@@ -17,7 +17,6 @@ use Yii;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
@@ -139,25 +138,20 @@ class SiteController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new Request();
         $post = Yii::$app->request->post();
+        if (isset($post['Request']['accept'])) {
+            $post['Request']['accept'] = 1;
+        }
         if (Yii::$app->request->isAjax && $model->load($post)) {
             $file = UploadedFile::getInstance($model, 'file');
-            if ($file && $file->tempName) {
-                $model->file = $file;
-                if ($model->validate(['file'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/request/');
-                    $time = time();
-                    $path = $dir . $time . '/';
-                    FileHelper::createDirectory($path);
-                    $fileName = $model->file->name;
-                    $model->file->saveAs($path . $fileName);
-                    $model->file = '/uploads/request/' . $time . '/' . $fileName;
-                }
-            }
             if ($model->save()) {
-                Yii::$app->mailer->compose('request', ['model' => $model])
+                $mail = Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новый комментарий')->send();
+                    ->setSubject('Новый запрос');
+                if ($file) {
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                }
+                $mail->send();
                 return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
                 return ['status' => 'fail'];
@@ -176,23 +170,15 @@ class SiteController extends Controller
         $request = new Request();
         if ($request->load(Yii::$app->request->post()) && $request->validate()) {
             $file = UploadedFile::getInstance($request, 'file');
-            if ($file && $file->tempName) {
-                $request->file = $file;
-                if ($request->validate(['file'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/request/');
-                    $time = time();
-                    $path = $dir . $time . '/';
-                    FileHelper::createDirectory($path);
-                    $fileName = $request->file->name;
-                    $request->file->saveAs($path . $fileName);
-                    $request->file = '/uploads/request/' . $time . '/' . $fileName;
-                }
-            }
             if ($request->save()) {
-                Yii::$app->mailer->compose('request', ['model' => $request])
+                $mail = Yii::$app->mailer->compose('request', ['model' => $request, 'type' => Yii::$app->request->post('type')])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новый комментарий')->send();
+                    ->setSubject('Новый запрос');
+                if ($file) {
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                }
+                $mail->send();
             }
             return $this->redirect(Yii::$app->request->referrer);
         }

@@ -25,24 +25,29 @@ use yii\widgets\ActiveForm;
             ]); ?>
             <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
             <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_OTHER) ?>
-            <?= Html::hiddenInput('Request[email]', 'no-email@exampleaaaaaaaaaaaa.com') ?>
+            <?= Html::hiddenInput('Request[email]', null) ?>
             <?= Html::hiddenInput('Request[name]', '-') ?>
             <?= Html::hiddenInput('Request[phone]', '-') ?>
             <div class="modal-form--fields">
                 <div class="custom-form">
                     <div class="form-row-element">
                         <div class="input">
-                            <?= $form->field($model, 'contact')->textInput(['placeholder' => '*Ваш телефон, e-mail или любой другой контакт'])->label(false) ?>
+                            <?= Html::activeTextInput($model, 'contact', ['placeholder' => '*Ваш телефон, e-mail или любой другой контакт']) ?>
                         </div>
                     </div>
                     <div class="form-row-element">
                         <div class="textarea">
-                            <?= $form->field($model, 'text')->textarea(['placeholder' => '*Ваше сообщение', 'rows' => 3])->label(false) ?>
+                            <?= Html::activeTextarea($model, 'text', ['placeholder' => '*Ваше сообщение', 'rows' => 3]) ?>
+                        </div>
+                    </div>
+                    <div class="form-row-element">
+                        <div class="input">
+                            <?= Html::dropDownList('type', null, [0 => '', 1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
                         </div>
                     </div>
                     <div class="form-row-element">
                         <div class="file">
-                            <?= $form->field($model, 'file')->fileInput(['id' => 'supportFileUpload'])->label(false) ?>
+                            <?= Html::activeFileInput($model, 'file', ['id' => 'supportFileUpload']) ?>
                             <label for="supportFileUpload">
                                 <i class="icon-loadFile">
                                     <svg xmlns="http://www.w3.org/2000/svg">
@@ -59,8 +64,8 @@ use yii\widgets\ActiveForm;
                     <div class="form-row-element">
                         <div class="check">
                             <label>
-                                <?= $form->field($model, 'accept')->checkbox(['label' => false]) ?>
-                                <span>Согласен на <a href="#"> обработку </a> персональных данных</span>
+                                <input type="checkbox" name="Request[accept]">
+                                <span>Согласен на обработку персональных данных</span>
                             </label>
                         </div>
                     </div>
@@ -70,6 +75,10 @@ use yii\widgets\ActiveForm;
                 <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt']) ?>
             </div>
             <? ActiveForm::end() ?>
+        </div>
+        <div class="modal-thanks">
+            <h4 class="modal-thanks--title">Спасибо!</h4>
+            <p>Ваше сообщение успешно отправлено, мы свяжемся с Вами в ближайшее время! </p>
         </div>
     </div>
 </div>
@@ -89,7 +98,6 @@ $js = <<<JS
 	 }
 	 
 	 formData = new FormData(data.get(0));
-	 // return false;
 	 $.ajax({
 	  contentType: false, 
       processData: false,
@@ -98,7 +106,7 @@ $js = <<<JS
 	    data: formData,
 	    success: function(res){
 	      if(res.status==='success'){
-	          alert(res.message);
+	           $('[data-modal="consultation"]').addClass('successful');
 	      }
 	    },
 	 });

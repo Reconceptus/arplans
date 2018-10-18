@@ -48,12 +48,14 @@ class VillageController extends Controller
         if ($post) {
             if (isset($post['processing_agree']) && $post['processing_agree'] === 'on') {
                 $file = UploadedFile::getInstanceByName('file');
-                Yii::$app->mailer->compose('add-village', ['model' => $post])
+                $mail = Yii::$app->mailer->compose('add-village', ['model' => $post])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новая заявка о добавлении поселка')
-                    ->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName.'.'.$file->extension])
-                    ->send();
+                    ->setSubject('Новая заявка о добавлении поселка');
+                if ($file) {
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                }
+                $mail->send();
             }
         }
         return $this->render('add');
