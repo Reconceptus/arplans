@@ -67,7 +67,7 @@ $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
                         </section>
                     </div>
                     <?= $this->render('_additional', ['services' => $services]) ?>
-                    <?= $this->render('_orderdata', ['models' => $models, 'user' => $user, 'albumPrice' => $albumPrice]) ?>
+                    <?= $this->render('_orderdata', ['models' => $models, 'user' => null, 'albumPrice' => $albumPrice]) ?>
                 </div>
             </div>
             <?= $this->render('_sidebar') ?>

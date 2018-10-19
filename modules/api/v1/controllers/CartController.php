@@ -4,6 +4,7 @@ namespace modules\api\v1\controllers;
 
 
 use modules\shop\models\Cart;
+use modules\shop\models\Service;
 use yii\web\Response;
 
 class CartController extends ActiveController
@@ -22,12 +23,13 @@ class CartController extends ActiveController
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
+        $services = Service::find()->all();
         if (isset($get['guid'])) {
             $models = Cart::find()->where(['guid' => $get['guid']])->all();
         } else {
             return ['status' => 'success', 'html' => '<p>Корзина пуста</p>'];
         }
-        return ['status' => 'success', 'html' => $this->renderPartial('index', ['models' => $models])];
+        return ['status' => 'success', 'html' => $this->renderPartial('index', ['models' => $models, 'services' => $services])];
     }
 
     /**
