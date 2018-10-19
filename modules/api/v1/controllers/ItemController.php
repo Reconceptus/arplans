@@ -34,7 +34,7 @@ class ItemController extends ActiveController
                 } else {
                     return ['status' => 'fail', 'message' => 'Категория не существует'];
                 }
-            } elseif (isset($categories)) {
+            } elseif ($categories) {
                 $category = $categories[0];
             } else {
                 return ['status' => 'fail', 'message' => 'Не указаны категории'];
@@ -44,7 +44,7 @@ class ItemController extends ActiveController
             $dataProvider = new ActiveDataProvider([
                 'query'      => $query,
                 'pagination' => [
-                    'defaultPageSize' => 6,
+                    'defaultPageSize' => 24,
                 ],
             ]);
             return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : []];

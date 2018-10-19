@@ -7,7 +7,7 @@
  */
 
 use frontend\widgets\recently\Recently;
-use modules\shop\widgets\like\Like;
+use modules\shop\widgets\related\Related;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
@@ -21,14 +21,14 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
     <div class="content content--lg">
         <div class="custom-row">
             <?= \modules\shop\widgets\filters\Filters::widget([
-                'viewName' => 'view',
+                'viewName' => 'index',
                 'category' => $model->category
             ]) ?>
             <div class="custom-row-col col-elastic">
 
                 <div class="project-page--head custom-row">
                     <?= $this->render('_photos', ['model' => $model]) ?>
-                    <?= $this->render('_info', ['model' => $model, 'favorites' => [], 'isInCart' =>false]) ?>
+                    <?= $this->render('_info', ['model' => $model, 'favorites' => [], 'isInCart' => false]) ?>
                 </div>
                 <div class="project-page--info temp">
                     <div class="data">
@@ -62,7 +62,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                         </svg>
                     </i>
                     <span class="text">Живые отзывы клиентов Вконтакте</span>
-                    <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="read">Читать</a>
+                    <a href="<?= \modules\content\models\ContentBlock::getValue('vk_reviews') ?>"
+                       class="read">Читать</a>
                 </div>
                 <div class="project-page--about">
                     <h3 class="title">О проекте</h3>
@@ -74,5 +75,5 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
         </div>
     </div>
 </div>
-<?= Like::widget() ?>
+<?= Related::widget(['model' => $model]) ?>
 <?= Recently::widget() ?>

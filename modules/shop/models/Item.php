@@ -259,6 +259,7 @@ class Item extends \yii\db\ActiveRecord
         unset($get['page']);
         unset($get['per-page']);
         unset($get['slug']);
+        unset($get['id']);
 
         // Этажи
         if (isset($get['floors']) && is_array($get['floors'])) {
