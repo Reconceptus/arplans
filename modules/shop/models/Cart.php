@@ -131,4 +131,21 @@ class Cart extends \yii\db\ActiveRecord
         $models= $query->all();
         return ArrayHelper::map($models, 'item_id', 'count');
     }
+
+    /**
+     * Цена со скидкой за весь лот, включая альбомы
+     * @param $count
+     * @param $albumPrice
+     * @return float
+     */
+    public function getLotPrice($albumPrice)
+    {
+        $price = $this->item->getPrice();
+        if ($this->count > 1) {
+            $result = $price + ($this->count - 1) * (float)$albumPrice;
+        } else {
+            $result = $price;
+        }
+        return $result;
+    }
 }

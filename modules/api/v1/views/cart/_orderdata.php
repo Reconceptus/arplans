@@ -90,9 +90,9 @@ $totalSum = 0;
                         <ul>
                             <? foreach ($models as $model) {
                                 $item = $model->item;
-                                $price = $item->getLotPrice($model->count, $albumPrice);
+                                $price = $model->getLotPrice($albumPrice);
                                 $totalSum += $price;
-                                echo '<li class="you-buy" data-id="' . $model->id . '">Проект ' . $item->name . ' на сумму <span class="sum" data-id="' . $model->id . '">' . $price . '</span></li>';
+                                echo '<li class="you-buy" data-id="' . $item->id . '">Проект ' . $item->name . ' на сумму <span class="price-num" data-id="' . $item->id . '">' . $price . '</span></li>';
                             } ?>
                         </ul>
                     </div>

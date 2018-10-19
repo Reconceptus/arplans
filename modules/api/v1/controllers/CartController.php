@@ -3,6 +3,7 @@
 namespace modules\api\v1\controllers;
 
 
+use common\models\Config;
 use modules\shop\models\Cart;
 use modules\shop\models\Service;
 use yii\web\Response;
@@ -80,7 +81,7 @@ class CartController extends ActiveController
         if ($model->count > 1) {
             $model->count = $model->count - 1;
             $model->save();
-            return ['status' => 'success', 'count' => $model->count];
+            return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice(Config::getValue('albumPrice'))];
         }
         return ['status' => 'fail', 'count' => $model->count];
     }
@@ -94,7 +95,7 @@ class CartController extends ActiveController
         if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
             $model->count = $model->count + 1;
             if ($model->save()) {
-                return ['status' => 'success', 'count' => $model->count];
+                return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice(Config::getValue('albumPrice'))];
             }
         }
         return ['status' => 'fail', 'count' => $model->count];
@@ -106,8 +107,10 @@ class CartController extends ActiveController
         $id = $get['id'];
         $guid = $get['guid'];
         if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+            /* @var $model Cart */
+            $price = $model->getLotPrice(Config::getValue('albumPrice'));
             $model->delete();
-            return ['status' => 'success'];
+            return ['status' => 'success', 'price' => $price];
         }
         return ['status' => 'fail', 'count' => $model->count];
     }

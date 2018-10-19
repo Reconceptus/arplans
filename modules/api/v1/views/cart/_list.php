@@ -10,7 +10,7 @@
 $item = $model->item;
 ?>
 
-<div class="compare-table--item" data-id="<?=$item->id?>">
+<div class="compare-table--item" data-id="<?= $item->id ?>">
     <div class="compare-table--section">
         <div class="compare-table--part part-project">
             <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--preview">
@@ -81,7 +81,10 @@ $item = $model->item;
             <div class="projects-item--actions">
                 <div class="price-box">
                     <div class="projects-item--part-title">Стоимость</div>
-                    <div class="price"><?= $item->getLotPrice($model->count, $albumPrice) ?>
+                    <div class="price">
+                        <span class="price-num" data-id="<?= $item->id ?>">
+                            <?= $model->getLotPrice($albumPrice) ?>
+                        </span>
                         &#8381;
                     </div>
                 </div>
