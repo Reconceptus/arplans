@@ -15,7 +15,7 @@ class CartController extends ActiveController
     {
         $actions = parent::actions();
 
-        unset($actions['index'], $actions['view']);
+        unset($actions['index'], $actions['view'], $actions['delete']);
         return $actions;
     }
 
@@ -68,5 +68,47 @@ class CartController extends ActiveController
             $result[] = ['item_id' => $model->item_id, 'count' => $model->count, 'name' => $model->item->name];
         }
         return $result;
+    }
+
+    public function actionMinus()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        /* @var $model Cart */
+        $model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one();
+        if ($model->count > 1) {
+            $model->count = $model->count - 1;
+            $model->save();
+            return ['status' => 'success', 'count' => $model->count];
+        }
+        return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    public function actionPlus()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        /* @var $model Cart */
+        if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+            $model->count = $model->count + 1;
+            if ($model->save()) {
+                return ['status' => 'success', 'count' => $model->count];
+            }
+        }
+        return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    public function actionDeleteItem()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+            $model->delete();
+            return ['status' => 'success'];
+        }
+        return ['status' => 'fail', 'count' => $model->count];
     }
 }
