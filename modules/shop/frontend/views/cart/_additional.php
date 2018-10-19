@@ -21,7 +21,7 @@ if ($services) {
                                 <div class="check">
                                     <label>
                                         <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                        <span><?=$service->name?>, <?=$service->price?> &nbsp;&#8381;</span>
+                                        <span><span class="service-name"><?=$service->name?></span>, <span class="service-price"><?=$service->price?></span> &nbsp;&#8381;</span>
                                     </label>
                                 </div>
                                 <span class="show-more"></span>
@@ -39,10 +39,10 @@ if ($services) {
                     <? foreach ($services[1] as $service): ?>
                         <div class="add-service show-more-parent">
                             <div class="add-service--header">
-                                <<div class="check">
+                                <div class="check">
                                     <label>
                                         <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                        <span><?=$service->name?>, <?=$service->price?> &nbsp;&#8381;</span>
+                                        <span><?=$service->name?>, <span class="service-price"><?=$service->price?></span> &nbsp;&#8381;</span>
                                     </label>
                                 </div>
                                 <span class="show-more"></span>
