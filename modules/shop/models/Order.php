@@ -22,6 +22,7 @@ use yii\helpers\Html;
  * @property string         $address
  * @property string         $village
  * @property int            $payment_id
+ * @property int            $type
  * @property string         $price Цена только товаров, без допуслуг
  * @property string         $created_at
  * @property string         $updated_at
@@ -36,6 +37,9 @@ use yii\helpers\Html;
 class Order extends \yii\db\ActiveRecord
 {
     const STATUS_NEW = 1;
+
+    const TYPE_SHOP = 0;
+    const TYPE_API = 1;
 
     /**
      * {@inheritdoc}

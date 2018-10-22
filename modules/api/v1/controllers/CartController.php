@@ -145,6 +145,7 @@ class CartController extends ActiveController
                 }
             }
             $order->price = $amount;
+            $order->type = Order::TYPE_API;
             if ($order->save()) {
                 Cart::clearUserCartByGuid($get['guid']);
                 $transaction->commit();
