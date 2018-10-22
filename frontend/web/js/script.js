@@ -208,19 +208,35 @@ $(function () {
             message: {required: ""}
         },
         errorClass: 'invalid',
-        highlight: function(element, errorClass) {
+        highlight: function (element, errorClass) {
             $(element).closest('.form-row-element').addClass(errorClass);
         },
-        unhighlight: function(element, errorClass) {
+        unhighlight: function (element, errorClass) {
             $(element).closest('.form-row-element').removeClass(errorClass)
         },
         errorPlacement: $.noop,
-        submitHandler:function (form) {
+        submitHandler: function (form) {
             $('[data-modal="consultation"]').addClass('successful');
-            if (form.valid()){
+            if (form.valid()) {
                 form.submit();
             }
             return false;
         }
-    })
+    });
+
+    $(document).on('click', '.cart-service', function () {
+        var button = $(this);
+        var price = parseInt(button.parent().find('.service-price').text(), 10);
+        var name = button.parent().find('.service-name').text();
+        var sumContainer = $('#totalsum');
+        var id = button.data('id');
+        if (button.prop('checked')) {
+            var string = '<li class="service-buy" data-id="' + id + '">Услуга ' + name + ' на сумму <span class="service-sum" data-id="' + id + '">' + price + '</span></li>';
+            $('#items-to-buy').append(string);
+            sumContainer.text(parseInt(sumContainer.text(), 10) + price);
+        } else {
+            $('#items-to-buy .service-buy[data-id="' + id + '"]').remove();
+            sumContainer.text(parseInt(sumContainer.text(), 10) - price);
+        }
+    });
 });

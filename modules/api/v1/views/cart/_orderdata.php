@@ -87,12 +87,12 @@ $totalSum = 0;
                     <div class="form-title">К оплате:</div>
                     <div class="ordering-submit--total">
                         <div class="total-head">Вы выбрали:</div>
-                        <ul>
+                        <ul id="items-to-buy">
                             <? foreach ($models as $model) {
                                 $item = $model->item;
-                                $price = $item->getLotPrice($model->count, $albumPrice);
+                                $price = $model->getLotPrice($albumPrice);
                                 $totalSum += $price;
-                                echo '<li class="you-buy" data-id="' . $model->id . '">Проект ' . $item->name . ' на сумму <span class="sum" data-id="' . $model->id . '">' . $price . '</span></li>';
+                                echo '<li class="you-buy" data-id="' . $item->id . '">Проект ' . $item->name . ' на сумму <span class="price-num" data-id="' . $item->id . '">' . $price . '</span></li>';
                             } ?>
                         </ul>
                     </div>

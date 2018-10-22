@@ -425,21 +425,4 @@ class Item extends \yii\db\ActiveRecord
         $price = $this->price - $this->discount;
         return $price >= 0 ? $price : 0;
     }
-
-    /**
-     * Цена со скидкой за весь лот, включая альбомы
-     * @param $count
-     * @param $albumPrice
-     * @return float
-     */
-    public function getLotPrice(int $count, $albumPrice)
-    {
-        $price = $this->getPrice();
-        if ($count > 1) {
-            $result = $price + ($count - 1) * (float)$albumPrice;
-        } else {
-            $result = $price;
-        }
-        return $result;
-    }
 }

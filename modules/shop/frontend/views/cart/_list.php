@@ -80,7 +80,7 @@ $item = $model->item;
             <div class="projects-item--actions">
                 <div class="price-box">
                     <div class="projects-item--part-title">Стоимость</div>
-                    <div class="price"><?= $item->getLotPrice($model->count, $albumPrice) ?>
+                    <div class="price"><?= $model->getLotPrice($albumPrice) ?>
                         &#8381;
                     </div>
                 </div>

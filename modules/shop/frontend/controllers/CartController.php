@@ -164,7 +164,7 @@ class CartController extends Controller
                 $model->count = 1;
             }
             if ($model->save()) {
-                return ['status' => 'success', 'count' => $model->count, 'price' => $model->item->getLotPrice($model->count, $albumPrice)];
+                return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice($albumPrice)];
             }
         }
         return ['status' => 'fail', 'message' => 'Ошибка при попытке изменить количество'];

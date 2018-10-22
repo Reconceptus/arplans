@@ -3,8 +3,12 @@
 namespace modules\api\v1\controllers;
 
 
+use common\models\Config;
+use common\models\User;
 use modules\shop\models\Cart;
+use modules\shop\models\Order;
 use modules\shop\models\Service;
+use Yii;
 use yii\web\Response;
 
 class CartController extends ActiveController
@@ -15,7 +19,7 @@ class CartController extends ActiveController
     {
         $actions = parent::actions();
 
-        unset($actions['index'], $actions['view']);
+        unset($actions['index'], $actions['view'], $actions['delete']);
         return $actions;
     }
 
@@ -68,5 +72,88 @@ class CartController extends ActiveController
             $result[] = ['item_id' => $model->item_id, 'count' => $model->count, 'name' => $model->item->name];
         }
         return $result;
+    }
+
+    public function actionMinus()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        /* @var $model Cart */
+        $model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one();
+        if ($model->count > 1) {
+            $model->count = $model->count - 1;
+            $model->save();
+            return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice(Config::getValue('albumPrice'))];
+        }
+        return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    public function actionPlus()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        /* @var $model Cart */
+        if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+            $model->count = $model->count + 1;
+            if ($model->save()) {
+                return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice(Config::getValue('albumPrice'))];
+            }
+        }
+        return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    public function actionDeleteItem()
+    {
+        $get = \Yii::$app->request->get();
+        $id = $get['id'];
+        $guid = $get['guid'];
+        if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+            /* @var $model Cart */
+            $price = $model->getLotPrice(Config::getValue('albumPrice'));
+            $model->delete();
+            return ['status' => 'success', 'price' => $price];
+        }
+        return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    /**
+     * @return array
+     * @throws \yii\base\Exception
+     */
+    public function actionOrder()
+    {
+        $get = Yii::$app->request->get();
+        $info = $get['info'];
+        $amount = 0;
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+            if (Yii::$app->user->isGuest) {
+                $password = Yii::$app->security->generateRandomString(8);
+                $user = User::createUser($info['email'], $password, $info['fio'], $info['phone'], $info['country'], $info['city'], $info['address']);
+                User::sendRegLetter($user);
+            } else {
+                $user = Yii::$app->user->identity;
+            }
+            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'],true);
+            if ($order) {
+                $amount += $order->addItems($get['items']);
+                if (isset($get['services'])) {
+                    $amount += $order->addServices($get['services']);
+                }
+            }
+            $order->price = $amount;
+            $order->type = Order::TYPE_API;
+            if ($order->save()) {
+                Cart::clearUserCartByGuid($get['guid']);
+                $transaction->commit();
+                return ['status' => 'success', 'orderId' => $order->id];
+            }
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return ['status' => 'fail'];
+        }
     }
 }

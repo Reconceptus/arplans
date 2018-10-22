@@ -10,8 +10,8 @@
 $item = $model->item;
 ?>
 
-<div class="compare-table--item">
-    <div class="compare-table--section" data-id="<?= $model->id ?>">
+<div class="compare-table--item" data-id="<?= $item->id ?>">
+    <div class="compare-table--section">
         <div class="compare-table--part part-project">
             <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--preview">
                 <div class="bg" style="background-image: url('<?= $item->getMainImage() ?>')"></div>
@@ -56,7 +56,8 @@ $item = $model->item;
                 <div class="album-head">**Количество альбомов</div>
                 <div class="form-row-element">
                     <div class="counter">
-                        <span class="minus <?= $model->count <= 1 ? 'disabled' : '' ?> js-cart-change">
+                        <span class="minus <?= $model->count <= 1 ? 'disabled' : '' ?> js-cart-change"
+                              onclick="minusAlbum(<?= $item->id ?>)">
                             <i class="icon icon-minus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-count-minus"/>
@@ -65,7 +66,7 @@ $item = $model->item;
                         </span>
                         <input class="result album-num" readonly value="<?= $model->count ?>"
                                data-id="<?= $item->id ?>">
-                        <span class="plus js-cart-change">
+                        <span class="plus js-cart-change" onclick="plusAlbum(<?= $item->id ?>)">
                             <i class="icon icon-plus">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-count-plus"/>
@@ -80,13 +81,16 @@ $item = $model->item;
             <div class="projects-item--actions">
                 <div class="price-box">
                     <div class="projects-item--part-title">Стоимость</div>
-                    <div class="price"><?= $item->getLotPrice($model->count, $albumPrice) ?>
+                    <div class="price">
+                        <span class="price-num" data-id="<?= $item->id ?>">
+                            <?= $model->getLotPrice($albumPrice) ?>
+                        </span>
                         &#8381;
                     </div>
                 </div>
                 <div class="btns">
-                    <button class="compare-table--remove">
-                        <i class="icon-remove js-delete-cart-item" data-id="<?= $model->id ?>">
+                    <button class="compare-table--remove" onclick="deleteItem(<?= $item->id ?>)">
+                        <i class="icon-remove js-delete-cart-item">
                             <svg xmlns="http://www.w3.org/2000/svg">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                      xlink:href="#icon-remove"/>
