@@ -4,8 +4,11 @@ namespace modules\api\v1\controllers;
 
 
 use common\models\Config;
+use common\models\User;
 use modules\shop\models\Cart;
+use modules\shop\models\Order;
 use modules\shop\models\Service;
+use Yii;
 use yii\web\Response;
 
 class CartController extends ActiveController
@@ -113,5 +116,43 @@ class CartController extends ActiveController
             return ['status' => 'success', 'price' => $price];
         }
         return ['status' => 'fail', 'count' => $model->count];
+    }
+
+    /**
+     * @return array
+     * @throws \yii\base\Exception
+     */
+    public function actionOrder()
+    {
+        $get = Yii::$app->request->get();
+        $info = $get['info'];
+        $amount = 0;
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+            if (Yii::$app->user->isGuest) {
+                $password = Yii::$app->security->generateRandomString(8);
+                $user = User::createUser($info['email'], $password, $info['fio'], $info['phone'], $info['country'], $info['city'], $info['address']);
+                User::sendRegLetter($user);
+            } else {
+                $user = Yii::$app->user->identity;
+            }
+            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'],true);
+            if ($order) {
+                $amount += $order->addItems($get['items']);
+                if (isset($get['services'])) {
+                    $amount += $order->addServices($get['services']);
+                }
+            }
+            $order->price = $amount;
+            if ($order->save()) {
+                Cart::clearUserCartByGuid($get['guid']);
+                $transaction->commit();
+                return ['status' => 'success', 'orderId' => $order->id];
+            }
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            return ['status' => 'fail'];
+        }
     }
 }

@@ -10,28 +10,28 @@ use yii\helpers\Html;
 /**
  * This is the model class for table "shop_order".
  *
- * @property int $id
- * @property int $user_id
- * @property int $status
- * @property string $comment
- * @property string $fio
- * @property string $phone
- * @property string $email
- * @property string $country
- * @property string $city
- * @property string $address
- * @property string $village
- * @property int $payment_id
- * @property string $price Цена только товаров, без допуслуг
- * @property string $created_at
- * @property string $updated_at
+ * @property int            $id
+ * @property int            $user_id
+ * @property int            $status
+ * @property string         $comment
+ * @property string         $fio
+ * @property string         $phone
+ * @property string         $email
+ * @property string         $country
+ * @property string         $city
+ * @property string         $address
+ * @property string         $village
+ * @property int            $payment_id
+ * @property string         $price Цена только товаров, без допуслуг
+ * @property string         $created_at
+ * @property string         $updated_at
  *
- * @property PaymentSystem $payment
- * @property User $user
- * @property OrderItem[] $orderItems
- * @property Item[] $items
+ * @property PaymentSystem  $payment
+ * @property User           $user
+ * @property OrderItem[]    $orderItems
+ * @property Item[]         $items
  * @property OrderService[] $orderServices
- * @property Service[] $services
+ * @property Service[]      $services
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -136,27 +136,37 @@ class Order extends \yii\db\ActiveRecord
 
     /**
      * Создание заказа
-     * @param $fio
-     * @param User $user
-     * @param $email
-     * @param $phone
-     * @param $country
-     * @param $city
-     * @param $address
+     * @param        $fio
+     * @param User   $user
+     * @param        $email
+     * @param        $phone
+     * @param        $country
+     * @param        $city
+     * @param        $address
+     * @param        $api
      * @param string $village
      * @return Order|null
      */
-    public static function createOrder($fio, User $user, $email, $phone, $country, $city, $address, $village = '')
+    public static function createOrder($fio, User $user, $email, $phone, $country, $city, $address, $village = '', $api = false)
     {
         $profile = $user->profile;
         $order = new self();
         $order->user_id = $user->id;
-        $order->fio = $fio ? Html::encode($fio) : $profile->fio;
-        $order->email = $email ? Html::encode($email) : $profile->email;
-        $order->phone = $phone ? Html::encode($phone) : $profile->phone;
-        $order->country = $country ? Html::encode($country) : $profile->country;
-        $order->city = $city ? Html::encode($city) : $profile->city;
-        $order->address = $address ? Html::encode($address) : $profile->address;
+        if ($api) {
+            $order->fio = Html::encode($fio);
+            $order->email = Html::encode($email);
+            $order->phone = Html::encode($phone);
+            $order->country = Html::encode($country);
+            $order->city = Html::encode($city);
+            $order->address = Html::encode($address);
+        } else {
+            $order->fio = $fio ? Html::encode($fio) : $profile->fio;
+            $order->email = $email ? Html::encode($email) : $user->email;
+            $order->phone = $phone ? Html::encode($phone) : $profile->phone;
+            $order->country = $country ? Html::encode($country) : $profile->country;
+            $order->city = $city ? Html::encode($city) : $profile->city;
+            $order->address = $address ? Html::encode($address) : $profile->address;
+        }
         $order->village = Html::encode($village);
         $order->status = self::STATUS_NEW;
         $order->created_at = date('Y-m-d H:i:s');
@@ -171,7 +181,8 @@ class Order extends \yii\db\ActiveRecord
      * @param array $data
      * @return float|int
      */
-    public function addItems(array $data){
+    public function addItems(array $data)
+    {
         $amount = 0;
         foreach ($data as $item) {
             $itemModel = Item::findActive($item['id']);
