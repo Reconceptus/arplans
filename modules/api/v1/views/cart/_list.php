@@ -41,7 +41,7 @@ $item = $model->item;
             <div class="projects-item--info">
                 <div><?= $item->getCatalogValue('walls') ?></div>
                 <div class="form-row-element">
-                    <div class="check">
+                    <div class="check" style="display: none">
                         <label>
                             <input type="checkbox" class="order-change-materials">
                             <span>*Изменить материал</span>

@@ -24,6 +24,8 @@ namespace common\models;
  */
 class Profile extends \yii\db\ActiveRecord
 {
+    const TYPE_USER = 1;
+    const TYPE_AGENT = 2;
     /**
      * {@inheritdoc}
      */
