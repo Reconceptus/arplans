@@ -21,7 +21,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
     <div class="content content--lg">
         <div class="custom-row">
             <?= \modules\shop\widgets\filters\Filters::widget([
-                'viewName' => 'index',
+                'viewName' => 'empty',
+                'api'      => true,
                 'category' => $model->category
             ]) ?>
             <div class="custom-row-col col-elastic">
