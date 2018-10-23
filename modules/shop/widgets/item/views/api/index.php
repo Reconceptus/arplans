@@ -16,7 +16,7 @@ use modules\shop\models\Item;
 <div class="projects-item--wrap">
     <a data-id="<?= $model->id ?>" onclick="openItem(<?= $model->id ?>)" class="projects-item--preview">
         <div class="bg"
-             style="background-image: url(<?= $model->getMainImage() ?>)"></div>
+             style="background-image: url(<?= Yii::$app->request->getHostInfo(). $model->getMainImage() ?>)"></div>
         <? if ($model->is_new): ?>
             <div class="hash">
                 <span class="new">новинка</span>
