@@ -17,7 +17,7 @@ $mainImage = $model->image;
                 <div class="gallery-list">
                     <? foreach ($model->getPhotos() as $k => $image): ?>
                         <div class="item" data-num="<?= $k + 1 ?>">
-                            <figure style="background-image: url(<?= $image->image ?>)"></figure>
+                            <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() . $image->image ?>)"></figure>
                         </div>
                     <? endforeach; ?>
                 </div>
