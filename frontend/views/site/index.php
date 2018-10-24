@@ -16,8 +16,8 @@ use yii\helpers\Url;
         <div class="video-box--wrap">
             <div class="video-box--about">
                 <section>
-                    <h1 class="title title-md">Купить готовый проект дома</h1>
-                    <p>коттеджа, бани от архитектурного бюро с доставкой курьером через 3-5 дней</p>
+                    <h1 class="title title-md"> <?=\modules\content\models\ContentBlock::getValue('main_page_offer')?></h1>
+                    <p><?=\modules\content\models\ContentBlock::getValue('main_page_offer_annotation')?></p>
                 </section>
                 <div class="actions">
                     <?= Html::a('каталог проектов', Url::to('/shop'), ['class' => 'btn btn--lt']) ?>
