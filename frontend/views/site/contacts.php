@@ -97,11 +97,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
                                             </div>
                                         </div>
-                                        <div class="form-row-element">
-                                            <div class="input">
-                                                <?= Html::dropDownList('type', null, [0 => '', 1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-row centered">

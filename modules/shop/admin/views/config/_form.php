@@ -20,7 +20,10 @@ $this->title = 'Редактирование параметра';
     <div class="post-form">
 
         <?= $model->isNewRecord ? $form->field($model, 'slug') : '' ?>
-
+        <? if (!$model->name): ?>
+            параметр <?= $model->slug ?>
+            <?= $form->field($model, 'name')->label('Введите название параметра') ?>
+        <? endif; ?>
         <?= $form->field($model, 'value')->label($model->name) ?>
     </div>
 

@@ -57,21 +57,30 @@ class ContentBlock extends \yii\db\ActiveRecord
 
     /**
      * @param $slug
+     * @param $createIfNotExists
      * @return ContentBlock|null|ActiveRecord
      */
-    public static function getOption(string $slug)
+    public static function getOption(string $slug, bool $createIfNotExists = true)
     {
         $model = self::find()->where(['slug' => $slug])->one();
+        if (!$model) {
+            if ($createIfNotExists) {
+                $model = new ContentBlock();
+                $model->slug = $slug;
+                $model->save();
+            }
+        }
         return $model;
     }
 
     /**
      * @param $slug
+     * @param $createIfNotExists
      * @return null|string
      */
-    public static function getValue(string $slug)
+    public static function getValue(string $slug, bool $createIfNotExists = true)
     {
-        $model = self::getOption($slug);
+        $model = self::getOption($slug, $createIfNotExists);
         return $model ? $model->text : null;
     }
 }

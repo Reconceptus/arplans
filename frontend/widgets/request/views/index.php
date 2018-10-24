@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <?= Html::dropDownList('type', null, [0 => '', 1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
+                            <?= Html::dropDownList('type', null, [1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
                         </div>
                     </div>
                     <div class="form-row-element">

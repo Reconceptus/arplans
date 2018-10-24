@@ -14,12 +14,14 @@ use yii\widgets\ListView;
 /* @var $favorites array */
 /* @var string $name */
 /* @var string $description */
+$this->title = $name;
+$this->registerMetaTag(['name' => 'description', 'content' => $description]);
 ?>
 
 
     <div class="section bg-head">
         <div class="content content--lg">
-            <div class="bg-head--main gradient"><h1 class="title title-lg">Все проекты со скидкой</h1></div>
+            <div class="bg-head--main gradient"><h1 class="title title-lg"><?=$name?></h1></div>
         </div>
     </div>
     <div class="section">
