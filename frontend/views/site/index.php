@@ -110,7 +110,7 @@ use yii\helpers\Url;
                     <div class="blog-hashes">
                         <a href="/about" class="btn-small">о компании</a>
                         <a href="/collaboration" class="btn-small">сотрудничество</a>
-                        <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="btn-small">живые отзывы вконтакте</a>
+                        <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="btn-small" target="_blank">живые отзывы вконтакте</a>
                     </div>
                 </div>
             </div>
