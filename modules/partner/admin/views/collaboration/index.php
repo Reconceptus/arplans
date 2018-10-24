@@ -76,6 +76,6 @@ $this->title = 'Сотрудничество';
 
 <div class="buttons-panel">
     <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>
-    <?= Html::a('На сайте', Url::to('/about'), ['target' => '_blank', 'class' => 'btn btn-admin']) ?>
+    <?= Html::a('На сайте', Url::to('/collaboration'), ['target' => '_blank', 'class' => 'btn btn-admin']) ?>
 </div>
 </div>
