@@ -29,21 +29,6 @@ $this->title = 'Edit ' . $model->username
 </div>
 
 <div class="form-group">
-    <?= Html::label('Фамилия', 'last_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[last_name]', $model->profile ? $model->profile->last_name : '', ['class' => 'form-control', 'id' => 'last_name-field', 'required' => true]) ?>
-</div>
-
-<div class="form-group">
-    <?= Html::label('Имя', 'first_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[first_name]', $model->profile ? $model->profile->first_name : '', ['class' => 'form-control', 'id' => 'first_name-field', 'required' => true]) ?>
-</div>
-
-<div class="form-group">
-    <?= Html::label('Отчество', 'patronymic-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[patronymic]', $model->profile ? $model->profile->patronymic : '', ['class' => 'form-control', 'id' => 'patronymic-field']) ?>
-</div>
-
-<div class="form-group">
     <?= Html::label('ФИО', 'fio-field', ['class' => 'control-label']) ?>
     <?= Html::textInput('Profile[fio]', $model->profile ? $model->profile->fio : '', ['class' => 'form-control', 'id' => 'fio-field', 'required' => true]) ?>
 </div>
