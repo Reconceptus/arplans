@@ -18,7 +18,12 @@ $columns = [
         'class'   => 'yii\grid\SerialColumn',
         'options' => ['style' => 'width:40px'],
     ],
-    'name',
+    [
+        'attribute' => 'name',
+        'value'     => function ($model) {
+            return $model->name ?? $model->slug;
+        }
+    ],
     'value'
 ];
 ?>

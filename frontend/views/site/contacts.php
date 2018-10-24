@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $query */
 /* @var $request \common\models\Request */
 /* @var $model \modules\partner\models\About */
+/* @var $partners \modules\partner\models\Partner[] */
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
@@ -96,11 +97,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
                                             </div>
                                         </div>
-                                        <div class="form-row-element">
-                                            <div class="input">
-                                                <?= Html::dropDownList('type', null, [0 => '', 1 => 'Запрос по проектам', 2 => 'Запрос на добавление поселка']) ?>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-row centered">
@@ -167,6 +163,25 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
+<?
+if ($partners): ?>
+    <div class="big-header">
+        <div class="content content--lg">
+            <h2 class="title">Официальные сайты-партнеры</h2>
+        </div>
+    </div>
+
+    <div class="contact-page--partners">
+        <div class="content content--lg">
+            <ul>
+                <? foreach ($partners as $partner): ?>
+                    <li><a href="<?= $partner->url ?>"><?= $partner->url ?></a></li>
+                <? endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+<? endif; ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <?php
 $js = <<<JS

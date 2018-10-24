@@ -51,6 +51,11 @@ class Config extends \yii\db\ActiveRecord
     public static function getOption(string $slug)
     {
         $model = Config::findOne(['slug' => $slug]);
+        if(!$model){
+            $model = new Config();
+            $model->slug = $slug;
+            $model->save();
+        }
         return $model;
     }
 
