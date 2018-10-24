@@ -84,45 +84,7 @@ use yii\helpers\Url;
 <?= \modules\shop\widgets\compilation\Compilation::widget(['limit' => 8, 'showMobile' => true]) ?>
 
 <div class="section home-about">
-    <div class="home-about-menu">
-        <div class="content content--lg">
-            <ul class="home-about-menu--wrap">
-                <li>
-                    <a href="#" class="home-about-menu--item">
-                        <article>
-                            <h4 class="title">Как заказать проект?</h4>
-                            <div class="subtitle">Инструкция</div>
-                            <div class="read">
-                                <button class="btn-small" type="button">Читать</button>
-                            </div>
-                        </article>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="home-about-menu--item">
-                        <article>
-                            <h4 class="title">Что входит в проект?</h4>
-                            <div class="subtitle">Описание состава проекта</div>
-                            <div class="read">
-                                <button class="btn-small" type="button">Читать</button>
-                            </div>
-                        </article>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="home-about-menu--item">
-                        <article>
-                            <h4 class="title">Безопасность</h4>
-                            <div class="subtitle">Оплата, возврат, гарантии</div>
-                            <div class="read">
-                                <button class="btn-small" type="button">Читать</button>
-                            </div>
-                        </article>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <?=\frontend\widgets\fromblogtop\FromBlogTop::widget()?>
     <div class="home-about-main">
         <img src="/img/branch.png" alt="branch" class="img-branch">
         <div class="content content--lg">
