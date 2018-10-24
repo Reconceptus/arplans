@@ -34,7 +34,7 @@ $this->title = 'Сотрудничество';
     <div class="row">
         <div class="col-lg-10">
             <?= $form->field($model, 'collaboration_title_1') ?>
-            <?= $form->field($model, 'collaboration_text_1') ?>
+            <?= $form->field($model, 'collaboration_text_1')->textarea(['rows' => 4]) ?>
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@ $this->title = 'Сотрудничество';
     <div class="row">
         <div class="col-lg-10">
             <?= $form->field($model, 'collaboration_title_2') ?>
-            <?= $form->field($model, 'collaboration_text_2') ?>
+            <?= $form->field($model, 'collaboration_text_2')->textarea(['rows' => 4]) ?>
         </div>
     </div>
 </div>
@@ -64,12 +64,12 @@ $this->title = 'Сотрудничество';
     <div class="row">
         <div class="col-lg-10">
             <?= $form->field($model, 'collaboration_title_3') ?>
-            <?= $form->field($model, 'collaboration_text_3') ?>
+            <?= $form->field($model, 'collaboration_text_3')->textarea(['rows' => 4]) ?>
         </div>
     </div>
 </div>
 <div class="post-form">
-    <?=$form->field($model,'collaboration_manager')->dropDownList(\common\models\User::getAuthors())?>
+    <?= $form->field($model, 'collaboration_manager')->dropDownList(\common\models\User::getAuthors()) ?>
 </div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
