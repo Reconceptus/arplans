@@ -90,13 +90,13 @@ use yii\widgets\Pjax;
 
                 <div class="compare-sidebar">
                     <div class="order">
-                        <a href="tel:88002001714" class="phone">
+                        <a href="tel:<?=\modules\content\models\ContentBlock::getValue('hot_line')?>" class="phone">
                             <i class="icon icon-phone">
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-phone"/>
                                 </svg>
                             </i>
-                            8 800 200-17-14
+                            <?=\modules\content\models\ContentBlock::getValue('hot_line')?>
                         </a>
                         <a href="#" class="btn-round-min">Консультация</a>
                     </div>

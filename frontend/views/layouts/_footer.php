@@ -12,7 +12,7 @@
             <div class="footer-top--order">
                 <div class="order">
                     <span class="title">Заказ проекта:</span>
-                    <a href="tel:88002001714">8 800 200-17-14</a>
+                    <a href="tel:<?=\modules\content\models\ContentBlock::getValue('hot_line')?>"><?=\modules\content\models\ContentBlock::getValue('hot_line')?></a>
                 </div>
                 <div class="consultation">
                     <a href="#" class="btn btn--round show-modal" data-modal="consultation">Консультация</a>
