@@ -94,18 +94,12 @@ use yii\helpers\Url;
                         <img src="/img/ava01.jpg" alt="director">
                     </div>
                     <div class="home-about-main--post">
-                        <p>Петр Васильевич,</p>
-                        <p>руководитель</p>
+                       <?=\modules\content\models\ContentBlock::getValue('main_page_author')?>
                     </div>
                 </div>
                 <div class="home-about-main--speech">
                     <div class="text">
-                        <p>Мы — архитектурное бюро Арпланс и мы знаем все о строительстве домов в России, за 10 лет по
-                            нашим проектам построено более 2000 домов. Наши дома комфортны, а проекты созданы с учетом
-                            современного строительно рынка России. Мы растем и становимся доступнее — более 300
-                            профессиональных готовых проектов на сайте.</p>
-                        <p>Мы благодарны нашим клиентам за отзывы и рекомендации, вы даете нам самый мощный импульс для
-                            творчества! </p>
+                        <?=\modules\content\models\ContentBlock::getValue('main_page_text')?>
                     </div>
                     <div class="blog-hashes">
                         <a href="/about" class="btn-small">о компании</a>
