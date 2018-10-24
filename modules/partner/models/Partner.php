@@ -11,12 +11,19 @@ use modules\shop\models\Category;
  * @property int               $id
  * @property int               $url
  * @property int               $agent_id
+ * @property int               $is_active
+ * @property int               $is_deleted
  *
  * @property User              $agent
  * @property PartnerCategory[] $partnerCategories
  */
 class Partner extends \yii\db\ActiveRecord
 {
+    const IS_ACTIVE = 1;
+    const IS_NOT_ACTIVE = 0;
+    const IS_DELETED = 1;
+    const IS_NOT_DELETED = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -33,6 +40,7 @@ class Partner extends \yii\db\ActiveRecord
         return [
             [['url', 'name'], 'string', 'max' => 255],
             ['agent_id', 'integer'],
+            [['is_active', 'is_deleted'], 'boolean'],
             [['agent_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['agent_id' => 'id']],
         ];
     }
@@ -43,9 +51,11 @@ class Partner extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'       => 'ID',
-            'url'      => 'Url',
-            'agent_id' => 'Agent ID',
+            'id'        => 'ID',
+            'url'       => 'Сайт',
+            'name'      => 'Название',
+            'agent_id'  => 'Представитель',
+            'is_active' => 'Активен',
         ];
     }
 

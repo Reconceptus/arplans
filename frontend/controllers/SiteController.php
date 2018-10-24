@@ -12,6 +12,7 @@ use modules\partner\models\About;
 use modules\partner\models\AboutBenefit;
 use modules\partner\models\AboutReady;
 use modules\partner\models\Collaboration;
+use modules\partner\models\Partner;
 use modules\partner\models\Reviews;
 use Yii;
 use yii\base\InvalidParamException;
@@ -184,10 +185,12 @@ class SiteController extends Controller
         }
         $model = About::getModel();
         $query = About::getFilteredQuery(Yii::$app->request->get());
+        $partners = Partner::find()->where(['is_active' => Partner::IS_ACTIVE, 'is_deleted' => Partner::IS_NOT_DELETED])->all();
         return $this->render('contacts', [
-            'model'   => $model,
-            'request' => $request,
-            'query'   => $query
+            'model'    => $model,
+            'request'  => $request,
+            'query'    => $query,
+            'partners' => $partners,
         ]);
     }
 
