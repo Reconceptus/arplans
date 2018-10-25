@@ -14,7 +14,9 @@ use modules\admin\controllers\AdminController;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 class UserController extends AdminController
 {
@@ -143,16 +145,29 @@ class UserController extends AdminController
                     $profile->user_id = $model->id;
                 }
 
-                foreach (Yii::$app->request->post('Profile', []) as $k => $v) {
-                    $profile->$k = $v;
+                if ($profile->load(Yii::$app->request->post())) {
+                    $image = UploadedFile::getInstance($profile, 'image');
+                    if ($image && $image->tempName) {
+                        $profile->image = $image;
+                        if ($profile->validate(['image'])) {
+                            $dir = Yii::getAlias('@webroot/uploads/user/avatar/');
+                            FileHelper::createDirectory($dir . $model->id . '/');
+                            $fileName = 'avatar.' . $profile->image->extension;
+                            unlink($dir . $model->id . '/' . $fileName);
+                            $profile->image->saveAs($dir . $model->id . '/' . $fileName);
+                            $profile->image = '/uploads/user/avatar/' . $model->id . '/' . $fileName;
+                        }
+                        if (!$profile->image && isset($profile->oldAttributes['image'])) {
+                            $profile->image = $profile->oldAttributes['image'];
+                        }
+                    }
+
+                    $profile->save();
+
+                    return $this->redirect($back);
                 }
-
-                $profile->save();
-
-                return $this->redirect($back);
             }
         }
-
 
         return $this->render('_form', [
             'model'      => $model,

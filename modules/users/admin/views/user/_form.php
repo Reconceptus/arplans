@@ -20,27 +20,25 @@ $this->title = 'Edit ' . $model->username
 ?>
 <h1><?= $this->title ?></h1>
 
-<?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(
+    ['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]
+); ?>
 <?= $form->field($model, 'email')->textInput(['required' => true]) ?>
+
+<div class="form-group">
+    <? if ($model->profile->image): ?>
+        <div class="image-admin-preview">
+            <?= Html::img($model->profile->image, ['class' => 'img-admin']) ?>
+        </div>
+    <? endif; ?>
+    <?= Html::label('Аватар', 'image-field', ['class' => 'control-label']) ?>
+    <?= Html::fileInput('Profile[image]', '', ['class' => 'form-control', 'id' => 'image-field']) ?>
+</div>
+
 
 <div class="form-group">
     <?= Html::label('Пароль', 'password-field', ['class' => 'control-label']) ?>
     <?= Html::textInput('password', '', ['class' => 'form-control', 'id' => 'password-field' . $model->isNewRecord ? ', "required" => true' : '']) ?>
-</div>
-
-<div class="form-group">
-    <?= Html::label('Фамилия', 'last_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[last_name]', $model->profile ? $model->profile->last_name : '', ['class' => 'form-control', 'id' => 'last_name-field', 'required' => true]) ?>
-</div>
-
-<div class="form-group">
-    <?= Html::label('Имя', 'first_name-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[first_name]', $model->profile ? $model->profile->first_name : '', ['class' => 'form-control', 'id' => 'first_name-field', 'required' => true]) ?>
-</div>
-
-<div class="form-group">
-    <?= Html::label('Отчество', 'patronymic-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('Profile[patronymic]', $model->profile ? $model->profile->patronymic : '', ['class' => 'form-control', 'id' => 'patronymic-field']) ?>
 </div>
 
 <div class="form-group">

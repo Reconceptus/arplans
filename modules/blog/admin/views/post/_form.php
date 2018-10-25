@@ -42,11 +42,15 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'author_id')->dropDownList(\common\models\User::getAuthors()) ?>
     <?= $form->field($model, 'on_main')->checkbox() ?>
+    <?= $form->field($model, 'on_main_top')->checkbox() ?>
     <?= $form->field($model, 'to_menu')->checkbox() ?>
+    <?= $form->field($model, 'short_description')->textarea() ?>
+
     <div class="form-group field-post-slug">
         <label class="control-label" for="tags">Теги (через запятую)</label>
         <?= Html::input('string', 'tags[ru]', $tags, ['class' => 'form-control', 'id' => 'tags']) ?>
     </div>
+
 
     <?= $form->field($model, 'text')->textarea()->widget(Widget::className(), [
         'settings' => [

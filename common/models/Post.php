@@ -7,24 +7,26 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "post".
  *
- * @property int $id
- * @property string $slug
- * @property string $name
- * @property string $text
- * @property string $title
- * @property string $keywords
- * @property string $description
- * @property int $author_id
- * @property string $image
- * @property string $created_at
- * @property string $updated_at
- * @property int $status
- * @property int $on_main
- * @property int $sort
- * @property int $to_menu
+ * @property int       $id
+ * @property string    $slug
+ * @property string    $name
+ * @property string    $text
+ * @property string    $title
+ * @property string    $keywords
+ * @property string    $description
+ * @property int       $author_id
+ * @property string    $image
+ * @property string    $created_at
+ * @property string    $updated_at
+ * @property int       $status
+ * @property int       $on_main
+ * @property int       $sort
+ * @property int       $to_menu
+ * @property string    $short_description
+ * @property int       $on_main_top
  *
  * @property Comment[] $comments
- * @property User $author
+ * @property User      $author
  * @property PostTag[] $postTags
  */
 class Post extends \yii\db\ActiveRecord
@@ -49,9 +51,10 @@ class Post extends \yii\db\ActiveRecord
             [['slug'], 'unique'],
             [['slug', 'name', 'text', 'author_id'], 'required'],
             [['text'], 'string'],
-            [['author_id', 'status', 'sort', 'on_main', 'to_menu'], 'integer'],
+            [['author_id', 'status', 'sort'], 'integer'],
+            [['on_main_top', 'on_main', 'to_menu'], 'boolean'],
             [['created_at', 'updated_at'], 'safe'],
-            [['slug', 'name', 'title', 'keywords', 'description'], 'string', 'max' => 255],
+            [['slug', 'name', 'title', 'keywords', 'description', 'short_description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
         ];
@@ -63,21 +66,23 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => 'ID',
-            'slug'        => 'Url',
-            'name'        => 'Заголовок',
-            'text'        => 'Текст',
-            'title'       => 'Title',
-            'keywords'    => 'Keywords',
-            'description' => 'Description',
-            'author_id'   => 'Автор',
-            'image'       => 'Изображение',
-            'created_at'  => 'Добавлено',
-            'updated_at'  => 'Изменено',
-            'status'      => 'Статус',
-            'sort'        => 'Сортировка',
-            'on_main'     => 'Вывести на главную',
-            'to_menu'     => 'Вывести в футер',
+            'id'                => 'ID',
+            'slug'              => 'Url',
+            'name'              => 'Заголовок',
+            'text'              => 'Текст',
+            'title'             => 'Title',
+            'keywords'          => 'Keywords',
+            'description'       => 'Description',
+            'short_description' => 'Краткое описание',
+            'author_id'         => 'Автор',
+            'image'             => 'Изображение',
+            'created_at'        => 'Добавлено',
+            'updated_at'        => 'Изменено',
+            'status'            => 'Статус',
+            'sort'              => 'Сортировка',
+            'on_main'           => 'Вывести на главную',
+            'on_main_top'       => 'В 3 статьи на главной',
+            'to_menu'           => 'Вывести в футер',
         ];
     }
 

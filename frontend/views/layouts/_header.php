@@ -5,7 +5,7 @@
         <div class="content content--lg">
             <div class="header-top--wrap">
                 <div class="header-top--telephone">
-                    <a href="tel:8800201714">8 (800) 200-17-14</a>
+                    <a href="tel:<?=\modules\content\models\ContentBlock::getValue('hot_line')?>"><?=\modules\content\models\ContentBlock::getValue('hot_line')?></a>
                 </div>
                 <div class="header-top--nav">
                     <nav>
@@ -17,6 +17,7 @@
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и магазины</a></li>
                             <li><a href="/contacts" class="">Контакты</a></li>
+                            <li><a href="/profile" class="">ЛК</a></li>
                         </ul>
                     </nav>
                     <div class="header-top--search">

@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </svg>
                 </i>
                 <span class="text">Живые отзывы клиентов Вконтакте</span>
-                <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="read">Читать</a>
+                <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="read" target="_blank">Читать</a>
             </div>
         </div>
     </div>
