@@ -11,7 +11,7 @@
 ?>
 <? if(Yii::$app->user->can('adminPanel')):?>
     <?=\yii\helpers\Html::a('Админка',\yii\helpers\Url::to('/admin'),['style'=>'margin-right:20px;'])?>
-<? else:?>
+<? elseif(!Yii::$app->user->isGuest):?>
     <?=\yii\helpers\Html::a('Личный кабинет',\yii\helpers\Url::to('/profile'),['style'=>'margin-right:20px;'])?>
 <?endif;?>
 <?if(!Yii::$app->user->isGuest):?>
