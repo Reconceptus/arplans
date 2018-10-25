@@ -11,7 +11,9 @@
 ?>
 <? if(Yii::$app->user->can('adminPanel')):?>
     <?=\yii\helpers\Html::a('Админка',\yii\helpers\Url::to('/admin'),['style'=>'margin-right:20px;'])?>
-<? endif;?>
+<? else:?>
+    <?=\yii\helpers\Html::a('Личный кабинет',\yii\helpers\Url::to('/profile'),['style'=>'margin-right:20px;'])?>
+<?endif;?>
 <?if(!Yii::$app->user->isGuest):?>
 <a href="/shop/favorite" class="stats stats-likes">
     <span id="count-favorite"><?= intval($favoriteCount) ?></span>
