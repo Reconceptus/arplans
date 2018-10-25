@@ -59,7 +59,7 @@
                     <p><?= $service->service->name ?>, <?= $service->price ?></p>
                 <? endforeach; ?>
             </div>
-Данные заказа:
+            Данные заказа:
             <table>
                 <tr>
                     <td>Email</td>
