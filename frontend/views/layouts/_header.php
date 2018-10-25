@@ -17,6 +17,7 @@
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и магазины</a></li>
                             <li><a href="/contacts" class="">Контакты</a></li>
+                            <li><a href="/profile" class="">ЛК</a></li>
                         </ul>
                     </nav>
                     <div class="header-top--search">
