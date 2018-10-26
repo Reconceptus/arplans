@@ -61,13 +61,13 @@ $image = $model->getMainImage();
         <div class="projects-item--info">
             <?
             $floors = [];
-            if ($model->one_floor) $floors[] = '1';
-            if ($model->two_floor) $floors[] = '2';
+            if ($model->one_floor) $floors[] = 'одноэтажный';
+            if ($model->two_floor) $floors[] = 'двухэтажный';
             if ($model->mansard) $floors[] = 'мансарда';
             ?>
             <div>
                 <? if ($floors): ?>
-                    <?= implode(', ', $floors) ?>/
+                    <?= implode(', ', $floors) ?>
                 <? endif; ?>
                 <?= $model->rooms ?> комнаты
             </div>
