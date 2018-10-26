@@ -135,10 +135,10 @@ class Item extends \yii\db\ActiveRecord
             'garage'          => 'Гараж',
             'double_garage'   => 'Гараж на 2 авто',
             'tent'            => 'Навес',
-            'terrace'         => 'Терасса',
+            'terrace'         => 'Терраса',
             'balcony'         => 'Балкон',
             'light2'          => 'Второй свет',
-            'pool'            => 'Бассейк',
+            'pool'            => 'Бассейн',
             'sauna'           => 'Сауна',
             'gas_boiler'      => 'Газовая котельная',
             'is_new'          => 'Новинка',
@@ -335,7 +335,7 @@ class Item extends \yii\db\ActiveRecord
         if ($this->garage) $comfort[] = 'гараж';
         if ($this->double_garage) $comfort[] = 'гараж на 2 авто';
         if ($this->tent) $comfort[] = 'навес';
-        if ($this->terrace) $comfort[] = 'терасса';
+        if ($this->terrace) $comfort[] = 'терраса';
         if ($this->balcony) $comfort[] = 'балкон';
         if ($this->light2) $comfort[] = 'второй свет';
         if ($this->pool) $comfort[] = 'бассейн';

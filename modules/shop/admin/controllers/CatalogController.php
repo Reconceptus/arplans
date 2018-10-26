@@ -14,6 +14,7 @@ use modules\shop\models\Catalog;
 use modules\shop\models\CatalogItem;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveRecord;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
@@ -172,9 +173,20 @@ class CatalogController extends AdminController
         ]);
     }
 
+    public function actionDeleteCi()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = CatalogItem::findOne(['id' => intval(Yii::$app->request->get('id'))]);
+        if ($model) {
+            $model->delete();
+            return ['status' => 'success'];
+        }
+        return ['status' => 'fail'];
+    }
+
     /**
      * @param $id
-     * @return Catalog|null
+     * @return Catalog|null|ActiveRecord
      * @throws NotFoundHttpException
      */
     public function findModel($id)
