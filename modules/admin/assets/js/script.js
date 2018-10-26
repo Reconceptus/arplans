@@ -259,4 +259,25 @@ $(function () {
             $('.benefit-text').val('');
         }
     });
+
+    $(document).on('click', '.js-category-checkbox', function () {
+        var button = $(this);
+        var category_id = button.data('category');
+        var partner_id = button.data('partner');
+        var checked = button.prop('checked') ? 1 : 0;
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/partner/partner/check-category',
+            data: {
+                category_id: category_id,
+                partner_id: partner_id,
+                checked: checked
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    button.prop('checked', data.checked);
+                }
+            }
+        });
+    });
 });

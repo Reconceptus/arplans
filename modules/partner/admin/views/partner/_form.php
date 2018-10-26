@@ -14,6 +14,7 @@ use yii\widgets\ActiveForm;
 
 
 /* @var $model \modules\partner\models\Partner */
+/* @var $categories \modules\shop\models\Category[] */
 
 $this->title = $model->isNewRecord ? 'Добавление партнера' : 'Редактирование партнера';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';

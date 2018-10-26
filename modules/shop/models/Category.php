@@ -2,6 +2,7 @@
 
 namespace modules\shop\models;
 
+use modules\partner\models\PartnerCategory;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -89,5 +90,17 @@ class Category extends \yii\db\ActiveRecord
         return $cache->getOrSet('categories-list', function ($cache) {
             return ArrayHelper::map(self::find()->where(['is_active' => self::IS_ACTIVE])->all(), 'id', 'name');
         }, 1000);
+    }
+
+    /**
+     * @param $partner_id
+     * @return bool
+     */
+    public function isAllowToPartner($partner_id)
+    {
+        if(PartnerCategory::find()->where(['category_id'=>$this->id, 'partner_id'=>$partner_id])->exists()){
+            return true;
+        }
+        return false;
     }
 }
