@@ -11,6 +11,8 @@ namespace modules\partner\admin\controllers;
 
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Partner;
+use modules\partner\models\PartnerCategory;
+use modules\shop\models\Category;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
@@ -91,6 +93,18 @@ class PartnerController extends AdminController
     }
 
     /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionCategories($id)
+    {
+        $categories = Category::find()->all();
+        $model = $this->findModel($id);
+        return $this->render('categories', ['model' => $model, 'categories' => $categories]);
+    }
+
+    /**
      * @param $model Partner
      * @return string|Response
      */
@@ -120,6 +134,34 @@ class PartnerController extends AdminController
             return $this->redirect(Yii::$app->request->get('back'));
         }
         throw new Exception('Ошибка при удалении партнера');
+    }
+
+    /**
+     * @return array
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionCheckCategory()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        $model = PartnerCategory::find()->where(['category_id' => intval($get['category_id']), 'partner_id' => intval($get['partner_id'])])->one();
+        if (intval($get['checked']) === 1) {
+            if (!$model) {
+                $model = new PartnerCategory();
+                $model->partner_id = intval($get['partner_id']);
+                $model->category_id = intval($get['category_id']);
+                if ($model->save()) {
+                    return ['status' => 'success', 'checked' => 1];
+                }
+            }
+        } else {
+            if ($model) {
+                $model->delete();
+                return ['status' => 'success', 'checked' => 0];
+            }
+        }
+        return ['status' => 'fail'];
     }
 
 

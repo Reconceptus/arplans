@@ -40,7 +40,7 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{delete}',
+        'template' => '{delete}  {categories}',
         'options'  => ['style' => 'width:100px'],
         'buttons'  => [
             'delete' => function ($url, $model) {
@@ -52,6 +52,13 @@ $columns = [
                     'data-method'  => 'post',
                     'data-confirm' => 'Вы действительно хотите удалить этого партнера?'
                 ]);
+            },
+            'categories' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-list"></span>', Url::to([
+                    '/admin/modules/partner/partner/categories',
+                    'id'   => $model->id,
+                    'back' => Yii::$app->request->absoluteUrl
+                ]));
             }
         ]
     ]
