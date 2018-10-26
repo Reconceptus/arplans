@@ -34,30 +34,46 @@ class ProfileController extends Controller
 
     /**
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionOrders()
     {
         $user = Yii::$app->user->identity;
+        if (!$user) {
+            throw new NotFoundHttpException();
+        }
         /* @var $user User */
-        $query = Order::find()->where(['user_id' => Yii::$app->user->id]);
+        $query = Order::find()->where(['user_id' => Yii::$app->user->id, 'type' => Order::TYPE_SHOP]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        if ($user->access_token || $user->partner) {
-            $viewName = 'orders-partner';
-        } else {
-            $viewName = 'orders-user';
-        }
-        return $this->render($viewName, ['dataProvider' => $dataProvider]);
+        return $this->render('orders', ['dataProvider' => $dataProvider]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionOrder($id)
     {
         $model = Order::findOne(['id' => $id]);
-        if (!$model && $model->user_id != Yii::$app->user->id) {
+        if (!$model || $model->user_id != Yii::$app->user->id || $model->type === Order::TYPE_API) {
             throw new NotFoundHttpException();
         } else {
             return $this->render('order', ['model' => $model]);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function actionSales()
+    {
+        $query = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('sales', ['dataProvider' => $dataProvider]);
     }
 }

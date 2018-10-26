@@ -17,26 +17,26 @@ $columns = [
         'options' => ['style' => 'width:40px'],
     ],
     [
+        'label'     => 'Номер заказа',
+        'attribute' => 'id',
+    ],
+    [
+        'label'     => 'Дата оформления заказа',
         'attribute' => 'created_at',
         'value'     => function ($model) {
             return date('d m Y', strtotime($model->created_at));
         }
     ],
     [
-        'label'   => 'Проекты',
+        'label'   => 'Сумма заказа',
         'format'  => 'html',
         'options' => ['style' => 'width:100px'],
         'value'   => function ($model) {
-            $res = '';
-            /* @var $model \modules\shop\models\Order */
-            foreach ($model->orderItems as $item) {
-                $res .= '<p>' . $item->item->name . ' ' . $item->price . '</p>';
-            }
-            return $res;
+            return $model->price. 'руб.';
         }
     ],
     [
-        'attribute' => 'price',
+        'attribute' => 'status',
     ],
 ];
 ?>

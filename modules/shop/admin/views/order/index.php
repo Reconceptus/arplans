@@ -14,8 +14,12 @@ $this->title = 'Заказы';
 
 $columns = [
     [
-        'class' => 'yii\grid\SerialColumn',
-        'options'   => ['style' => 'width:40px'],
+        'class'   => 'yii\grid\SerialColumn',
+        'options' => ['style' => 'width:40px'],
+    ],
+    [
+        'attribute' => 'id',
+        'label'     => 'Номер заказа',
     ],
     [
         'attribute' => 'user_id',
@@ -31,6 +35,26 @@ $columns = [
             return $model->user->email;
         }
     ],
+    [
+        'label'     => 'Дата оформления заказа',
+        'attribute' => 'created_at',
+        'value'     => function ($model) {
+            return date('d m Y', strtotime($model->created_at));
+        }
+    ],
+    [
+        'label'     => 'Сумма заказа',
+        'attribute' => 'price'
+    ],
+    [
+        'label' => 'Сайт-партнер',
+        'value' => function ($model) {
+            return $model->type===1 && $model->user->partner ? $model->user->partner->name : '';
+        }
+    ],
+    [
+        'attribute' => 'status'
+    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>
