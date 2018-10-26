@@ -7,6 +7,7 @@
  */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $model \modules\partner\models\Partner */
 /* @var $categories \modules\shop\models\Category[] */
@@ -24,4 +25,7 @@ $this->title = 'Категории для партнера ' . $model->name;
             <? endforeach; ?>
         </div>
     </div>
+</div>
+<div class="buttons-panel">
+    <?= Html::a('Вернуться к списку партнеров', Url::to('/admin/modules/partner/partner'), ['class' => 'btn btn-admin']) ?>
 </div>
