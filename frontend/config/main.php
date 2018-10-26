@@ -15,6 +15,11 @@ return [
     'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components'          => [
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'defaultTimeZone' => 'Europe/Moscow',
+            'timeZone' => 'GMT+3'
+        ],
         'request'      => [
             'parsers'   => [
                 'application/json' => 'yii\web\JsonParser',
