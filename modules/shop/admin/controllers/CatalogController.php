@@ -99,7 +99,7 @@ class CatalogController extends AdminController
     {
         $model = new CatalogItem();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['catalog/update', 'id' => $id]);
+            return $this->redirect(['/admin/modules/shop/catalog/update', 'id' => $id]);
         }
         $model->catalog_id = $id;
         return $this->render('_ci_form', ['model' => $model]);

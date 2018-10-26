@@ -16,7 +16,10 @@ class m180926_070907_create_partner_category_table extends Migration
             'id'       => $this->primaryKey()->unsigned(),
             'url'      => $this->string(),
             'name'     => $this->string(),
-            'agent_id' => $this->integer()
+            'email'    => $this->string(),
+            'contacts' => $this->string(),
+            'contract' => $this->string(),
+            'agent_id' => $this->integer(),
         ]);
 
 
