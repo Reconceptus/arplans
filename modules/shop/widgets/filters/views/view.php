@@ -183,7 +183,7 @@ $get = Yii::$app->request->get();
                                                         <label>
                                                             <input type="checkbox"
                                                                    name="terrace" <?= isset($get['terrace']) ? 'checked' : '' ?>>
-                                                            <span>терасса</span>
+                                                            <span>терраса</span>
                                                         </label>
                                                     </div>
                                                 </div>

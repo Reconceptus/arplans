@@ -280,4 +280,26 @@ $(function () {
             }
         });
     });
+
+    $(document).on('click', '.js-delete-ci', function () {
+        var button = $(this);
+        var id = button.parent().attr('data-id');
+        if (id) {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/modules/shop/catalog/delete-ci',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        var container = button.closest('.filter');
+                        container.remove();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+    });
 });

@@ -40,7 +40,7 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{delete}  {categories}',
+        'template' => '{categories} {delete}',
         'options'  => ['style' => 'width:100px'],
         'buttons'  => [
             'delete' => function ($url, $model) {

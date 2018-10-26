@@ -191,7 +191,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                                     <label>
                                                         <input type="checkbox" class="filter-checkbox"
                                                                name="terrace" <?= isset($get['terrace']) ? 'checked' : '' ?>>
-                                                        <span>терасса</span>
+                                                        <span>терраса</span>
                                                     </label>
                                                 </div>
                                             </div>
