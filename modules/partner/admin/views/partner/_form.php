@@ -26,6 +26,9 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <div class="col-md-6">
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'url') ?>
+            <?= $form->field($model, 'contract') ?>
+            <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'contacts') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
             <?= $form->field($model, 'agent_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'username'), ['prompt' => '']) ?>
         </div>

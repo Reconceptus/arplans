@@ -9,10 +9,14 @@ use modules\shop\models\Category;
  * This is the model class for table "partner".
  *
  * @property int               $id
- * @property int               $url
+ * @property string            $url
  * @property int               $agent_id
  * @property int               $is_active
  * @property int               $is_deleted
+ * @property string            $contract
+ * @property string            $contacts
+ * @property string            $email
+ * @property string            $name
  *
  * @property User              $agent
  * @property PartnerCategory[] $partnerCategories
@@ -38,7 +42,8 @@ class Partner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'name'], 'string', 'max' => 255],
+            [['url', 'name', 'email', 'contacts', 'contract'], 'string', 'max' => 255],
+            ['email', 'email'],
             ['agent_id', 'integer'],
             [['is_active', 'is_deleted'], 'boolean'],
             [['agent_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['agent_id' => 'id']],
@@ -54,6 +59,9 @@ class Partner extends \yii\db\ActiveRecord
             'id'        => 'ID',
             'url'       => 'Сайт',
             'name'      => 'Название',
+            'email'     => 'Email для заявок',
+            'contacts'  => 'Контакты',
+            'contract'  => 'Номер договора',
             'agent_id'  => 'Представитель',
             'is_active' => 'Активен',
         ];
