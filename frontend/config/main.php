@@ -14,11 +14,12 @@ return [
     'basePath'            => dirname(__DIR__),
     'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'timeZone'            => 'GMT+3',
     'components'          => [
-        'formatter' => [
-            'class' => 'yii\i18n\Formatter',
+        'formatter'    => [
+            'class'           => 'yii\i18n\Formatter',
             'defaultTimeZone' => 'Europe/Moscow',
-            'timeZone' => 'GMT+3'
+            'timeZone'        => 'GMT+3'
         ],
         'request'      => [
             'parsers'   => [
@@ -100,8 +101,8 @@ return [
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 'shop',
                 '/'                                                                                               => '/',
-                '<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>'=>'<controller>/<action>',
-                '<controller:[a-zA-Z0-9\_\-]+>'=>'<controller>',
+                '<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>'                                         => '<controller>/<action>',
+                '<controller:[a-zA-Z0-9\_\-]+>'                                                                   => '<controller>',
             ],
         ],
     ],
