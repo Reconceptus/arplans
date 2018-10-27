@@ -49,7 +49,7 @@ $image = $model->getMainImage();
     </a>
     <div class="projects-item--actions">
         <div class="prices">
-            <? if ($model->discount): ?>
+            <? if ($model->discount > 0): ?>
                 <div class="price old"><?= $model->price ?> &#8381;</div>
             <? endif; ?>
             <div class="price"><?= $model->getPrice() ?>&#8381;
