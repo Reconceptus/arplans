@@ -330,6 +330,7 @@ class Item extends \yii\db\ActiveRecord
     public function getComfort()
     {
         $comfort = [];
+        if ($this->mansard) $comfort[] = 'мансарда';
         if ($this->pedestal) $comfort[] = 'цоколь';
         if ($this->cellar) $comfort[] = 'чердак';
         if ($this->garage) $comfort[] = 'гараж';

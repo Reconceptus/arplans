@@ -130,11 +130,11 @@ $bathrooms = [
     <div class="checkbox-panel row">
         <div class="col-sm-4"><?= $form->field($model, 'one_floor')->checkbox() ?></div>
         <div class="col-sm-4"><?= $form->field($model, 'two_floor')->checkbox() ?></div>
-        <div class="col-sm-4"> <?= $form->field($model, 'mansard')->checkbox() ?></div>
     </div>
     <p style="font-weight: bold; margin-top: 30px;">Удобства</p>
     <div class="checkbox-panel row">
         <div class="col-sm-4">
+            <?= $form->field($model, 'mansard')->checkbox() ?>
             <?= $form->field($model, 'pedestal')->checkbox() ?>
             <?= $form->field($model, 'cellar')->checkbox() ?>
             <?= $form->field($model, 'garage')->checkbox() ?>

@@ -63,7 +63,6 @@ $image = $model->getMainImage();
             $floors = [];
             if ($model->one_floor) $floors[] = 'одноэтажный';
             if ($model->two_floor) $floors[] = 'двухэтажный';
-            if ($model->mansard) $floors[] = 'мансарда';
             ?>
             <div>
                 <? if ($floors): ?>
