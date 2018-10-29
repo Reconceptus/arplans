@@ -48,7 +48,7 @@ $columns = [
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
-                    '/admin/modules/shop/item/delete',
+                    '/shop/item/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -61,15 +61,26 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Добавить товар', Url::to(['/admin/modules/shop/item/create', 'category_id' => Yii::$app->request->get('category_id')]), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Добавить товар', Url::to(['/shop/item/create', 'category_id' => Yii::$app->request->get('category_id')]), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'filterModel'  => $filterModel,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/item/update', 'id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/shop/item/update', 'id' => $model->id]) . '"'];
         },
-        'layout'       => '{items}{pager}',
+        'layout'       => '{items}',
         'columns'      => $columns
     ]
 );
+?>
+
+<?= \yii\widgets\LinkPager::widget([
+    'pagination'         => $dataProvider->getPagination(),
+    'linkOptions'        => ['class' => 'page'],
+    'activePageCssClass' => 'current',
+    'nextPageLabel'      => '>',
+    'prevPageLabel'      => '<',
+    'prevPageCssClass'   => 'prev',
+    'nextPageCssClass'   => 'next',
+]) ?>

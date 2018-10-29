@@ -153,7 +153,9 @@ class UserController extends AdminController
                             $dir = Yii::getAlias('@webroot/uploads/user/avatar/');
                             FileHelper::createDirectory($dir . $model->id . '/');
                             $fileName = 'avatar.' . $profile->image->extension;
-                            unlink($dir . $model->id . '/' . $fileName);
+                            if(file_exists($dir . $model->id . '/' . $fileName)) {
+                                unlink($dir . $model->id . '/' . $fileName);
+                            }
                             $profile->image->saveAs($dir . $model->id . '/' . $fileName);
                             $profile->image = '/uploads/user/avatar/' . $model->id . '/' . $fileName;
                         }

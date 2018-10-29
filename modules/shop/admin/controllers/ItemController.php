@@ -68,6 +68,7 @@ class ItemController extends AdminController
      */
     public function actionCategory($category_id)
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Item::find()->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
         $filterModel = new Item();
         $filter = Yii::$app->request->get('Item');

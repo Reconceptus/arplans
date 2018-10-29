@@ -27,9 +27,9 @@ class Compilation extends Widget
         }else{
             $favorites = [];
         }
-        $models['new'] = Item::find()->where(['is_new' => Item::IS_NEW])->limit($this->limit)->all();
-        $models['discount'] = Item::find()->where(['>', 'discount', 0])->limit($this->limit)->all();
-        $models['free'] = Item::find()->where(['or', ['price' => 0.00], ['is', 'price', null]])->limit($this->limit)->all();
+        $models['new'] = Item::find()->where(['is_new' => Item::IS_NEW])->limit($this->limit)->orderBy(['created_at'=>SORT_DESC])->all();
+        $models['discount'] = Item::find()->where(['>', 'discount', 0])->limit($this->limit)->orderBy(['created_at'=>SORT_DESC])->all();
+        $models['free'] = Item::find()->where(['or', ['price' => 0.00], ['is', 'price', null]])->limit($this->limit)->orderBy(['created_at'=>SORT_DESC])->all();
         $content = $this->render($this->viewName, ['models' => $models, 'favorites' => $favorites]);
         if ($this->showMobile) {
             $content .= $this->render('mobile', ['models' => array_chunk($models, $this->limitMobile), 'favorites' => $favorites]);
