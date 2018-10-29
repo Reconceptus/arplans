@@ -12,7 +12,8 @@
     <? foreach ($models as $k => $model): ?>
         <?
         if ($model->lat && $model->lng) {
-            $coordinates[] = ['lat' => $model->lat, 'lng' => $model->lng];
+            $coordinates[$k] = ['lat' => $model->lat, 'lng' => $model->lng];
+            $icons[$k] = ['url' => '/svg/partials/map-mark.svg?i=custom_marker' . $k];
         }
         ?>
     <? endforeach; ?>
@@ -21,8 +22,6 @@
         var map;
 
         function initMap() {
-
-            var icon = '/img/map-mark.png';
 
             var mapOptions = {
                 zoom: 3,
@@ -93,13 +92,19 @@
                 <?endforeach;?>
             ];
 
+            var icons = [
+                <?foreach ($icons as $icon):?>
+                {url: '<?=$icon['url']?>', size: new google.maps.Size(36, 41)},
+                <?endforeach;?>
+            ];
+
             var marker;
 
             for (var i = 0; i < locations.length; i++) {
                 marker = new google.maps.Marker({
                     position: locations[i],
                     map: map,
-                    icon: icon
+                    icon: icons[i]
                 });
             }
         }
