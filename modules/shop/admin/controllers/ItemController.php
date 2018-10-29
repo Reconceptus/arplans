@@ -131,8 +131,6 @@ class ItemController extends AdminController
                     $fileName = 'project.' . $model->project->extension;
                     $model->project->saveAs($dir . $model->id . '/' . $fileName);
                     $model->project = '/uploads/shop/project/' . $model->id . '/' . $fileName;
-                } else {
-                    var_dump($model->errors);
                 }
             }
             if (!$model->project && isset($model->oldAttributes['project'])) {

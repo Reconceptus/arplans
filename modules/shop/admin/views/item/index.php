@@ -37,7 +37,16 @@ $columns = [
         'rowOptions'   => function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/item/category', 'category_id' => $model->id]) . '"'];
         },
-        'layout'       => '{items}{pager}',
+        'layout'       => '{items}',
         'columns'      => $columns
     ]
-);
+);?>
+<?= \yii\widgets\LinkPager::widget([
+    'pagination'         => $dataProvider->getPagination(),
+    'linkOptions'        => ['class' => 'page'],
+    'activePageCssClass' => 'current',
+    'nextPageLabel'      => '>',
+    'prevPageLabel'      => '<',
+    'prevPageCssClass'   => 'prev',
+    'nextPageCssClass'   => 'next',
+]) ?>
