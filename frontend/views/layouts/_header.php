@@ -63,59 +63,7 @@
     <div class="header-mobile desktop-hidden">
         <div class="bg"></div>
         <nav class="header-mobile--nav">
-            <ul>
-                <li class="show-more-parent">
-                    <span class="show-more">Готовые проекты домов <span class="tick"></span></span>
-                    <ul class="show-more-hidden">
-                        <li><a href="#">Деревянные дома</a></li>
-                        <li><a href="#">Каменные дома</a></li>
-                        <li><a href="#">Каркасные дома</a></li>
-                        <li><a href="#">Комбинированные дома</a></li>
-                        <li><a href="#">Бани</a></li>
-                        <li><a href="#">Индивидуальный проект</a></li>
-                    </ul>
-                </li>
-                <li class="show-more-parent">
-                    <span class="show-more">Услуги <span class="tick"></span></span>
-                    <ul class="show-more-hidden">
-                        <li><a href="#">Индивидуальное проектирование</a></li>
-                        <li><a href="#">Адаптация фундамента</a></li>
-                        <li><a href="#">Разработка раздела игр</a></li>
-                        <li><a href="#">Посадка дома на участок</a></li>
-                        <li><a href="#">Разработка паспорта проекта</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <span>
-                        <a href="#">Контакты</a>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <a href="#">Консультация</a>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <a href="#">О нас</a>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <a href="/collaboration">Сотрудничество</a>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <a href="#">Коттеджные поселки России</a>
-                    </span>
-                </li>
-                <li>
-                    <span>
-                        <a href="#">Строители и магазины</a>
-                    </span>
-                </li>
-            </ul>
+            <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top-mobile', 'showServices' => 1]) ?>
         </nav>
     </div>
 </header>
