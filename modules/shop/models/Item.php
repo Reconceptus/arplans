@@ -32,7 +32,6 @@ use yii\db\ActiveRecord;
  * @property int          $one_floor
  * @property int          $two_floor
  * @property int          $mansard
- * @property int          $pedestal
  * @property int          $cellar
  * @property int          $garage
  * @property int          $double_garage
@@ -90,7 +89,7 @@ class Item extends \yii\db\ActiveRecord
             [['cost'], 'safe'],
             [['price', 'discount', 'cost'], 'number'],
             [['category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
-              'one_floor', 'two_floor', 'mansard', 'pedestal', 'cellar', 'garage', 'double_garage', 'tent', 'terrace',
+              'one_floor', 'two_floor', 'mansard', 'cellar', 'garage', 'double_garage', 'tent', 'terrace',
               'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video', 'seo_title', 'seo_keywords', 'seo_description', 'exact_gab'], 'string', 'max' => 255],
             [['description', 'build_price'], 'string'],
@@ -130,7 +129,6 @@ class Item extends \yii\db\ActiveRecord
             'one_floor'       => 'Один этаж',
             'two_floor'       => 'Два этажа',
             'mansard'         => 'Мансарда',
-            'pedestal'        => 'Цоколь',
             'cellar'          => 'Чердак',
             'garage'          => 'Гараж',
             'double_garage'   => 'Гараж на 2 авто',
@@ -331,7 +329,6 @@ class Item extends \yii\db\ActiveRecord
     {
         $comfort = [];
         if ($this->mansard) $comfort[] = 'мансарда';
-        if ($this->pedestal) $comfort[] = 'цоколь';
         if ($this->cellar) $comfort[] = 'чердак';
         if ($this->garage) $comfort[] = 'гараж';
         if ($this->double_garage) $comfort[] = 'гараж на 2 авто';

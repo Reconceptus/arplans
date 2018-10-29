@@ -135,7 +135,6 @@ $bathrooms = [
     <div class="checkbox-panel row">
         <div class="col-sm-4">
             <?= $form->field($model, 'mansard')->checkbox() ?>
-            <?= $form->field($model, 'pedestal')->checkbox() ?>
             <?= $form->field($model, 'cellar')->checkbox() ?>
             <?= $form->field($model, 'garage')->checkbox() ?>
             <?= $form->field($model, 'double_garage')->checkbox() ?>
@@ -225,6 +224,6 @@ $bathrooms = [
 </div>
 <?= Html::a('Клонировать', Url::to(['/admin/modules/shop/item/clone', 'id' => $model->id]), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Товар еще не добавлен' : '' ?>">
-    <?= Html::a('cancel', Url::to('/admin/modules/shop/item'), ['class' => 'btn btn-admin']) ?>
+    <?= Html::a('Отмена', Url::to('/admin/modules/shop/item/category?category_id=' . $model->category_id), ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайте', Url::to('/shop/' . $model->category->slug . '/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

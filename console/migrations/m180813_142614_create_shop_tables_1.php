@@ -85,7 +85,6 @@ class m180813_142614_create_shop_tables_1 extends Migration
             'one_floor'     => $this->smallInteger(1)->defaultValue(0),
             'two_floor'     => $this->smallInteger(1)->defaultValue(0),
             'mansard'       => $this->smallInteger(1)->defaultValue(0),
-            'pedestal'      => $this->smallInteger(1)->defaultValue(0),
             'cellar'        => $this->smallInteger(1)->defaultValue(0),
             'garage'        => $this->smallInteger(1)->defaultValue(0),
             'double_garage' => $this->smallInteger(1)->defaultValue(0),
