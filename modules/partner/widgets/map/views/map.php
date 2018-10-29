@@ -38,7 +38,7 @@ $coordinates = [];
             var icon = '/img/map-mark.png';
 
             var mapOptions = {
-                zoom: 10,
+                zoom: 3,
                 mapTypeControl: false,
                 streetViewControl: false,
                 styles: [{
@@ -93,7 +93,7 @@ $coordinates = [];
                     "stylers": [{"color": "#fefefe"}, {"lightness": 17}, {"weight": 1.2}]
                 }],
                 scrollwheel: false,
-                center: new google.maps.LatLng(55.754080, 37.619151)
+                center: new google.maps.LatLng(61.110217, 101.464168)
             };
             map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
