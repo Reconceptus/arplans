@@ -57,23 +57,14 @@ $get = Yii::$app->request->get();
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div class="form-row-element">
-                                                    <div class="check">
-                                                        <label>
-                                                            <input type="checkbox"
-                                                                   name="floors[two_floor]" <?= isset($get['floors']['two_floor']) ? 'checked' : '' ?>>
-                                                            <span>2-этажные</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="form-row-col col-50">
                                                 <div class="form-row-element">
                                                     <div class="check">
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="floors[mansard]" <?= isset($get['floors']['mansard']) ? 'checked' : '' ?>>
-                                                            <span>с мансардой</span>
+                                                                   name="floors[two_floor]" <?= isset($get['floors']['two_floor']) ? 'checked' : '' ?>>
+                                                            <span>2-этажные</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -131,6 +122,15 @@ $get = Yii::$app->request->get();
                                     <div class="catalog-filters--main show-more-hidden" style="display: block;">
                                         <div class="form-row">
                                             <div class="form-row-col col-50">
+                                                <div class="form-row-element">
+                                                    <div class="check">
+                                                        <label>
+                                                            <input type="checkbox"
+                                                                   name="floors[mansard]" <?= isset($get['floors']['mansard']) ? 'checked' : '' ?>>
+                                                            <span>с мансардой</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
                                                 <div class="form-row-element">
                                                     <div class="check">
                                                         <label>

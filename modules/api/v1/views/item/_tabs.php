@@ -75,7 +75,6 @@ $ready = $model->getReady();
                             $floors = [];
                             if ($model->one_floor) $floors[] = 'одноэтажный';
                             if ($model->two_floor) $floors[] = 'двухэтажный';
-                            if ($model->mansard) $floors[] = 'мансарда';
                             ?>
                             <? if ($floors): ?>
                                 <tr>

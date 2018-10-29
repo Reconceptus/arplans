@@ -14,12 +14,12 @@ return [
     'basePath'            => dirname(__DIR__),
     'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'timeZone'            => 'GMT+3',
+    'timeZone'            => 'Europe/Moscow',
     'components'          => [
         'formatter'    => [
             'class'           => 'yii\i18n\Formatter',
             'defaultTimeZone' => 'Europe/Moscow',
-            'timeZone'        => 'GMT+3'
+            'timeZone'        => 'Europe/Moscow'
         ],
         'request'      => [
             'parsers'   => [
