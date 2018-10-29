@@ -106,13 +106,13 @@ class About extends Model
     public static function getFilteredQuery(array $get)
     {
         // Делаем выборку поселков
-        $query1 = Village::find()->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
-        // Регион
+        $query1 = Village::find()->alias('v')->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
+        $query2 = Builder::find()->alias('b')->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
         if (isset($get['region'])) {
             $query1->andWhere(['v.region_id' => intval($get['region'])]);
+            $query2->andWhere(['b.region_id' => intval($get['region'])]);
             unset($get['region']);
         }
-        $query2 = Builder::find()->select(['id', 'name', 'address', 'phones', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => 1]);
 
         $query = $query1->union($query2);
         return $query;
