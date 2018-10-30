@@ -63,30 +63,34 @@
     </div>
 
     <div class="section service--profit content">
-        <?= $model->description ?>
+        <div class="text-box">
+            <?= $model->description ?>
+        </div>
         <? if ($model->files): ?>
-            <h3 class="title">Примеры:</h3>
-            <ul class="examples">
-                <? foreach ($model->files as $file): ?>
-                    <?
-                    $ext = explode('.', $file->file);
-                    $name = explode('/', $file->file);
-                    ?>
-                    <li>
-                        <a href="<?= $file->file ?>">
-                            <i class="icon-pdf">
-                                <svg xmlns="http://www.w3.org/2000/svg">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="#icon-<?= end($ext) ?>"/>
-                                </svg>
-                            </i>
-                            <span><?= str_replace('_', ' ', end($name)) ?></span>
-                        </a>
-                    </li>
-                <? endforeach; ?>
-            </ul>
+            <div class="examples-box">
+                <h3 class="title">Примеры:</h3>
+                <ul class="examples">
+                    <? foreach ($model->files as $file): ?>
+                        <?
+                        $ext = explode('.', $file->file);
+                        $name = explode('/', $file->file);
+                        ?>
+                        <li>
+                            <a href="<?= $file->file ?>">
+                                <i class="icon-pdf">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#icon-<?= end($ext) ?>"/>
+                                    </svg>
+                                </i>
+                                <span><?= str_replace('_', ' ', end($name)) ?></span>
+                            </a>
+                        </li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
         <? endif; ?>
     </div>
 
-<?= \modules\shop\widgets\services\Services::widget(['id' => $model->id, 'viewName'=>'another']) ?>
+<?= \modules\shop\widgets\services\Services::widget(['id' => $model->id, 'viewName' => 'another']) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>

@@ -44,7 +44,7 @@ $price = $model->getPrice();
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                 xlink:href="#icon-heart"/>
+                                 xlink:href="#icon-heart-project"/>
                         </svg>
                     </a>
                 </div>
