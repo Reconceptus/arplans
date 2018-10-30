@@ -40,10 +40,15 @@ $ready = $model->getReady();
                         <ul class="owl-carousel">
                             <? foreach ($model->getPlans() as $k => $plan): ?>
                                 <li class="plan-item">
-                                    <img src="<?= $plan->image ?>" alt="plan">
+                                    <img data-plan="<?= $plan->id ?>" src="<?= $plan->image ?>" alt="plan">
                                 </li>
                             <? endforeach; ?>
                         </ul>
+                    </div>
+                    <div class="gallery-items">
+                        <? foreach ($model->getPlans() as $k => $plan): ?>
+                            <a data-plan="<?= $plan->id ?>" href="<?= $plan->image ?>" data-fancybox="plans"></a>
+                        <? endforeach; ?>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">
