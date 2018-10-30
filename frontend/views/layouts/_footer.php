@@ -70,3 +70,13 @@
         </div>
     </div>
 </div>
+<div class="modal" data-modal="custom">
+    <div class="bg close"></div>
+    <div class="modal-box">
+        <span class="close">&times;</span>
+        <div class="modal-custom">
+            <h4 class="modal-custom--title"></h4>
+            <div class="modal-custom--text"></div>
+        </div>
+    </div>
+</div>
