@@ -47,6 +47,8 @@ class FavoriteController extends Controller
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
         $fav = false;
+        $message = '';
+        $title = '';
         if (!\Yii::$app->user->isGuest) {
             $model = Favorite::find()->where(['item_id' => intval($get['id']), 'user_id' => \Yii::$app->user->id])->one();
             if (!$model && isset($get['fav']) && $get['fav'] === 'true') {
@@ -63,8 +65,11 @@ class FavoriteController extends Controller
                 $model->delete();
                 $addCounter = -1;
             }
+        }else{
+            $title = 'Вы не зарегистрированы';
+            $message = 'После регистрации Вам будет доступна функция добавления понравившихся проектов в подборку для сравнения. <p><a href="/site/signup" style="color: #2196f3">Зарегистрироваться</a></p>';
         }
-        return ['fav' => $fav, 'counter' => $addCounter];
+        return ['fav' => $fav, 'counter' => $addCounter, 'title'=>$title, 'message'=>$message];
     }
 
     /**

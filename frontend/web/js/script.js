@@ -24,6 +24,9 @@ $(function () {
                 } else {
                     button.removeClass('liked');
                 }
+                if(data.message){
+                    project.alertMessage(data.title, data.message)
+                }
                 var count = parseInt($('#count-favorite').text(), 10);
                 var add = parseInt(data.counter, 10);
                 $('#count-favorite').text(add + count);
