@@ -51,7 +51,7 @@ $(function () {
                     count++;
                     $('#count-basket').text(count)
                 }
-                alert(data.message)
+                project.alertMessage(data.message);
             }
         });
     })

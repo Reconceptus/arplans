@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Config;
 use common\models\LoginForm;
+use common\models\Profile;
 use common\models\Request;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -239,6 +240,9 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                    $profile = new Profile();
+                    $profile->user_id = $user->id;
+                    $profile->save();
                     Yii::$app->mailer->compose('registration', ['model' => $model])
                         ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                         ->setTo($user->email)
