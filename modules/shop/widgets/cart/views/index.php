@@ -24,7 +24,7 @@
     </i>
 </a>
 <?else:?>
-<?=\yii\helpers\Html::a('Войти',\yii\helpers\Url::to('/site/login'))?>
+<?=\yii\helpers\Html::a('Войти',\yii\helpers\Url::to('/site/login'),['class'=>'stats stats-enter'])?>
 <?endif;?>
 <a href="/shop/cart" class="stats stats-prods">
     <span id="count-basket"><?= intval($cartCount) ?></span>

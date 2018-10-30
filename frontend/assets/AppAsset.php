@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'js/wNumb.js',
         'js/nouislider.min.js',
         'js/jquery.mCustomScrollbar.concat.min.js',
+        'js/jquery.fancybox.min.js',
         'js/jquery.validate.min.js',
         'js/main.min.js',
         'js/script.js',
