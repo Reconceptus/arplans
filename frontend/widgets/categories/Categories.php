@@ -21,17 +21,16 @@ class Categories extends Widget
     public function run()
     {
         $cache = \Yii::$app->cache;
-
-        $content = $cache->getOrSet('categories_' . $this->viewName, function ($cache) {
-            if ($this->showServices) {
-                $services = Service::find()->where(['is_active' => 1, 'is_deleted' => 0, 'to_main_menu' => 1])->all();
-            } else {
-                $services = [];
-            }
-            $models = Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
-            return $this->render($this->viewName, ['models' => $models, 'services' => $services]);
+        $models = $cache->getOrSet('categories', function ($cache) {
+            return Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
         }, 1000);
-
-        return $content;
+        if ($this->showServices) {
+            $services = $cache->getOrSet('services', function ($cache) {
+                return Service::find()->where(['is_active' => 1, 'is_deleted' => 0, 'to_main_menu' => 1])->all();
+            }, 1000);
+        } else {
+            $services = [];
+        }
+        return $this->render($this->viewName, ['models' => $models, 'services' => $services]);
     }
 }
