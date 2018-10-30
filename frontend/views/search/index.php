@@ -26,7 +26,7 @@ $this->title = 'Поиск';
                         <div class="custom-search--field">
                             <div class="custom-search--inputs">
                                 <div class="input">
-                                    <input type="text" placeholder="Поисковый запрос" name="q">
+                                    <input type="text" placeholder="Поисковый запрос" name="q" value="<?=Yii::$app->request->get('q')?>">
                                 </div>
                                 <button class="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg">

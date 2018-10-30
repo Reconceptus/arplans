@@ -53,7 +53,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                             </ul>
                         </div>
                         <div class="estimate">
-                            <a href="#" class="btn-add"><span>Получить точную смету</span></a>
+                            <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Получить точную смету</span></a>
                         </div>
                     </div>
                 </div>

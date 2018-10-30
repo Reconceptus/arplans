@@ -122,7 +122,7 @@ $ready = $model->getReady();
                     <h4 class="title">Стоимость строительства "коробки"</h4>
                     <?= $model->build_price ?>
                     <div class="estimate">
-                        <a href="#" class="btn-add"><span>Получить точную смету</span></a>
+                        <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Получить точную смету</span></a>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">
