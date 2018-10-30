@@ -63,3 +63,35 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?php
+$js = <<<JS
+       $('.login-form form').validate({
+        onfocusout: false,
+        ignore: ".ignore",
+        rules: {
+            'LoginForm[username]': {required: true},
+            'LoginForm[password]': {required: true},
+        },
+        messages: {
+           'LoginForm[username]': {required: ""},
+           'LoginForm[password]': {required: ""},
+        },
+        errorClass: 'invalid',
+        highlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').addClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').removeClass(errorClass)
+        },
+        errorPlacement: $.noop,
+        submitHandler:function (form) {
+           $('.contact-form').addClass('successful');
+           if (form.valid()){
+               form.submit();
+           }
+            return false;
+        }
+    })
+JS;
+
+$this->registerJs($js);
