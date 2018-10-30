@@ -21,9 +21,9 @@
                     </nav>
                     <div class="header-top--search">
                         <div id="searchForm">
-                            <form action="#">
+                            <form action="/search">
                                 <div class="fieldset">
-                                    <input class="input" type="text" id="site-search">
+                                    <input class="input" type="text" id="site-search" name="q">
                                 </div>
                                 <label class="label" for="site-search">
                                     <svg xmlns="http://www.w3.org/2000/svg">
