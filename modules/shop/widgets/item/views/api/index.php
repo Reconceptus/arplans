@@ -17,21 +17,17 @@ use modules\shop\models\Item;
     <a data-id="<?= $model->id ?>" onclick="openItem(<?= $model->id ?>)" class="projects-item--preview">
         <div class="bg"
              style="background-image: url(<?= Yii::$app->request->getHostInfo(). $model->getMainImage() ?>)"></div>
-        <? if ($model->is_new): ?>
-            <div class="hash">
+        <div class="hash">
+            <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
-            </div>
-        <? endif; ?>
-        <? if ($model->discount): ?>
-            <div class="hash">
+            <? endif; ?>
+            <? if ($model->discount): ?>
                 <span class="sale">скидка</span>
-            </div>
-        <? endif; ?>
-        <? if (!$model->price): ?>
-            <div class="hash">
+            <? endif; ?>
+            <? if (!$model->price): ?>
                 <span class="free">бесплатно</span>
-            </div>
-        <? endif; ?>
+            <? endif; ?>
+        </div>
         <div class="data">
             <span class="index"><?= $model->name ?></span>
             <ul class="info">
