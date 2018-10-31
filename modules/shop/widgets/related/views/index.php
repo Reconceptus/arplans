@@ -17,7 +17,7 @@
                     <ul class="owl-carousel">
                         <? foreach ($models as $model): ?>
                             <? $image = $model->getMainImage(); ?>
-                            <? $isInCart = array_key_exists($model->id, $inCart);?>
+                            <? $isInCart = array_key_exists($model->id, $inCart); ?>
                             <li class="projects-item">
                                 <div class="projects-item--wrap">
                                     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
@@ -43,7 +43,7 @@
                                     </a>
                                     <div class="projects-item--actions">
                                         <div class="prices">
-                                            <? if ($model->discount): ?>
+                                            <? if ($model->discount > 0): ?>
                                                 <div class="price old"><?= $model->price ?> &#8381;</div>
                                             <? endif; ?>
                                             <div class="price"><?= $model->getPrice() ?>&#8381;

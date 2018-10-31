@@ -23,7 +23,7 @@ $price = $model->getPrice();
                 <div class="current-price"><?= $price ?>
                     &#8381;
                 </div>
-                <? if ($model->discount): ?>
+                <? if ($model->discount > 0): ?>
                     <div class="old-price"><?= $model->price ?> руб</div>
                 <? endif; ?>
             </div>
