@@ -31,7 +31,6 @@ use yii\helpers\Url;
                     </div>
                     <div class="cell cell-contacts">
                         <p>&nbsp;</p>
-                        <p><?= $model->url ?></p>
                         <?= Html::a('сайт', Url::to($model->url),['target'=>'_blank']) ?>
                     </div>
                     <? if ($model->price_list) : ?>
