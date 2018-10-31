@@ -49,9 +49,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-bottom--copyright">© 2008-2018 ARPLANCE готовые проекты домов и индивидуальное
-                проектирование
-            </div>
+            <div class="footer-bottom--copyright">© <?=\common\models\Config::getValue('footer_copyright')?></div>
             <div class="footer-bottom--auth">Сделано <a href="http://reconcept.ru" target="_blank">Reconcept</a></div>
         </div>
     </div>
