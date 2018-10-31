@@ -16,14 +16,14 @@ $mainImage = $model->image;
             <div class="gallery-list-wrap">
                 <div class="gallery-list">
                     <? if ($model->getMainImage()): ?>
-                        <div class="item" data-num="<?= $model->image_id ?>">
+                        <div class="item" data-num="1">
                             <figure style="background-image: url(<?= $model->image->image ?>)"
                                     data-url-fancybox="<?= $model->image->image ?>"></figure>
                         </div>
                     <? endif; ?>
-                    <? foreach ($model->getPhotos() as $image): ?>
+                    <? foreach ($model->getPhotos() as $k => $image): ?>
                         <? if ($image->id !== $model->image_id): ?>
-                            <div class="item" data-num="<?= $image->id ?>">
+                            <div class="item" data-num="<?=$k+3 ?>">
                                 <figure style="background-image: url(<?= $image->image ?>)"
                                         data-url-fancybox="<?= $image->image ?>"></figure>
                             </div>
