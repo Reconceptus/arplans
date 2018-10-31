@@ -22,7 +22,7 @@ $image = $model->getMainImage();
             <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
             <? endif; ?>
-            <? if ($model->discount): ?>
+            <? if ($model->discount > 0): ?>
                 <span class="sale">скидка</span>
             <? endif; ?>
             <? if (!$model->price): ?>

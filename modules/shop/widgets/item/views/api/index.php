@@ -16,12 +16,12 @@ use modules\shop\models\Item;
 <div class="projects-item--wrap">
     <a data-id="<?= $model->id ?>" onclick="openItem(<?= $model->id ?>)" class="projects-item--preview">
         <div class="bg"
-             style="background-image: url(<?= Yii::$app->request->getHostInfo(). $model->getMainImage() ?>)"></div>
+             style="background-image: url(<?= Yii::$app->request->getHostInfo() . $model->getMainImage() ?>)"></div>
         <div class="hash">
             <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
             <? endif; ?>
-            <? if ($model->discount): ?>
+            <? if ($model->discount > 0): ?>
                 <span class="sale">скидка</span>
             <? endif; ?>
             <? if (!$model->price): ?>
@@ -48,7 +48,7 @@ use modules\shop\models\Item;
     </a>
     <div class="projects-item--actions">
         <div class="prices">
-            <? if ($model->discount): ?>
+            <? if ($model->discount > 0): ?>
                 <div class="price old"><?= $model->price ?> &#8381;</div>
             <? endif; ?>
             <div class="price"><?= $model->getPrice() ?>&#8381;
