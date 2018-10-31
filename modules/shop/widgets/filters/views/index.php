@@ -182,13 +182,22 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                                     <div class="check">
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="tent" <?= isset($get['tent']) ? 'checked' : '' ?>>
-                                                            <span>навес</span>
+                                                                   name="oriel" <?= isset($get['oriel']) ? 'checked' : '' ?>>
+                                                            <span>с эркером</span>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row-col col-50">
+                                                <div class="form-row-element">
+                                                    <div class="check">
+                                                        <label>
+                                                            <input type="checkbox"
+                                                                   name="tent" <?= isset($get['tent']) ? 'checked' : '' ?>>
+                                                            <span>навес</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
                                                 <div class="form-row-element">
                                                     <div class="check">
                                                         <label>
