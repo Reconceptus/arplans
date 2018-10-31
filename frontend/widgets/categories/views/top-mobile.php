@@ -63,7 +63,7 @@ use yii\helpers\Url;
         </li>
         <li>
             <span>
-                <a href="/builder">Строители и магазины</a>
+                <a href="/builder">Строители и материалы</a>
             </span>
         </li>
     </ul>
