@@ -91,7 +91,7 @@ class CatalogController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $arr = Yii::$app->request->get('arr');
-        $models = Item::find()->where(['in', 'id', $arr])->all();
+        $models = Item::find()->where(['in', 'id', $arr])->andWhere(['is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED])->all();
         $html = $this->renderPartial('_history', ['models' => array_reverse($models)]);
         return ['status' => 'success', 'html' => $html];
     }
