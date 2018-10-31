@@ -138,6 +138,7 @@ $bathrooms = [
             <?= $form->field($model, 'cellar')->checkbox() ?>
             <?= $form->field($model, 'garage')->checkbox() ?>
             <?= $form->field($model, 'double_garage')->checkbox() ?>
+            <?= $form->field($model, 'oriel')->checkbox() ?>
         </div>
         <div class="col-sm-4">
             <?= $form->field($model, 'tent')->checkbox() ?>
