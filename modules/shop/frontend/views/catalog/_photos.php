@@ -15,10 +15,19 @@ $mainImage = $model->image;
         <div class="project-gallery">
             <div class="gallery-list-wrap">
                 <div class="gallery-list">
-                    <? foreach ($model->getPhotos() as $k => $image): ?>
-                        <div class="item" data-num="<?= $k + 1 ?>">
-                            <figure style="background-image: url(<?= $image->image ?>)" data-url-fancybox="<?= $image->image ?>"></figure>
+                    <? if ($model->getMainImage()): ?>
+                        <div class="item" data-num="<?= $model->image_id ?>">
+                            <figure style="background-image: url(<?= $model->image->image ?>)"
+                                    data-url-fancybox="<?= $model->image->image ?>"></figure>
                         </div>
+                    <? endif; ?>
+                    <? foreach ($model->getPhotos() as $image): ?>
+                        <? if ($image->id !== $model->image_id): ?>
+                            <div class="item" data-num="<?= $image->id ?>">
+                                <figure style="background-image: url(<?= $image->image ?>)"
+                                        data-url-fancybox="<?= $image->image ?>"></figure>
+                            </div>
+                        <? endif; ?>
                     <? endforeach; ?>
                 </div>
             </div>
