@@ -17,7 +17,7 @@ use yii\helpers\Url;
             <div class="content content--md">
                 <div class="partner-page--info-table">
                     <div class="cell-logo">
-                        <a href="<?= $model->url ?>" class="logo"><img width="100" height="100"
+                        <a class="logo"><img width="100" height="100"
                                                                        src="<?= $model->logo ?>"
                                                                        alt="<?= $model->name ?>"></a>
                     </div>
