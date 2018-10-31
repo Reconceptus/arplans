@@ -22,8 +22,8 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
                 <div class="custom-row-col col-elastic">
                     <div class="map-box">
                         <div class="map-box--main view-box">
-                            <input type="radio" checked id="view_map" name="view">
-                            <input type="radio" id="view_list" name="view">
+                            <input type="radio" id="view_map" name="view">
+                            <input type="radio" checked id="view_list" name="view">
                             <div class="custom-search">
                                 <form action="#">
                                     <div class="custom-search--field">
