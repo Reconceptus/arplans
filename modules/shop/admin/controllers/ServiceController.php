@@ -282,4 +282,48 @@ class ServiceController extends AdminController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionDeleteImage()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        if (intval($get['id'])) {
+            $model = ServiceImage::findOne(['id' => $get['id']]);
+            if ($model) {
+                $fileName = Yii::getAlias('@webroot') . $model->file;
+                if (file_exists($fileName) && is_file($fileName)) {
+                    unlink($fileName);
+                }
+                $model->delete();
+            } else {
+                return ['status' => 'fail', 'message' => 'Ошибка при удалении изображеия'];
+            }
+        } elseif (isset($get['file'])) {
+            $fileName = Yii::getAlias('@webroot') . $get['file'];
+            unlink($fileName);
+        }
+        return ['status' => 'success'];
+    }
+
+    public function actionDeleteFile()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        if (intval($get['id'])) {
+            $model = ServiceFile::findOne(['id' => $get['id']]);
+            if ($model) {
+                $fileName = Yii::getAlias('@webroot') . $model->file;
+                if (file_exists($fileName) && is_file($fileName)) {
+                    unlink($fileName);
+                }
+                $model->delete();
+            } else {
+                return ['status' => 'fail', 'message' => 'Ошибка при удалении файла'];
+            }
+        } elseif (isset($get['file'])) {
+            $fileName = Yii::getAlias('@webroot') . $get['file'];
+            unlink($fileName);
+        }
+        return ['status' => 'success'];
+    }
 }
