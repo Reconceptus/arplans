@@ -143,7 +143,7 @@ class m180723_111111_create_builders extends Migration
             'phones'          => $this->string(),
             'price_list'      => $this->string(),
             'logo'            => $this->string(),
-            'description'     => $this->string(),
+            'description'     => $this->text(),
             'seo_description' => $this->string(),
             'seo_title'       => $this->string(),
             'seo_keywords'    => $this->string(),
