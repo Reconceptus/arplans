@@ -13,8 +13,8 @@ $fileName = explode('/',$model->file);
 $fileName = end($fileName);
 ?>
 <div class="image-admin-preview file-preview" data-id="<?= isset($model->id) ? $model->id : '' ?>" data-file="<?= $model->file ?>">
-    <div class="js-image-admin-delete">
-        <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>
+    <div class="js-file-admin-delete" data-path="shop/service">
+        <span class="glyphicon glyphicon-trash" title="Удалить файл"></span>
     </div>
     <?= Html::img('/img/file-icon.png', ['class' => 'img-admin file-admin']) ?>
     <div style="word-wrap: break-word"><?=$fileName?></div>

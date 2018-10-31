@@ -24,7 +24,7 @@ $item = $model->village;
             </div>
         <? endif; ?>
     <? endif; ?>
-    <div class="js-image-admin-delete">
+    <div class="js-image-admin-delete" data-path="partner/village">
         <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>
     </div>
     <?= Html::img($model->file, ['class' => 'img-admin']) ?>

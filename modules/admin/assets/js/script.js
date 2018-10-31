@@ -111,12 +111,13 @@ $(function () {
     });
 
     $(document).on('click', '.js-image-admin-delete', function () {
+        var path = $(this).data('path');
         var container = $(this).closest('.image-admin-preview');
         var id = container.data('id');
         var file = container.data('file');
         $.ajax({
             type: 'GET',
-            url: '/admin/modules/shop/item/delete-image',
+            url: '/admin/modules/' + path + '/delete-image',
             data: {
                 id: id,
                 file: file
@@ -127,6 +128,30 @@ $(function () {
                     var urls = $('.new-images-input').attr("value");
                     var urlsNew = urls.replace(':' + file, '');
                     $('.new-images-input').attr('value', urlsNew);
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.js-file-admin-delete', function () {
+        var path = $(this).data('path');
+        var container = $(this).closest('.image-admin-preview');
+        var id = container.data('id');
+        var file = container.data('file');
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/' + path + '/delete-file',
+            data: {
+                id: id,
+                file: file
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    container.remove();
+                    var urls = $('.new-files-input').attr("value");
+                    var urlsNew = urls.replace(':' + file, '');
+                    $('.new-files-input').attr('value', urlsNew);
                 }
             }
         });

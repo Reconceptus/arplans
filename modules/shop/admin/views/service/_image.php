@@ -14,7 +14,7 @@ use yii\helpers\Html;
 ?>
 
 <div class="image-admin-preview" data-id="<?= isset($model->id) ? $model->id : '' ?>" data-file="<?= $model->file ?>">
-    <div class="js-image-admin-delete">
+    <div class="js-image-admin-delete" data-path="shop/service">
         <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>
     </div>
     <?= Html::img($model->file, ['class' => 'img-admin']) ?>
