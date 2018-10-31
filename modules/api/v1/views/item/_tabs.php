@@ -27,7 +27,7 @@ $ready = $model->getReady();
             <? endif; ?>
             <!--            <li class="tab04"><label for="tab04">3D-тур</label></li>-->
             <? if ($ready): ?>
-                <li class="tab05"><label for="tab05">Готовые объекты</label></li>
+                <li class="tab05"><label for="tab05">Фото строительства</label></li>
             <? endif; ?>
             <li class="tab06"><label for="tab06">Доп. услуги</label></li>
         </ul>
