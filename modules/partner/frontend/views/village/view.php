@@ -14,7 +14,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
     <div class="section partner-page--head">
         <div class="content content--lg mobile-wide">
-            <div class="partner-page--wrap" style="background-image: url(<?= $model->image->file ?>)">
+            <div class="partner-page--wrap"
+                 style="background-image: url(<?= $model->image ? $model->image->file : '' ?>)">
                 <div class="content content--sm">
                     <h1 class="title title-lg"><?= $model->name ?></h1>
                 </div>
@@ -60,7 +61,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                         </div>
                         <div class="sharing title-end">
                             <div class="title">Поделиться</div>
-                            <?=\frontend\widgets\share\Share::widget()?>
+                            <?= \frontend\widgets\share\Share::widget() ?>
                         </div>
                     </div>
                 </div>
