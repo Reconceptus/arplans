@@ -40,10 +40,10 @@ class m180913_063418_create_villages extends Migration
             'life_service'      => $this->boolean(),
             'forest'            => $this->boolean(),
             'reservoir'         => $this->boolean(),
-            'description'         => $this->string(),
-            'seo_description'         => $this->string(),
+            'description'       => $this->text(),
+            'seo_description'   => $this->string(),
             'seo_title'         => $this->string(),
-            'seo_keywords'         => $this->string(),
+            'seo_keywords'      => $this->string(),
             'is_active'         => $this->boolean()->defaultValue(1),
             'is_deleted'        => $this->boolean()->defaultValue(0)
         ]);
