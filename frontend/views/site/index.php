@@ -11,7 +11,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
 <div class="section video-box">
     <div class="video-box--bg">
         <video autoplay muted loop>
-            <source src="/media/bg.mp4" type='video/mp4'>
+            <source src="<?=\modules\content\models\ContentBlock::getValue('main_page_video_1')?>">
         </video>
     </div>
     <div class="content content--lg">

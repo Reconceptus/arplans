@@ -14,6 +14,8 @@ use modules\admin\controllers\AdminController;
 use modules\partner\models\Main;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 class MainController extends AdminController
 {
@@ -51,6 +53,35 @@ class MainController extends AdminController
         $model = Main::getModel();
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
+            $video1 = UploadedFile::getInstance($model, 'main_page_video_1');
+            if ($video1 && $video1->tempName) {
+                $model->main_page_video_1 = $video1;
+                if ($model->validate(['main_page_video_1'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'video1.' . $model->main_page_video_1->extension;
+                    $model->main_page_video_1->saveAs($dir . '/' . $fileName);
+                    $model->main_page_video_1 = '/uploads/' . $fileName;
+                }
+            }
+            if (!$model->main_page_video_1 && isset($post['old_main_page_video_1'])) {
+                $model->main_page_video_1 = $post['old_main_page_video_1'];
+            }
+
+            $video2 = UploadedFile::getInstance($model, 'main_page_video_2');
+            if ($video2 && $video2->tempName) {
+                $model->main_page_video_2 = $video2;
+                if ($model->validate(['main_page_video_2'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'video2.' . $model->main_page_video_2->extension;
+                    $model->main_page_video_2->saveAs($dir . '/' . $fileName);
+                    $model->main_page_video_2 = '/uploads/' . $fileName;
+                }
+            }
+            if (!$model->main_page_video_2 && isset($post['old_main_page_video_2'])) {
+                $model->main_page_video_2 = $post['old_main_page_video_2'];
+            }
             $model->save();
         }
         $users = User::getAuthors();

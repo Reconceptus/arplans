@@ -11,12 +11,15 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $users \common\models\User[]*/
+/* @var $model \modules\partner\models\Main*/
 
 $this->title = 'Главная страница';
 ?>
 <h1><?= $this->title ?></h1>
 
 <? $form = ActiveForm::begin(['method' => 'post']); ?>
+<?= Html::hiddenInput('old_main_page_video_1', $model->main_page_video_1) ?>
+<?= Html::hiddenInput('old_main_page_video_2', $model->main_page_video_2) ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
@@ -25,6 +28,18 @@ $this->title = 'Главная страница';
             <?= $form->field($model, 'main_page_offer_annotation') ?>
             <?= $form->field($model, 'main_page_text') ?>
             <?= $form->field($model, 'main_page_author')->dropDownList($users) ?>
+            <?if($model->main_page_video_1):?>
+            <video width="200" height="120" controls="controls">
+                <source src="<?=$model->main_page_video_1?>">
+            </video>
+            <?endif;?>
+            <?= $form->field($model, 'main_page_video_1')->fileInput(['accept' => 'video/*']) ?>
+            <?if($model->main_page_video_2):?>
+                <video width="200" height="120" controls="controls">
+                    <source src="<?=$model->main_page_video_2?>">
+                </video>
+            <?endif;?>
+            <?= $form->field($model, 'main_page_video_2')->fileInput(['accept' => 'video/*']) ?>
         </div>
     </div>
     <div class="row">
