@@ -57,14 +57,14 @@ class MainController extends AdminController
             if ($video1 && $video1->tempName) {
                 $model->main_page_video_1 = $video1;
                 if ($model->validate(['main_page_video_1'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    FileHelper::createDirectory($dir . '/', 775);
+                    $dir = Yii::getAlias('@webroot/uploads/');
+                    FileHelper::createDirectory($dir . '/',777);
                     $fileName = 'video1.' . $model->main_page_video_1->extension;
                     if (file_exists($dir . '/' . $fileName) && is_file($dir . '/' . $fileName)) {
                         unlink($dir . '/' . $fileName);
                     }
                     $model->main_page_video_1->saveAs($dir . '/' . $fileName);
-                    $model->main_page_video_1 = '/uploads/videos/' . $fileName;
+                    $model->main_page_video_1 = '/uploads/' . $fileName;
                 }
             }
             if (!$model->main_page_video_1 && isset($post['old_main_page_video_1'])) {
@@ -75,14 +75,14 @@ class MainController extends AdminController
             if ($video2 && $video2->tempName) {
                 $model->main_page_video_2 = $video2;
                 if ($model->validate(['main_page_video_2'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    FileHelper::createDirectory($dir . '/');
+                    $dir = Yii::getAlias('@webroot/uploads/');
+                    FileHelper::createDirectory($dir . '/',777);
                     $fileName = 'video2.' . $model->main_page_video_2->extension;
                     if (file_exists($dir . '/' . $fileName) && is_file($dir . '/' . $fileName)) {
                         unlink($dir . '/' . $fileName);
                     }
                     $model->main_page_video_2->saveAs($dir . '/' . $fileName);
-                    $model->main_page_video_2 = '/uploads/videos/' . $fileName;
+                    $model->main_page_video_2 = '/uploads/' . $fileName;
                 }
             }
             if (!$model->main_page_video_2 && isset($post['old_main_page_video_2'])) {
@@ -91,6 +91,6 @@ class MainController extends AdminController
             $model->save();
         }
         $users = User::getAuthors();
-        return $this->render('index', ['model' => $model, 'users' => $users]);
+        return $this->render('index', ['model' => $model, 'users'=>$users]);
     }
 }
