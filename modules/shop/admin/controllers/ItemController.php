@@ -192,6 +192,7 @@ class ItemController extends AdminController
                 }
                 Yii::$app->session->setFlash('success', 'Товар добавлен успешно');
             } else {
+                var_dump($model->errors);die;
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
             if (isset($post['Catalogs'])) {
