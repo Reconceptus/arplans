@@ -14,6 +14,8 @@ use yii\web\NotFoundHttpException;
  *
  * @property string $main_page_text
  * @property string $main_page_author
+ * @property string $main_page_video_1
+ * @property string $main_page_video_2
  *
  * @property string $main_page_seo_title
  * @property string $main_page_seo_description
@@ -25,6 +27,8 @@ class Main extends Model
     public $main_page_offer_annotation;
     public $main_page_text;
     public $main_page_author;
+    public $main_page_video_1;
+    public $main_page_video_2;
     public $main_page_seo_title;
     public $main_page_seo_description;
     public $main_page_seo_keywords;
@@ -37,6 +41,7 @@ class Main extends Model
         return [
             [['main_page_offer', 'main_page_offer_annotation', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords'], 'string', 'max' => 255],
             ['main_page_text', 'string'],
+            [['main_page_video_1', 'main_page_video_2'], 'file', 'extensions' => 'mp4, webm'],
         ];
     }
 
@@ -53,6 +58,8 @@ class Main extends Model
             'main_page_seo_title'        => 'SEO тайтл',
             'main_page_seo_description'  => 'SEO описание',
             'main_page_seo_keywords'     => 'SEO ключевые слова',
+            'main_page_video_1'          => 'Видео 1',
+            'main_page_video_2'          => 'Видео 2',
         ];
     }
 
@@ -62,7 +69,7 @@ class Main extends Model
     public static function getModel()
     {
         $model = new static();
-        $data = ContentBlock::find()->select(['text'])->where(['page'=>'main'])->indexBy('slug')->column();
+        $data = ContentBlock::find()->select(['text'])->where(['page' => 'main'])->indexBy('slug')->column();
         foreach ($data as $k => $val) {
             $model->$k = $val;
         }
