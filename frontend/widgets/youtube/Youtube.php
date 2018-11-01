@@ -49,32 +49,31 @@ class Youtube extends Widget
         return $this->render(
             'youtube',
             [
-                'width' => $this->width,
-                'height' => $this->height,
+                'width'    => $this->width,
+                'height'   => $this->height,
                 'autoplay' => $this->autoplay,
-                'repeat' => $this->repeat,
-                'controls'=>$this->controls,
-                'showInfo'=>$this->showInfo,
-                'url' => self::videoLink($this->url)
+                'repeat'   => $this->repeat,
+                'controls' => $this->controls,
+                'showInfo' => $this->showInfo,
+                'url'      => self::videoLink($this->url)
             ]
         );
     }
 
     private static function videoLink($url)
     {
+        $video = null;
         if (preg_match("#youtu.be/([0-9a-zA-Z\\-_]+)#", $url, $mat)) {
-            $inp = $mat[1];
+            $video = $mat[1];
         } elseif (preg_match("#youtube.com/embed/([0-9a-zA-Z\\-_]+)#", $url, $mat)) {
-            $inp = $mat[1];
+            $video = $mat[1];
         } elseif (preg_match("#\\?v=#", $url, $mat)) {
             $arr = explode("?v=", $url);
             if (sizeof($arr) >= 2) {
-                $inp = preg_replace("#&.*#", "", $arr[1]);
+                $video = preg_replace("#&.*#", "", $arr[1]);
             }
-        } elseif (preg_match("#vimeo.com/([0-9a-zA-Z\\-_])+#", $url, $mat)) {
-            $inp = $mat[1];
         }
-        return $inp;
+        return $video;
     }
 
 
