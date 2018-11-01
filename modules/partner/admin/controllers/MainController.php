@@ -58,11 +58,11 @@ class MainController extends AdminController
                 $model->main_page_video_1 = $video1;
                 if ($model->validate(['main_page_video_1'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    FileHelper::createDirectory($dir . '/', 777);
+                    $path = date('YmdHis') . '/';
+                    FileHelper::createDirectory($dir . $path, 777);
                     $fileName = 'video1.' . $model->main_page_video_1->extension;
-                    $path = $dir . '/' . $fileName;
-                    $model->main_page_video_1->saveAs($path);
-                    $model->main_page_video_1 = '/uploads/videos/' . $fileName;
+                    $model->main_page_video_1->saveAs($dir . $path . $fileName);
+                    $model->main_page_video_1 = '/uploads/videos/' . $path . $fileName;
                 }
             }
             if (!$model->main_page_video_1 && isset($post['old_main_page_video_1'])) {
@@ -74,11 +74,11 @@ class MainController extends AdminController
                 $model->main_page_video_2 = $video2;
                 if ($model->validate(['main_page_video_2'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    FileHelper::createDirectory($dir . '/', 777);
+                    $path = date('YmdHis') . '/';
+                    FileHelper::createDirectory($dir . $path, 777);
                     $fileName = 'video2.' . $model->main_page_video_2->extension;
-                    $path = $dir . '/' . $fileName;
-                    $model->main_page_video_2->saveAs($path);
-                    $model->main_page_video_2 = '/uploads/videos/' . $fileName;
+                    $model->main_page_video_2->saveAs($dir . $path . $fileName);
+                    $model->main_page_video_2 = '/uploads/videos/' . $path . $fileName;
                 }
             }
             if (!$model->main_page_video_2 && isset($post['old_main_page_video_2'])) {
