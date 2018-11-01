@@ -13,6 +13,7 @@ use modules\admin\controllers\AdminController;
 use modules\partner\models\About;
 use modules\partner\models\AboutBenefit;
 use modules\partner\models\AboutReady;
+use modules\partner\models\Main;
 use Yii;
 use yii\base\Exception;
 use yii\filters\AccessControl;
@@ -144,5 +145,15 @@ class AboutController extends AdminController
             unlink($fileName);
         }
         return ['status' => 'success'];
+    }
+
+    public function actionMain()
+    {
+        $model = Main::getModel();
+        $post = Yii::$app->request->post();
+        if ($model->load($post)) {
+            $model->save();
+        }
+        return $this->render('main', ['model' => $model]);
     }
 }

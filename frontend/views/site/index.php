@@ -4,7 +4,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-
+$this->title = \modules\content\models\ContentBlock::getValue('main_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_description')]);
 ?>
 <div class="section video-box">
     <div class="video-box--bg">
@@ -16,8 +18,8 @@ use yii\helpers\Url;
         <div class="video-box--wrap">
             <div class="video-box--about">
                 <section>
-                    <h1 class="title title-md"> <?=\modules\content\models\ContentBlock::getValue('main_page_offer')?></h1>
-                    <p><?=\modules\content\models\ContentBlock::getValue('main_page_offer_annotation')?></p>
+                    <h1 class="title title-md"> <?= \modules\content\models\ContentBlock::getValue('main_page_offer') ?></h1>
+                    <p><?= \modules\content\models\ContentBlock::getValue('main_page_offer_annotation') ?></p>
                 </section>
                 <div class="actions">
                     <?= Html::a('каталог проектов', Url::to('/shop'), ['class' => 'btn btn--lt']) ?>
@@ -84,7 +86,7 @@ use yii\helpers\Url;
 <?= \modules\shop\widgets\compilation\Compilation::widget(['limit' => 8, 'showMobile' => true]) ?>
 
 <div class="section home-about">
-    <?=\frontend\widgets\fromblogtop\FromBlogTop::widget()?>
+    <?= \frontend\widgets\fromblogtop\FromBlogTop::widget() ?>
     <div class="home-about-main">
         <img src="/img/branch.png" alt="branch" class="img-branch">
         <div class="content content--lg">
@@ -94,17 +96,18 @@ use yii\helpers\Url;
                         <img src="/img/ava01.jpg" alt="director">
                     </div>
                     <div class="home-about-main--post">
-                       <?=\modules\content\models\ContentBlock::getValue('main_page_author')?>
+                        <?= \modules\content\models\ContentBlock::getValue('main_page_author') ?>
                     </div>
                 </div>
                 <div class="home-about-main--speech">
                     <div class="text">
-                        <?=\modules\content\models\ContentBlock::getValue('main_page_text')?>
+                        <?= \modules\content\models\ContentBlock::getValue('main_page_text') ?>
                     </div>
                     <div class="blog-hashes">
                         <a href="/about" class="btn-small">о компании</a>
                         <a href="/collaboration" class="btn-small">сотрудничество</a>
-                        <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="btn-small" target="_blank">живые отзывы вконтакте</a>
+                        <a href="<?= \modules\content\models\ContentBlock::getValue('vk_reviews') ?>" class="btn-small"
+                           target="_blank">живые отзывы вконтакте</a>
                     </div>
                 </div>
             </div>
