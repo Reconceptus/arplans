@@ -60,7 +60,7 @@ class MainController extends AdminController
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
                     FileHelper::createDirectory($dir . '/', 777);
                     $fileName = 'video1.' . $model->main_page_video_1->extension;
-                    $path = $dir . $fileName;
+                    $path = $dir . '/' . $fileName;
                     $model->main_page_video_1->saveAs($path);
                     $model->main_page_video_1 = '/uploads/videos/' . $fileName;
                 }
