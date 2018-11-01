@@ -58,8 +58,8 @@ class MainController extends AdminController
                 $model->main_page_video_1 = $video1;
                 if ($model->validate(['main_page_video_1'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    FileHelper::createDirectory($dir . '/');
-                    $fileName = $model->main_page_video_1->baseName . '.' . $model->main_page_video_1->extension;
+                    FileHelper::createDirectory($dir . '/', 775);
+                    $fileName = 'video1.' . $model->main_page_video_1->extension;
                     if (file_exists($dir . '/' . $fileName) && is_file($dir . '/' . $fileName)) {
                         unlink($dir . '/' . $fileName);
                     }
@@ -77,7 +77,7 @@ class MainController extends AdminController
                 if ($model->validate(['main_page_video_2'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
                     FileHelper::createDirectory($dir . '/');
-                    $fileName = $model->main_page_video_2->baseName . '.' . $model->main_page_video_2->extension;
+                    $fileName = 'video2.' . $model->main_page_video_2->extension;
                     if (file_exists($dir . '/' . $fileName) && is_file($dir . '/' . $fileName)) {
                         unlink($dir . '/' . $fileName);
                     }
