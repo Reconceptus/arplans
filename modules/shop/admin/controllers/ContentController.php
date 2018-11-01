@@ -50,10 +50,10 @@ class ContentController extends AdminController
      */
     public function actionIndex()
     {
-        $query = ContentBlock::find()->groupBy('page');
+        $query = ContentBlock::find()->select(['page','page_title','page_url'])->groupBy(['page','page_title', 'page_url']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'  => ['defaultOrder' => ['sort' => SORT_DESC, 'page' => SORT_ASC]]
+            'sort'  => ['defaultOrder' => ['page' => SORT_ASC]]
         ]);
         return $this->render('index', ['dataProvider' => $dataProvider]);
     }
