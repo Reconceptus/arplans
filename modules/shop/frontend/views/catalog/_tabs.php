@@ -122,7 +122,8 @@ $ready = $model->getReady();
                     <h4 class="title">Стоимость строительства "коробки"</h4>
                     <?= $model->build_price ?>
                     <div class="estimate">
-                        <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Получить точную смету</span></a>
+                        <a href="#" class="btn-add show-modal"
+                           data-modal="consultation"><span>Получить точную смету</span></a>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">
@@ -141,8 +142,9 @@ $ready = $model->getReady();
             <div class="tab-section tab-video tab03">
                 <div class="video">
                     <figure>
-                        <iframe width="560" height="315" src="<?= str_replace('watch', 'embed', $model->video) ?>"
-                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <?= \frontend\widgets\youtube\Youtube::widget([
+                        'url'    => $model->video,
+                    ]) ?>
                     </figure>
                 </div>
             </div>
