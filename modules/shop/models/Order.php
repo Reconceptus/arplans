@@ -37,9 +37,23 @@ use yii\helpers\Html;
 class Order extends \yii\db\ActiveRecord
 {
     const STATUS_NEW = 1;
+    const STATUS_PAYED = 2;
+    const STATUS_IN_PROGRESS = 3;
+    const STATUS_SEND = 4;
+    const STATUS_DONE = 5;
+    const STATUS_CANCEL = 6;
 
     const TYPE_SHOP = 0;
     const TYPE_API = 1;
+
+    const STATUSES = [
+        self::STATUS_NEW         => 'Новый',
+        self::STATUS_PAYED       => 'Оплачен',
+        self::STATUS_IN_PROGRESS => 'Выполняется',
+        self::STATUS_SEND        => 'Отправлен',
+        self::STATUS_DONE        => 'Выполнен',
+        self::STATUS_CANCEL      => 'Отменен'
+    ];
 
     /**
      * {@inheritdoc}
@@ -231,5 +245,18 @@ class Order extends \yii\db\ActiveRecord
             }
         }
         return $amount;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return array_merge([0 => ''], self::STATUSES);
+    }
+
+    public static function getStatusName($status)
+    {
+        return self::STATUSES[$status];
     }
 }

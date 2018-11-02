@@ -9,8 +9,13 @@
 namespace modules\shop\admin\controllers;
 
 
+use common\models\Profile;
+use common\models\User;
+use DateTime;
+use DateTimeZone;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Order;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -46,7 +51,35 @@ class OrderController extends AdminController
      */
     public function actionIndex()
     {
-        $query = Order::find();
+        $query = Order::find()->alias('o')
+            ->innerJoin(User::tableName() . ' u', 'o.user_id=u.id')
+            ->innerJoin(Profile::tableName() . ' p', 'u.id=p.user_id');
+        $filterModel = new Order();
+        $filter = Yii::$app->request->get('Order');
+        if (isset($filter['id'])) {
+            $query->andFilterWhere(['o.id' => $filter['id']]);
+        }
+        if (isset($filter['status'])&&$filter['status']) {
+            $query->andFilterWhere(['o.status' => $filter['status']]);
+        }
+        if (isset($filter['price_from']) && $filter['price_from']) {
+            $query->andFilterWhere(['>=', 'o.price', intval($filter['price_from'])]);
+        }
+        if (isset($filter['price_to']) && $filter['price_to']) {
+            $query->andFilterWhere(['<=', 'o.price', intval($filter['price_to'])]);
+        }
+        if (isset($filter['fio'])) {
+            $query->andFilterWhere(['like', 'p.fio', $filter['fio']]);
+        }
+        if (isset($filter['email'])) {
+            $query->andFilterWhere(['like', 'u.email', $filter['email']]);
+        }
+        if (isset($filter['from']) && $filter['from']) {
+            $query->andWhere('o.created_at>=:from', [':from' => (new DateTime($filter['from'], new DateTimeZone('europe/moscow')))->format('Y-m-d 00:00:00')]);
+        }
+        if (isset($filter['to']) && $filter['to']) {
+            $query->andWhere('o.created_at<=:to', [':to' => (new DateTime($filter['to'], new DateTimeZone('europe/moscow')))->format('Y-m-d 00:00:00')]);
+        }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'  => [
@@ -55,7 +88,7 @@ class OrderController extends AdminController
                 ]
             ]
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
     /**
