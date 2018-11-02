@@ -58,8 +58,8 @@ class Main extends Model
             'main_page_seo_title'        => 'SEO тайтл',
             'main_page_seo_description'  => 'SEO описание',
             'main_page_seo_keywords'     => 'SEO ключевые слова',
-            'main_page_video_1'          => 'Видео 1',
-            'main_page_video_2'          => 'Видео 2',
+            'main_page_video_1'          => 'Видео (mp4)',
+            'main_page_video_2'          => 'Видео (webm)',
         ];
     }
 

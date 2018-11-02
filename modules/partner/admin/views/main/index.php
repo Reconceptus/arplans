@@ -33,13 +33,13 @@ $this->title = 'Главная страница';
                 <source src="<?=$model->main_page_video_1?>">
             </video>
             <?endif;?>
-            <?= $form->field($model, 'main_page_video_1')->fileInput(['accept' => 'video/*']) ?>
+            <?= $form->field($model, 'main_page_video_1')->fileInput(['accept' => 'video/mp4']) ?>
             <?if($model->main_page_video_2):?>
                 <video width="200" height="120" controls="controls">
                     <source src="<?=$model->main_page_video_2?>">
                 </video>
             <?endif;?>
-            <?= $form->field($model, 'main_page_video_2')->fileInput(['accept' => 'video/*']) ?>
+            <?= $form->field($model, 'main_page_video_2')->fileInput(['accept' => 'video/webm']) ?>
         </div>
     </div>
     <div class="row">
