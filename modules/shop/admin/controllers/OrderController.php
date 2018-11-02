@@ -48,7 +48,12 @@ class OrderController extends AdminController
     {
         $query = Order::find();
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'sort'  => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
         ]);
         return $this->render('index', ['dataProvider' => $dataProvider]);
     }
