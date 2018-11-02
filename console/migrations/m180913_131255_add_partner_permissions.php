@@ -35,7 +35,7 @@ class m180913_131255_add_partner_permissions extends Migration
         $auth->addChild($admin, $partner);
         $auth->addChild($admin, $village);
 
-        $this->insert('module', ['name' => 'partner', 'title' => 'Партнеры']);
+        $this->insert('module', ['name' => 'partner', 'title' => 'Разделы и страницы']);
         $id = $this->db->createCommand("SELECT id FROM module WHERE name='partner'")->queryScalar();
         $partnerModules = [
             ['builder', 'Застройщики', $id],
