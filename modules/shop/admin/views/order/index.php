@@ -19,11 +19,12 @@ $columns = [
     ],
     [
         'attribute' => 'id',
-        'label'     => 'Номер заказа',
+        'header'    => 'Номер заказа',
     ],
     [
         'attribute' => 'user_id',
         'format'    => 'raw',
+        'header'    => 'ФИО',
         'value'     => function ($model) {
             return $model->user->profile->fio;
         }
@@ -31,29 +32,31 @@ $columns = [
     [
         'attribute' => 'user_id',
         'format'    => 'raw',
+        'header'    => 'Email',
         'value'     => function ($model) {
             return $model->user->email;
         }
     ],
     [
-        'label'     => 'Дата оформления заказа',
+        'header'    => 'Дата оформления заказа',
         'attribute' => 'created_at',
         'value'     => function ($model) {
             return date('d m Y', strtotime($model->created_at));
         }
     ],
     [
-        'label'     => 'Сумма заказа',
+        'header'    => 'Сумма заказа',
         'attribute' => 'price'
     ],
     [
-        'label' => 'Сайт-партнер',
-        'value' => function ($model) {
-            return $model->type===1 && $model->user->partner ? $model->user->partner->name : '';
+        'header' => 'Сайт-партнер',
+        'value'  => function ($model) {
+            return $model->type === 1 && $model->user->partner ? $model->user->partner->name : '';
         }
     ],
     [
-        'attribute' => 'status'
+        'attribute' => 'status',
+        'header'    => 'Статус'
     ]
 ];
 ?>
@@ -62,7 +65,10 @@ $columns = [
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/order/update', 'id' => $model->id]) . '"'];
+            return [
+                'onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/order/update', 'id' => $model->id]) . '"',
+                'style'   => $model->type === 1 && $model->user->partner ? 'color:blue' : ''
+            ];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns
