@@ -21,6 +21,7 @@ class Menu extends Widget
         $query = new Query();
         $modules = $query->select('*')
             ->from('module')
+            ->orderBy(['sort' => SORT_DESC])
             ->createCommand()
             ->queryAll();
 
@@ -67,9 +68,9 @@ class Menu extends Widget
         $pathArray = explode('/', $path);
         $result = [];
 
-        if(count($pathArray) >= 2) {
-            $result = [$pathArray[0] => true, 'module'=> $pathArray[1]];
-            if(count($result) >=3 ) {
+        if (count($pathArray) >= 2) {
+            $result = [$pathArray[0] => true, 'module' => $pathArray[1]];
+            if (count($result) >= 3) {
                 $result['controller'] = $pathArray[2];
             }
         }
