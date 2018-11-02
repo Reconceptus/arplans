@@ -82,4 +82,17 @@ class Partner extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('partner_category', ['partner_id' => 'id']);
     }
+
+    /**
+     * @return array
+     */
+    public static function getUserList()
+    {
+        return Partner::find()->alias('p')
+            ->select(['p.name','u.id'])
+            ->innerJoin(User::tableName() . ' u', 'p.agent_id=u.id')
+            ->where(['p.is_active' => Partner::IS_ACTIVE, 'p.is_deleted' => Partner::IS_NOT_DELETED])
+            ->indexBy('id')
+            ->column();
+    }
 }

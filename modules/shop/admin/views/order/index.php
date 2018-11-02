@@ -7,6 +7,7 @@
  */
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $partners array */
 
 /* @var $filterModel \modules\shop\models\Order */
 
@@ -81,6 +82,7 @@ $columns = [
     ],
     [
         'header' => 'Сайт-партнер',
+        'filter' => Html::dropDownList('Order[partner]', $order['partner'], $partners),
         'value'  => function ($model) {
             return $model->type === 1 && $model->user->partner ? $model->user->partner->name : '';
         }
@@ -96,7 +98,7 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Сбросить фильтры', Url::to('/admin/modules/shop/order'), ['class' => 'btn btn-admin','style'=>'margin-bottom:20px']) ?>
+<?= Html::a('Сбросить фильтры', Url::to('/admin/modules/shop/order'), ['class' => 'btn btn-admin', 'style' => 'margin-bottom:20px']) ?>
 
 <?= \yii\grid\GridView::widget(
     [

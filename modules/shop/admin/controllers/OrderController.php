@@ -14,10 +14,12 @@ use common\models\User;
 use DateTime;
 use DateTimeZone;
 use modules\admin\controllers\AdminController;
+use modules\partner\models\Partner;
 use modules\shop\models\Order;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 class OrderController extends AdminController
@@ -51,6 +53,7 @@ class OrderController extends AdminController
      */
     public function actionIndex()
     {
+        $partners = ArrayHelper::merge([0=>''], Partner::getUserList());
         $query = Order::find()->alias('o')
             ->innerJoin(User::tableName() . ' u', 'o.user_id=u.id')
             ->innerJoin(Profile::tableName() . ' p', 'u.id=p.user_id');
@@ -59,7 +62,10 @@ class OrderController extends AdminController
         if (isset($filter['id'])) {
             $query->andFilterWhere(['o.id' => $filter['id']]);
         }
-        if (isset($filter['status'])&&$filter['status']) {
+        if (isset($filter['partner']) && $filter['partner']) {
+            $query->andFilterWhere(['o.user_id' => $filter['partner'], 'o.type' => Order::TYPE_API]);
+        }
+        if (isset($filter['status']) && $filter['status']) {
             $query->andFilterWhere(['o.status' => $filter['status']]);
         }
         if (isset($filter['price_from']) && $filter['price_from']) {
@@ -88,7 +94,7 @@ class OrderController extends AdminController
                 ]
             ]
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel, 'partners' => $partners]);
     }
 
     /**
