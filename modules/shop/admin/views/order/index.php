@@ -90,7 +90,7 @@ $columns = [
     [
         'attribute' => 'status',
         'header'    => 'Статус',
-        'filter'    => Html::dropDownList('Order[status]', $order['status'], \modules\shop\models\Order::getStatusList()),
+        'filter'    => Html::dropDownList('Order[status]', $order['status'], array_merge([0 => ''], \modules\shop\models\Order::getStatusList())),
         'value'     => function ($model) {
             return \modules\shop\models\Order::getStatusName($model->status);
         }

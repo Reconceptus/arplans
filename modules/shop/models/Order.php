@@ -252,7 +252,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public static function getStatusList()
     {
-        return array_merge([0 => ''], self::STATUSES);
+        return self::STATUSES;
     }
 
     public static function getStatusName($status)

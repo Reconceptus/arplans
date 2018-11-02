@@ -53,7 +53,7 @@ class OrderController extends AdminController
      */
     public function actionIndex()
     {
-        $partners = ArrayHelper::merge([0=>''], Partner::getUserList());
+        $partners = ArrayHelper::merge([0 => ''], Partner::getUserList());
         $query = Order::find()->alias('o')
             ->innerJoin(User::tableName() . ' u', 'o.user_id=u.id')
             ->innerJoin(Profile::tableName() . ' p', 'u.id=p.user_id');
@@ -105,6 +105,10 @@ class OrderController extends AdminController
     public function actionUpdate(int $id)
     {
         $model = Order::findOne(['id' => $id]);
+        if ($post = Yii::$app->request->post()) {
+            $model->load($post);
+            $model->save();
+        }
         if (!$model) {
             throw new NotFoundHttpException();
         }
