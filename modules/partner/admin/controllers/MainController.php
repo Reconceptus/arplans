@@ -59,7 +59,7 @@ class MainController extends AdminController
                 if ($model->validate(['main_page_video_1'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
                     $path = date('YmdHis') . '/';
-                    FileHelper::createDirectory($dir . $path, 777);
+                    FileHelper::createDirectory($dir . $path);
                     $fileName = 'video1.' . $model->main_page_video_1->extension;
                     $model->main_page_video_1->saveAs($dir . $path . $fileName);
                     $model->main_page_video_1 = '/uploads/videos/' . $path . $fileName;
@@ -75,7 +75,7 @@ class MainController extends AdminController
                 if ($model->validate(['main_page_video_2'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
                     $path = date('YmdHis') . '/';
-                    FileHelper::createDirectory($dir . $path, 777);
+                    FileHelper::createDirectory($dir . $path);
                     $fileName = 'video2.' . $model->main_page_video_2->extension;
                     $model->main_page_video_2->saveAs($dir . $path . $fileName);
                     $model->main_page_video_2 = '/uploads/videos/' . $path . $fileName;
