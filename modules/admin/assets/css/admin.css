@@ -25,7 +25,7 @@ ul {
 }
 
 .sidebar-header {
-    height: 200px;
+    height: 70px;
 }
 
 .logo {
@@ -147,7 +147,7 @@ ul {
 }
 
 .side-menu li {
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .role-checkbox {

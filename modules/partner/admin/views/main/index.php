@@ -25,8 +25,8 @@ $this->title = 'Главная страница';
         <div class="col-md-6">
             <p style="font-weight: bold;">Информация на странице</p>
             <?= $form->field($model, 'main_page_offer') ?>
-            <?= $form->field($model, 'main_page_offer_annotation') ?>
-            <?= $form->field($model, 'main_page_text') ?>
+            <?= $form->field($model, 'main_page_offer_annotation')->textarea(['rows'=>4]) ?>
+            <?= $form->field($model, 'main_page_text')->textarea(['rows'=>4]) ?>
             <?= $form->field($model, 'main_page_author')->dropDownList($users) ?>
             <?if($model->main_page_video_1):?>
             <video width="200" height="120" controls="controls">
@@ -56,6 +56,6 @@ $this->title = 'Главная страница';
 
     <div class="buttons-panel">
         <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>
-        <?= Html::a('На сайте', Url::to('/about'), ['target' => '_blank', 'class' => 'btn btn-admin']) ?>
+        <?= Html::a('На сайте', Url::to('/'), ['target' => '_blank', 'class' => 'btn btn-admin']) ?>
     </div>
 </div>

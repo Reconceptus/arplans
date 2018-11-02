@@ -39,8 +39,8 @@ class Main extends Model
     public function rules()
     {
         return [
-            [['main_page_offer', 'main_page_offer_annotation', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords'], 'string', 'max' => 255],
-            ['main_page_text', 'string'],
+            [['main_page_offer', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords'], 'string', 'max' => 255],
+            [['main_page_offer_annotation', 'main_page_text'], 'string'],
             [['main_page_video_1', 'main_page_video_2'], 'file', 'extensions' => 'mp4, webm'],
         ];
     }
