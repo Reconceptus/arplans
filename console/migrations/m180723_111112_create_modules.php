@@ -16,7 +16,8 @@ class m180723_111112_create_modules extends Migration
             'id'        => $this->primaryKey()->unsigned(),
             'name'      => $this->string(),
             'title'     => $this->string(),
-            'parent_id' => $this->integer()->unsigned()
+            'parent_id' => $this->integer()->unsigned(),
+            'sort'      => $this->integer()->defaultValue(500)
         ]);
     }
 
