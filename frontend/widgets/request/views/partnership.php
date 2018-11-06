@@ -11,12 +11,12 @@ use yii\widgets\ActiveForm;
 
 /* @var $model \frontend\widgets\request\Request */
 ?>
-    <div class="modal" data-modal="consultation">
+    <div class="modal" data-modal="partnership">
         <div class="bg close"></div>
         <div class="modal-box">
             <span class="close">&times;</span>
             <h3 class="modal-title">Мы очень быстро свяжемся с вами</h3>
-            <div class="modal-form consultation-form">
+            <div class="modal-form">
                 <? $form = ActiveForm::begin([
                     'action'  => '/site/contacts',
                     'method'  => 'post',
@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
                     'id'      => 'request-form'
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
-                <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_OTHER) ?>
+                <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_PARTNER) ?>
                 <?= Html::hiddenInput('Request[email]', null) ?>
                 <?= Html::hiddenInput('Request[name]', '-') ?>
                 <?= Html::hiddenInput('Request[phone]', '-') ?>
@@ -46,8 +46,7 @@ use yii\widgets\ActiveForm;
                                 <label for="supportFileUpload">
                                     <i class="icon-loadFile">
                                         <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#icon-file-change"/>
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-file-change"/>
                                         </svg>
                                     </i>
                                     <span id="supportFileName" data-default="Прикрепить файл">Прикрепить файл</span>
@@ -81,56 +80,32 @@ use yii\widgets\ActiveForm;
 <?php
 $js = <<<JS
     var files; 
-    $('#request-form input[type=file]').on('change', function(){
+    $('#partnership-form input[type=file]').on('change', function(){
         files = this.files;
     });
 
-    $('#request-form').on('beforeSubmit', function(){
-    var data = $(this);
-    if( typeof files !== 'undefined' ){
-    $.each( files, function( key, value ){
-        data.append( key, value );
-    });
-    }
-    $('.consultation-form form').validate({
-        onfocusout: false,
-        ignore: ".ignore",
-        rules: {
-            'Request[contact]': {required: true},
-            'Request[accept]': {required: true}
-        },
-        messages: {
-           'Request[contact]': {required: ""},
-           'Request[accept]': {required: ""}
-        },
-        errorClass: 'invalid',
-        highlight: function(element, errorClass) {
-            $(element).closest('.form-row-element').addClass(errorClass);
-        },
-        unhighlight: function(element, errorClass) {
-            $(element).closest('.form-row-element').removeClass(errorClass)
-        },
-        errorPlacement: $.noop,
-        submitHandler:function (form) {
-           $('.contact-form').addClass('successful');
-           if (form.valid()){
-                formData = new FormData(data.get(0));
-                $.ajax({
-                contentType: false, 
-                processData: false,
-                url: '/site/request',
-                type: 'POST',
-                data: formData,
-                success: function(res){
-                  if(res.status==='success'){
-                       $('[data-modal="consultation"]').addClass('successful');
-                  }
-                },
-              });
-           }
-            return false;
-        }
-    })
+     $('#partnership-form').on('beforeSubmit', function(){
+	 var data = $(this);
+	 if( typeof files !== 'undefined' ){
+	    $.each( files, function( key, value ){
+		    data.append( key, value );
+	    });
+	 }
+	 
+	 formData = new FormData(data.get(0));
+	 $.ajax({
+	  contentType: false, 
+      processData: false,
+	    url: '/site/request',
+	    type: 'POST',
+	    data: formData,
+	    success: function(res){
+	      if(res.status==='success'){
+	           $('[data-modal="partnership"]').addClass('successful');
+	      }
+	    },
+	 });
+	 return false;
      });
 JS;
 

@@ -1,21 +1,35 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: borod
  * Date: 15.10.2018
  * Time: 17:47
  */
-/* @var $model \common\models\Request */
-/* @var $type integer */
-?>
 
-<h2><?= isset($type) && $type == 2 ? 'Запрос на добавление поселка' : 'Новое сообщение пользователя' ?></h2>
-<? if ($model->type === \common\models\Request::PAGE_OTHER): ?>
-    <p>Контактная информация: <?= $model->contact ?></p>
-<? else: ?>
+use common\models\Request;
+
+/* @var $model Request */
+$type = intval($model->type);
+?>
+<? if (isset($type)): ?>
+    <? if ($type === Request::PAGE_CALCULATION): ?>
+        <h2>Запрос сметы</h2>
+    <? elseif ($type === Request::PAGE_CONTACT): ?>
+        <h2>Сообщение со страницы контактов</h2>
+    <? elseif ($type === Request::PAGE_PARTNER): ?>
+        <h2>Запрос на партнертво</h2>
+    <? else: ?>
+        <h2>Новое сообщение пользователя</h2>
+    <? endif; ?>
+<? endif; ?>
+
+<? if ($model->type === Request::PAGE_CONTACT): ?>
     <p>Имя: <?= $model->name ?></p>
     <p>Email: <?= $model->email ?></p>
     <p>Телефон: <?= $model->phone ?></p>
+<? else: ?>
+    <p>Контактная информация: <?= $model->contact ?></p>
 <? endif; ?>
 <h2>Текст</h2>
 <p><?= $model->text ?></p>

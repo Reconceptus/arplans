@@ -149,7 +149,7 @@ class SiteController extends Controller
                 $mail = Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новый запрос');
+                    ->setSubject(Request::TYPES[intval($model->type)]);
                 if ($file) {
                     $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
                 }

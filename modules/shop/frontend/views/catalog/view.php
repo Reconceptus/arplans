@@ -53,7 +53,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                             </ul>
                         </div>
                         <div class="estimate">
-                            <a href="#" class="btn-add show-modal" data-modal="consultation"><span>Получить точную смету</span></a>
+                            <a href="#" class="btn-add show-modal" data-modal="calculation"><span>Получить точную смету</span></a>
                         </div>
                     </div>
                 </div>
@@ -80,3 +80,4 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
 <?= Related::widget(['model' => $model, 'favorites' => $favorites, 'inCart' => $inCart]) ?>
 <?= Recently::widget() ?>
+<?=\frontend\widgets\request\Request::widget(['viewName'=>'calculation'])?>

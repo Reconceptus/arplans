@@ -123,7 +123,7 @@ $ready = $model->getReady();
                     <?= $model->build_price ?>
                     <div class="estimate">
                         <a href="#" class="btn-add show-modal"
-                           data-modal="consultation"><span>Получить точную смету</span></a>
+                           data-modal="calculation"><span>Получить точную смету</span></a>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">

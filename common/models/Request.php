@@ -5,7 +5,7 @@ namespace common\models;
 /**
  * This is the model class for table "request".
  *
- * @property int    $id
+ * @property int $id
  * @property string $name
  * @property string $contact
  * @property string $email
@@ -15,13 +15,22 @@ namespace common\models;
  * @property string $url
  * @property string $created_at
  * @property string $updated_at
- * @property int    $type
- * @property int    $accept
+ * @property int $type
+ * @property int $accept
  */
 class Request extends \yii\db\ActiveRecord
 {
     const PAGE_CONTACT = 1;
     const PAGE_OTHER = 2;
+    const PAGE_CALCULATION = 3;
+    const PAGE_PARTNER = 4;
+
+    const TYPES = [
+        self::PAGE_CONTACT     => 'Контактная форма',
+        self::PAGE_OTHER       => 'Консультация',
+        self::PAGE_CALCULATION => 'Запрос на смету',
+        self::PAGE_PARTNER     => 'Запрос на партнерство'
+    ];
 
     /**
      * {@inheritdoc}
