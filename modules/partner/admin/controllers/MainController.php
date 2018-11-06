@@ -63,6 +63,8 @@ class MainController extends AdminController
                     $fileName = 'video1.' . $model->main_page_video_1->extension;
                     $model->main_page_video_1->saveAs($dir . $path . $fileName);
                     $model->main_page_video_1 = '/uploads/videos/' . $path . $fileName;
+                }else{
+                    var_dump($model);die;
                 }
             }
             if (!$model->main_page_video_1 && isset($post['old_main_page_video_1'])) {
@@ -79,6 +81,8 @@ class MainController extends AdminController
                     $fileName = 'video2.' . $model->main_page_video_2->extension;
                     $model->main_page_video_2->saveAs($dir . $path . $fileName);
                     $model->main_page_video_2 = '/uploads/videos/' . $path . $fileName;
+                }else{
+                    var_dump($model);die;
                 }
             }
             if (!$model->main_page_video_2 && isset($post['old_main_page_video_2'])) {
