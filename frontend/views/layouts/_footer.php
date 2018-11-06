@@ -54,7 +54,7 @@
         </div>
     </div>
 </footer>
-<?=\frontend\widgets\request\Request::widget()?>
+<?=\frontend\widgets\request\Request::widget(['viewName'=>'index'])?>
 <div class="modal" data-modal="addToBasket">
     <div class="bg close"></div>
     <div class="modal-box">
