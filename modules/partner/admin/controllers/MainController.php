@@ -14,7 +14,6 @@ use modules\admin\controllers\AdminController;
 use modules\partner\models\Main;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 class MainController extends AdminController
@@ -58,13 +57,12 @@ class MainController extends AdminController
                 $model->main_page_video_1 = $video1;
                 if ($model->validate(['main_page_video_1'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    $path = date('YmdHis') . '/';
-                    FileHelper::createDirectory($dir . $path);
-                    $fileName = 'video1.' . $model->main_page_video_1->extension;
-                    $model->main_page_video_1->saveAs($dir . $path . $fileName);
-                    $model->main_page_video_1 = '/uploads/videos/' . $path . $fileName;
-                }else{
-                    var_dump($model);die;
+                    $fileName = time() . '.' . $model->main_page_video_1->extension;
+                    $model->main_page_video_1->saveAs($dir . $fileName);
+                    $model->main_page_video_1 = '/uploads/videos/' . $fileName;
+                } else {
+                    var_dump($model);
+                    die;
                 }
             }
             if (!$model->main_page_video_1 && isset($post['old_main_page_video_1'])) {
@@ -76,13 +74,12 @@ class MainController extends AdminController
                 $model->main_page_video_2 = $video2;
                 if ($model->validate(['main_page_video_2'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
-                    $path = date('YmdHis') . '/';
-                    FileHelper::createDirectory($dir . $path);
-                    $fileName = 'video2.' . $model->main_page_video_2->extension;
-                    $model->main_page_video_2->saveAs($dir . $path . $fileName);
-                    $model->main_page_video_2 = '/uploads/videos/' . $path . $fileName;
-                }else{
-                    var_dump($model);die;
+                    $fileName = time() . '.' . $model->main_page_video_2->extension;
+                    $model->main_page_video_2->saveAs($dir . $fileName);
+                    $model->main_page_video_2 = '/uploads/videos/' . $fileName;
+                } else {
+                    var_dump($model);
+                    die;
                 }
             }
             if (!$model->main_page_video_2 && isset($post['old_main_page_video_2'])) {
