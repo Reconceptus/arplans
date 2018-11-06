@@ -89,8 +89,11 @@ $this->title = 'Заказ #' . $model->id;
     <div class="row">
         <div class="col-md-4">
             <?= $form->field($model, 'track') ?>
+            <? if ($model->type === \modules\shop\models\Order::TYPE_API): ?>
+                <?= $form->field($model, 'payment_status')->dropDownList([0 => 'Не оплачен', 1 => 'Оплачен']) ?>
+            <? endif; ?>
             <?= $form->field($model, 'status')->dropDownList(\modules\shop\models\Order::getStatusList()) ?>
         </div>
     </div>
-<?= \yii\helpers\Html::submitButton('Сохранить',['class'=>'btn btn-admin']) ?>
+<?= \yii\helpers\Html::submitButton('Сохранить', ['class' => 'btn btn-admin']) ?>
 <? ActiveForm::end() ?>
