@@ -88,6 +88,7 @@ $this->title = 'Заказ #' . $model->id;
     </div>
     <div class="row">
         <div class="col-md-4">
+            <?= $form->field($model, 'track') ?>
             <?= $form->field($model, 'status')->dropDownList(\modules\shop\models\Order::getStatusList()) ?>
         </div>
     </div>
