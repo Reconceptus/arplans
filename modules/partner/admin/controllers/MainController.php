@@ -53,7 +53,7 @@ class MainController extends AdminController
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
             $video1 = UploadedFile::getInstance($model, 'main_page_video_1');
-            if ($video1 && $video1->tempName) {
+            if ($video1) {
                 $model->main_page_video_1 = $video1;
                 if ($model->validate(['main_page_video_1'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
@@ -70,7 +70,7 @@ class MainController extends AdminController
             }
 
             $video2 = UploadedFile::getInstance($model, 'main_page_video_2');
-            if ($video2 && $video2->tempName) {
+            if ($video2) {
                 $model->main_page_video_2 = $video2;
                 if ($model->validate(['main_page_video_2'])) {
                     $dir = Yii::getAlias('@webroot/uploads/videos/');
