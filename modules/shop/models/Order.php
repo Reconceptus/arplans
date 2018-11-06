@@ -21,6 +21,7 @@ use yii\helpers\Html;
  * @property string         $city
  * @property string         $address
  * @property string         $village
+ * @property string         $track
  * @property int            $payment_id
  * @property int            $type
  * @property string         $price Цена только товаров, без допуслуг
@@ -73,7 +74,7 @@ class Order extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['comment', 'village'], 'string', 'max' => 800],
-            [['fio', 'country', 'city', 'address'], 'string', 'max' => 255],
+            [['fio', 'country', 'city', 'address', 'track'], 'string', 'max' => 255],
             [['phone', 'email'], 'string', 'max' => 50],
             [['payment_id'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentSystem::className(), 'targetAttribute' => ['payment_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -99,6 +100,7 @@ class Order extends \yii\db\ActiveRecord
             'village'    => 'Дополнительная информация',
             'payment_id' => 'Платежная система',
             'price'      => 'Цена',
+            'track'      => 'Код отслеживания',
             'created_at' => 'Дата',
             'updated_at' => 'Updated At',
         ];
@@ -252,7 +254,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public static function getStatusList()
     {
-        return array_merge([0 => ''], self::STATUSES);
+        return self::STATUSES;
     }
 
     public static function getStatusName($status)
