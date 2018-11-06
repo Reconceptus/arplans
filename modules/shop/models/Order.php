@@ -10,30 +10,31 @@ use yii\helpers\Html;
 /**
  * This is the model class for table "shop_order".
  *
- * @property int            $id
- * @property int            $user_id
- * @property int            $status
- * @property string         $comment
- * @property string         $fio
- * @property string         $phone
- * @property string         $email
- * @property string         $country
- * @property string         $city
- * @property string         $address
- * @property string         $village
- * @property string         $track
- * @property int            $payment_id
- * @property int            $type
- * @property string         $price Цена только товаров, без допуслуг
- * @property string         $created_at
- * @property string         $updated_at
+ * @property int $id
+ * @property int $user_id
+ * @property int $status
+ * @property string $comment
+ * @property string $fio
+ * @property string $phone
+ * @property string $email
+ * @property string $country
+ * @property string $city
+ * @property string $address
+ * @property string $village
+ * @property string $track
+ * @property string $payment_status
+ * @property int $payment_id
+ * @property int $type
+ * @property string $price Цена только товаров, без допуслуг
+ * @property string $created_at
+ * @property string $updated_at
  *
- * @property PaymentSystem  $payment
- * @property User           $user
- * @property OrderItem[]    $orderItems
- * @property Item[]         $items
+ * @property PaymentSystem $payment
+ * @property User $user
+ * @property OrderItem[] $orderItems
+ * @property Item[] $items
  * @property OrderService[] $orderServices
- * @property Service[]      $services
+ * @property Service[] $services
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -56,6 +57,9 @@ class Order extends \yii\db\ActiveRecord
         self::STATUS_CANCEL      => 'Отменен'
     ];
 
+    const PAYMENT_DONE = 1;
+    const PAYMENT_WAIT = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -70,7 +74,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'payment_id'], 'integer'],
+            [['user_id', 'status', 'payment_id', 'payment_status'], 'integer'],
             [['price'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['comment', 'village'], 'string', 'max' => 800],
@@ -87,22 +91,23 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'         => 'ID',
-            'user_id'    => 'Покупатель',
-            'status'     => 'Статус',
-            'comment'    => 'Комментарий (виден только админу)',
-            'fio'        => 'ФИО',
-            'phone'      => 'Телефон',
-            'email'      => 'Email',
-            'country'    => 'Страна',
-            'city'       => 'Город',
-            'address'    => 'Адрес',
-            'village'    => 'Дополнительная информация',
-            'payment_id' => 'Платежная система',
-            'price'      => 'Цена',
-            'track'      => 'Код отслеживания',
-            'created_at' => 'Дата',
-            'updated_at' => 'Updated At',
+            'id'             => 'ID',
+            'user_id'        => 'Покупатель',
+            'status'         => 'Статус',
+            'comment'        => 'Комментарий (виден только админу)',
+            'fio'            => 'ФИО',
+            'phone'          => 'Телефон',
+            'email'          => 'Email',
+            'country'        => 'Страна',
+            'city'           => 'Город',
+            'address'        => 'Адрес',
+            'village'        => 'Дополнительная информация',
+            'payment_id'     => 'Платежная система',
+            'price'          => 'Цена',
+            'track'          => 'Код отслеживания',
+            'created_at'     => 'Дата',
+            'payment_status' => 'Статус оплаты',
+            'updated_at'     => 'Updated At',
         ];
     }
 
@@ -157,7 +162,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * Создание заказа
      * @param        $fio
-     * @param User   $user
+     * @param User $user
      * @param        $email
      * @param        $phone
      * @param        $country
