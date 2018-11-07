@@ -9,6 +9,7 @@
 /* @var $model \modules\shop\models\Item */
 
 $mainImage = $model->image;
+$index = 1;
 ?>
 <div class="custom-row-col col-66">
     <div class="project-page--slider">
@@ -17,15 +18,15 @@ $mainImage = $model->image;
                 <div class="gallery-list">
                     <? if ($model->getMainImage()): ?>
                         <div class="item" data-num="1">
-                            <figure style="background-image: url(<?=Yii::$app->request->getHostInfo() . $model->image->image ?>)"
-                                    data-url-fancybox="<?= Yii::$app->request->getHostInfo() .$model->image->image ?>"></figure>
+                            <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() . $model->image->image ?>)"
+                                    data-url-fancybox="<?= Yii::$app->request->getHostInfo() . $model->image->image ?>"></figure>
                         </div>
                     <? endif; ?>
-                    <? foreach ($model->getPhotos() as $k => $image): ?>
-                        <? if ($image->id !==$model->image_id): ?>
-                            <div class="item" data-num="<?=$k+3 ?>">
-                                <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() .$image->image ?>)"
-                                        data-url-fancybox="<?= Yii::$app->request->getHostInfo() .$image->image ?>"></figure>
+                    <? foreach ($model->getPhotos() as $image): ?>
+                        <? if ($image->id !== $model->image_id): ?>
+                            <div class="item" data-num="<?= ++$index ?>">
+                                <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() . $image->image ?>)"
+                                        data-url-fancybox="<?= Yii::$app->request->getHostInfo() . $image->image ?>"></figure>
                             </div>
                         <? endif; ?>
                     <? endforeach; ?>
