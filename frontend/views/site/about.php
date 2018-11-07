@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="section about--head">
         <div class="content content--lg mobile-wide">
-            <div class="about--wrap gradient">
+            <div class="about--wrap">
+                <div class="gradient absolute"></div>
                 <div class="content content--sm">
                     <h1 class="title title-lg">О нас</h1>
                     <h2 class="subtitle"><?= $model->about_title ?></h2>
