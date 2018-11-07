@@ -86,7 +86,7 @@ $this->registerMetaTag(['name' => 'yandex-verification', 'content' => '1cffe0527
     </div>
 </div>
 
-<?= \modules\shop\widgets\compilation\Compilation::widget(['limit' => 8, 'showMobile' => true]) ?>
+<?= \modules\shop\widgets\compilation\Compilation::widget(['limit' => 8]) ?>
 
 <div class="section home-about">
     <?= \frontend\widgets\fromblogtop\FromBlogTop::widget() ?>

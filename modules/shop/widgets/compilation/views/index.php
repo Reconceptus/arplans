@@ -20,9 +20,9 @@ if (isset($get['category'])) {
 <div class="section projects">
     <div class="content content--lg mobile-hidden">
         <div class="projects-filters">
-            <?= Html::a('скидки', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter'=>"1"]) ?>
-            <?= Html::a('новые проекты', 'javascript:void(0);', ['class' => 'projects-filters--item current', 'data-filter'=>"2"]) ?>
-            <?= Html::a('бесплатно','javascript:void(0);' , ['class' => 'projects-filters--item', 'data-filter'=>"3"]) ?>
+            <?= Html::a('скидки', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter' => "1"]) ?>
+            <?= Html::a('новые проекты', 'javascript:void(0);', ['class' => 'projects-filters--item current', 'data-filter' => "2"]) ?>
+            <?= Html::a('бесплатно', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter' => "3"]) ?>
         </div>
     </div>
     <div class="content content--lg active" data-filter-box="2">
@@ -81,4 +81,5 @@ if (isset($get['category'])) {
         <div class="btn-box">
             <?= Html::a('все бесплатные проекты', Url::to('/shop/compilation/free'), ['class' => 'btn btn--lt']) ?>
         </div>
+    </div>
 </div>
