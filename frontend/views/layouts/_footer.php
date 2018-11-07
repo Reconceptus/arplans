@@ -54,27 +54,3 @@
         </div>
     </div>
 </footer>
-<?=\frontend\widgets\request\Request::widget(['viewName'=>'index'])?>
-<div class="modal" data-modal="addToBasket">
-    <div class="bg close"></div>
-    <div class="modal-box">
-        <span class="close">&times;</span>
-        <h3 class="modal-title">Проект добавлен в корзину!</h3>
-        <div class="modal-content">
-            <div class="links">
-                <a href="#" class="link">Продолжить покупки</a>
-                <a href="#" class="btn-square-min">Оформить заказ</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal" data-modal="custom">
-    <div class="bg close"></div>
-    <div class="modal-box">
-        <span class="close">&times;</span>
-        <div class="modal-custom">
-            <h4 class="modal-custom--title"></h4>
-            <div class="modal-custom--text"></div>
-        </div>
-    </div>
-</div>
