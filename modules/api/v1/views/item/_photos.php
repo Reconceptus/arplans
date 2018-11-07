@@ -22,7 +22,7 @@ $mainImage = $model->image;
                         </div>
                     <? endif; ?>
                     <? foreach ($model->getPhotos() as $k => $image): ?>
-                        <? if ($image->id !== Yii::$app->request->getHostInfo() .$model->image_id): ?>
+                        <? if ($image->id !==$model->image_id): ?>
                             <div class="item" data-num="<?=$k+3 ?>">
                                 <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() .$image->image ?>)"
                                         data-url-fancybox="<?= Yii::$app->request->getHostInfo() .$image->image ?>"></figure>
