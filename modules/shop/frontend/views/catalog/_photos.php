@@ -23,7 +23,7 @@ $mainImage = $model->image;
                     <? endif; ?>
                     <? foreach ($model->getPhotos() as $k => $image): ?>
                         <? if ($image->id !== $model->image_id): ?>
-                            <div class="item" data-num="<?=$k+3 ?>">
+                            <div class="item" data-num="<?=$k+1 ?>">
                                 <figure style="background-image: url(<?= $image->image ?>)"
                                         data-url-fancybox="<?= $image->image ?>"></figure>
                             </div>
