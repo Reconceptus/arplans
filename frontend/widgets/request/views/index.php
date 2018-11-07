@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
                     'action'  => '/site/contacts',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
-                    'id'      => 'request-form'
+                    'id'      => 'consultation-form'
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_OTHER) ?>
@@ -80,27 +80,30 @@ use yii\widgets\ActiveForm;
     </div>
 <?php
 $js = <<<JS
-    var files; 
-    $('#request-form input[type=file]').on('change', function(){
-        files = this.files;
-    });
-
-    $('#request-form').on('beforeSubmit', function(){
-    var data = $(this);
-    if( typeof files !== 'undefined' ){
-    $.each( files, function( key, value ){
-        data.append( key, value );
-    });
-    }
-    $('.consultation-form form').validate({
+    // var files; 
+    // $('#consultation-form input[type=file]').on('change', function(){
+    //     files = this.files;
+    // });
+    //
+    // $('#consultation-form').on('beforeSubmit', function(){
+    //     var data = $(this);
+    //     if( typeof files !== 'undefined' ){
+    //         $.each( files, function( key, value ){
+    //             data.append( key, value );
+    //         });
+    //     }
+    //  });
+    $('#consultation-form').validate({
         onfocusout: false,
         ignore: ".ignore",
         rules: {
             'Request[contact]': {required: true},
+            'Request[text]': {required: true},
             'Request[accept]': {required: true}
         },
         messages: {
            'Request[contact]': {required: ""},
+           'Request[text]': {required: ""},
            'Request[accept]': {required: ""}
         },
         errorClass: 'invalid',
@@ -112,25 +115,25 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           $('.contact-form').addClass('successful');
+           $('.consultation-form').addClass('successful');
            if (form.valid()){
-                formData = new FormData(data.get(0));
-                $.ajax({
-                contentType: false, 
-                processData: false,
-                url: '/site/request',
-                type: 'POST',
-                data: formData,
-                success: function(res){
-                  if(res.status==='success'){
-                       $('[data-modal="consultation"]').addClass('successful');
-                  }
-                },
-              });
+              //   formData = new FormData(data.get(0));
+              //   $.ajax({
+              //   contentType: false, 
+              //   processData: false,
+              //   url: '/site/request',
+              //   type: 'POST',
+              //   data: formData,
+              //   success: function(res){
+              //     if(res.status==='success'){
+              //          $('[data-modal="consultation"]').addClass('successful');
+              //     }
+              //   },
+              // });
            }
             return false;
         }
-    })
+   
      });
 JS;
 
