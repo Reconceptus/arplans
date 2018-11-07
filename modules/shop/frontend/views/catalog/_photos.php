@@ -9,6 +9,7 @@
 /* @var $model \modules\shop\models\Item */
 
 $mainImage = $model->image;
+$index = 1;
 ?>
 <div class="custom-row-col col-66">
     <div class="project-page--slider">
@@ -21,9 +22,9 @@ $mainImage = $model->image;
                                     data-url-fancybox="<?= $model->image->image ?>"></figure>
                         </div>
                     <? endif; ?>
-                    <? foreach ($model->getPhotos() as $k => $image): ?>
+                    <? foreach ($model->getPhotos() as $image): ?>
                         <? if ($image->id !== $model->image_id): ?>
-                            <div class="item" data-num="<?=$k+1 ?>">
+                            <div class="item" data-num="<?= ++$index ?>">
                                 <figure style="background-image: url(<?= $image->image ?>)"
                                         data-url-fancybox="<?= $image->image ?>"></figure>
                             </div>
