@@ -9,23 +9,35 @@
 /* @var $cartCount int */
 /* @var $favoriteCount int */
 ?>
-<? if(Yii::$app->user->can('adminPanel')):?>
-    <?=\yii\helpers\Html::a('Админка',\yii\helpers\Url::to('/admin'),['style'=>'margin-right:20px;'])?>
-<? elseif(!Yii::$app->user->isGuest):?>
-    <?=\yii\helpers\Html::a('Личный кабинет',\yii\helpers\Url::to('/profile'),['style'=>'margin-right:20px;'])?>
-<?endif;?>
-<?if(!Yii::$app->user->isGuest):?>
-<a href="/shop/favorite" class="stats stats-likes">
-    <span id="count-favorite"><?= intval($favoriteCount) ?></span>
-    <i class="icon-likes">
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart"/>
-        </svg>
-    </i>
-</a>
-<?else:?>
-<?=\yii\helpers\Html::a('Войти',\yii\helpers\Url::to('/site/login'),['class'=>'stats stats-enter'])?>
-<?endif;?>
+
+<? if (!Yii::$app->user->isGuest): ?>
+    <div class="stats stats-profile has-drop">
+        <span>Профиль</span>
+        <div class="header-main--drop">
+            <?= \yii\helpers\Html::a('Мои данные', \yii\helpers\Url::to('/profile')) ?>
+            <?= \yii\helpers\Html::a('Мои заказы', \yii\helpers\Url::to('/profile/orders')) ?>
+            <? if (Yii::$app->user->identity->partner): ?>
+                <?= \yii\helpers\Html::a('Мои продажи', \yii\helpers\Url::to('/profile/sales')) ?>
+            <? endif; ?>
+            <? if (Yii::$app->user->can('adminPanel')): ?>
+                <?= \yii\helpers\Html::a('Админка', \yii\helpers\Url::to('/admin')) ?>
+            <? endif; ?>
+            <?= \yii\helpers\Html::a('Выйти', \yii\helpers\Url::to('/site/logout')) ?>
+        </div>
+    </div>
+<? endif; ?>
+<? if (!Yii::$app->user->isGuest): ?>
+    <a href="/shop/favorite" class="stats stats-likes">
+        <span id="count-favorite"><?= intval($favoriteCount) ?></span>
+        <i class="icon-likes">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-heart"/>
+            </svg>
+        </i>
+    </a>
+<? else: ?>
+    <?= \yii\helpers\Html::a('Войти', \yii\helpers\Url::to('/site/login'), ['class' => 'stats stats-enter']) ?>
+<? endif; ?>
 <a href="/shop/cart" class="stats stats-prods">
     <span id="count-basket"><?= intval($cartCount) ?></span>
     <i class="icon-basket">
