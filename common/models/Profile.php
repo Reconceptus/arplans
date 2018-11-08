@@ -19,11 +19,14 @@ namespace common\models;
  * @property int $type
  * @property string $organization
  * @property string $position
+ * @property string $email
+ * @property string $password
  *
  * @property User $user
  */
 class Profile extends \yii\db\ActiveRecord
 {
+    public $password;
     const TYPE_USER = 1;
     const TYPE_AGENT = 2;
     /**
@@ -68,6 +71,7 @@ class Profile extends \yii\db\ActiveRecord
             'type'         => 'Тип',
             'organization' => 'Организация',
             'position'     => 'Должность',
+            'password'     => 'Пароль',
         ];
     }
 

@@ -8,7 +8,6 @@
 
 namespace frontend\controllers;
 
-use common\models\Profile;
 use common\models\User;
 use modules\shop\models\Order;
 use Yii;
@@ -27,10 +26,16 @@ class ProfileController extends Controller
         if(Yii::$app->user->isGuest){
             throw new NotFoundHttpException();
         }
-        $model = Yii::$app->user->identity->profile;
-        /* @var $model Profile */
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $post = Yii::$app->request->post();
+        $user = Yii::$app->user->identity;
+        /* @var $user User*/
+        $model = $user->profile;
+        if ($model->load($post) && $model->validate()) {
             $model->save();
+            if($post['Profile']['password']){
+                $user->setPassword($post['Profile']['password']);
+                $user->save();
+            }
         }
         return $this->render('index', ['profile' => $model]);
     }
