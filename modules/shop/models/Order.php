@@ -184,12 +184,14 @@ class Order extends \yii\db\ActiveRecord
             $order->country = Html::encode($country);
             $order->city = Html::encode($city);
             $order->address = Html::encode($address);
+            $order->type = self::TYPE_API;
         } else {
             $order->fio = $fio ? Html::encode($fio) : $profile->fio;
             $order->email = $email ? Html::encode($email) : $user->email;
             $order->phone = $phone ? Html::encode($phone) : $profile->phone;
             $order->country = $country ? Html::encode($country) : $profile->country;
             $order->city = $city ? Html::encode($city) : $profile->city;
+            $order->type = self::TYPE_SHOP;
             $order->address = $address ? Html::encode($address) : $profile->address;
         }
         $order->village = Html::encode($village);
@@ -197,6 +199,8 @@ class Order extends \yii\db\ActiveRecord
         $order->created_at = date('Y-m-d H:i:s');
         if ($order->save()) {
             return $order;
+        } else {
+            var_dump($order);
         }
         return null;
     }

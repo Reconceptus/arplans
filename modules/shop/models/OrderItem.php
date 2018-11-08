@@ -9,6 +9,7 @@ namespace modules\shop\models;
  * @property int $order_id
  * @property int $item_id
  * @property int $count
+ * @property int $change_material
  * @property string $price
  * @property string $comment
  *
@@ -34,6 +35,7 @@ class OrderItem extends \yii\db\ActiveRecord
             [['order_id', 'item_id', 'count'], 'required'],
             [['order_id', 'item_id', 'count'], 'integer'],
             [['price'], 'number'],
+            [['change_material'], 'boolean'],
             [['comment'], 'string', 'max' => 800],
             [['order_id', 'item_id'], 'unique', 'targetAttribute' => ['order_id', 'item_id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
@@ -47,12 +49,13 @@ class OrderItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'order_id' => 'Order ID',
-            'item_id' => 'Item ID',
-            'count' => 'Count',
-            'price' => 'Price',
-            'comment' => 'Comment',
+            'id'              => 'ID',
+            'order_id'        => 'Номер заказа',
+            'item_id'         => 'ID товара',
+            'count'           => 'Количество',
+            'price'           => 'Цена',
+            'comment'         => 'Комментарий',
+            'change_material' => 'Изменить материал',
         ];
     }
 

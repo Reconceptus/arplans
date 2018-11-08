@@ -6,58 +6,19 @@
  * Time: 14:37
  */
 
-use yii\helpers\Url;
+/* @var $models \modules\shop\models\Order[] */
+$this->title = 'Мои заказы';
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-$this->title = 'История заказов';
-
-$columns = [
-    [
-        'class'   => 'yii\grid\SerialColumn',
-        'options' => ['style' => 'width:40px'],
-    ],
-    [
-        'attribute' => 'created_at',
-        'value'     => function ($model) {
-            return date('d m Y', strtotime($model->created_at));
-        }
-    ],
-    [
-        'label'   => 'Проекты',
-        'format'  => 'html',
-        'options' => ['style' => 'width:100px'],
-        'value'   => function ($model) {
-            $res = '';
-            /* @var $model \modules\shop\models\Order */
-            foreach ($model->orderItems as $item) {
-                $res .= '<p>' . $item->item->name . ' ' . $item->price . '</p>';
-            }
-            return $res;
-        }
-    ],
-    [
-        'attribute' => 'price',
-    ],
-];
 ?>
-<div class="section">
+<div class="section site-profile">
     <div class="content content--lg mobile-wide">
         <div class="request--wrap gradient">
-            <div class="content content--xs">
+            <div class="content content--md">
                 <h1 class="title title-lg"><?= $this->title ?></h1>
-                <div class="profile-form">
-                    <?= $this->render('_tabs') ?>
-                    <?= \yii\grid\GridView::widget(
-                        [
-                            'dataProvider' => $dataProvider,
-                            'rowOptions'   => function ($model, $key, $index, $grid) {
-                                return ['onclick' => 'window.location = "' . Url::to(['/profile/order', 'id' => $model->id]) . '"'];
-                            },
-                            'layout'       => '{items}{pager}',
-                            'columns'      => $columns
-                        ]
-                    );
-                    ?>
+                <div class="profile-orders">
+                    <? foreach ($models as $model) : ?>
+                        <?= $this->render('order', ['model' => $model]) ?>
+                    <? endforeach; ?>
                 </div>
             </div>
         </div>
