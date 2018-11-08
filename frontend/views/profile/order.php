@@ -6,91 +6,109 @@
  * Time: 15:47
  */
 /* @var $model \modules\shop\models\Order */
+$services = \yii\helpers\ArrayHelper::map($model->services, 'id', 'name');
 ?>
-
-<?= $this->render('_tabs') ?>
-<div class="custom-row">
-    <div class="custom-row-col col-elastic">
-        <div class="basket-form">
-            <div>
-                <section class="compare filter-form">
-                    <div class="compare-table">
-                        <div class="compare-table--header">
-                            <div class="compare-table--part part-project">
-                                <a href="javascript:void(0);">
-                                    Проект
-                                </a>
-                            </div>
-                            <div class="compare-table--part">
-                                <a href="javascript:void(0);">
-                                    Артикул
-                                </a>
-                            </div>
-                            <div class="compare-table--part">
-                                <a href="javascript:void(0);">
-                                    Площадь
-                                </a>
-                            </div>
-                            <div class="compare-table--part">
-                                <a href="javascript:void(0);">
-                                    Материал
-                                </a>
-                            </div>
-                            <div class="compare-table--part part-count">
-                                <a href="javascript:void(0);">
-                                    Количество альбомов
-                                </a>
-                            </div>
-                            <div class="compare-table--part part-cost">
-                                <a href="javascript:void(0);">
-                                    Стоимость
-                                </a>
-                            </div>
-                        </div>
-                        <div class="compare-table--main">
-                            <? foreach ($model->orderItems as $item): ?>
-                                <?= $this->render('_list', ['model' => $item]) ?>
-                            <? endforeach; ?>
+<div class="compare-table">
+    <div class="compare-table--total">
+        <div class="compare-table--part part-number">
+            <dl>
+                <dd>Номер заказа:</dd>
+                <dt><?= $model->id ?></dt>
+            </dl>
+        </div>
+        <div class="compare-table--part part-total">
+            <dl>
+                <dd>Дата:</dd>
+                <dt><?= date('d m Y', strtotime($model->created_at)) ?></dt>
+            </dl>
+        </div>
+        <div class="compare-table--part part-total">
+            <dl>
+                <dd>Цена:</dd>
+                <dt><?= $model->price ?> руб.</dt>
+            </dl>
+        </div>
+        <div class="compare-table--part part-total">
+            <dl>
+                <dd>Статус:</dd>
+                <dt><?= \modules\shop\models\Order::STATUSES[$model->status] ?></dt>
+            </dl>
+        </div>
+        <div class="compare-table--part part-total"></div>
+    </div>
+    <div class="compare-table--main">
+        <? foreach ($model->orderItems as $oi): ?>
+            <?
+            $item = $oi->item;
+            $url = '/shop/' . $item->category->slug . '/' . $item->slug;
+            ?>
+            <div class="compare-table--item">
+                <div class="compare-table--section">
+                    <div class="compare-table--part part-project">
+                        <a href="<?= $url ?>" class="projects-item--preview">
+                            <div class="bg"
+                                 style="background-image: url(<?= $item->getMainImage() ?>)"></div>
+                            <span class="look">
+                                                                    <span class="look-alone data">смотреть</span>
+                                                                </span>
+                        </a>
+                    </div>
+                    <div class="compare-table--part part-articul">
+                        <div class="projects-item--part-title">Артикул</div>
+                        <div class="projects-item--info">
+                            <a href="<?= $url ?>" class="projects-item--articul"><?= $item->name ?></a>
                         </div>
                     </div>
-                </section>
-                Услуги: <br/>
-                <? foreach ($model->orderServices as $service): ?>
-                    <p><?= $service->service->name ?>, <?= $service->price ?></p>
-                <? endforeach; ?>
-            </div>
-            Данные заказа:
-            <table>
-                <tr>
-                    <td>Email</td>
-                    <td><?= $model->email ?></td>
-                </tr>
-                <tr>
-                    <td>Телефон</td>
-                    <td><?= $model->phone ?></td>
-                </tr>
-                <tr>
-                    <td>ФИО</td>
-                    <td><?= $model->fio ?></td>
-                </tr>
-                <tr>
-                    <td>Страна</td>
-                    <td><?= $model->country ?></td>
-                </tr>
-                <tr>
-                    <td>Город</td>
-                    <td><?= $model->city ?></td>
-                </tr>
-                <tr>
-                    <td>Адрес</td>
-                    <td><?= $model->address ?></td>
-                </tr>
-                <tr>
-                    <td>Комментарий</td>
-                    <td><?= $model->comment ?></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
+                    <div class="compare-table--part">
+                        <div class="projects-item--part-title">Площадь</div>
+                        <div class="projects-item--info">
+                            <div>Жилая: <?= $item->live_area ?></div>
+                            <div>Полезная: <?= $item->useful_area ?></div>
+                            <div>Общая: <?= $item->common_area ?> м</div>
+                            <div><?= $item->getCatalogValue('size') ?> метров</div>
+                        </div>
+                    </div>
+                    <div class="compare-table--part">
+                        <div class="projects-item--part-title">Материал</div>
+                        <div class="projects-item--info">
+                            <div><?= $item->getCatalogValue('walls') ?></div>
+                            <div class="no-form-element">
+                                <div class="check">
+                                    <label>
+                                        <input type="checkbox" <?= $oi->change_material ? 'checked' : '' ?>>
+                                        <span>*Изменить материал</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-table--part part-total-count">
+                        <div class="projects-item--part-title">**Количество альбомов</div>
+                        <div class="projects-item--info">
+                            <div class="album-head">**Количество альбомов</div>
+                            <div class="no-form-element">
+                                <div class="counter">
+                                    <input class="result" readonly value="<?= $oi->count ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="compare-table--part part-total-cost">
+                        <div class="projects-item--actions">
+                            <div class="price-box">
+                                <div class="projects-item--part-title">Стоимость</div>
+                                <div class="price"><?= $oi->price ?> &#8381;</div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        <? endforeach; ?>
+    </div>
+    <? if ($services): ?>
+        <div class="compare-table--addition">
+            Указаны дополнительные услуги: <?= implode(', ', $services) ?>
+        </div>
+    <? endif; ?>
+</div>

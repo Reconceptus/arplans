@@ -8,11 +8,9 @@
 
 namespace frontend\controllers;
 
-use common\models\Profile;
 use common\models\User;
 use modules\shop\models\Order;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -24,13 +22,19 @@ class ProfileController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->isGuest){
+        if (Yii::$app->user->isGuest) {
             throw new NotFoundHttpException();
         }
-        $model = Yii::$app->user->identity->profile;
-        /* @var $model Profile */
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $post = Yii::$app->request->post();
+        $user = Yii::$app->user->identity;
+        /* @var $user User */
+        $model = $user->profile;
+        if ($model->load($post) && $model->validate()) {
             $model->save();
+            if ($post['Profile']['password']) {
+                $user->setPassword($post['Profile']['password']);
+                $user->save();
+            }
         }
         return $this->render('index', ['profile' => $model]);
     }
@@ -46,11 +50,8 @@ class ProfileController extends Controller
             throw new NotFoundHttpException();
         }
         /* @var $user User */
-        $query = Order::find()->where(['user_id' => Yii::$app->user->id, 'type' => Order::TYPE_SHOP]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('orders', ['dataProvider' => $dataProvider]);
+        $models = Order::find()->where(['user_id' => Yii::$app->user->id, 'type' => Order::TYPE_SHOP])->all();
+        return $this->render('orders', ['models' => $models]);
     }
 
     /**
@@ -73,10 +74,7 @@ class ProfileController extends Controller
      */
     public function actionSales()
     {
-        $query = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('sales', ['dataProvider' => $dataProvider]);
+        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->all();
+        return $this->render('sales', ['models' => $models]);
     }
 }
