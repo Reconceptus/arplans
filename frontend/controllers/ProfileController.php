@@ -11,7 +11,6 @@ namespace frontend\controllers;
 use common\models\User;
 use modules\shop\models\Order;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -75,10 +74,7 @@ class ProfileController extends Controller
      */
     public function actionSales()
     {
-        $query = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('sales', ['dataProvider' => $dataProvider]);
+        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->all();
+        return $this->render('sales', ['models' => $models]);
     }
 }

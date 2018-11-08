@@ -6,58 +6,38 @@
  * Time: 14:37
  */
 
-use yii\helpers\Url;
-
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-$this->title = 'История заказов';
-
-$columns = [
-    [
-        'class'   => 'yii\grid\SerialColumn',
-        'options' => ['style' => 'width:40px'],
-    ],
-    [
-        'label'     => 'Номер заказа',
-        'attribute' => 'id',
-    ],
-    [
-        'label'     => 'Дата оформления заказа',
-        'attribute' => 'created_at',
-        'value'     => function ($model) {
-            return date('d m Y', strtotime($model->created_at));
-        }
-    ],
-    [
-        'label'   => 'Сумма заказа',
-        'format'  => 'html',
-        'options' => ['style' => 'width:100px'],
-        'value'   => function ($model) {
-            return $model->price. 'руб.';
-        }
-    ],
-    [
-        'attribute' => 'status',
-    ],
-];
+/* @var $models \modules\shop\models\Order[] */
+$this->title = 'Мои продажи';
 ?>
-<div class="section">
+
+<div class="section site-profile">
     <div class="content content--lg mobile-wide">
         <div class="request--wrap gradient">
-            <div class="content content--xs">
+            <div class="content content--md">
                 <h1 class="title title-lg"><?= $this->title ?></h1>
-                <div class="profile-form">
-                    <?= $this->render('_tabs') ?>
-                    <?= \yii\grid\GridView::widget(
-                        [
-                            'dataProvider' => $dataProvider,
-                            'rowOptions'   => function ($model, $key, $index, $grid) {
-                                return ['onclick' => 'window.location = "' . Url::to(['/profile/order', 'id' => $model->id]) . '"'];
-                            },
-                            'layout'       => '{items}{pager}',
-                            'columns'      => $columns
-                        ]
-                    );
-                    ?>
+                <div class="profile-sales">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>№ ЗАКАЗА</th>
+                            <th>Сумма заказ</th>
+                            <th>Отчисления</th>
+                            <th>Статус отчислений</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <? foreach ($models as $model): ?>
+                            <tr>
+                                <td><?= date('d.m.Y', strtotime($model->created_at)) ?></td>
+                                <td><?= $model->id ?></td>
+                                <td><?= $model->price ?></td>
+                                <td><?= $model->price / 100 * 5 ?></td>
+                                <td><?= $model->payment_status ? 'Оплачено' : 'Не оплачено' ?></td>
+                            </tr>
+                        <? endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
