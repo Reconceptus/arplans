@@ -71,19 +71,24 @@ use yii\helpers\Url;
         <li class="show-more-parent">
             <span class="show-more">Профиль <span class="tick"></span></span>
             <ul class="show-more-hidden">
-                <li><?= \yii\helpers\Html::a('Мои данные', \yii\helpers\Url::to('/profile')) ?></li>
-                <li><?= \yii\helpers\Html::a('Мои заказы', \yii\helpers\Url::to('/profile/orders')) ?></li>
-                <li>
-                    <? if (Yii::$app->user->identity->partner): ?>
-                        <?= \yii\helpers\Html::a('Мои продажи', \yii\helpers\Url::to('/profile/sales')) ?>
-                    <? endif; ?>
-                </li>
-                <li>
-                    <? if (Yii::$app->user->can('adminPanel')): ?>
-                        <?= \yii\helpers\Html::a('Админка', \yii\helpers\Url::to('/admin')) ?>
-                    <? endif; ?>
-                </li>
-                <li><?= \yii\helpers\Html::a('Выйти', \yii\helpers\Url::to('/site/logout')) ?></li>
+                <? if (Yii::$app->user->isGuest): ?>
+                    <li><?= \yii\helpers\Html::a('Войти', \yii\helpers\Url::to('/site/login')) ?></li>
+                    <li><?= \yii\helpers\Html::a('Регистрация', \yii\helpers\Url::to('/site/signup')) ?></li>
+                <? else: ?>
+                    <li><?= \yii\helpers\Html::a('Мои данные', \yii\helpers\Url::to('/profile')) ?></li>
+                    <li><?= \yii\helpers\Html::a('Мои заказы', \yii\helpers\Url::to('/profile/orders')) ?></li>
+                    <li>
+                        <? if (Yii::$app->user->identity->partner): ?>
+                            <?= \yii\helpers\Html::a('Мои продажи', \yii\helpers\Url::to('/profile/sales')) ?>
+                        <? endif; ?>
+                    </li>
+                    <li>
+                        <? if (Yii::$app->user->can('adminPanel')): ?>
+                            <?= \yii\helpers\Html::a('Админка', \yii\helpers\Url::to('/admin')) ?>
+                        <? endif; ?>
+                    </li>
+                    <li><?= \yii\helpers\Html::a('Выйти', \yii\helpers\Url::to('/site/logout')) ?></li>
+                <? endif; ?>
             </ul>
         </li>
     </ul>
