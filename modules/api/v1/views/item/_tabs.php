@@ -40,7 +40,7 @@ $ready = $model->getReady();
                         <ul class="owl-carousel">
                             <? foreach ($model->getPlans() as $k => $plan): ?>
                                 <li class="plan-item">
-                                    <img src="<?= $plan->image ?>" alt="plan">
+                                    <img src="<?= Yii::$app->request->getHostInfo() . $plan->image ?>" alt="plan">
                                 </li>
                             <? endforeach; ?>
                         </ul>

@@ -33,37 +33,37 @@ $this->title = 'Мои данные';
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'first_name',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'first_name', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'first_name', ['placeholder' => 'Имя']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'patronymic',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'patronymic', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'patronymic', ['placeholder' => 'Отчество']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'phone',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'phone', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'phone', ['placeholder' => 'Телефон']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'country',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'country', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'country', ['placeholder' => 'Страна']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'city',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'city', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'city', ['placeholder' => 'Город']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
                                 <?=Html::activeLabel($profile,'address',['class'=>'label'])?>
                                 <div class="input">
-                                    <?= Html::activeTextInput($profile, 'address', ['placeholder' => 'Фамилия']) ?>
+                                    <?= Html::activeTextInput($profile, 'address', ['placeholder' => 'адрес']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element has-label">
