@@ -8,7 +8,7 @@
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
-/* @var $isInPrice bool */
+/* @var $isInCart bool */
 
 $price = $model->getPrice();
 ?>
@@ -29,7 +29,7 @@ $price = $model->getPrice();
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <a class="btn-square-min" onclick="toCart(<?= $model->id ?>)">Купить проект</a>
+                    <a class="btn-square-min <?=$isInCart?'incart':''?>" onclick="toCart(<?= $model->id ?>)"><?=$isInCart?'Добавлен в корзину':'Купить проект'?></a>
                     <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">

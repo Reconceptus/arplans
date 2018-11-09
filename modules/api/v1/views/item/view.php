@@ -8,8 +8,7 @@
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
-/* @var $inCart array */
-//$isInCart = array_key_exists($model->id, $inCart);
+/* @var $isInCart bool */
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
@@ -26,7 +25,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
                 <div class="project-page--head custom-row">
                     <?= $this->render('_photos', ['model' => $model]) ?>
-                    <?= $this->render('_info', ['model' => $model, 'favorites' => [], 'isInCart' => false]) ?>
+                    <?= $this->render('_info', ['model' => $model, 'favorites' => [], 'isInCart' => $isInCart]) ?>
                 </div>
                 <div class="project-page--info temp">
                     <div class="data">
