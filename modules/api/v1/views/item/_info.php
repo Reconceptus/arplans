@@ -29,7 +29,8 @@ $price = $model->getPrice();
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <a class="btn-square-min <?=$isInCart?'incart':''?>" onclick="toCart(<?= $model->id ?>)"><?=$isInCart?'Добавлен в корзину':'Купить проект'?></a>
+                    <a class="btn-square-min basket <?= $isInCart ? 'incart' : '' ?>"
+                       onclick="toCart(<?= $model->id ?>)" data-id="<?= $model->id ?>"><?= $isInCart ? 'Добавлен в корзину' : 'Купить проект' ?></a>
                     <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
