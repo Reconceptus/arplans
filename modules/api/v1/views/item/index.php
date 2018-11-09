@@ -17,7 +17,7 @@ use yii\widgets\ListView;
 /* @var $favorites array */
 /* @var $inCart array */
 $favorites = [];
-$inCart = [];
+
 ?>
 
     <div class="section bg-head">

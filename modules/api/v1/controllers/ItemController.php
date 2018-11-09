@@ -2,10 +2,12 @@
 
 namespace modules\api\v1\controllers;
 
+use modules\shop\models\Cart;
 use modules\shop\models\Category;
 use modules\shop\models\Item;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Response;
 
 class ItemController extends ActiveController
@@ -24,6 +26,12 @@ class ItemController extends ActiveController
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
+        if (isset($get['cart'])) {
+            $cart = Html::encode($get['cart']);
+            $inCart = Cart::find()->select(['item_id', 'count'])->where(['guid' => $cart])->indexBy('item_id')->column();
+        } else {
+            $inCart = [];
+        }
         $partner = \Yii::$app->user->identity->partner;
         if ($partner) {
             $categories = $partner->categories;
@@ -47,7 +55,7 @@ class ItemController extends ActiveController
                     'defaultPageSize' => 24,
                 ],
             ]);
-            return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : []];
+            return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category, 'inCart' => $inCart]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : []];
         } else {
             return ['status' => 'fail', 'message' => 'Ошибка получения данных'];
         }
@@ -56,8 +64,16 @@ class ItemController extends ActiveController
     public function actionView($id)
     {
         $model = Item::findOne(['id' => $id]);
+        $get = \Yii::$app->request->get();
+        if (isset($get['cart'])) {
+            $cart = Html::encode($get['cart']);
+            $inCart = Cart::find()->select(['item_id', 'count'])->where(['guid' => $cart])->indexBy('item_id')->column();
+        } else {
+            $inCart = [];
+        }
         if ($model) {
-            return ['status' => 'success', 'html' => $this->renderPartial('view', ['model' => $model])];
+            $isInCart = array_key_exists($model->id, $inCart);
+            return ['status' => 'success', 'html' => $this->renderPartial('view', ['model' => $model, 'isInCart' => $isInCart])];
         } else {
             return ['status' => 'fail'];
         }
