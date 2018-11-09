@@ -6,9 +6,6 @@
  * Time: 10:08
  */
 
-use frontend\widgets\recently\Recently;
-use modules\shop\widgets\related\Related;
-
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
 /* @var $inCart array */
@@ -76,5 +73,3 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
         </div>
     </div>
 </div>
-<?= Related::widget(['model' => $model]) ?>
-<?= Recently::widget() ?>
