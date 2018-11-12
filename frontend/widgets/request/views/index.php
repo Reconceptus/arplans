@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
             <h3 class="modal-title">Мы очень быстро свяжемся с вами</h3>
             <div class="modal-form consultation-form">
                 <? $form = ActiveForm::begin([
-                    'action'  => '/site/contacts',
+                    'action'  => '#',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
                     'id'      => 'consultation-form'
@@ -80,19 +80,10 @@ use yii\widgets\ActiveForm;
     </div>
 <?php
 $js = <<<JS
-    // var files; 
-    // $('#consultation-form input[type=file]').on('change', function(){
-    //     files = this.files;
-    // });
-    //
-    // $('#consultation-form').on('beforeSubmit', function(){
-    //     var data = $(this);
-    //     if( typeof files !== 'undefined' ){
-    //         $.each( files, function( key, value ){
-    //             data.append( key, value );
-    //         });
-    //     }
-    //  });
+    var files; 
+    $('#consultation-form input[type=file]').on('change', function(){
+        files = this.files;
+    });
     $('#consultation-form').validate({
         onfocusout: false,
         ignore: ".ignore",
@@ -115,25 +106,26 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           $('.consultation-form').addClass('successful');
-           if (form.valid()){
-              //   formData = new FormData(data.get(0));
-              //   $.ajax({
-              //   contentType: false, 
-              //   processData: false,
-              //   url: '/site/request',
-              //   type: 'POST',
-              //   data: formData,
-              //   success: function(res){
-              //     if(res.status==='success'){
-              //          $('[data-modal="consultation"]').addClass('successful');
-              //     }
-              //   },
-              // });
-           }
-            return false;
+            var data = $('#consultation-form');
+            if( typeof files !== 'undefined' ){
+                $.each( files, function( key, value ){
+                    data.append( key, value );
+                });
+            }
+                formData = new FormData(data.get(0));
+                $.ajax({
+                contentType: false, 
+                processData: false,
+                url: '/site/request',
+                type: 'POST',
+                data: formData,
+                success: function(res){
+                  if(res.status==='success'){
+                       $('[data-modal="consultation"]').addClass('successful');
+                  }
+                },
+              });
         }
-   
      });
 JS;
 

@@ -18,10 +18,10 @@ use yii\widgets\ActiveForm;
             <h3 class="modal-title">Мы очень быстро свяжемся с вами</h3>
             <div class="modal-form">
                 <? $form = ActiveForm::begin([
-                    'action'  => '/site/contacts',
+                    'action'  => '#',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
-                    'id'      => 'request-form'
+                    'id'      => 'partnership-form'
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_PARTNER) ?>
@@ -83,29 +83,48 @@ $js = <<<JS
     $('#partnership-form input[type=file]').on('change', function(){
         files = this.files;
     });
-
-     $('#partnership-form').on('beforeSubmit', function(){
-	 var data = $(this);
-	 if( typeof files !== 'undefined' ){
-	    $.each( files, function( key, value ){
-		    data.append( key, value );
-	    });
-	 }
-	 
-	 formData = new FormData(data.get(0));
-	 $.ajax({
-	  contentType: false, 
-      processData: false,
-	    url: '/site/request',
-	    type: 'POST',
-	    data: formData,
-	    success: function(res){
-	      if(res.status==='success'){
-	           $('[data-modal="partnership"]').addClass('successful');
-	      }
-	    },
-	 });
-	 return false;
+    $('#partnership-form').validate({
+        onfocusout: false,
+        ignore: ".ignore",
+        rules: {
+            'Request[contact]': {required: true},
+            'Request[text]': {required: true},
+            'Request[accept]': {required: true}
+        },
+        messages: {
+           'Request[contact]': {required: ""},
+           'Request[text]': {required: ""},
+           'Request[accept]': {required: ""}
+        },
+        errorClass: 'invalid',
+        highlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').addClass(errorClass);
+        },
+        unhighlight: function(element, errorClass) {
+            $(element).closest('.form-row-element').removeClass(errorClass)
+        },
+        errorPlacement: $.noop,
+        submitHandler:function (form) {
+            var data = $('#partnership-form');
+            if( typeof files !== 'undefined' ){
+                $.each( files, function( key, value ){
+                    data.append( key, value );
+                });
+            }
+                formData = new FormData(data.get(0));
+                $.ajax({
+                contentType: false, 
+                processData: false,
+                url: '/site/request',
+                type: 'POST',
+                data: formData,
+                success: function(res){
+                  if(res.status==='success'){
+                       $('[data-modal="partnership"]').addClass('successful');
+                  }
+                },
+              });
+        }
      });
 JS;
 
