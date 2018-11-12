@@ -124,6 +124,7 @@ $js = <<<JS
                        $('[data-modal="calculation"]').addClass('successful');
                   }
                   $('.submit-calc').hide();
+                  return false;
                 },
               });
         }

@@ -125,6 +125,7 @@ $js = <<<JS
                        $('[data-modal="consultation"]').addClass('successful');
                   }
                   $('.submit-consult').show()
+                   return false;
                 },
               });
         }

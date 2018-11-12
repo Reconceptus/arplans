@@ -124,6 +124,7 @@ $js = <<<JS
                        $('[data-modal="partnership"]').addClass('successful');
                   }
                   $('.submit-partner').show();
+                   return false;
                 },
               });
         }
