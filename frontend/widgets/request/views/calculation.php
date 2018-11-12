@@ -123,6 +123,7 @@ $js = <<<JS
                   if(res.status==='success'){
                        $('[data-modal="calculation"]').addClass('successful');
                   }
+                  $('.submit-calc').hide();
                 },
               });
         }
