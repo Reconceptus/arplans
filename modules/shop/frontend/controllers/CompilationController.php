@@ -8,7 +8,7 @@
 
 namespace modules\shop\frontend\controllers;
 
-use common\models\Config;
+use modules\content\models\ContentBlock;
 use modules\shop\models\Item;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -23,8 +23,8 @@ class CompilationController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        $description = Config::getValue('compilation_new_description');
-        $name = Config::getValue('compilation_new_name');
+        $description = ContentBlock::getValue('compilation_new_description');
+        $name = ContentBlock::getValue('compilation_new_name');
 
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
@@ -40,8 +40,8 @@ class CompilationController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        $description = Config::getValue('compilation_discount_description');
-        $name = Config::getValue('compilation_discount_name');
+        $description = ContentBlock::getValue('compilation_discount_description');
+        $name = ContentBlock::getValue('compilation_discount_name');
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
@@ -56,8 +56,8 @@ class CompilationController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        $description = Config::getValue('compilation_free_description');
-        $name = Config::getValue('compilation_free_name');
+        $description = ContentBlock::getValue('compilation_free_description');
+        $name = ContentBlock::getValue('compilation_free_name');
         return $this->render('compilation', [
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
