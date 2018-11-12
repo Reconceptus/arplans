@@ -12,6 +12,18 @@ use yii\helpers\Url;
 /* @var $models \modules\shop\models\Category */
 /* @var $services \modules\shop\models\Service */
 ?>
+<div class="search">
+    <form action="/search">
+        <div class="fieldset">
+            <input class="input" type="text" name="q">
+            <button class="submit" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>
+                </svg>
+            </button>
+        </div>
+    </form>
+</div>
 <ul>
     <li class="show-more-parent">
         <span class="show-more">Готовые проекты домов <span class="tick"></span></span>
@@ -22,6 +34,11 @@ use yii\helpers\Url;
                 </li>
             <? endforeach; ?>
         </ul>
+    </li>
+    <li>
+        <span>
+            <?= Html::a('Блог', Url::to('/blog')) ?>
+        </span>
     </li>
     <? if ($services): ?>
         <li class="show-more-parent">

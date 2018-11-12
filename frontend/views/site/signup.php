@@ -19,14 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h2 class="subtitle align-center">Пожалуйста, заполните форму</h2>
                 <div class="login-form">
                     <?php $form = ActiveForm::begin([
-                        'id'                   => 'form-signup'
+                        'id' => 'form-signup'
                     ]); ?>
                     <div class="login-form--wrap">
                         <div class="request-form--main custom-form">
                             <div class="form-row-element">
                                 <div class="input">
                                     <?= Html::activeTextInput($model, 'email', ['placeholder' => '*Email']) ?>
-                                    <?= Html::error($model, 'email') ?>
+                                    <?= Html::error($model, 'email', ['class' => 'error-text']) ?>
                                 </div>
                             </div>
                             <div class="form-row-element">
