@@ -124,6 +124,7 @@ $js = <<<JS
                   if(res.status==='success'){
                        $('[data-modal="consultation"]').addClass('successful');
                   }
+                  $('.submit-consult').show()
                 },
               });
         }

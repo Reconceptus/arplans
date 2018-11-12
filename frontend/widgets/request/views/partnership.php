@@ -123,6 +123,7 @@ $js = <<<JS
                   if(res.status==='success'){
                        $('[data-modal="partnership"]').addClass('successful');
                   }
+                  $('.submit-partner').show();
                 },
               });
         }
