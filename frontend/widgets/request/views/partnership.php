@@ -67,7 +67,7 @@ use yii\widgets\ActiveForm;
                     </div>
                 </div>
                 <div class="modal-form--submit">
-                    <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt']) ?>
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt submit-partner']) ?>
                 </div>
                 <? ActiveForm::end() ?>
             </div>
@@ -105,6 +105,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
+            $('.submit-partner').hide();
             var data = $('#partnership-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){

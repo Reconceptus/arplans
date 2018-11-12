@@ -67,7 +67,7 @@ use yii\widgets\ActiveForm;
                     </div>
                 </div>
                 <div class="modal-form--submit">
-                    <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt']) ?>
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt submit-calc']) ?>
                 </div>
                 <? ActiveForm::end() ?>
             </div>
@@ -105,6 +105,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
+            $('.submit-calc').hide();
             var data = $('#calculation-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){
