@@ -17,7 +17,7 @@ $get = Yii::$app->request->get();
             <div class="catalog-filters dynamic">
                 <div class="catalog-filters--container" data-catalog="partners">
                     <div class="catalog-filters--btn">
-                        <a href="#" class="btn--lt btn show-modal" data-modal="consultation">+ запрос на партнерство</a>
+                        <a href="#" class="btn--lt btn show-modal" data-modal="partnership">+ запрос на партнерство</a>
                     </div>
                     <form action="/builder">
                         <div class="catalog-filters--form scrolled">
@@ -280,3 +280,4 @@ $get = Yii::$app->request->get();
         </div>
     </div>
 </div>
+<?= \frontend\widgets\request\Request::widget(['viewName' => 'partnership']) ?>
