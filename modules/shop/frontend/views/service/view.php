@@ -55,7 +55,7 @@
                 <div class="custom-list--info">
                     <div class="price"><?= intval($model->price) ?> &#8381;</div>
                     <p><strong>Срок:</strong> <?= $model->time ?></p>
-                    <a href="#" class="order btn-square-min">Заказать услугу</a>
+                    <a href="#" class="order btn-square-min show-modal" data-modal="consultation">Заказать услугу</a>
                 </div>
             </div>
 
