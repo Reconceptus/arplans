@@ -17,7 +17,7 @@ $get = Yii::$app->request->get();
             <div class="catalog-filters dynamic">
                 <div class="catalog-filters--container" data-catalog="partners">
                     <div class="catalog-filters--btn">
-                        <a href="#" class="btn--lt btn">+ добавить свой поселок</a>
+                        <a href="/village/add" class="btn--lt btn">+ добавить свой поселок</a>
                     </div>
                     <form action="#">
                         <div class="catalog-filters--form scrolled">
