@@ -345,6 +345,11 @@ class BuilderController extends AdminController
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
         $model->is_deleted = Builder::IS_DELETED;
+        $slug = $model->slug . '_deleted_' . rand(0, 1000);
+        if (Builder::find()->where(['slug' => $slug])->exists()) {
+            $slug = $model->slug . '_deleted_' . rand(0, 1000) . '_' . rand(0, 1000);
+        }
+        $model->slug = $slug;
         if ($model->save()) {
             return $this->redirect(Yii::$app->request->get('back'));
         }

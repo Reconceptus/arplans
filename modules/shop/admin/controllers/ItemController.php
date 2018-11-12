@@ -192,7 +192,8 @@ class ItemController extends AdminController
                 }
                 Yii::$app->session->setFlash('success', 'Товар добавлен успешно');
             } else {
-                var_dump($model->errors);die;
+                var_dump($model->errors);
+                die;
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
             if (isset($post['Catalogs'])) {
@@ -349,6 +350,11 @@ class ItemController extends AdminController
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
         $model->is_deleted = Item::IS_DELETED;
+        $slug = $model->slug . '_deleted_' . rand(0, 1000);
+        if (Item::find()->where(['slug' => $slug])->exists()) {
+            $slug = $model->slug . '_deleted_' . rand(0, 1000) . '_' . rand(0, 1000);
+        }
+        $model->slug = $slug;
         if ($model->save()) {
             return $this->redirect(Yii::$app->request->get('back'));
         }

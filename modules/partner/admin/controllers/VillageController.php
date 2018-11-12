@@ -345,6 +345,11 @@ class VillageController extends AdminController
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
         $model->is_deleted = Village::IS_DELETED;
+        $slug = $model->slug . '_deleted_' . rand(0, 1000);
+        if (Village::find()->where(['slug' => $slug])->exists()) {
+            $slug = $model->slug . '_deleted_' . rand(0, 1000) . '_' . rand(0, 1000);
+        }
+        $model->slug = $slug;
         if ($model->save()) {
             return $this->redirect(Yii::$app->request->get('back'));
         }
