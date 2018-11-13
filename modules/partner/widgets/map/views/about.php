@@ -51,6 +51,9 @@
                             <? endif; ?>
                         </div>
                     <? endforeach; ?>
+                    <div class="show-all">
+                        <button type="button" class="btn btn--round show-all-btn">Показать все</button>
+                    </div>
                 </div>
             </div>
         </div>
