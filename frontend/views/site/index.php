@@ -25,7 +25,7 @@ $this->registerMetaTag(['name' => 'yandex-verification', 'content' => '1cffe0527
                     <p><?= \modules\content\models\ContentBlock::getValue('main_page_offer_annotation') ?></p>
                 </section>
                 <div class="actions">
-                    <?= Html::a('каталог проектов', Url::to('/shop'), ['class' => 'btn btn--lt']) ?>
+                    <?= Html::a('сотрудничество', Url::to('/collaboration'), ['class' => 'btn btn--lt']) ?>
                     <?= Html::a('консультация', Url::to('#'), ['class' => 'btn btn--dk show-modal', 'data-modal' => 'consultation']) ?>
                 </div>
             </div>
