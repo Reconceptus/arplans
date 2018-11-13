@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="contact-form">
                         <? $form = ActiveForm::begin([
-                            'method'  => 'post',
+                            'action'  => '#',
                             'options' => ['enctype' => 'multipart/form-data'],
                             'id'      => 'contacts-form',
                         ]); ?>
@@ -185,6 +185,10 @@ if ($partners): ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <?php
 $js = <<<JS
+var files; 
+    $('#contacts-form input[type=file]').on('change', function(){
+        files = this.files;
+    });
        $('.contact-form form').validate({
         onfocusout: false,
         ignore: ".ignore",
@@ -210,10 +214,32 @@ $js = <<<JS
         errorPlacement: $.noop,
         submitHandler:function (form) {
            $('.contact-form').addClass('successful');
-           if (form.valid()){
-               form.submit();
-           }
-            return false;
+           var data = $('#contacts-form');
+            if( typeof files !== 'undefined' ){
+                $.each( files, function( key, value ){
+                    data.append( key, value );
+                });
+            }
+            formData = new FormData(data.get(0));
+                $.ajax({
+                contentType: false, 
+                processData: false,
+                url: '/site/request',
+                type: 'POST',
+                data: formData,
+                success: function(res){
+                  if(res.status==='success'){
+                     project.alertMessage('Спасибо');
+                  }else{
+                      var errors = "";
+                      $.each(res.message, function( i, elem ) {
+                        errors+=elem+'<br/>';
+                      });
+                      project.alertMessage('',errors);
+                  }
+                   return false;
+                },
+              });
         }
     })
 JS;

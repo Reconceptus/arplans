@@ -156,7 +156,7 @@ class SiteController extends Controller
                 $mail->send();
                 return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
-                return ['status' => 'fail'];
+                return ['status' => 'fail','message'=>$model->getFirstErrors()];
             }
         }
 
@@ -170,20 +170,6 @@ class SiteController extends Controller
     public function actionContacts()
     {
         $request = new Request();
-        if ($request->load(Yii::$app->request->post()) && $request->validate()) {
-            $file = UploadedFile::getInstance($request, 'file');
-            if ($request->save()) {
-                $mail = Yii::$app->mailer->compose('request', ['model' => $request, 'type' => Yii::$app->request->post('type')])
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новый запрос');
-                if ($file) {
-                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
-                }
-                $mail->send();
-            }
-            return $this->redirect(Yii::$app->request->referrer);
-        }
         $model = About::getModel();
         $query = About::getFilteredQuery(Yii::$app->request->get());
         $partners = Partner::find()->where(['is_active' => Partner::IS_ACTIVE, 'is_deleted' => Partner::IS_NOT_DELETED])->all();
