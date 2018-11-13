@@ -80,7 +80,7 @@ $favorites = [];
                             <div class="catalog-actions">
                                 <?= LinkPager::widget([
                                     'pagination'         => $dataProvider->getPagination(),
-                                    'linkOptions'        => ['class' => 'page'],
+                                    'linkOptions'        => ['class' => 'page paginator-page'],
                                     'activePageCssClass' => 'current',
                                     'nextPageLabel'      => '>',
                                     'prevPageLabel'      => '<',
