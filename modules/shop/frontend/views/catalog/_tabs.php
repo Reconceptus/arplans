@@ -105,10 +105,12 @@ $ready = $model->getReady();
                                 <td class="name">Количество с/у</td>
                                 <td><?= $model->bathrooms ?></td>
                             </tr>
-                            <tr>
-                                <td class="name">Удобства</td>
-                                <td><?= implode(', ', $model->getComfort()) ?></td>
-                            </tr>
+                            <? if ($comfort = $model->getComfort()): ?>
+                                <tr>
+                                    <td class="name">Удобства</td>
+                                    <td><?= implode(', ', $comfort) ?></td>
+                                </tr>
+                            <? endif; ?>
                         </table>
                     </div>
                 </div>
@@ -133,7 +135,9 @@ $ready = $model->getReady();
                             строительства необходима разработка сметы, согласно стоимости материалов в вашем регионе
                         </li>
                         <li>Мы не учитываем стоимость доставки материалов.</li>
-                        <li>Смотрите советы по выбору материала в нашем <?=\yii\helpers\Html::a('блоге', \yii\helpers\Url::to('/blog'))?>.</li>
+                        <li>Смотрите советы по выбору материала в
+                            нашем <?= \yii\helpers\Html::a('блоге', \yii\helpers\Url::to('/blog')) ?>.
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -142,9 +146,9 @@ $ready = $model->getReady();
             <div class="tab-section tab-video tab03">
                 <div class="video">
                     <figure>
-                    <?= \frontend\widgets\youtube\Youtube::widget([
-                        'url'    => $model->video,
-                    ]) ?>
+                        <?= \frontend\widgets\youtube\Youtube::widget([
+                            'url' => $model->video,
+                        ]) ?>
                     </figure>
                 </div>
             </div>
