@@ -66,8 +66,8 @@ class FavoriteController extends Controller
                 $addCounter = -1;
             }
         }else{
-            $title = 'Вы не зарегистрированы';
-            $message = 'После регистрации Вам будет доступна функция добавления понравившихся проектов в подборку для сравнения. <p><a href="/site/signup" style="color: #2196f3">Зарегистрироваться</a></p>';
+            $title = ' Вы не авторизованы';
+            $message = 'После авторизации Вам будет доступна функция добавления понравившихся проектов в подборку для сравнения. <p><a href="/site/login" style="color: #2196f3">Войти</a></p><p><a href="/site/signup" style="color: #2196f3">Зарегистрироваться</a></p>';
         }
         return ['fav' => $fav, 'counter' => $addCounter, 'title'=>$title, 'message'=>$message];
     }
