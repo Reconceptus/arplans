@@ -15,12 +15,21 @@ $item = $model->builder;
 <div class="image-admin-preview" data-id="<?= isset($model->id) ? $model->id : '' ?>" data-file="<?= $model->file ?>">
     <? if ($model->id && $model->builder_id): ?>
         <? if ($item && $item->image_id === $model->id): ?>
-            <div class="default-image">
+            <div class="default-image" data-path="partner/builder">
                 <span class="glyphicon glyphicon-ok" title="Основное изображение"></span>
             </div>
         <? else: ?>
-            <div class="js-set-default-image">
+            <div class="js-set-default-image" data-path="partner/builder">
                 <span class="glyphicon glyphicon-ok" title="Сделать основным"></span>
+            </div>
+        <? endif; ?>
+        <? if ($item && $item->back_image_id === $model->id): ?>
+            <div class="back-image" data-path="partner/builder">
+                <span class="glyphicon glyphicon-ok" title="Фоновое изображение"></span>
+            </div>
+        <?else:?>
+            <div class="js-set-back-image" data-path="partner/builder">
+                <span class="glyphicon glyphicon-ok" title="Сделать фоновым"></span>
             </div>
         <? endif; ?>
     <? endif; ?>

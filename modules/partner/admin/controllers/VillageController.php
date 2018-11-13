@@ -337,6 +337,28 @@ class VillageController extends AdminController
     }
 
     /**
+     * Устанавливает через ajax основное фото для партнера
+     * @return array
+     */
+    public function actionSetBack()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = Yii::$app->request->get('id');
+        $model = VillageImage::findOne(['id' => $id]);
+        if ($model) {
+            $item = $model->village;
+            if ($item) {
+                $item->back_image_id = $model->id;
+                if ($item->save()) {
+                    return ['status' => 'success'];
+                }
+            }
+        }
+        return ['status' => 'fail'];
+    }
+
+
+    /**
      * @return Response
      * @throws NotFoundHttpException
      * @throws \yii\base\Exception

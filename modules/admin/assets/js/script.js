@@ -181,10 +181,11 @@ $(function () {
 
     $(document).on('click', '.js-set-default-image', function () {
         var button = $(this);
+        var path = button.data('path')?button.data('path'):'shop/item';
         var id = button.closest('.image-admin-preview').data('id');
         $.ajax({
             type: 'GET',
-            url: '/admin/modules/shop/item/set-preview',
+            url: '/admin/modules/'+path+'/set-preview',
             data: {
                 id: id
             },
@@ -195,7 +196,26 @@ $(function () {
                 }
             }
         });
-    })
+    });
+
+    $(document).on('click', '.js-set-back-image', function () {
+        var button = $(this);
+        var path = button.data('path');
+        var id = button.closest('.image-admin-preview').data('id');
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/'+path+'/set-back',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    $('.back-image').addClass('js-set-back-image').removeClass('back-image');
+                    button.removeClass('js-set-back-image').addClass('back-image');
+                }
+            }
+        });
+    });
 
     $(document).on('click', '.js-save-catalog', function () {
         var button = $(this);

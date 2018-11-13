@@ -18,6 +18,7 @@ use common\models\Region;
  * @property string           $lat
  * @property string           $lng
  * @property int              $image_id
+ * @property int                $back_image_id
  * @property int              $region_id
  * @property int              $electric
  * @property int              $gas
@@ -45,6 +46,7 @@ use common\models\Region;
  *
  * @property Region           $region
  * @property VillageImage     $image
+ * @property VillageImage     $background
  * @property VillageBenefit[] $benefits
  * @property VillageImage[]   $images
  */
@@ -70,7 +72,7 @@ class Village extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
+            [['image_id', 'back_image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
             [['name', 'slug', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
@@ -100,6 +102,7 @@ class Village extends \yii\db\ActiveRecord
             'price_list'      => 'Прайслист',
             'logo'            => 'Логотип',
             'image_id'        => 'Основное изображение',
+            'back_image_id'   => 'Фоновое изображение',
             'region_id'       => 'Регион',
             'is_active'       => 'Активен',
             'is_office'       => 'Офис продаж',
@@ -164,12 +167,34 @@ class Village extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery|VillageImage
+     */
+    public function getBackground()
+    {
+        return $this->hasOne(VillageImage::className(), ['id' => 'back_image_id']);
+    }
+    /**
      * @return mixed|string
      */
     public function getMainImage()
     {
         if ($this->image) {
             $image = $this->image->file;
+        } elseif ($this->images) {
+            $image = $this->images[0]->file;
+        } else {
+            $image = '';
+        }
+        return $image;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getBackImage()
+    {
+        if ($this->background) {
+            $image = $this->background->file;
         } elseif ($this->images) {
             $image = $this->images[0]->file;
         } else {
