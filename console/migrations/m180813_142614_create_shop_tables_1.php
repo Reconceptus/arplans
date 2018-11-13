@@ -24,7 +24,6 @@ class m180813_142614_create_shop_tables_1 extends Migration
         ]);
 
         $this->createIndex('U_category_slug', 'shop_category', 'slug', true);
-        $this->createIndex('U_category_name', 'shop_category', 'name', true);
 
         $this->createTable('shop_catalog', [
             'id'          => $this->primaryKey()->unsigned(),
