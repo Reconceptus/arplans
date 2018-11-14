@@ -18,7 +18,6 @@ class Slider extends Widget
 
     public function run()
     {
-        $models = $this->model->images;
-        return $this->render($this->viewName, ['models' => $models]);
+        return $this->render($this->viewName, ['model' => $this->model]);
     }
 }

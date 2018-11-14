@@ -200,7 +200,7 @@ ul {
     z-index: 2;
 }
 
-.js-set-default-image, .js-image-admin-delete {
+.js-set-default-image, .js-set-back-image, .js-image-admin-delete {
     display: none;
 }
 
@@ -211,12 +211,20 @@ ul {
     cursor: pointer;
 }
 
-.image-admin-preview:hover .js-set-default-image, .image-admin-preview:hover .js-image-admin-delete {
+.js-set-back-image, .back-image {
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+.image-admin-preview:hover .js-set-default-image, .image-admin-preview:hover .js-set-back-image, .image-admin-preview:hover .js-image-admin-delete {
     display: block;
 }
 
 .image-admin-preview
-.default-image {
+.default-image, .image-admin-preview .back-image {
     color: green;
     border: 2px solid green;
 }
