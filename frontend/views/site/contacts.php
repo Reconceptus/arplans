@@ -150,6 +150,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                         <? ActiveForm::end() ?>
+                        <div class="modal-thanks">
+                            <h4 class="modal-thanks--title">Спасибо!</h4>
+                            <p>Ваше сообщение успешно отправлено, мы свяжемся с Вами в ближайшее время!</p>
+                        </div>
                     </div>
                 </div>
 
@@ -229,7 +233,7 @@ var files;
                 data: formData,
                 success: function(res){
                   if(res.status==='success'){
-                     project.alertMessage('Спасибо');
+                      $('.contact-form').addClass('successful');
                   }else{
                       var errors = "";
                       $.each(res.message, function( i, elem ) {

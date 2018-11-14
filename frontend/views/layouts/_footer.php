@@ -43,7 +43,7 @@
                 </section>
             </div>
             <div class="footer-main--logo">
-                <a href="index.html">
+                <a href="/">
                     <img src="/svg/partials/logo-mini.svg" alt="ARPLANS">
                 </a>
             </div>
