@@ -137,8 +137,8 @@ $coordinates = [];
             }
         }
     </script>
-    <!-- API KEY for ARPLANS:  AIzaSyDTe4a3uDvnMx11fyEgPXA6UEEsNYh5Eg8-->
+    <!-- API KEY for ARPLANS:  AIzaSyAq3bYt2V4QqFvLcak_2ajt34wbfFuU8qY-->
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6PFq1z3G7_YGiZl1KUuVVH_kxI2YAdaA&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq3bYt2V4QqFvLcak_2ajt34wbfFuU8qY&callback=initMap"></script>
 
 </div>
