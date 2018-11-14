@@ -106,7 +106,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-            $('.submit-consult').hide();
+            $('[data-modal="consultation"]').addClass('successful');
             var data = $('#consultation-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){
@@ -121,11 +121,11 @@ $js = <<<JS
                 type: 'POST',
                 data: formData,
                 success: function(res){
-                  if(res.status==='success'){
-                       $('[data-modal="consultation"]').addClass('successful');
+                  if(res.status!=='success'){
+                       if($('[data-modal="consultation"]').hasClass('successful')){
+                           $('[data-modal="consultation"]').removeClass('successful');
+                       }
                   }
-                  $('.submit-consult').show()
-                   return false;
                 },
               });
         }
