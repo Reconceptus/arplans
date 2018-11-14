@@ -80,10 +80,6 @@ use yii\widgets\ActiveForm;
     </div>
 <?php
 $js = <<<JS
-    var files; 
-    $('#consultation-form input[type=file]').on('change', function(){
-        files = this.files;
-    });
     $('#consultation-form').validate({
         onfocusout: false,
         ignore: ".ignore",
@@ -106,13 +102,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-            $('[data-modal="consultation"]').addClass('successful');
-            var data = $('#consultation-form');
-            if( typeof files !== 'undefined' ){
-                $.each( files, function( key, value ){
-                    data.append( key, value );
-                });
-            }
+                var data = $('#consultation-form');
                 formData = new FormData(data.get(0));
                 $.ajax({
                 contentType: false, 
@@ -121,10 +111,8 @@ $js = <<<JS
                 type: 'POST',
                 data: formData,
                 success: function(res){
-                  if(res.status!=='success'){
-                       if($('[data-modal="consultation"]').hasClass('successful')){
-                           $('[data-modal="consultation"]').removeClass('successful');
-                       }
+                  if(res.status==='success'){
+                       $('[data-modal="consultation"]').addClass('successful');
                   }
                 },
               });

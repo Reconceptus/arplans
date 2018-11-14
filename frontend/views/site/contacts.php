@@ -189,10 +189,6 @@ if ($partners): ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <?php
 $js = <<<JS
-var files; 
-    $('#contacts-form input[type=file]').on('change', function(){
-        files = this.files;
-    });
        $('.contact-form form').validate({
         onfocusout: false,
         ignore: ".ignore",
@@ -218,11 +214,6 @@ var files;
         errorPlacement: $.noop,
         submitHandler:function (form) {
            var data = $('#contacts-form');
-            if( typeof files !== 'undefined' ){
-                $.each( files, function( key, value ){
-                    data.append( key, value );
-                });
-            }
             formData = new FormData(data.get(0));
                 $.ajax({
                 contentType: false, 
