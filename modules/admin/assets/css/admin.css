@@ -13,15 +13,15 @@ ul {
 }
 
 .sidebar {
-    background-color: #17191f;
+    background-color: #F0F1F3;
     min-height: 100%;
     position: fixed;
     width: 240px;
-    color: #fff;
+    color: #434A58;
 }
 
 .sidebar a {
-    color: #FFF;
+    color: #434A58;
 }
 
 .sidebar-header {
