@@ -217,7 +217,6 @@ var files;
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           $('.contact-form').addClass('successful');
            var data = $('#contacts-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){

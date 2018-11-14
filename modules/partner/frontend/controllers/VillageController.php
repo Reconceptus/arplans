@@ -14,6 +14,7 @@ use modules\partner\models\Village;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 
@@ -45,18 +46,23 @@ class VillageController extends Controller
     public function actionAdd()
     {
         $post = Yii::$app->request->post();
-        if ($post) {
-            if (isset($post['processing_agree']) && $post['processing_agree'] === 'on') {
-                $file = UploadedFile::getInstanceByName('file');
-                $mail = Yii::$app->mailer->compose('add-village', ['model' => $post])
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                    ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Новая заявка о добавлении поселка');
-                if ($file) {
-                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if ($post) {
+                if (isset($post['processing_agree']) && $post['processing_agree'] === 'on') {
+                    $file = UploadedFile::getInstanceByName('file');
+                    $mail = Yii::$app->mailer->compose('add-village', ['model' => $post])
+                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                        ->setTo(Config::getValue('requestEmail'))
+                        ->setSubject('Новая заявка о добавлении поселка');
+                    if ($file) {
+                        $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                    }
+                    $mail->send();
+                    return ['status' => 'success', 'message' => 'Спасибо! Мы обязательно с вами свяжемся'];
                 }
-                $mail->send();
             }
+            return ['status' => 'fail'];
         }
         return $this->render('add');
     }

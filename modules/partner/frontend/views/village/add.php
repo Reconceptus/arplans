@@ -18,7 +18,8 @@
                     <div class="request-form">
                         <? $form = \yii\widgets\ActiveForm::begin([
                             'options' => [
-                                'enctype' => 'multipart/form-data'
+                                'enctype' => 'multipart/form-data',
+                                'id'=>'add-form'
                             ]
                         ]) ?>
                         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>">
@@ -334,11 +335,33 @@ $js=<<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           $('.request-form').addClass('successful');
-           if (form.valid()){
-               form.submit();
-           }
-            return false;
+           var data = $('#add-form');
+            if( typeof files !== 'undefined' ){
+                $.each( files, function( key, value ){
+                    data.append( key, value );
+                });
+            }
+            formData = new FormData(data.get(0));
+                $.ajax({
+                contentType: false, 
+                processData: false,
+                url: '/village/add',
+                type: 'POST',
+                data: formData,
+                success: function(res){
+                  if(res.status==='success'){
+                      $('.request-form').addClass('successful');
+                      project.alertMessage(res.message);
+                  }else{
+                      var errors = "";
+                      $.each(res.message, function( i, elem ) {
+                        errors+=elem+'<br/>';
+                      });
+                      project.alertMessage('',errors);
+                  }
+                   return false;
+                },
+              });
         }
     })
 
