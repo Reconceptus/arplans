@@ -105,7 +105,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-            $('.submit-partner').hide();
+             $('[data-modal="partnership"]').addClass('successful');
             var data = $('#partnership-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){
@@ -120,8 +120,10 @@ $js = <<<JS
                 type: 'POST',
                 data: formData,
                 success: function(res){
-                  if(res.status==='success'){
-                       $('[data-modal="partnership"]').addClass('successful');
+                  if(res.status!=='success'){
+                       if($('[data-modal="partnership"]').hasClass('successful')){
+                            $('[data-modal="partnership"]').removeClass('successful');
+                       }
                   }
                   $('.submit-partner').show();
                    return false;

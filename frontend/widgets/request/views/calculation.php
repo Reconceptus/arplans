@@ -105,7 +105,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-            $('.submit-calc').hide();
+            $('[data-modal="calculation"]').addClass('successful');
             var data = $('#calculation-form');
             if( typeof files !== 'undefined' ){
                 $.each( files, function( key, value ){
@@ -120,10 +120,11 @@ $js = <<<JS
                 type: 'POST',
                 data: formData,
                 success: function(res){
-                  if(res.status==='success'){
-                       $('[data-modal="calculation"]').addClass('successful');
+                  if(res.status!=='success'){
+                       if($('[data-modal="calculation"]').hasClass('successful')){
+                           $('[data-modal="calculation"]').removeClass('successful');
+                       }
                   }
-                  $('.submit-calc').hide();
                   return false;
                 },
               });
