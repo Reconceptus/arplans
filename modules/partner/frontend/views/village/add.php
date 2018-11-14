@@ -336,11 +336,6 @@ $js=<<<JS
         errorPlacement: $.noop,
         submitHandler:function (form) {
            var data = $('#add-form');
-            if( typeof files !== 'undefined' ){
-                $.each( files, function( key, value ){
-                    data.append( key, value );
-                });
-            }
             formData = new FormData(data.get(0));
                 $.ajax({
                 contentType: false, 

@@ -24,6 +24,7 @@ class Request extends \yii\db\ActiveRecord
     const PAGE_OTHER = 2;
     const PAGE_CALCULATION = 3;
     const PAGE_PARTNER = 4;
+    const PAGE_API_CONS = 5;
 
     const TYPES = [
         self::PAGE_CONTACT     => 'Контактная форма',

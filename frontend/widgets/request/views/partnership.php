@@ -79,10 +79,6 @@ use yii\widgets\ActiveForm;
     </div>
 <?php
 $js = <<<JS
-    var files; 
-    $('#partnership-form input[type=file]').on('change', function(){
-        files = this.files;
-    });
     $('#partnership-form').validate({
         onfocusout: false,
         ignore: ".ignore",
@@ -105,13 +101,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-             $('[data-modal="partnership"]').addClass('successful');
             var data = $('#partnership-form');
-            if( typeof files !== 'undefined' ){
-                $.each( files, function( key, value ){
-                    data.append( key, value );
-                });
-            }
                 formData = new FormData(data.get(0));
                 $.ajax({
                 contentType: false, 
@@ -120,13 +110,9 @@ $js = <<<JS
                 type: 'POST',
                 data: formData,
                 success: function(res){
-                  if(res.status!=='success'){
-                       if($('[data-modal="partnership"]').hasClass('successful')){
-                            $('[data-modal="partnership"]').removeClass('successful');
-                       }
+                  if(res.status==='success'){
+                     $('[data-modal="partnership"]').addClass('successful');
                   }
-                  $('.submit-partner').show();
-                   return false;
                 },
               });
         }
