@@ -47,27 +47,31 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                             </ul>
                         </div>
                         <div class="estimate">
-                            <a href="#" class="btn-add show-modal" data-modal="calculation"><span>Получить точную смету</span></a>
+                            <a href="#" class="btn-add show-modal"
+                               data-modal="calculation"><span>Получить точную смету</span></a>
                         </div>
                     </div>
                 </div>
                 <?= $this->render('_tabs', ['model' => $model]) ?>
-<!--                <div class="project-page--reviews">-->
-<!--                    <i class="icon icon-vk-reviews">-->
-<!--                        <svg xmlns="http://www.w3.org/2000/svg">-->
-<!--                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-vk-reviews"/>-->
-<!--                        </svg>-->
-<!--                    </i>-->
-<!--                    <span class="text">Живые отзывы клиентов Вконтакте</span>-->
-<!--                    <a href="--><?//= \modules\content\models\ContentBlock::getValue('vk_reviews') ?><!--"-->
-<!--                       class="read" target="_blank">Читать</a>-->
-<!--                </div>-->
-                <div class="project-page--about">
-                    <h3 class="title">О проекте</h3>
-                    <div class="text-box">
-                        <?= $model->description ?>
+                <!--                <div class="project-page--reviews">-->
+                <!--                    <i class="icon icon-vk-reviews">-->
+                <!--                        <svg xmlns="http://www.w3.org/2000/svg">-->
+                <!--                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-vk-reviews"/>-->
+                <!--                        </svg>-->
+                <!--                    </i>-->
+                <!--                    <span class="text">Живые отзывы клиентов Вконтакте</span>-->
+                <!--                    <a href="-->
+                <? //= \modules\content\models\ContentBlock::getValue('vk_reviews') ?><!--"-->
+                <!--                       class="read" target="_blank">Читать</a>-->
+                <!--                </div>-->
+                <?php if ($model->description): ?>
+                    <div class="project-page--about">
+                        <h3 class="title">О проекте</h3>
+                        <div class="text-box">
+                            <?= $model->description ?>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
