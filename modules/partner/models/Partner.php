@@ -8,17 +8,18 @@ use modules\shop\models\Category;
 /**
  * This is the model class for table "partner".
  *
- * @property int               $id
- * @property string            $url
- * @property int               $agent_id
- * @property int               $is_active
- * @property int               $is_deleted
- * @property string            $contract
- * @property string            $contacts
- * @property string            $email
- * @property string            $name
+ * @property int $id
+ * @property string $url
+ * @property int $agent_id
+ * @property int $is_active
+ * @property int $is_deleted
+ * @property int $send_notify
+ * @property string $contract
+ * @property string $contacts
+ * @property string $email
+ * @property string $name
  *
- * @property User              $agent
+ * @property User $agent
  * @property PartnerCategory[] $partnerCategories
  */
 class Partner extends \yii\db\ActiveRecord
@@ -45,7 +46,7 @@ class Partner extends \yii\db\ActiveRecord
             [['url', 'name', 'email', 'contacts', 'contract'], 'string', 'max' => 255],
             ['email', 'email'],
             ['agent_id', 'integer'],
-            [['is_active', 'is_deleted'], 'boolean'],
+            [['is_active', 'is_deleted', 'send_notify'], 'boolean'],
             [['agent_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['agent_id' => 'id']],
         ];
     }
@@ -56,14 +57,15 @@ class Partner extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'        => 'ID',
-            'url'       => 'Сайт',
-            'name'      => 'Название',
-            'email'     => 'Email для заявок',
-            'contacts'  => 'Контакты',
-            'contract'  => 'Номер договора',
-            'agent_id'  => 'Представитель',
-            'is_active' => 'Активен',
+            'id'          => 'ID',
+            'url'         => 'Сайт',
+            'name'        => 'Название',
+            'email'       => 'Email для заявок',
+            'contacts'    => 'Контакты',
+            'contract'    => 'Номер договора',
+            'agent_id'    => 'Представитель',
+            'is_active'   => 'Активен',
+            'send_notify' => 'Посылать уведомления',
         ];
     }
 
@@ -89,7 +91,7 @@ class Partner extends \yii\db\ActiveRecord
     public static function getUserList()
     {
         return Partner::find()->alias('p')
-            ->select(['p.name','u.id'])
+            ->select(['p.name', 'u.id'])
             ->innerJoin(User::tableName() . ' u', 'p.agent_id=u.id')
             ->where(['p.is_active' => Partner::IS_ACTIVE, 'p.is_deleted' => Partner::IS_NOT_DELETED])
             ->indexBy('id')

@@ -18,7 +18,7 @@
                 </i>
                 <?=\modules\content\models\ContentBlock::getValue('hot_line')?>
             </a>
-            <a href="#" class="btn-round-min">Консультация</a>
+            <a class="btn-round-min show-modal" data-modal="consultation">Консультация</a>
         </div>
         <div class="compare-sidebar--info">
             <div class="info-title">*Замена материала бесплатно</div>

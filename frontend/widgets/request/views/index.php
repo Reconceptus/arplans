@@ -101,7 +101,8 @@ $js = <<<JS
             $(element).closest('.form-row-element').removeClass(errorClass)
         },
         errorPlacement: $.noop,
-        submitHandler:function (form) {
+        submitHandler:function (form,e) {
+            e.preve
                 var data = $('#consultation-form');
                 formData = new FormData(data.get(0));
                 $.ajax({

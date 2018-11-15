@@ -4,12 +4,14 @@ namespace modules\api\v1\controllers;
 
 
 use common\models\Config;
+use common\models\Request;
 use common\models\User;
 use modules\shop\models\Cart;
 use modules\shop\models\Order;
 use modules\shop\models\Service;
 use Yii;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class CartController extends ActiveController
 {
@@ -137,7 +139,7 @@ class CartController extends ActiveController
             } else {
                 $user = Yii::$app->user->identity;
             }
-            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'],true);
+            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'], true);
             if ($order) {
                 $amount += $order->addItems($get['items']);
                 if (isset($get['services'])) {
@@ -154,6 +156,41 @@ class CartController extends ActiveController
         } catch (\Exception $e) {
             $transaction->rollBack();
             return ['status' => 'fail'];
+        }
+    }
+
+    public function actionHelp()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = new Request();
+        $post = Yii::$app->request->post();
+        if (isset($post['Request']['accept'])) {
+            $post['Request']['accept'] = 1;
+        };
+        $user = Yii::$app->user->identity;
+        /* @var $user User */
+        $partner = $user->partner;
+        if ($partner) {
+            $model->partner_id = $partner->id;
+        }
+        if ($model->load($post)) {
+            $file = UploadedFile::getInstance($model, 'file');
+            if ($model->save()) {
+                $mail = Yii::$app->mailer->compose('request', ['model' => $model])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo(Config::getValue('requestEmail'))
+                    ->setSubject(Request::TYPES[intval($model->type)]);
+                if ($partner->send_notify) {
+                    $mail->setCc([$user->email]);
+                }
+                if ($file) {
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
+                }
+                $mail->send();
+                return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
+            } else {
+                return ['status' => 'fail', 'message' => $model->getFirstErrors()];
+            }
         }
     }
 }
