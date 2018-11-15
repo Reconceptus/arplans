@@ -166,6 +166,12 @@ class CartController extends ActiveController
         $post = Yii::$app->request->post();
         if (isset($post['Request']['accept'])) {
             $post['Request']['accept'] = 1;
+        };
+        $user = Yii::$app->user->identity;
+        /* @var $user User */
+        $partner = $user->partner;
+        if ($partner) {
+            $model->partner_id = $partner->id;
         }
         if ($model->load($post)) {
             $file = UploadedFile::getInstance($model, 'file');
@@ -173,7 +179,10 @@ class CartController extends ActiveController
                 $mail = Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject('Заявка с сайта партнера');
+                    ->setSubject(Request::TYPES[intval($model->type)]);
+                if ($partner->send_notify) {
+                    $mail->setCc($user->email);
+                }
                 if ($file) {
                     $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
                 }
@@ -182,8 +191,6 @@ class CartController extends ActiveController
             } else {
                 return ['status' => 'fail', 'message' => $model->getFirstErrors()];
             }
-        } else {
-            var_dump($model->errors);
         }
     }
 }
