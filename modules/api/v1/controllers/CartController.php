@@ -181,7 +181,7 @@ class CartController extends ActiveController
                     ->setTo(Config::getValue('requestEmail'))
                     ->setSubject(Request::TYPES[intval($model->type)]);
                 if ($partner->send_notify) {
-                    $mail->setCc($user->email);
+                    $mail->setCc([$user->email]);
                 }
                 if ($file) {
                     $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
