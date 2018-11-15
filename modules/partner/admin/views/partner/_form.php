@@ -31,6 +31,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
             <?= $form->field($model, 'email') ?>
             <?= $form->field($model, 'contacts') ?>
             <?= $form->field($model, 'is_active')->checkbox() ?>
+            <?= $form->field($model, 'send_notify')->checkbox() ?>
             <?= $form->field($model, 'agent_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'username'), ['prompt' => '']) ?>
         </div>
         <div class="clearfix"></div>
