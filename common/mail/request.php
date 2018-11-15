@@ -31,7 +31,16 @@ $type = intval($model->type);
 <? else: ?>
     <p>Контактная информация: <?= $model->contact ?></p>
 <? endif; ?>
-<h2>Текст</h2>
-<p><?= $model->text ?></p>
-
-Запрос поступил со страницы <a href="<?= $model->url ?>"><?= $model->url ?></a>
+    <h2>Текст</h2>
+    <p><?= $model->text ?></p>
+<? if (intval($model->url)>0): ?>
+    <?
+    $item = \modules\shop\models\Item::findOne(intval($model->url));
+    ?>
+    <? if ($item): ?>
+        Смету треюуется посчитать на <a
+                href="<?= Yii::$app->request->getHostInfo() . '/shop/' . $item->category->slug . '/' . $item->slug ?>"><?= $item->name ?></a>
+    <? endif; ?>
+<? else: ?>
+    Запрос поступил со страницы <a href="<?= $model->url ?>"><?= $model->url ?></a>
+<? endif; ?>
