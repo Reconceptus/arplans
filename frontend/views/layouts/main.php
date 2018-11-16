@@ -18,6 +18,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <?php $this->registerMetaTag(['name' => 'og:image', 'content' => \modules\content\models\ContentBlock::getValue('share_image')]);?>
     <?php $this->head() ?>
 </head>
 <body>

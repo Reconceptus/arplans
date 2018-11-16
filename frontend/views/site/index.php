@@ -7,7 +7,6 @@ use yii\helpers\Url;
 $this->title = \modules\content\models\ContentBlock::getValue('main_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_description')]);
-$this->registerMetaTag(['name' => 'yandex-verification', 'content' => '1cffe0527a833bfc']);
 
 ?>
 <div class="section video-box">

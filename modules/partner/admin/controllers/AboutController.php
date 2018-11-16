@@ -69,6 +69,20 @@ class AboutController extends AdminController
             if (!$model->about_main_image && isset($post['old_image'])) {
                 $model->about_main_image = $post['old_image'];
             }
+            $share = UploadedFile::getInstance($model, 'share_image');
+            if ($share && $share->tempName) {
+                $model->share_image = $share;
+                if ($model->validate(['share_image'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'share.' . $model->share_image->extension;
+                    $model->share_image->saveAs($dir . '/' . $fileName);
+                    $model->share_image = '/uploads/village/item/' . $fileName;
+                }
+            }
+            if (!$model->share_image && isset($post['old_share_image'])) {
+                $model->share_image = $post['old_share_image'];
+            }
             $model->save();
             if (isset($post['new-benefits'])) {
                 $newBenefits = explode('~', $post['new-benefits']);

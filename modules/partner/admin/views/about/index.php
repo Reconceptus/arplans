@@ -25,10 +25,18 @@ $this->title = 'О компании';
     </div>
 <? endif; ?>
 <div class="clearfix"></div>
+<?= $form->field($model, 'share_image')->fileInput(['accept' => 'image/*']) ?>
+<? if ($model->share_image): ?>
+    <div class="image-admin-preview">
+        <?= Html::img($model->share_image, ['class' => 'img-admin']) ?>
+    </div>
+<? endif; ?>
+<div class="clearfix"></div>
 <br/>
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
+            <?= Html::hiddenInput('old_share_image', $model->share_image) ?>
             <?= Html::hiddenInput('old_image', $model->about_main_image) ?>
             <?= Html::hiddenInput('new-benefits', '', ['class' => 'new-benefits-input']) ?>
             <?= Html::hiddenInput('new-ready', '', ['class' => 'new-ready-input']) ?>
