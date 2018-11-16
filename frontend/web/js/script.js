@@ -22,7 +22,9 @@ $(function () {
                 if (data.fav === true) {
                     button.addClass('liked');
                 } else {
-                    button.removeClass('liked');
+                    if(button.hasClass('liked')) {
+                        button.removeClass('liked');
+                    }
                 }
                 if(data.message){
                     project.alertMessage(data.title, data.message)
