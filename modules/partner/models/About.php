@@ -9,9 +9,10 @@ use yii\web\NotFoundHttpException;
 
 /**
  *
- * @property int    $id
+ * @property int $id
  * @property string $about_title
  * @property string $about_main_image
+ * @property string $share_image
  * @property string $hot_line
  * @property string $phone
  * @property string $email
@@ -25,6 +26,7 @@ class About extends Model
 {
     public $about_title;
     public $about_main_image;
+    public $share_image;
     public $hot_line;
     public $phone;
     public $email;
@@ -41,7 +43,7 @@ class About extends Model
     {
         return [
             [['about_title', 'hot_line', 'phone', 'email', 'vk', 'vk_reviews', 'fb', 'instagram', 'main_office_address'], 'string', 'max' => 255],
-            [['about_main_image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
+            [['about_main_image', 'share_image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
         ];
     }
 
@@ -54,6 +56,7 @@ class About extends Model
             'id'                  => 'ID',
             'about_title'         => 'Заголовок "О нас"',
             'about_main_image'    => 'Фото на странице "О нас"',
+            'share_image'         => 'Фото для ссылок "поделиться страницей"',
             'hot_line'            => 'Телефон горячей линии',
             'phone'               => 'Телефон',
             'email'               => 'Email',
