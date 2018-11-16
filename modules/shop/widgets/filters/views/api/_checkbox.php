@@ -17,41 +17,37 @@
     <div class="catalog-filters--main show-more-hidden" style="display: block;">
         <? if ($catalog->columns_in_filter === 3): ?>
             <? $catalogItemsArray = \common\helpers\FormatHelper::divideArray($catalog->catalogItems, 3) ?>
-            <div class="form-row">
+            <div class="form-row col-lg-3">
                 <? foreach ($catalogItemsArray as $catalogItems): ?>
-                    <div class="form-row-col col-33">
-                        <? foreach ($catalogItems as $catalogItem): ?>
-                            <? $name = $catalog->id . '[' . $catalogItem->id . ']'; ?>
-                            <div class="form-row-element">
-                                <div class="check">
-                                    <label>
-                                        <input type="checkbox" class="filter-checkbox"
-                                               name="<?= $name ?>" <?= isset($checked[$catalogItem->id]) ? 'checked' : '' ?>>
-                                        <span><?= $catalogItem->name ?></span>
-                                    </label>
-                                </div>
+                    <? foreach ($catalogItems as $catalogItem): ?>
+                        <? $name = $catalog->id . '[' . $catalogItem->id . ']'; ?>
+                        <div class="form-row-element">
+                            <div class="check">
+                                <label>
+                                    <input type="checkbox" class="filter-checkbox"
+                                           name="<?= $name ?>" <?= isset($checked[$catalogItem->id]) ? 'checked' : '' ?>>
+                                    <span><?= $catalogItem->name ?></span>
+                                </label>
                             </div>
-                        <? endforeach; ?>
-                    </div>
+                        </div>
+                    <? endforeach; ?>
                 <? endforeach; ?>
             </div>
         <? elseif ($catalog->columns_in_filter === 2): ?>
-            <? $catalogItemsArray = \common\helpers\FormatHelper::divideArray($catalog->catalogItems, 3) ?>
-            <div class="form-row">
+            <? $catalogItemsArray = \common\helpers\FormatHelper::divideArray($catalog->catalogItems, 2) ?>
+            <div class="form-row col-lg-2">
                 <? foreach ($catalogItemsArray as $catalogItems): ?>
-                    <div class="form-row-col col-50">
-                        <? foreach ($catalogItems as $catalogItem): ?>
-                            <div class="form-row-element">
-                                <div class="check">
-                                    <label>
-                                        <input type="checkbox" class="filter-checkbox"
-                                               name="<?= $name ?>" <?= isset($checked[$catalogItem->id]) ? 'checked' : '' ?>>
-                                        <span><?= $catalogItem->name ?></span>
-                                    </label>
-                                </div>
+                    <? foreach ($catalogItems as $catalogItem): ?>
+                        <div class="form-row-element">
+                            <div class="check">
+                                <label>
+                                    <input type="checkbox" class="filter-checkbox"
+                                           name="<?= $name ?>" <?= isset($checked[$catalogItem->id]) ? 'checked' : '' ?>>
+                                    <span><?= $catalogItem->name ?></span>
+                                </label>
                             </div>
-                        <? endforeach; ?>
-                    </div>
+                        </div>
+                    <? endforeach; ?>
                 <? endforeach; ?>
             </div>
         <? else: ?>
@@ -69,4 +65,5 @@
             <? endforeach; ?>
         <? endif; ?>
     </div>
+
 </div>
