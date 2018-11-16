@@ -15,6 +15,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/styles.min.css',
         'css/common.css',
+        '//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,latin-ext',
+        '//fonts.googleapis.com/css?family=PT+Sans&amp;subset=cyrillic,cyrillic-ext,latin-ext'
     ];
     public $js = [
 //        'js/jquery.min.js',
