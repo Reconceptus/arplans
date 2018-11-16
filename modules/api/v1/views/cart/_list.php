@@ -14,7 +14,8 @@ $item = $model->item;
     <div class="compare-table--section">
         <div class="compare-table--part part-project">
             <a href="/shop/<?= $item->category->slug ?>/<?= $item->slug ?>" class="projects-item--preview">
-                <div class="bg" style="background-image: url('<?= $item->getMainImage() ?>')"></div>
+                <div class="bg"
+                     style="background-image: url('<?= Yii::$app->request->getHostInfo() . $item->getMainImage() ?>')"></div>
                 <span class="look">
                     <span class="look-alone data">смотреть</span>
                 </span>

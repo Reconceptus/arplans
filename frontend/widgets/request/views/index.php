@@ -17,11 +17,12 @@ use yii\widgets\ActiveForm;
             <span class="close">&times;</span>
             <h3 class="modal-title">Мы очень быстро свяжемся с вами</h3>
             <div class="modal-form consultation-form">
+                <div id="senden-cons"></div>
                 <? $form = ActiveForm::begin([
                     'action'  => '#',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
-                    'id'      => 'consultation-form'
+                    'id'      => 'consultation-form',
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_OTHER) ?>
@@ -101,8 +102,9 @@ $js = <<<JS
             $(element).closest('.form-row-element').removeClass(errorClass)
         },
         errorPlacement: $.noop,
-        submitHandler:function (form,e) {
-            e.preve
+        submitHandler:function (form) {
+            if(!$('#senden-cons').hasClass('senden')){
+                $('#senden-cons').addClass('senden');
                 var data = $('#consultation-form');
                 formData = new FormData(data.get(0));
                 $.ajax({
@@ -114,9 +116,12 @@ $js = <<<JS
                 success: function(res){
                   if(res.status==='success'){
                        $('[data-modal="consultation"]').addClass('successful');
+                       $('#senden-cons').removeClass('senden');
                   }
                 },
-              });
+            
+          });
+                }
         }
      });
 JS;

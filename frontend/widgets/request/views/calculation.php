@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
             <span class="close">&times;</span>
             <h3 class="modal-title">Получить смету</h3>
             <div class="modal-form">
+                <div id="senden-calc"></div>
                 <? $form = ActiveForm::begin([
                     'action'  => '#',
                     'method'  => 'post',
@@ -101,6 +102,8 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
+             if(!$('#senden-calc').hasClass('senden')){
+                $('#senden-calc').addClass('senden');
             var data = $('#calculation-form');
                 formData = new FormData(data.get(0));
                 $.ajax({
@@ -112,10 +115,12 @@ $js = <<<JS
                 success: function(res){
                   if(res.status==='success'){
                        $('[data-modal="calculation"]').addClass('successful');
+                       $('#senden-calc').removeClass('senden');
                   }
                   return false;
                 },
               });
+                }
         }
      });
 JS;
