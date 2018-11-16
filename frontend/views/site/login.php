@@ -85,9 +85,7 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           if (form.valid()){
                form.submit();
-           }
             return false;
         }
     })
