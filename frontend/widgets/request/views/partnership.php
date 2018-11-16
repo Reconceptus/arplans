@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
             <span class="close">&times;</span>
             <h3 class="modal-title">Запрос на сотрудничество</h3>
             <div class="modal-form">
+                <div id="senden-part"></div>
                 <? $form = ActiveForm::begin([
                     'action'  => '#',
                     'method'  => 'post',
@@ -101,6 +102,8 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
+              if(!$('#senden-part').hasClass('senden')){
+                $('#senden-part').addClass('senden');
             var data = $('#partnership-form');
                 formData = new FormData(data.get(0));
                 $.ajax({
@@ -112,9 +115,11 @@ $js = <<<JS
                 success: function(res){
                   if(res.status==='success'){
                      $('[data-modal="partnership"]').addClass('successful');
+                      $('#senden-part').removeClass('senden');
                   }
                 },
               });
+                }
         }
      });
 JS;
