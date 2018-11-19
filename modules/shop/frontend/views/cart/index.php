@@ -79,7 +79,7 @@ $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
         <div class="ready-projects--info">
 <!--            <h3 class="title">Безопасность при оплате</h3>-->
             <div class="info-box--text">
-                <?=\common\models\Config::getValue('cart_description')?>
+                <?=\modules\content\models\ContentBlock::getValue('cart_description')?>
             </div>
         </div>
     </div>

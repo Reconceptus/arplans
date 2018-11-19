@@ -97,7 +97,7 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
             <div class="ready-projects--info">
                 <h3 class="title">Клуб Арпланс</h3>
                 <div class="info-box--text">
-                    <?=\common\models\Config::getValue('builder_index_description')?>
+                    <?=\modules\content\models\ContentBlock::getValue('builder_index_description')?>
                 </div>
             </div>
         </div>

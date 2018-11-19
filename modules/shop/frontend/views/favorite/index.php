@@ -166,7 +166,7 @@ use yii\widgets\Pjax;
         <div class="ready-projects--info">
             <h3 class="title">Как сравнивать проекты</h3>
             <div class="info-box--text">
-                <?=\common\models\Config::getValue('favorite_description')?>
+                <?=\modules\content\models\ContentBlock::getValue('favorite_description')?>
             </div>
         </div>
     </div>
