@@ -164,7 +164,8 @@ $(function () {
             },
             success: function (data) {
                 if (data.status === 'success') {
-                    alert('Заказ оформлен');
+                    project.alertMessage('Заказ успешно оформлен');
+                    $('.compare-table--item').remove();
                 }
             }
         });
