@@ -199,8 +199,6 @@ class Order extends \yii\db\ActiveRecord
         $order->created_at = date('Y-m-d H:i:s');
         if ($order->save()) {
             return $order;
-        } else {
-            var_dump($order);
         }
         return null;
     }

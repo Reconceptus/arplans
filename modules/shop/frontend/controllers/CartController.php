@@ -138,6 +138,11 @@ class CartController extends Controller
             if ($order->save()) {
                 Cart::clearUserCart($user->id);
                 $transaction->commit();
+                Yii::$app->mailer->compose('new-order', ['model' => $order])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo($order->email)
+                    ->setSubject('Новый заказ на сайте ' . Yii::$app->request->getHostInfo())
+                    ->send();
                 return ['status' => 'success', 'orderId' => $order->id];
             }
         } catch (\Exception $e) {
