@@ -14,6 +14,7 @@ use yii\web\NotFoundHttpException;
  *
  * @property string $main_page_text
  * @property string $main_page_author
+ * @property string $main_page_description
  * @property string $main_page_video_1
  * @property string $main_page_video_2
  *
@@ -27,6 +28,7 @@ class Main extends Model
     public $main_page_offer_annotation;
     public $main_page_text;
     public $main_page_author;
+    public $main_page_description;
     public $main_page_video_1;
     public $main_page_video_2;
     public $main_page_seo_title;
@@ -39,7 +41,7 @@ class Main extends Model
     public function rules()
     {
         return [
-            [['main_page_offer', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords'], 'string', 'max' => 255],
+            [['main_page_offer', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords', 'main_page_description'], 'string', 'max' => 255],
             [['main_page_offer_annotation', 'main_page_text'], 'string'],
             [['main_page_video_1', 'main_page_video_2'], 'file'],
         ];
@@ -55,6 +57,7 @@ class Main extends Model
             'main_page_offer_annotation' => 'Пояснение к оферте',
             'main_page_text'             => 'Текст на главной',
             'main_page_author'           => 'Автор текста на главной',
+            'main_page_description'      => 'Описание внизу главной',
             'main_page_seo_title'        => 'SEO тайтл',
             'main_page_seo_description'  => 'SEO описание',
             'main_page_seo_keywords'     => 'SEO ключевые слова',
@@ -88,7 +91,8 @@ class Main extends Model
             if ($model) {
                 $model->text = $v;
                 if (!$model->save()) {
-                    var_dump($model);die;
+                    var_dump($model);
+                    die;
                     throw new Exception('Ошибка при сохранении');
                 }
             } else {
