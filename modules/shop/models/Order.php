@@ -74,7 +74,7 @@ class Order extends \yii\db\ActiveRecord
         if ($this->isNewRecord) {
             $this->created_at = date('Y-m-d H:i:s', time());
         } else {
-            if ($this->oldAttributes['status'] !== $this->status && $this->status != Order::STATUS_NEW) {
+            if ($this->oldAttributes['status'] != $this->status && $this->status != Order::STATUS_NEW) {
                 $mail = Yii::$app->mailer->compose('order-status-changed', ['model' => $this]);
                 $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                 $mail->setTo($this->email);
