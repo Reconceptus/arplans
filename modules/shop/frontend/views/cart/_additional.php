@@ -29,7 +29,7 @@ if ($services) {
                             <div class="add-service--main show-more-hidden" style="display: none">
                                 <div class="add-service--main-text">
                                     <p><?= $service->preview_text ?></p>
-                                    <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробней</a></p>
+                                    <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробнее</a></p>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ if ($services) {
                             <div class="add-service--main show-more-hidden" style="display: none">
                                 <div class="add-service--main-text">
                                     <p><?= $service->preview_text ?></p>
-                                    <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробней</a></p>
+                                    <p class="link"><a href="/shop/service/<?= $service->slug ?>">Подробнее</a></p>
                                 </div>
                             </div>
                         </div>

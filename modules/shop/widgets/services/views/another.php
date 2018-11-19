@@ -29,7 +29,7 @@
                                         <div class="add-service--main show-more-hidden">
                                             <div class="add-service--main-text">
                                                 <?=$model->preview_text?>
-                                                <p class="link"><a href="/shop/service/<?=$model->slug?>">Подробней</a></p>
+                                                <p class="link"><a href="/shop/service/<?=$model->slug?>">Подробнее</a></p>
                                             </div>
                                         </div>
                                     </div>
