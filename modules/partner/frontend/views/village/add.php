@@ -274,7 +274,7 @@
                                                 <div class="check">
                                                     <label>
                                                         <input type="checkbox" name="processing_agree">
-                                                        <span>Согласен на обработку персональных данных</span>
+                                                        <span>Согласен на <a href="/page/privacy">обработку персональных данных</a></span>
                                                     </label>
                                                 </div>
                                             </div>

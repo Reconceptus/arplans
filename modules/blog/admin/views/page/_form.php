@@ -22,17 +22,17 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 
 <? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
-    <?= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
+<!--    --><?//= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
     <?= $form->field($model, 'slug') ?>
-    <div class="preview-image-block" data-id="<?= $model->id ?>">
-        <?
-        if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
-            echo Html::img($model->image, ['class' => 'img-responsive preview-image']);
-            echo Html::button('удалить изображение', ['class' => 'btn btn-admin js-delete-preview-page']);
-        }
-        ?>
-        <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
-    </div>
+<!--    <div class="preview-image-block" data-id="--><?//= $model->id ?><!--">-->
+<!--        --><?//
+//        if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
+//            echo Html::img($model->image, ['class' => 'img-responsive preview-image']);
+//            echo Html::button('удалить изображение', ['class' => 'btn btn-admin js-delete-preview-page']);
+//        }
+//        ?>
+<!--        --><?//= $form->field($model, 'image')->fileInput(['accept' => 'image/*', 'id' => 'preview_image']) ?>
+<!--    </div>-->
 
     <?= $form->field($model, 'name') ?>
 
@@ -60,5 +60,5 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <? ActiveForm::end() ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Страница еще не опубликована' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
-    <?= Html::a('На сайт', Url::to('/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
+    <?= Html::a('На сайт', Url::to('/page/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>
 </div>

@@ -92,11 +92,11 @@ return [
                 'blog/test'                    => 'blog/post/test',
                 'blog/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/post/view',
                 'blog'                         => 'blog/post/index',
+                'page/<slug:[a-zA-Z0-9\_\-]+>' => 'blog/page/view',
 
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>'               => '<module>/<controller>/<action>',
                 '<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                                         => '<module>/<controller>',
                 '<module:[a-zA-Z0-9\_\-]+>'                                                                       => '<module>',
-                '<slug:[a-zA-Z0-9\_\-]+>'                                                                         => 'page/view',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>/<action:[a-zA-Z0-9\_\-]+>' => '<module>/<controller>/<action>',
                 'admin/modules/<module:[a-zA-Z0-9\_\-]+>/<controller:[a-zA-Z0-9\_\-]+>'                           => '<module>/<controller>',
                 'shop',
