@@ -92,5 +92,15 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
             </div>
         </div>
     </div>
+    <div class="section info-box ">
+        <div class="content content--md">
+            <div class="ready-projects--info">
+                <h3 class="title">Клуб Арпланс</h3>
+                <div class="info-box--text">
+                    <?=\common\models\Config::getValue('builder_index_description')?>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?= \frontend\widgets\recently\Recently::widget() ?>
