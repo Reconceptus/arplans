@@ -39,6 +39,7 @@
                         <li><?= \yii\helpers\Html::a('Коттеджные поселки', \yii\helpers\Url::to('/village')) ?></li>
                         <li><?= \yii\helpers\Html::a('Сотрудничество', \yii\helpers\Url::to('/collaboration')) ?></li>
                         <li><?= \yii\helpers\Html::a('Блог', \yii\helpers\Url::to('/blog')) ?></li>
+                        <li><?= \yii\helpers\Html::a('Политика конфиденциальности', \yii\helpers\Url::to('/page/privacy')) ?></li>
                     </ul>
                 </section>
             </div>

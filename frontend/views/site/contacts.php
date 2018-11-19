@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <div class="check">
                                                 <label>
                                                     <input type="checkbox" name="Request[accept]">
-                                                    <span>Согласен на обработку персональных данных</span>
+                                                    <span>Согласен на <a href="/page/privacy">обработку персональных данных</a></span>
                                                 </label>
                                             </div>
                                         </div>

@@ -145,7 +145,7 @@ class PageController extends AdminController
             } else {
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании страницы');
             }
-            return $this->redirect(Url::to(['admin/modules/blog/page/update', 'id' => $model->id]));
+            return $this->redirect(Url::to(['/admin/modules/blog/page/update', 'id' => $model->id]));
         }
 
         return $this->render('_form', [
