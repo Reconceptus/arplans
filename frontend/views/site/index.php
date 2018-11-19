@@ -123,7 +123,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
     <div class="content content--md">
         <div class="ready-projects--info">
             <div class="info-box--text">
-                <?=\common\models\Config::getValue('main_page_description')?>
+                <?=\modules\content\models\ContentBlock::getValue('main_page_description')?>
             </div>
         </div>
     </div>

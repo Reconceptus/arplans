@@ -64,7 +64,7 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
             <div class="ready-projects--info">
                 <h3 class="title">Котеджные поселки</h3>
                 <div class="info-box--text">
-                    <?=\common\models\Config::getValue('village_index_description')?>
+                    <?=\modules\content\models\ContentBlock::getValue('village_index_description')?>
                 </div>
             </div>
         </div>
