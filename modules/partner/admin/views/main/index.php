@@ -28,6 +28,7 @@ $this->title = 'Главная страница';
             <?= $form->field($model, 'main_page_offer_annotation')->textarea(['rows'=>4]) ?>
             <?= $form->field($model, 'main_page_text')->textarea(['rows'=>4]) ?>
             <?= $form->field($model, 'main_page_author')->dropDownList($users) ?>
+            <?= $form->field($model, 'main_page_description')->textarea(['rows'=>4]) ?>
             <?if($model->main_page_video_1):?>
             <video width="200" height="120" controls="controls">
                 <source src="<?=$model->main_page_video_1?>">
