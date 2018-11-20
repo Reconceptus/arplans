@@ -40,7 +40,7 @@ $price = $model->getPrice();
                             <?= Html::a('Скачать проект', \yii\helpers\Url::to(['/shop/download', 'id' => $model->id]), ['class' => 'btn-square-min', 'data-id' => $model->id]) ?>
                         <? endif; ?>
                     <? endif; ?>
-                    <a class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+                    <a href="javascript:void(0);" class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
