@@ -23,6 +23,9 @@
         <div class="compare-sidebar--info">
             <div class="info-title">*Замена материала бесплатно</div>
             <p>Укажите в заказе, что требуется изменение материала, мы свяжемся и уточним.</p>
+       <br/>
+            <div class="info-title">**Количество альбомов</div>
+            <p>Укажите количество и мы подготовим дополнительные пакеты документации. Стоимость доп. альбома <?=\common\models\Config::getValue('albumPrice')?> рублей</p>
         </div>
         <div class="compare-list">
             <ul>
