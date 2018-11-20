@@ -288,8 +288,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                             </div>
                             <div class="actions">
                                 <div class="reset">
-                                    <a href="/<?= \yii\helpers\Url::to(Yii::$app->request->getPathInfo()) ?>"
-                                       class="btn-reset">
+                                    <a class="btn-reset">
                                         <span>&times;</span>
                                         сбросить фильтр
                                     </a>
