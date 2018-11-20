@@ -154,6 +154,22 @@ class PageController extends AdminController
     }
 
     /**
+     * @param $id
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException]
+     */
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        if ($model) {
+            $model->delete();
+        }
+        return $this->redirect(Yii::$app->request->get('back'));
+    }
+
+    /**
      * Удаляет через ajax файл превью поста
      * @return array
      */
