@@ -31,13 +31,13 @@ $price = $model->getPrice();
                 <div class="actions">
                     <a class="btn-square-min basket <?= $isInCart ? 'incart' : '' ?>"
                        onclick="toCart(<?= $model->id ?>)" data-id="<?= $model->id ?>"><?= $isInCart ? 'Добавлен в корзину' : 'Купить проект' ?></a>
-                    <a href="javascript:void(0);" class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+                    <button type="button" class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xlink:href="#icon-heart"/>
                         </svg>
-                    </a>
+                    </button>
                 </div>
                 <? if ($price > 0): ?>
                     <div class="feature">
