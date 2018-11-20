@@ -293,9 +293,6 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                         сбросить фильтр
                                     </a>
                                 </div>
-                                <div class="submit">
-                                    <button class="btn-square-min">показать</button>
-                                </div>
                             </div>
                         </form>
                     </div>
