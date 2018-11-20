@@ -54,13 +54,13 @@ use modules\shop\models\Item;
             <div class="price"><?= $model->getPrice() ?>&#8381;
             </div>
         </div>
-        <a href="javascript:void(0);" class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+        <button type="button" class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
            data-id="<?= $model->id ?>">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                      xlink:href="#icon-heart-like"/>
             </svg>
-        </a>
+        </button>
         <a class="basket btn-small <?= $isInCart ? 'incart' : '' ?>" onclick="toCart(<?= $model->id ?>)"
            data-id="<?= $model->id ?>"><?= $isInCart ? 'в корзине' : 'в корзину' ?></a>
     </div>
