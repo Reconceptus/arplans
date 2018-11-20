@@ -36,12 +36,12 @@ $sort = Yii::$app->request->get('sort');
                     <div class="catalog">
                         <div class="catalog-header show-more-hidden">
                             <a href="<?= $dataProvider->sort->createUrl('cost') ?>"
-                               class="filter <?= $sort === '-cost' ? 'up' : 'down' ?>">
-                                По цене
+                               class="filter <?= $sort === '-cost' ? 'down' : $sort==='cost'? 'up':'' ?>">
+                                <?= $sort === '-cost' ? 'По убыванию цены' : $sort==='cost' ? 'По возрастанию цены':'По цене' ?>
                                 <i class="arrow"></i>
                             </a>
-                            <a href="<?= $dataProvider->sort->createUrl('common_area') ?>" class="filter <?= $sort === '-common_area' ? 'up' : 'down' ?>">
-                                По площади
+                            <a href="<?= $dataProvider->sort->createUrl('common_area') ?>" class="filter <?= $sort === '-common_area' ? 'down' : $sort === 'common_area' ? 'up':'' ?>">
+                                <?= $sort === '-common_area' ? 'По убыванию площади' : $sort === 'common_area' ? 'По возрастанию площади':'По площади'?>
                                 <i class="arrow"></i>
                             </a>
                         </div>
