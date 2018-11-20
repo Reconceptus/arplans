@@ -49,7 +49,7 @@
                                             <div class="price"><?= $model->getPrice() ?>&#8381;
                                             </div>
                                         </div>
-                                        <a class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
+                                        <a href="javascript:void(0);" class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                                            data-id="<?= $model->id ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg">
                                                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
