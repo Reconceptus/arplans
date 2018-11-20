@@ -288,7 +288,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                             </div>
                             <div class="actions">
                                 <div class="reset">
-                                    <a class="btn-reset">
+                                    <a class="btn-reset reset-filter">
                                         <span>&times;</span>
                                         сбросить фильтр
                                     </a>
