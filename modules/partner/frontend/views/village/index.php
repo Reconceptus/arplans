@@ -8,7 +8,7 @@
 
 /* @var $query */
 
-$this->title = 'Клуб АРПЛАНС: строители и материалы';
+$this->title = 'Клуб АРПЛАНС: коттеджные поселки';
 ?>
     <div class="section bg-head">
         <div class="content content--lg">
