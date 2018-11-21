@@ -26,7 +26,7 @@ class VillageController extends Controller
     public function actionIndex()
     {
         $get = Yii::$app->request->get();
-        $query = Village::getFilteredQuery($get);
+        $query = Village::getFilteredQuery($get)->orderBy(['sort' => SORT_DESC]);
         return $this->render('index', ['query' => $query]);
     }
 
