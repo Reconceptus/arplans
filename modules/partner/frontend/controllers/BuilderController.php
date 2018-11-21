@@ -23,7 +23,7 @@ class BuilderController extends Controller
     public function actionIndex()
     {
         $get = Yii::$app->request->get();
-        $query = Builder::getFilteredQuery($get);
+        $query = Builder::getFilteredQuery($get)->orderBy(['sort' => SORT_DESC]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);

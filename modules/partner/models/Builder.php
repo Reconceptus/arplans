@@ -43,6 +43,7 @@ use common\models\User;
  * @property int $any_region
  * @property int $is_office
  * @property int $no_page
+ * @property int $sort
  *
  * @property Region $region
  * @property BuilderImage $image
@@ -73,7 +74,7 @@ class Builder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'back_image_id', 'region_id', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region', 'is_office', 'no_page'], 'integer'],
+            [['image_id', 'back_image_id', 'region_id', 'sort', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region', 'is_office', 'no_page'], 'integer'],
             [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
@@ -133,6 +134,7 @@ class Builder extends \yii\db\ActiveRecord
 
             'lat' => 'Широта (в формате 55.555555)',
             'lng' => 'Долгота (в формате 55.555555)',
+            'sort' => 'Сортировка',
         ];
     }
 

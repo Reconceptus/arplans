@@ -43,6 +43,7 @@ use common\models\Region;
  * @property int              $reservoir
  * @property int              $is_office
  * @property int              $no_page
+ * @property int              $sort
  *
  * @property Region           $region
  * @property VillageImage     $image
@@ -72,7 +73,7 @@ class Village extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image_id', 'back_image_id', 'region_id', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
+            [['image_id', 'back_image_id', 'region_id', 'sort', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
             [['name', 'slug', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
@@ -131,6 +132,7 @@ class Village extends \yii\db\ActiveRecord
 
             'lat' => 'Широта (в формате 55.555555)',
             'lng' => 'Долгота (в формате 55.555555)',
+            'sort' => 'Сортировка',
         ];
     }
 
