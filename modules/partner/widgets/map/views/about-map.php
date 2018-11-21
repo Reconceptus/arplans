@@ -7,6 +7,8 @@
  */
 
 /* @var $models array */
+$coordinates = [];
+$icons = [];
 ?>
 <div data-map="offices-map">
     <? foreach ($models as $k => $model): ?>
