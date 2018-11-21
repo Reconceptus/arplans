@@ -47,11 +47,11 @@ class Region extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'slug' => 'Код',
-            'name' => 'Название',
-            'center' => 'Центр',
-            'sort' => 'Сортировка',
+            'id'        => 'ID',
+            'slug'      => 'Код',
+            'name'      => 'Название',
+            'center'    => 'Центр',
+            'sort'      => 'Сортировка',
             'is_active' => 'Активен',
         ];
     }
@@ -70,5 +70,18 @@ class Region extends \yii\db\ActiveRecord
     public function getVillages()
     {
         return $this->hasMany(Village::className(), ['region_id' => 'id']);
+    }
+
+    /**
+     * @param $id
+     * @return string|null
+     */
+    public static function getNameById($id)
+    {
+        $model = self::findOne(['id' => $id]);
+        if ($model) {
+            return $model->name;
+        }
+        return null;
     }
 }
