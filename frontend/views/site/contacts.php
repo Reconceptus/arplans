@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
+\yii\widgets\Pjax::begin();
 ?>
     <div class="section contact-page">
         <div class="content content--lg mobile-wide">
@@ -187,6 +188,9 @@ if ($partners): ?>
 
 <? endif; ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
+    <script>
+        initMap();
+    </script>
 <?php
 $js = <<<JS
        $('.contact-form form').validate({
@@ -239,3 +243,4 @@ $js = <<<JS
 JS;
 
 $this->registerJs($js);
+\yii\widgets\Pjax::end();

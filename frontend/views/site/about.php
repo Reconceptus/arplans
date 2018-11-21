@@ -10,7 +10,7 @@
 
 $this->title = 'О нас';
 $this->params['breadcrumbs'][] = $this->title;
-
+\yii\widgets\Pjax::begin();
 ?>
     <div class="section about--head">
         <div class="content content--lg mobile-wide">
@@ -115,8 +115,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <? endif; ?>
     <div class="big-header">
         <div class="content content--lg">
-            <h2 class="title">Офисы продаж</h2>
+            <h2 class="title" id="map-anchor">Офисы продаж</h2>
         </div>
     </div>
 <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
+<script>
+    initMap();
+    $('html,body').stop().animate({ scrollTop: $('#map-anchor').offset().top }, 1);
+</script>
+<? \yii\widgets\Pjax::end()?>
