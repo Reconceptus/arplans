@@ -118,6 +118,9 @@ class CatalogController extends AdminController
         if (!$model) {
             throw new NotFoundHttpException('Не найден параметр');
         }
+        if($model->load(Yii::$app->request->post())&&$model->validate()){
+            $model->save();
+        }
         return $this->render('_ci_form', ['model' => $model]);
     }
 
