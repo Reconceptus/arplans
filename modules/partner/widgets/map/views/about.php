@@ -8,6 +8,7 @@
 
 /* @var $query */
 /* @var $models array */
+$reg = Yii::$app->request->get('region');
 ?>
 <div class="map-box">
     <div class="content content--lg">
@@ -18,7 +19,7 @@
                         <div class="custom-search--field">
                             <div class="custom-search--inputs">
                                 <div class="input region-dropbox">
-                                    <input type="text" placeholder="Введите регион">
+                                    <input type="text" placeholder="Введите регион" value="<?=$reg?\common\models\Region::getNameById($reg):''?>">
                                     <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop']) ?>
                                 </div>
                                 <button class="submit">
