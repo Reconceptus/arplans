@@ -7,49 +7,50 @@ use common\models\Region;
 /**
  * This is the model class for table "village".
  *
- * @property int              $id
- * @property string           $name
- * @property string           $slug
- * @property string           $address
- * @property string           $phones
- * @property string           $url
- * @property string           $price_list
- * @property string           $logo
- * @property string           $lat
- * @property string           $lng
- * @property int              $image_id
- * @property int                $back_image_id
- * @property int              $region_id
- * @property int              $electric
- * @property int              $gas
- * @property string           $description
- * @property string           $seo_description
- * @property string           $seo_title
- * @property string           $seo_keywords
- * @property int              $water
- * @property int              $internet
- * @property int              $gas_boiler
- * @property int              $territory_control
- * @property int              $fire_alarm
- * @property int              $security_alarm
- * @property int              $shop
- * @property int              $children_club
- * @property int              $sports_center
- * @property int              $sports_ground
- * @property int              $golf_club
- * @property int              $beach
- * @property int              $life_service
- * @property int              $forest
- * @property int              $reservoir
- * @property int              $is_office
- * @property int              $no_page
- * @property int              $sort
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $address
+ * @property string $phones
+ * @property string $url
+ * @property string $email
+ * @property string $price_list
+ * @property string $logo
+ * @property string $lat
+ * @property string $lng
+ * @property int $image_id
+ * @property int $back_image_id
+ * @property int $region_id
+ * @property int $electric
+ * @property int $gas
+ * @property string $description
+ * @property string $seo_description
+ * @property string $seo_title
+ * @property string $seo_keywords
+ * @property int $water
+ * @property int $internet
+ * @property int $gas_boiler
+ * @property int $territory_control
+ * @property int $fire_alarm
+ * @property int $security_alarm
+ * @property int $shop
+ * @property int $children_club
+ * @property int $sports_center
+ * @property int $sports_ground
+ * @property int $golf_club
+ * @property int $beach
+ * @property int $life_service
+ * @property int $forest
+ * @property int $reservoir
+ * @property int $is_office
+ * @property int $no_page
+ * @property int $sort
  *
- * @property Region           $region
- * @property VillageImage     $image
- * @property VillageImage     $background
+ * @property Region $region
+ * @property VillageImage $image
+ * @property VillageImage $background
  * @property VillageBenefit[] $benefits
- * @property VillageImage[]   $images
+ * @property VillageImage[] $images
  */
 class Village extends \yii\db\ActiveRecord
 {
@@ -74,7 +75,7 @@ class Village extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'back_image_id', 'region_id', 'sort', 'electric', 'gas', 'water', 'internet', 'gas_boiler', 'territory_control', 'fire_alarm', 'security_alarm', 'shop', 'children_club', 'sports_center', 'sports_ground', 'golf_club', 'beach', 'life_service', 'forest', 'reservoir', 'is_office', 'no_page'], 'integer'],
-            [['name', 'slug', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
+            [['name', 'slug', 'email', 'address', 'phones', 'url', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
             [['lat', 'lng'], 'string', 'max' => 10],
@@ -100,6 +101,7 @@ class Village extends \yii\db\ActiveRecord
             'address'         => 'Адрес',
             'phones'          => 'Телефоны (через запятую)',
             'url'             => 'Сайт',
+            'email'           => 'Email',
             'price_list'      => 'Прайслист',
             'logo'            => 'Логотип',
             'image_id'        => 'Основное изображение',
@@ -130,8 +132,8 @@ class Village extends \yii\db\ActiveRecord
             'forest'    => 'Лесозона',
             'reservoir' => 'Водоем',
 
-            'lat' => 'Широта (в формате 55.555555)',
-            'lng' => 'Долгота (в формате 55.555555)',
+            'lat'  => 'Широта (в формате 55.555555)',
+            'lng'  => 'Долгота (в формате 55.555555)',
             'sort' => 'Сортировка',
         ];
     }
@@ -175,6 +177,7 @@ class Village extends \yii\db\ActiveRecord
     {
         return $this->hasOne(VillageImage::className(), ['id' => 'back_image_id']);
     }
+
     /**
      * @return mixed|string
      */

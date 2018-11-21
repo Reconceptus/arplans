@@ -19,12 +19,18 @@ $coordinates = [];
             }
             ?>
             <div class="partners-list--item map-item" data-item="builder<?= $model->id ?>">
-                    <figure class="bg" style="background-image: url(<?= $model->getMainImage() ?>)"></figure>
+                <figure class="bg" style="background-image: url(<?= $model->getMainImage() ?>)"></figure>
                 <a href="/village/<?= $model->slug ?>">
                     <div class="partners-list--data">
                         <div class="name"><?= $model->name ?></div>
                         <div class="address"><?= $model->address ?></div>
                         <div class="tel"><?= $model->phones ?></div>
+                        <? if ($model->email): ?>
+                            <div class="email"><?= $model->email ?></div>
+                        <? endif; ?>
+                        <? if ($model->url): ?>
+                            <div class="url"><?= $model->url ?></div>
+                        <? endif; ?>
                     </div>
                 </a>
                 <span class="close">&times;</span>

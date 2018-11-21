@@ -17,6 +17,12 @@
         </div>
         <div class="address"><?= $model->address ?></div>
         <div class="tel"><?= $model->phones ?></div>
+        <? if ($model->email): ?>
+            <div class="email"><?= $model->email ?></div>
+        <? endif; ?>
+        <? if ($model->url): ?>
+            <div class="url"><?= $model->url ?></div>
+        <? endif; ?>
         <a href="#" class="on-map">на карте</a>
     </div>
 </div>
