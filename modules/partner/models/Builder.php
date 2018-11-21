@@ -14,6 +14,7 @@ use common\models\User;
  * @property string $slug
  * @property string $address
  * @property string $phones
+ * @property string $email
  * @property string $price_list
  * @property string $logo
  * @property string $description
@@ -75,7 +76,7 @@ class Builder extends \yii\db\ActiveRecord
     {
         return [
             [['image_id', 'back_image_id', 'region_id', 'sort', 'glued_timber', 'profiled_timber', 'wooden_frame', 'lstk', 'carcass', 'combined', 'brick', 'block', 'finishing', 'santech', 'electric', 'wooden', 'stone', 'roof', 'windows', 'stretch_ceiling', 'surround_region', 'any_region', 'is_office', 'no_page'], 'integer'],
-            [['address', 'phones', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
+            [['address', 'phones', 'email', 'name', 'url', 'slug', 'seo_description', 'seo_title', 'seo_keywords'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['slug', 'name'], 'unique'],
             [['lat', 'lng'], 'string', 'max' => 10],
@@ -98,6 +99,7 @@ class Builder extends \yii\db\ActiveRecord
             'seo_title'       => 'Заголовок (SEO)',
             'seo_keywords'    => 'Ключевые слова (SEO)',
             'url'             => 'Сайт',
+            'email'           => 'Email',
             'slug'            => 'Код',
             'image_id'        => 'Основное изображение',
             'back_image_id'   => 'Фоновое изображение',
@@ -132,8 +134,8 @@ class Builder extends \yii\db\ActiveRecord
             'is_office'       => 'Офис продаж',
             'no_page'         => 'Не создавать страницу',
 
-            'lat' => 'Широта (в формате 55.555555)',
-            'lng' => 'Долгота (в формате 55.555555)',
+            'lat'  => 'Широта (в формате 55.555555)',
+            'lng'  => 'Долгота (в формате 55.555555)',
             'sort' => 'Сортировка',
         ];
     }

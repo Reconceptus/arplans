@@ -58,12 +58,13 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <div class="col-md-5">
             <?= $form->field($model, 'region_id')->dropDownList(ArrayHelper::map(Region::find()->all(), 'id', 'name'), ['prompt' => '']) ?>
             <?= $form->field($model, 'phones') ?>
+            <?= $form->field($model, 'email') ?>
             <?= $form->field($model, 'lat') ?>
-            <?= $form->field($model, 'sort') ?>
         </div>
         <div class="col-md-5">
             <?= $form->field($model, 'address') ?>
             <?= $form->field($model, 'url') ?>
+            <?= $form->field($model, 'sort') ?>
             <?= $form->field($model, 'lng') ?>
         </div>
         <div class="clearfix"></div>
