@@ -38,6 +38,11 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 
     <?= $form->field($model, 'is_active')->checkbox() ?>
 
+    <?= $form->field($model, 'seo_title') ?>
+
+    <?= $form->field($model, 'seo_description') ?>
+
+    <?= $form->field($model, 'seo_keywords') ?>
 </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>

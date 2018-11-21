@@ -17,6 +17,9 @@ use yii\widgets\ListView;
 /* @var $favorites array */
 /* @var $inCart array */
 $sort = Yii::$app->request->get('sort');
+$this->title = $category->seo_title;
+$this->registerMetaTag(['name' => 'keywords', 'content' => $category->seo_keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $category->seo_description]);
 ?>
 
     <div class="section bg-head">
