@@ -9,6 +9,7 @@
 /* @var $query */
 
 $this->title = 'Клуб АРПЛАНС: коттеджные поселки';
+\yii\widgets\Pjax::begin();
 ?>
     <div class="section bg-head">
         <div class="content content--lg">
@@ -70,3 +71,4 @@ $this->title = 'Клуб АРПЛАНС: коттеджные поселки';
         </div>
     </div>
 <?= \frontend\widgets\recently\Recently::widget() ?>
+<? \yii\widgets\Pjax::end(); ?>
