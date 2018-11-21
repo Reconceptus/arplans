@@ -60,6 +60,8 @@ class Village extends \yii\db\ActiveRecord
     const IS_DELETED = 1;
     const IS_NOT_DELETED = 0;
 
+    const PAGE_NEED = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -217,7 +219,8 @@ class Village extends \yii\db\ActiveRecord
         // Делаем выборку товаров
         $query = self::find()->alias('v')->distinct()
             ->andWhere(['v.is_active' => self::IS_ACTIVE])
-            ->andWhere(['v.is_deleted' => self::IS_NOT_DELETED]);
+            ->andWhere(['v.is_deleted' => self::IS_NOT_DELETED])
+            ->andWhere(['v.no_page' => self::PAGE_NEED]);
 
         // Фильтруем их по get параметрам
 
