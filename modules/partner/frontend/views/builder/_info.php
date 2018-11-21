@@ -9,7 +9,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $model \modules\partner\models\Builder*/
+/* @var $model \modules\partner\models\Builder */
 ?>
 <div class="section">
     <div class="content content--lg mobile-wide">
@@ -18,8 +18,8 @@ use yii\helpers\Url;
                 <div class="partner-page--info-table">
                     <div class="cell-logo">
                         <a class="logo"><img width="100" height="100"
-                                                                       src="<?= $model->logo ?>"
-                                                                       alt="<?= $model->name ?>"></a>
+                                             src="<?= $model->logo ?>"
+                                             alt="<?= $model->name ?>"></a>
                     </div>
                     <div class="cell cell-location">
                         <p><strong>Расположение</strong></p>
@@ -30,13 +30,13 @@ use yii\helpers\Url;
                         <?= $model->phones ?>
                     </div>
                     <div class="cell cell-contacts">
-                        <p>&nbsp;</p>
-                        <a href="<?=$model->url?>" target="_blank">сайт</a>
+                        <p><?= $model->email ?></p>
+                        <a href="<?= $model->url ?>" target="_blank">сайт</a>
                     </div>
                     <? if ($model->price_list) : ?>
                         <div class="cell cell-contacts">
                             <p><strong>Цены</strong></p>
-                            <?= Html::a('скачать прайс', Url::to($model->price_list),['target'=>'_blank']) ?>
+                            <?= Html::a('скачать прайс', Url::to($model->price_list), ['target' => '_blank']) ?>
                         </div>
                     <? endif; ?>
                 </div>

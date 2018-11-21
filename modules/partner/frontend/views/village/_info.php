@@ -30,7 +30,7 @@ use yii\helpers\Url;
                         <?= $model->phones ?>
                     </div>
                     <div class="cell cell-contacts">
-                        <p>&nbsp;</p>
+                        <p><?= $model->email ?></p>
                         <a href="<?=$model->url?>" target="_blank">сайт</a>
                     </div>
                     <? if ($model->price_list) : ?>
