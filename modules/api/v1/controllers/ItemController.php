@@ -55,7 +55,7 @@ class ItemController extends ActiveController
                     'defaultPageSize' => 24,
                 ],
             ]);
-            return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category, 'inCart' => $inCart]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : []];
+            return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category, 'inCart' => $inCart]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : [], 'category_id' => $category->id];
         } else {
             return ['status' => 'fail', 'message' => 'Ошибка получения данных'];
         }
