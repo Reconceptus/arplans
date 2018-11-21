@@ -23,7 +23,7 @@ class FromBlog extends Widget
         $models = Post::find()->where(['status' => Post::STATUS_PUBLISHED, 'on_main' => 1])->all();
         $tags = Tag::find()->alias('t')
             ->joinWith('posts')
-            ->where(['status' => Post::STATUS_PUBLISHED])->limit(10)->all();
+            ->where(['status' => Post::STATUS_PUBLISHED])->limit($this->limit)->all();
         $content = $this->render($this->viewName, ['models' => $models, 'tags' => $tags]);
         return $content;
     }
