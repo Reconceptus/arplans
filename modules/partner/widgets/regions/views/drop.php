@@ -13,6 +13,9 @@ if (isset($get['region'])) {
 ?>
 <div class="regions-drop">
     <ul>
+        <li>
+            <?= \yii\helpers\Html::a('Все регионы', \yii\helpers\Url::to(['', $get])) ?>
+        </li>
         <? foreach ($models as $model): ?>
             <li>
                 <?= \yii\helpers\Html::a($model->name, \yii\helpers\Url::to(['', $get, 'region' => $model->id])) ?>
