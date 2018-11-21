@@ -51,4 +51,4 @@ $this->title = $model->title;
             </div>
         </div>
     </div>
-<?= \modules\blog\widgets\tagposts\TagPosts::widget(['tag' => $model->tags ? $model->tags[0] : '']) ?>
+<?= \modules\blog\widgets\tagposts\TagPosts::widget(['tag' => $model->tags ? $model->tags[0] : '', 'postId'=>$model->id]) ?>
