@@ -191,6 +191,7 @@ if ($partners): ?>
     <script>
         initMap();
         project.regionDropBox();
+        project.customScroll();
     </script>
 <?php
 $js = <<<JS

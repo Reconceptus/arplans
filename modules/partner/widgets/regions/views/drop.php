@@ -48,7 +48,16 @@ if (isset($get['eco'])) {
 <div class="regions-drop">
     <ul>
         <li>
-            <?= \yii\helpers\Html::a('Все регионы', \yii\helpers\Url::to(['', 'build' => $build])) ?>
+            <?= \yii\helpers\Html::a('Все регионы', \yii\helpers\Url::to(['',
+                'build'    => $build,
+                'eco'      => $eco,
+                'networks' => $networks,
+                'safety'   => $safety,
+                'infra'    => $infra,
+                'works'    => $works,
+                'mat'      => $mat,
+                'reg'      => $reg,
+            ])) ?>
         </li>
         <? foreach ($models as $model): ?>
             <li>
