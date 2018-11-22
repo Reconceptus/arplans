@@ -71,6 +71,14 @@ $this->title = 'Сотрудничество';
 <div class="post-form">
     <?= $form->field($model, 'collaboration_manager')->dropDownList(\common\models\User::getAuthors()) ?>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <p style="font-weight: bold;">SEO</p>
+        <?= $form->field($model, 'collaboration_page_seo_title') ?>
+        <?= $form->field($model, 'collaboration_page_seo_description') ?>
+        <?= $form->field($model, 'collaboration_page_seo_keywords') ?>
+    </div>
+</div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
 <? ActiveForm::end() ?>
 

@@ -81,6 +81,14 @@ $this->title = 'О компании';
             </div>
         </form>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p style="font-weight: bold;">SEO</p>
+            <?= $form->field($model, 'about_page_seo_title') ?>
+            <?= $form->field($model, 'about_page_seo_description') ?>
+            <?= $form->field($model, 'about_page_seo_keywords') ?>
+        </div>
+    </div>
 
     <div class="buttons-panel">
         <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>

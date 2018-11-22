@@ -9,6 +9,9 @@
 /* @var $models \modules\shop\widgets\cart\Cart[] */
 /* @var $services \modules\shop\models\Service[] */
 /* @var $user \common\models\User */
+$this->title = \modules\content\models\ContentBlock::getValue('cart_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('cart_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('cart_page_seo_description')]);
 
 $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
 ?>

@@ -6,9 +6,10 @@
 /* @var $reviews \modules\partner\models\Reviews[] */
 /* @var $readyProjects \modules\partner\models\AboutReady[] */
 /* @var $query */
+$this->title = \modules\content\models\ContentBlock::getValue('about_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('about_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('about_page_seo_description')]);
 
-
-$this->title = 'О нас';
 $this->params['breadcrumbs'][] = $this->title;
 \yii\widgets\Pjax::begin();
 ?>

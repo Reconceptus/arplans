@@ -8,7 +8,10 @@
 
 /* @var $query */
 
-$this->title = 'Клуб АРПЛАНС: коттеджные поселки';
+$this->title = \modules\content\models\ContentBlock::getValue('village_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_description')]);
+
 \yii\widgets\Pjax::begin();
 ?>
     <div class="section bg-head">
