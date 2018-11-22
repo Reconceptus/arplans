@@ -124,7 +124,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
     initMap();
     $('html,body').stop().animate({ scrollTop: $('#map-anchor').offset().top }, 1);
-    project.regionDropBox();
-    project.customScroll();
+    if (typeof project !== 'undefined') {
+        project.regionDropBox();
+        project.customScroll();
+    }
 </script>
 <? \yii\widgets\Pjax::end()?>

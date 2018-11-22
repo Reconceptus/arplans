@@ -193,8 +193,10 @@ if ($partners): ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
     <script>
         initMap();
-        project.regionDropBox();
-        project.customScroll();
+        if (typeof project !== 'undefined') {
+            project.regionDropBox();
+            project.customScroll();
+        }
     </script>
 <?php
 $js = <<<JS
