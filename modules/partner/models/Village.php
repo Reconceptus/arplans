@@ -231,38 +231,38 @@ class Village extends \yii\db\ActiveRecord
         }
 
         if (isset($get['networks']) && is_array($get['networks'])) {
-            $build[] = 'or';
+            $networks[] = 'and';
             foreach ($get['networks'] as $k => $item) {
-                $build[] = ['v.' . $k => 1];
+                $networks[] = ['v.' . $k => 1];
             }
-            $query->andWhere($build);
+            $query->andWhere($networks);
             unset($get['networks']);
         }
 
         if (isset($get['safety']) && is_array($get['safety'])) {
-            $work[] = 'or';
+            $safety[] = 'and';
             foreach ($get['safety'] as $k => $item) {
-                $work[] = ['v.' . $k => 1];
+                $safety[] = ['v.' . $k => 1];
             }
-            $query->andWhere($work);
+            $query->andWhere($safety);
             unset($get['safety']);
         }
 
         if (isset($get['infra']) && is_array($get['infra'])) {
-            $mat[] = 'or';
+            $infra[] = 'and';
             foreach ($get['infra'] as $k => $item) {
-                $mat[] = ['v.' . $k => 1];
+                $infra[] = ['v.' . $k => 1];
             }
-            $query->andWhere($mat);
+            $query->andWhere($infra);
             unset($get['infra']);
         }
 
         if (isset($get['eco']) && is_array($get['eco'])) {
-            $mat[] = 'or';
+            $eco[] = 'and';
             foreach ($get['eco'] as $k => $item) {
-                $mat[] = ['v.' . $k => 1];
+                $eco[] = ['v.' . $k => 1];
             }
-            $query->andWhere($mat);
+            $query->andWhere($eco);
             unset($get['eco']);
         }
 

@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 /* @var $model \modules\partner\models\About */
 /* @var $partners \modules\partner\models\Partner[] */
 
-$this->title = 'Contact';
+$this->title = 'Контакты';
 $this->params['breadcrumbs'][] = $this->title;
 \yii\widgets\Pjax::begin();
 ?>
@@ -190,6 +190,7 @@ if ($partners): ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
     <script>
         initMap();
+        project.regionDropBox();
     </script>
 <?php
 $js = <<<JS
