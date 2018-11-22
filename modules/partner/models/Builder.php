@@ -62,6 +62,7 @@ class Builder extends \yii\db\ActiveRecord
     const IS_NOT_DELETED = 0;
 
     const PAGE_NEED = 0;
+    const IS_OFFICE = 1;
 
     /**
      * {@inheritdoc}

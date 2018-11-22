@@ -34,7 +34,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                                         <div class="custom-search--inputs">
                                             <div class="input region-dropbox">
                                                 <input type="text" placeholder="Введите название населенного пункта">
-                                                <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop']) ?>
+                                                <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type'=>'village']) ?>
                                             </div>
                                             <button class="submit">
                                                 <svg xmlns="http://www.w3.org/2000/svg">
