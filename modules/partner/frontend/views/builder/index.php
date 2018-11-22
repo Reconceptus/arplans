@@ -105,4 +105,8 @@ $this->title = 'Клуб АРПЛАНС: строители и материал�
 </div>
 
 <?= \frontend\widgets\recently\Recently::widget() ?>
+<script>
+    project.regionDropBox();
+    project.showMore()
+</script>
 <? \yii\widgets\Pjax::end(); ?>

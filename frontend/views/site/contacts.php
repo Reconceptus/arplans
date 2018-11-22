@@ -190,6 +190,7 @@ if ($partners): ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
     <script>
         initMap();
+        project.regionDropBox();
     </script>
 <?php
 $js = <<<JS

@@ -71,5 +71,9 @@ $this->title = 'Клуб АРПЛАНС: коттеджные поселки';
         </div>
     </div>
 <?= \frontend\widgets\recently\Recently::widget() ?>
-<script>initMap()</script>
+<script>
+    initMap();
+    project.regionDropBox();
+    project.showMore();
+</script>
 <? \yii\widgets\Pjax::end(); ?>
