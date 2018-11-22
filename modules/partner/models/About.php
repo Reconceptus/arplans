@@ -21,6 +21,9 @@ use yii\web\NotFoundHttpException;
  * @property string $fb
  * @property string $instagram
  * @property string $main_office_address
+ * @property string $about_page_seo_description
+ * @property string $about_page_seo_title
+ * @property string $about_page_seo_keywords
  */
 class About extends Model
 {
@@ -35,6 +38,9 @@ class About extends Model
     public $fb;
     public $instagram;
     public $main_office_address;
+    public $about_page_seo_description;
+    public $about_page_seo_title;
+    public $about_page_seo_keywords;
 
     /**
      * {@inheritdoc}
@@ -42,7 +48,7 @@ class About extends Model
     public function rules()
     {
         return [
-            [['about_title', 'hot_line', 'phone', 'email', 'vk', 'vk_reviews', 'fb', 'instagram', 'main_office_address'], 'string', 'max' => 255],
+            [['about_page_seo_keywords', 'about_page_seo_title', 'about_page_seo_description', 'about_title', 'hot_line', 'phone', 'email', 'vk', 'vk_reviews', 'fb', 'instagram', 'main_office_address'], 'string', 'max' => 255],
             [['about_main_image', 'share_image'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
         ];
     }
@@ -53,18 +59,21 @@ class About extends Model
     public function attributeLabels()
     {
         return [
-            'id'                  => 'ID',
-            'about_title'         => 'Заголовок "О нас"',
-            'about_main_image'    => 'Фото на странице "О нас"',
-            'share_image'         => 'Фото для ссылок "поделиться страницей"',
-            'hot_line'            => 'Телефон горячей линии',
-            'phone'               => 'Телефон',
-            'email'               => 'Email',
-            'vk'                  => 'Вконтакте',
-            'vk_reviews'          => 'Отзывы Вконтакте',
-            'fb'                  => 'Facebook',
-            'instagram'           => 'Instagram',
-            'main_office_address' => 'Адрес главного оффиса',
+            'id'                         => 'ID',
+            'about_title'                => 'Заголовок "О нас"',
+            'about_main_image'           => 'Фото на странице "О нас"',
+            'share_image'                => 'Фото для ссылок "поделиться страницей"',
+            'hot_line'                   => 'Телефон горячей линии',
+            'phone'                      => 'Телефон',
+            'email'                      => 'Email',
+            'vk'                         => 'Вконтакте',
+            'vk_reviews'                 => 'Отзывы Вконтакте',
+            'fb'                         => 'Facebook',
+            'instagram'                  => 'Instagram',
+            'about_page_seo_keywords'    => 'Seo keywords',
+            'about_page_seo_title'       => 'Seo title',
+            'about_page_seo_description' => 'Seo description',
+            'main_office_address'        => 'Адрес главного оффиса',
         ];
     }
 

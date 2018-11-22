@@ -30,7 +30,8 @@ class CompilationController extends Controller
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
-            'name'         => $name
+            'name'         => $name,
+            'type'         => 'new'
         ]);
     }
 
@@ -46,7 +47,8 @@ class CompilationController extends Controller
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
-            'name'         => $name
+            'name'         => $name,
+            'type'         => 'discount'
         ]);
     }
 
@@ -62,7 +64,8 @@ class CompilationController extends Controller
             'dataProvider' => $dataProvider,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'description'  => $description,
-            'name'         => $name
+            'name'         => $name,
+            'type'         => 'free'
         ]);
     }
 }

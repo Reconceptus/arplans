@@ -9,7 +9,9 @@
 /* @var $model \modules\partner\models\Collaboration */
 /* @var $manager \common\models\Profile */
 $manager = $model->getManager();
-
+$this->title = \modules\content\models\ContentBlock::getValue('collaboration_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('collaboration_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('collaboration_page_seo_description')]);
 ?>
 
     <div class="section collaborate-head">

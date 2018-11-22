@@ -13,9 +13,13 @@ use yii\widgets\ListView;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $favorites array */
 /* @var string $name */
+/* @var string $type */
 /* @var string $description */
-$this->title = $name;
-$this->registerMetaTag(['name' => 'description', 'content' => $description]);
+
+$this->title = \modules\content\models\ContentBlock::getValue($type.'_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue($type.'_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue($type.'_page_seo_description')]);
+
 ?>
 
 

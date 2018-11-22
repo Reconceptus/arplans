@@ -12,6 +12,10 @@ use yii\widgets\Pjax;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $sizeCatalog \modules\shop\models\Catalog */
 /* @var $inCart array */
+$this->title = \modules\content\models\ContentBlock::getValue('favorite_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('favorite_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('favorite_page_seo_description')]);
+
 ?>
 <div class="section compare compare-page">
     <div class="content content--lg">

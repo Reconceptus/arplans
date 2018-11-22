@@ -11,6 +11,9 @@ use yii\widgets\ActiveForm;
 /* @var $model \modules\partner\models\About */
 /* @var $partners \modules\partner\models\Partner[] */
 
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('about_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('about_page_seo_description')]);
+
 $this->title = 'Контакты';
 $this->params['breadcrumbs'][] = $this->title;
 \yii\widgets\Pjax::begin();

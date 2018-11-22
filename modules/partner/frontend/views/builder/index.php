@@ -11,7 +11,10 @@ use yii\widgets\ListView;
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-$this->title = 'Клуб АРПЛАНС: строители и материалы';
+$this->title = \modules\content\models\ContentBlock::getValue('builder_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_description')]);
+
 \yii\widgets\Pjax::begin();
 ?>
 
