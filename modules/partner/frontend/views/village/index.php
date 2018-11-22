@@ -76,7 +76,9 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <script>
     initMap();
-    project.regionDropBox();
-    project.showMore();
+    if (typeof project !== 'undefined') {
+        project.regionDropBox();
+        project.showMore();
+    }
 </script>
 <? \yii\widgets\Pjax::end(); ?>
