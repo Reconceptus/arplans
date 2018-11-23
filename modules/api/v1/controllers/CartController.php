@@ -139,7 +139,8 @@ class CartController extends ActiveController
                 if ($order) {
                     $amount += $order->addItems($get['items']);
                     if (isset($get['services'])) {
-                        $amount += $order->addServices($get['services']);
+//                        $amount +=
+                            $order->addServices($get['services']);
                     }
                 }
                 $order->price = $amount;
