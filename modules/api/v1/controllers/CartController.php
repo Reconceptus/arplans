@@ -130,36 +130,34 @@ class CartController extends ActiveController
         $info = $get['info'];
         $amount = 0;
         $connection = Yii::$app->db;
-        $transaction = $connection->beginTransaction();
-        try {
-            if (Yii::$app->user->isGuest) {
-                $password = Yii::$app->security->generateRandomString(8);
-                $user = User::createUser($info['email'], $password, $info['fio'], $info['phone'], $info['country'], $info['city'], $info['address']);
-                User::sendRegLetter($user);
-            } else {
-                $user = Yii::$app->user->identity;
-            }
-            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'], true);
-            if ($order) {
-                $amount += $order->addItems($get['items']);
-                if (isset($get['services'])) {
-                    $amount += $order->addServices($get['services']);
+        $user = Yii::$app->user->identity;
+        /* @var $user User*/
+        if($user->partner->is_active === 1 && $user->partner->is_deleted == 0) {
+            $transaction = $connection->beginTransaction();
+            try {
+                $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'], true);
+                if ($order) {
+                    $amount += $order->addItems($get['items']);
+                    if (isset($get['services'])) {
+                        $amount += $order->addServices($get['services']);
+                    }
                 }
+                $order->price = $amount;
+                $order->type = Order::TYPE_API;
+                if ($order->save()) {
+                    Cart::clearUserCartByGuid($get['guid']);
+                    $transaction->commit();
+                    $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
+                    $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
+                    $mail->setTo($order->email);
+                    $mail->setSubject('Новый заказ');
+                    $mail->send();
+                    return ['status' => 'success', 'orderId' => $order->id];
+                }
+            } catch (\Exception $e) {
+                $transaction->rollBack();
             }
-            $order->price = $amount;
-            $order->type = Order::TYPE_API;
-            if ($order->save()) {
-                Cart::clearUserCartByGuid($get['guid']);
-                $transaction->commit();
-                $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
-                $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
-                $mail->setTo($order->email);
-                $mail->setSubject('Новый заказ');
-                $mail->send();
-                return ['status' => 'success', 'orderId' => $order->id];
-            }
-        } catch (\Exception $e) {
-            $transaction->rollBack();
+        }else{
             return ['status' => 'fail'];
         }
     }
