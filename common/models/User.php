@@ -258,6 +258,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user->username = $email;
         $user->setPassword($password);
         $user->generateAuthKey();
+        $user->status = 10;
         if ($user->save()) {
             $profile = new Profile();
             $profile->user_id = $user->id;
