@@ -16,4 +16,5 @@
 }
 .catalog-header .up .arrow, .catalog-header .down .arrow{
     position: relative;
+    display: block;
 }
