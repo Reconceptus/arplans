@@ -10,7 +10,7 @@ use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-
+$reg = Yii::$app->request->get('region');
 $this->title = \modules\content\models\ContentBlock::getValue('builder_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_description')]);
@@ -37,8 +37,10 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                                 <div class="custom-search--field">
                                     <div class="custom-search--inputs">
                                         <div class="input region-dropbox">
-                                            <input type="text" placeholder="Введите название населенного пункта">
-                                            <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type'=>'builder']) ?>
+                                            <input type="text"
+                                                   value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>"
+                                                   placeholder="Введите название населенного пункта">
+                                            <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type' => 'builder']) ?>
                                         </div>
                                         <button class="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg">
