@@ -151,6 +151,11 @@ class CartController extends ActiveController
             if ($order->save()) {
                 Cart::clearUserCartByGuid($get['guid']);
                 $transaction->commit();
+                $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
+                $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
+                $mail->setTo($order->email);
+                $mail->setSubject('Новый заказ');
+                $mail->send();
                 return ['status' => 'success', 'orderId' => $order->id];
             }
         } catch (\Exception $e) {
