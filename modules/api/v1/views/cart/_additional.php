@@ -11,7 +11,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
 ?>
 <div class="basket-form--section">
     <section class="basket-form--additional filter-form">
-        <h2 class="title title-sm">2. Выберите дополнительные услуги</h2>
+        <h2 class="title title-sm">2. Запрос на дополнительные услуги</h2>
         <div class="add-service--list">
             <div class="add-service--part">
                 <? foreach ($services[0] as $service): ?>
@@ -20,7 +20,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             <div class="check">
                                 <label>
                                     <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                    <span><span class="service-name"><?=$service->name?></span>, <span class="service-price"><?=$service->price?></span> &nbsp;&nbsp;&#8381;</span>
+                                    <span><span class="service-name"><?=$service->name?></span> <span class="service-price" style="display: none">0</span></span>
                                 </label>
                             </div>
                             <span class="show-more"></span>
