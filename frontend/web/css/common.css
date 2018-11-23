@@ -11,10 +11,8 @@
     color: #3466dd;
 }
 .catalog-header .filter .arrow{
-    position: unset;
     display: none;
 }
 .catalog-header .up .arrow, .catalog-header .down .arrow{
-    position: relative;
     display: block;
 }
