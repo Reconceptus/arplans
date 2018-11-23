@@ -23,7 +23,7 @@ $totalSum = 0;
                     <div class="form-row-element">
                         <div class="input">
                             <input type="text" placeholder="*Ф.И.О." name="name"
-                                   value="<?= $user && $user->profile->fio ? $user->profile->fio : mb_substr($this->last_name . ' ' . $this->first_name . ' ' . $this->patronymic, 0, 254) ?>" id="order-fio">
+                                   value="<?= $user && $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>" id="order-fio">
                         </div>
                     </div>
                     <div class="form-row-element">
