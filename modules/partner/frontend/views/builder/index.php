@@ -39,7 +39,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                                         <div class="input region-dropbox">
                                             <input type="text"
                                                    value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>"
-                                                   placeholder="Введите название населенного пункта">
+                                                   placeholder="Выберите регион">
                                             <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type' => 'builder']) ?>
                                         </div>
                                         <button class="submit">

@@ -35,7 +35,7 @@ $mapSelected = boolval(Yii::$app->request->get('selector'));
                                 <div class="custom-search--field">
                                     <div class="custom-search--inputs">
                                         <div class="input region-dropbox">
-                                            <input type="text" value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>" placeholder="Введите название населенного пункта">
+                                            <input type="text" value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>" placeholder="Выберите регион">
                                             <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type' => 'village', 'selector' => 1]) ?>
                                         </div>
                                         <button class="submit">
