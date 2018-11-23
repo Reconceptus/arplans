@@ -113,6 +113,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
         project.regionDropBox();
         project.showMore();
         project.mapMarkers();
+        project.fixedSidebar();
     }
 </script>
 <? \yii\widgets\Pjax::end(); ?>
