@@ -50,7 +50,7 @@ class ProfileController extends Controller
             throw new NotFoundHttpException();
         }
         /* @var $user User */
-        $models = Order::find()->where(['user_id' => Yii::$app->user->id, 'type' => Order::TYPE_SHOP])->all();
+        $models = Order::find()->where(['user_id' => Yii::$app->user->id, 'type' => Order::TYPE_SHOP])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('orders', ['models' => $models]);
     }
 
