@@ -242,6 +242,7 @@ class Order extends \yii\db\ActiveRecord
                 $orderItem->price = $price;
                 if (intval($item['change'])) {
                     $orderItem->comment = 'Требуется изменить материал';
+                    $orderItem->change_material = 1;
                 }
                 if ($orderItem->save()) {
                     $amount += $price;
