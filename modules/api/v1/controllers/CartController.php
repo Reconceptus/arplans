@@ -131,8 +131,8 @@ class CartController extends ActiveController
         $amount = 0;
         $connection = Yii::$app->db;
         $user = Yii::$app->user->identity;
-        /* @var $user User*/
-        if($user->partner->is_active === 1 && $user->partner->is_deleted == 0) {
+        /* @var $user User */
+        if ($user->partner->is_active === 1 && $user->partner->is_deleted == 0) {
             $transaction = $connection->beginTransaction();
             try {
                 $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village'], true);
@@ -140,10 +140,11 @@ class CartController extends ActiveController
                     $amount += $order->addItems($get['items']);
                     if (isset($get['services'])) {
 //                        $amount +=
-                            $order->addServices($get['services']);
+                        $order->addServices($get['services']);
                     }
                 }
                 $order->price = $amount;
+                $order->partner_percent = $amount / 100 * floatval(Config::getValue('partner_percent'));
                 $order->type = Order::TYPE_API;
                 if ($order->save()) {
                     Cart::clearUserCartByGuid($get['guid']);
@@ -158,7 +159,7 @@ class CartController extends ActiveController
             } catch (\Exception $e) {
                 $transaction->rollBack();
             }
-        }else{
+        } else {
             return ['status' => 'fail'];
         }
     }

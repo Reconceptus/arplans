@@ -32,7 +32,7 @@ $this->title = 'Мои продажи';
                                 <td><?= date('d.m.Y', strtotime($model->created_at)) ?></td>
                                 <td><?= $model->id ?></td>
                                 <td><?= $model->price ?></td>
-                                <td><?= $model->price / 100 * 5 ?></td>
+                                <td><?= $model->partner_percent ?></td>
                                 <td><?= $model->payment_status ? 'Оплачено' : 'Не оплачено' ?></td>
                             </tr>
                         <? endforeach; ?>
