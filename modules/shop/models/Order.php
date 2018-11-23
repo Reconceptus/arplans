@@ -27,6 +27,7 @@ use yii\helpers\Html;
  * @property int $payment_id
  * @property int $type
  * @property string $price Цена только товаров, без допуслуг
+ * @property string $partner_percent
  * @property string $created_at
  * @property string $updated_at
  *
@@ -94,7 +95,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'status', 'payment_id', 'payment_status'], 'integer'],
-            [['price'], 'number'],
+            [['price', 'partner_percent'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['comment', 'village'], 'string', 'max' => 800],
             [['fio', 'country', 'city', 'address', 'track'], 'string', 'max' => 255],
@@ -110,23 +111,24 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'             => 'ID',
-            'user_id'        => 'Покупатель',
-            'status'         => 'Статус',
-            'comment'        => 'Комментарий (виден только админу)',
-            'fio'            => 'ФИО',
-            'phone'          => 'Телефон',
-            'email'          => 'Email',
-            'country'        => 'Страна',
-            'city'           => 'Город',
-            'address'        => 'Адрес',
-            'village'        => 'Дополнительная информация',
-            'payment_id'     => 'Платежная система',
-            'price'          => 'Цена',
-            'track'          => 'Код отслеживания',
-            'created_at'     => 'Дата',
-            'payment_status' => 'Статус партнерского вознаграждения',
-            'updated_at'     => 'Updated At',
+            'id'              => 'ID',
+            'user_id'         => 'Покупатель',
+            'status'          => 'Статус',
+            'comment'         => 'Комментарий (виден только админу)',
+            'fio'             => 'ФИО',
+            'phone'           => 'Телефон',
+            'email'           => 'Email',
+            'country'         => 'Страна',
+            'city'            => 'Город',
+            'address'         => 'Адрес',
+            'village'         => 'Дополнительная информация',
+            'payment_id'      => 'Платежная система',
+            'price'           => 'Цена',
+            'partner_percent' => 'Отчисление партнеру',
+            'track'           => 'Код отслеживания',
+            'created_at'      => 'Дата',
+            'payment_status'  => 'Статус партнерского вознаграждения',
+            'updated_at'      => 'Updated At',
         ];
     }
 
