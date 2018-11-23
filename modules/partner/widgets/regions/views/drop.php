@@ -6,6 +6,7 @@
  * Time: 11:22
  */
 /* @var $models \common\models\Region[] */
+/* @var $selector */
 $get = Yii::$app->request->resolve()[1];
 // Для строителей
 $build = [];
@@ -57,7 +58,7 @@ if (isset($get['eco'])) {
                 'works'    => $works,
                 'mat'      => $mat,
                 'reg'      => $reg,
-            ])) ?>
+            ]), ['class' => 'js-region-selector']) ?>
         </li>
         <? foreach ($models as $model): ?>
             <li>
@@ -71,7 +72,7 @@ if (isset($get['eco'])) {
                     'works'    => $works,
                     'mat'      => $mat,
                     'reg'      => $reg,
-                ])) ?>
+                ]), ['class' => 'js-region-selector']) ?>
             </li>
         <? endforeach; ?>
     </ul>

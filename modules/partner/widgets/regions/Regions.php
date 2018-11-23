@@ -18,6 +18,7 @@ class Regions extends Widget
 {
     public $viewName = 'drop';
     public $type = 'about';
+    public $selector = 0;
 
     public function run()
     {
@@ -38,6 +39,6 @@ class Regions extends Widget
                 ->where(['v.is_office' => Village::IS_OFFICE, 'v.is_active' => Village::IS_ACTIVE, 'v.is_deleted' => Village::IS_NOT_DELETED]);
             $query = $query1->union($query2);
         }
-        return $this->render($this->viewName, ['models' => $query->all()]);
+        return $this->render($this->viewName, ['models' => $query->all(), 'selector' => $this->selector]);
     }
 }
