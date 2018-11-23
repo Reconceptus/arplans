@@ -295,7 +295,7 @@ $(function () {
         var container = button.closest('.benefit-form');
         var name = container.find('.benefit-title').val();
         var text = container.find('.benefit-text').val();
-        if (name && text) {
+        if (name) {
             var data = $('.new-benefits-input').attr("value");
             data += '~' + name + '|' + text;
             $('.new-benefits-input').attr('value', data);

@@ -196,6 +196,7 @@ if ($partners): ?>
         if (typeof project !== 'undefined') {
             project.regionDropBox();
             project.customScroll();
+            project.mapMarkers();
         }
     </script>
 <?php
