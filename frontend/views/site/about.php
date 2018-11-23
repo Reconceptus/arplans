@@ -127,6 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
     if (typeof project !== 'undefined') {
         project.regionDropBox();
         project.customScroll();
+        project.mapMarkers();
     }
 </script>
 <? \yii\widgets\Pjax::end()?>

@@ -112,6 +112,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
     if (typeof project !== 'undefined') {
         project.regionDropBox();
         project.showMore();
+        project.mapMarkers();
     }
 </script>
 <? \yii\widgets\Pjax::end(); ?>
