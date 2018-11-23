@@ -117,6 +117,7 @@ $(function () {
 
     $(document).on('click', '.js-order', function () {
         var button = $(this);
+        button.hide();
         var items = [];
         var services = [];
         var reEmail = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,5}$/i;
@@ -165,7 +166,9 @@ $(function () {
             success: function (data) {
                 if (data.status === 'success') {
                     project.alertMessage('Заказ успешно оформлен');
-                    $('.compare-table--item').remove();
+                    window.location.reload();
+                }else{
+                    button.show();
                 }
             }
         });
