@@ -125,7 +125,7 @@ class Order extends \yii\db\ActiveRecord
             'price'          => 'Цена',
             'track'          => 'Код отслеживания',
             'created_at'     => 'Дата',
-            'payment_status' => 'Статус оплаты',
+            'payment_status' => 'Статус партнерского вознаграждения',
             'updated_at'     => 'Updated At',
         ];
     }
