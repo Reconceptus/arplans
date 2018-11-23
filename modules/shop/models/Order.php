@@ -266,7 +266,8 @@ class Order extends \yii\db\ActiveRecord
                 $orderService = new OrderService();
                 $orderService->order_id = $this->id;
                 $orderService->service_id = $service->id;
-                $orderService->price = $service->price;
+//                $orderService->price = $service->price;
+                $orderService->price = 0;
                 if ($orderService->save()) {
                     $amount += $service->price;
                 }

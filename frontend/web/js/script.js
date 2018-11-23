@@ -213,10 +213,10 @@ $(function () {
         var id = button.data('id');
         if (button.prop('checked')) {
             var string = '<li class="service-buy" data-id="' + id + '">Услуга ' + name + ' на сумму <span class="service-sum" data-id="' + id + '">' + price + '</span></li>';
-            $('#items-to-buy').append(string);
+            // $('#items-to-buy').append(string);
             sumContainer.text(parseInt(sumContainer.text(), 10) + price);
         } else {
-            $('#items-to-buy .service-buy[data-id="' + id + '"]').remove();
+            // $('#items-to-buy .service-buy[data-id="' + id + '"]').remove();
             sumContainer.text(parseInt(sumContainer.text(), 10) - price);
         }
     });

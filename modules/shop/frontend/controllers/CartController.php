@@ -131,7 +131,9 @@ class CartController extends Controller
             if ($order) {
                 $amount += $order->addItems($get['items']);
                 if (isset($get['services'])) {
-                    $amount += $order->addServices($get['services']);
+                    // убрано временно, пока решили не считать цену услуг
+//                    $amount +=
+                    $order->addServices($get['services']);
                 }
             }
             $order->price = $amount;
