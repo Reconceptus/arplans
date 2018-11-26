@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "comment".
  *
@@ -37,7 +35,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['author_id', 'accept', 'post_id', 'parent_id'], 'integer'],
-            [['text'], 'string'],
+            [['text'], 'string', 'max'=>2000],
             [['created_at'], 'safe'],
             [['name', 'email'], 'string', 'max' => 70],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['post_id' => 'id']],

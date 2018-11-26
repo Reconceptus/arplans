@@ -36,7 +36,7 @@ class ItemImage extends \yii\db\ActiveRecord
     {
         return [
             [['item_id', 'type'], 'integer'],
-            [['alt'], 'string'],
+            [['alt'], 'string', 'max'=>250],
             [['image', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];

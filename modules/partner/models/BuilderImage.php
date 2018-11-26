@@ -31,7 +31,7 @@ class BuilderImage extends \yii\db\ActiveRecord
     {
         return [
             [['builder_id', 'sort'], 'integer'],
-            [['alt'], 'string'],
+            [['alt'], 'string', 'max' => 250],
             [['file', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['builder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Builder::className(), 'targetAttribute' => ['builder_id' => 'id']],
         ];

@@ -27,7 +27,7 @@ class Reviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text'], 'string'],
+            [['text'], 'string', 'max' => 2000],
             [['author_name', 'author_email', 'author_status'], 'string', 'max' => 255],
         ];
     }
@@ -38,11 +38,11 @@ class Reviews extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'author_name' => 'Author Name',
-            'author_email' => 'Author Email',
+            'id'            => 'ID',
+            'author_name'   => 'Author Name',
+            'author_email'  => 'Author Email',
             'author_status' => 'Author Status',
-            'text' => 'Text',
+            'text'          => 'Text',
         ];
     }
 }
