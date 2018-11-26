@@ -65,7 +65,7 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             [['text', 'name', 'contact'], 'required'],
-            [['text'], 'string'],
+            [['text'], 'string', 'max' => 2000],
             [['file'], 'file', 'extensions' => 'png, jpg, gif, pdf, xls, xlsx, doc, docx, odt, zip, rar, 7z'],
             [['type', 'partner_id'], 'integer'],
             [['accept'], 'compare', 'compareValue' => 1, 'message' => 'Необходимо подтвердить согласие на обработку данных'],
