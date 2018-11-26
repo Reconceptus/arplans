@@ -12,7 +12,7 @@ $reg = Yii::$app->request->get('region');
 $this->title = \modules\content\models\ContentBlock::getValue('village_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_description')]);
-
+\yii\widgets\Pjax::begin();
 $mapSelected = boolval(Yii::$app->request->get('selector'));
 ?>
 <a name="map-anchor"></a>
@@ -35,8 +35,10 @@ $mapSelected = boolval(Yii::$app->request->get('selector'));
                                 <div class="custom-search--field">
                                     <div class="custom-search--inputs">
                                         <div class="input region-dropbox">
-                                            <input type="text" value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>" placeholder="Выберите регион">
-                                            <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type' => 'village', 'selector' => 1]) ?>
+                                            <input type="text"
+                                                   value="<?= $reg ? \common\models\Region::getNameById($reg) : '' ?>"
+                                                   placeholder="Выберите регион">
+                                            <?= \modules\partner\widgets\regions\Regions::widget(['viewName' => 'drop', 'type' => 'village']) ?>
                                         </div>
                                         <button class="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg">
@@ -75,24 +77,41 @@ $mapSelected = boolval(Yii::$app->request->get('selector'));
         </div>
     </div>
 </div>
+<script>
+    if (typeof google !== 'undefined') {
+        initMap();
+    }
+    if (typeof project !== 'undefined') {
+        project.regionDropBox();
+        project.customScroll();
+        project.mapMarkers();
+        project.showMore();
+        project.fixedSidebar();
+    }
+</script>
 <?= \frontend\widgets\recently\Recently::widget() ?>
 
 <?php
 $js = <<<JS
-    $(document).on('click', '.js-region-selector', function (e) {
-        e.preventDefault();
-        var button = $(this);
-        var href = (button.attr('href')).replace('&selector=1','').replace('?selector=1','');
-        
-        if($('#view_map').prop('checked')){
-            if(href ==='/village'){
+    $(document).on('click', '#view_map', function (e) {
+       $('.js-region-selector').each(function(index,i) {
+         var href=$(i).attr('href').replace('&selector=1','').replace('?selector=1','');;
+            if(href==='/village'){
                 href+='?selector=1';
             }else{
                 href+='&selector=1';
             }
-        }
-        window.location.href = href+'#map-anchor';
+            $(i).attr('href',href)
+       });
+    });
+$(document).on('click', '#view_list', function (e) {
+       $('.js-region-selector').each(function(index,i) {
+         var href=$(i).attr('href').replace('&selector=1','').replace('?selector=1','');;
+            $(i).attr('href',href)
+       });
     });
 JS;
 
-$this->registerJs($js); ?>
+$this->registerJs($js);
+\yii\widgets\Pjax::end();
+?>

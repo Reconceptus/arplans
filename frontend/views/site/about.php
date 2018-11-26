@@ -11,7 +11,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\mode
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('about_page_seo_description')]);
 
 $this->params['breadcrumbs'][] = $this->title;
-\yii\widgets\Pjax::begin();
+
 ?>
     <div class="section about--head">
         <div class="content content--lg mobile-wide">
@@ -119,11 +119,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2 class="title" id="map-anchor">Офисы продаж</h2>
         </div>
     </div>
+<?\yii\widgets\Pjax::begin();?>
 <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
 <script>
-    initMap();
-    $('html,body').stop().animate({ scrollTop: $('#map-anchor').offset().top }, 1);
+    if (typeof google !== 'undefined') {
+        initMap();
+    }
+    // $('html,body').stop().animate({ scrollTop: $('#map-anchor').offset().top }, 1);
     if (typeof project !== 'undefined') {
         project.regionDropBox();
         project.customScroll();

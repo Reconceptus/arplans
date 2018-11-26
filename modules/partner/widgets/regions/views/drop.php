@@ -8,6 +8,7 @@
 /* @var $models \common\models\Region[] */
 /* @var $selector */
 $get = Yii::$app->request->resolve()[1];
+$selector = isset($get['selector']) ? 1 : null;
 // Для строителей
 $build = [];
 $works = [];
@@ -58,6 +59,7 @@ if (isset($get['eco'])) {
                 'works'    => $works,
                 'mat'      => $mat,
                 'reg'      => $reg,
+                'selector' => $selector
             ]), ['class' => 'js-region-selector']) ?>
         </li>
         <? foreach ($models as $model): ?>
@@ -72,6 +74,7 @@ if (isset($get['eco'])) {
                     'works'    => $works,
                     'mat'      => $mat,
                     'reg'      => $reg,
+                    'selector' => $selector
                 ]), ['class' => 'js-region-selector']) ?>
             </li>
         <? endforeach; ?>
