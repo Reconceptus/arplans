@@ -183,7 +183,11 @@ if ($partners): ?>
         <div class="content content--lg">
             <ul>
                 <? foreach ($partners as $partner): ?>
-                    <li><a href="<?= $partner->url ?>"><?= $partner->url ?></a></li>
+                    <? if (mb_substr($partner->url, 0, 3) !== 'http'): ?>
+                        <li><a href="http://<?= $partner->url ?>"><?= $partner->url ?></a></li>
+                    <? else: ?>
+                        <li><a href="<?= $partner->url ?>"><?= $partner->url ?></a></li>
+                    <? endif; ?>
                 <? endforeach; ?>
             </ul>
         </div>
