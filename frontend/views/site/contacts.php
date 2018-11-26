@@ -196,7 +196,9 @@ if ($partners): ?>
 <? endif; ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
     <script>
-        initMap();
+        if (typeof google !== 'undefined') {
+            initMap();
+        }
         if (typeof project !== 'undefined') {
             project.regionDropBox();
             project.customScroll();
