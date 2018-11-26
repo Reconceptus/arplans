@@ -81,7 +81,7 @@ class CatalogController extends Controller
             $extArr = explode('.', $model->project);
             $ext = end($extArr);
             if ($model->project && file_exists($fileName)) {
-                header("Content-Disposition: attachment; filename='project_" . $model->slug . "." . $ext . "';");
+                header("Content-Disposition: attachment; filename=project_" . $model->slug . "." . $ext . ";");
                 echo file_get_contents($fileName);
             }
         }
