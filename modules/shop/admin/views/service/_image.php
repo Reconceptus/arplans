@@ -17,5 +17,10 @@ use yii\helpers\Html;
     <div class="js-image-admin-delete" data-path="shop/service">
         <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>
     </div>
+    <div class="img-alt <?= $model->alt ? 'green' : '' ?>" data-toggle="modal" data-id="<?= $model->id ?>"
+         data-path="shop/service" data-target="#setAlt"
+         title="<?= $model->alt ?? 'Добавить подпись' ?>">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </div>
     <?= Html::img($model->file, ['class' => 'img-admin']) ?>
 </div>

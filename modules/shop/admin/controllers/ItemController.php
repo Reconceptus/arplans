@@ -21,6 +21,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -361,6 +362,18 @@ class ItemController extends AdminController
         throw new \yii\base\Exception('Ошибка при удалении товара');
     }
 
+
+    public function actionSetAlt()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        $model = ItemImage::findOne(['id' => $get['id']]);
+        $model->alt = Html::encode($get['alt']);
+        if ($model->save()) {
+            return ['status' => 'success'];
+        }
+        return ['status' => 'fail'];
+    }
 
     /**
      * @param $id

@@ -9,6 +9,7 @@ namespace modules\shop\models;
  * @property int $service_id
  * @property string $file
  * @property string $thumb
+ * @property string $alt
  * @property int $sort
  *
  * @property Service $service
@@ -30,6 +31,7 @@ class ServiceImage extends \yii\db\ActiveRecord
     {
         return [
             [['service_id', 'sort'], 'integer'],
+            [['alt'], 'string'],
             [['file', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['service_id' => 'id']],
         ];
@@ -46,6 +48,7 @@ class ServiceImage extends \yii\db\ActiveRecord
             'file' => 'Фото',
             'thumb' => 'Thumb',
             'sort' => 'Сортировка',
+            'alt' => 'Подпись',
         ];
     }
 

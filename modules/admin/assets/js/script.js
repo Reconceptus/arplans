@@ -181,11 +181,11 @@ $(function () {
 
     $(document).on('click', '.js-set-default-image', function () {
         var button = $(this);
-        var path = button.data('path')?button.data('path'):'shop/item';
+        var path = button.data('path') ? button.data('path') : 'shop/item';
         var id = button.closest('.image-admin-preview').data('id');
         $.ajax({
             type: 'GET',
-            url: '/admin/modules/'+path+'/set-preview',
+            url: '/admin/modules/' + path + '/set-preview',
             data: {
                 id: id
             },
@@ -204,7 +204,7 @@ $(function () {
         var id = button.closest('.image-admin-preview').data('id');
         $.ajax({
             type: 'GET',
-            url: '/admin/modules/'+path+'/set-back',
+            url: '/admin/modules/' + path + '/set-back',
             data: {
                 id: id
             },
@@ -346,5 +346,43 @@ $(function () {
                 }
             });
         }
+    });
+    $('#setAlt').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var path = button.data('path');
+        var modal = $(this);
+        var title = button.attr('title') === 'Добавить подпись' ? '' : button.attr('title');
+        $('#alt').val(title);
+        var setBtn = modal.find('.js-set-img-alt');
+        setBtn.attr('data-id', id);
+        setBtn.attr('data-path', path);
+    });
+
+    $(document).on('click', '.js-set-img-alt', function () {
+        var button = $(this);
+        var id = button.data('id');
+        var path = button.data('path');
+        var alt = $('#alt').val();
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/' + path + '/set-alt',
+            data: {
+                id: id,
+                alt: alt
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    $('#setAlt').modal('hide');
+                    var selector = $('.img-alt[data-id=' + id + ']');
+                    selector.attr('title', alt);
+                    if (alt) {
+                        selector.addClass('green')
+                    } else {
+                        selector.removeClass('green')
+                    }
+                }
+            }
+        });
     });
 });
