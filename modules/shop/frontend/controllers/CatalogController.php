@@ -76,7 +76,7 @@ class CatalogController extends Controller
     {
         $id = Yii::$app->request->get('id');
         $model = Item::findOne(['id' => $id]);
-        if ($model->getPrice() === 0) {
+        if ($model->getPrice() == 0) {
             $fileName = Yii::getAlias('@webroot') . $model->project;
             $extArr = explode('.', $model->project);
             $ext = end($extArr);
