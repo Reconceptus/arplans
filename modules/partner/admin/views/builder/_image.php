@@ -32,6 +32,11 @@ $item = $model->builder;
                 <span class="glyphicon glyphicon-ok" title="Сделать фоновым"></span>
             </div>
         <? endif; ?>
+        <div class="img-alt <?= $model->alt ? 'green' : '' ?>" data-toggle="modal" data-id="<?= $model->id ?>"
+             data-path="partner/builder" data-target="#setAlt"
+             title="<?= $model->alt ?? 'Добавить подпись' ?>">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </div>
     <? endif; ?>
     <div class="js-image-admin-delete" data-path="partner/builder">
         <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>

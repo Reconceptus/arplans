@@ -20,6 +20,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -303,6 +304,19 @@ class ServiceController extends AdminController
             unlink($fileName);
         }
         return ['status' => 'success'];
+    }
+
+
+    public function actionSetAlt()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $get = Yii::$app->request->get();
+        $model = ServiceImage::findOne(['id' => $get['id']]);
+        $model->alt = Html::encode($get['alt']);
+        if ($model->save()) {
+            return ['status' => 'success'];
+        }
+        return ['status' => 'fail'];
     }
 
     public function actionDeleteFile()

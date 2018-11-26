@@ -9,6 +9,7 @@ namespace modules\shop\models;
  * @property int $item_id
  * @property int $type
  * @property string $image
+ * @property string $alt
  * @property string $thumb
  *
  * @property Item $item
@@ -19,6 +20,7 @@ class ItemImage extends \yii\db\ActiveRecord
     const TYPE_PLAN = 2;
     const TYPE_READY = 3;
     const TYPE_FILE = 4;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +36,7 @@ class ItemImage extends \yii\db\ActiveRecord
     {
         return [
             [['item_id', 'type'], 'integer'],
+            [['alt'], 'string'],
             [['image', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];
@@ -50,6 +53,7 @@ class ItemImage extends \yii\db\ActiveRecord
             'type'    => 'Тип',
             'image'   => 'Файл',
             'thumb'   => 'Thumb',
+            'alt'     => 'Подпись',
         ];
     }
 

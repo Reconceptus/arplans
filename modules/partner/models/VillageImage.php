@@ -9,6 +9,7 @@ namespace modules\partner\models;
  * @property int $village_id
  * @property string $file
  * @property string $thumb
+ * @property string $alt
  * @property int $sort
  *
  * @property Village $village
@@ -30,6 +31,7 @@ class VillageImage extends \yii\db\ActiveRecord
     {
         return [
             [['village_id', 'sort'], 'integer'],
+            [['alt'], 'string'],
             [['file', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['village_id'], 'exist', 'skipOnError' => true, 'targetClass' => Village::className(), 'targetAttribute' => ['village_id' => 'id']],
         ];
@@ -41,11 +43,12 @@ class VillageImage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'         => 'ID',
             'village_id' => 'Поселок',
-            'file' => 'Фото',
-            'thumb' => 'Thumb',
-            'sort' => 'Сортировка',
+            'file'       => 'Фото',
+            'thumb'      => 'Thumb',
+            'sort'       => 'Сортировка',
+            'alt'        => 'Подпись',
         ];
     }
 

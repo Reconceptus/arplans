@@ -9,6 +9,7 @@ namespace modules\partner\models;
  * @property int $builder_id
  * @property string $file
  * @property string $thumb
+ * @property string $alt
  * @property int $sort
  *
  * @property Builder $builder
@@ -30,6 +31,7 @@ class BuilderImage extends \yii\db\ActiveRecord
     {
         return [
             [['builder_id', 'sort'], 'integer'],
+            [['alt'], 'string'],
             [['file', 'thumb'], 'file', 'extensions' => 'png, jpg, gif', 'maxSize' => 1024 * 1024 * 3],
             [['builder_id'], 'exist', 'skipOnError' => true, 'targetClass' => Builder::className(), 'targetAttribute' => ['builder_id' => 'id']],
         ];
@@ -41,11 +43,12 @@ class BuilderImage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'         => 'ID',
             'builder_id' => 'Застройщик',
-            'file' => 'Фото',
-            'thumb' => 'Thumb',
-            'sort' => 'Сортировка',
+            'file'       => 'Фото',
+            'thumb'      => 'Thumb',
+            'alt'        => 'Подпись',
+            'sort'       => 'Сортировка',
         ];
     }
 
