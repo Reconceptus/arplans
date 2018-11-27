@@ -13,7 +13,7 @@ use modules\shop\widgets\related\Related;
 /* @var $favorites array */
 /* @var $inCart array */
 $isInCart = array_key_exists($model->id, $inCart);
-$this->title = $model->seo_title;
+$this->title = $model->seo_title??$model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
