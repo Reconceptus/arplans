@@ -128,6 +128,7 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        Yii::$app->response->cookies->remove('cart');
         Yii::$app->user->logout();
         if (Yii::$app->request->get('toLogin')) {
             return $this->redirect('/site/login');
@@ -156,7 +157,7 @@ class SiteController extends Controller
                 $mail->send();
                 return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
             } else {
-                return ['status' => 'fail','message'=>$model->getFirstErrors()];
+                return ['status' => 'fail', 'message' => $model->getFirstErrors()];
             }
         }
 
