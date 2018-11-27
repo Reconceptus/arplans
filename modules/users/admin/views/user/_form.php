@@ -26,7 +26,7 @@ $this->title = 'Edit ' . $model->username
 <?= $form->field($model, 'email')->textInput(['required' => true]) ?>
 
 <div class="form-group">
-    <? if ($model->profile->image): ?>
+    <? if ($model->profile && $model->profile->image): ?>
         <div class="image-admin-preview">
             <?= Html::img($model->profile->image, ['class' => 'img-admin']) ?>
         </div>
