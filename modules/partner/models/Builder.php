@@ -184,33 +184,37 @@ class Builder extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return mixed|string
+     * @return BuilderImage|string
+     * @param $is_object bool
      */
-    public function getMainImage()
+    public function getMainImage($is_object=false)
     {
         if ($this->image) {
-            $image = $this->image->file;
+            $image = $this->image;
         } elseif ($this->images) {
-            $image = $this->images[0]->file;
-        } else {
-            $image = '';
+            $image = $this->images[0];
         }
-        return $image;
+        if (isset($image) && $image) {
+            return $is_object ? $image : $image->file;
+        }
+        return null;
     }
 
     /**
-     * @return mixed|string
+     * @return BuilderImage|string
+     * @param $is_object bool
      */
-    public function getBackImage()
+    public function getBackImage($is_object=false)
     {
         if ($this->background) {
-            $image = $this->background->file;
+            $image = $this->background;
         } elseif ($this->images) {
-            $image = $this->images[0]->file;
-        } else {
-            $image = '';
+            $image = $this->images[0];
         }
-        return $image;
+        if (isset($image) && $image) {
+            return $is_object ? $image : $image->file;
+        }
+        return null;
     }
 
     /**

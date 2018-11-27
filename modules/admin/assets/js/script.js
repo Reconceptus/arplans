@@ -361,7 +361,7 @@ $(function () {
 
     $(document).on('click', '.js-set-img-alt', function () {
         var button = $(this);
-        var id = button.data('id');
+        var id = button.attr('data-id');
         var path = button.data('path');
         var alt = $('#alt').val();
         $.ajax({

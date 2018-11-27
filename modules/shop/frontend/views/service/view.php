@@ -24,7 +24,8 @@
                                         <li class="object-item" data-num="1">
                                             <div class="projects-item--wrap">
                                                 <div class="projects-item--preview">
-                                                    <div class="bg"
+                                                    <div class="bg" role="img"
+                                                         aria-label="<?=$image->alt ?>"
                                                          style="background-image: url(<?= $image->file ?>)"></div>
                                                 </div>
                                             </div>
