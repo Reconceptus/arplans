@@ -12,14 +12,15 @@ use modules\shop\models\Item;
 /* @var $isInCart bool */
 /* @var $sizeCatalog \modules\shop\models\Catalog */
 $size = $model->getItemOptionCatalogItem($sizeCatalog->id);
-$image = $model->getMainImage();
+$image = $model->getMainImage(true);
 ?>
 
 <div class="compare-table--section">
     <div class="compare-table--part part-project">
         <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug]) ?>"
            class="projects-item--preview">
-            <div class="bg" <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
+            <div class="bg" role="img"
+                 aria-label="<?= $image && $image->image ? $image->alt:'' ?>"  <?= $image && $image->image ? 'style="background-image: url(' . $image->image . ')"' : '' ?>></div>
             <div class="hash">
                 <? if ($model->is_new): ?>
                     <span class="new">новинка</span>

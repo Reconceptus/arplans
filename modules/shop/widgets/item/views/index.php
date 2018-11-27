@@ -12,12 +12,13 @@ use modules\shop\models\Item;
 /* @var $favorites array */
 /* @var $get array */
 /* @var $isInCart bool */
-$image = $model->getMainImage();
+$image = $model->getMainImage(true);
 ?>
 <div class="projects-item--wrap">
     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
        class="projects-item--preview">
-        <div class="bg" <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
+        <div class="bg" role="img"
+             aria-label="<?= $image && $image->image ? $image->alt:'' ?>" <?= $image && $image->image ? 'style="background-image: url(' . $image->image . ')"' : '' ?>></div>
         <div class="hash">
             <? if ($model->is_new): ?>
                 <span class="new">новинка</span>
@@ -56,7 +57,7 @@ $image = $model->getMainImage();
             </div>
         </div>
         <button type="button" class="icon-like js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
-           data-id="<?= $model->id ?>">
+                data-id="<?= $model->id ?>">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink"
                      xlink:href="#icon-heart-like"/>
