@@ -118,7 +118,7 @@ class CatalogController extends AdminController
         if (!$model) {
             throw new NotFoundHttpException('Не найден параметр');
         }
-        if($model->load(Yii::$app->request->post())&&$model->validate()){
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
         }
         return $this->render('_ci_form', ['model' => $model]);
@@ -181,8 +181,12 @@ class CatalogController extends AdminController
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = CatalogItem::findOne(['id' => intval(Yii::$app->request->get('id'))]);
         if ($model) {
-            $model->delete();
-            return ['status' => 'success'];
+            try {
+                $model->delete();
+                return ['status' => 'success'];
+            } catch (\Exception $e) {
+                return ['status' => 'fail', 'message' => 'Ошибка при удалении. Возможно значение используется для одного из товаров'];
+            }
         }
         return ['status' => 'fail'];
     }
