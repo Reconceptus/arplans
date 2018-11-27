@@ -8,6 +8,7 @@
 
 /* @var $model \modules\partner\models\Builder */
 $index = 1;
+$mainImage = $model->getMainImage(true);
 ?>
 <div class="partner-page--slider">
     <div class="content content--md">
@@ -17,7 +18,9 @@ $index = 1;
                     <li class="object-item" data-num="1">
                         <div class="projects-item--wrap">
                             <div class="projects-item--preview">
-                                <div class="bg" style="background-image: url(<?= $model->image->file ?>)"></div>
+                                <div class="bg" role="img"
+                                     aria-label="<?= $mainImage ? $mainImage->alt : '' ?>"
+                                     style="background-image: url(<?= $mainImage ? $mainImage->file : '' ?>)"></div>
                             </div>
                         </div>
                     </li>
@@ -27,7 +30,9 @@ $index = 1;
                         <li class="object-item" data-num="<?= ++$index ?>">
                             <div class="projects-item--wrap">
                                 <div class="projects-item--preview">
-                                    <div class="bg" style="background-image: url(<?= $image->file ?>)"></div>
+                                    <div class="bg" role="img"
+                                         aria-label="<?= $image->alt ?>"
+                                         style="background-image: url(<?= $image->file ?>)"></div>
                                 </div>
                             </div>
                         </li>
