@@ -9,51 +9,51 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "shop_item".
  *
- * @property string       $id
- * @property string       $category_id
- * @property string       $slug
- * @property string       $name
- * @property string       $exact_gab
- * @property string       $description
- * @property string       $build_price
- * @property string       $video
- * @property string       $project
- * @property string       $seo_title
- * @property string       $seo_keywords
- * @property string       $seo_description
- * @property int          $price
- * @property int          $discount
- * @property int          $image_id
- * @property int          $rooms
- * @property int          $bathrooms
- * @property int          $live_area
- * @property int          $common_area
- * @property int          $useful_area
- * @property int          $one_floor
- * @property int          $two_floor
- * @property int          $mansard
- * @property int          $cellar
- * @property int          $oriel
- * @property int          $garage
- * @property int          $double_garage
- * @property int          $tent
- * @property int          $terrace
- * @property int          $balcony
- * @property int          $light2
- * @property int          $pool
- * @property int          $sauna
- * @property int          $gas_boiler
- * @property int          $is_new
- * @property int          $is_active
- * @property int          $is_deleted
- * @property int          $sort
- * @property string       $created_at
- * @property string       $updated_at
+ * @property string $id
+ * @property string $category_id
+ * @property string $slug
+ * @property string $name
+ * @property string $exact_gab
+ * @property string $description
+ * @property string $build_price
+ * @property string $video
+ * @property string $project
+ * @property string $seo_title
+ * @property string $seo_keywords
+ * @property string $seo_description
+ * @property int $price
+ * @property int $discount
+ * @property int $image_id
+ * @property int $rooms
+ * @property int $bathrooms
+ * @property int $live_area
+ * @property int $common_area
+ * @property int $useful_area
+ * @property int $one_floor
+ * @property int $two_floor
+ * @property int $mansard
+ * @property int $cellar
+ * @property int $oriel
+ * @property int $garage
+ * @property int $double_garage
+ * @property int $tent
+ * @property int $terrace
+ * @property int $balcony
+ * @property int $light2
+ * @property int $pool
+ * @property int $sauna
+ * @property int $gas_boiler
+ * @property int $is_new
+ * @property int $is_active
+ * @property int $is_deleted
+ * @property int $sort
+ * @property string $created_at
+ * @property string $updated_at
  *
- * @property Category     $category
- * @property ItemImage    $image
+ * @property Category $category
+ * @property ItemImage $image
  * @property ItemOption[] $itemOptions
- * @property ItemImage[]  $images
+ * @property ItemImage[] $images
  */
 class Item extends \yii\db\ActiveRecord
 {
@@ -90,8 +90,8 @@ class Item extends \yii\db\ActiveRecord
             [['cost'], 'safe'],
             [['price', 'discount', 'cost'], 'number'],
             [['category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
-              'one_floor', 'two_floor', 'mansard', 'cellar', 'oriel', 'garage', 'double_garage', 'tent', 'terrace',
-              'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
+                'one_floor', 'two_floor', 'mansard', 'cellar', 'oriel', 'garage', 'double_garage', 'tent', 'terrace',
+                'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
             [['slug', 'name', 'video', 'seo_title', 'seo_keywords', 'seo_description', 'exact_gab'], 'string', 'max' => 255],
             [['description', 'build_price'], 'string'],
             [['slug'], 'unique'],
@@ -131,7 +131,7 @@ class Item extends \yii\db\ActiveRecord
             'two_floor'       => 'Два этажа',
             'mansard'         => 'Мансарда',
             'cellar'          => 'Подвал',
-            'oriel'          => 'Эркер',
+            'oriel'           => 'Эркер',
             'garage'          => 'Гараж',
             'double_garage'   => 'Гараж на 2 авто',
             'tent'            => 'Навес',
@@ -222,24 +222,26 @@ class Item extends \yii\db\ActiveRecord
 
     /**
      * Получаем основное фото товара
-     * @return string
+     * @param $is_object bool
+     * @return string|ItemImage
      */
-    public function getMainImage()
+    public function getMainImage($is_object = false)
     {
         if ($this->image) {
-            $image = $this->image->image;
+            $image = $this->image;
         } elseif ($this->images) {
-            $image = $this->images[0]->image;
-        } else {
-            $image = null;
+            $image = $this->images[0];
         }
-        return $image;
+        if (isset($image) && $image) {
+            return $is_object ? $image : $image->image;
+        }
+        return null;
     }
 
 
     /**
      * @param Category|ActiveRecord $category
-     * @param array                 $get
+     * @param array $get
      * @return ActiveQuery
      */
     public static function getFilteredQuery(Category $category, array $get)
@@ -348,7 +350,7 @@ class Item extends \yii\db\ActiveRecord
     /**
      * Добавляем условия по чекбоксам свойств товара к выборке
      * @param ActiveQuery $query
-     * @param array       $get
+     * @param array $get
      * @return ActiveQuery
      */
     public static function addConditions(ActiveQuery $query, array $get)
