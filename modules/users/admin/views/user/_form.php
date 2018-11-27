@@ -38,7 +38,7 @@ $this->title = 'Edit ' . $model->username
 
 <div class="form-group">
     <?= Html::label('Пароль', 'password-field', ['class' => 'control-label']) ?>
-    <?= Html::textInput('password', '', ['class' => 'form-control', 'id' => 'password-field' . $model->isNewRecord ? ', "required" => true' : '']) ?>
+    <?= Html::textInput('password', '', ['class' => 'form-control', 'id' => 'password-field', 'required' => $model->isNewRecord ? true : false]) ?>
 </div>
 
 <div class="form-group">
