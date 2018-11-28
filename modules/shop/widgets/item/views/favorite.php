@@ -20,7 +20,7 @@ $image = $model->getMainImage(true);
         <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug]) ?>"
            class="projects-item--preview">
             <div class="bg" role="img"
-                 aria-label="<?= $image && $image->image ? $image->alt:'' ?>"  <?= $image && $image->image ? 'style="background-image: url(' . $image->image . ')"' : '' ?>></div>
+                 aria-label="<?= $image && $image->image ? $image->alt:'' ?>"  <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
             <div class="hash">
                 <? if ($model->is_new): ?>
                     <span class="new">новинка</span>
