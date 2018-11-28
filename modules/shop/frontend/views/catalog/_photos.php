@@ -8,7 +8,7 @@
 
 /* @var $model \modules\shop\models\Item */
 
-$mainImage = $model->image;
+$mainImage = $model->getMainImage(true);
 $index = 1;
 ?>
 <div class="custom-row-col col-66">
@@ -16,16 +16,17 @@ $index = 1;
         <div class="project-gallery">
             <div class="gallery-list-wrap">
                 <div class="gallery-list">
-                    <? if ($model->getMainImage()): ?>
+                    <? if ($mainImage): ?>
                         <div class="item" data-num="1">
-                            <figure style="background-image: url(<?= $model->image->image ?>)"
-                                    data-url-fancybox="<?= $model->image->image ?>"></figure>
+                            <figure style="background-image: url(<?= $mainImage->getThumb() ?>)"
+                                    data-url-fancybox="<?= $mainImage->image ?>"></figure>
                         </div>
                     <? endif; ?>
                     <? foreach ($model->getPhotos() as $image): ?>
+                    <? /* @var $image \modules\shop\models\ItemImage*/?>
                         <? if ($image->id !== $model->image_id): ?>
                             <div class="item" data-num="<?= ++$index ?>">
-                                <figure style="background-image: url(<?= $image->image ?>)"
+                                <figure style="background-image: url(<?= $image->getThumb() ?>)"
                                         data-url-fancybox="<?= $image->image ?>"></figure>
                             </div>
                         <? endif; ?>
