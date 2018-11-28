@@ -8,7 +8,6 @@
 
 namespace modules\shop\admin\controllers;
 
-
 use common\models\Translit;
 use modules\admin\controllers\AdminController;
 use modules\shop\models\Catalog;
@@ -119,7 +118,6 @@ class ItemController extends AdminController
     public function modify($model)
     {
         $post = Yii::$app->request->post();
-
         if ($model->load($post)) {
             if (!$model->slug && $model->name) {
                 $model->slug = Translit::encodestring($model->name);
@@ -153,9 +151,7 @@ class ItemController extends AdminController
                             $image->item_id = $model->id;
                             $image->image = $newImage;
                             $image->type = ItemImage::TYPE_PHOTO;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }
@@ -193,8 +189,6 @@ class ItemController extends AdminController
                 }
                 Yii::$app->session->setFlash('success', 'Товар добавлен успешно');
             } else {
-                var_dump($model->errors);
-                die;
                 Yii::$app->session->setFlash('danger', 'Ошибка при создании категории');
             }
             if (isset($post['Catalogs'])) {

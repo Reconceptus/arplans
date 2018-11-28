@@ -7,6 +7,7 @@
  */
 
 /* @var $models \modules\shop\models\Item[] */
+/* @var $inCart array */
 ?>
 <? if ($models): ?>
     <div class="section like-slider">
@@ -16,13 +17,13 @@
                 <div class="like-slider--carousel" data-owl="likes">
                     <ul class="owl-carousel">
                         <? foreach ($models as $model): ?>
-                            <? $image = $model->getMainImage(); ?>
+                            <? $image = $model->getMainImage(true); ?>
                             <? $isInCart = array_key_exists($model->id, $inCart); ?>
                             <li class="projects-item">
                                 <div class="projects-item--wrap">
                                     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
                                        class="projects-item--preview">
-                                        <div class="bg" <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
+                                        <div class="bg" <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
                                         <div class="data">
                                             <span class="index"><?= $model->name ?></span>
                                             <ul class="info">

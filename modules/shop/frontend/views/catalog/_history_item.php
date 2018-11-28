@@ -6,13 +6,13 @@
  * Time: 16:38
  */
 /* @var $model \modules\shop\models\Item */
-$image = $model->getMainImage();
+$image = $model->getMainImage(true);
 ?>
 <li class="projects-item">
     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
        class="projects-item--wrap">
         <div class="projects-item--preview">
-            <div class="bg" <?= $image ? 'style="background-image: url(' . $image . ')"' : '' ?>></div>
+            <div class="bg" <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
             <div class="data">
                 <span class="index"><?= $model->name ?></span>
                 <ul class="info">
