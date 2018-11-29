@@ -53,6 +53,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         ]]) ?>
 
     <?= $form->field($model, 'price')->textInput(['type' => 'number']) ?>
+    <?= $form->field($model, 'measure')->textInput() ?>
 
     <?= $form->field($model, 'in_cart')->checkbox() ?>
     <?= $form->field($model, 'is_active')->checkbox() ?>

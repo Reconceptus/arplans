@@ -25,7 +25,7 @@
                                             <div class="projects-item--wrap">
                                                 <div class="projects-item--preview">
                                                     <div class="bg" role="img"
-                                                         aria-label="<?=$image->alt ?>"
+                                                         aria-label="<?= $image->alt ?>"
                                                          style="background-image: url(<?= $image->file ?>)"></div>
                                                 </div>
                                             </div>
@@ -54,7 +54,7 @@
                     </ul>
                 <? endif; ?>
                 <div class="custom-list--info">
-                    <div class="price"><?= intval($model->price) ?> &#8381;</div>
+                    <div class="price"><?= intval($model->price) ?> &#8381; <?= $model->measure ?></div>
                     <p><strong>Срок:</strong> <?= $model->time ?></p>
                     <a href="#" class="order btn-square-min show-modal" data-modal="consultation">Заказать услугу</a>
                 </div>
