@@ -49,7 +49,7 @@ $columns = [
         'template' => '{delete}',
         'buttons'  => [
             'delete' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
+                return Html::a('<span class="glyphicon glyphicon-remove"></span>', Url::to([
                     '/admin/modules/users/user/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
