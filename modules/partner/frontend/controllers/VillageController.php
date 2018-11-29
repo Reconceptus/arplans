@@ -46,7 +46,7 @@ class VillageController extends Controller
     public function actionAdd()
     {
         $post = Yii::$app->request->post();
-        if (Yii::$app->request->isAjax) {
+        if ($post && Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($post) {
                 if (isset($post['processing_agree']) && $post['processing_agree'] === 'on') {
