@@ -38,6 +38,7 @@
             <div class="form-row col-lg-2">
                 <? foreach ($catalogItemsArray as $catalogItems): ?>
                     <? foreach ($catalogItems as $catalogItem): ?>
+                        <? $name = $catalog->id . '[' . $catalogItem->id . ']'; ?>
                         <div class="form-row-element">
                             <div class="check">
                                 <label>
