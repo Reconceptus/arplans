@@ -2,6 +2,7 @@
 
 namespace modules\partner\models;
 
+use common\models\Profile;
 use modules\content\models\ContentBlock;
 use yii\base\Model;
 use yii\db\Exception;
@@ -100,5 +101,19 @@ class Main extends Model
             }
         }
         return 1;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAuthorMain()
+    {
+        $author_id = intval(ContentBlock::getValue('main_page_author'));
+        $result = ['name' => '', 'photo' => ''];
+        $profile = Profile::findOne(['user_id' => $author_id]);
+        if ($profile) {
+            $result = ['name' => $profile->fio, 'photo' => $profile->image];
+        }
+        return $result;
     }
 }
