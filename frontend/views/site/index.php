@@ -7,13 +7,13 @@ use yii\helpers\Url;
 $this->title = \modules\content\models\ContentBlock::getValue('main_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_description')]);
-
+$author = \modules\partner\models\Main::getAuthorMain();
 ?>
 <div class="section video-box">
     <div class="video-box--bg">
         <video autoplay muted loop>
-            <source src="<?=\modules\content\models\ContentBlock::getValue('main_page_video_1')?>" type="video/mp4">
-            <source src="<?=\modules\content\models\ContentBlock::getValue('main_page_video_2')?>" type="video/webm">
+            <source src="<?= \modules\content\models\ContentBlock::getValue('main_page_video_1') ?>" type="video/mp4">
+            <source src="<?= \modules\content\models\ContentBlock::getValue('main_page_video_2') ?>" type="video/webm">
         </video>
     </div>
     <div class="content content--lg">
@@ -95,10 +95,10 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
             <div class="home-about-main--wrap">
                 <div class="home-about-main--chief">
                     <div class="home-about-main--photo">
-                        <img src="/img/ava01.jpg" alt="director">
+                        <img src="<?= $author['photo'] ?>" alt="director">
                     </div>
                     <div class="home-about-main--post">
-                        <?= \modules\content\models\ContentBlock::getValue('main_page_author') ?>
+                        <?= $author['name'] ?>
                     </div>
                 </div>
                 <div class="home-about-main--speech">
@@ -123,7 +123,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
     <div class="content content--md">
         <div class="ready-projects--info">
             <div class="info-box--text">
-                <?=\modules\content\models\ContentBlock::getValue('main_page_description')?>
+                <?= \modules\content\models\ContentBlock::getValue('main_page_description') ?>
             </div>
         </div>
     </div>
