@@ -67,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                     <div class="contact-form">
+                        <div id="senden-contacts"></div>
                         <? $form = ActiveForm::begin([
                             'action'  => '#',
                             'options' => ['enctype' => 'multipart/form-data'],
@@ -231,27 +232,31 @@ $js = <<<JS
         },
         errorPlacement: $.noop,
         submitHandler:function (form) {
-           var data = $('#contacts-form');
-            formData = new FormData(data.get(0));
-                $.ajax({
-                contentType: false, 
-                processData: false,
-                url: '/site/request',
-                type: 'POST',
-                data: formData,
-                success: function(res){
-                  if(res.status==='success'){
-                      $('.contact-form').addClass('successful');
-                  }else{
-                      var errors = "";
-                      $.each(res.message, function( i, elem ) {
-                        errors+=elem+'<br/>';
-                      });
-                      project.alertMessage('',errors);
-                  }
-                   return false;
-                },
-              });
+            if(!$('#senden-contacts').hasClass('senden')){
+                $('#senden-contacts').addClass('senden');
+                var data = $('#contacts-form');
+                formData = new FormData(data.get(0));
+                    $.ajax({
+                    contentType: false, 
+                    processData: false,
+                    url: '/site/request',
+                    type: 'POST',
+                    data: formData,
+                    success: function(res){
+                      if(res.status==='success'){
+                          $('.contact-form').addClass('successful');
+                          $('#senden-contacts').removeClass('senden');
+                      }else{
+                          var errors = "";
+                          $.each(res.message, function( i, elem ) {
+                            errors+=elem+'<br/>';
+                          });
+                          project.alertMessage('',errors);
+                      }
+                       return false;
+                    },
+                  });
+            }
         }
     })
 JS;
