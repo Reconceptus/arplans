@@ -15,17 +15,17 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
- * @property string  $username
- * @property string  $password_hash
- * @property string  $password_reset_token
- * @property string  $email
- * @property string  $role
- * @property string  $auth_key
- * @property string  $access_token
+ * @property string $username
+ * @property string $password_hash
+ * @property string $password_reset_token
+ * @property string $email
+ * @property string $role
+ * @property string $auth_key
+ * @property string $access_token
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
- * @property string  $password write-only password
+ * @property string $password write-only password
  * @property Profile $profile
  * @property Partner $partner
  */
@@ -59,7 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'role'], 'string', 'max'=>255],
+            [['username', 'email', 'role'], 'string', 'max' => 255],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
@@ -277,9 +277,9 @@ class User extends ActiveRecord implements IdentityInterface
         return null;
     }
 
-    public static function sendRegLetter($user)
+    public static function sendRegLetter($user, $password = null)
     {
-        Yii::$app->mailer->compose('registration', ['model' => $user])
+        Yii::$app->mailer->compose('registration', ['model' => $user, 'password' => $password])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
             ->setTo($user->email)
             ->setSubject('Вы зарегистрированы на сайте ' . Yii::$app->name)
@@ -301,12 +301,13 @@ class User extends ActiveRecord implements IdentityInterface
      * Получаем список всех ролей (кроме гостя)
      * @return array
      */
-    public static function getAccessTypes() {
+    public static function getAccessTypes()
+    {
         $auth = Yii::$app->authManager;
         $roles = $auth->getRoles();
         $result = [];
-        foreach($roles as $name=>$role){
-            if($name === 'guest')
+        foreach ($roles as $name => $role) {
+            if ($name === 'guest')
                 continue;
             $result[$name] = $role->description;
         }

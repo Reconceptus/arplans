@@ -123,7 +123,7 @@ class CartController extends Controller
             if (Yii::$app->user->isGuest) {
                 $password = Yii::$app->security->generateRandomString(8);
                 $user = User::createUser($info['email'], $password, $info['fio'], $info['phone'], $info['country'], $info['city'], $info['address']);
-                User::sendRegLetter($user);
+                User::sendRegLetter($user, $password);
             } else {
                 $user = Yii::$app->user->identity;
             }
@@ -146,8 +146,9 @@ class CartController extends Controller
                 $mail->setSubject('Новый заказ на сайте ' . Yii::$app->request->getHostInfo());
                 $mail->send();
                 return ['status' => 'success', 'orderId' => $order->id];
-            }else{
-                var_dump($order->errors);die;
+            } else {
+                var_dump($order->errors);
+                die;
             }
         } catch (\Exception $e) {
             $transaction->rollBack();
