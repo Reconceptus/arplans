@@ -160,9 +160,7 @@ class ServiceController extends AdminController
                             $image = new ServiceImage();
                             $image->service_id = $model->id;
                             $image->file = $newImage;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }
@@ -231,7 +229,7 @@ class ServiceController extends AdminController
             $dirs = 'uploads/service/file/';
             $view = '_file';
         }
-        $dir = Yii::getAlias('@webroot/'.$dirs);
+        $dir = Yii::getAlias('@webroot/' . $dirs);
 
         $path = date('ymdHis') . '/';
         if (!is_dir($dir . $path)) {
@@ -242,14 +240,14 @@ class ServiceController extends AdminController
             $target = $dir . $path . $fileName;
             if (move_uploaded_file($images['tmp_name'][$i], $target)) {
                 $success = true;
-                $paths[] = '/'.$dirs . $path . $fileName;
+                $paths[] = '/' . $dirs . $path . $fileName;
                 $fullPaths[] = $dir . $path . $fileName;
                 if ($type === Service::TYPE_IMAGE) {
                     $model = new ServiceImage();
-                }else{
+                } else {
                     $model = new ServiceFile();
                 }
-                $model->file = '/'.$dirs . $path . $fileName;
+                $model->file = '/' . $dirs . $path . $fileName;
                 $blocks[] = $this->renderAjax($view, ['model' => $model]);
             } else {
                 $success = false;

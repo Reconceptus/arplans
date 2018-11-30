@@ -8,7 +8,7 @@
 /* @var $model \modules\partner\models\Village */
 ?>
 <div class="partners-list--item">
-    <figure class="bg" style="background-image: url(<?= $model->getMainImage() ?>)">
+    <figure class="bg" style="background-image: url(<?= $model->getMainImage(true)->getThumb() ?>)">
         <?= \yii\helpers\Html::a('#', \yii\helpers\Url::to('/village/' . $model->slug)) ?>
     </figure>
     <div class="partners-list--data">

@@ -83,7 +83,7 @@ class VillageController extends AdminController
         if (isset($filter['name'])) {
             $query->andFilterWhere(['like', 'name', $filter['name']]);
         };
-        if(isset($filter['url'])){
+        if (isset($filter['url'])) {
             $query->andFilterWhere(['like', 'url', $filter['url']]);
         };
         $dataProvider = new ActiveDataProvider([
@@ -173,9 +173,7 @@ class VillageController extends AdminController
                             $image = new VillageImage();
                             $image->village_id = $model->id;
                             $image->file = $newImage;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }
