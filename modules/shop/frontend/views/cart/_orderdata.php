@@ -22,8 +22,12 @@ $totalSum = 0;
                 <div class="form-row-col col-50">
                     <div class="form-row-element">
                         <div class="input">
+                            <?php if($user): ?>
                             <input type="text" placeholder="*Ф.И.О." name="name"
-                                   value="<?= $user && $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>" id="order-fio">
+                                   value="<?= $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>" id="order-fio">
+                            <? else:?>
+                                <input type="text" placeholder="*Ф.И.О." name="name" value="" id="order-fio">
+                            <? endif;?>
                         </div>
                     </div>
                     <div class="form-row-element">
