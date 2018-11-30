@@ -185,9 +185,7 @@ class BuilderController extends AdminController
                             $image = new BuilderImage();
                             $image->builder_id = $model->id;
                             $image->file = $newImage;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }

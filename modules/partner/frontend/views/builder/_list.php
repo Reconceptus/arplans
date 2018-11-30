@@ -12,7 +12,7 @@ use yii\helpers\Html;
 ?>
 
 <div class="partners-list--item">
-    <figure class="bg" style="background-image: url(<?= $model->logo ?? $model->getMainImage() ?>)">
+    <figure class="bg" style="background-image: url(<?= $model->logo ?? $model->getMainImage(true)->getThumb() ?>)">
         <?= Html::a('', \yii\helpers\Url::to('/builder/' . $model->slug)) ?>
     </figure>
     <div class="partners-list--data">

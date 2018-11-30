@@ -59,4 +59,58 @@ class VillageImage extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Village::className(), ['id' => 'village_id']);
     }
+
+    /**
+     * @param int $width
+     * @param int $height
+     * @return string|null
+     */
+    public function makeThumb(int $width = 0, int $height = 0)
+    {
+        $width = $width > 0 ? $width : \common\models\Image::getCropWidth();
+        $height = $height > 0 ? $height : \common\models\Image::getCropHeight();
+        $thumb = \common\models\Image::cropImage($this->file, $width, $height, true, 30);
+        $this->thumb = $thumb;
+        if ($this->save()) {
+            return $this->thumb;
+        }
+        return null;
+    }
+
+    /**
+     * @param int $maxSize
+     * @param bool $clone
+     * @param int $quality
+     * @return string
+     */
+    public function resizeImage(int $maxSize, bool $clone = true, int $quality = 90)
+    {
+        return \common\models\Image::thumbImage($this->file, $maxSize, $clone, $quality);
+    }
+
+    /**
+     * @param int $width
+     * @param int $height
+     * @param bool $clone
+     * @param int $quality
+     * @return string
+     */
+    public function cropImage(int $width, int $height, bool $clone = true, int $quality = 90)
+    {
+        return \common\models\Image::cropImage($this->file, $width, $height, $clone, $quality);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getThumb()
+    {
+        if (!$this->thumb) {
+            $width = \common\models\Image::getCropWidth();
+            $height = \common\models\Image::getCropHeight();
+            $this->makeThumb($width, $height);
+        }
+        return $this->thumb ?? $this->file;
+    }
 }
