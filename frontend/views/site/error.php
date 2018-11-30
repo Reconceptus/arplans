@@ -3,25 +3,38 @@
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
+
 /* @var $exception Exception */
 
 use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<div class="site-error">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+<?php if ($exception->statusCode === 404): ?>
+    <div class="section">
+        <div class="bg-head--error gradient">
+            <div class="content content--sm">
+                <h1 class="title">404</h1>
+                <h2 class="subtitle">страница не существует,</h2>
+                <h3 class="subtitle">вернитесь <a href="index.html">на главную</a></h3>
+            </div>
+        </div>
     </div>
+<?php else: ?>
+    <div class="site-error">
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+        <h1><?= Html::encode($this->title) ?></h1>
 
-</div>
+        <div class="alert alert-danger">
+            <?= nl2br(Html::encode($message)) ?>
+        </div>
+
+        <p>
+            The above error occurred while the Web server was processing your request.
+        </p>
+        <p>
+            Please contact us if you think this is a server error. Thank you.
+        </p>
+
+    </div>
+<?php endif; ?>
