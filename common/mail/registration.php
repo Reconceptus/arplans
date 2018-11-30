@@ -173,6 +173,7 @@
                                                                     href="<?= Yii::$app->request->getHostInfo() ?>/site/login">Arplans</a>
                                                         </td>
                                                     </tr>
+                                                    <tr><td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;"></td></tr>
                                                     <tr>
                                                         <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
                                                             Ваш логин: <?= $model->username ?></td>
@@ -183,6 +184,10 @@
                                                                 Ваш пароль: <?= $password ?></td>
                                                         </tr>
                                                     <?php endif; ?>
+                                                    <tr>
+                                                        <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
+                                                            Вход: <a href="<?= Yii::$app->request->getHostInfo() ?>/site/login">Arplans</a></td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </td>
