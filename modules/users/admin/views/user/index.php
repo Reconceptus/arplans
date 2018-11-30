@@ -32,17 +32,18 @@ $columns = [
         },
     ],
     [
-        'header'    => 'Статус',
-        'attribute' => 'status',
-        'value'     => function ($model) {
-            return $model->status === User::STATUS_ACTIVE ? 'Active' : 'Disabled';
-        },
-        'filter'    => Html::dropDownList('User[status]', Yii::$app->request->get('User')['status'], ['' => 'Все', 10 => 'Активен', 0 => 'Не активен'], ['class' => 'form-control']),
-    ],
-    [
         'header'    => 'Роль',
         'attribute' => 'role',
         'filter'    => Html::dropDownList('User[role]', Yii::$app->request->get('User')['role'], \yii\helpers\ArrayHelper::merge(['' => 'Все'], User::getAccessTypes()), ['class' => 'form-control']),
+    ],
+    [
+        'header'    => 'Статус',
+        'attribute' => 'status',
+        'format'    => 'html',
+        'value'     => function ($model) {
+            return $model->status === User::STATUS_ACTIVE ? '<span class="green">Активен</span>' : '<span class="red">Отключен</span>';
+        },
+        'filter'    => Html::dropDownList('User[status]', Yii::$app->request->get('User')['status'], ['' => 'Все', 10 => 'Активен', 0 => 'Не активен'], ['class' => 'form-control']),
     ],
     [
         'class'    => 'yii\grid\ActionColumn',

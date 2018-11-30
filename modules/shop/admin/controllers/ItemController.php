@@ -17,7 +17,6 @@ use modules\shop\models\ItemImage;
 use modules\shop\models\ItemOption;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
@@ -163,9 +162,7 @@ class ItemController extends AdminController
                             $image->item_id = $model->id;
                             $image->image = $newPlan;
                             $image->type = ItemImage::TYPE_PLAN;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }
@@ -177,9 +174,7 @@ class ItemController extends AdminController
                             $image->item_id = $model->id;
                             $image->image = $newPlan;
                             $image->type = ItemImage::TYPE_READY;
-                            if (!$image->save()) {
-                                throw new Exception('Ошибка сохранения изображения');
-                            };
+                            $image->makeThumb();
                         }
                     }
                 }

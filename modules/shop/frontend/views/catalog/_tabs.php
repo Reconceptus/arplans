@@ -39,8 +39,9 @@ $ready = $model->getReady();
                     <div class="tab-main-slider" data-owl="plans">
                         <ul class="owl-carousel">
                             <? foreach ($model->getPlans() as $k => $plan): ?>
+                            <? /* @var $plan \modules\shop\models\ItemImage*/?>
                                 <li class="plan-item">
-                                    <img data-plan="<?= $plan->id ?>" src="<?= $plan->image ?>" alt="plan">
+                                    <img data-plan="<?= $plan->id ?>" src="<?= $plan->getThumb() ?>" alt="plan">
                                 </li>
                             <? endforeach; ?>
                         </ul>
