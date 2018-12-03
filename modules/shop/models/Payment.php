@@ -162,14 +162,13 @@ class Payment extends \yii\db\ActiveRecord
                             $this->status = self::STATUS_COMPLETE;
                             $this->payed_at = date('Y-m-d H:i:s', time());
                             $order->status = Order::STATUS_PAYED;
+                            $order->save();
                         }
                         $this->payed = $payment->amount->value;
                     } elseif ($payment->status == 'canceled') {
                         $this->reason = $payment->cancellationDetails->reason;
                         $this->status = self::STATUS_CANCEL;
-                        $order->status = Order::STATUS_IN_PROGRESS;
                     }
-                    $order->save();
                     $this->save();
                     $transaction->commit();
                 } catch (\Exception $e) {
