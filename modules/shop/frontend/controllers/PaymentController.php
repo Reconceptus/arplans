@@ -26,8 +26,8 @@ class PaymentController extends Controller
         $orderId = intval(\Yii::$app->request->get('order'));
         $order = Order::findOne(['id' => $orderId]);
         $yaData = \Yii::$app->params['yakassa'];
-        $paymentObj = Payment::findOne(['order_id' => $order->id]);
-        if($paymentObj) {
+        $paymentObj = Payment::findOne(['order_id' => $order->id, 'status' => Payment::STATUS_NEW]);
+        if ($paymentObj) {
             $dateMissed = (new \DateTime())->modify('-1 day')->format('Y-m-d H:i:s');
             if ($paymentObj->created_at < $dateMissed) {
                 $paymentObj->status = Payment::STATUS_CANCEL;
@@ -60,6 +60,10 @@ class PaymentController extends Controller
             $paymentObj->payment_id = $payment->id;
             $paymentObj->save();
             return $this->redirect($payment->confirmation->confirmationUrl);
+        } else {
+            $paymentObj->status = Payment::STATUS_CANCEL;
+            $paymentObj->save();
+            return $this->refresh();
         }
     }
 
