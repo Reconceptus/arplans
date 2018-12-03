@@ -16,6 +16,7 @@ use Yii;
  * @property string $guid
  * @property string $payment_id
  * @property string $amount
+ * @property string $payed
  * @property string $currency
  * @property string $reason
  * @property int $status
@@ -29,9 +30,9 @@ class Payment extends \yii\db\ActiveRecord
 {
 
     const STATUS_NEW = 1;
-    const STATUS_WAIT = 2;
+    const STATUS_CANCEL = 2;
     const STATUS_COMPLETE = 3;
-    const STATUS_CANCEL = 4;
+
 
     const PAYMENT_ERRORS = [
         '3d_secure_failed'              => 'Не пройдена аутентификация по 3-D Secure.',
@@ -64,7 +65,7 @@ class Payment extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'user_id', 'status'], 'integer'],
-            [['amount'], 'number'],
+            [['amount', 'payed'], 'number'],
             [['created_at', 'updated_at', 'payed_at'], 'safe'],
             [['ip'], 'string', 'max' => 20],
             [['guid', 'payment_id', 'reason'], 'string', 'max' => 40],
@@ -92,6 +93,7 @@ class Payment extends \yii\db\ActiveRecord
             'updated_at' => 'Изменен',
             'payed_at'   => 'Оплачен',
             'reason'     => 'Причина',
+            'payed'      => 'Уплачено',
         ];
     }
 
@@ -145,24 +147,35 @@ class Payment extends \yii\db\ActiveRecord
      */
     public function getInfo()
     {
-        if (in_array($this->status, [self::STATUS_WAIT, self::STATUS_NEW])) {
+        if ($this->status === self::STATUS_NEW) {
             $yaData = \Yii::$app->params['yakassa'];
             $client = new Client();
             $client->setAuth($yaData['shopId'], $yaData['secretKey']);
             $payment = $client->getPaymentInfo($this->payment_id);
             if ($payment) {
                 $order = $this->order;
-                if ($payment->status == 'succeeded' && $payment->paid == true) {
-                    $this->status = self::STATUS_COMPLETE;
-                    $this->payed_at = date('Y-m-d H:i:s', time());
-                    $order->status = Order::STATUS_PAYED;
-                } elseif ($payment->status == 'canceled') {
-                    $this->reason = $payment->cancellationDetails->reason;
-                    $this->status = self::STATUS_WAIT;
-                    $order->status = Order::STATUS_IN_PROGRESS;
+                $connection = Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+                try {
+                    if ($payment->status == 'succeeded' && $payment->paid == true) {
+                        if (floatval($payment->amount->value) == $order->price) {
+                            $this->status = self::STATUS_COMPLETE;
+                            $this->payed_at = date('Y-m-d H:i:s', time());
+                            $order->status = Order::STATUS_PAYED;
+                        }
+                        $this->payed = $payment->amount->value;
+                    } elseif ($payment->status == 'canceled') {
+                        $this->reason = $payment->cancellationDetails->reason;
+                        $this->status = self::STATUS_CANCEL;
+                        $order->status = Order::STATUS_IN_PROGRESS;
+                    }
+                    $order->save();
+                    $this->save();
+                    $transaction->commit();
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                    return null;
                 }
-                $order->save();
-                $this->save();
                 return $this;
             }
         }
