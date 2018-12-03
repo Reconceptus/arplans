@@ -74,11 +74,12 @@ return [
                 'shop/cart/order'                                          => 'shop/cart/order',
                 'shop/cart/change'                                         => 'shop/cart/change',
                 'shop/cart'                                                => 'shop/cart/index',
+                'shop/catalog'                                             => 'shop/catalog',
+                'shop/payment/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/payment/<slug>',
                 'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
                 'shop/<category:[a-zA-Z0-9\_\-]+>'                         => 'shop/catalog/index',
                 'shop'                                                     => 'shop/catalog',
-                'shop/catalog'                                             => 'shop/catalog',
 
                 'village'                         => 'partner/village/index',
                 'village/add'                     => 'partner/village/add',
