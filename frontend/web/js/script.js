@@ -167,6 +167,7 @@ $(function () {
                 if (data.status === 'success') {
                     project.alertMessage('Заказ успешно оформлен');
                     window.location.reload();
+                    // window.location.href = '/shop/payment/index?order='+data.orderId;
                 }else{
                     button.show();
                 }

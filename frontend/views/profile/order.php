@@ -34,7 +34,7 @@ $services = \yii\helpers\ArrayHelper::map($model->services, 'id', 'name');
                 <dt><?= \modules\shop\models\Order::STATUSES[$model->status] ?></dt>
             </dl>
         </div>
-        <div class="compare-table--part part-total"></div>
+        <div class="compare-table--part part-total"><?= Yii::$app->user->can('adminPanel') ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
         <? foreach ($model->orderItems as $oi): ?>
