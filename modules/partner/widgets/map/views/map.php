@@ -28,9 +28,6 @@ $coordinates = [];
                         <? if ($model->email): ?>
                             <div class="email"><?= $model->email ?></div>
                         <? endif; ?>
-                        <? if ($model->url): ?>
-                            <div class="url"><?= $model->url ?></div>
-                        <? endif; ?>
                     </div>
                 </a>
                 <span class="close">&times;</span>
