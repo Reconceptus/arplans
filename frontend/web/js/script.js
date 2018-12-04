@@ -144,15 +144,18 @@ $(function () {
             'accept': $('#order-accept').prop('checked') ? 1 : 0
         };
         if (!info.accept) {
-            alert('Подтвердите согласие на использование персональных данных');
+            project.alertMessage('Подтвердите согласие на использование персональных данных');
+            button.show();
             return false;
         }
         if (!reEmail.test(info.email)) {
-            alert('Email, указанный вами, некорректен');
+            project.alertMessage('Email, указанный вами, некорректен');
+            button.show();
             return false;
         }
         if (!info.fio || !info.phone || !info.email || !info.city || !info.address) {
-            alert('Заполнены не все поля');
+            project.alertMessage('Заполнены не все поля');
+            button.show();
             return false;
         }
         $.ajax({
