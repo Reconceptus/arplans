@@ -21,15 +21,10 @@ class Map extends Widget
     {
         $models = [];
         if ($this->viewName !== 'index') {
-            $models = $this->query->orderBy(['sort'=>SORT_DESC])->all();
+            $models = $this->query->all();
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $this->query,
-            'sort' => [
-                'defaultOrder' => [
-                    'sort' => SORT_DESC,
-                ],
-            ]
         ]);
         $content = $this->render($this->viewName, ['dataProvider' => $dataProvider, 'models' => $models]);
         return $content;

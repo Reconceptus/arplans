@@ -126,7 +126,8 @@ class About extends Model
             unset($get['region']);
         }
 
-        $query = $query1->union($query2);
-        return $query;
+        $subQuery = ($query1->union($query2));
+        $query = Village::find()->from(['x' => $subQuery]);
+        return $query->orderBy(['sort' => SORT_DESC]);
     }
 }
