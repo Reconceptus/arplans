@@ -118,8 +118,8 @@ class About extends Model
     public static function getFilteredQuery(array $get)
     {
         // Делаем выборку поселков
-        $query1 = Village::find()->alias('v')->select(['id', 'name', 'address', 'phones', 'email', 'url', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => Village::IS_ACTIVE, 'is_deleted' => Village::IS_NOT_DELETED]);
-        $query2 = Builder::find()->alias('b')->select(['id', 'name', 'address', 'phones', 'email', 'url', 'lat', 'lng'])->where(['is_office' => 1, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED]);
+        $query1 = Village::find()->alias('v')->select(['id', 'name', 'address', 'phones', 'email', 'url', 'lat', 'lng', 'sort'])->where(['is_office' => 1, 'is_active' => Village::IS_ACTIVE, 'is_deleted' => Village::IS_NOT_DELETED]);
+        $query2 = Builder::find()->alias('b')->select(['id', 'name', 'address', 'phones', 'email', 'url', 'lat', 'lng', 'sort'])->where(['is_office' => 1, 'is_active' => Builder::IS_ACTIVE, 'is_deleted' => Builder::IS_NOT_DELETED]);
         if (isset($get['region'])) {
             $query1->andWhere(['v.region_id' => intval($get['region'])]);
             $query2->andWhere(['b.region_id' => intval($get['region'])]);
