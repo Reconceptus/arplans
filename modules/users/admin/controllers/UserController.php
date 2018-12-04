@@ -8,6 +8,7 @@
 
 namespace modules\users\admin\controllers;
 
+use common\models\Image;
 use common\models\Profile;
 use common\models\User;
 use modules\admin\controllers\AdminController;
@@ -153,11 +154,12 @@ class UserController extends AdminController
                             $dir = Yii::getAlias('@webroot/uploads/user/avatar/');
                             FileHelper::createDirectory($dir . $model->id . '/');
                             $fileName = 'avatar.' . $profile->image->extension;
-                            if(file_exists($dir . $model->id . '/' . $fileName)) {
+                            if (file_exists($dir . $model->id . '/' . $fileName)) {
                                 unlink($dir . $model->id . '/' . $fileName);
                             }
                             $profile->image->saveAs($dir . $model->id . '/' . $fileName);
                             $profile->image = '/uploads/user/avatar/' . $model->id . '/' . $fileName;
+                            Image::thumbImage($profile->image, 240, false, 30);
                         }
                         if (!$profile->image && isset($profile->oldAttributes['image'])) {
                             $profile->image = $profile->oldAttributes['image'];
