@@ -167,7 +167,6 @@ class Payment extends \yii\db\ActiveRecord
                         $this->payed = $payment->amount->value;
                     } elseif ($payment->status == 'canceled') {
                         $this->reason = $payment->cancellationDetails->reason;
-                        $this->status = self::STATUS_CANCEL;
                     }
                     $this->save();
                     $transaction->commit();
