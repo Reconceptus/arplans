@@ -11,6 +11,7 @@ namespace modules\shop\frontend\controllers;
 use modules\shop\models\Order;
 use modules\shop\models\Payment;
 use YandexCheckout\Client;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -79,5 +80,17 @@ class PaymentController extends Controller
         } else {
             throw new NotFoundHttpException();
         }
+    }
+
+    public function actionConfirm()
+    {
+        \Yii::$app->request->enableCsrfValidation = false;
+        $get = \Yii::$app->request->get();
+        $post = \Yii::$app->request->post();
+        $mail = Yii::$app->mailer->compose('kassatest', ['get' => $get, 'post'=>$post]);
+        $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
+        $mail->setTo('suhov.a.s@yandex.ru');
+        $mail->setSubject('Подтверждение кассы');
+        $mail->send();
     }
 }
