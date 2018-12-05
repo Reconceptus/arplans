@@ -9,5 +9,7 @@
 ?>
 <pre>
     <? print_r($post)?>
+    <? print_r($payment)?>
+    <? print_r($order)?>
 </pre>
 

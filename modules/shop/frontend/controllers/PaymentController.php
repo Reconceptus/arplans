@@ -106,9 +106,15 @@ class PaymentController extends Controller
                     $payment->save();
                     $transaction->commit();
                 } catch (\Exception $e) {
+                    $mail = Yii::$app->mailer->compose('kassatest', ['post' => $post, 'payment' => $payment, 'order' => $order]);
+                    $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
+                    $mail->setTo('suhov.a.s@yandex.ru');
+                    $mail->setSubject('Подтверждение кассы');
+                    $mail->send();
                     $transaction->rollBack();
                 }
             }
         }
     }
+
 }
