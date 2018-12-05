@@ -32,23 +32,14 @@ class PaymentController extends Controller
     {
         $orderId = intval(\Yii::$app->request->get('order'));
         $order = Order::findOne(['id' => $orderId]);
-        if(!$order){
+        if (!$order) {
             throw new NotFoundHttpException();
         }
         $yaData = \Yii::$app->params['yakassa'];
-        $paymentObj = Payment::findOne(['order_id' => $order->id, 'status' => Payment::STATUS_NEW]);
-        if ($paymentObj) {
-            $dateMissed = (new \DateTime())->modify('-1 day')->format('Y-m-d H:i:s');
-            if ($paymentObj->created_at < $dateMissed) {
-                $paymentObj->status = Payment::STATUS_CANCEL;
-                $paymentObj->save();
-                unset($paymentObj);
-            }
-        }
-        if (!isset($paymentObj) || !$paymentObj) {
-            $paymentObj = Payment::createPayment($order);
-            $paymentObj->save();
-        }
+
+        $paymentObj = Payment::createPayment($order);
+        $paymentObj->save();
+
         $client = new Client();
         $client->setAuth($yaData['shopId'], $yaData['secretKey']);
         $payment = $client->createPayment(
@@ -93,12 +84,31 @@ class PaymentController extends Controller
 
     public function actionConfirm()
     {
-        $get = \Yii::$app->request->get();
         $post = \Yii::$app->request->post();
-        $mail = Yii::$app->mailer->compose('kassatest', ['get' => $get, 'post'=>$post]);
-        $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
-        $mail->setTo('suhov.a.s@yandex.ru');
-        $mail->setSubject('Подтверждение кассы');
-        $mail->send();
+        $object = $post['object'];
+        if (!empty($object) && is_array($object)) {
+            $payment = Payment::find()->where(['payment_id' => $object['id']])->andWhere(['status' => Payment::STATUS_NEW])->one();
+            /* @var $payment Payment */
+            if ($payment) {
+                $order = $payment->order;
+                $connection = Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+                try {
+                    if ($object['status'] === 'succeeded' && $order['paid'] == 1) {
+                        if (floatval($object['amount']['value']) == $order->price) {
+                            $payment->status = Payment::STATUS_COMPLETE;
+                            $payment->payed_at = date('Y-m-d H:i:s', time());
+                            $order->status = Order::STATUS_PAYED;
+                            $order->save();
+                        }
+                        $payment->payed = $object['amount']['value'];
+                    }
+                    $payment->save();
+                    $transaction->commit();
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
     }
 }
