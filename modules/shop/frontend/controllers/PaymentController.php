@@ -94,7 +94,7 @@ class PaymentController extends Controller
                 $connection = Yii::$app->db;
                 $transaction = $connection->beginTransaction();
                 try {
-                    if ($object['status'] === 'succeeded' && $order['paid'] == 1) {
+                    if ($object['status'] === 'succeeded' && $object['paid'] == 1) {
                         if (floatval($object['amount']['value']) == $order->price) {
                             $payment->status = Payment::STATUS_COMPLETE;
                             $payment->payed_at = date('Y-m-d H:i:s', time());
@@ -106,11 +106,6 @@ class PaymentController extends Controller
                     $payment->save();
                     $transaction->commit();
                 } catch (\Exception $e) {
-                    $mail = Yii::$app->mailer->compose('kassatest', ['post' => $post, 'payment' => $payment, 'order' => $order]);
-                    $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
-                    $mail->setTo('suhov.a.s@yandex.ru');
-                    $mail->setSubject('Подтверждение кассы');
-                    $mail->send();
                     $transaction->rollBack();
                 }
             }
