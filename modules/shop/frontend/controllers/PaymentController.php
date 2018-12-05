@@ -26,6 +26,9 @@ class PaymentController extends Controller
     {
         $orderId = intval(\Yii::$app->request->get('order'));
         $order = Order::findOne(['id' => $orderId]);
+        if(!$order){
+            throw new NotFoundHttpException();
+        }
         $yaData = \Yii::$app->params['yakassa'];
         $paymentObj = Payment::findOne(['order_id' => $order->id, 'status' => Payment::STATUS_NEW]);
         if ($paymentObj) {
