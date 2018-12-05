@@ -16,7 +16,7 @@ $this->title = $name;
             <div class="content content--sm">
                 <h1 class="title">404</h1>
                 <h2 class="subtitle">страница не существует,</h2>
-                <h3 class="subtitle">вернитесь <a href="index.html">на главную</a></h3>
+                <h3 class="subtitle">вернитесь <a href="/">на главную</a></h3>
             </div>
         </div>
     </div>

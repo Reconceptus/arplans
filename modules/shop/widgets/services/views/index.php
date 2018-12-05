@@ -13,7 +13,7 @@ $models = \common\helpers\FormatHelper::divideArray($models);
     <div class="custom-row-col col-50">
         <? foreach ($models[0] as $model): ?>
             <article>
-                <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '&nbsp;&#8381;</h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class'=>'service-link']) ?>
+                <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '<span class="pt-sans">&nbsp;&#8381;</span></h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class'=>'service-link']) ?>
                 <div class="text">
                     <?= $model->preview_text ?>
                 </div>
@@ -26,7 +26,7 @@ $models = \common\helpers\FormatHelper::divideArray($models);
     <div class="custom-row-col col-50">
         <? foreach ($models[1] as $model): ?>
             <article>
-                <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '&nbsp;&#8381;</h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class'=>'service-link']) ?>
+                <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '<span class="pt-sans">&nbsp;&#8381;</span></h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class'=>'service-link']) ?>
                 <div class="text">
                     <?= $model->preview_text ?>
                 </div>
