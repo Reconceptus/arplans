@@ -63,7 +63,12 @@ class CartController extends Controller
                     'value' => $guid
                 ]));
             }
-            $cart = Cart::find()->where(['user_id' => \Yii::$app->user->id, 'item_id' => $get['id']])->one();
+            if(Yii::$app->user->isGuest){
+                $guid = Cart::setGuid();
+                $cart = Cart::find()->where(['guid' => $guid, 'item_id' => $get['id']])->one();
+            }else {
+                $cart = Cart::find()->where(['user_id' => \Yii::$app->user->id, 'item_id' => $get['id']])->one();
+            }
             if ($cart) {
                 $status = 'fail';
                 $message = 'Этот товар уже у вас в корзине';
