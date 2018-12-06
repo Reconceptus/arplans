@@ -79,6 +79,9 @@ class Order extends \yii\db\ActiveRecord
                 $mail = Yii::$app->mailer->compose('order-status-changed', ['model' => $this]);
                 $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                 $mail->setTo($this->email);
+                if($this->status == Order::STATUS_PAYED){
+                    $mail->setBcc(Config::getValue('requestEmail'));
+                }
                 $mail->setSubject('Изменение статуса заказа №' . $this->id);
                 $mail->send();
             }
