@@ -64,7 +64,7 @@ class CartController extends Controller
                 ]));
             }
             if(Yii::$app->user->isGuest){
-                $guid = Cart::setGuid();
+                $guid = Cart::setGuid(false);
                 $cart = Cart::find()->where(['guid' => $guid, 'item_id' => $get['id']])->one();
             }else {
                 $cart = Cart::find()->where(['user_id' => \Yii::$app->user->id, 'item_id' => $get['id']])->one();
