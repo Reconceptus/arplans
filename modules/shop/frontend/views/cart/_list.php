@@ -85,14 +85,12 @@ $item = $model->item;
                     </div>
                 </div>
                 <div class="btns">
-                    <button class="compare-table--remove">
-                        <i class="icon-remove js-delete-cart-item" data-id="<?= $model->id ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     xlink:href="#icon-remove"/>
-                            </svg>
-                        </i>
-                    </button>
+                    <i class="icon-remove js-delete-cart-item compare-table--remove" data-id="<?= $model->id ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="#icon-remove"/>
+                        </svg>
+                    </i>
                 </div>
             </div>
         </div>
