@@ -83,17 +83,20 @@ class Cart extends \yii\db\ActiveRecord
      * @return mixed|string
      * @throws \yii\base\Exception
      */
-    public static function setGuid()
+    public static function setGuid($canBeUser = true)
     {
         if (isset(Yii::$app->request->cookies['cart'])) {
             $cart = Yii::$app->request->cookies['cart'];
             $cart = $cart ? $cart->value : null;
         }
+
         if (!isset($cart)) {
-            if (!Yii::$app->user->isGuest) {
-                $cartGuid = self::findOne(['user_id' => Yii::$app->user->id]);
-                if ($cartGuid) {
-                    $cart = $cartGuid->guid;
+            if ($canBeUser) {
+                if (!Yii::$app->user->isGuest) {
+                    $cartGuid = self::findOne(['user_id' => Yii::$app->user->id]);
+                    if ($cartGuid) {
+                        $cart = $cartGuid->guid;
+                    }
                 }
             }
         }
@@ -133,7 +136,13 @@ class Cart extends \yii\db\ActiveRecord
     public static function getInCart($active = true)
     {
         if (Yii::$app->user->isGuest) {
-            return [];
+            $cart = self::setGuid(false);
+            $query = Cart::find()->alias('c');
+            if ($active) {
+                $query->innerJoin(Item::tableName() . ' i', 'i.id = c.item_id')
+                    ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
+            }
+            $query->andWhere(['c.guid' => $cart]);
         } else {
             $query = Cart::find()->alias('c');
             if ($active) {
@@ -141,9 +150,9 @@ class Cart extends \yii\db\ActiveRecord
                     ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
             }
             $query->andWhere(['c.user_id' => Yii::$app->user->id]);
-            $models = $query->all();
-            return ArrayHelper::map($models, 'item_id', 'count');
         }
+        $models = $query->all();
+        return ArrayHelper::map($models, 'item_id', 'count');
     }
 
     /**
