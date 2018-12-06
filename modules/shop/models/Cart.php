@@ -9,14 +9,14 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "shop_cart".
  *
- * @property int    $id
+ * @property int $id
  * @property string $guid
- * @property int    $user_id
- * @property int    $item_id
- * @property int    $count
+ * @property int $user_id
+ * @property int $item_id
+ * @property int $count
  *
- * @property Item   $item
- * @property User   $user
+ * @property Item $item
+ * @property User $user
  */
 class Cart extends \yii\db\ActiveRecord
 {
@@ -132,14 +132,18 @@ class Cart extends \yii\db\ActiveRecord
      */
     public static function getInCart($active = true)
     {
-        $query = Cart::find()->alias('c');
-        if ($active) {
-            $query->innerJoin(Item::tableName() . ' i', 'i.id = c.item_id')
-                ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
+        if (Yii::$app->user->isGuest) {
+            return [];
+        } else {
+            $query = Cart::find()->alias('c');
+            if ($active) {
+                $query->innerJoin(Item::tableName() . ' i', 'i.id = c.item_id')
+                    ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);
+            }
+            $query->andWhere(['c.user_id' => Yii::$app->user->id]);
+            $models = $query->all();
+            return ArrayHelper::map($models, 'item_id', 'count');
         }
-        $query->andWhere(['c.user_id' => Yii::$app->user->id]);
-        $models = $query->all();
-        return ArrayHelper::map($models, 'item_id', 'count');
     }
 
     /**
