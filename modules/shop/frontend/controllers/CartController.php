@@ -29,7 +29,7 @@ class CartController extends Controller
     {
         $guid = Cart::setGuid();
         $models = Cart::find()->where(['guid' => $guid])->all();
-        $services = Service::find()->all();
+        $services = Service::find()->where(['in_cart' => 1])->all();
         $user = null;
         if (!Yii::$app->user->isGuest) {
             $user = Yii::$app->user->identity;
