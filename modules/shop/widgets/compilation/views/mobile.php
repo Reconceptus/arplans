@@ -11,6 +11,7 @@ use yii\helpers\Url;
 
 /* @var $models array */
 /* @var $favorites array */
+/* @var $inCart array */
 ?>
 
 <div class="section projects mobile-show">
@@ -42,7 +43,7 @@ use yii\helpers\Url;
             <? if (array_key_exists('discount', $models)): ?>
                 <? foreach ($models['discount'] as $model): ?>
                     <div class="projects-item">
-                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites]) ?>
+                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
                 <? endforeach; ?>
             <? endif ?>

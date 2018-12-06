@@ -12,6 +12,7 @@ use yii\helpers\Url;
 
 /* @var $models Item[] */
 /* @var $favorites array */
+/* @var $inCart array */
 $get = Yii::$app->request->get();
 if (isset($get['category'])) {
     unset($get['category']);
@@ -54,7 +55,8 @@ if (isset($get['category'])) {
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
                         'get'       => $get,
-                        'favorites' => $favorites
+                        'favorites' => $favorites,
+                        'inCart'    => $inCart
                     ]) ?>
                 </div>
             <? endforeach; ?>
