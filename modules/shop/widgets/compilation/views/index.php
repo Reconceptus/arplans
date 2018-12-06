@@ -36,7 +36,8 @@ if (isset($get['category'])) {
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
                         'get'       => $get,
-                        'favorites' => $favorites
+                        'favorites' => $favorites,
+                        'inCart'    => $inCart
                     ]) ?>
                 </div>
             <? endforeach; ?>
@@ -75,7 +76,8 @@ if (isset($get['category'])) {
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
                         'get'       => $get,
-                        'favorites' => $favorites
+                        'favorites' => $favorites,
+                        'inCart'    => $inCart
                     ]) ?>
                 </div>
             <? endforeach; ?>

@@ -23,7 +23,7 @@ use yii\helpers\Url;
             <? if (array_key_exists('new', $models)): ?>
                 <? foreach ($models['new'] as $model): ?>
                     <div class="projects-item">
-                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites]) ?>
+                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
                 <? endforeach; ?>
             <? endif; ?>
@@ -63,7 +63,7 @@ use yii\helpers\Url;
             <? if (array_key_exists('free', $models)): ?>
                 <? foreach ($models['free'] as $model): ?>
                     <div class="projects-item">
-                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites]) ?>
+                        <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
                 <? endforeach; ?>
             <? endif; ?>
