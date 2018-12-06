@@ -35,7 +35,7 @@ use modules\shop\models\Order; ?>
                 <dt><?= \modules\shop\models\Order::STATUSES[$model->status] ?></dt>
             </dl>
         </div>
-        <div class="compare-table--part part-total"><?= Yii::$app->user->can('adminPanel') && in_array($model->status, [Order::STATUS_NEW]) ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
+        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
         <? foreach ($model->orderItems as $oi): ?>
