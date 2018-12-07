@@ -295,6 +295,25 @@ class BuilderController extends AdminController
     }
 
     /**
+     * @return array
+     */
+    public function actionDeletePrice()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $model = Builder::findOne(['id' => $id]);
+            if ($model) {
+                $model->price_list = '';
+                if ($model->save()) {
+                    return ['status' => 'success'];
+                }
+            }
+        }
+        return ['status' => 'fail'];
+    }
+
+    /**
      * Удаление картинки застройщика через ajax
      * @return array
      * @throws \Throwable
