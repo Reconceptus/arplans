@@ -265,6 +265,26 @@ $(function () {
         $('.item-project-field').show();
     });
 
+    $(document).on('click', '.js-delete-price', function () {
+        var button = $(this);
+        var id = button.data('id');
+        $.ajax({
+            type: 'GET',
+            url: '/admin/modules/partner/builder/delete-price',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.status === 'success') {
+                    $('.old-project').hide();
+                    $('.item-project-field').show();
+                }
+            }
+        });
+        $('.old-project').hide();
+        $('.item-project-field').show();
+    });
+
     $(document).on('click', '.js-delete-benefit', function () {
         var button = $(this);
         var id = button.attr('data-id');
