@@ -166,7 +166,7 @@ class BuilderController extends AdminController
                 if ($model->validate(['price_list'])) {
                     $dir = Yii::getAlias('@webroot/uploads/builder/price/');
                     FileHelper::createDirectory($dir . $model->id . '/');
-                    $fileName = 'pricelist.' . $model->price_list->extension;
+                    $fileName = 'pricelist' . time() . '.' . $model->price_list->extension;
                     $model->price_list->saveAs($dir . $model->id . '/' . $fileName);
                     $model->price_list = '/uploads/builder/price/' . $model->id . '/' . $fileName;
                 } else {
