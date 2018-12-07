@@ -42,4 +42,19 @@ class BuilderController extends Controller
         }
         return $this->render('view', ['model' => $model]);
     }
+
+    public function actionDownloadPrice()
+    {
+        $id = Yii::$app->request->get('id');
+        $model = Builder::findOne(['id' => $id]);
+        if ($model->price_list) {
+            $fileName = Yii::getAlias('@webroot') . $model->price_list;
+            $extArr = explode('.', $model->price_list);
+            $ext = end($extArr);
+            if ($model->price_list && file_exists($fileName)) {
+                header("Content-Disposition: attachment; filename=pricelist_" . $model->slug . "." . $ext . ";");
+                echo file_get_contents($fileName);
+            }
+        }
+    }
 }

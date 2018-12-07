@@ -81,7 +81,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <? if ($model->price_list): ?>
             <div class="old-project">
                 <p style="font-weight: bold">Прайслист</p>
-                <?= Html::a('Скачать', Url::to($model->price_list), ['class' => 'btn btn-admin']) ?>
+                <?= Html::a('Скачать', Url::to(['/builder/download-price', 'id' => $model->id]), ['class' => 'btn btn-admin']) ?>
                 <div class="js-show-project-field btn btn-admin">Заменить</div>
             </div>
         <? endif; ?>

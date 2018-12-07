@@ -36,7 +36,7 @@ use yii\helpers\Url;
                     <? if ($model->price_list) : ?>
                         <div class="cell cell-contacts">
                             <p><strong>Цены</strong></p>
-                            <?= Html::a('скачать прайс', Url::to($model->price_list), ['target' => '_blank']) ?>
+                            <?= Html::a('скачать прайс',  Url::to(['/builder/download-price', 'id' => $model->id]), ['target' => '_blank']) ?>
                         </div>
                     <? endif; ?>
                 </div>
