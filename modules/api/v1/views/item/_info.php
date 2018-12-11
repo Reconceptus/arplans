@@ -19,7 +19,7 @@ $price = $model->getPrice();
             <div class="index"><?= $model->name ?></div>
             <div class="price">
                 <div class="current-price"><?= $price ?>
-                    &#8381;
+                    <span class="pt-sans">&#8381;</span>
                 </div>
                 <? if ($model->discount > 0): ?>
                     <div class="old-price"><?= $model->price ?> руб</div>

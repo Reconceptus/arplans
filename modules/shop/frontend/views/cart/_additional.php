@@ -42,7 +42,7 @@ if ($services) {
                                 <div class="check">
                                     <label>
                                         <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                        <span><?=$service->name?>, <span class="service-price"><?=$service->price?></span> &nbsp;&#8381;</span>
+                                        <span><?=$service->name?>, <span class="service-price"><?=$service->price?></span> &nbsp;<span class="pt-sans">&#8381;</span></span>
                                     </label>
                                 </div>
                                 <span class="show-more"></span>
