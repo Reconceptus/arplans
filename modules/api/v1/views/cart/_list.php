@@ -86,7 +86,7 @@ $item = $model->item;
                         <span class="price-num" data-id="<?= $item->id ?>">
                             <?= $model->getLotPrice($albumPrice) ?>
                         </span>
-                        &#8381;
+                        <span class="pt-sans">&#8381;</span>
                     </div>
                 </div>
                 <div class="btns">

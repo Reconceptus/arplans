@@ -41,7 +41,7 @@ $services = \common\helpers\FormatHelper::divideArray($services)
                             <div class="check">
                                 <label>
                                     <input type="checkbox" class="cart-service" data-id="<?= $service->id ?>">
-                                    <span><?=$service->name?>, <?=$service->price?> &nbsp;&#8381;</span>
+                                    <span><?=$service->name?>, <?=$service->price?> &nbsp;<span class="pt-sans">&#8381;</span></span>
                                 </label>
                             </div>
                             <span class="show-more"></span>
