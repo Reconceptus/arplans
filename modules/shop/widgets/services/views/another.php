@@ -21,7 +21,7 @@
                                         <div class="add-service--header">
                                             <div class="check">
                                                 <label>
-                                                    <div><?=$model->name?>, <?=$model->price?> &#8381;</div>
+                                                    <div><?=$model->name?>, <?=$model->price?> <span class="pt-sans">&#8381;</span> <?= $model->measure ?></div>
                                                 </label>
                                             </div>
                                             <span class="show-more"></span>
