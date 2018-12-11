@@ -19,14 +19,6 @@ $columns = [
         'options'   => ['style' => 'width:40px'],
     ],
     [
-        'attribute' => 'image',
-        'format'    => 'html',
-        'options'   => ['style' => 'width:100px'],
-        'value'     => function ($model) {
-            return $model->image ? Html::img($model->image, ['class' => 'post-list-image-preview']) : '';
-        }
-    ],
-    [
         'attribute' => 'name',
     ],
 ];
