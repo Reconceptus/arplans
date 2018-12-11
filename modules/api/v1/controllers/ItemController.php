@@ -54,6 +54,7 @@ class ItemController extends ActiveController
                 'pagination' => [
                     'defaultPageSize' => 24,
                 ],
+                'sort'       => ['defaultOrder' => ['sort' => SORT_DESC, 'id' => SORT_DESC]]
             ]);
             return ['status' => 'success', 'html' => $this->renderPartial('index', ['dataProvider' => $dataProvider, 'category' => $category, 'inCart' => $inCart]), 'categories' => !empty(\Yii::$app->request->get('askCat')) ? $categoriesArray : [], 'category_id' => $category->id];
         } else {
