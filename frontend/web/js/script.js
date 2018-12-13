@@ -22,11 +22,11 @@ $(function () {
                 if (data.fav === true) {
                     button.addClass('liked');
                 } else {
-                    if(button.hasClass('liked')) {
+                    if (button.hasClass('liked')) {
                         button.removeClass('liked');
                     }
                 }
-                if(data.message){
+                if (data.message) {
                     project.alertMessage(data.title, data.message)
                 }
                 var count = parseInt($('#count-favorite').text(), 10);
@@ -169,8 +169,9 @@ $(function () {
             success: function (data) {
                 if (data.status === 'success') {
                     project.alertMessage('Заказ успешно оформлен');
-                    window.location.href = '/shop/payment/index?order='+data.orderId;
-                }else{
+                    window.location.href = '/shop/payment/index?order=' + data.orderId;
+                } else {
+                    project.alertMessage('', data.message);
                     button.show();
                 }
             }
