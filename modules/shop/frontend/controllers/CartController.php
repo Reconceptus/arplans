@@ -63,10 +63,10 @@ class CartController extends Controller
                     'value' => $guid
                 ]));
             }
-            if(Yii::$app->user->isGuest){
+            if (Yii::$app->user->isGuest) {
                 $guid = Cart::setGuid(false);
                 $cart = Cart::find()->where(['guid' => $guid, 'item_id' => $get['id']])->one();
-            }else {
+            } else {
                 $cart = Cart::find()->where(['user_id' => \Yii::$app->user->id, 'item_id' => $get['id']])->one();
             }
             if ($cart) {
@@ -121,6 +121,10 @@ class CartController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
         $info = $get['info'];
+        $email = $info['email'];
+        if(User::findOne(['email'=>$email])){
+            return ['status'=>'fail', 'message'=>'Пользователь с таким email уже зарегистрирован, войдите и повторите заказ'];
+        }
         $amount = 0;
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
