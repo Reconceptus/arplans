@@ -70,12 +70,14 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                     <a href="<?= \modules\content\models\ContentBlock::getValue('vk_reviews') ?>" class="read"
                        target="_blank">Читать</a>
                 </div>
-                <div class="project-page--about">
-                    <h3 class="title">О проекте</h3>
-                    <div class="text-box">
-                        <?= $model->description ?>
+                <? if ($model->description): ?>
+                    <div class="project-page--about">
+                        <h3 class="title">О проекте</h3>
+                        <div class="text-box">
+                            <?= $model->description ?>
+                        </div>
                     </div>
-                </div>
+                <? endif; ?>
                 <div class="catalog-actions">
                     <div class="page-arrows"></div>
                     <?= Share::widget(['viewName' => 'catalog']) ?>
