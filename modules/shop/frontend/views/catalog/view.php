@@ -7,13 +7,14 @@
  */
 
 use frontend\widgets\recently\Recently;
+use frontend\widgets\share\Share;
 use modules\shop\widgets\related\Related;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
 /* @var $inCart array */
 $isInCart = array_key_exists($model->id, $inCart);
-$this->title = $model->seo_title??$model->name;
+$this->title = $model->seo_title ?? $model->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
@@ -53,7 +54,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                             </ul>
                         </div>
                         <div class="estimate">
-                            <a href="#" class="btn-add show-modal" data-modal="calculation"><span>Получить точную смету</span></a>
+                            <a href="#" class="btn-add show-modal"
+                               data-modal="calculation"><span>Получить точную смету</span></a>
                         </div>
                     </div>
                 </div>
@@ -65,13 +67,18 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                         </svg>
                     </i>
                     <span class="text">Живые отзывы клиентов Вконтакте</span>
-                    <a href="<?=\modules\content\models\ContentBlock::getValue('vk_reviews')?>" class="read" target="_blank">Читать</a>
+                    <a href="<?= \modules\content\models\ContentBlock::getValue('vk_reviews') ?>" class="read"
+                       target="_blank">Читать</a>
                 </div>
                 <div class="project-page--about">
                     <h3 class="title">О проекте</h3>
                     <div class="text-box">
                         <?= $model->description ?>
                     </div>
+                </div>
+                <div class="catalog-actions">
+                    <div class="page-arrows"></div>
+                    <?= Share::widget(['viewName' => 'catalog']) ?>
                 </div>
             </div>
         </div>
@@ -80,4 +87,4 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 
 <?= Related::widget(['model' => $model, 'favorites' => $favorites, 'inCart' => $inCart]) ?>
 <?= Recently::widget() ?>
-<?=\frontend\widgets\request\Request::widget(['viewName'=>'calculation'])?>
+<?= \frontend\widgets\request\Request::widget(['viewName' => 'calculation']) ?>
