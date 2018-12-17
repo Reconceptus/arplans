@@ -31,9 +31,9 @@ $get = Yii::$app->request->get();
                                                 <div id="keypress" class="range-field"></div>
                                                 <div class="range-inputs">
                                                     от
-                                                    <input type="text" id="input-with-keypress-0">
+                                                    <input type="text" name="minarea" id="input-with-keypress-0">
                                                     до
-                                                    <input type="text" id="input-with-keypress-1">
+                                                    <input type="text" name="maxarea" id="input-with-keypress-1">
                                                     м<sup>2</sup>
                                                 </div>
                                             </div>
