@@ -122,7 +122,7 @@ class CartController extends Controller
         $get = Yii::$app->request->get();
         $info = $get['info'];
         $email = $info['email'];
-        if(User::findOne(['email'=>$email])){
+        if(Yii::$app->user->isGuest && User::findOne(['email'=>$email])){
             return ['status'=>'fail', 'message'=>'Пользователь с таким email уже зарегистрирован, войдите и повторите заказ. Все товары останутся в вашей корзине<br/> <a href="/site/login" target="_blank" style="color:blue">Войти</a>'];
         }
         $amount = 0;
