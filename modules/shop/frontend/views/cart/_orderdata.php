@@ -22,12 +22,13 @@ $totalSum = 0;
                 <div class="form-row-col col-50">
                     <div class="form-row-element">
                         <div class="input">
-                            <?php if($user): ?>
-                            <input type="text" placeholder="*Ф.И.О." name="name"
-                                   value="<?= $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>" id="order-fio">
-                            <? else:?>
+                            <?php if ($user): ?>
+                                <input type="text" placeholder="*Ф.И.О." name="name"
+                                       value="<?= $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>"
+                                       id="order-fio">
+                            <? else: ?>
                                 <input type="text" placeholder="*Ф.И.О." name="name" value="" id="order-fio">
-                            <? endif;?>
+                            <? endif; ?>
                         </div>
                     </div>
                     <div class="form-row-element">
@@ -103,10 +104,12 @@ $totalSum = 0;
                 </div>
                 <div class="form-row-col col-50">
                     <div class="ordering-submit--title">К оплате:</div>
-                    <div class="ordering-submit--subtitle">товаров на сумму <span id="totalsum"><?= $totalSum ?></span></div>
+                    <div class="ordering-submit--subtitle">товаров на сумму <span id="totalsum"><?= $totalSum ?></span>
+                    </div>
                     <div class="form-row-submit">
                         <div class="submit">
-                            <button class="btn btn--og js-order">Перейти к оплате <i class="arrow"></i></button>
+                            <button class="btn btn--og js-order" <?= Yii::$app->user->isGuest ? 'data-guest="1"' : '' ?>>
+                                Перейти к оплате <i class="arrow"></i></button>
                         </div>
                     </div>
                     <div class="form-row-element">
