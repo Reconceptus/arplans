@@ -5,6 +5,8 @@
  * Date: 27.08.2018
  * Time: 15:29
  */
+$min = !empty($get['minarea']) ? intval($get['minarea']) : 0;
+$max = !empty($get['maxarea']) ? intval($get['maxarea']) : 0;
 ?>
     <script>
         var min = <?=$min?>;

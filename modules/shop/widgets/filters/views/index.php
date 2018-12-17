@@ -13,8 +13,6 @@ use modules\shop\models\Catalog;
 
 $get = Yii::$app->request->get();
 $rooms = isset($get['rooms']) ? $get['rooms'] : null;
-$min = !empty($get['minarea']) ? intval($get['minarea']) : 0;
-$max = !empty($get['maxarea']) ? intval($get['maxarea']) : 0;
 ?>
     <div class="custom-row-col col-sidebar">
         <div class="btn-box multiple">
@@ -304,4 +302,4 @@ $max = !empty($get['maxarea']) ? intval($get['maxarea']) : 0;
             </div>
         </div>
     </div>
-<?= $this->render('_js', ['min' => $min, 'max' => $max]) ?>
+<?= $this->render('_js') ?>
