@@ -5,8 +5,12 @@
  * Date: 27.08.2018
  * Time: 15:29
  */
-
-
+?>
+    <script>
+        var min = <?=$min?>;
+        var max = <?=$max?>;
+    </script>
+<?php
 $js = <<<JS
     (function () {
         var keypressSlider = document.getElementById('keypress'),
@@ -15,7 +19,7 @@ $js = <<<JS
             inputs = [input0, input1];
 
         noUiSlider.create(keypressSlider, {
-            start: [40, 300],
+            start: [min?min:40, max?max:300],
             step: 10,
             connect: true,
             range: {

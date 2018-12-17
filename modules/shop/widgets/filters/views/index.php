@@ -13,6 +13,8 @@ use modules\shop\models\Catalog;
 
 $get = Yii::$app->request->get();
 $rooms = isset($get['rooms']) ? $get['rooms'] : null;
+$min = !empty($get['minarea']) ? intval($get['minarea']) : 0;
+$max = !empty($get['maxarea']) ? intval($get['maxarea']) : 0;
 ?>
     <div class="custom-row-col col-sidebar">
         <div class="btn-box multiple">
@@ -40,11 +42,9 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                                     <div id="keypress" class="range-field"></div>
                                                     <div class="range-inputs">
                                                         от
-                                                        <input type="text" name="minarea" id="input-with-keypress-0"
-                                                               value="<?= isset($get['minarea']) ? $get['minarea'] : '' ?>">
+                                                        <input type="text" name="minarea" id="input-with-keypress-0">
                                                         до
-                                                        <input type="text" name="maxarea" id="input-with-keypress-1"
-                                                               value="<?= isset($get['maxarea']) ? $get['maxarea'] : '' ?>">
+                                                        <input type="text" name="maxarea" id="input-with-keypress-1">
                                                         м<sup>2</sup>
                                                     </div>
                                                 </div>
@@ -304,4 +304,4 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
             </div>
         </div>
     </div>
-<?= $this->render('_js') ?>
+<?= $this->render('_js', ['min' => $min, 'max' => $max]) ?>
