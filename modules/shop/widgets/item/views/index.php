@@ -13,9 +13,12 @@ use modules\shop\models\Item;
 /* @var $get array */
 /* @var $isInCart bool */
 $image = $model->getMainImage(true);
-?>
+$getString = '';
+foreach ($get as $k => $param) {
+    $getString .= $k . '=' . $param . '&';
+} ?>
 <div class="projects-item--wrap">
-    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
+    <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug . '?' . $getString]) ?>"
        class="projects-item--preview">
         <div class="bg" role="img"
              aria-label="<?= $image && $image->image ? $image->alt : '' ?>" <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
