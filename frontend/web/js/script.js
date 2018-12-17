@@ -118,6 +118,7 @@ $(function () {
     $(document).on('click', '.js-order', function () {
         var button = $(this);
         button.hide();
+        var isGuest = button.data('guest');
         var items = [];
         var services = [];
         var reEmail = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,5}$/i;
@@ -157,6 +158,9 @@ $(function () {
             project.alertMessage('Заполнены не все поля');
             button.show();
             return false;
+        }
+        if(isGuest>0){
+            project.alertMessage('Подождите', 'сейчас вы будете перенаправлены на страницу оплаты');
         }
         $.ajax({
             type: 'GET',
