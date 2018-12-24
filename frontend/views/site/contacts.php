@@ -184,7 +184,7 @@ if ($partners): ?>
         <div class="content content--lg">
             <ul>
                 <? foreach ($partners as $partner): ?>
-                        <li><a href="<?= $partner->url ?>"><?= $partner->url ?></a></li>
+                        <li><a href="<?= $partner->url ?>" target="_blank"><?= $partner->url ?></a></li>
                 <? endforeach; ?>
             </ul>
         </div>
