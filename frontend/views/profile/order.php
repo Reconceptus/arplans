@@ -33,7 +33,7 @@ use modules\shop\models\Order; ?>
             <div class="compare-table--part part-total">
                 <dl>
                     <dd>Код отслеживания:</dd>
-                    <dt><?= $model->track ?> руб.</dt>
+                    <dt><?= $model->track ?></dt>
                 </dl>
             </div>
         <? endif; ?>
