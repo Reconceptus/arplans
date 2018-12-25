@@ -103,7 +103,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                            <p>Ваш заказ №<?=$model->id ?> оформлен и передан в работу</p>
+                                                            <p>Вашему заказу №<?=$model->id ?> присвоен треккод <?=$model->track?></p>
                                                         </td>
                                                     </tr>
                                                     </tbody>
