@@ -87,7 +87,7 @@
                                                     <tr>
                                                         <td align="center" style="height: 18px; font-size: 18px; line-height: 18px;">
                                                             <a href="<?=Yii::$app->request->getHostInfo()?>" style="color: #21202e; text-decoration: none;" target="_blank">
-                                                                <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="https://reconceptus.github.io/Arplans/dev/build/assets/images/logo.png" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
+                                                                <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="<?=Yii::$app->request->getHostInfo()?>/svg/partials/logo.svg" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
                                                             </a>
                                                         </td>
                                                     </tr>
