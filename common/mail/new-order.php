@@ -82,16 +82,10 @@
                                 <td style="padding-bottom: 20px; border-left-style:solid; border-left-width: 1px; border-left-color: #F0F1F3; border-right-style:solid; border-right-width: 1px; border-right-color: #F0F1F3; border-bottom-style:solid; border-bottom-width: 1px; border-bottom-color: #F0F1F3;">
                                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                         <tr>
-                                            <td align="center" style="padding-top: 24px;">
-                                                <table width="90%" cellspacing="0" cellpadding="0" border="0">
-                                                    <tr>
-                                                        <td align="center" style="height: 18px; font-size: 18px; line-height: 18px;">
-                                                            <a href="<?=Yii::$app->request->getHostInfo()?>" style="color: #21202e; text-decoration: none;" target="_blank">
-                                                                <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="<?=Yii::$app->request->getHostInfo()?>/svg/partials/logo.svg" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                            <td align="center" style="height: 18px; font-size: 18px; line-height: 18px;">
+                                                <a href="<?=Yii::$app->request->getHostInfo()?>" style="color: #21202e; text-decoration: none;" target="_blank">
+                                                    <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="https://reconceptus.github.io/Arplans/dev/build/assets/images/logo.png" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
