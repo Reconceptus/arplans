@@ -29,6 +29,14 @@ use modules\shop\models\Order; ?>
                 <dt><?= $model->price ?> руб.</dt>
             </dl>
         </div>
+        <? if ($model->track): ?>
+            <div class="compare-table--part part-total">
+                <dl>
+                    <dd>Код отслеживания:</dd>
+                    <dt><?= $model->track ?> руб.</dt>
+                </dl>
+            </div>
+        <? endif; ?>
         <div class="compare-table--part part-total">
             <dl>
                 <dd>Статус:</dd>
