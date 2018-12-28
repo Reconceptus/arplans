@@ -53,6 +53,7 @@ class OrderController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $partners = ArrayHelper::merge([0 => ''], Partner::getUserList());
         $query = Order::find()->alias('o')
             ->innerJoin(User::tableName() . ' u', 'o.user_id=u.id')

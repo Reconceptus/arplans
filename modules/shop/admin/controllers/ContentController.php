@@ -50,6 +50,7 @@ class ContentController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = ContentBlock::find()
             ->select(['page', 'page_title', 'page_url'])
             ->where(['not in', 'page', ['main', 'about', 'contacts', 'collaboration']])

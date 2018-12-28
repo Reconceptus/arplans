@@ -31,7 +31,7 @@ $columns = [
     [
         'dataProvider' => $dataProvider,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/content/page', 'page' => $model->page]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/shop/content/page', 'page' => $model->page]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns

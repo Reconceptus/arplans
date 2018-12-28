@@ -76,6 +76,7 @@ class ServiceController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Service::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query

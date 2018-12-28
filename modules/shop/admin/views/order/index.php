@@ -117,7 +117,7 @@ $columns = [
         'filterModel' => $filterModel,
         'rowOptions' => function ($model, $key, $index, $grid) {
             return [
-                'onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/order/update', 'id' => $model->id]) . '"',
+                'onclick' => 'window.location = "' . Url::to(['/shop/order/update', 'id' => $model->id]) . '"',
                 'style' => $model->type === 1 && $model->user->partner ? 'color:blue' : ''
             ];
         },

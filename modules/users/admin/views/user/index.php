@@ -51,7 +51,7 @@ $columns = [
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-remove"></span>', Url::to([
-                    '/admin/modules/users/user/delete',
+                    '/users/user/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -64,13 +64,13 @@ $columns = [
 ];
 ?>
     <h1><?= $this->title ?></h1>
-<?= Html::a('Add user', Url::to(['/admin/modules/users/user/create', 'back' => Yii::$app->request->absoluteUrl]), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Add user', Url::to(['/users/user/create', 'back' => Yii::$app->request->absoluteUrl]), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= GridView::widget([
     'id'           => 'user-list',
     'filterModel'  => $filterModel,
     'dataProvider' => $dataProvider,
     'rowOptions'   => function ($model, $key, $index, $grid) {
-        return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/users/user/update', 'id' => $model->id, 'back' => Yii::$app->request->absoluteUrl]) . '"'];
+        return ['onclick' => 'window.location = "' . Url::to(['/users/user/update', 'id' => $model->id, 'back' => Yii::$app->request->absoluteUrl]) . '"'];
     },
     'layout'       => '{items}{pager}',
     'columns'      => $columns,

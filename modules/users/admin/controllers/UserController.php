@@ -48,6 +48,7 @@ class UserController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $filterModel = new User();
         $query = User::find()->alias('u')
             ->leftJoin(Profile::tableName() . ' p', 'u.id = p.user_id');
