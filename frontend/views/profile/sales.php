@@ -8,7 +8,8 @@
 
 /* @var $models \modules\shop\models\Order[] */
 $this->title = 'Мои продажи';
-?>
+
+use modules\shop\models\Order; ?>
 
 <div class="section site-profile">
     <div class="content content--lg mobile-wide">
@@ -33,7 +34,7 @@ $this->title = 'Мои продажи';
                                 <td><?= $model->id ?></td>
                                 <td><?= $model->price ?></td>
                                 <td><?= $model->partner_percent ?></td>
-                                <td><?= $model->payment_status ? 'Оплачено' : 'Не оплачено' ?></td>
+                                <td><?= in_array($model->status,[Order::STATUS_NEW, Order::STATUS_CANCEL])  ? 'Не оплачен' : 'Оплачен' ?></td>
                             </tr>
                         <? endforeach; ?>
                         </tbody>
