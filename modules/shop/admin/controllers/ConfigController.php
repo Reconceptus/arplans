@@ -50,6 +50,7 @@ class ConfigController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Config::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query

@@ -73,6 +73,7 @@ class CategoryController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Category::find();
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
