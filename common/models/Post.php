@@ -2,37 +2,53 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "post".
  *
- * @property int       $id
- * @property string    $slug
- * @property string    $name
- * @property string    $text
- * @property string    $title
- * @property string    $keywords
- * @property string    $description
- * @property int       $author_id
- * @property string    $image
- * @property string    $created_at
- * @property string    $updated_at
- * @property int       $status
- * @property int       $on_main
- * @property int       $sort
- * @property int       $to_menu
- * @property string    $short_description
- * @property int       $on_main_top
+ * @property int $id
+ * @property string $slug
+ * @property string $name
+ * @property string $text
+ * @property string $title
+ * @property string $keywords
+ * @property string $description
+ * @property int $author_id
+ * @property string $image
+ * @property string $created_at
+ * @property string $updated_at
+ * @property int $status
+ * @property int $on_main
+ * @property int $sort
+ * @property int $to_menu
+ * @property string $short_description
+ * @property int $on_main_top
  *
  * @property Comment[] $comments
- * @property User      $author
+ * @property User $author
  * @property PostTag[] $postTags
  */
 class Post extends \yii\db\ActiveRecord
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_NOT_PUBLISHED = 0;
+
+    public static function findActive()
+    {
+        return new PostQuery(get_called_class());
+    }
+
+    private $_url;
+
+    public function getUrl()
+    {
+        if ($this->_url === null)
+            $this->_url = Url::to('/blog/' . $this->slug);
+        return $this->_url;
+    }
 
     /**
      * {@inheritdoc}
@@ -180,5 +196,14 @@ class Post extends \yii\db\ActiveRecord
             }
         }
         return ['next' => $next ?? null, 'prev' => $prev ?? null];
+    }
+}
+
+class PostQuery extends ActiveQuery
+{
+    public function active()
+    {
+        $this->andWhere(['status' => Post::STATUS_PUBLISHED]);
+        return $this;
     }
 }

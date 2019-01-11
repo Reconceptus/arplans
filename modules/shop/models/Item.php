@@ -5,6 +5,7 @@ namespace modules\shop\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "shop_item".
@@ -66,6 +67,20 @@ class Item extends \yii\db\ActiveRecord
     const IS_NEW = 1;
 
     public $cost;
+
+    public static function findActive()
+    {
+        return new ItemQuery(get_called_class());
+    }
+
+    private $_url;
+
+    public function getUrl()
+    {
+        if ($this->_url === null)
+            $this->_url = Url::to('/shop/' . $this->category->slug . '/' . $this->slug);
+        return $this->_url;
+    }
 
     public function attributes()
     {
@@ -239,8 +254,6 @@ class Item extends \yii\db\ActiveRecord
     }
 
 
-
-
     /**
      * @param Category|ActiveRecord $category
      * @param array $get
@@ -412,16 +425,6 @@ class Item extends \yii\db\ActiveRecord
     }
 
     /**
-     * Находит активный товар
-     * @param $id
-     * @return array|null|ActiveRecord|Item
-     */
-    public static function findActive($id)
-    {
-        return self::find()->where(['id' => intval($id), 'is_active' => self::IS_ACTIVE, 'is_deleted' => self::IS_NOT_DELETED])->one();
-    }
-
-    /**
      * Цена со скидкой
      * @return float
      */
@@ -429,5 +432,14 @@ class Item extends \yii\db\ActiveRecord
     {
         $price = $this->price - $this->discount;
         return $price >= 0 ? $price : 0;
+    }
+}
+
+class ItemQuery extends ActiveQuery
+{
+    public function active()
+    {
+        $this->andWhere(['is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED]);
+        return $this;
     }
 }
