@@ -33,7 +33,7 @@ class ItemController extends ActiveController
             $inCart = [];
         }
         $partner = \Yii::$app->user->identity->partner;
-        if ($partner) {
+        if ($partner && $partner->is_active && !$partner->is_deleted) {
             $categories = $partner->categories;
             $categoriesArray = ArrayHelper::map($categories, 'id', 'name');
             if (isset($get['category'])) {
