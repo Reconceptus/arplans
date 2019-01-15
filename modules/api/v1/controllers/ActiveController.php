@@ -18,15 +18,15 @@ class ActiveController extends MainActiveController
     {
         $behaviors = array_merge(
             ['corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
+                'class'   => \yii\filters\Cors::className(),
                 'actions' => [
                     'incoming' => [
-                        'Origin' => ['*'],
-                        'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-                        'Access-Control-Request-Headers' => ['*'],
+                        'Origin'                           => ['*'],
+                        'Access-Control-Request-Method'    => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+                        'Access-Control-Request-Headers'   => ['*'],
                         'Access-Control-Allow-Credentials' => null,
-                        'Access-Control-Max-Age' => 86400,
-                        'Access-Control-Expose-Headers' => [],
+                        'Access-Control-Max-Age'           => 86400,
+                        'Access-Control-Expose-Headers'    => [],
                     ],
                 ],
             ],
