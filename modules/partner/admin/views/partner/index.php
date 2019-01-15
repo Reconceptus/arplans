@@ -27,6 +27,9 @@ $columns = [
         'attribute' => 'url',
     ],
     [
+        'attribute' => 'api_url',
+    ],
+    [
         'header' => 'Представитель',
         'format' => 'html',
         'value'  => function ($model) {

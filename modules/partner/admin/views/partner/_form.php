@@ -27,6 +27,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <div class="col-md-6">
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'url') ?>
+            <?= $form->field($model, 'api_url') ?>
             <?= $form->field($model, 'contract') ?>
             <?= $form->field($model, 'email') ?>
             <?= $form->field($model, 'contacts') ?>

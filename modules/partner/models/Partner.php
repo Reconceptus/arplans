@@ -43,7 +43,7 @@ class Partner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'name', 'email', 'contacts', 'contract'], 'string', 'max' => 255],
+            [['url', 'api_url', 'name', 'email', 'contacts', 'contract'], 'string', 'max' => 255],
             ['email', 'email'],
             ['agent_id', 'integer'],
             [['is_active', 'is_deleted', 'send_notify'], 'boolean'],
@@ -59,6 +59,7 @@ class Partner extends \yii\db\ActiveRecord
         return [
             'id'          => 'ID',
             'url'         => 'Сайт',
+            'api_url'     => 'Url API',
             'name'        => 'Название',
             'email'       => 'Email для заявок',
             'contacts'    => 'Контакты',
