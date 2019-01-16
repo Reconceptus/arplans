@@ -152,6 +152,7 @@ class CartController extends ActiveController
                     $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
                     $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                     $mail->setTo($order->email);
+                    $mail->setCc(Yii::$app->params['requestEmail']);
                     $mail->setSubject('Новый заказ');
                     $mail->send();
                     return ['status' => 'success', 'orderId' => $order->id];
