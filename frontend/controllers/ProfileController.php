@@ -74,7 +74,7 @@ class ProfileController extends Controller
      */
     public function actionSales()
     {
-        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->all();
+        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->orderBy(['id'=>SORT_DESC])->all();
         return $this->render('sales', ['models' => $models]);
     }
 }
