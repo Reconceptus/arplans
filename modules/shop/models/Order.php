@@ -235,7 +235,7 @@ class Order extends \yii\db\ActiveRecord
     {
         $amount = 0;
         foreach ($data as $item) {
-            $itemModel = Item::findActive($item['id']);
+            $itemModel = Item::findActiveItem($item['id']);
             if ($itemModel) {
                 $albumPrice = intval(Config::getValue('albumPrice'));
                 $itemPrice = $itemModel->getPrice();
