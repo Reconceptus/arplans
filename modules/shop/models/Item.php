@@ -433,6 +433,16 @@ class Item extends \yii\db\ActiveRecord
         $price = $this->price - $this->discount;
         return $price >= 0 ? $price : 0;
     }
+
+    /**
+     * Находит активный товар
+     * @param $id
+     * @return array|null|ActiveRecord|Item
+     */
+    public static function findActiveItem($id)
+    {
+        return self::find()->where(['id' => intval($id), 'is_active' => self::IS_ACTIVE, 'is_deleted' => self::IS_NOT_DELETED])->one();
+    }
 }
 
 class ItemQuery extends ActiveQuery
