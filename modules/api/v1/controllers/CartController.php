@@ -169,9 +169,12 @@ class CartController extends ActiveController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new Request();
-        $post = Yii::$app->request->post();
-        if (isset($post['Request']['accept'])) {
-            $post['Request']['accept'] = 1;
+        $get = Yii::$app->request->get();
+        if (!$get) {
+            return ['status' => 'fail', 'message' => 'Ошибка при отправке данных'];
+        }
+        if (isset($get['Request']['accept'])) {
+            $get['Request']['accept'] = 1;
         };
         $user = Yii::$app->user->identity;
         /* @var $user User */
@@ -179,7 +182,7 @@ class CartController extends ActiveController
         if ($partner) {
             $model->partner_id = $partner->id;
         }
-        if ($model->load($post)) {
+        if ($model->load($get)) {
             $file = UploadedFile::getInstance($model, 'file');
             if ($model->save()) {
                 $mail = Yii::$app->mailer->compose('request', ['model' => $model])
