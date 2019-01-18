@@ -66,7 +66,7 @@ class Partner extends \yii\db\ActiveRecord
             'contract'    => 'Номер договора',
             'agent_id'    => 'Представитель',
             'is_active'   => 'Активен',
-            'send_notify' => 'Посылать уведомления о заявках партнеру',
+            'send_notify' => 'Посылать заявки на просчет',
         ];
     }
 
