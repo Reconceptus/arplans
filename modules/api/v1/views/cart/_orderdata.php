@@ -15,7 +15,7 @@ $totalSum = 0;
 ?>
 <div class="basket-form--section">
     <section class="basket-form--ordering">
-        <h2 class="title title-sm">3. Оформление заказа</h2>
+        <h2 class="title title-sm">2. Оформление заказа</h2>
         <div class="ordering-data custom-form">
             <div class="form-title">Заполните данные:</div>
             <div class="form-row">
