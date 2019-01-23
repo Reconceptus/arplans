@@ -54,7 +54,7 @@ class PartnerController extends AdminController
      */
     public function actionIndex()
     {
-        $query = Partner::find()->where(['is_deleted' => Partner::IS_NOT_DELETED, 'is_active' => Partner::IS_ACTIVE]);
+        $query = Partner::find()->where(['is_deleted' => Partner::IS_NOT_DELETED]);
         $filterModel = new Partner();
         $filter = Yii::$app->request->get('Builder');
         if (isset($filter['name'])) {
