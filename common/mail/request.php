@@ -46,5 +46,5 @@ $type = intval($model->type);
 <? endif; ?>
 
 <? if ($model->partner_id): ?>
-    Заявка с сайта партнера <?= $model->partner->name ?>
+    Заявка с сайта партнера <?= $model->partner->name . ' (' . $model->partner->url . ')' ?>
 <? endif; ?>
