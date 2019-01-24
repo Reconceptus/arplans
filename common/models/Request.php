@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use modules\partner\models\Partner;
+
 /**
  * This is the model class for table "request".
  *
@@ -18,6 +20,7 @@ namespace common\models;
  * @property int $type
  * @property int $partner_id
  * @property int $accept
+ * @property Partner $partner
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -91,5 +94,13 @@ class Request extends \yii\db\ActiveRecord
             'partner_id' => 'Партнер',
             'accept'     => 'Согласие на обработку',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPartner()
+    {
+        return $this->hasOne(Partner::className(), ['id' => 'partner_id']);
     }
 }
