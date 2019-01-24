@@ -33,14 +33,18 @@ $type = intval($model->type);
 <? endif; ?>
     <h2>Текст</h2>
     <p><?= $model->text ?></p>
-<? if (intval($model->url)>0): ?>
+<? if (intval($model->url) > 0): ?>
     <?
     $item = \modules\shop\models\Item::findOne(intval($model->url));
     ?>
     <? if ($item): ?>
-        Смету треюуется посчитать на <a
+        Требуется просчитать смету на проект <a
                 href="<?= Yii::$app->request->getHostInfo() . '/shop/' . $item->category->slug . '/' . $item->slug ?>"><?= $item->name ?></a>
     <? endif; ?>
 <? else: ?>
     Запрос поступил со страницы <a href="<?= $model->url ?>"><?= $model->url ?></a>
+<? endif; ?>
+
+<? if ($model->partner_id): ?>
+    Заявка с сайта партнера <?= $model->partner->name ?>
 <? endif; ?>
