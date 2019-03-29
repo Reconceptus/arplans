@@ -7,6 +7,9 @@
  */
 
 /* @var $model \modules\shop\models\Service */
+$this->title = $model->seo_title;
+$this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
+$this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
     <div class="section service--head">
         <div class="content content--lg mobile-wide">
@@ -54,7 +57,8 @@
                     </ul>
                 <? endif; ?>
                 <div class="custom-list--info">
-                    <div class="price"><?= intval($model->price) ?> <span class="pt-sans">&#8381;</span> <?= $model->measure ?></div>
+                    <div class="price"><?= intval($model->price) ?> <span
+                                class="pt-sans">&#8381;</span> <?= $model->measure ?></div>
                     <p><strong>Срок:</strong> <?= $model->time ?></p>
                     <a href="#" class="order btn-square-min show-modal" data-modal="consultation">Заказать услугу</a>
                 </div>
