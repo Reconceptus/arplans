@@ -18,17 +18,17 @@ $this->title = 'Сотрудничество';
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= Html::hiddenInput('old_collaboration_image_1', $model->collaboration_image_1) ?>
 <?= Html::hiddenInput('old_collaboration_image_2', $model->collaboration_image_2) ?>
 <?= Html::hiddenInput('old_collaboration_image_3', $model->collaboration_image_3) ?>
 
 <?= $form->field($model, 'collaboration_image_1')->fileInput(['accept' => 'image/*']) ?>
-<? if ($model->collaboration_image_1): ?>
+<?php if ($model->collaboration_image_1): ?>
     <div class="image-admin-preview">
         <?= Html::img($model->collaboration_image_1, ['class' => 'img-admin']) ?>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="clearfix"></div>
 <div class="post-form">
     <div class="row">
@@ -40,11 +40,11 @@ $this->title = 'Сотрудничество';
 </div>
 
 <?= $form->field($model, 'collaboration_image_2')->fileInput(['accept' => 'image/*']) ?>
-<? if ($model->collaboration_image_2): ?>
+<?php if ($model->collaboration_image_2): ?>
     <div class="image-admin-preview">
         <?= Html::img($model->collaboration_image_2, ['class' => 'img-admin']) ?>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="post-form">
     <div class="row">
         <div class="col-lg-10">
@@ -55,11 +55,11 @@ $this->title = 'Сотрудничество';
 </div>
 
 <?= $form->field($model, 'collaboration_image_3')->fileInput(['accept' => 'image/*']) ?>
-<? if ($model->collaboration_image_3): ?>
+<?php if ($model->collaboration_image_3): ?>
     <div class="image-admin-preview">
         <?= Html::img($model->collaboration_image_3, ['class' => 'img-admin']) ?>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="post-form">
     <div class="row">
         <div class="col-lg-10">
@@ -80,7 +80,7 @@ $this->title = 'Сотрудничество';
     </div>
 </div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 
 <div class="buttons-panel">
     <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>

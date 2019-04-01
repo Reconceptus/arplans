@@ -17,7 +17,7 @@
             <div class="content content--md">
                 <div class="request-form">
                     <div id="senden-village"></div>
-                    <? $form = \yii\widgets\ActiveForm::begin([
+                    <?php $form = \yii\widgets\ActiveForm::begin([
                         'options' => [
                             'enctype' => 'multipart/form-data',
                             'id'      => 'add-form'
@@ -293,7 +293,7 @@
 
                     </div>
 
-                    <? \yii\widgets\ActiveForm::end() ?>
+                    <?php \yii\widgets\ActiveForm::end() ?>
                 </div>
             </div>
 
@@ -301,8 +301,7 @@
     </div>
 </div>
 <?= \frontend\widgets\recently\Recently::widget() ?>
-<?
-$js = <<<JS
+<?php $js = <<<JS
  
     $('.request-form form').validate({
         onfocusout: false,

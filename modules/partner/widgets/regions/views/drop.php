@@ -62,7 +62,7 @@ if (isset($get['eco'])) {
                 'selector' => $selector
             ]), ['class' => 'js-region-selector']) ?>
         </li>
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <li>
                 <?= \yii\helpers\Html::a($model->name, \yii\helpers\Url::to(['',
                     'region'   => $model->id,
@@ -77,6 +77,6 @@ if (isset($get['eco'])) {
                     'selector' => $selector
                 ]), ['class' => 'js-region-selector']) ?>
             </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </div>

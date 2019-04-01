@@ -227,11 +227,11 @@ $get = Yii::$app->request->get();
                                         </div>
                                     </div>
                                 </div>
-                                <? foreach ($filters as $catalog): ?>
-                                    <? if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
+                                <?php foreach ($filters as $catalog): ?>
+                                    <?php if ($catalog->view_type === Catalog::VIEW_CHECKBOX): ?>
                                         <?= $this->render('_checkbox', ['catalog' => $catalog]) ?>
-                                    <? endif; ?>
-                                <? endforeach; ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                                 <div class="catalog-filters--section show-more-parent">
                                     <div class="catalog-filters--head">
                                         <h3 class="form-title">Подборки</h3>

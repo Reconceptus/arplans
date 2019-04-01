@@ -16,19 +16,19 @@ $this->title = 'Редактирование параметра';
 
     <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="post-form" style="margin-top: 30px;">
-        <? if ($model->isNewRecord): ?>
+        <?php if ($model->isNewRecord): ?>
             <?= $form->field($model, 'page') ?>
             <?= $form->field($model, 'page_title') ?>
             <?= $form->field($model, 'page_url') ?>
             <?= $form->field($model, 'slug') ?>
             <?= $form->field($model, 'name') ?>
-        <? else: ?>
+        <?php else: ?>
             <p style="font-weight: bold"><?= $model->name ?></p>
-        <? endif; ?>
+        <?php endif; ?>
         <?= $form->field($model, 'text')->textarea(['rows' => 4])->label(false) ?>
     </div>
 
 <?= Html::submitButton('Save', ['class' => 'btn btn-admin']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>

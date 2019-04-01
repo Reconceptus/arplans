@@ -14,8 +14,8 @@ use yii\helpers\Url;
 <div class="lang">
     <div class="lang-sign"><?= Yii::$app->language ?></div>
     <div class="lang-select">
-        <? foreach ($langs as $lang): ?>
+        <?php foreach ($langs as $lang): ?>
             <?= Html::a($lang, Url::to([mb_substr(Yii::$app->request->getUrl(), 3), 'language' => $lang]), ['class' => $lang === Yii::$app->language ? 'current' : '']) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>

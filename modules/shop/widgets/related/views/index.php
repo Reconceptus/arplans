@@ -9,16 +9,16 @@
 /* @var $models \modules\shop\models\Item[] */
 /* @var $inCart array */
 ?>
-<? if ($models): ?>
+<?php if ($models): ?>
     <div class="section like-slider">
         <div class="content content--lg">
             <div class="like-slider--wrap">
                 <h3 class="title">Вам могут понравиться</h3>
                 <div class="like-slider--carousel" data-owl="likes">
                     <ul class="owl-carousel">
-                        <? foreach ($models as $model): ?>
-                            <? $image = $model->getMainImage(true); ?>
-                            <? $isInCart = array_key_exists($model->id, $inCart); ?>
+                        <?php foreach ($models as $model): ?>
+                            <?php $image = $model->getMainImage(true); ?>
+                            <?php $isInCart = array_key_exists($model->id, $inCart); ?>
                             <li class="projects-item">
                                 <div class="projects-item--wrap">
                                     <a href="<?= \yii\helpers\Url::to(['/shop/' . $model->category->slug . '/' . $model->slug, $get ?? []]) ?>"
@@ -44,9 +44,9 @@
                                     </a>
                                     <div class="projects-item--actions">
                                         <div class="prices">
-                                            <? if ($model->discount > 0): ?>
+                                            <?php if ($model->discount > 0): ?>
                                                 <div class="price old"><?= $model->price ?> &#8381;</div>
-                                            <? endif; ?>
+                                            <?php endif; ?>
                                             <div class="price"><?= $model->getPrice() ?>&#8381;
                                             </div>
                                         </div>
@@ -62,10 +62,10 @@
                                     </div>
                                 </div>
                             </li>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>

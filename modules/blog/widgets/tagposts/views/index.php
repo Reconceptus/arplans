@@ -8,13 +8,13 @@
 
 /* @var $models \common\models\Post[] */
 ?>
-<? if ($models): ?>
+<?php if ($models): ?>
     <div class="section blog-slider simple">
         <div class="content content--lg">
             <div class="blog-slider--wrap">
                 <div class="blog-slider--carousel" data-owl="blog">
                     <ul class="owl-carousel">
-                        <? foreach ($models as $model):?>
+                        <?php foreach ($models as $model):?>
                         <li class="item">
                             <a href="/blog/<?=$model->slug?>" class="blog-slider--item">
                                 <div class="blog-slider--item-figure" style="background-image: url('<?= $model->image ?>')"></div>
@@ -30,4 +30,4 @@
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>

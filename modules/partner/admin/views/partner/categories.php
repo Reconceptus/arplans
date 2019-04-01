@@ -17,12 +17,12 @@ $this->title = 'Категории для партнера ' . $model->name;
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
-            <? foreach ($categories as $category): ?>
+            <?php foreach ($categories as $category): ?>
                 <div class="form-group">
                     <?= Html::checkbox($category->slug, $category->isAllowToPartner($model->id), ['id' => $category->slug, 'class' => 'js-category-checkbox', 'data-category' => $category->id, 'data-partner' => $model->id]) ?>
                     <?= Html::label($category->name, '#' . $category->slug) ?>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

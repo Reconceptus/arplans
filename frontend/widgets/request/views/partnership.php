@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
             <h3 class="modal-title">Запрос на сотрудничество</h3>
             <div class="modal-form">
                 <div id="senden-part"></div>
-                <? $form = ActiveForm::begin([
+                <?php $form = ActiveForm::begin([
                     'action'  => '#',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
                 <div class="modal-form--submit">
                     <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt submit-partner']) ?>
                 </div>
-                <? ActiveForm::end() ?>
+                <?php ActiveForm::end() ?>
             </div>
             <div class="modal-thanks">
                 <h4 class="modal-thanks--title">Спасибо!</h4>

@@ -23,7 +23,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <?= $this->render('_files', ['model' => $model]) ?>
 <?= \frontend\widgets\benefit\Benefit::widget(['model' => $model]) ?>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <?= Html::hiddenInput('new-images', '', ['class' => 'new-images-input']) ?>
     <?= Html::hiddenInput('new-files', '', ['class' => 'new-files-input']) ?>
@@ -66,7 +66,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Услуга еще не добавлена' : '' ?>">
     <?= Html::a('Отмена', Url::to('/admin/modules/shop/service/'), ['class' => 'btn btn-admin']) ?>

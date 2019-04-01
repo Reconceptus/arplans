@@ -18,12 +18,12 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                     <h1 class="title title-lg"><?= $model->name ?></h1>
                     <h2 class="subtitle"><?= $model->short_description ?></h2>
                 </div>
-                <? if ($model->images): ?>
+                <?php if ($model->images): ?>
                     <div class="service--slider">
                         <div class="content content--md">
                             <div class="services-slider" data-owl="objects">
                                 <ul class="owl-carousel">
-                                    <? foreach ($model->images as $image): ?>
+                                    <?php foreach ($model->images as $image): ?>
                                         <li class="object-item" data-num="1">
                                             <div class="projects-item--wrap">
                                                 <div class="projects-item--preview">
@@ -33,12 +33,12 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                                                 </div>
                                             </div>
                                         </li>
-                                    <? endforeach; ?>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -46,16 +46,16 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
     <div class="section custom-list">
         <div class="content content--md">
             <div class="custom-list--flexed">
-                <? if ($model->benefits): ?>
+                <?php if ($model->benefits): ?>
                     <ul class="col-2">
-                        <? foreach ($model->benefits as $benefit): ?>
+                        <?php foreach ($model->benefits as $benefit): ?>
                             <li>
                                 <div class="title"><?= $benefit->name ?></div>
                                 <?= $benefit->text ?>
                             </li>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
-                <? endif; ?>
+                <?php endif; ?>
                 <div class="custom-list--info">
                     <div class="price"><?= intval($model->price) ?> <span
                                 class="pt-sans">&#8381;</span> <?= $model->measure ?></div>
@@ -71,13 +71,12 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
         <div class="text-box">
             <?= $model->description ?>
         </div>
-        <? if ($model->files): ?>
+        <?php if ($model->files): ?>
             <div class="examples-box">
                 <h3 class="title">Примеры:</h3>
                 <ul class="examples">
-                    <? foreach ($model->files as $file): ?>
-                        <?
-                        $ext = explode('.', $file->file);
+                    <?php foreach ($model->files as $file): ?>
+                        <?php $ext = explode('.', $file->file);
                         $name = explode('/', $file->file);
                         ?>
                         <li>
@@ -91,10 +90,10 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                                 <span><?= str_replace('_', ' ', end($name)) ?></span>
                             </a>
                         </li>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
     </div>
 
 <?= \modules\shop\widgets\services\Services::widget(['id' => $model->id, 'viewName' => 'another']) ?>

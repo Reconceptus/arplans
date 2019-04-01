@@ -6,9 +6,14 @@
  * Time: 15:47
  */
 /* @var $model \modules\shop\models\Order */
-$services = \yii\helpers\ArrayHelper::map($model->services, 'id', 'name');
 
-use modules\shop\models\Order; ?>
+use modules\shop\models\Order;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$services = ArrayHelper::map($model->services, 'id', 'name');
+?>
 <div class="compare-table">
     <div class="compare-table--total">
         <div class="compare-table--part part-number">
@@ -29,26 +34,25 @@ use modules\shop\models\Order; ?>
                 <dt><?= $model->price ?> руб.</dt>
             </dl>
         </div>
-        <? if ($model->track): ?>
+        <?php if ($model->track): ?>
             <div class="compare-table--part part-total">
                 <dl>
                     <dd>Код отслеживания:</dd>
                     <dt><?= $model->track ?></dt>
                 </dl>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
         <div class="compare-table--part part-total">
             <dl>
                 <dd>Статус:</dd>
-                <dt><?= \modules\shop\models\Order::STATUSES[$model->status] ?></dt>
+                <dt><?= Order::STATUSES[$model->status] ?></dt>
             </dl>
         </div>
-        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
+        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? Html::a('Оплатить', Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
-        <? foreach ($model->orderItems as $oi): ?>
-            <?
-            $item = $oi->item;
+        <?php foreach ($model->orderItems as $oi): ?>
+            <?php $item = $oi->item;
             $url = '/shop/' . $item->category->slug . '/' . $item->slug;
             ?>
             <div class="compare-table--item">
@@ -113,11 +117,11 @@ use modules\shop\models\Order; ?>
 
                 </div>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
-    <? if ($services): ?>
+    <?php if ($services): ?>
         <div class="compare-table--addition">
             Указаны дополнительные услуги: <?= implode(', ', $services) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 </div>

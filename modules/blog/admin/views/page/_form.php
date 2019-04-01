@@ -20,7 +20,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
 <!--    --><?//= Html::hiddenInput('old-image', $model->image, ['class' => 'old-image-input']) ?>
     <?= $form->field($model, 'slug') ?>
@@ -57,7 +57,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Страница еще не опубликована' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайт', Url::to('/page/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>

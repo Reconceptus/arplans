@@ -18,15 +18,15 @@ use modules\shop\models\Item;
         <div class="bg"
              style="background-image: url(<?= Yii::$app->request->getHostInfo() . $model->getMainImage() ?>)"></div>
         <div class="hash">
-            <? if ($model->is_new): ?>
+            <?php if ($model->is_new): ?>
                 <span class="new">новинка</span>
-            <? endif; ?>
-            <? if ($model->discount > 0): ?>
+            <?php endif; ?>
+            <?php if ($model->discount > 0): ?>
                 <span class="sale">скидка</span>
-            <? endif; ?>
-            <? if (!$model->price): ?>
+            <?php endif; ?>
+            <?php if (!$model->price): ?>
                 <span class="free">бесплатно</span>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
         <div class="data">
             <span class="index"><?= $model->name ?></span>
@@ -48,9 +48,9 @@ use modules\shop\models\Item;
     </a>
     <div class="projects-item--actions">
         <div class="prices">
-            <? if ($model->discount > 0): ?>
+            <?php if ($model->discount > 0): ?>
                 <div class="price old"><?= $model->price ?> &#8381;</div>
-            <? endif; ?>
+            <?php endif; ?>
             <div class="price"><?= $model->getPrice() ?>&#8381;
             </div>
         </div>

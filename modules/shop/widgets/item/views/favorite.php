@@ -22,15 +22,15 @@ $image = $model->getMainImage(true);
             <div class="bg" role="img"
                  aria-label="<?= $image && $image->image ? $image->alt:'' ?>"  <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
             <div class="hash">
-                <? if ($model->is_new): ?>
+                <?php if ($model->is_new): ?>
                     <span class="new">новинка</span>
-                <? endif; ?>
-                <? if ($model->discount > 0): ?>
+                <?php endif; ?>
+                <?php if ($model->discount > 0): ?>
                     <span class="sale">скидка</span>
-                <? endif; ?>
-                <? if (!$model->price): ?>
+                <?php endif; ?>
+                <?php if (!$model->price): ?>
                     <span class="free">бесплатно</span>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
             <span class="look data">
                     <span class="look-num"><?= $model->name ?></span>
@@ -44,31 +44,30 @@ $image = $model->getMainImage(true);
             <div>Жилая: <?= $model->live_area ?></div>
             <div>Полезная: <?= $model->useful_area ?></div>
             <div>Общая: <?= $model->common_area ?> м</div>
-            <? if ($size): ?>
+            <?php if ($size): ?>
                 <div><?= $size->name ?></div>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <div class="compare-table--part">
         <div class="projects-item--part-title">Удобства</div>
         <div class="projects-item--info">
-            <? foreach ($model->getComfort() as $item): ?>
+            <?php foreach ($model->getComfort() as $item): ?>
                 <div><?= $item ?></div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="compare-table--part part-rooms">
         <div class="projects-item--part-title">Этажи/комнаты</div>
         <div class="projects-item--info">
-            <?
-            $floors = [];
+            <?php $floors = [];
             if ($model->one_floor) $floors[] = 'одноэтажный';
             if ($model->two_floor) $floors[] = 'двухэтажный';
             ?>
             <div>
-                <? if ($floors): ?>
+                <?php if ($floors): ?>
                     <?= implode(', ', $floors) ?>
-                <? endif; ?>
+                <?php endif; ?>
                 <?= $model->rooms ?> комнаты
             </div>
         </div>

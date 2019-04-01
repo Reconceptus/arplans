@@ -14,7 +14,7 @@ $mainImage = $model->getMainImage(true);
     <div class="content content--md">
         <div class="partner-slider" data-owl="partner">
             <ul class="owl-carousel">
-                <? if ($model->getMainImage()): ?>
+                <?php if ($model->getMainImage()): ?>
                     <li class="object-item" data-num="1">
                         <div class="projects-item--wrap">
                             <div class="projects-item--preview">
@@ -24,9 +24,9 @@ $mainImage = $model->getMainImage(true);
                             </div>
                         </div>
                     </li>
-                <? endif; ?>
-                <? foreach ($model->images as $image): ?>
-                    <? if ($image->id != $model->image_id): ?>
+                <?php endif; ?>
+                <?php foreach ($model->images as $image): ?>
+                    <?php if ($image->id != $model->image_id): ?>
                         <li class="object-item" data-num="<?= ++$index ?>">
                             <div class="projects-item--wrap">
                                 <div class="projects-item--preview">
@@ -36,8 +36,8 @@ $mainImage = $model->getMainImage(true);
                                 </div>
                             </div>
                         </li>
-                    <? endif; ?>
-                <? endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

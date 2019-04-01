@@ -1,5 +1,4 @@
-<?
-/* @var $width */
+<?php /* @var $width */
 /* @var $height */
 /* @var $autoplay */
 /* @var $repeat */

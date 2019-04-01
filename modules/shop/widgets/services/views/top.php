@@ -10,8 +10,8 @@
 <li class="has-drop">
     <a href="#" class="">Услуги+</a>
     <div class="header-top--drop">
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <?= \yii\helpers\Html::a($model->name, \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </li>

@@ -20,9 +20,9 @@ $get = Yii::$app->request->get();
                         <a href="/village/add" class="btn--lt btn">+ добавить свой поселок</a>
                     </div>
                     <form action="/village">
-                        <? if (isset($get['region'])): ?>
+                        <?php if (isset($get['region'])): ?>
                             <input type="hidden" name="region" value="<?= $get['region'] ?>">
-                        <? endif; ?>
+                        <?php endif; ?>
                         <div class="catalog-filters--form scrolled">
                             <div class="filter-form">
                                 <div class="catalog-filters--section show-more-parent show">

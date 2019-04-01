@@ -20,7 +20,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->electric): ?>
+                                    <?php if ($model->electric): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -28,8 +28,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->gas): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->gas): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -37,8 +37,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->water): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->water): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -46,8 +46,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->internet): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->internet): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -55,8 +55,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->gas_boiler): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->gas_boiler): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -64,7 +64,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->territory_control): ?>
+                                    <?php if ($model->territory_control): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -84,8 +84,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->fire_alarm): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->fire_alarm): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -93,8 +93,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->security_alarm): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->security_alarm): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -102,7 +102,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->shop): ?>
+                                    <?php if ($model->shop): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -122,8 +122,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->children_club): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->children_club): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -131,8 +131,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->sports_center): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->sports_center): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -140,8 +140,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->sports_ground): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->sports_ground): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -149,8 +149,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->golf_club): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->golf_club): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -158,8 +158,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->beach): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->beach): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -167,8 +167,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->life_service): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->life_service): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -176,7 +176,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +188,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->forest): ?>
+                                    <?php if ($model->forest): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -196,8 +196,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->reservoir): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->reservoir): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -205,7 +205,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

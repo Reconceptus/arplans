@@ -39,21 +39,33 @@ class PaymentController extends Controller
 
         $paymentObj = Payment::createPayment($order);
         $paymentObj->save();
-
+        $itemsData = [];
+        foreach ($order->orderItems as $item) {
+            $itemsData[] = [
+                'text' => $item->item->name,
+                'quantity' => $item->count,
+                'tax' => 1,
+                'amount' => ['currency' => 'RUB', 'value' => floatval($item->price)],
+            ];
+        }
         $client = new Client();
         $client->setAuth($yaData['shopId'], $yaData['secretKey']);
         $payment = $client->createPayment(
             [
-                'amount'       => [
-                    'value'    => $paymentObj->amount,
+                'amount' => [
+                    'value' => $paymentObj->amount,
                     'currency' => 'RUB',
                 ],
                 'confirmation' => [
-                    'type'       => 'redirect',
+                    'type' => 'redirect',
                     'return_url' => \Yii::$app->request->getHostInfo() . '/shop/payment/return?pid=' . $paymentObj->id,
                 ],
-                'description'  => 'Оплата заказа #' . $paymentObj->order_id . ' в магазине Arplans',
-                'capture'      => true
+                'ym_merchant_receipt' => [
+                    'customerContact' => $order->email,
+                    'items' => $itemsData,
+                ],
+                'description' => 'Оплата заказа #' . $paymentObj->order_id . ' в магазине Arplans',
+                'capture' => true
             ],
             $paymentObj->guid
         );

@@ -16,16 +16,16 @@ $this->title = 'Редактирование параметра';
 
     <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="post-form">
 
         <?= $model->isNewRecord ? $form->field($model, 'slug') : '' ?>
-        <? if (!$model->name): ?>
+        <?php if (!$model->name): ?>
             параметр <?= $model->slug ?>
             <?= $form->field($model, 'name')->label('Введите название параметра') ?>
-        <? endif; ?>
+        <?php endif; ?>
         <?= $form->field($model, 'value')->label($model->name) ?>
     </div>
 
 <?= Html::submitButton('Save', ['class' => 'btn btn-admin']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>

@@ -33,7 +33,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
             <div class="custom-row">
                 <div class="custom-row-col">
                     <div class="catalog show-more-parent">
-                        <? if (false): ?>
+                        <?php if (false): ?>
                             <div class="btn-box">
                                 <div class="show-more btn btn--sort mobile-show">
                                     <span>Сортировать</span>
@@ -53,10 +53,9 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                                     <i class="arrow"></i>
                                 </a>
                             </div>
-                        <? endif; ?>
+                        <?php endif; ?>
                         <div class="catalog-main">
-                            <?
-                            echo ListView::widget([
+                            <?php echo ListView::widget([
                                 'dataProvider' => $dataProvider,
                                 'options'      => [
                                     'tag'   => 'div',

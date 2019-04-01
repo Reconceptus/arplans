@@ -12,39 +12,38 @@ use common\models\Request;
 /* @var $model Request */
 $type = intval($model->type);
 ?>
-<? if (isset($type)): ?>
-    <? if ($type === Request::PAGE_CALCULATION): ?>
+<?php if (isset($type)): ?>
+    <?php if ($type === Request::PAGE_CALCULATION): ?>
         <h2>Запрос сметы</h2>
-    <? elseif ($type === Request::PAGE_CONTACT): ?>
+    <?php elseif ($type === Request::PAGE_CONTACT): ?>
         <h2>Сообщение со страницы контактов</h2>
-    <? elseif ($type === Request::PAGE_PARTNER): ?>
+    <?php elseif ($type === Request::PAGE_PARTNER): ?>
         <h2>Запрос на партнертво</h2>
-    <? else: ?>
+    <?php else: ?>
         <h2>Новое сообщение пользователя</h2>
-    <? endif; ?>
-<? endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
 
-<? if ($model->type === Request::PAGE_CONTACT): ?>
+<?php if ($model->type === Request::PAGE_CONTACT): ?>
     <p>Имя: <?= $model->name ?></p>
     <p>Email: <?= $model->email ?></p>
     <p>Телефон: <?= $model->phone ?></p>
-<? else: ?>
+<?php else: ?>
     <p>Контактная информация: <?= $model->contact ?></p>
-<? endif; ?>
+<?php endif; ?>
     <h2>Текст</h2>
     <p><?= $model->text ?></p>
-<? if (intval($model->url) > 0): ?>
-    <?
-    $item = \modules\shop\models\Item::findOne(intval($model->url));
+<?php if (intval($model->url) > 0): ?>
+    <?php $item = \modules\shop\models\Item::findOne(intval($model->url));
     ?>
-    <? if ($item): ?>
+    <?php if ($item): ?>
         Требуется просчитать смету на проект <a
                 href="<?= Yii::$app->request->getHostInfo() . '/shop/' . $item->category->slug . '/' . $item->slug ?>"><?= $item->name ?></a>
-    <? endif; ?>
-<? else: ?>
+    <?php endif; ?>
+<?php else: ?>
     Запрос поступил со страницы <a href="<?= $model->url ?>"><?= $model->url ?></a>
-<? endif; ?>
+<?php endif; ?>
 
-<? if ($model->partner_id): ?>
+<?php if ($model->partner_id): ?>
     Заявка с сайта партнера <?= $model->partner->name . ' (' . $model->partner->url . ')' ?>
-<? endif; ?>
+<?php endif; ?>

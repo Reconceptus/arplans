@@ -12,9 +12,9 @@ use yii\helpers\Html;
 ?>
 <div class="comments-section">
     <div class="comments">
-        <? foreach ($model->comments as $comment): ?>
+        <?php foreach ($model->comments as $comment): ?>
             <?= $this->render('_comment_box', ['model' => $comment]) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <div class="add-comment" data-lang="<?= Yii::$app->language ?>">
         <div><h2 class="control-label">Leave a reply</h2></div>

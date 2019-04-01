@@ -11,7 +11,7 @@ $models = \common\helpers\FormatHelper::divideArray($models);
 ?>
 <div class="custom-row">
     <div class="custom-row-col col-50">
-        <? foreach ($models[0] as $model): ?>
+        <?php foreach ($models[0] as $model): ?>
             <article>
                 <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '<span class="pt-sans">&nbsp;&#8381;</span> ' . $model->measure . '</h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class' => 'service-link']) ?>
                 <div class="text">
@@ -21,10 +21,10 @@ $models = \common\helpers\FormatHelper::divideArray($models);
                     <?= \yii\helpers\Html::a('Читать полностью', \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?>
                 </div>
             </article>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <div class="custom-row-col col-50">
-        <? foreach ($models[1] as $model): ?>
+        <?php foreach ($models[1] as $model): ?>
             <article>
                 <?= \yii\helpers\Html::a('<h4 class="title">' . $model->name . ', ' . $model->price . '<span class="pt-sans">&nbsp;&#8381;</span> ' . $model->measure . '</h4>', \yii\helpers\Url::to('/shop/service/' . $model->slug), ['class' => 'service-link']) ?>
                 <div class="text">
@@ -34,6 +34,6 @@ $models = \common\helpers\FormatHelper::divideArray($models);
                     <?= \yii\helpers\Html::a('Читать полностью', \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?>
                 </div>
             </article>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>

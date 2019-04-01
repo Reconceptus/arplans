@@ -12,9 +12,9 @@
         <h3 class="title">Недавно смотрели</h3>
         <div class="projects-slider--carousel" data-owl="projects">
             <ul class="owl-carousel">
-                <? foreach ($models as $model): ?>
+                <?php foreach ($models as $model): ?>
                     <?= $this->render('_history_item', ['model' => $model]) ?>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

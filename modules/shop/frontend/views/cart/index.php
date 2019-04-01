@@ -62,9 +62,9 @@ $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
                                     </div>
                                 </div>
                                 <div class="compare-table--main">
-                                    <? foreach ($models as $model): ?>
+                                    <?php foreach ($models as $model): ?>
                                         <?= $this->render('_list', ['model' => $model, 'albumPrice' => $albumPrice]) ?>
-                                    <? endforeach; ?>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </section>

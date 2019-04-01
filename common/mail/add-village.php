@@ -26,57 +26,57 @@ use yii\helpers\Html;
 <p>Сайт отдела продаж: <?= Html::encode($model['sale_url']) ?></p>
 
 <h3>Инженерные сети</h3>
-<? if (isset($model['electric'])): ?>
+<?php if (isset($model['electric'])): ?>
     <p>электричество</p>
-<? endif; ?>
-<? if (isset($model['gas'])): ?>
+<?php endif; ?>
+<?php if (isset($model['gas'])): ?>
     <p>газ</p>
-<? endif; ?>
-<? if (isset($model['water'])): ?>
+<?php endif; ?>
+<?php if (isset($model['water'])): ?>
     <p>водоснабжение</p>
-<? endif; ?>
-<? if (isset($model['interner'])): ?>
+<?php endif; ?>
+<?php if (isset($model['interner'])): ?>
     <p>интернет</p>
-<? endif; ?>
+<?php endif; ?>
 
 <h3>Инфраструктура</h3>
-<? if (isset($model['stores'])): ?>
+<?php if (isset($model['stores'])): ?>
     <p>магазины</p>
-<? endif; ?>
-<? if (isset($model['children_club'])): ?>
+<?php endif; ?>
+<?php if (isset($model['children_club'])): ?>
     <p>детский клуб</p>
-<? endif; ?>
-<? if (isset($model['sports_center'])): ?>
+<?php endif; ?>
+<?php if (isset($model['sports_center'])): ?>
     <p>спортивно-оздоровительный комплекс</p>
-<? endif; ?>
-<? if (isset($model['sports_ground'])): ?>
+<?php endif; ?>
+<?php if (isset($model['sports_ground'])): ?>
     <p>спортивные площадки</p>
-<? endif; ?>
-<? if (isset($model['golf_club'])): ?>
+<?php endif; ?>
+<?php if (isset($model['golf_club'])): ?>
     <p>гольф-клуб</p>
-<? endif; ?>
-<? if (isset($model['beach'])): ?>
+<?php endif; ?>
+<?php if (isset($model['beach'])): ?>
     <p>пляж</p>
-<? endif; ?>
-<? if (isset($model['life_service'])): ?>
+<?php endif; ?>
+<?php if (isset($model['life_service'])): ?>
     <p>службы быта</p>
-<? endif; ?>
+<?php endif; ?>
 
     <h3>Безопасность</h3>
-<? if (isset($model['territory_control'])): ?>
+<?php if (isset($model['territory_control'])): ?>
     <p>охрана территории и подъездов</p>
-<? endif; ?>
-<? if (isset($model['fire_alarm'])): ?>
+<?php endif; ?>
+<?php if (isset($model['fire_alarm'])): ?>
     <p>противопожарная сигнализация</p>
-<? endif; ?>
-<? if (isset($model['security_alarm'])): ?>
+<?php endif; ?>
+<?php if (isset($model['security_alarm'])): ?>
     <p>охранная сигнализация</p>
-<? endif; ?>
+<?php endif; ?>
 
     <h3>Экология</h3>
-<? if (isset($model['forest'])): ?>
+<?php if (isset($model['forest'])): ?>
     <p>лесозона</p>
-<? endif; ?>
-<? if (isset($model['reservoir'])): ?>
+<?php endif; ?>
+<?php if (isset($model['reservoir'])): ?>
     <p>водоем</p>
-<? endif; ?>
+<?php endif; ?>

@@ -40,8 +40,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
                         <div class="catalog-header show-more-hidden">
                             <a href="<?= $dataProvider->sort->createUrl('cost') ?>"
                                class="filter <?= $sort === '-cost' ? 'down' : '' ?><?= $sort === 'cost' ? 'up' : '' ?>">
-                                <?
-                                if ($sort === '-cost') {
+                                <?php if ($sort === '-cost') {
                                     echo 'По убыванию цены';
                                 } elseif ($sort === 'cost') {
                                     echo 'По возрастанию цены';
@@ -53,8 +52,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
                             </a>
                             <a href="<?= $dataProvider->sort->createUrl('common_area') ?>"
                                class="filter <?= $sort === '-common_area' ? 'down' : '' ?><?= $sort === 'common_area' ? 'up' : '' ?>">
-                                <?
-                                if ($sort === '-common_area') {
+                                <?php if ($sort === '-common_area') {
                                     echo 'По убыванию площади';
                                 } elseif ($sort === 'common_area') {
                                     echo 'По возрастанию площади';
@@ -66,8 +64,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
                             </a>
                         </div>
                         <div class="catalog-main">
-                            <?
-                            echo ListView::widget([
+                            <?php echo ListView::widget([
                                 'dataProvider' => $dataProvider,
                                 'options'      => [
                                     'tag'   => 'div',
@@ -114,7 +111,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
             </div>
         </div>
     </div>
-<? if ($category->description): ?>
+<?php if ($category->description): ?>
     <div class="section info-box ">
         <div class="content content--md">
             <div class="ready-projects--info">
@@ -125,5 +122,5 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <?= Recently::widget() ?>

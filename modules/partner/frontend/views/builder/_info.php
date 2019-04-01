@@ -33,12 +33,12 @@ use yii\helpers\Url;
                         <p><?= $model->email ?></p>
                         <a href="<?= $model->url ?>" target="_blank">сайт</a>
                     </div>
-                    <? if ($model->price_list) : ?>
+                    <?php if ($model->price_list) : ?>
                         <div class="cell cell-contacts">
                             <p><strong>Цены</strong></p>
                             <?= Html::a('скачать прайс',  Url::to(['/builder/download-price', 'id' => $model->id]), ['target' => '_blank']) ?>
                         </div>
-                    <? endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -118,4 +118,4 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
         project.fixedSidebar();
     }
 </script>
-<? \yii\widgets\Pjax::end(); ?>
+<?php \yii\widgets\Pjax::end(); ?>

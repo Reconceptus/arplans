@@ -23,23 +23,23 @@ $price = $model->getPrice();
                 <div class="current-price"><?= $price ?>
                     &#8381;
                 </div>
-                <? if ($model->discount > 0): ?>
+                <?php if ($model->discount > 0): ?>
                     <div class="old-price"><?= $model->price ?> руб</div>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="data">
             <div class="data-col">
                 <div class="actions">
-                    <? if ($isInCart): ?>
+                    <?php if ($isInCart): ?>
                         <?= Html::a('Добавлен в корзину', '', ['class' => 'btn-square-min incart js-to-cart', 'data-id' => $model->id]) ?>
-                    <? else: ?>
-                        <? if ($price || !$model->project): ?>
+                    <?php else: ?>
+                        <?php if ($price || !$model->project): ?>
                             <?= Html::a('Купить проект', '', ['class' => 'btn-square-min js-to-cart', 'data-id' => $model->id]) ?>
-                        <? else: ?>
+                        <?php else: ?>
                             <?= Html::a('Скачать проект', \yii\helpers\Url::to(['/shop/download', 'id' => $model->id]), ['class' => 'btn-square-min', 'data-id' => $model->id]) ?>
-                        <? endif; ?>
-                    <? endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <button type="button" class="icon-liked js-favor <?= array_key_exists($model->id, $favorites) ? 'liked' : '' ?>"
                        data-id="<?= $model->id ?>">
                         <svg xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@ $price = $model->getPrice();
                         </svg>
                     </button>
                 </div>
-                <? if ($price > 0): ?>
+                <?php if ($price > 0): ?>
                     <div class="feature">
                         <i class="icon-feature">
                             <svg xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ $price = $model->getPrice();
                         </i>
                         <span>Замена материала стен и зеркальное отображение бесплатно</span>
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
             <div class="data-col">
                 <div class="info">

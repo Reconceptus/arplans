@@ -40,8 +40,7 @@ use yii\widgets\Pjax;
                     </div>
                 </div>
                 <div class="blog--articles">
-                    <?
-                    Pjax::begin(['id' => 'actionsPjax']);
+                    <?php Pjax::begin(['id' => 'actionsPjax']);
                     echo ListView::widget([
                         'dataProvider' => $dataProvider,
                         'options'      => [

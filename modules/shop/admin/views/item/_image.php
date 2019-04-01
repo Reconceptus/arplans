@@ -15,17 +15,17 @@ use yii\helpers\Html;
 $item = $model->item;
 ?>
 <div class="image-admin-preview" data-id="<?= isset($model->id) ? $model->id : '' ?>" data-file="<?= $model->image ?>">
-    <? if ($model->id && $model->item_id): ?>
-        <? if ($item && $item->image_id === $model->id): ?>
+    <?php if ($model->id && $model->item_id): ?>
+        <?php if ($item && $item->image_id === $model->id): ?>
             <div class="default-image">
                 <span class="glyphicon glyphicon-ok" title="Основное изображение"></span>
             </div>
-        <? else: ?>
+        <?php else: ?>
             <div class="js-set-default-image">
                 <span class="glyphicon glyphicon-ok" title="Сделать основным"></span>
             </div>
-        <? endif; ?>
-    <? endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
     <div class="js-image-admin-delete" data-path="shop/item">
         <span class="glyphicon glyphicon-trash" title="Удалить изображение"></span>
     </div>
