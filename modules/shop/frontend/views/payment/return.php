@@ -24,7 +24,7 @@
             <div class="actions">
                 <?= \yii\helpers\Html::a('Вернуться к заказам', \yii\helpers\Url::to('/profile/orders'), ['class' => 'btn']) ?>
                 <?php if ($model->status === \modules\shop\models\Payment::STATUS_COMPLETE): ?>
-                    <?= \yii\helpers\Html::a('Вернуться а главную', \yii\helpers\Url::to('/'), ['class' => 'btn']) ?>
+                    <?= \yii\helpers\Html::a('Вернуться на главную', \yii\helpers\Url::to('/'), ['class' => 'btn']) ?>
                 <?php else: ?>
                     <?= \yii\helpers\Html::a('Оплатить повторно', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->order->id]), ['class' => 'btn']) ?>
                 <?php endif; ?>
