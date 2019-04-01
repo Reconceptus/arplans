@@ -47,8 +47,6 @@ class PaymentController extends Controller
                 'amount' => ['currency' => 'RUB', 'value' => $item->price],
                 'vat_code' => 1,
             ];
-            var_dump($item);
-            die;
         }
         $client = new Client();
         $client->setAuth($yaData['shopId'], $yaData['secretKey']);
