@@ -88,7 +88,7 @@ $totalSum = 0;
                     <div class="ordering-submit--total">
                         <div class="total-head">Вы выбрали:</div>
                         <ul id="items-to-buy">
-                            <? foreach ($models as $model) {
+                            <?php foreach ($models as $model) {
                                 $item = $model->item;
                                 $price = $model->getLotPrice($albumPrice);
                                 $totalSum += $price;

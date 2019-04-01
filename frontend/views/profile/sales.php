@@ -28,7 +28,7 @@ use modules\shop\models\Order; ?>
                         </tr>
                         </thead>
                         <tbody>
-                        <? foreach ($models as $model): ?>
+                        <?php foreach ($models as $model): ?>
                             <tr>
                                 <td><?= date('d.m.Y', strtotime($model->created_at)) ?></td>
                                 <td><?= $model->id ?></td>
@@ -36,7 +36,7 @@ use modules\shop\models\Order; ?>
                                 <td><?= $model->partner_percent ?></td>
                                 <td><?= in_array($model->status,[Order::STATUS_NEW, Order::STATUS_CANCEL])  ? 'Не оплачен' : 'Оплачен' ?></td>
                             </tr>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

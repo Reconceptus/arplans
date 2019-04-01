@@ -11,9 +11,9 @@
 ?>
 <p style="font-weight: bold">Преимущества</p>
 <div class="benefits">
-    <? foreach ($benefits as $benefit): ?>
+    <?php foreach ($benefits as $benefit): ?>
         <?= $this->render('_benefit', ['model' => $benefit, 'type' => $type]) ?>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </div>
 <div class="clearfix"></div>
 <div class="benefit-form">

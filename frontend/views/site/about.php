@@ -32,20 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-<? if ($benefits): ?>
+<?php if ($benefits): ?>
     <div class="section custom-list">
         <div class="content content--md">
             <ul class="col-3">
-                <? foreach ($benefits as $benefit): ?>
+                <?php foreach ($benefits as $benefit): ?>
                     <li>
                         <div class="title"><?= $benefit->name ?></div>
                         <p><?= $benefit->text ?></p>
                     </li>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
 
     <div class="big-header">
         <div class="content content--lg">
@@ -56,10 +56,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="our-projects">
         <img src="img/branch3.png" alt="branch" class="img-branch">
         <div class="content content--md">
-            <? if ($readyProjects): ?>
+            <?php if ($readyProjects): ?>
                 <div class="our-projects-slider" data-owl="objects">
                     <ul class="owl-carousel">
-                        <? foreach ($readyProjects as $project): ?>
+                        <?php foreach ($readyProjects as $project): ?>
                             <li class="object-item">
                                 <div class="projects-item--wrap">
                                     <a href="#" class="projects-item--preview">
@@ -67,10 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </a>
                                 </div>
                             </li>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
-            <? endif; ?>
+            <?php endif; ?>
             <div class="project-page--reviews">
                 <i class="icon icon-vk-reviews">
                     <svg xmlns="http://www.w3.org/2000/svg">
@@ -82,14 +82,14 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-<? if ($reviews): ?>
+<?php if ($reviews): ?>
     <div class="reviews">
         <div class="content content--md">
             <div class="reviews-carousel--box">
                 <div class="reviews-carousel--wrap">
                     <div class="reviews-carousel" data-owl="reviews">
                         <ul class="owl-carousel">
-                            <? foreach ($reviews as $review): ?>
+                            <?php foreach ($reviews as $review): ?>
                                 <li class="item">
                                     <div class="review-header">
                                         <div class="author">
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <p><?= $review->text ?></p>
                                     </div>
                                 </li>
-                            <? endforeach; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <button class="temp-nav-next" id="t_next"></button>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
     <div class="big-header">
         <div class="content content--lg">
             <h2 class="title" id="map-anchor">Офисы продаж</h2>
@@ -133,4 +133,4 @@ $this->params['breadcrumbs'][] = $this->title;
         project.mapMarkers();
     }
 </script>
-<? \yii\widgets\Pjax::end()?>
+<?php \yii\widgets\Pjax::end()?>

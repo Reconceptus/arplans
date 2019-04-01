@@ -21,7 +21,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
     'id'      => 'edit-post-form',
     'method'  => 'post',
     'options' => ['enctype' => 'multipart/form-data'],
@@ -74,7 +74,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
 </div>
 
 <?= Html::submitButton('Save', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 <div class="buttons-panel" title="<?= $model->isNewRecord || !$model->status ? 'Пост еще не был опубликован' : '' ?>">
     <?= Html::button('cancel', ['class' => 'btn btn-admin']) ?>
     <?= Html::a('На сайте', Url::to('/blog/' . $model->slug), ['target' => '_blank', 'class' => $viewPostClass]) ?>

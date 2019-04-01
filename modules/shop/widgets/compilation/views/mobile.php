@@ -20,13 +20,13 @@ use yii\helpers\Url;
             <div class="projects-filters--item current">новые проекты</div>
         </div>
         <div class="projects-list col-4">
-            <? if (array_key_exists('new', $models)): ?>
-                <? foreach ($models['new'] as $model): ?>
+            <?php if (array_key_exists('new', $models)): ?>
+                <?php foreach ($models['new'] as $model): ?>
                     <div class="projects-item">
                         <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
-                <? endforeach; ?>
-            <? endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
         <div class="btn-box">
@@ -40,13 +40,13 @@ use yii\helpers\Url;
             <div class="projects-filters--item current">Скидки</div>
         </div>
         <div class="projects-list col-4">
-            <? if (array_key_exists('discount', $models)): ?>
-                <? foreach ($models['discount'] as $model): ?>
+            <?php if (array_key_exists('discount', $models)): ?>
+                <?php foreach ($models['discount'] as $model): ?>
                     <div class="projects-item">
                         <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
-                <? endforeach; ?>
-            <? endif ?>
+                <?php endforeach; ?>
+            <?php endif ?>
         </div>
 
         <div class="btn-box">
@@ -60,13 +60,13 @@ use yii\helpers\Url;
             <div class="projects-filters--item current">Бесплатно</div>
         </div>
         <div class="projects-list col-4">
-            <? if (array_key_exists('free', $models)): ?>
-                <? foreach ($models['free'] as $model): ?>
+            <?php if (array_key_exists('free', $models)): ?>
+                <?php foreach ($models['free'] as $model): ?>
                     <div class="projects-item">
                         <?= \modules\shop\widgets\item\Item::widget(['model' => $model, 'favorites' => $favorites, 'inCart'=>$inCart]) ?>
                     </div>
-                <? endforeach; ?>
-            <? endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
         <div class="btn-box">

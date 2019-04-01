@@ -8,11 +8,11 @@
 
 /* @var $models \common\models\Post[] */
 ?>
-<? if ($models): ?>
+<?php if ($models): ?>
     <div class="home-about-menu">
         <div class="content content--lg">
             <ul class="home-about-menu--wrap">
-                <? foreach ($models as $model): ?>
+                <?php foreach ($models as $model): ?>
                     <li>
                         <a href="/blog/<?= $model->slug ?>" class="home-about-menu--item">
                             <article>
@@ -24,8 +24,8 @@
                             </article>
                         </a>
                     </li>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>

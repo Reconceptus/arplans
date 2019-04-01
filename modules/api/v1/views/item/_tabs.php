@@ -22,12 +22,12 @@ $ready = $model->getReady();
         <ul>
             <li class="tab01"><label for="tab01">Основное</label></li>
             <li class="tab02"><label for="tab02">Стоимость строительства</label></li>
-            <? if ($model->video): ?>
+            <?php if ($model->video): ?>
                 <li class="tab03"><label for="tab03">Видеообзор</label></li>
-            <? endif; ?>
-            <? if ($ready): ?>
+            <?php endif; ?>
+            <?php if ($ready): ?>
                 <li class="tab05"><label for="tab05">Фото строительства</label></li>
-            <? endif; ?>
+            <?php endif; ?>
 <!--            <li class="tab06"><label for="tab06">Доп. услуги</label></li>-->
         </ul>
     </nav>
@@ -37,17 +37,17 @@ $ready = $model->getReady();
                 <div class="custom-row-col col-50">
                     <div class="tab-main-slider" data-owl="plans">
                         <ul class="owl-carousel">
-                            <? foreach ($model->getPlans() as $k => $plan): ?>
+                            <?php foreach ($model->getPlans() as $k => $plan): ?>
                                 <li class="plan-item">
                                     <img data-plan="<?= $plan->id ?>" src="<?= Yii::$app->request->getHostInfo() . $plan->image ?>" alt="plan">
                                 </li>
-                            <? endforeach; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <div class="gallery-items">
-                        <? foreach ($model->getPlans() as $k => $plan): ?>
+                        <?php foreach ($model->getPlans() as $k => $plan): ?>
                             <a data-plan="<?= $plan->id ?>" href="<?= Yii::$app->request->getHostInfo() . $plan->image ?>" data-fancybox="plans"></a>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">
@@ -57,14 +57,14 @@ $ready = $model->getReady();
                                 <td class="name">Тип дома</td>
                                 <td><?= $model->category->name ?></td>
                             </tr>
-                            <? foreach ($model->itemOptions as $io): ?>
-                                <? if ($io->catalog->basic): ?>
+                            <?php foreach ($model->itemOptions as $io): ?>
+                                <?php if ($io->catalog->basic): ?>
                                     <tr>
                                         <td class="name"><?= $io->catalog->name ?></td>
                                         <td><?= $io->catalogItem->name ?></td>
                                     </tr>
-                                <? endif; ?>
-                            <? endforeach; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                             <tr>
                                 <td class="name">
                                     <div class="flex">Площадь <i class="icon-sign">i</i></div>
@@ -80,12 +80,12 @@ $ready = $model->getReady();
                             if ($model->one_floor) $floors[] = 'одноэтажный';
                             if ($model->two_floor) $floors[] = 'двухэтажный';
                             ?>
-                            <? if ($floors): ?>
+                            <?php if ($floors): ?>
                                 <tr>
                                     <td class="name">Этажность</td>
                                     <td><?= implode(', ', $floors) ?></td>
                                 </tr>
-                            <? endif; ?>
+                            <?php endif; ?>
                             <tr>
                                 <td class="name">Количество комнат</td>
                                 <td><?= $model->rooms == 6 ? '6+' : $model->rooms ?></td>
@@ -126,7 +126,7 @@ $ready = $model->getReady();
                 </div>
             </div>
         </div>
-        <? if ($model->video): ?>
+        <?php if ($model->video): ?>
             <div class="tab-section tab-video tab03">
                 <div class="video">
                     <figure>
@@ -135,17 +135,17 @@ $ready = $model->getReady();
                     </figure>
                 </div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
         <!--        <div class="tab-section tab-3d tab04">-->
         <!--            <div class="tour">-->
         <!--                <iframe src=""></iframe>-->
         <!--            </div>-->
         <!--        </div>-->
-        <? if ($ready): ?>
+        <?php if ($ready): ?>
             <div class="tab-section tab-objects tab05">
                 <div class="tab-objects-slider" data-owl="objects">
                     <ul class="owl-carousel">
-                        <? foreach ($ready as $readyImage): ?>
+                        <?php foreach ($ready as $readyImage): ?>
                             <li class="object-item">
                                 <div class="projects-item--wrap">
                                     <a href="#" class="projects-item--preview">
@@ -154,11 +154,11 @@ $ready = $model->getReady();
                                     </a>
                                 </div>
                             </li>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
 <!--        <div class="tab-section tab-services tab06">-->
 <!--            --><?//= \modules\shop\widgets\services\Services::widget(['viewName' => 'index']) ?>
 <!--        </div>-->

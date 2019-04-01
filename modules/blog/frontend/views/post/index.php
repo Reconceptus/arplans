@@ -41,7 +41,7 @@ $this->title = 'Блог';
                 ?>
                 <?= Html::a('Все статьи', Url::to(['/blog']), $options) ?>
 
-                <? foreach ($tags as $tag): ?>
+                <?php foreach ($tags as $tag): ?>
                     <?php
                     $options = ['class' => 'btn-small'];
                     if ($tag->name == $mainTag) {
@@ -49,7 +49,7 @@ $this->title = 'Блог';
                     }
                     ?>
                     <?= Html::a($tag->name, Url::to(['index', 'tag' => $tag->name]), $options) ?>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </div>
         </div>
         <?

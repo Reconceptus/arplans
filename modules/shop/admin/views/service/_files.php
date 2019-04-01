@@ -13,9 +13,9 @@ use yii\helpers\Html;
 <div class="images-block" data-type="shop/service">
     <p style="font-weight: bold">Файлы</p>
     <div class="images-panel">
-        <? foreach ($model->files as $file): ?>
+        <?php foreach ($model->files as $file): ?>
             <?= $this->render('_file', ['model' => $file]) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">

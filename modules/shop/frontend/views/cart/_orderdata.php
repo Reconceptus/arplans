@@ -26,9 +26,9 @@ $totalSum = 0;
                                 <input type="text" placeholder="*Ф.И.О." name="name"
                                        value="<?= $user->profile->fio ? $user->profile->fio : mb_substr($user->profile->last_name . ' ' . $user->profile->first_name . ' ' . $user->profile->patronymic, 0, 254) ?>"
                                        id="order-fio">
-                            <? else: ?>
+                            <?php else: ?>
                                 <input type="text" placeholder="*Ф.И.О." name="name" value="" id="order-fio">
-                            <? endif; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="form-row-element">
@@ -93,7 +93,7 @@ $totalSum = 0;
                     <div class="ordering-submit--total">
                         <div class="total-head">Вы выбрали:</div>
                         <ul id="items-to-buy">
-                            <? foreach ($models as $model) {
+                            <?php foreach ($models as $model) {
                                 $item = $model->item;
                                 $price = $model->getLotPrice($albumPrice);
                                 $totalSum += $price;

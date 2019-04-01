@@ -40,7 +40,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
 
                 <div class="custom-row-col col-sidebar">
                     <div class="collaborate-list--person">
-                        <? if ($manager): ?>
+                        <?php if ($manager): ?>
                             <div class="photo">
                                 <img src="<?= $manager->image ?>" alt="director">
                             </div>
@@ -49,7 +49,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                                 <p><?= $manager->position ?></p>
                                 <p><?= $manager->phone ?></p>
                             </div>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="custom-row-col col-elastic">

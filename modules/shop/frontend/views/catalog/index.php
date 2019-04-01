@@ -114,7 +114,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
             </div>
         </div>
     </div>
-<? if ($category->description): ?>
+<?php if ($category->description): ?>
     <div class="section info-box ">
         <div class="content content--md">
             <div class="ready-projects--info">
@@ -125,5 +125,5 @@ $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_des
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <?= Recently::widget() ?>

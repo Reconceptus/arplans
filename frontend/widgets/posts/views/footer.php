@@ -13,8 +13,8 @@ use yii\helpers\Html;
 <section class="section">
     <h4 class="title">проектирование</h4>
     <ul>
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <li><?= Html::a($model->name, \yii\helpers\Url::to('/blog/' . $model->slug)) ?></li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </section>

@@ -26,11 +26,11 @@ $this->title = 'Edit ' . $model->username
 <?= $form->field($model, 'email')->textInput(['required' => true]) ?>
 
 <div class="form-group">
-    <? if ($model->profile && $model->profile->image): ?>
+    <?php if ($model->profile && $model->profile->image): ?>
         <div class="image-admin-preview">
             <?= Html::img($model->profile->image, ['class' => 'img-admin']) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
     <?= Html::label('Аватар', 'image-field', ['class' => 'control-label']) ?>
     <?= Html::fileInput('Profile[image]', '', ['class' => 'form-control', 'id' => 'image-field']) ?>
 </div>

@@ -7,6 +7,6 @@
  */
 
 ?>
-<? foreach ($flashes as $type => $message): ?>
+<?php foreach ($flashes as $type => $message): ?>
     <div class="alert alert-<?= $type ?>" role="alert"><?= $message ?></div>
 <?php endforeach ?>

@@ -96,7 +96,7 @@ $favorites = [];
             </div>
         </div>
     </div>
-<? if ($category->description): ?>
+<?php if ($category->description): ?>
     <div class="section info-box ">
         <div class="content content--md">
             <div class="ready-projects--info">
@@ -107,5 +107,5 @@ $favorites = [];
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <?= Recently::widget() ?>

@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="contact-form">
                         <div id="senden-contacts"></div>
-                        <? $form = ActiveForm::begin([
+                        <?php $form = ActiveForm::begin([
                             'action'  => '#',
                             'options' => ['enctype' => 'multipart/form-data'],
                             'id'      => 'contacts-form',
@@ -154,7 +154,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                             </div>
                         </div>
-                        <? ActiveForm::end() ?>
+                        <?php ActiveForm::end() ?>
                         <div class="modal-thanks">
                             <h4 class="modal-thanks--title">Спасибо!</h4>
                             <p>Ваше сообщение успешно отправлено, мы свяжемся с Вами в ближайшее время!</p>
@@ -183,16 +183,16 @@ if ($partners): ?>
     <div class="contact-page--partners">
         <div class="content content--lg">
             <ul>
-                <? foreach ($partners as $partner): ?>
-                    <? if ($partner->url): ?>
+                <?php foreach ($partners as $partner): ?>
+                    <?php if ($partner->url): ?>
                         <li><a href="<?= $partner->url ?>" target="_blank"><?= $partner->url ?></a></li>
-                    <? endif; ?>
-                <? endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
 
-<? endif; ?>
+<?php endif; ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>
     <script>
         if (typeof google !== 'undefined') {

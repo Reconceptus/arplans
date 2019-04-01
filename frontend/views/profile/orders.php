@@ -16,9 +16,9 @@ $this->title = 'Мои заказы';
             <div class="content content--md">
                 <h1 class="title title-lg"><?= $this->title ?></h1>
                 <div class="profile-orders">
-                    <? foreach ($models as $model) : ?>
+                    <?php foreach ($models as $model) : ?>
                         <?= $this->render('order', ['model' => $model]) ?>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

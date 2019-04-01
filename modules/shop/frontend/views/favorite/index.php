@@ -23,7 +23,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
         <div class="custom-row">
             <div class="custom-row-col col-elastic">
                 <div class="compare-table">
-                    <?  Pjax::begin(); ?>
+                    <?php  Pjax::begin(); ?>
                     <div class="compare-table--header">
                         <div class="compare-table--part part-project">
                             <a href="<?=$dataProvider->sort->createUrl('id')?>">

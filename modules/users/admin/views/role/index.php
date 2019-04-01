@@ -23,7 +23,7 @@ $i = 0;
         <th>Code</th>
         <th></th>
     </tr>
-    <? foreach ($roles as $code => $role): ?>
+    <?php foreach ($roles as $code => $role): ?>
         <tr>
             <td style="width:40px">
                 <?= ++$i ?>
@@ -34,13 +34,13 @@ $i = 0;
             <td><?= $code ?></td>
             <td style="width:50px">
                 <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',Url::to(['/admin/modules/users/role/update','role'=>$code]))?>
-                <? if (!in_array($code, ['admin', 'user', 'guest'])): ?>
+                <?php if (!in_array($code, ['admin', 'user', 'guest'])): ?>
                     <?= Html::a('<span class="glyphicon glyphicon-trash"></span>',Url::to(['/admin/modules/users/role/delete','role'=>$code]),[
                             "data-method"=>"post",
                             "data-confirm"=>"Are you sure you want to delete this role?"
                     ])?>
-                <? endif; ?>
+                <?php endif; ?>
             </td>
         </tr>
-    <? endforeach ?>
+    <?php endforeach ?>
 </table>

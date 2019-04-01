@@ -21,7 +21,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post']); ?>
+<?php $form = ActiveForm::begin(['method' => 'post']); ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
@@ -39,7 +39,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </div>
 </div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 
 <div class="buttons-panel">
     <?= Html::a('cancel', Url::to('/admin/modules/partner/partner'), ['class' => 'btn btn-admin']) ?>

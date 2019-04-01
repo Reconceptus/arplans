@@ -25,9 +25,9 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <div class="images-block" data-type="partner/village">
     <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
-        <? foreach ($model->images as $image): ?>
+        <?php foreach ($model->images as $image): ?>
             <?= $this->render('_image', ['model' => $image]) ?>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
@@ -43,7 +43,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     </form>
 </div>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-6">
@@ -70,21 +70,21 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
         <div class="clearfix"></div>
         <div class="col-md-6">
             <?= $form->field($model, 'logo')->fileInput(['accept' => 'image/*']) ?>
-            <? if ($model->logo): ?>
+            <?php if ($model->logo): ?>
                 <div class="image-admin-preview">
                     <?= Html::img($model->logo, ['class' => 'img-admin']) ?>
                 </div>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <div class="project-block">
-        <? if ($model->price_list): ?>
+        <?php if ($model->price_list): ?>
             <div class="old-project">
                 <p style="font-weight: bold">Прайслист</p>
                 <?= Html::a('Скачать', Url::to($model->price_list), ['class' => 'btn btn-admin']) ?>
                 <div class="js-show-project-field btn btn-admin">Заменить</div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
         <div class="item-project-field" <?= $model->price_list ? 'style="display:none;"' : '' ?>>
             <?= $form->field($model, 'price_list')->fileInput() ?>
         </div>
@@ -173,7 +173,7 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
     <?= $form->field($model, 'seo_description') ?>
 </div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 
 <div class="buttons-panel" title="<?= $model->isNewRecord ? 'Поселок еще не добавлен' : '' ?>">
     <?= Html::a('cancel', Url::to('/admin/modules/partner/village'), ['class' => 'btn btn-admin']) ?>

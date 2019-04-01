@@ -61,7 +61,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                 <!--                    </i>-->
                 <!--                    <span class="text">Живые отзывы клиентов Вконтакте</span>-->
                 <!--                    <a href="-->
-                <? //= \modules\content\models\ContentBlock::getValue('vk_reviews') ?><!--"-->
+                <?php //= \modules\content\models\ContentBlock::getValue('vk_reviews') ?><!--"-->
                 <!--                       class="read" target="_blank">Читать</a>-->
                 <!--                </div>-->
                 <?php if ($model->description): ?>

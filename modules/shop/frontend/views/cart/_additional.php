@@ -15,7 +15,7 @@ if ($services) {
             <h2 class="title title-sm">2. Запрос на дополнительные услуги</h2>
             <div class="add-service--list">
                 <div class="add-service--part">
-                    <? foreach ($services[0] as $service): ?>
+                    <?php foreach ($services[0] as $service): ?>
                         <div class="add-service show-more-parent">
                             <div class="add-service--header">
                                 <div class="check">
@@ -33,10 +33,10 @@ if ($services) {
                                 </div>
                             </div>
                         </div>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="add-service--part">
-                    <? foreach ($services[1] as $service): ?>
+                    <?php foreach ($services[1] as $service): ?>
                         <div class="add-service show-more-parent">
                             <div class="add-service--header">
                                 <div class="check">
@@ -54,9 +54,9 @@ if ($services) {
                                 </div>
                             </div>
                         </div>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </section>
     </div>
-<? } ?>
+<?php } ?>

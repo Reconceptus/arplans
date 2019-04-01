@@ -7,7 +7,7 @@
  */
 /* @var $models \modules\shop\models\Service[] */
 ?>
-<? if ($models): ?>
+<?php if ($models): ?>
     <div class="services-more">
         <div class="content content--lg">
             <div class="bg">
@@ -16,7 +16,7 @@
                         <div class="title">Остальные услуги</div>
                         <div class="add-service--list">
                             <div class="add-service--part">
-                                <? foreach ($models as $model): ?>
+                                <?php foreach ($models as $model): ?>
                                     <div class="add-service show-more-parent">
                                         <div class="add-service--header">
                                             <div class="check">
@@ -33,7 +33,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <? endforeach; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -41,4 +41,4 @@
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>

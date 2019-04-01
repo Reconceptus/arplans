@@ -20,7 +20,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->glued_timber): ?>
+                                    <?php if ($model->glued_timber): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -28,8 +28,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->profiled_timber): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->profiled_timber): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -37,8 +37,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->wooden_frame): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->wooden_frame): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -46,8 +46,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->lstk): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->lstk): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -55,8 +55,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->carcass): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->carcass): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -64,8 +64,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->combined): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->combined): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -73,8 +73,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->brick): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->brick): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -82,8 +82,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->block): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->block): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -91,7 +91,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->finishing): ?>
+                                    <?php if ($model->finishing): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -111,8 +111,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->santech): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->santech): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -120,8 +120,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->electric): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->electric): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -129,7 +129,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->wooden): ?>
+                                    <?php if ($model->wooden): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -149,8 +149,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->stone): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->stone): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -158,8 +158,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->roof): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->roof): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -167,8 +167,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->windows): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->windows): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -176,8 +176,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->stretch_ceiling): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->stretch_ceiling): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -185,7 +185,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                         <div class="catalog-filters--main">
                             <div class="form-row">
                                 <div class="form-row-col">
-                                    <? if ($model->surround_region): ?>
+                                    <?php if ($model->surround_region): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -205,8 +205,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
-                                    <? if ($model->any_region): ?>
+                                    <?php endif; ?>
+                                    <?php if ($model->any_region): ?>
                                         <div class="form-row-element">
                                             <div class="checked">
                                                 <label>
@@ -214,7 +214,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    <? endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

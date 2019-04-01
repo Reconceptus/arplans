@@ -23,41 +23,41 @@ $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin
 <div class="post-form">
     <div class="row catalog-panel">
         <div class="col-md-5">
-            <? $form = ActiveForm::begin([
+            <?php $form = ActiveForm::begin([
                 'method'               => 'post',
                 'options'              => ['enctype' => 'multipart/form-data'],
                 'id'                   => 'admin-catalog-form',
                 'enableAjaxValidation' => true
             ]); ?>
-            <? if ($model->isNewRecord): ?>
-                <? $categories = Category::getList() ?>
+            <?php if ($model->isNewRecord): ?>
+                <?php $categories = Category::getList() ?>
                 <?= $form->field($model, 'category_id')->dropDownList($categories, ['prompt' => 'Все категории', 'class' => 'cat-category form-control']) ?>
-            <? endif; ?>
+            <?php endif; ?>
 
             <?= $form->field($model, 'slug')->textInput(['class' => 'cat-slug form-control']) ?>
             <?= $form->field($model, 'name')->textInput(['class' => 'cat-name form-control']) ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number', 'class' => 'cat-sort form-control']) ?>
             <?= $form->field($model, 'filter')->checkbox() ?>
             <?= $form->field($model, 'basic')->checkbox() ?>
-            <? if ($model->isNewRecord): ?>
+            <?php if ($model->isNewRecord): ?>
                 <div class="btn btn-admin js-save-catalog">Сохранить</div>
-            <? else: ?>
+            <?php else: ?>
                 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin']) ?>
-            <? endif; ?>
-            <? ActiveForm::end() ?>
+            <?php endif; ?>
+            <?php ActiveForm::end() ?>
         </div>
     </div>
     <div class="row filter-panel <?= $model->isNewRecord ? 'hidden' : '' ?>">
         <span id="catalog-id-span" data-id="<?= $model->isNewRecord ? 0 : $model->id ?>"></span>
         <h3>Добавить варианты значений</h3>
-        <? foreach ($model->catalogItems as $catalogItem): ?>
+        <?php foreach ($model->catalogItems as $catalogItem): ?>
             <div class="filter" data-id="<?= $catalogItem->id ?>">
                 <div class="js-delete-ci">
                     <span class="glyphicon glyphicon-trash"></span>
                 </div>
                 <?= Html::a('<span>' . $catalogItem->name . '</span>', Url::to(['/admin/modules/shop/catalog/update-item', 'id' => $catalogItem->id])) ?>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
         <div class="filter add js-add-filter">
             <span class="glyphicon glyphicon-plus"></span>
         </div>

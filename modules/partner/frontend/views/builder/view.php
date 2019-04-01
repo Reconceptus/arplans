@@ -29,12 +29,12 @@ $backImage = $model->getBackImage(true);
     <div class="section custom-list">
         <div class="content content--md">
             <ul class="col-3">
-                <? foreach ($model->benefits as $benefit): ?>
+                <?php foreach ($model->benefits as $benefit): ?>
                     <li>
                         <div class="title"><?= $benefit->name ?></div>
                         <?= $benefit->text ?>
                     </li>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

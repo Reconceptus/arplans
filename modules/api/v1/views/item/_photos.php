@@ -16,20 +16,20 @@ $index = 1;
         <div class="project-gallery">
             <div class="gallery-list-wrap">
                 <div class="gallery-list">
-                    <? if ($model->getMainImage()): ?>
+                    <?php if ($model->getMainImage()): ?>
                         <div class="item" data-num="1">
                             <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() . $model->image->image ?>)"
                                     data-url-fancybox="<?= Yii::$app->request->getHostInfo() . $model->image->image ?>"></figure>
                         </div>
-                    <? endif; ?>
-                    <? foreach ($model->getPhotos() as $image): ?>
-                        <? if ($image->id !== $model->image_id): ?>
+                    <?php endif; ?>
+                    <?php foreach ($model->getPhotos() as $image): ?>
+                        <?php if ($image->id !== $model->image_id): ?>
                             <div class="item" data-num="<?= ++$index ?>">
                                 <figure style="background-image: url(<?= Yii::$app->request->getHostInfo() . $image->image ?>)"
                                         data-url-fancybox="<?= Yii::$app->request->getHostInfo() . $image->image ?>"></figure>
                             </div>
-                        <? endif; ?>
-                    <? endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="buttons">

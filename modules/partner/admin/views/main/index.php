@@ -17,7 +17,7 @@ $this->title = 'Главная страница';
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post']); ?>
+<?php $form = ActiveForm::begin(['method' => 'post']); ?>
 <?= Html::hiddenInput('old_main_page_video_1', $model->main_page_video_1) ?>
 <?= Html::hiddenInput('old_main_page_video_2', $model->main_page_video_2) ?>
 <div class="post-form">
@@ -53,7 +53,7 @@ $this->title = 'Главная страница';
     </div>
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-    <? ActiveForm::end() ?>
+    <?php ActiveForm::end() ?>
 
     <div class="buttons-panel">
         <?= Html::a('cancel', Url::to('/admin/modules/partner/builder'), ['class' => 'btn btn-admin']) ?>

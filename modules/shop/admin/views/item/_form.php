@@ -40,11 +40,11 @@ $bathrooms = [
 <div class="images-block">
     <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
-        <? foreach ($model->images as $image): ?>
-            <? if ($image->type == \modules\shop\models\ItemImage::TYPE_PHOTO): ?>
+        <?php foreach ($model->images as $image): ?>
+            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_PHOTO): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
-            <? endif; ?>
-        <? endforeach; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
@@ -63,11 +63,11 @@ $bathrooms = [
 <div class="images-block">
     <p style="font-weight: bold">План</p>
     <div class="images-panel">
-        <? foreach ($model->images as $image): ?>
-            <? if ($image->type == \modules\shop\models\ItemImage::TYPE_PLAN): ?>
+        <?php foreach ($model->images as $image): ?>
+            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_PLAN): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
-            <? endif; ?>
-        <? endforeach; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
@@ -84,7 +84,7 @@ $bathrooms = [
 </div>
 
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <div class="post-form">
     <div class="row">
         <div class="col-md-5">
@@ -107,13 +107,13 @@ $bathrooms = [
         <div class="col-md-5">
             <?= $form->field($model, 'video') ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
-            <? foreach ($catalogs as $catalog): ?>
+            <?php foreach ($catalogs as $catalog): ?>
                 <?
                 $iO = $model->getItemOptionCatalogItem($catalog->id);
                 $iOid = $iO ? $iO->id : null;
                 $items = \yii\helpers\ArrayHelper::map($catalog->catalogItems, 'id', 'name')
                 ?>
-                <? if ($catalog->catalogItems): ?>
+                <?php if ($catalog->catalogItems): ?>
                     <div class="form-group">
                         <label class="control-label"><?= $catalog->name ?></label>
                         <?= Html::dropDownList(
@@ -122,8 +122,8 @@ $bathrooms = [
                             $items,
                             ['prompt' => 'Не выбрано', 'class' => 'form-control']) ?>
                     </div>
-                <? endif; ?>
-            <? endforeach; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
     </div>
     <p style="font-weight: bold; margin-top: 30px;">Этажность</p>
@@ -181,13 +181,13 @@ $bathrooms = [
             ],
         ]]) ?>
     <div class="project-block">
-        <? if ($model->project): ?>
+        <?php if ($model->project): ?>
             <div class="old-project">
                 <p style="font-weight: bold">Бесплатный проект</p>
                 <?= Html::a('Скачать', Url::to($model->project), ['class' => 'btn btn-admin']) ?>
                 <div class="js-show-project-field btn btn-admin">Заменить</div>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
         <div class="item-project-field" <?= $model->project ? 'style="display:none;"' : '' ?>>
             <?= $form->field($model, 'project')->fileInput() ?>
         </div>
@@ -200,15 +200,15 @@ $bathrooms = [
 </div>
 
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>
 <div class="images-block">
     <p style="font-weight: bold">Фото готового дома</p>
     <div class="images-panel">
-        <? foreach ($model->images as $image): ?>
-            <? if ($image->type == \modules\shop\models\ItemImage::TYPE_READY): ?>
+        <?php foreach ($model->images as $image): ?>
+            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_READY): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
-            <? endif; ?>
-        <? endforeach; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">

@@ -21,9 +21,9 @@ $price = $model->getPrice();
                 <div class="current-price"><?= $price ?>
                     <span class="pt-sans">&#8381;</span>
                 </div>
-                <? if ($model->discount > 0): ?>
+                <?php if ($model->discount > 0): ?>
                     <div class="old-price"><?= $model->price ?> руб</div>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="data">
@@ -39,7 +39,7 @@ $price = $model->getPrice();
                         </svg>
                     </button>
                 </div>
-                <? if ($price > 0): ?>
+                <?php if ($price > 0): ?>
                     <div class="feature">
                         <i class="icon-feature">
                             <svg xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@ $price = $model->getPrice();
                         </i>
                         <span>Замена материала стен и зеркальное отображение бесплатно</span>
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
             <div class="data-col">
                 <div class="info">

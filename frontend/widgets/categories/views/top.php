@@ -21,15 +21,15 @@ if (!$category) {
 ?>
 <nav>
     <ul>
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <li>
                 <?= Html::a($model->name, Url::to('/shop/' . $model->slug), ['class' => $category === $model->slug ? 'active' : '']) ?>
             </li>
-        <? endforeach; ?>
-        <? foreach ($services as $service): ?>
+        <?php endforeach; ?>
+        <?php foreach ($services as $service): ?>
             <li>
                 <?= Html::a($service->name, Url::to('/shop/service/' . $service->slug), ['class' => $slug === $service->slug ? 'active' : '']) ?>
             </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </nav>

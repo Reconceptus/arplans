@@ -20,15 +20,15 @@ $image = $model->getMainImage(true);
         <div class="bg" role="img"
              aria-label="<?= $image && $image->image ? $image->alt : '' ?>" <?= $image ? 'style="background-image: url(' . $image->getThumb() . ')"' : '' ?>></div>
         <div class="hash">
-            <? if ($model->is_new): ?>
+            <?php if ($model->is_new): ?>
                 <span class="new">новинка</span>
-            <? endif; ?>
-            <? if ($model->discount > 0): ?>
+            <?php endif; ?>
+            <?php if ($model->discount > 0): ?>
                 <span class="sale">скидка</span>
-            <? endif; ?>
-            <? if (!$model->price): ?>
+            <?php endif; ?>
+            <?php if (!$model->price): ?>
                 <span class="free">бесплатно</span>
-            <? endif; ?>
+            <?php endif; ?>
         </div>
         <div class="data">
             <span class="index"><?= $model->name ?></span>
@@ -50,9 +50,9 @@ $image = $model->getMainImage(true);
     </a>
     <div class="projects-item--actions">
         <div class="prices">
-            <? if ($model->discount > 0): ?>
+            <?php if ($model->discount > 0): ?>
                 <div class="price old"><?= $model->price ?> &#8381;</div>
-            <? endif; ?>
+            <?php endif; ?>
             <div class="price"><?= $model->getPrice() ?>&#8381;
             </div>
         </div>

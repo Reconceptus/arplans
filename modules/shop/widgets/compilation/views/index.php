@@ -31,7 +31,7 @@ if (isset($get['category'])) {
             <div class="projects-filters--item current">новые проекты</div>
         </div>
         <div class="projects-list col-4">
-            <? foreach ($models['new'] as $model): ?>
+            <?php foreach ($models['new'] as $model): ?>
                 <div class="projects-item">
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
@@ -40,7 +40,7 @@ if (isset($get['category'])) {
                         'inCart'    => $inCart
                     ]) ?>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
         <div class="btn-box">
             <?= Html::a('все новые проекты', Url::to('/shop/compilation/new'), ['class' => 'btn btn--lt']) ?>
@@ -51,7 +51,7 @@ if (isset($get['category'])) {
             <div class="projects-filters--item current">Скидки</div>
         </div>
         <div class="projects-list col-4">
-            <? foreach ($models['discount'] as $model): ?>
+            <?php foreach ($models['discount'] as $model): ?>
                 <div class="projects-item">
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
@@ -60,7 +60,7 @@ if (isset($get['category'])) {
                         'inCart'    => $inCart
                     ]) ?>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
         <div class="btn-box">
             <?= Html::a('все проекты со скидкой', Url::to('/shop/compilation/discount'), ['class' => 'btn btn--lt']) ?>
@@ -71,7 +71,7 @@ if (isset($get['category'])) {
             <div class="projects-filters--item current">Бесплатно</div>
         </div>
         <div class="projects-list col-4">
-            <? foreach ($models['free'] as $model): ?>
+            <?php foreach ($models['free'] as $model): ?>
                 <div class="projects-item">
                     <?= \modules\shop\widgets\item\Item::widget([
                         'model'     => $model,
@@ -80,7 +80,7 @@ if (isset($get['category'])) {
                         'inCart'    => $inCart
                     ]) ?>
                 </div>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
         <div class="btn-box">
             <?= Html::a('все бесплатные проекты', Url::to('/shop/compilation/free'), ['class' => 'btn btn--lt']) ?>

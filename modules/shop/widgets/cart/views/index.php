@@ -10,23 +10,23 @@
 /* @var $favoriteCount int */
 ?>
 
-<? if (!Yii::$app->user->isGuest): ?>
+<?php if (!Yii::$app->user->isGuest): ?>
     <div class="stats stats-profile has-drop">
         <span>Профиль</span>
         <div class="header-main--drop">
             <?= \yii\helpers\Html::a('Мои данные', \yii\helpers\Url::to('/profile')) ?>
             <?= \yii\helpers\Html::a('Мои заказы', \yii\helpers\Url::to('/profile/orders')) ?>
-            <? if (Yii::$app->user->identity->partner): ?>
+            <?php if (Yii::$app->user->identity->partner): ?>
                 <?= \yii\helpers\Html::a('Мои продажи', \yii\helpers\Url::to('/profile/sales')) ?>
-            <? endif; ?>
-            <? if (Yii::$app->user->can('adminPanel')): ?>
+            <?php endif; ?>
+            <?php if (Yii::$app->user->can('adminPanel')): ?>
                 <?= \yii\helpers\Html::a('Админка', \yii\helpers\Url::to('/admin')) ?>
-            <? endif; ?>
+            <?php endif; ?>
             <?= \yii\helpers\Html::a('Выйти', \yii\helpers\Url::to('/site/logout')) ?>
         </div>
     </div>
-<? endif; ?>
-<? if (!Yii::$app->user->isGuest): ?>
+<?php endif; ?>
+<?php if (!Yii::$app->user->isGuest): ?>
     <a href="/shop/favorite" class="stats stats-likes">
         <span id="count-favorite"><?= intval($favoriteCount) ?></span>
         <i class="icon-likes">
@@ -35,9 +35,9 @@
             </svg>
         </i>
     </a>
-<? else: ?>
+<?php else: ?>
     <?= \yii\helpers\Html::a('Войти', \yii\helpers\Url::to('/site/login'), ['class' => 'stats stats-enter']) ?>
-<? endif; ?>
+<?php endif; ?>
 <a href="/shop/cart" class="stats stats-prods">
     <span id="count-basket"><?= intval($cartCount) ?></span>
     <i class="icon-basket">

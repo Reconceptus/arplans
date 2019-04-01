@@ -10,8 +10,8 @@
 <section class="section">
     <h4 class="title">Услуги</h4>
     <ul>
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <li><?= \yii\helpers\Html::a($model->name, \yii\helpers\Url::to('/shop/service/' . $model->slug)) ?></li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </section>

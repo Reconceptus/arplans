@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
             <h3 class="modal-title">Получить смету</h3>
             <div class="modal-form">
                 <div id="senden-calc"></div>
-                <? $form = ActiveForm::begin([
+                <?php $form = ActiveForm::begin([
                     'action'  => '#',
                     'method'  => 'post',
                     'options' => ['enctype' => 'multipart/form-data'],
@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
                 <div class="modal-form--submit">
                     <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt submit-calc']) ?>
                 </div>
-                <? ActiveForm::end() ?>
+                <?php ActiveForm::end() ?>
             </div>
             <div class="modal-thanks">
                 <h4 class="modal-thanks--title">Спасибо!</h4>

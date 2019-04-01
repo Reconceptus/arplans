@@ -15,13 +15,13 @@ $this->title = $model->isNewRecord ? 'Добавление параметра' :
 <div class="post-form">
     <div class="row">
         <div class="col-md-5">
-            <? $form = ActiveForm::begin(); ?>
+            <?php $form = ActiveForm::begin(); ?>
             <?=$form->field($model, 'catalog_id')->hiddenInput()->label(false)?>
             <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'slug') ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <?= \yii\helpers\Html::submitButton('Сохранить') ?>
-            <? ActiveForm::end() ?>
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 </div>

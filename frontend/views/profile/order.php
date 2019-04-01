@@ -29,14 +29,14 @@ use modules\shop\models\Order; ?>
                 <dt><?= $model->price ?> руб.</dt>
             </dl>
         </div>
-        <? if ($model->track): ?>
+        <?php if ($model->track): ?>
             <div class="compare-table--part part-total">
                 <dl>
                     <dd>Код отслеживания:</dd>
                     <dt><?= $model->track ?></dt>
                 </dl>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
         <div class="compare-table--part part-total">
             <dl>
                 <dd>Статус:</dd>
@@ -46,7 +46,7 @@ use modules\shop\models\Order; ?>
         <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
-        <? foreach ($model->orderItems as $oi): ?>
+        <?php foreach ($model->orderItems as $oi): ?>
             <?
             $item = $oi->item;
             $url = '/shop/' . $item->category->slug . '/' . $item->slug;
@@ -113,11 +113,11 @@ use modules\shop\models\Order; ?>
 
                 </div>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
-    <? if ($services): ?>
+    <?php if ($services): ?>
         <div class="compare-table--addition">
             Указаны дополнительные услуги: <?= implode(', ', $services) ?>
         </div>
-    <? endif; ?>
+    <?php endif; ?>
 </div>

@@ -11,14 +11,14 @@ $coordinates = [];
 $icons = [];
 ?>
 <div data-map="offices-map">
-    <? foreach ($models as $k => $model): ?>
+    <?php foreach ($models as $k => $model): ?>
         <?
         if ($model->lat && $model->lng) {
             $coordinates[$k] = ['lat' => $model->lat, 'lng' => $model->lng];
             $icons[$k] = ['url' => '/svg/partials/map-mark.svg?i=custom_marker' . $k];
         }
         ?>
-    <? endforeach; ?>
+    <?php endforeach; ?>
     <div id="map"></div>
     <script type="text/javascript">
         var map;

@@ -17,20 +17,20 @@ $this->title = 'О компании';
 ?>
 <h1><?= $this->title ?></h1>
 
-<? $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['method' => 'post', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $form->field($model, 'about_main_image')->fileInput(['accept' => 'image/*']) ?>
-<? if ($model->about_main_image): ?>
+<?php if ($model->about_main_image): ?>
     <div class="image-admin-preview">
         <?= Html::img($model->about_main_image, ['class' => 'img-admin']) ?>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="clearfix"></div>
 <?= $form->field($model, 'share_image')->fileInput(['accept' => 'image/*']) ?>
-<? if ($model->share_image): ?>
+<?php if ($model->share_image): ?>
     <div class="image-admin-preview">
         <?= Html::img($model->share_image, ['class' => 'img-admin']) ?>
     </div>
-<? endif; ?>
+<?php endif; ?>
 <div class="clearfix"></div>
 <br/>
 <div class="post-form">
@@ -60,14 +60,14 @@ $this->title = 'О компании';
     </div>
 
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-admin save-post']) ?>
-    <? ActiveForm::end() ?>
+    <?php ActiveForm::end() ?>
 
     <div class="images-block">
         <p style="font-weight: bold">Готовые проекты</p>
         <div class="images-panel">
-            <? foreach ($readyProjects as $project): ?>
+            <?php foreach ($readyProjects as $project): ?>
                 <?= $this->render('_image', ['model' => $project]) ?>
-            <? endforeach; ?>
+            <?php endforeach; ?>
         </div>
         <div class="clearfix"></div>
         <form name="uploader" enctype="multipart/form-data" method="POST">

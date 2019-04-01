@@ -11,7 +11,7 @@ $coordinates = [];
 ?>
 <div class="view-map" data-map="settlements-map">
     <div class="selected-items">
-        <? foreach ($models as $model): ?>
+        <?php foreach ($models as $model): ?>
             <?
             if ($model->lat && $model->lng) {
                 $builders[] = 'builder' . $model->id;
@@ -25,14 +25,14 @@ $coordinates = [];
                         <div class="name"><?= $model->name ?></div>
                         <div class="address"><?= $model->address ?></div>
                         <div class="tel"><?= $model->phones ?></div>
-                        <? if ($model->email): ?>
+                        <?php if ($model->email): ?>
                             <div class="email"><?= $model->email ?></div>
-                        <? endif; ?>
+                        <?php endif; ?>
                     </div>
                 </a>
                 <span class="close">&times;</span>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
     <div id="map"></div>
     <script type="text/javascript">

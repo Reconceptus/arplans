@@ -9,14 +9,14 @@
 /* @var $models \common\models\Post[] */
 /* @var $tags \common\models\Tag[] */
 ?>
-<? if ($models): ?>
+<?php if ($models): ?>
     <div class="section home-blog-slider blog-slider full bg">
         <div class="content content--lg">
             <div class="blog-slider--wrap">
                 <h3 class="title">полезное из блога</h3>
                 <div class="blog-slider--carousel" data-owl="blog">
                     <ul class="owl-carousel">
-                        <? foreach ($models as $model): ?>
+                        <?php foreach ($models as $model): ?>
                             <li class="item">
                                 <a href="/blog/<?= $model->slug ?>" class="blog-slider--item">
                                     <div class="blog-slider--item-figure"
@@ -27,16 +27,16 @@
                                     </div>
                                 </a>
                             </li>
-                        <? endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
                 <div class="blog-hashes">
                     <?= \yii\helpers\Html::a('Все статьи', \yii\helpers\Url::to(['/blog']), ['class' => 'btn-small']) ?>
-                    <? foreach ($tags as $tag): ?>
+                    <?php foreach ($tags as $tag): ?>
                         <?= \yii\helpers\Html::a($tag->name, \yii\helpers\Url::to(['/blog/index', 'tag' => $tag->name]), ['class' => 'btn-small']) ?>
-                    <? endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
-<? endif; ?>
+<?php endif; ?>
