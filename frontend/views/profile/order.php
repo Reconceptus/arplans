@@ -6,9 +6,14 @@
  * Time: 15:47
  */
 /* @var $model \modules\shop\models\Order */
-$services = \yii\helpers\ArrayHelper::map($model->services, 'id', 'name');
 
-use modules\shop\models\Order; ?>
+use modules\shop\models\Order;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$services = ArrayHelper::map($model->services, 'id', 'name');
+?>
 <div class="compare-table">
     <div class="compare-table--total">
         <div class="compare-table--part part-number">
@@ -40,10 +45,10 @@ use modules\shop\models\Order; ?>
         <div class="compare-table--part part-total">
             <dl>
                 <dd>Статус:</dd>
-                <dt><?= \modules\shop\models\Order::STATUSES[$model->status] ?></dt>
+                <dt><?= Order::STATUSES[$model->status] ?></dt>
             </dl>
         </div>
-        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? \yii\helpers\Html::a('Оплатить', \yii\helpers\Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
+        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? Html::a('Оплатить', Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
         <?php foreach ($model->orderItems as $oi): ?>
