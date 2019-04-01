@@ -42,11 +42,13 @@ class PaymentController extends Controller
         $itemsData = [];
         foreach ($order->orderItems as $item) {
             $itemsData[] = [
-                'text' => $item->item->name,
+                'description' => $item->item->name,
                 'quantity' => $item->count,
-                'tax' => 1,
-                'amount' => ['currency' => 'RUB', 'value' => floatval($item->price)],
+                'amount' => ['currency' => 'RUB', 'value' => $item->price],
+                'vat_code' => 1,
             ];
+            var_dump($item);
+            die;
         }
         $client = new Client();
         $client->setAuth($yaData['shopId'], $yaData['secretKey']);
@@ -60,8 +62,8 @@ class PaymentController extends Controller
                     'type' => 'redirect',
                     'return_url' => \Yii::$app->request->getHostInfo() . '/shop/payment/return?pid=' . $paymentObj->id,
                 ],
-                'ym_merchant_receipt' => [
-                    'customerContact' => $order->email,
+                'receipt' => [
+                    'email' => $order->email,
                     'items' => $itemsData,
                 ],
                 'description' => 'Оплата заказа #' . $paymentObj->order_id . ' в магазине Arplans',
