@@ -12,8 +12,7 @@ $coordinates = [];
 <div class="view-map" data-map="settlements-map">
     <div class="selected-items">
         <?php foreach ($models as $model): ?>
-            <?
-            if ($model->lat && $model->lng) {
+            <?php if ($model->lat && $model->lng) {
                 $builders[] = 'builder' . $model->id;
                 $coordinates[] = ['lat' => $model->lat, 'lng' => $model->lng];
             }

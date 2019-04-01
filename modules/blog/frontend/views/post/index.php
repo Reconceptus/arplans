@@ -52,8 +52,7 @@ $this->title = 'Блог';
                 <?php endforeach; ?>
             </div>
         </div>
-        <?
-        echo ListView::widget([
+        <?php echo ListView::widget([
             'dataProvider' => $dataProvider,
             'options'      => [
                 'tag'   => 'div',

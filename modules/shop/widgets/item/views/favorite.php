@@ -60,8 +60,7 @@ $image = $model->getMainImage(true);
     <div class="compare-table--part part-rooms">
         <div class="projects-item--part-title">Этажи/комнаты</div>
         <div class="projects-item--info">
-            <?
-            $floors = [];
+            <?php $floors = [];
             if ($model->one_floor) $floors[] = 'одноэтажный';
             if ($model->two_floor) $floors[] = 'двухэтажный';
             ?>

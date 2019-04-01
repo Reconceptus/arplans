@@ -48,8 +48,7 @@ $favorites = [];
                             </a>
                         </div>
                         <div class="catalog-main">
-                            <?
-                            echo ListView::widget([
+                            <?php echo ListView::widget([
                                 'dataProvider' => $dataProvider,
                                 'options'      => [
                                     'tag'   => 'div',

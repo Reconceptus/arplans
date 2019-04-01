@@ -75,8 +75,7 @@ $ready = $model->getReady();
                                     <span>общая: <?= $model->common_area ?>м<sup>2</sup></span>
                                 </td>
                             </tr>
-                            <?
-                            $floors = [];
+                            <?php $floors = [];
                             if ($model->one_floor) $floors[] = 'одноэтажный';
                             if ($model->two_floor) $floors[] = 'двухэтажный';
                             ?>

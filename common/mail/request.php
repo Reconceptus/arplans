@@ -34,8 +34,7 @@ $type = intval($model->type);
     <h2>Текст</h2>
     <p><?= $model->text ?></p>
 <?php if (intval($model->url) > 0): ?>
-    <?
-    $item = \modules\shop\models\Item::findOne(intval($model->url));
+    <?php $item = \modules\shop\models\Item::findOne(intval($model->url));
     ?>
     <?php if ($item): ?>
         Требуется просчитать смету на проект <a

@@ -172,8 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 <?= \modules\partner\widgets\map\Map::widget(['viewName' => 'about', 'query' => $query]) ?>
-<?
-if ($partners): ?>
+<?php if ($partners): ?>
     <div class="big-header">
         <div class="content content--lg">
             <h2 class="title">Официальные сайты-партнеры</h2>

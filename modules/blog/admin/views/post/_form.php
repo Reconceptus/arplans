@@ -31,8 +31,7 @@ $viewPostClass = $model->isNewRecord || !$model->status ? 'btn btn-admin disable
     <?= $form->field($model, 'slug', ['enableAjaxValidation' => true]) ?>
     <?= $form->field($model, 'status')->dropDownList([Post::STATUS_PUBLISHED => 'опубликована', Post::STATUS_NOT_PUBLISHED => 'скрыта']) ?>
     <div class="preview-image-block" data-id="<?= $model->id ?>">
-        <?
-        if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
+        <?php if ($model->image && file_exists(Yii::getAlias('@webroot', $model->image))) {
             echo Html::img($model->image, ['class' => 'img-responsive preview-image']);
             echo Html::button('Удалить изображение', ['class' => 'btn btn-admin js-delete-preview']);
         }

@@ -112,8 +112,7 @@
         }*/
     </style>
 </head>
-<?
-/* @var $model \common\models\User */
+<?php /* @var $model \common\models\User */
 /* @var $password string */
 ?>
 <body style="color:#21202e; font-family: Arial, sans-serif; font-size:16px; background:#ffffff; " alink="#2196f3"

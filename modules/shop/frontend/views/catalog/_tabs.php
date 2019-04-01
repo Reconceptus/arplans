@@ -87,8 +87,7 @@ $ready = $model->getReady();
                                     </td>
                                 </tr>
                             <?php endif; ?>
-                            <?
-                            $floors = [];
+                            <?php $floors = [];
                             if ($model->one_floor) $floors[] = 'одноэтажный';
                             if ($model->two_floor) $floors[] = 'двухэтажный';
                             ?>

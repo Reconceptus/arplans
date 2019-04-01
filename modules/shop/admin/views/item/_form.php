@@ -108,8 +108,7 @@ $bathrooms = [
             <?= $form->field($model, 'video') ?>
             <?= $form->field($model, 'sort')->textInput(['type' => 'number']) ?>
             <?php foreach ($catalogs as $catalog): ?>
-                <?
-                $iO = $model->getItemOptionCatalogItem($catalog->id);
+                <?php $iO = $model->getItemOptionCatalogItem($catalog->id);
                 $iOid = $iO ? $iO->id : null;
                 $items = \yii\helpers\ArrayHelper::map($catalog->catalogItems, 'id', 'name')
                 ?>

@@ -15,8 +15,7 @@ use yii\helpers\Url;
 
 <ul class="side-menu">
     <?php foreach ($modules as $module): ?>
-        <?
-        if (!Yii::$app->user->can($module['name'])) {
+        <?php if (!Yii::$app->user->can($module['name'])) {
             continue;
         }
         ?>
@@ -25,8 +24,7 @@ use yii\helpers\Url;
                 <span class="module"><?= $module['title'] ?></span>
                 <ul class="module-items">
                     <?php foreach ($module['items'] as $item): ?>
-                        <?
-                        if (!Yii::$app->user->can(str_replace('/', '_', $item['name']))) continue;
+                        <?php if (!Yii::$app->user->can(str_replace('/', '_', $item['name']))) continue;
                         $options = ['class' => ''];
                         $class = isset($selected['modules']) && isset($selected['controller']) && $item['name'] === $module['name'] . '/' . $selected['controller'] ? 'active' : '';
                         Html::addCssClass($options, 'active');

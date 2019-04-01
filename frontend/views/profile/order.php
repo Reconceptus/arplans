@@ -47,8 +47,7 @@ use modules\shop\models\Order; ?>
     </div>
     <div class="compare-table--main">
         <?php foreach ($model->orderItems as $oi): ?>
-            <?
-            $item = $oi->item;
+            <?php $item = $oi->item;
             $url = '/shop/' . $item->category->slug . '/' . $item->slug;
             ?>
             <div class="compare-table--item">

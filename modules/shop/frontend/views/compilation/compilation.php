@@ -55,8 +55,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
                             </div>
                         <?php endif; ?>
                         <div class="catalog-main">
-                            <?
-                            echo ListView::widget([
+                            <?php echo ListView::widget([
                                 'dataProvider' => $dataProvider,
                                 'options'      => [
                                     'tag'   => 'div',

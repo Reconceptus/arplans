@@ -301,8 +301,7 @@
     </div>
 </div>
 <?= \frontend\widgets\recently\Recently::widget() ?>
-<?
-$js = <<<JS
+<?php $js = <<<JS
  
     $('.request-form form').validate({
         onfocusout: false,

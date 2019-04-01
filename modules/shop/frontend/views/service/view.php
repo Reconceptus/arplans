@@ -76,8 +76,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                 <h3 class="title">Примеры:</h3>
                 <ul class="examples">
                     <?php foreach ($model->files as $file): ?>
-                        <?
-                        $ext = explode('.', $file->file);
+                        <?php $ext = explode('.', $file->file);
                         $name = explode('/', $file->file);
                         ?>
                         <li>
