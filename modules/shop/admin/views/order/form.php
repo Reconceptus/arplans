@@ -48,6 +48,10 @@ $this->title = 'Заказ #' . $model->id;
                 <td>Дата и время</td>
                 <td><?= $model->created_at ?></td>
             </tr>
+            <tr>
+                <td>Комментарий</td>
+                <td><?= $model->village ?></td>
+            </tr>
         </table>
         <p style="font-weight: bold">Товары</p>
         <table class="table table-bordered table-striped">
