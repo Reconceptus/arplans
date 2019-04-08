@@ -28,11 +28,13 @@ $type = intval($model->type);
     <p>Имя: <?= $model->name ?></p>
     <p>Email: <?= $model->email ?></p>
     <p>Телефон: <?= $model->phone ?></p>
-<?php elseif($model->type === Request::PAGE_CALCULATION):?>
-    <p>Имя: <?= $model->name ?></p>
-    <p>Регион: <?= $model->region ?></p>
-    <p>Контактная информация: <?= $model->contact ?></p>
 <?php else: ?>
+    <?php if ($model->name && $model->name != '-'): ?>
+        <p>Имя: <?= $model->name ?></p>
+    <?php endif; ?>
+    <?php if ($model->region): ?>
+        <p>Регион: <?= $model->region ?></p>
+    <?php endif; ?>
     <p>Контактная информация: <?= $model->contact ?></p>
 <?php endif; ?>
     <h2>Текст</h2>
