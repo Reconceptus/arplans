@@ -9,6 +9,7 @@ use modules\partner\models\Partner;
  *
  * @property int $id
  * @property string $name
+ * @property string $region
  * @property string $contact
  * @property string $email
  * @property string $phone
@@ -67,12 +68,12 @@ class Request extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'name', 'contact'], 'required'],
+            [['text', 'name', 'contact', 'region'], 'required'],
             [['text'], 'string', 'max' => 2000],
             [['file'], 'file', 'extensions' => 'png, jpg, gif, pdf, xls, xlsx, doc, docx, odt, zip, rar, 7z'],
             [['type', 'partner_id'], 'integer'],
             [['accept'], 'compare', 'compareValue' => 1, 'message' => 'Необходимо подтвердить согласие на обработку данных'],
-            [['name', 'contact', 'phone', 'url'], 'string', 'max' => 255],
+            [['name', 'contact', 'region', 'phone', 'url'], 'string', 'max' => 255],
             [['email'], 'email']
         ];
     }
@@ -85,6 +86,7 @@ class Request extends \yii\db\ActiveRecord
         return [
             'id'         => 'ID',
             'name'       => 'Имя',
+            'region'     => 'Регион',
             'contact'    => 'Контакты',
             'email'      => 'Email',
             'phone'      => 'Телефон',
