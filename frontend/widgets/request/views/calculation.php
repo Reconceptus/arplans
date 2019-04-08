@@ -27,10 +27,19 @@ use yii\widgets\ActiveForm;
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CALCULATION) ?>
                 <?= Html::hiddenInput('Request[email]', null) ?>
-                <?= Html::hiddenInput('Request[name]', '-') ?>
                 <?= Html::hiddenInput('Request[phone]', '-') ?>
                 <div class="modal-form--fields">
                     <div class="custom-form">
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'name', ['placeholder' => '*Имя']) ?>
+                            </div>
+                        </div>
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'region', ['placeholder' => '*Регион строительства']) ?>
+                            </div>
+                        </div>
                         <div class="form-row-element">
                             <div class="input">
                                 <?= Html::activeTextInput($model, 'contact', ['placeholder' => '*Ваш телефон, e-mail или любой другой контакт']) ?>
@@ -85,11 +94,15 @@ $js = <<<JS
         ignore: ".ignore",
         rules: {
             'Request[contact]': {required: true},
+            'Request[name]': {required: true},
+            'Request[region]': {required: true},
             'Request[text]': {required: true},
             'Request[accept]': {required: true}
         },
         messages: {
            'Request[contact]': {required: ""},
+           'Request[name]': {required: ""},
+           'Request[region]': {required: ""},
            'Request[text]': {required: ""},
            'Request[accept]': {required: ""}
         },

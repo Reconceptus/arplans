@@ -26,6 +26,7 @@ $type = intval($model->type);
 
 <?php if ($model->type === Request::PAGE_CONTACT): ?>
     <p>Имя: <?= $model->name ?></p>
+    <p>Регион: <?= $model->region ?></p>
     <p>Email: <?= $model->email ?></p>
     <p>Телефон: <?= $model->phone ?></p>
 <?php else: ?>
