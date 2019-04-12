@@ -39,7 +39,7 @@ $columns = [
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
-                    '/admin/modules/blog/post/delete',
+                    '/blog/post/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -58,7 +58,7 @@ $columns = [
             [
                 'dataProvider' => $dataProvider,
                 'rowOptions'   => function ($model, $key, $index, $grid) {
-                    return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/blog/post/update', 'id' => $model->id]) . '"'];
+                    return ['onclick' => 'window.location = "' . Url::to(['/blog/post/update', 'id' => $model->id]) . '"'];
                 },
                 'layout'       => '{items}{pager}',
                 'columns'      => $columns

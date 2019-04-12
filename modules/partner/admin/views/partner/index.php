@@ -48,7 +48,7 @@ $columns = [
         'buttons'  => [
             'delete' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
-                    '/admin/modules/partner/partner/delete',
+                    '/partner/partner/delete',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]), [
@@ -58,7 +58,7 @@ $columns = [
             },
             'categories' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-list"></span>', Url::to([
-                    '/admin/modules/partner/partner/categories',
+                    '/partner/partner/categories',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
                 ]));
@@ -68,13 +68,13 @@ $columns = [
 ];
 ?>
 <h1><?= $this->title ?></h1>
-<?= Html::a('Добавить партнера', Url::to(['/admin/modules/partner/partner/create']), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Добавить партнера', Url::to(['/partner/partner/create']), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'filterModel'  => $filterModel,
         'rowOptions'   => function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/partner/partner/update', 'id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "' . Url::to(['/partner/partner/update', 'id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',
         'columns'      => $columns
