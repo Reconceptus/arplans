@@ -73,6 +73,7 @@ class PostController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Post::find();
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
