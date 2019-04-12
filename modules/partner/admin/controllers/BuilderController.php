@@ -77,6 +77,7 @@ class BuilderController extends AdminController
      */
     public function actionIndex()
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $query = Builder::find()->where(['is_deleted' => Builder::IS_NOT_DELETED]);
         $filterModel = new Builder();
         $filter = Yii::$app->request->get('Builder');
