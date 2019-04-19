@@ -10,6 +10,7 @@ namespace modules\partner\admin\controllers;
 
 
 use modules\admin\controllers\AdminController;
+use modules\partner\models\AddPartnerForm;
 use modules\partner\models\Partner;
 use modules\partner\models\PartnerCategory;
 use modules\shop\models\Category;
@@ -125,6 +126,35 @@ class PartnerController extends AdminController
         return $this->render('_form', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @return string|Response
+     * @throws Exception
+     */
+    public function actionAdd()
+    {
+        $model = new AddPartnerForm();
+        $post = Yii::$app->request->post();
+        if ($model->load($post) && $model->validate()) {
+            if ($id = $model->add()) {
+                return $this->redirect(['/admin/modules/partner/partner/update', 'id' => $id]);
+            }
+        }
+        return $this->render('add', ['model' => $model]);
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionConfig()
+    {
+        $id = intval(Yii::$app->request->get('id'));
+        if (!$id) {
+            throw new NotFoundHttpException();
+        }
+        $model = Partner::findOne(['id' => $id]);
+        $this->renderPartial('config', ['model' => $model->agent]);
     }
 
     /**

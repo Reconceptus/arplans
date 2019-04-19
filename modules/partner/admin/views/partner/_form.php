@@ -20,7 +20,11 @@ $this->title = $model->isNewRecord ? 'Добавление партнера' : '
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 ?>
 <h1><?= $this->title ?></h1>
-
+<?php
+if (!$model->isNewRecord) {
+    echo Html::a('Скачать конфиг', Url::to(['/admin/modules/partner/partner/config','id'=>$model->id]), ['class' => 'btn btn-admin add-big-button']);
+}
+?>
 <?php $form = ActiveForm::begin(['method' => 'post']); ?>
 <div class="post-form">
     <div class="row">
