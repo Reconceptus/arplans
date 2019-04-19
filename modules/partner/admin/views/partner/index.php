@@ -43,7 +43,7 @@ $columns = [
     ],
     [
         'class'    => 'yii\grid\ActionColumn',
-        'template' => '{categories} {delete}',
+        'template' => '{config} {categories} {delete}',
         'options'  => ['style' => 'width:100px'],
         'buttons'  => [
             'delete' => function ($url, $model) {
@@ -61,6 +61,12 @@ $columns = [
                     '/partner/partner/categories',
                     'id'   => $model->id,
                     'back' => Yii::$app->request->absoluteUrl
+                ]));
+            },
+            'config' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-check"></span>', Url::to([
+                    '/partner/partner/config',
+                    'id'   => $model->id
                 ]));
             }
         ]
