@@ -68,6 +68,7 @@ $columns = [
 ];
 ?>
 <h1><?= $this->title ?></h1>
+<?= Html::a('Добавить партнера (быстро)', Url::to(['/partner/partner/add']), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= Html::a('Добавить партнера', Url::to(['/partner/partner/create']), ['class' => 'btn btn-admin add-big-button']) ?>
 <?= \yii\grid\GridView::widget(
     [
