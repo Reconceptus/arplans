@@ -13,6 +13,7 @@ class SignupForm extends Model
 {
     public $email;
     public $password;
+    public $is_referrer;
 
 
     /**
@@ -26,7 +27,7 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Пользователь с этим email уже зарегистрирован.'],
-
+            ['is_referrer', 'boolean'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -47,9 +48,17 @@ class SignupForm extends Model
         $user->username = $this->email;
         $user->email = $this->email;
         $user->status = User::STATUS_ACTIVE;
+        if($this->is_referrer){
+            $user->is_referrer = 1;
+        }
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        if($user->save()){
+        $inv = intval(Yii::$app->request->cookies->getValue('inv'));
+        if ($inv) {
+            $user->referrer_id = $inv;
+            Yii::$app->response->cookies->remove('inv');
+        }
+        if ($user->save()) {
             $userRole = Yii::$app->authManager->getRole('user');
             Yii::$app->authManager->assign($userRole, $user->getId());
             return $user;
