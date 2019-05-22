@@ -23,8 +23,8 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $access_token
  * @property integer $status
- * @property integer $is_refer
- * @property integer $inviter_id
+ * @property integer $is_referrer
+ * @property integer $referrer_id
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -62,7 +62,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'email', 'role'], 'string', 'max' => 255],
-            [['is_refer', 'inviter_id'], 'integer'],
+            [['is_referrer', 'referrer_id'], 'integer'],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],

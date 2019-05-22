@@ -1,12 +1,13 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-
-/* @var $model \frontend\models\SignupForm */
-
+use frontend\models\SignupForm;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $isRef int */
+/* @var $model SignupForm */
 
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]); ?>
                     <div class="login-form--wrap">
                         <div class="request-form--main custom-form">
+                            <?php if ($isRef): ?>
+                                <input type="hidden" name="SignupForm[is_referrer]" value="1">
+                            <?php endif; ?>
                             <div class="form-row-element">
                                 <div class="input">
                                     <?= Html::activeTextInput($model, 'email', ['placeholder' => '*Email']) ?>

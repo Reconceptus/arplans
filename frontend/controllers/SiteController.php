@@ -21,6 +21,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
@@ -224,6 +225,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+        $isRef = intval(Yii::$app->request->get('ref'));
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -239,8 +241,23 @@ class SiteController extends Controller
                 }
             }
         }
+        return $this->render('signup', ['model' => $model, 'isRef' => $isRef]);
+    }
 
-        return $this->render('signup', ['model' => $model,]);
+    /**
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionRef()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $model = Yii::$app->user->identity;
+            $model->is_referrer = 1;
+            if ($model->save()) {
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+        throw new NotFoundHttpException();
     }
 
     /**

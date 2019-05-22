@@ -8,6 +8,7 @@
 
 namespace frontend\widgets\referral;
 
+use common\models\User;
 use Yii;
 use yii\base\Widget;
 use yii\web\Cookie;
@@ -20,17 +21,20 @@ class Referral extends Widget
     public function run()
     {
         if (Yii::$app->user->isGuest) {
-            $ref = Yii::$app->request->get('inv');
+            $ref = intval(Yii::$app->request->get('inv'));
             if ($ref) {
-                $cookies = Yii::$app->response->cookies;
-                if (!$cookies->has('inv')) {
-                    $cookies->add(new Cookie([
-                        'name'   => 'inv',
-                        'value'  => $ref,
-                        'expire' => time() + 60 * 60 * 24 * 365
-                    ]));
-                    $this->view->context->redirect(Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo);
+                $referrer = User::findOne(['id'=>$ref,'status'=>User::STATUS_ACTIVE, 'is_referrer'=>1]);
+                if($referrer) {
+                    $cookies = Yii::$app->response->cookies;
+                    if (!$cookies->has('inv')) {
+                        $cookies->add(new Cookie([
+                            'name'   => 'inv',
+                            'value'  => $ref,
+                            'expire' => time() + 60 * 60 * 24 * 365
+                        ]));
+                    }
                 }
+                $this->view->context->redirect(Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo);
             }
         }
         return '';
