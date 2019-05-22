@@ -112,9 +112,10 @@
         }*/
     </style>
 </head>
-<?php /* @var $model \common\models\User */
+<?php /* @var $model SignupForm */
 /* @var $password string */
-?>
+
+use frontend\models\SignupForm; ?>
 <body style="color:#21202e; font-family: Arial, sans-serif; font-size:16px; background:#ffffff; " alink="#2196f3"
       link="#2196f3" bgcolor="#ffffff" text="#21202e" yahoo="fix">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -169,12 +170,12 @@
                                                     <tr><td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;"></td></tr>
                                                     <tr>
                                                         <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                            Ваш логин: <?= $model->username ?></td>
+                                                            Ваш логин: <?= $model->email ?></td>
                                                     </tr>
-                                                    <?php if ($password): ?>
+                                                    <?php if (!empty($model->password)): ?>
                                                         <tr>
                                                             <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                                Ваш пароль: <?= $password ?></td>
+                                                                Ваш пароль: <?= $model->password ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                     <tr>

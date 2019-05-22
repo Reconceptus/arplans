@@ -49,6 +49,11 @@ class SignupForm extends Model
         $user->status = User::STATUS_ACTIVE;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $inv = intval(Yii::$app->request->cookies->getValue('inv'));
+        if($inv){
+            $user->inviter_id = $inv;
+            Yii::$app->response->cookies->remove('inv');
+        }
         if($user->save()){
             $userRole = Yii::$app->authManager->getRole('user');
             Yii::$app->authManager->assign($userRole, $user->getId());

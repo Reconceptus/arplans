@@ -1,18 +1,26 @@
 <?php
+
+use frontend\widgets\categories\Categories;
+use frontend\widgets\referral\Referral;
+use modules\content\models\ContentBlock;
+use modules\shop\widgets\cart\Cart;
+use modules\shop\widgets\services\Services;
+
 ?>
+<?= Referral::widget() ?>
 <header id="header" class="header">
     <div class="header-top">
         <div class="content content--lg">
             <div class="header-top--wrap">
                 <div class="header-top--telephone">
-                    <a href="tel:<?=\modules\content\models\ContentBlock::getValue('hot_line')?>"><?=\modules\content\models\ContentBlock::getValue('hot_line')?></a>
+                    <a href="tel:<?= ContentBlock::getValue('hot_line') ?>"><?= ContentBlock::getValue('hot_line') ?></a>
                 </div>
                 <div class="header-top--nav">
                     <nav>
                         <ul>
                             <li><a href="#" class="show-modal " data-modal="consultation">Консультация</a></li>
                             <li><a href="/about" class="">О нас</a></li>
-                            <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'top']) ?>
+                            <?= Services::widget(['viewName' => 'top']) ?>
                             <li><a href="/collaboration" class="">Сотрудничество</a></li>
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и материалы</a></li>
@@ -47,10 +55,10 @@
                     </a>
                 </div>
                 <div class="header-main--nav">
-                    <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top', 'showServices' => 1]) ?>
+                    <?= Categories::widget(['viewName' => 'top', 'showServices' => 1]) ?>
                 </div>
                 <div class="header-main--stats">
-                    <?= \modules\shop\widgets\cart\Cart::widget() ?>
+                    <?= Cart::widget() ?>
                     <div class="burger desktop-hidden">
                         <span></span>
                         <span></span>
@@ -63,7 +71,7 @@
     <div class="header-mobile desktop-hidden">
         <div class="bg"></div>
         <nav class="header-mobile--nav">
-            <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'top-mobile', 'showServices' => 1]) ?>
+            <?= Categories::widget(['viewName' => 'top-mobile', 'showServices' => 1]) ?>
         </nav>
     </div>
 </header>
