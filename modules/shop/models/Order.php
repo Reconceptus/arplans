@@ -80,7 +80,7 @@ class Order extends ActiveRecord
             $this->created_at = date('Y-m-d H:i:s', time());
         } else {
             if ($this->oldAttributes['status'] != $this->status && $this->status != Order::STATUS_NEW) {
-                if ($this->status === self::STATUS_PAYED) {
+                if ($this->status == self::STATUS_PAYED) {
                     // если есть реферер, то при переходе в статус оплачен начисляем бонусы
                     $referrer = $this->user->referrer;
                     if ($referrer) {
