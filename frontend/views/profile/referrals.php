@@ -23,6 +23,7 @@ $user = Yii::$app->user->identity;
             <div class="content content--md">
                 <h1 class="title title-lg"><?= $this->title ?></h1>
                 <div class="summary">
+                    <p>Ваша ссылка для привлечения реферралов: <?=Yii::$app->request->getHostInfo().'?inv='.$user->id?></p>
                     <p>По Вашей ссылке зарегистрированы <?= $referrals ?> человек</p>
                     <p>За все время Вами заработано <?= floatval($user->bonus_total) ?> р.</p>
                     <p>Не выведено <?= $user->bonusRemnants ?> р.</p>
