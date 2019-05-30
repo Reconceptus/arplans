@@ -7,6 +7,7 @@ use modules\shop\models\RefRequest;
 use modules\shop\models\RefRequestSearch;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -65,7 +66,7 @@ class ReferrerController extends AdminController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Url::to(['/admin/modules/shop/referrer']));
         }
 
         return $this->render('_form', [
