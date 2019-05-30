@@ -53,13 +53,13 @@ $totalSum = 0;
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <input type="text" placeholder="Город" value="<?= $user ? $user->profile->city : '' ?>"
+                            <input type="text" placeholder="*Город" value="<?= $user ? $user->profile->city : '' ?>"
                                    id="order-city">
                         </div>
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <input type="text" placeholder="Адрес" value="<?= $user ? $user->profile->address : '' ?>"
+                            <input type="text" placeholder="*Адрес" value="<?= $user ? $user->profile->address : '' ?>"
                                    id="order-address">
                         </div>
                     </div>
