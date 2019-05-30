@@ -3,6 +3,7 @@
 namespace modules\shop\models;
 
 use common\models\User;
+use yii\base\Exception;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -62,7 +63,10 @@ class RefRequest extends ActiveRecord
         $this->updated_at = $time;
         if ($this->oldAttributes['status'] != $this->status && $this->status == self::STATUS_COMPLETE) {
             $user = $this->referrer;
-            $user->bonus_payed = $this->amount+$user->bonus_payed;
+            if ($this->amount > $user->bonusRemnants) {
+                throw new Exception('Сумма к выводу больше суммы на счете');
+            }
+            $user->bonus_payed = floatval($this->amount) + floatval($user->bonus_payed);
         }
         return parent::beforeSave($insert);
     }
