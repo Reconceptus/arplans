@@ -61,13 +61,15 @@ class RefRequest extends ActiveRecord
             $this->created_at = $time;
         }
         $this->updated_at = $time;
-        if (!empty($this->oldAttributes['status']) && $this->oldAttributes['status'] != $this->status && $this->status == self::STATUS_COMPLETE) {
-            $user = $this->referrer;
-            if ($this->amount > $user->bonusRemnants) {
-                throw new Exception('Сумма к выводу больше суммы на счете');
+        if(array_key_exists('status', $this->oldAttributes)) {
+            if ($this->oldAttributes['status'] != $this->status && $this->status == self::STATUS_COMPLETE) {
+                $user = $this->referrer;
+                if ($this->amount > $user->bonusRemnants) {
+                    throw new Exception('Сумма к выводу больше суммы на счете');
+                }
+                $user->bonus_payed = floatval($this->amount) + floatval($user->bonus_payed);
+                $user->save();
             }
-            $user->bonus_payed = floatval($this->amount) + floatval($user->bonus_payed);
-            $user->save();
         }
         return parent::beforeSave($insert);
     }
