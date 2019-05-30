@@ -81,7 +81,7 @@ class Order extends ActiveRecord
         } else {
             if ($this->oldAttributes['status'] != $this->status && $this->status != Order::STATUS_NEW) {
                 if ($this->status === self::STATUS_PAYED) {
-                    // если есть реферрер, то при переходе в статус оплачен начисляем бонусы
+                    // если есть реферер, то при переходе в статус оплачен начисляем бонусы
                     $referrer = $this->user->referrer;
                     if ($referrer) {
                         $percent = floatval(Config::getValue('referrer_percent')) ?? 0;
@@ -90,7 +90,7 @@ class Order extends ActiveRecord
                         $this->referrer_id = $referrer->id;
                         $this->referrer_bonus = $amount;
                         if (!$referrer->save()) {
-                            throw new Exception('Ошибка добавления бонуса реферреру');
+                            throw new Exception('Ошибка добавления бонуса рефереру');
                         };
                     }
                 }
@@ -146,8 +146,8 @@ class Order extends ActiveRecord
             'village'         => 'Дополнительная информация',
             'payment_id'      => 'Платежная система',
             'price'           => 'Цена',
-            'referrer_id'     => 'Реферрер',
-            'referrer_bonus'  => 'Выплата реферререру',
+            'referrer_id'     => 'Реферер',
+            'referrer_bonus'  => 'Выплата рефереру',
             'partner_percent' => 'Отчисление партнеру',
             'track'           => 'Код отслеживания',
             'created_at'      => 'Дата',

@@ -32,7 +32,7 @@ class m190522_131815_add_referral_fields_to_order extends Migration
 
         // создать разрешения
         $ref = $auth->createPermission('shop_referrer');
-        $ref->description = 'Доступ к запросам реферерров';
+        $ref->description = 'Доступ к запросам рефереров';
         $auth->add($ref);
 
 
@@ -41,7 +41,7 @@ class m190522_131815_add_referral_fields_to_order extends Migration
 
         $id = $this->db->createCommand("SELECT id FROM module WHERE name='shop'")->queryScalar();
         $shopModules = [
-            ['referrer', 'Реферерры', $id],
+            ['referrer', 'Рефереры', $id],
         ];
         $this->batchInsert('module', ['name', 'title', 'parent_id'], $shopModules);
     }

@@ -118,6 +118,7 @@ class CartController extends Controller
      */
     public function actionOrder()
     {
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
         $info = $get['info'];

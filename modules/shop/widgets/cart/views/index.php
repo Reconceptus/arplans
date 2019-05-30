@@ -23,7 +23,7 @@ $user = Yii::$app->user->identity;
             <?= Html::a('Мои данные', Url::to('/profile')) ?>
             <?= Html::a('Мои заказы', Url::to('/profile/orders')) ?>
             <?php if ($user->is_referrer): ?>
-                <?= Html::a('Мои реферралы', Url::to('/profile/referrals')) ?>
+                <?= Html::a('Мои рефералы', Url::to('/profile/referrals')) ?>
             <?php endif; ?>
             <?php if ($user->partner): ?>
                 <?= Html::a('Мои продажи', Url::to('/profile/sales')) ?>
