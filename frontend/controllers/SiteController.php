@@ -6,6 +6,7 @@ use common\models\Config;
 use common\models\LoginForm;
 use common\models\Profile;
 use common\models\Request;
+use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -251,6 +252,7 @@ class SiteController extends Controller
     public function actionRef()
     {
         if (!Yii::$app->user->isGuest) {
+            /* @var $model User*/
             $model = Yii::$app->user->identity;
             $model->is_referrer = 1;
             if ($model->save()) {

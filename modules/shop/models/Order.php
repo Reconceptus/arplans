@@ -6,6 +6,8 @@ use common\models\Config;
 use common\models\PaymentSystem;
 use common\models\User;
 use Yii;
+use yii\base\Exception;
+use yii\db\ActiveRecord;
 use yii\helpers\Html;
 
 /**
@@ -27,6 +29,8 @@ use yii\helpers\Html;
  * @property int $payment_id
  * @property int $type
  * @property string $price Цена только товаров, без допуслуг
+ * @property string $referrer_bonus
+ * @property int $referrer_id
  * @property string $partner_percent
  * @property string $created_at
  * @property string $updated_at
@@ -38,7 +42,7 @@ use yii\helpers\Html;
  * @property OrderService[] $orderServices
  * @property Service[] $services
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
     const STATUS_NEW = 1;
     const STATUS_PAYED = 2;
@@ -76,10 +80,24 @@ class Order extends \yii\db\ActiveRecord
             $this->created_at = date('Y-m-d H:i:s', time());
         } else {
             if ($this->oldAttributes['status'] != $this->status && $this->status != Order::STATUS_NEW) {
+                if ($this->status === self::STATUS_PAYED) {
+                    // если есть реферрер, то при переходе в статус оплачен начисляем бонусы
+                    $referrer = $this->user->referrer;
+                    if ($referrer) {
+                        $percent = floatval(Config::getValue('referrer_percent')) ?? 0;
+                        $amount = $this->price / 100 * $percent;
+                        $referrer->bonus_total += $amount;
+                        $this->referrer_id = $referrer->id;
+                        $this->referrer_bonus = $amount;
+                        if (!$referrer->save()) {
+                            throw new Exception('Ошибка добавления бонуса реферреру');
+                        };
+                    }
+                }
                 $mail = Yii::$app->mailer->compose('order-status-changed', ['model' => $this]);
                 $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                 $mail->setTo($this->email);
-                if($this->status == Order::STATUS_PAYED){
+                if ($this->status == Order::STATUS_PAYED) {
                     $mail->setBcc(Config::getValue('requestEmail'));
                 }
                 $mail->setSubject('Изменение статуса заказа №' . $this->id);
@@ -97,13 +115,14 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'payment_id', 'payment_status'], 'integer'],
-            [['price', 'partner_percent'], 'number'],
+            [['user_id', 'status', 'payment_id', 'payment_status', 'referrer_id'], 'integer'],
+            [['price', 'partner_percent', 'referrer_bonus'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['comment', 'village'], 'string', 'max' => 800],
             [['fio', 'country', 'city', 'address', 'track'], 'string', 'max' => 255],
             [['phone', 'email'], 'string', 'max' => 50],
             [['payment_id'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentSystem::className(), 'targetAttribute' => ['payment_id' => 'id']],
+            [['referrer_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['referrer_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -127,6 +146,8 @@ class Order extends \yii\db\ActiveRecord
             'village'         => 'Дополнительная информация',
             'payment_id'      => 'Платежная система',
             'price'           => 'Цена',
+            'referrer_id'     => 'Реферрер',
+            'referrer_bonus'  => 'Выплата реферререру',
             'partner_percent' => 'Отчисление партнеру',
             'track'           => 'Код отслеживания',
             'created_at'      => 'Дата',
@@ -279,6 +300,14 @@ class Order extends \yii\db\ActiveRecord
             }
         }
         return 0;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReferrer()
+    {
+        return $this->hasOne(User::className(), ['id' => 'referrer_id']);
     }
 
     /**
