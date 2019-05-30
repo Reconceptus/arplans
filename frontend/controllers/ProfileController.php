@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use common\models\User;
 use modules\shop\models\Order;
+use modules\shop\models\RefRequest;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,7 +75,40 @@ class ProfileController extends Controller
      */
     public function actionSales()
     {
-        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->orderBy(['id'=>SORT_DESC])->all();
+        if (Yii::$app->user->isGuest || !Yii::$app->user->identity->partner) {
+            throw new NotFoundHttpException();
+        }
+        $models = Order::find()->where(['type' => Order::TYPE_API, 'user_id' => Yii::$app->user->id])->orderBy(['id' => SORT_DESC])->all();
         return $this->render('sales', ['models' => $models]);
+    }
+
+    /**
+     * @return string
+     */
+    public function actionReferrals()
+    {
+        if (Yii::$app->user->isGuest || !Yii::$app->user->identity->is_referrer) {
+            throw new NotFoundHttpException();
+        }
+        $user_id = Yii::$app->user->id;
+        $referrals = User::find()->where(['referrer_id' => $user_id, 'status' => User::STATUS_ACTIVE])->count();
+        $models = Order::find()->where(['referrer_id' => $user_id, 'type' => Order::TYPE_SHOP])->andWhere(['in', 'status', [Order::STATUS_PAYED, Order::STATUS_DONE]])->orderBy(['id' => SORT_DESC])->all();
+        return $this->render('referrals', ['models' => $models, 'referrals' => $referrals]);
+    }
+
+    public function actionBonus()
+    {
+        if (Yii::$app->user->isGuest || !Yii::$app->user->identity->is_referrer || Yii::$app->user->identity->bonusRemnants < 2000) {
+            throw new NotFoundHttpException();
+        }
+        /* @var $user User */
+        $user = Yii::$app->user->identity;
+        $model = new RefRequest(['referrer_id' => $user->id]);
+        $post = Yii::$app->request->post();
+        if ($model->load($post) && $model->save()) {
+            return $this->redirect('/profile/referrals');
+        }
+        $model->amount = 2000;
+        return $this->render('bonus', ['user' => $user, 'model' => $model]);
     }
 }

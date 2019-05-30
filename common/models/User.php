@@ -22,6 +22,9 @@ use yii\web\IdentityInterface;
  * @property string $role
  * @property string $auth_key
  * @property string $access_token
+ * @property string $bonus_payed
+ * @property string $bonus_total
+ * @property string $bonusRemnants
  * @property integer $status
  * @property integer $is_referrer
  * @property integer $referrer_id
@@ -30,6 +33,7 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  * @property Profile $profile
  * @property Partner $partner
+ * @property User $referrer
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -63,6 +67,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['username', 'email', 'role'], 'string', 'max' => 255],
             [['is_referrer', 'referrer_id'], 'integer'],
+            [['bonus_payed', 'bonus_total'], 'number'],
             [['username', 'email', 'status'], 'required'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
@@ -316,5 +321,21 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReferrer()
+    {
+        return $this->hasOne(self::className(), ['id' => 'referrer_id']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBonusRemnants()
+    {
+        return ($this->bonus_total - $this->bonus_payed);
     }
 }
