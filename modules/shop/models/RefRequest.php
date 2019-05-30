@@ -67,6 +67,7 @@ class RefRequest extends ActiveRecord
                 throw new Exception('Сумма к выводу больше суммы на счете');
             }
             $user->bonus_payed = floatval($this->amount) + floatval($user->bonus_payed);
+            $user->save();
         }
         return parent::beforeSave($insert);
     }
