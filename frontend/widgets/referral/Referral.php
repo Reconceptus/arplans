@@ -20,11 +20,13 @@ class Referral extends Widget
 
     public function run()
     {
-        if (Yii::$app->user->isGuest) {
+        /* @var $user User */
+        $user = Yii::$app->user->identity;
+        if (!$user) {
             $ref = intval(Yii::$app->request->get('inv'));
             if ($ref) {
-                $referrer = User::findOne(['id'=>$ref,'status'=>User::STATUS_ACTIVE, 'is_referrer'=>1]);
-                if($referrer) {
+                $referrer = User::findOne(['id' => $ref, 'status' => User::STATUS_ACTIVE, 'is_referrer' => 1]);
+                if ($referrer) {
                     $cookies = Yii::$app->response->cookies;
                     if (!$cookies->has('inv')) {
                         $cookies->add(new Cookie([
@@ -36,6 +38,9 @@ class Referral extends Widget
                 }
                 $this->view->context->redirect(Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo);
             }
+        } elseif ($user->is_referrer) {
+            $link = Yii::$app->request->hostInfo.'/'.Yii::$app->request->pathInfo.'?inv='.$user->id;
+            return $this->render('_link', ['link' => $link]);
         }
         return '';
     }
