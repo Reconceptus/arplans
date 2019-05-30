@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel modules\shop\models\RefRequestSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Запросы реферреров';
+$this->title = 'Запросы рефереров';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <h1><?= Html::encode($this->title) ?></h1>

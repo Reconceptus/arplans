@@ -78,7 +78,7 @@ class RefRequest extends ActiveRecord
     {
         return [
             'id'          => 'ID',
-            'referrer_id' => 'Реферрер',
+            'referrer_id' => 'Реферер',
             'amount'      => 'Сумма',
             'status'      => 'Статус',
             'info'        => 'Информация',
