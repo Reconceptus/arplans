@@ -256,7 +256,7 @@ class SiteController extends Controller
             $model = Yii::$app->user->identity;
             $model->is_referrer = 1;
             if ($model->save()) {
-                return $this->redirect(Yii::$app->request->referrer);
+                return $this->redirect('/');
             }
         }
         throw new NotFoundHttpException();
