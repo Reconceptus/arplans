@@ -39,7 +39,7 @@ $totalSum = 0;
                     </div>
                     <div class="form-row-element">
                         <div class="input">
-                            <input type="text" placeholder="Ваш e-mail" name="email"
+                            <input type="text" placeholder="*Ваш e-mail" name="email"
                                    value="<?= $user ? $user->email : '' ?>" id="order-email">
                         </div>
                     </div>
