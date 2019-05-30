@@ -268,6 +268,11 @@ class User extends ActiveRecord implements IdentityInterface
         $user->generateAuthKey();
         $user->status = 10;
         if ($user->save()) {
+            $inv = intval(Yii::$app->request->cookies->getValue('inv'));
+            if ($inv) {
+                $user->referrer_id = $inv;
+                Yii::$app->response->cookies->remove('inv');
+            }
             $profile = new Profile();
             $profile->user_id = $user->id;
             $profile->fio = Html::encode($fio);
