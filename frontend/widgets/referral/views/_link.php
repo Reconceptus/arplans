@@ -9,12 +9,8 @@
 
 <?php
 $js = <<<JS
-var button = document.getElementById('copy-ref');
-button.addEventListener('click', function () {
-  var ta = document.getElementById('referral-link');
-  var range = document.createRange();
-  range.selectNode(ta); 
-  window.getSelection().addRange(range); 
+$("#copy-ref").click(function() { 
+    $("#referral-link").select(); 
   
   try { 
     document.execCommand('copy'); 
