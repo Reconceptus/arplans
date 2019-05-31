@@ -298,6 +298,7 @@ class User extends ActiveRecord implements IdentityInterface
             ->setTo($user->email)
             ->setSubject('Вы зарегистрированы на сайте ' . Yii::$app->name)
             ->send();
+        return 1;
     }
 
     /**

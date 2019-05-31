@@ -172,10 +172,10 @@ use frontend\models\SignupForm; ?>
                                                         <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
                                                             Ваш логин: <?= $model->email ?></td>
                                                     </tr>
-                                                    <?php if (!empty($model->password)): ?>
+                                                    <?php if (!empty($password)): ?>
                                                         <tr>
                                                             <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                                Ваш пароль: <?= $model->password ?></td>
+                                                                Ваш пароль: <?= $password ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                     <tr>
