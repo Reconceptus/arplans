@@ -232,12 +232,9 @@ class SiteController extends Controller
                 if (Yii::$app->getUser()->login($user)) {
                     $profile = new Profile();
                     $profile->user_id = $user->id;
-                    $profile->save();
-                    Yii::$app->mailer->compose('registration', ['model' => $model])
-                        ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
-                        ->setTo($user->email)
-                        ->setSubject('Регистрация на сайте ' . Yii::$app->name)
-                        ->send();
+                    if ($profile->save()) {
+                        User::sendRegLetter($user, $model->password);
+                    }
                     return $this->goHome();
                 }
             }
@@ -252,7 +249,7 @@ class SiteController extends Controller
     public function actionRef()
     {
         if (!Yii::$app->user->isGuest) {
-            /* @var $model User*/
+            /* @var $model User */
             $model = Yii::$app->user->identity;
             $model->is_referrer = 1;
             if ($model->save()) {
