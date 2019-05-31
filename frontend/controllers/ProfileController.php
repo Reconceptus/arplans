@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Config;
 use common\models\User;
 use modules\shop\models\Order;
 use modules\shop\models\RefRequest;
@@ -106,6 +107,11 @@ class ProfileController extends Controller
         $model = new RefRequest(['referrer_id' => $user->id]);
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->save()) {
+            Yii::$app->mailer->compose('bonus', ['model' => $model])
+                ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                ->setTo(Config::getValue('requestEmail'))
+                ->setSubject('Новый запрос на вывод средств')
+                ->send();
             return $this->redirect('/profile/referrals');
         }
         $model->amount = 2000;
