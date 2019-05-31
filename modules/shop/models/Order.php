@@ -7,6 +7,7 @@ use common\models\PaymentSystem;
 use common\models\User;
 use Yii;
 use yii\base\Exception;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 
@@ -37,6 +38,7 @@ use yii\helpers\Html;
  *
  * @property PaymentSystem $payment
  * @property User $user
+ * @property User $referrer
  * @property OrderItem[] $orderItems
  * @property Item[] $items
  * @property OrderService[] $orderServices
@@ -157,7 +159,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getPayment()
     {
@@ -165,7 +167,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getUser()
     {
@@ -173,7 +175,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getOrderItems()
     {
@@ -181,7 +183,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItems()
     {
@@ -189,7 +191,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getOrderServices()
     {
@@ -197,7 +199,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getServices()
     {
@@ -303,7 +305,7 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getReferrer()
     {
