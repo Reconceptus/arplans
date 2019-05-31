@@ -114,11 +114,11 @@ class OrderController extends AdminController
         $model = Order::findOne(['id' => $id]);
         if ($post = Yii::$app->request->post()) {
             $model->load($post);
-            if($model->track !== $model->oldAttributes['track']){
+            if ($model->track && $model->track !== $model->oldAttributes['track']) {
                 $mail = Yii::$app->mailer->compose('new-track', ['model' => $model]);
                 $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                 $mail->setTo($model->email);
-                $mail->setSubject('Заказу #'.$model->id.' присвоен треккод');
+                $mail->setSubject('Заказу #' . $model->id . ' присвоен треккод');
                 $mail->send();
             }
             $model->save();
