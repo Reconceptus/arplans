@@ -13,6 +13,7 @@ use common\models\Profile;
 use common\models\User;
 use DateTime;
 use DateTimeZone;
+use Exception;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\Partner;
 use modules\shop\models\Order;
@@ -50,6 +51,7 @@ class OrderController extends AdminController
 
     /**
      * @return string
+     * @throws Exception
      */
     public function actionIndex()
     {
@@ -57,6 +59,7 @@ class OrderController extends AdminController
         $partners = ArrayHelper::merge([0 => ''], Partner::getUserList());
         $query = Order::find()->alias('o')
             ->innerJoin(User::tableName() . ' u', 'o.user_id=u.id')
+            ->leftJoin(User::tableName() . ' r', 'o.referrer_id=r.id')
             ->innerJoin(Profile::tableName() . ' p', 'u.id=p.user_id');
         $filterModel = new Order();
         $filter = Yii::$app->request->get('Order');
@@ -68,6 +71,9 @@ class OrderController extends AdminController
         }
         if (isset($filter['status']) && $filter['status']) {
             $query->andFilterWhere(['o.status' => $filter['status']]);
+        }
+        if (isset($filter['referrer_id']) && $filter['referrer_id']) {
+            $query->andFilterWhere(['like', 'r.username', $filter['referrer_id']]);
         }
         if (isset($filter['price_from']) && $filter['price_from']) {
             $query->andFilterWhere(['>=', 'o.price', intval($filter['price_from'])]);
