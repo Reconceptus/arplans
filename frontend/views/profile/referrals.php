@@ -36,7 +36,7 @@ $user = Yii::$app->user->identity;
                         <thead>
                         <tr>
                             <th>Дата</th>
-                            <th>Сумма заказ</th>
+                            <th>Сумма заказа</th>
                             <th>Отчисления</th>
                         </tr>
                         </thead>
