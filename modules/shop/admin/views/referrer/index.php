@@ -4,6 +4,7 @@ use modules\shop\models\RefRequest;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -13,12 +14,13 @@ use yii\widgets\Pjax;
 $this->title = 'Запросы рефереров';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title) ?></h1>
 <?php Pjax::begin(); ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel'  => $searchModel,
+    'layout'       => "{summary}\n{items}",
     'rowOptions'   => function ($model) {
         return [
             'onclick' => 'window.location = "' . Url::to(['/shop/referrer/update', 'id' => $model->id]) . '"',
@@ -28,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'id',
             'filter'    => false,
-            'options' => ['style' => 'width:40px'],
+            'options'   => ['style' => 'width:40px'],
         ],
         [
             'attribute' => 'referrer_id',
@@ -50,3 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]); ?>
 <?php Pjax::end(); ?>
+<?= LinkPager::widget([
+    'pagination'         => $dataProvider->getPagination(),
+    'linkOptions'        => ['class' => 'page'],
+    'activePageCssClass' => 'current',
+    'nextPageLabel'      => '>',
+    'prevPageLabel'      => '<',
+    'prevPageCssClass'   => 'prev',
+    'nextPageCssClass'   => 'next',
+]) ?>
