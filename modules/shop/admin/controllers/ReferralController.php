@@ -24,7 +24,7 @@ class ReferralController extends AdminController
         $behaviors = parent::behaviors();
         $behaviors['access'] = [
             'class'        => AccessControl::className(),
-            'denyCallback' => function ($rule, $action) {
+            'denyCallback' => function () {
                 return $this->redirect('/');
             },
             'rules'        => [
@@ -55,8 +55,24 @@ class ReferralController extends AdminController
             $model['created_at'] = date('Y-m-d H:i:s', $model['created_at']);
             $model['referrals'] = array_key_exists($model['id'], $refs) ? intval($refs[$model['id']]) : 0;
         }
+
+        $filteredresultData = array_filter($models, function ($item) {
+            $username = Yii::$app->request->getQueryParam('username', '');
+            if (strlen($username) > 0) {
+                if (strpos($item['username'], $username) !== false) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        });
+
+        $mailfilter = Yii::$app->request->getQueryParam('username', '');
+        $searchModel = ['email' => $mailfilter];
         $dataProvider = new ArrayDataProvider([
-            'allModels'  => $models,
+            'allModels'  => $filteredresultData,
             'sort'       => [
                 'defaultOrder' => ['referrals' => SORT_DESC],
                 'attributes'   => ['id', 'username', 'created_at', 'referrals', 'bonus_total', 'bonus_payed', 'balance'],
@@ -65,6 +81,6 @@ class ReferralController extends AdminController
                 'pageSize' => 20,
             ],
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel'=>$searchModel]);
     }
 }
