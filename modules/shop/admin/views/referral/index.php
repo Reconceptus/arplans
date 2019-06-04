@@ -12,10 +12,6 @@ $this->title = 'Рефереры';
 
 $columns = [
     [
-        'class'   => 'yii\grid\SerialColumn',
-        'options' => ['style' => 'width:40px'],
-    ],
-    [
         'attribute' => 'id',
         'label'     => 'ID',
         'options'   => ['style' => 'width:100px'],
