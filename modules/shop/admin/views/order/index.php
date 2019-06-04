@@ -23,10 +23,6 @@ $order = Yii::$app->request->get('Order');
 
 $columns = [
     [
-        'class'   => 'yii\grid\SerialColumn',
-        'options' => ['style' => 'width:40px'],
-    ],
-    [
         'attribute' => 'id',
         'header'    => 'Номер заказа',
         'filter'    => Html::textInput('Order[id]', $order['id'], ['style' => 'width:80px;display: inline-block;font-size:13px'])
