@@ -6,10 +6,12 @@
  * Time: 14:34
  */
 
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $dataProvider ActiveDataProvider */
 
 $this->title = 'Выберите категорию товара';
 
@@ -31,10 +33,10 @@ $columns = [
 ?>
     <h1><?= $this->title ?></h1>
 
-<?= \yii\grid\GridView::widget(
+<?= GridView::widget(
     [
         'dataProvider' => $dataProvider,
-        'rowOptions'   => function ($model, $key, $index, $grid) {
+        'rowOptions'   => function ($model) {
             return ['onclick' => 'window.location = "' . Url::to(['/admin/modules/shop/item/category', 'category_id' => $model->id]) . '"'];
         },
         'layout'       => '{items}{pager}',

@@ -6,20 +6,21 @@
  * Time: 12:44
  */
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-
-/* @var $filterModel \modules\shop\models\Item */
-
+use modules\shop\models\Item;
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
+
+
+/* @var $dataProvider ActiveDataProvider */
+/* @var $filterModel Item */
 
 $this->title = 'Товары';
 
 $columns = [
-    [
-        'class'   => 'yii\grid\SerialColumn',
-        'options' => ['style' => 'width:40px'],
-    ],
+    'id',
     [
         'attribute' => 'image_id',
         'format'    => 'html',
@@ -60,9 +61,9 @@ $columns = [
     ]
 ];
 ?>
-    <h1><?= $this->title ?></h1>
+<h1><?= $this->title ?></h1>
 <?= Html::a('Добавить товар', Url::to(['/shop/item/create', 'category_id' => Yii::$app->request->get('category_id')]), ['class' => 'btn btn-admin add-big-button']) ?>
-<?= \yii\grid\GridView::widget(
+<?= GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'filterModel'  => $filterModel,
@@ -75,7 +76,7 @@ $columns = [
 );
 ?>
 
-<?= \yii\widgets\LinkPager::widget([
+<?= LinkPager::widget([
     'pagination'         => $dataProvider->getPagination(),
     'linkOptions'        => ['class' => 'page'],
     'activePageCssClass' => 'current',
