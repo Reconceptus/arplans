@@ -74,7 +74,7 @@ class ReferralController extends AdminController
         $dataProvider = new ArrayDataProvider([
             'allModels'  => $filteredresultData,
             'sort'       => [
-                'defaultOrder' => ['referrals' => SORT_DESC],
+                'defaultOrder' => ['id' => SORT_DESC],
                 'attributes'   => ['id', 'username', 'created_at', 'referrals', 'bonus_total', 'bonus_payed', 'balance'],
             ],
             'pagination' => [
