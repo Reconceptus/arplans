@@ -70,7 +70,7 @@ $columns = [
         'rowOptions'   => function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "' . Url::to(['/shop/item/update', 'id' => $model->id]) . '"'];
         },
-        'layout'       => '{items}',
+        'layout'=>"{summary}\n{items}",
         'columns'      => $columns
     ]
 );
