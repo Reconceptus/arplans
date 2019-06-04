@@ -1,10 +1,14 @@
 <?php
 /* @var $dataProvider ArrayDataProvider */
 
+/* @var $searchModel array */
+
 use yii\data\ArrayDataProvider;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\widgets\Pjax;
 
-$this->title = 'Рефералы';
+$this->title = 'Рефереры';
 
 $columns = [
     [
@@ -18,11 +22,12 @@ $columns = [
     ],
     [
         'attribute' => 'username',
+        'filter'    => Html::textInput('username', Yii::$app->request->get('username'), ['class' => 'form-control']),
         'label'     => 'Пользователь',
     ],
     [
         'attribute' => 'referrals',
-        'label'     => 'Количество реферралов',
+        'label'     => 'Количество рефералов',
     ],
     [
         'attribute' => 'bonus_total',
@@ -42,14 +47,17 @@ $columns = [
     ],
 ];
 ?>
-<h1><?= $this->title ?></h1>
-<div class="posts-table">
-    <?= GridView::widget(
-        [
-            'dataProvider' => $dataProvider,
-            'layout'       => '{items}{pager}',
-            'columns'      => $columns
-        ]
-    );
-    ?>
-</div>
+    <h1><?= $this->title ?></h1>
+<?php Pjax::begin() ?>
+    <div class="posts-table">
+        <?= GridView::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'filterModel'  => $searchModel,
+                'layout'       => '{items}{pager}',
+                'columns'      => $columns
+            ]
+        );
+        ?>
+    </div>
+<?php Pjax::end() ?>
