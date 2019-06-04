@@ -26,10 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
     },
     'columns'      => [
         [
-            'class'   => 'yii\grid\SerialColumn',
-            'options' => ['style' => 'width:40px'],
-        ],
-        [
             'attribute' => 'id',
             'filter'    => false,
             'options' => ['style' => 'width:40px'],
