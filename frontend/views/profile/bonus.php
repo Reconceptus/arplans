@@ -21,22 +21,20 @@ $this->title = 'Запрос на вывод денег';
     <div class="section site-profile">
         <div class="content content--lg mobile-wide">
             <div class="request--wrap gradient">
-                <div class="content content--md">
+                <div class="content content--xs">
                     <h1 class="title title-lg"><?= $this->title ?></h1>
                     <div class="profile-form">
                         <?php $form = ActiveForm::begin(); ?>
                         <div class="profile-form--wrap">
                             <div class="request-form--main custom-form">
-
+                                <?= Html::activeLabel($model, 'amount', ['class' => 'label']) ?>
                                 <div class="form-row-element has-label">
-                                    <?= Html::activeLabel($model, 'amount', ['class' => 'label']) ?>
                                     <div class="input">
                                         <?= Html::activeTextInput($model, 'amount', ['placeholder' => 'Сумма (минимум 2000 рублей)', 'type' => 'number', 'step' => 100, 'min' => 2000, 'id' => 'amount-field']) ?>
                                     </div>
                                 </div>
-
+                                <?= Html::activeLabel($model, 'info', ['class' => 'label']) ?>
                                 <div class="form-row-element has-label">
-                                    <?= Html::activeLabel($model, 'info', ['class' => 'label']) ?>
                                     <div class="input">
                                         <?= Html::activeTextInput($model, 'info', ['placeholder' => 'Комментарий к выводу (куда, как связаться)']) ?>
                                     </div>
