@@ -22,13 +22,17 @@ $user = Yii::$app->user->identity;
         <div class="request--wrap gradient">
             <div class="content content--md">
                 <h1 class="title title-lg"><?= $this->title ?></h1>
-                <div class="summary">
+                <div class="summary content content--sm">
+                    <div class="subtitle">
                     <p>Ваша ссылка для привлечения рефералов: <?=Yii::$app->request->getHostInfo().'?inv='.$user->id?></p>
                     <p>По Вашей ссылке зарегистрированы <?= $referrals ?> человек</p>
                     <p>За все время Вами заработано <?= floatval($user->bonus_total) ?> р.</p>
                     <p>Не выведено <?= $user->bonusRemnants ?> р.</p>
+                    </div>
                     <?php if ($user->bonusRemnants >= 2000): ?>
-                        <?= Html::a('Вывести', '/profile/bonus', ['class' => 'btn-small']) ?>
+                    <div class="submit">
+                        <?= Html::a('Вывести', '/profile/bonus', ['class' => 'btn btn--white']) ?>
+                    </div>
                     <?php endif; ?>
                 </div>
                 <div class="profile-sales">
