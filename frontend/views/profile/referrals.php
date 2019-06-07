@@ -29,11 +29,11 @@ $user = Yii::$app->user->identity;
                                 <div class="link">
                                     <div class="custom-form">
                                         <div class="input">
-                                            <input type="text" readonly
+                                            <input type="text" id="lk-input-link" readonly
                                                    value="<?= Yii::$app->request->getHostInfo() . '?inv=' . $user->id ?>">
                                         </div>
                                     </div>
-<!--                                    <button type="button" class="copy-btn btn-square-dark">Copy</button>-->
+                                    <button type="button" class="copy-btn btn-square-dark" id="lk-link-copy">Copy</button>
                                 </div>
                                 <div class="link-info">
                                     Поделитесь ссылкой и зарабатывайте. Если вы авторизованы, то на каждой странице
@@ -93,3 +93,17 @@ $user = Yii::$app->user->identity;
         </div>
     </div>
 </div>
+<?php
+$js = <<<JS
+$("#lk-link-copy").click(function() { 
+    $("#lk-input-link").select(); 
+  
+  try { 
+    document.execCommand('copy'); 
+  } catch(err) { 
+    console.log(''); 
+  } 
+  window.getSelection().removeAllRanges();
+});
+JS;
+$this->registerJs($js);
