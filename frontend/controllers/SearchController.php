@@ -22,8 +22,7 @@ class SearchController extends Controller
         $q = Html::encode($q);
         $query = Item::find()->alias('i')
             ->where(['and',['i.is_active' => Item::IS_ACTIVE],['i.is_deleted' => Item::IS_NOT_DELETED]])
-            ->andWhere(['or',['like', 'i.name', $q],['like', 'i.description', $q],['like', 'i.slug', $q]])
-            ->createCommand()->rawSql;
+            ->andWhere(['or',['like', 'i.name', $q],['like', 'i.description', $q],['like', 'i.slug', $q]]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
