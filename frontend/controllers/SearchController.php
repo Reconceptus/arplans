@@ -21,7 +21,8 @@ class SearchController extends Controller
     {
         $q = Html::encode($q);
         $query = Item::find()->alias('i')
-            ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED])
+            ->where(['i.is_active' => Item::IS_ACTIVE])
+            ->andWhere(['i.is_deleted' => Item::IS_NOT_DELETED])
             ->andWhere(['like', 'i.name', $q])
             ->orWhere(['like', 'i.description', $q])
             ->orWhere(['like', 'i.slug', $q]);
