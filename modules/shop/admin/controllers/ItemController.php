@@ -340,6 +340,7 @@ class ItemController extends AdminController
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
         $model->is_deleted = Item::IS_DELETED;
+        $model->is_active = Item::IS_NOT_ACTIVE;
         $slug = $model->slug . '_deleted_' . rand(0, 1000);
         if (Item::find()->where(['slug' => $slug])->exists()) {
             $slug = $model->slug . '_deleted_' . rand(0, 1000) . '_' . rand(0, 1000);
