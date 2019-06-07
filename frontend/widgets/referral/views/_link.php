@@ -1,12 +1,20 @@
 <?php
 /* @var $link string */
 ?>
-    <div class="ref-link"
-         style="position: fixed; bottom:10px;right:10px;z-index: 999; background-color: #63b6f7; padding: 10px;">
-        <input type="text" value="<?= $link ?>" id="referral-link" style="width: 400px">
-        <button id="copy-ref" style="height: 35px; padding: 5px;color:#fff;background-color:#346697;border-color:#346697">Скопировать</button>
-    </div>
 
+    <div class="ref-link">
+        <div class="ref-link--title">Ваша ссылка на эту страницу для рефералов</div>
+        <div class="ref-link--subtitle">Поделитесь ссылкой и зарабатывайте. Про <a href="/page/refinfo" target="_blank">реферальную
+                систему</a></div>
+        <div class="link">
+            <div class="custom-form">
+                <div class="input">
+                    <input type="text" id="referral-link" readonly value="<?= $link ?>">
+                </div>
+            </div>
+            <button type="button" id="copy-ref" class="copy-btn btn-square-dark">Copy</button>
+        </div>
+    </div>
 <?php
 $js = <<<JS
 $("#copy-ref").click(function() { 

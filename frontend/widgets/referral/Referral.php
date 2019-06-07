@@ -39,7 +39,11 @@ class Referral extends Widget
                 $this->view->context->redirect(Yii::$app->request->hostInfo . '/' . Yii::$app->request->pathInfo);
             }
         } elseif ($user->is_referrer) {
-            $link = Yii::$app->request->hostInfo.'/'.Yii::$app->request->pathInfo.'?inv='.$user->id;
+            if(strpos(Yii::$app->request->pathInfo,'profile')===0){
+                $link = Yii::$app->request->hostInfo.'?inv='.$user->id;
+            }else{
+                $link = Yii::$app->request->hostInfo.'/'.Yii::$app->request->pathInfo.'?inv='.$user->id;
+            }
             return $this->render('_link', ['link' => $link]);
         }
         return '';
