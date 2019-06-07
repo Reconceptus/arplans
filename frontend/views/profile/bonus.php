@@ -39,9 +39,10 @@ $this->title = 'Запрос на вывод денег';
                                         <?= Html::activeTextInput($model, 'info', ['placeholder' => 'Комментарий к выводу (куда, как связаться)']) ?>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
+                                <div class="form-row-submit">
+                                    <div class="submit">
+                                        <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt']) ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
