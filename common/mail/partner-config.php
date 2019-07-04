@@ -98,11 +98,26 @@ use modules\partner\models\Partner; ?>
                                                         <td style="padding-bottom: 16px; font-size: 17px; line-height: 22px;  font-family: Arial, sans-serif;  color:#000000; text-align: left;"><?= $partner->agent->profile->fio ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td style="padding-bottom: 16px; font-size: 17px; line-height: 22px;  font-family: Arial, sans-serif;  color:#000000; text-align: left;">Для того, чтобы скачать дистрибутив клиента апи, перейдите по ссылке <?=Yii::$app->request->getHostInfo()?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                            <p>В приложении к этому письму файл конфига для подключения к апи</p>
+                                                        <td style="padding-bottom: 16px; font-size: 17px; line-height: 22px;  font-family: Arial, sans-serif;  color:#000000; text-align: left;">
+                                                            <h2>Инструкция по установке API Арпланс:</h2>
+                                                            <p>1. Скачать <a href="https://drive.google.com/drive/folders/1wtyNjJ_DwKmm1hlV1gyae7YX8nuxhVaS?usp=sharing" target="_blank">клент API</a> и конфиг (приложен к письму).</p>
+                                                            <p>2. Создайте на своем сайте пункт меню и сделайте по нему открытие пустой страницы (без вашей верстки) в соседней вкладке.</p>
+                                                            <p>3. Разархивировать папку с API.</p>
+                                                            <p>4. Закиньте файл "config.php" в папку ко всем php-файлам.</p>
+                                                            <p>5. Залейте папку на сервер.</p>
+                                                            <p>6. Настройте какой-нибудь url чтобы он смотрел в папку (это будет адрес размещенного апи).</p>
+                                                            <p>7. Пришлите урл размещенного апи на почту arplans@yandex.ru, укажите название вашей компании.</p>
+                                                            <p>8. Если вам не нужны все разделы, напишите на arplans@yandex.ru какие отключить, укажите название вашей компании.</p>
+<br/>
+                                                            <p>Ваш уникальный конфиг в прикреплении к письму.</p>
+                                                            Скачать API Арпланс
+
+                                                            <p>Технические вопросы уточняйте по номеру: +7 902 651 11 15 (тел, телеграм), Азалия из <a href="https://reconcept.ru" target="_blank">ReConcept</a></p>
+
+                                                            <p>Все права на API Арпланс пренадлежат ООО "Арпланс", передача третьим лицам запрещена.</p>
+
+                                                            <p>С уважением, команда Арпланс</p>
+
                                                         </td>
                                                     </tr>
                                                     </tbody>
