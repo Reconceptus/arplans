@@ -12,6 +12,7 @@
 
 use common\models\User;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -35,6 +36,14 @@ $columns = [
         'header'    => 'Роль',
         'attribute' => 'role',
         'filter'    => Html::dropDownList('User[role]', Yii::$app->request->get('User')['role'], \yii\helpers\ArrayHelper::merge(['' => 'Все'], User::getAccessTypes()), ['class' => 'form-control']),
+    ],
+    [
+        'header'    => 'Реферер',
+        'attribute' => 'referrer_id',
+        'value'     => function ($model) {
+            return $model->referrer ? $model->referrer->username : '';
+        },
+        'filter'    => Html::dropDownList('User[referrer_id]', Yii::$app->request->get('User')['referrer_id'], array_merge([''=>''], ArrayHelper::map(User::find()->where(['status' => User::STATUS_ACTIVE, 'is_referrer' => 1])->all(), 'id', 'username')), ['class' => 'form-control']),
     ],
     [
         'header'    => 'Статус',
