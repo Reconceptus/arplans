@@ -11,8 +11,10 @@ namespace modules\shop\admin\controllers;
 use common\models\User;
 use modules\admin\controllers\AdminController;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 class ReferralController extends AdminController
 {
@@ -81,6 +83,23 @@ class ReferralController extends AdminController
                 'pageSize' => 20,
             ],
         ]);
-        return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel'=>$searchModel]);
+        return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
+    }
+
+    public function actionList()
+    {
+        Yii::$app->request->baseUrl = '/admin/modules';
+        $id = intval(Yii::$app->request->get('id'));
+        if (!$id) {
+            throw new NotFoundHttpException();
+        }
+        $query = User::find()->where(['status' => User::STATUS_ACTIVE, 'referrer_id' => $id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 30,
+            ],
+        ]);
+        return $this->render('list', ['dataProvider' => $dataProvider]);
     }
 }
