@@ -65,6 +65,9 @@ class UserController extends AdminController
         if (isset($filter['role'])) {
             $query->andFilterWhere(['role' => $filter['role']]);
         }
+        if (isset($filter['referrer_id'])) {
+            $query->andFilterWhere(['referrer_id' => $filter['referrer_id']]);
+        }
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'sort'  => [
