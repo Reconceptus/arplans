@@ -20,11 +20,21 @@ $this->title = $model->isNewRecord ? 'Добавление партнера' : '
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
 ?>
 <h1><?= $this->title ?></h1>
-<?php
-if (!$model->isNewRecord) {
-    echo Html::a('Скачать конфиг', Url::to(['/admin/modules/partner/partner/config','id'=>$model->id]), ['class' => 'btn btn-admin add-big-button']);
-}
-?>
+<?php if (!$model->isNewRecord): ?>
+   <?=Html::a('Скачать конфиг', Url::to(['/admin/modules/partner/partner/config','id'=>$model->id]), ['class' => 'btn btn-admin add-big-button'])?>
+
+    <div class="row">
+        <div class="col-md-6">
+            <?php foreach ($categories as $category): ?>
+                <div class="form-group">
+                    <?= Html::checkbox($category->slug, $category->isAllowToPartner($model->id), ['id' => $category->slug, 'class' => 'js-category-checkbox', 'data-category' => $category->id, 'data-partner' => $model->id]) ?>
+                    <?= Html::label($category->name, '#' . $category->slug) ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif;?>
+
 <?php $form = ActiveForm::begin(['method' => 'post']); ?>
 <div class="post-form">
     <div class="row">

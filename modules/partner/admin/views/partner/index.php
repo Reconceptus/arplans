@@ -56,13 +56,7 @@ $columns = [
                     'data-confirm' => 'Вы действительно хотите удалить этого партнера?'
                 ]);
             },
-            'categories' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-list"></span>', Url::to([
-                    '/partner/partner/categories',
-                    'id'   => $model->id,
-                    'back' => Yii::$app->request->absoluteUrl
-                ]));
-            },
+
             'config'     => function ($url, $model) {
                 if (!$model->agent_id) {
                     return '';
@@ -78,7 +72,7 @@ $columns = [
 ?>
 <h1><?= $this->title ?></h1>
 <?= Html::a('Добавить партнера в один клик', Url::to(['/partner/partner/add']), ['class' => 'btn btn-admin add-big-button', 'style'=>'margin-right:10px;']) ?>
-<?= Html::a('Добавить фирму-партнера', Url::to(['/partner/partner/create']), ['class' => 'btn btn-admin add-big-button']) ?>
+
 <?= \yii\grid\GridView::widget(
     [
         'dataProvider' => $dataProvider,

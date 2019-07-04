@@ -15,12 +15,14 @@ use modules\shop\models\RefRequest;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 
 class ProfileController extends Controller
 {
     /**
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionIndex()
     {
@@ -73,6 +75,7 @@ class ProfileController extends Controller
 
     /**
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionSales()
     {
@@ -85,6 +88,7 @@ class ProfileController extends Controller
 
     /**
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionReferrals()
     {
@@ -97,6 +101,11 @@ class ProfileController extends Controller
         return $this->render('referrals', ['models' => $models, 'referrals' => $referrals]);
     }
 
+
+    /**
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionBonus()
     {
         if (Yii::$app->user->isGuest || !Yii::$app->user->identity->is_referrer || Yii::$app->user->identity->bonusRemnants < 2000) {

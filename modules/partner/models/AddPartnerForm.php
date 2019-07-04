@@ -53,7 +53,7 @@ class AddPartnerForm extends Model
 
 
     /**
-     * @return int|null
+     * @return Partner|null
      * @throws \yii\base\Exception
      */
     public function add()
@@ -63,12 +63,12 @@ class AddPartnerForm extends Model
             $user = new User();
             $profile = new Profile();
             $partner = new Partner();
-
+            $password = Yii::$app->security->generateRandomString(10);
             $user->username = $this->email;
             $user->email = $this->email;
             $user->status = User::STATUS_ACTIVE;
             $user->access_token = Yii::$app->security->generateRandomString(15);
-            $user->setPassword(Yii::$app->security->generateRandomString(10));
+            $user->setPassword($password);
             $user->generateAuthKey();
             if ($user->save()) {
                 $userRole = Yii::$app->authManager->getRole('user');
@@ -84,8 +84,13 @@ class AddPartnerForm extends Model
                     $partner->email = $this->email;
                     $partner->send_notify = 0;
                     if ($partner->save()) {
+                        Yii::$app->mailer->compose('partner-reg', ['partner' => $partner, 'user' => $user, 'password' => $password])
+                            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                            ->setTo($user->email)
+                            ->setSubject('Вы зарегистрированы как партнер на сайте ' . Yii::$app->request->getHostInfo())
+                            ->send();
                         $transaction->commit();
-                        return $partner->id;
+                        return $partner;
                     }
                 }
             }
