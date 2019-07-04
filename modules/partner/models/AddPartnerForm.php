@@ -4,6 +4,7 @@
 namespace modules\partner\models;
 
 
+use common\models\Config;
 use common\models\Profile;
 use common\models\User;
 use Yii;
@@ -87,6 +88,7 @@ class AddPartnerForm extends Model
                         Yii::$app->mailer->compose('partner-reg', ['partner' => $partner, 'user' => $user, 'password' => $password])
                             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                             ->setTo($user->email)
+                            ->setBcc(Config::getValue('requestEmail'))
                             ->setSubject('Вы зарегистрированы как партнер на сайте ' . Yii::$app->request->getHostInfo())
                             ->send();
                         $transaction->commit();

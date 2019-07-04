@@ -9,6 +9,7 @@
 namespace modules\partner\admin\controllers;
 
 
+use common\models\Config;
 use modules\admin\controllers\AdminController;
 use modules\partner\models\AddPartnerForm;
 use modules\partner\models\Partner;
@@ -139,6 +140,7 @@ class PartnerController extends AdminController
                 Yii::$app->mailer->compose('partner-config', ['partner' => $partner])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo($partner->email)
+                    ->setBcc(Config::getValue('requestEmail'))
                     ->setSubject('Файл конфига для подключения вашего сайта к апи ' . Yii::$app->request->getHostInfo())
                     ->attachContent($config, ['fileName' => 'config.php'])
                     ->send();
