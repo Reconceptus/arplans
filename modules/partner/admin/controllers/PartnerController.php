@@ -100,18 +100,6 @@ class PartnerController extends AdminController
     }
 
     /**
-     * @param $id
-     * @return string
-     * @throws NotFoundHttpException
-     */
-    public function actionCategories($id)
-    {
-        $categories = Category::find()->all();
-        $model = $this->findModel($id);
-        return $this->render('categories', ['model' => $model, 'categories' => $categories]);
-    }
-
-    /**
      * @param $model Partner
      * @return string|Response
      */
@@ -123,8 +111,10 @@ class PartnerController extends AdminController
                 return $this->redirect(Url::to(['/admin/modules/partner/partner/update', 'id' => $model->id]));
             }
         }
+        $categories = Category::find()->all();
         return $this->render('_form', [
             'model' => $model,
+            'categories'=>$categories
         ]);
     }
 
@@ -138,6 +128,14 @@ class PartnerController extends AdminController
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             if ($id = $model->add()) {
+                $categories = Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
+                foreach ($categories as $category) {
+                    $partCat = new PartnerCategory();
+                    $partCat->partner_id = $id;
+                    $partCat->category_id = $category->id;
+                    $partCat->save();
+
+                }
                 return $this->redirect(['/admin/modules/partner/partner/update', 'id' => $id]);
             }
         }
