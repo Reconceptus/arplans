@@ -6,5 +6,4 @@ $params = [
     "mainElement" => "#main",
     "token"=>"' . $model->access_token . '"
 ];';
-
-Yii::$app->response->sendContentAsFile($str, 'config.php', ['mimeType'=>'text/php']);
+echo $str;

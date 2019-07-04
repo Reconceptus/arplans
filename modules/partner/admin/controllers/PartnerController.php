@@ -113,8 +113,8 @@ class PartnerController extends AdminController
         }
         $categories = Category::find()->all();
         return $this->render('_form', [
-            'model' => $model,
-            'categories'=>$categories
+            'model'      => $model,
+            'categories' => $categories
         ]);
     }
 
@@ -127,16 +127,22 @@ class PartnerController extends AdminController
         $model = new AddPartnerForm();
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
-            if ($id = $model->add()) {
+            if ($partner = $model->add()) {
                 $categories = Category::find()->where(['is_active' => Category::IS_ACTIVE])->all();
                 foreach ($categories as $category) {
                     $partCat = new PartnerCategory();
-                    $partCat->partner_id = $id;
+                    $partCat->partner_id = $partner->id;
                     $partCat->category_id = $category->id;
                     $partCat->save();
-
                 }
-                return $this->redirect(['/admin/modules/partner/partner/update', 'id' => $id]);
+                $config = $this->renderPartial('config', ['model' => $partner->agent]);
+                Yii::$app->mailer->compose('partner-config', ['partner' => $partner])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                    ->setTo($partner->email)
+                    ->setSubject('Файл конфига для подключения вашего сайта к апи ' . Yii::$app->request->getHostInfo())
+                    ->attachContent($config, ['fileName' => 'config.php'])
+                    ->send();
+                return $this->redirect(['/admin/modules/partner/partner/update', 'id' => $partner->id]);
             }
         }
         return $this->render('add', ['model' => $model]);
@@ -152,7 +158,7 @@ class PartnerController extends AdminController
             throw new NotFoundHttpException();
         }
         $model = Partner::findOne(['id' => $id]);
-        $this->renderPartial('config', ['model' => $model->agent]);
+        Yii::$app->response->sendContentAsFile($this->renderPartial('config', ['model' => $model->agent]),'config.php', ['mimeType'=>'text/php']);
     }
 
     /**
