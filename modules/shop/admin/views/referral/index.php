@@ -6,6 +6,7 @@
 use yii\data\ArrayDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 $this->title = 'Рефереры';
@@ -51,6 +52,9 @@ $columns = [
                 'dataProvider' => $dataProvider,
                 'filterModel'  => $searchModel,
                 'layout'       => '{items}{pager}',
+                'rowOptions'   => function ($model) {
+                    return ['onclick' => 'window.location = "' . Url::to(['/shop/referral/list', 'id' => $model['id']]) . '"'];
+                },
                 'columns'      => $columns
             ]
         );
