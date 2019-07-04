@@ -175,10 +175,9 @@ class Payment extends \yii\db\ActiveRecord
                     $transaction->rollBack();
                     return null;
                 }
-                return $this;
             }
         }
-        return null;
+        return $this;
     }
 
     /**

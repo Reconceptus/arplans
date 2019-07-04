@@ -22,7 +22,6 @@
                 <?php endif; ?>
             <?php endif; ?>
             <div class="actions">
-                <?= \yii\helpers\Html::a('Вернуться к заказам', \yii\helpers\Url::to('/profile/orders'), ['class' => 'btn']) ?>
                 <?php if ($model->status === \modules\shop\models\Payment::STATUS_COMPLETE): ?>
                     <?= \yii\helpers\Html::a('Вернуться на главную', \yii\helpers\Url::to('/'), ['class' => 'btn']) ?>
                 <?php else: ?>

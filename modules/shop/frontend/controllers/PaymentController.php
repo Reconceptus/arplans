@@ -86,7 +86,8 @@ class PaymentController extends Controller
         $paymentObj = Payment::find()->where(['id' => $id])->one();
         /* @var $paymentObj Payment */
         if ($paymentObj) {
-            if ($result = $paymentObj->getInfo()) {
+            $result = $paymentObj->getInfo();
+            if ($result) {
                 return $this->render('return', ['model' => $result]);
             }
         } else {
