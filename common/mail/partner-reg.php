@@ -114,6 +114,11 @@ use modules\partner\models\Partner;
                                                             <p>Для авторизации перейдите по ссылке <?=Yii::$app->request->getHostInfo().'/site/login'?></p>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
+                                                            <p>Личный кабинет <?=Yii::$app->request->getHostInfo().'/profile/sales'?></p>
+                                                        </td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </td>
