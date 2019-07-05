@@ -43,7 +43,7 @@ $columns = [
         'value'     => function ($model) {
             return $model->referrer ? $model->referrer->username : '';
         },
-        'filter'    => Html::dropDownList('User[referrer_id]', Yii::$app->request->get('User')['referrer_id'], array_merge([''=>''], ArrayHelper::map(User::find()->where(['status' => User::STATUS_ACTIVE, 'is_referrer' => 1])->all(), 'id', 'username')), ['class' => 'form-control']),
+        'filter'    => Html::dropDownList('User[referrer_id]', Yii::$app->request->get('User')['referrer_id'], ArrayHelper::map(User::find()->where(['status' => User::STATUS_ACTIVE, 'is_referrer' => 1])->all(), 'id', 'username'), ['class' => 'form-control', 'prompt'=>'']),
     ],
     [
         'header'    => 'Статус',
