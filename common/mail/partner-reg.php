@@ -116,7 +116,7 @@ use modules\partner\models\Partner;
                                                     </tr>
                                                     <tr>
                                                         <td style="color:#000000;  font-family: Arial, sans-serif; font-size:17px; line-height: 22px;">
-                                                            <p>Личный кабинет <?=Yii::$app->request->getHostInfo().'/profile/sales'?></p>
+                                                            <p>Личный кабинет <?=Yii::$app->request->getHostInfo().'/profile/sales'?> (ссылка будет активна после авторизации)</p>
                                                         </td>
                                                     </tr>
                                                     </tbody>
