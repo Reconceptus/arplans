@@ -58,6 +58,6 @@ $icons = [];
     </script>
     <!-- API KEY for ARPLANS:  AIzaSyAq3bYt2V4QqFvLcak_2ajt34wbfFuU8qY-->
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq3bYt2V4QqFvLcak_2ajt34wbfFuU8qY&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmJmuofNtaxw8ZFp1IPgcRjCocajdNhbU&callback=initMap"></script>
 
 </div>
