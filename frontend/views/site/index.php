@@ -27,7 +27,7 @@ $author = Main::getAuthorMain();
                 <figure>
                     <img class="video-box--img img-desktop" src="<?= ContentBlock::getValue('main_page_photo_1') ?>"
                          alt="">
-                    <img class="video-box--img img-mobile" src="<?= ContentBlock::getValue('main_page_photo_1') ?>"
+                    <img class="video-box--img img-mobile" src="<?= ContentBlock::getValue('main_page_photo_2') ?>"
                          alt="">
                 </figure>
             <?php endif; ?>
