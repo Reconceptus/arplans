@@ -1,18 +1,1 @@
 /* common styles */
-.show-more-hidden {
-    display: block;
-}
-
-.projects-item .btn-small, .btn-square-min, .icon-liked {
-    cursor: pointer;
-}
-
-.service-link:hover{
-    color: #3466dd;
-}
-.catalog-header .filter .arrow{
-    display: none;
-}
-.catalog-header .up .arrow, .catalog-header .down .arrow{
-    display: block;
-}
