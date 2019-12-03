@@ -53,7 +53,7 @@ class ContentController extends AdminController
         Yii::$app->request->baseUrl = '/admin/modules';
         $query = ContentBlock::find()
             ->select(['page', 'page_title', 'page_url'])
-            ->where(['not in', 'page', ['main', 'about', 'contacts', 'collaboration']])
+            ->where(['not in', 'page', ['about', 'contacts', 'collaboration']])
             ->groupBy(['page', 'page_title', 'page_url']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
