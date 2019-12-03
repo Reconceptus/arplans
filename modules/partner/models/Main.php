@@ -16,6 +16,8 @@ use yii\web\NotFoundHttpException;
  * @property string $main_page_text
  * @property string $main_page_author
  * @property string $main_page_description
+ * @property string $main_page_photo_1
+ * @property string $main_page_photo_2
  * @property string $main_page_video_1
  * @property string $main_page_video_2
  *
@@ -30,6 +32,8 @@ class Main extends Model
     public $main_page_text;
     public $main_page_author;
     public $main_page_description;
+    public $main_page_photo_1;
+    public $main_page_photo_2;
     public $main_page_video_1;
     public $main_page_video_2;
     public $main_page_seo_title;
@@ -44,7 +48,7 @@ class Main extends Model
         return [
             [['main_page_offer', 'main_page_author', 'main_page_seo_title', 'main_page_seo_description', 'main_page_seo_keywords'], 'string', 'max' => 255],
             [['main_page_offer_annotation', 'main_page_text', 'main_page_description'], 'string'],
-            [['main_page_video_1', 'main_page_video_2'], 'file'],
+            [['main_page_video_1', 'main_page_video_2', 'main_page_photo_1', 'main_page_photo_2'], 'file'],
         ];
     }
 
@@ -62,6 +66,8 @@ class Main extends Model
             'main_page_seo_title'        => 'SEO тайтл',
             'main_page_seo_description'  => 'SEO описание',
             'main_page_seo_keywords'     => 'SEO ключевые слова',
+            'main_page_photo_1'          => 'Фото веб',
+            'main_page_photo_2'          => 'Фото мобил',
             'main_page_video_1'          => 'Видео (mp4)',
             'main_page_video_2'          => 'Видео (webm)',
         ];

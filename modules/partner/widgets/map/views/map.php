@@ -88,7 +88,7 @@ $coordinates = [];
             }
         }
     </script>
-    <!-- API KEY for ARPLANS:  AIzaSyAq3bYt2V4QqFvLcak_2ajt34wbfFuU8qY-->
+    <!-- API KEY for ARPLANS:  AIzaSyDmJmuofNtaxw8ZFp1IPgcRjCocajdNhbU-->
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmJmuofNtaxw8ZFp1IPgcRjCocajdNhbU&callback=initMap"></script>
 

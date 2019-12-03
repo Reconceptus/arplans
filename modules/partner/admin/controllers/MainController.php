@@ -14,6 +14,7 @@ use modules\admin\controllers\AdminController;
 use modules\partner\models\Main;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 class MainController extends AdminController
@@ -52,6 +53,34 @@ class MainController extends AdminController
         $model = Main::getModel();
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
+            $logo1 = UploadedFile::getInstance($model, 'main_page_photo_1');
+            if ($logo1 && $logo1->tempName) {
+                $model->main_page_photo_1 = $logo1;
+                if ($model->validate(['main_page_photo_1'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/collab/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'image1.' . $model->main_page_photo_1->extension;
+                    $model->main_page_photo_1->saveAs($dir . '/' . $fileName);
+                    $model->main_page_photo_1 = '/uploads/village/item/collab/' . $fileName;
+                }
+            }
+            if (!$model->main_page_photo_1 && isset($post['old_main_page_photo_1'])) {
+                $model->main_page_photo_1 = $post['old_main_page_photo_1'];
+            }
+            $logo2 = UploadedFile::getInstance($model, 'main_page_photo_2');
+            if ($logo2 && $logo2->tempName) {
+                $model->main_page_photo_2 = $logo2;
+                if ($model->validate(['main_page_photo_2'])) {
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/collab/');
+                    FileHelper::createDirectory($dir . '/');
+                    $fileName = 'image1.' . $model->main_page_photo_2->extension;
+                    $model->main_page_photo_2->saveAs($dir . '/' . $fileName);
+                    $model->main_page_photo_2 = '/uploads/village/item/collab/' . $fileName;
+                }
+            }
+            if (!$model->main_page_photo_2 && isset($post['old_main_page_photo_2'])) {
+                $model->main_page_photo_2 = $post['old_main_page_photo_2'];
+            }
             $video1 = UploadedFile::getInstance($model, 'main_page_video_1');
             if ($video1) {
                 $model->main_page_video_1 = $video1;

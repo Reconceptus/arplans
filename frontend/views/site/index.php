@@ -1,30 +1,43 @@
 <?php
 
+use modules\content\models\ContentBlock;
+use modules\partner\models\Main;
+use modules\shop\widgets\compilation\Compilation;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
-/* @var $this yii\web\View */
-$this->title = \modules\content\models\ContentBlock::getValue('main_page_seo_title');
-$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_keywords')]);
-$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('main_page_seo_description')]);
-$author = \modules\partner\models\Main::getAuthorMain();
+/* @var $this View */
+$this->title = ContentBlock::getValue('main_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => ContentBlock::getValue('main_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => ContentBlock::getValue('main_page_seo_description')]);
+$author = Main::getAuthorMain();
 ?>
     <script>
-        var v1 = "<?=\modules\content\models\ContentBlock::getValue('main_page_video_1')?>";
-        var v2 = "<?=\modules\content\models\ContentBlock::getValue('main_page_video_2')?>";
+        var v1 = "<?=ContentBlock::getValue('main_page_video_1')?>";
+        var v2 = "<?=ContentBlock::getValue('main_page_video_2')?>";
     </script>
     <div class="section video-box">
         <div class="video-box--bg">
-            <video autoplay muted loop id="video-main">
+            <?php if (ContentBlock::getValue('main_page_video_1')): ?>
+                <video autoplay muted loop id="video-main">
 
-            </video>
+                </video>
+            <?php else: ?>
+                <figure>
+                    <img class="video-box--img img-desktop" src="<?= ContentBlock::getValue('main_page_photo_1') ?>"
+                         alt="">
+                    <img class="video-box--img img-mobile" src="<?= ContentBlock::getValue('main_page_photo_1') ?>"
+                         alt="">
+                </figure>
+            <?php endif; ?>
         </div>
         <div class="content content--lg">
             <div class="video-box--wrap">
                 <div class="video-box--about">
                     <section>
-                        <h1 class="title title-md"> <?= \modules\content\models\ContentBlock::getValue('main_page_offer') ?></h1>
-                        <p><?= \modules\content\models\ContentBlock::getValue('main_page_offer_annotation') ?></p>
+                        <h1 class="title title-md"> <?= ContentBlock::getValue('main_page_offer') ?></h1>
+                        <p><?= ContentBlock::getValue('main_page_offer_annotation') ?></p>
                     </section>
                     <div class="actions">
                         <?= Html::a('сотрудничество', Url::to('/collaboration'), ['class' => 'btn btn--lt']) ?>
@@ -88,7 +101,7 @@ $author = \modules\partner\models\Main::getAuthorMain();
         </div>
     </div>
 
-<?= \modules\shop\widgets\compilation\Compilation::widget(['limit' => 8]) ?>
+<?= Compilation::widget(['limit' => 8]) ?>
 
     <div class="section home-about">
         <?= \frontend\widgets\fromblogtop\FromBlogTop::widget() ?>
@@ -106,12 +119,12 @@ $author = \modules\partner\models\Main::getAuthorMain();
                     </div>
                     <div class="home-about-main--speech">
                         <div class="text">
-                            <?= \modules\content\models\ContentBlock::getValue('main_page_text') ?>
+                            <?= ContentBlock::getValue('main_page_text') ?>
                         </div>
                         <div class="blog-hashes">
                             <a href="/about" class="btn-small">о компании</a>
                             <a href="/collaboration" class="btn-small">сотрудничество</a>
-                            <a href="<?= \modules\content\models\ContentBlock::getValue('vk_reviews') ?>"
+                            <a href="<?= ContentBlock::getValue('vk_reviews') ?>"
                                class="btn-small"
                                target="_blank">живые отзывы вконтакте</a>
                         </div>
@@ -127,7 +140,7 @@ $author = \modules\partner\models\Main::getAuthorMain();
         <div class="content content--md">
             <div class="ready-projects--info">
                 <div class="info-box--text">
-                    <?= \modules\content\models\ContentBlock::getValue('main_page_description') ?>
+                    <?= ContentBlock::getValue('main_page_description') ?>
                 </div>
             </div>
         </div>
