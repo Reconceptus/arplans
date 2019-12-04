@@ -58,11 +58,11 @@ class MainController extends AdminController
             if ($logo1 && $logo1->tempName) {
                 $model->main_page_photo_1 = $logo1;
                 if ($model->validate(['main_page_photo_1'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/village/item/collab/');
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/mainpage/');
                     FileHelper::createDirectory($dir . '/');
-                    $fileName = 'image1.' . $model->main_page_photo_1->extension;
+                    $fileName =  time().'image1.' . $model->main_page_photo_1->extension;
                     $model->main_page_photo_1->saveAs($dir . '/' . $fileName);
-                    $model->main_page_photo_1 = '/uploads/village/item/collab/' . $fileName;
+                    $model->main_page_photo_1 = '/uploads/village/item/mainpage/' . $fileName;
                 }
             }
             if (!$model->main_page_photo_1 && isset($post['old_main_page_photo_1'])) {
@@ -73,11 +73,11 @@ class MainController extends AdminController
             if ($logo2 && $logo2->tempName) {
                 $model->main_page_photo_2 = $logo2;
                 if ($model->validate(['main_page_photo_2'])) {
-                    $dir = Yii::getAlias('@webroot/uploads/village/item/collab/');
+                    $dir = Yii::getAlias('@webroot/uploads/village/item/mainpage/');
                     FileHelper::createDirectory($dir . '/');
-                    $fileName = 'image2.' . $model->main_page_photo_2->extension;
+                    $fileName = time().'image2.' . $model->main_page_photo_2->extension;
                     $model->main_page_photo_2->saveAs($dir . '/' . $fileName);
-                    $model->main_page_photo_2 = '/uploads/village/item/collab/' . $fileName;
+                    $model->main_page_photo_2 = '/uploads/village/item/mainpage/' . $fileName;
                 }
             }
             if (!$model->main_page_photo_2 && isset($post['old_main_page_photo_2'])) {
