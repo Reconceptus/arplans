@@ -26,10 +26,9 @@ if (!$category) {
                 <?= Html::a($model->name, Url::to('/shop/' . $model->slug), ['class' => $category === $model->slug ? 'active' : '']) ?>
             </li>
         <?php endforeach; ?>
-        <?php foreach ($services as $service): ?>
+
             <li>
-                <?= Html::a($service->name, Url::to('/shop/service/' . $service->slug), ['class' => $slug === $service->slug ? 'active' : '']) ?>
+                <?= Html::a('Индивидуальное проектирование', Url::to('/shop/service/individual'), ['class' => $slug === 'individual' ? 'active' : '']) ?>
             </li>
-        <?php endforeach; ?>
     </ul>
 </nav>
