@@ -3,6 +3,7 @@
 ?>
 
     <div class="ref-link">
+        <button type="button" class="ref-link--toggle" data-toggle-show="Развернуть" data-toggle-hide="Свернуть"></button>
         <div class="ref-link--title">Ваша ссылка на эту страницу для рефералов</div>
         <div class="ref-link--subtitle">Поделитесь ссылкой и зарабатывайте. Про <a href="/page/refinfo" target="_blank">реферальную
                 систему</a></div>
@@ -15,6 +16,7 @@
             <button type="button" id="copy-ref" class="copy-btn btn-square-dark">Copy</button>
         </div>
     </div>
+
 <?php
 $js = <<<JS
 $("#copy-ref").click(function() { 

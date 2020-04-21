@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tour start="node1">
+  <panorama id="node1">
+    <input levelingpitch="0" levelingroll="0" levelbias="0.400" overlap="1" leveltileurl="tiles/1/cf_%c/l_%l/c_%x/tile_%y.jpg" width="750" height="750" levelbiashidpi="0.400" leveltilesize="510">
+      <level width="750" height="750" preload="0" predecode="0"/>
+      <level width="375" height="375" preload="1" predecode="1"/>
+      <preview color="0x808080" strip="1"/>
+    </input>
+    <view fovmode="0" pannorth="0">
+      <start fov="70" pan="-77.52" tilt="-6.06"/>
+      <min fov="5" pan="0" tilt="-90"/>
+      <max fov="120" pan="360" tilt="90"/>
+    </view>
+    <userdata comment="" tags="2017 Екатерина СрубЭкострой 3 дом на другом компе" latitude="" author="" longitude="" description="" copyright="" source="" info="" title="" datetime="2018:06:04 16:36:39"/>
+    <hotspots wordwrap="1" width="180" height="20">
+      <label borderalpha="1" backgroundalpha="1" backgroundcolor="0xffffff" wordwrap="1" background="1" borderradius="1" width="180" height="20" textcolor="0x000000" bordercolor="0x000000" border="1" enabled="1" textalpha="1"/>
+      <polystyle borderalpha="1" backgroundalpha="0.2509803921568627" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0" handcursor="1"/>
+      <hotspot target="111.348/-8.32771/70" id="Point01" description="" pan="-58.19" skinid="ht_node" tilt="-8.39" title="Спальня (11,61 м2)" url="{node2}"/>
+    </hotspots>
+    <media/>
+    <transition type="crossdissolve" blendtime="1" zoomoutpause="1" zoomfov="20" blendcolor="0x000000" zoomspeed="2" zoomout="0" enabled="1" softedge="0" zoomin="0"/>
+    <autorotate speed="0.200" noderandom="1" delay="5.00" startloaded="0" nodedelay="0.00" returntohorizon="0.000" useanimation="0"/>
+    <control simulatemass="1" speedwheel="1" contextfullscreen="0" lockedwheel="0" invertwheel="0" lockedkeyboard="0" sensitivity="8" lockedkeyboardzoom="0" dblclickfullscreen="0" hideabout="0" lockedmouse="0" invertcontrol="0"/>
+  </panorama>
+  <panorama id="node2">
+    <input levelingpitch="0" levelingroll="0" levelbias="0.400" overlap="1" leveltileurl="tiles/2/cf_%c/l_%l/c_%x/tile_%y.jpg" width="750" height="750" levelbiashidpi="0.400" leveltilesize="510">
+      <level width="750" height="750" preload="0" predecode="0"/>
+      <level width="375" height="375" preload="1" predecode="1"/>
+      <preview color="0x808080" strip="1"/>
+    </input>
+    <view fovmode="0" pannorth="0">
+      <start fov="70" pan="99.15" tilt="-5.57"/>
+      <min fov="5" pan="0" tilt="-90"/>
+      <max fov="120" pan="360" tilt="90"/>
+    </view>
+    <userdata comment="" tags="2017 Екатерина СрубЭкострой 3 дом на другом компе" latitude="" author="" longitude="" description="" copyright="" source="" info="" title="" datetime="2018:06:04 17:07:29"/>
+    <hotspots wordwrap="1" width="180" height="20">
+      <label borderalpha="1" backgroundalpha="1" backgroundcolor="0xffffff" wordwrap="1" background="1" borderradius="1" width="180" height="20" textcolor="0x000000" bordercolor="0x000000" border="1" enabled="1" textalpha="1"/>
+      <polystyle borderalpha="1" backgroundalpha="0.2509803921568627" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0" handcursor="1"/>
+      <hotspot target="" id="Point01" description="" pan="112.63" skinid="ht_node" tilt="-10.91" title="Кухня-гостиная (21,86 м2)" url="{node1}"/>
+    </hotspots>
+    <media/>
+    <transition type="crossdissolve" blendtime="1" zoomoutpause="1" zoomfov="20" blendcolor="0x000000" zoomspeed="2" zoomout="0" enabled="1" softedge="0" zoomin="0"/>
+    <autorotate speed="0.200" noderandom="1" delay="5.00" startloaded="0" nodedelay="0.00" returntohorizon="0.000" useanimation="0"/>
+    <control simulatemass="1" speedwheel="1" contextfullscreen="0" lockedwheel="0" invertwheel="0" lockedkeyboard="0" sensitivity="8" lockedkeyboardzoom="0" dblclickfullscreen="0" hideabout="0" lockedmouse="0" invertcontrol="0"/>
+  </panorama>
+</tour>
