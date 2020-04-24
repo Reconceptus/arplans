@@ -489,10 +489,20 @@ project.fixedSidebar = function() {
         setFixPosition();
     });
 
-    $(window).scroll(function () {
-        setOffsets();
-        setFixPosition();
-    });
+    var isScrolling;
+    window.addEventListener('scroll', function(event) {
+        window.clearTimeout(isScrolling);
+        isScrolling = setTimeout(function(){
+            setOffsets();
+            setFixPosition();
+        }, 10);
+    }, false);
+
+
+    // $(window).scroll(function () {
+    //     setOffsets();
+    //     setFixPosition();
+    // });
 
     setTimeout(function () {
         setOffsets();
@@ -872,12 +882,19 @@ $(document).ready(function () {
     /*
      ============= toggle ref link
     */
+    if($('.ref-link').length > 0){
+        if(localStorage.reflink == 'hidden'){
+            $('.ref-link').addClass('hidden')
+        }
+    }
 
     $(document).on('click','.ref-link--toggle',function () {
         var _this = $(this),
             _ref = _this.closest('.ref-link');
 
         _ref.toggleClass('hidden');
+
+        localStorage.reflink = _ref.hasClass('hidden') ? 'hidden' : 'shown'
     });
 
     /* --------------------------------- document load --------------------------------- */

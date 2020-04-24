@@ -4281,6 +4281,10 @@ svg {
   font-weight: 700;
 }
 
+.title.title-xl {
+  font-weight: 600;
+}
+
 .title.title-md {
   font-weight: 600;
 }
@@ -6578,6 +6582,11 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   color: #FFF;
   text-align: center;
   padding: 60px 20px;
+}
+
+.bg-head--project {
+  text-align: center;
+  color: #FFF;
 }
 
 .bg-head--text {
@@ -11056,6 +11065,10 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     font-size: 7.5rem;
   }
 
+  .title.title-xl {
+    font-size: 6rem;
+  }
+
   .title.title-md {
     font-size: 6rem;
   }
@@ -11244,6 +11257,10 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 
   .project-gallery .buttons .down {
     display: none;
+  }
+
+  .bg-head--project {
+    padding: 20px;
   }
 
   .bg-head--text {
@@ -13623,6 +13640,10 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     margin-left: 20px;
   }
 
+  .title.title-xl {
+    font-size: 10rem;
+  }
+
   .title.title-md {
     font-size: 8rem;
   }
@@ -13774,6 +13795,10 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 
   .project-gallery .buttons .next {
     right: 20%;
+  }
+
+  .bg-head--project {
+    padding: 40px 20px;
   }
 
   .bg-head--text {
