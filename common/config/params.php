@@ -1,6 +1,6 @@
 <?php
 return [
-    'adminEmail'                    => 'suhov.a.s@yandex.ru',
+    'adminEmail'                    => 'no-reply@arplans.ru',
     'supportEmail'                  => 'no-reply@arplans.ru',
     'user.passwordResetTokenExpire' => 3600,
     'defaultAvatar'                 => '/img/avatar.png',
