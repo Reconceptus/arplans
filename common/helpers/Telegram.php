@@ -22,7 +22,7 @@ class Telegram
             ->setFormat(Client::FORMAT_JSON)
             ->setUrl(Yii::$app->params['telegramUrl'])
             ->setData([
-                'email' => $email, 'text' => $text, 'site' => ArrayHelper::getValue(Yii::$app->params,'telegramBearer')
+                'email' => $email, 'text' => $text, 'site' => ArrayHelper::getValue(Yii::$app->params, 'telegramBearer') ?? 'arplans.ru'
             ])
             ->send();
         if (!$response->isOk) {
