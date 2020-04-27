@@ -44,7 +44,7 @@ class RequestController extends AdminController
     public function actionIndex()
     {
         Yii::$app->request->baseUrl = '/admin/modules';
-        $query = Request::find();
+        $query = Request::find()->orderBy(['id'=>SORT_DESC]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
