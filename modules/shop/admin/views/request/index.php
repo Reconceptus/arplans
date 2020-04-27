@@ -15,7 +15,16 @@ $columns = [
     'phone',
     'url',
     'region',
-    'text',
+    [
+        'attribute'     => 'text',
+        'headerOptions' => ['style'=>'min-width:400px']
+    ],
+    [
+        'attribute' => 'created_at',
+        'value'     => function ($model) {
+            return date('Y-m-d', strtotime($model->created_at));
+        }
+    ],
     [
         'class'    => 'yii\grid\ActionColumn',
         'template' => '{delete}',
