@@ -14,7 +14,7 @@ use modules\shop\widgets\related\Related;
 /* @var $favorites array */
 /* @var $inCart array */
 $isInCart = array_key_exists($model->id, $inCart);
-$this->title = $model->title ?? $model->name;
+$this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 ?>
@@ -23,7 +23,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 </script>
 <div class="section bg-head">
     <div class="content content--lg">
-        <div class="bg-head--project gradient"><h1 class="title title-xl"><?= $this->title ?></h1></div>
+        <div class="bg-head--project gradient"><h1 class="title title-xl"><?= $model->title??$model->seo_title ?></h1></div>
     </div>
 </div>
 <div class="section project-page">
