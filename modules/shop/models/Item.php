@@ -20,6 +20,7 @@ use yii\helpers\Url;
  * @property string $build_price
  * @property string $video
  * @property string $project
+ * @property string $title
  * @property string $seo_title
  * @property string $seo_keywords
  * @property string $seo_description
@@ -78,8 +79,9 @@ class Item extends \yii\db\ActiveRecord
 
     public function getUrl()
     {
-        if ($this->_url === null)
-            $this->_url = Url::to('/shop/' . $this->category->slug . '/' . $this->slug);
+        if ($this->_url === null) {
+            $this->_url = Url::to('/shop/'.$this->category->slug.'/'.$this->slug);
+        }
         return $this->_url;
     }
 
@@ -105,10 +107,14 @@ class Item extends \yii\db\ActiveRecord
             [['name', 'slug', 'category_id'], 'required'],
             [['cost'], 'safe'],
             [['price', 'discount', 'cost'], 'number'],
-            [['category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
-                'one_floor', 'two_floor', 'mansard', 'cellar', 'oriel', 'garage', 'double_garage', 'tent', 'terrace',
-                'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'], 'integer'],
-            [['slug', 'name', 'video', 'seo_title', 'seo_keywords', 'seo_description', 'exact_gab'], 'string', 'max' => 255],
+            [
+                [
+                    'category_id', 'rooms', 'bathrooms', 'live_area', 'common_area', 'useful_area',
+                    'one_floor', 'two_floor', 'mansard', 'cellar', 'oriel', 'garage', 'double_garage', 'tent', 'terrace',
+                    'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'is_new', 'is_active', 'is_deleted', 'image_id', 'sort'
+                ], 'integer'
+            ],
+            [['slug', 'name', 'video', 'seo_title', 'seo_keywords', 'seo_description', 'exact_gab', 'title'], 'string', 'max' => 255],
             [['description', 'build_price'], 'string'],
             [['slug'], 'unique'],
             [['created_at', 'updated_at'], 'safe'],
@@ -129,6 +135,7 @@ class Item extends \yii\db\ActiveRecord
             'name'            => 'Название',
             'description'     => 'Описание',
             'video'           => 'Видео',
+            'title'           => 'Заголовок проекта',
             'seo_title'       => 'Заголовок (SEO)',
             'seo_description' => 'Описание (SEO)',
             'seo_keywords'    => 'Ключевые слова (SEO)',
@@ -257,17 +264,17 @@ class Item extends \yii\db\ActiveRecord
 
 
     /**
-     * @param Category|ActiveRecord $category
-     * @param array $get
+     * @param  Category|ActiveRecord  $category
+     * @param  array  $get
      * @return ActiveQuery
      */
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
         $query = Item::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')->distinct()
-            ->leftJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
-            ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
-            ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
+            ->leftJoin(ItemOption::tableName().' io', 'i.id=io.item_id')
+            ->innerJoin(Category::tableName().' cat', 'i.category_id = cat.id')
+            ->leftJoin(Catalog::tableName().' c', 'cat.id=c.category_id')
             ->where(['i.category_id' => $category->id])
             ->andWhere(['i.is_active' => Item::IS_ACTIVE])
             ->andWhere(['i.is_deleted' => Item::IS_NOT_DELETED]);
@@ -285,7 +292,7 @@ class Item extends \yii\db\ActiveRecord
         if (isset($get['floors']) && is_array($get['floors'])) {
             $floors[] = 'or';
             foreach ($get['floors'] as $k => $floor) {
-                $floors[] = ['>', 'i.' . $k, 0];
+                $floors[] = ['>', 'i.'.$k, 0];
             }
             $query->andWhere($floors);
             unset($get['floors']);
@@ -350,25 +357,49 @@ class Item extends \yii\db\ActiveRecord
     public function getComfort()
     {
         $comfort = [];
-        if ($this->mansard) $comfort[] = 'мансарда';
-        if ($this->cellar) $comfort[] = 'подвал';
-        if ($this->oriel) $comfort[] = 'эркер';
-        if ($this->garage) $comfort[] = 'гараж';
-        if ($this->double_garage) $comfort[] = 'гараж на 2 авто';
-        if ($this->tent) $comfort[] = 'навес';
-        if ($this->terrace) $comfort[] = 'терраса';
-        if ($this->balcony) $comfort[] = 'балкон';
-        if ($this->light2) $comfort[] = 'второй свет';
-        if ($this->pool) $comfort[] = 'бассейн';
-        if ($this->sauna) $comfort[] = 'сауна';
-        if ($this->gas_boiler) $comfort[] = 'газовая котельная';
+        if ($this->mansard) {
+            $comfort[] = 'мансарда';
+        }
+        if ($this->cellar) {
+            $comfort[] = 'подвал';
+        }
+        if ($this->oriel) {
+            $comfort[] = 'эркер';
+        }
+        if ($this->garage) {
+            $comfort[] = 'гараж';
+        }
+        if ($this->double_garage) {
+            $comfort[] = 'гараж на 2 авто';
+        }
+        if ($this->tent) {
+            $comfort[] = 'навес';
+        }
+        if ($this->terrace) {
+            $comfort[] = 'терраса';
+        }
+        if ($this->balcony) {
+            $comfort[] = 'балкон';
+        }
+        if ($this->light2) {
+            $comfort[] = 'второй свет';
+        }
+        if ($this->pool) {
+            $comfort[] = 'бассейн';
+        }
+        if ($this->sauna) {
+            $comfort[] = 'сауна';
+        }
+        if ($this->gas_boiler) {
+            $comfort[] = 'газовая котельная';
+        }
         return $comfort;
     }
 
     /**
      * Добавляем условия по чекбоксам свойств товара к выборке
-     * @param ActiveQuery $query
-     * @param array $get
+     * @param  ActiveQuery  $query
+     * @param  array  $get
      * @return ActiveQuery
      */
     public static function addConditions(ActiveQuery $query, array $get)
@@ -376,7 +407,7 @@ class Item extends \yii\db\ActiveRecord
         foreach ($get as $key => $item) {
             if (!is_array($item)) {
                 $query->andWhere(['>', $key, 0]);
-            }else {
+            } else {
                 $values = [];
                 $query->joinWith('itemOptions io'.$key);
                 foreach ($item as $k => $value) {
@@ -413,8 +444,8 @@ class Item extends \yii\db\ActiveRecord
     public function getIO($slug)
     {
         return ItemOption::find()->alias('io')
-            ->innerJoin(Item::tableName() . ' i', 'io.item_id=i.id')
-            ->innerJoin(Catalog::tableName() . ' c', 'io.catalog_id=c.id')
+            ->innerJoin(Item::tableName().' i', 'io.item_id=i.id')
+            ->innerJoin(Catalog::tableName().' c', 'io.catalog_id=c.id')
             ->where(['c.slug' => $slug, 'i.id' => $this->id])
             ->andWhere(['or', ['c.category_id' => $this->category_id], ['is', 'c.category_id', null]])
             ->one();
