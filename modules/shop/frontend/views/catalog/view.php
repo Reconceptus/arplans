@@ -23,7 +23,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
 </script>
 <div class="section bg-head">
     <div class="content content--lg">
-        <div class="bg-head--project gradient"><h1 class="title title-xl"><?= $model->title??$model->seo_title ?></h1></div>
+        <div class="bg-head--project gradient"><h1 class="title title-xl"><?= mb_strlen($model->title) > 0 ? $model->title : $model->seo_title ?></h1></div>
     </div>
 </div>
 <div class="section project-page">
