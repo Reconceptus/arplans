@@ -376,12 +376,15 @@ class Item extends \yii\db\ActiveRecord
         foreach ($get as $key => $item) {
             if (!is_array($item)) {
                 $query->andWhere(['>', $key, 0]);
-            } else {
+            }else {
                 $values = [];
+                $query->joinWith('itemOptions io'.$key);
                 foreach ($item as $k => $value) {
                     $values[] = $k;
                 }
-                $query->andWhere(['io.catalog_id' => $key])->andWhere(['in', 'io.catalog_item_id', $values]);
+                $query->andWhere(['io'.$key.'.catalog_id' => $key])->andWhere([
+                    'in', 'io'.$key.'.catalog_item_id', $values
+                ]);
             }
         }
         return $query;

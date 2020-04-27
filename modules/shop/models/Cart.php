@@ -144,7 +144,7 @@ class Cart extends \yii\db\ActiveRecord
             }
             $query->andWhere(['c.guid' => $cart]);
         } else {
-            $query = Cart::find()->alias('c');
+            $query = self::find()->alias('c');
             if ($active) {
                 $query->innerJoin(Item::tableName() . ' i', 'i.id = c.item_id')
                     ->where(['i.is_active' => Item::IS_ACTIVE, 'i.is_deleted' => Item::IS_NOT_DELETED]);

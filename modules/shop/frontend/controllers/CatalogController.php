@@ -13,6 +13,7 @@ use modules\shop\models\Category;
 use modules\shop\models\Item;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -55,7 +56,7 @@ class CatalogController extends Controller
             'category'     => $category,
             'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
             'inCart'       => Cart::getInCart(),
-            'sort'         => isset($get['sort']) ? $get['sort'] : '',
+            'sort'         => ArrayHelper::getValue($get, 'sort'),
         ]);
     }
 
