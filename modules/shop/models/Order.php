@@ -29,7 +29,9 @@ use yii\helpers\Html;
  * @property string $payment_status
  * @property int $payment_id
  * @property int $type
+ * @property int $promocode_id
  * @property string $price Цена только товаров, без допуслуг
+ * @property string $price_after_promocode Цена после применения промокода
  * @property string $referrer_bonus
  * @property int $referrer_id
  * @property string $partner_percent
@@ -46,17 +48,17 @@ use yii\helpers\Html;
  */
 class Order extends ActiveRecord
 {
-    const STATUS_NEW = 1;
-    const STATUS_PAYED = 2;
-    const STATUS_IN_PROGRESS = 3;
-    const STATUS_SEND = 4;
-    const STATUS_DONE = 5;
-    const STATUS_CANCEL = 6;
+    public const STATUS_NEW = 1;
+    public const STATUS_PAYED = 2;
+    public const STATUS_IN_PROGRESS = 3;
+    public const STATUS_SEND = 4;
+    public const STATUS_DONE = 5;
+    public const STATUS_CANCEL = 6;
 
-    const TYPE_SHOP = 0;
-    const TYPE_API = 1;
+    public const TYPE_SHOP = 0;
+    public const TYPE_API = 1;
 
-    const STATUSES = [
+    public const STATUSES = [
         self::STATUS_NEW         => 'Новый',
         self::STATUS_PAYED       => 'Оплачен',
         self::STATUS_IN_PROGRESS => 'Выполняется',
@@ -102,7 +104,7 @@ class Order extends ActiveRecord
                 if ($this->status == Order::STATUS_PAYED) {
                     $mail->setBcc(Config::getValue('requestEmail'));
                 }
-                $mail->setSubject('Изменение статуса заказа №' . $this->id);
+                $mail->setSubject('Изменение статуса заказа №'.$this->id);
                 $mail->send();
             }
         }
@@ -117,8 +119,8 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'status', 'payment_id', 'payment_status', 'referrer_id'], 'integer'],
-            [['price', 'partner_percent', 'referrer_bonus'], 'number'],
+            [['user_id', 'status', 'payment_id', 'payment_status', 'referrer_id', 'promocode_id'], 'integer'],
+            [['price', 'partner_percent', 'referrer_bonus', 'price_after_promocode'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['comment', 'village'], 'string', 'max' => 800],
             [['fio', 'country', 'city', 'address', 'track'], 'string', 'max' => 255],
@@ -135,26 +137,28 @@ class Order extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'              => 'ID',
-            'user_id'         => 'Покупатель',
-            'status'          => 'Статус',
-            'comment'         => 'Комментарий (виден только админу)',
-            'fio'             => 'ФИО',
-            'phone'           => 'Телефон',
-            'email'           => 'Email',
-            'country'         => 'Страна',
-            'city'            => 'Город',
-            'address'         => 'Адрес',
-            'village'         => 'Дополнительная информация',
-            'payment_id'      => 'Платежная система',
-            'price'           => 'Цена',
-            'referrer_id'     => 'Реферер',
-            'referrer_bonus'  => 'Выплата рефереру',
-            'partner_percent' => 'Отчисление партнеру',
-            'track'           => 'Код отслеживания',
-            'created_at'      => 'Дата',
-            'payment_status'  => 'Статус партнерского вознаграждения',
-            'updated_at'      => 'Updated At',
+            'id'                    => 'ID',
+            'user_id'               => 'Покупатель',
+            'status'                => 'Статус',
+            'comment'               => 'Комментарий (виден только админу)',
+            'fio'                   => 'ФИО',
+            'phone'                 => 'Телефон',
+            'email'                 => 'Email',
+            'country'               => 'Страна',
+            'city'                  => 'Город',
+            'address'               => 'Адрес',
+            'village'               => 'Дополнительная информация',
+            'payment_id'            => 'Платежная система',
+            'price'                 => 'Цена',
+            'referrer_id'           => 'Реферер',
+            'referrer_bonus'        => 'Выплата рефереру',
+            'partner_percent'       => 'Отчисление партнеру',
+            'track'                 => 'Код отслеживания',
+            'created_at'            => 'Дата',
+            'promocode_id'          => 'Промокод',
+            'price_after_promocode' => 'Цена после применения промокода',
+            'payment_status'        => 'Статус партнерского вознаграждения',
+            'updated_at'            => 'Updated At',
         ];
     }
 
@@ -209,14 +213,14 @@ class Order extends ActiveRecord
     /**
      * Создание заказа
      * @param        $fio
-     * @param User $user
+     * @param  User  $user
      * @param        $email
      * @param        $phone
      * @param        $country
      * @param        $city
      * @param        $address
      * @param        $api
-     * @param string $village
+     * @param  string  $village
      * @return Order|null
      */
     public static function createOrder($fio, User $user, $email, $phone, $country, $city, $address, $village = '', $api = false)
@@ -251,7 +255,7 @@ class Order extends ActiveRecord
 
     /**
      * Добавление товаров к заказу
-     * @param array $data
+     * @param  array  $data
      * @return float|int
      */
     public function addItems(array $data)
@@ -260,15 +264,15 @@ class Order extends ActiveRecord
         foreach ($data as $item) {
             $itemModel = Item::findActiveItem($item['id']);
             if ($itemModel) {
-                $albumPrice = intval(Config::getValue('albumPrice'));
+                $albumPrice = (int) Config::getValue('albumPrice');
                 $itemPrice = $itemModel->getPrice();
-                $price = $itemPrice + $albumPrice * (intval($item['count']) > 0 ? intval($item['count']) - 1 : 0);
+                $price = $itemPrice + $albumPrice * ((int) $item['count'] > 0 ? (int) $item['count'] - 1 : 0);
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $this->id;
-                $orderItem->item_id = intval($item['id']);
-                $orderItem->count = intval($item['count']);
+                $orderItem->item_id = (int) $item['id'];
+                $orderItem->count = (int) $item['count'];
                 $orderItem->price = $price;
-                if (intval($item['change'])) {
+                if ((int) $item['change']) {
                     $orderItem->comment = 'Требуется изменить материал';
                     $orderItem->change_material = 1;
                 }
@@ -282,14 +286,14 @@ class Order extends ActiveRecord
 
     /**
      * Добавление услуг к заказу
-     * @param array $data
+     * @param  array  $data
      * @return float|int
      */
     public function addServices(array $data)
     {
         $amount = 0;
         foreach ($data as $serviceId) {
-            $service = Service::findOne(intval($serviceId));
+            $service = Service::findOne((int) $serviceId);
             if ($service) {
                 $orderService = new OrderService();
                 $orderService->order_id = $this->id;

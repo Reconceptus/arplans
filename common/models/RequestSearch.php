@@ -51,7 +51,6 @@ class RequestSearch extends Request
             ->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['like', 'phone', $this->phone]);
 
-        $d = $query->createCommand()->rawSql;
         return $dataProvider;
     }
 }

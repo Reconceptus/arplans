@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 14.08.2018
- * Time: 13:12
- */
 
 namespace modules;
 
@@ -17,7 +11,7 @@ class Module extends \yii\base\Module
         if ($name !== 'admin') {
             $name = 'frontend';
         }
-        $path = str_replace('Module', '', $this->className()) . "{$name}";
+        $path = str_replace('Module', '', self::className()) . "{$name}";
         $this->controllerNamespace = "{$path}\\controllers";
         $this->viewPath = $this->basePath . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . 'views';
         if ($name === 'admin') {

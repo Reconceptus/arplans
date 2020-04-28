@@ -1,11 +1,12 @@
 <?php
 
-/* @var $this \yii\web\View */
-
-/* @var $content string */
-
+use frontend\widgets\flashes\Flashes;
 use modules\admin\assets\AdminAsset;
+use modules\admin\widgets\menu\Menu;
 use yii\helpers\Html;
+
+/* @var $this \yii\web\View */
+/* @var $content string */
 
 AdminAsset::register($this);
 
@@ -31,10 +32,10 @@ AdminAsset::register($this);
                 <div class="sidebar-header">
                     <?= Html::a('<div class="logo"><img src="/svg/partials/logo.svg" alt="arplans" width="154" height="35"></div>', \yii\helpers\Url::to('/')) ?>
                 </div>
-                <?= \modules\admin\widgets\menu\Menu::widget() ?>
+                <?= Menu::widget() ?>
             </div>
             <div class="admin-content">
-                <?= \frontend\widgets\flashes\Flashes::widget() ?>
+                <?= Flashes::widget() ?>
                 <?= $content ?>
             </div>
         </div>

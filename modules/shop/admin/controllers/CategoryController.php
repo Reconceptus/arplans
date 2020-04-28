@@ -127,11 +127,11 @@ class CategoryController extends AdminController
                 $model->image = $image;
                 if ($model->validate(['image'])) {
                     $dir = Yii::getAlias('@webroot/uploads/shop/category/');
-                    $path = date('ymdHis') . '/';
-                    FileHelper::createDirectory($dir . $path);
-                    $fileName = $model->image->baseName . '.' . $model->image->extension;
-                    $model->image->saveAs($dir . $path . $fileName);
-                    $model->image = '/uploads/shop/category/' . $path . $fileName;
+                    $path = date('ymdHis').'/';
+                    FileHelper::createDirectory($dir.$path);
+                    $fileName = $model->image->baseName.'.'.$model->image->extension;
+                    $model->image->saveAs($dir.$path.$fileName);
+                    $model->image = '/uploads/shop/category/'.$path.$fileName;
 //                    $photo = Image::getImagine()->open($dir . $path . $fileName);
 //                    $photo->thumbnail(new Box(400, 400))->save($dir . $path . $fileName, ['quality' => 90]);
                 } else {
@@ -164,11 +164,11 @@ class CategoryController extends AdminController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
-        $categoryId = (int)$get['categoryId'];
+        $categoryId = (int) $get['categoryId'];
         if ($categoryId) {
             $category = Category::findOne($categoryId);
             if ($category && $category->image) {
-                $fileName = '@webroot' . $category->image;
+                $fileName = '@webroot'.$category->image;
                 if (file_exists($fileName)) {
                     unlink($fileName);
                 }
@@ -186,12 +186,12 @@ class CategoryController extends AdminController
      * @return Category|null
      * @throws NotFoundHttpException
      */
-    public function findModel($id)
+    public function findModel($id): ?Category
     {
-        if (($model = Category::find()->where(['id' => $id])->one()) !== null) {
-            return $model;
-        } else {
+        $model = Category::findOne(['id' => $id]);
+        if (!$model) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+        return $model;
     }
 }

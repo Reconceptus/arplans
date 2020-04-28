@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.08.2018
- * Time: 10:53
- */
 
+use modules\shop\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-/* @var $model \modules\shop\models\Category */
+/* @var $model Category */
 
 $this->title = $model->isNewRecord ? 'Создание категории' : 'Редактирование категории';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 18.10.2018
- * Time: 10:25
- */
+$this->title = 'Запрос на добавление посёлка';
 ?>
 <div class="section request">
     <div class="content content--lg mobile-wide">

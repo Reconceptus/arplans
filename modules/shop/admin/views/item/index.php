@@ -1,15 +1,10 @@
-<?php use yii\data\ActiveDataProvider;
+<?php
+
+use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 23.08.2018
- * Time: 14:34
- */
 
 /* @var $dataProvider ActiveDataProvider */
 

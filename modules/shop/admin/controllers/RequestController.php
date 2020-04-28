@@ -46,6 +46,7 @@ class RequestController extends AdminController
         Yii::$app->request->baseUrl = '/admin/modules';
         $searchModel = new RequestSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
         return $this->render('index', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider]);
     }
 

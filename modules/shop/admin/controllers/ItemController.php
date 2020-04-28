@@ -126,10 +126,10 @@ class ItemController extends AdminController
                 $model->project = $project;
                 if ($model->validate(['project'])) {
                     $dir = Yii::getAlias('@webroot/uploads/shop/project/');
-                    FileHelper::createDirectory($dir . $model->id . '/');
-                    $fileName = 'project.' . $model->project->extension;
-                    $model->project->saveAs($dir . $model->id . '/' . $fileName);
-                    $model->project = '/uploads/shop/project/' . $model->id . '/' . $fileName;
+                    FileHelper::createDirectory($dir.$model->id.'/');
+                    $fileName = 'project.'.$model->project->extension;
+                    $model->project->saveAs($dir.$model->id.'/'.$fileName);
+                    $model->project = '/uploads/shop/project/'.$model->id.'/'.$fileName;
                 }
             }
             if (!$model->project && isset($model->oldAttributes['project'])) {
@@ -239,20 +239,20 @@ class ItemController extends AdminController
         $fullPaths = [];
         $filenames = $images['name'];
         $dir = Yii::getAlias('@webroot/uploads/shop/item/');
-        $path = date('ymdHis') . '/';
-        if (!is_dir($dir . $path)) {
-            FileHelper::createDirectory($dir . $path);
+        $path = date('ymdHis').'/';
+        if (!is_dir($dir.$path)) {
+            FileHelper::createDirectory($dir.$path);
         }
 
         for ($i = 0; $i < count($filenames); $i++) {
             $fileName = str_replace(' ', '_', $filenames[$i]);
-            $target = $dir . $path . $fileName;
+            $target = $dir.$path.$fileName;
             if (move_uploaded_file($images['tmp_name'][$i], $target)) {
                 $success = true;
-                $paths[] = '/uploads/shop/item/' . $path . $fileName;
-                $fullPaths[] = $dir . $path . $fileName;
+                $paths[] = '/uploads/shop/item/'.$path.$fileName;
+                $fullPaths[] = $dir.$path.$fileName;
                 $model = new ItemImage();
-                $model->image = '/uploads/shop/item/' . $path . $fileName;
+                $model->image = '/uploads/shop/item/'.$path.$fileName;
                 $blocks[] = $this->renderAjax('_image', ['model' => $model]);
             } else {
                 $success = false;
@@ -283,15 +283,15 @@ class ItemController extends AdminController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
-        if (intval($get['id'])) {
+        if ((int) $get['id']) {
             $model = ItemImage::findOne(['id' => $get['id']]);
             $item = Item::find()->where(['image_id' => $get['id']])->one();
             if ($model) {
-                $fileName = Yii::getAlias('@webroot') . $model->image;
+                $fileName = Yii::getAlias('@webroot').$model->image;
                 if (file_exists($fileName) && is_file($fileName)) {
                     unlink($fileName);
                 }
-                $thumbName = Yii::getAlias('@webroot') . $model->thumb;
+                $thumbName = Yii::getAlias('@webroot').$model->thumb;
                 if (file_exists($thumbName) && is_file($thumbName)) {
                     unlink($thumbName);
                 }
@@ -304,7 +304,7 @@ class ItemController extends AdminController
                 return ['status' => 'fail', 'message' => 'Ошибка при удалении изображеия'];
             }
         } elseif (isset($get['file'])) {
-            $fileName = Yii::getAlias('@webroot') . $get['file'];
+            $fileName = Yii::getAlias('@webroot').$get['file'];
             unlink($fileName);
         }
         return ['status' => 'success'];
@@ -339,13 +339,12 @@ class ItemController extends AdminController
     public function actionDelete()
     {
         $model = $this->findModel(Yii::$app->request->get('id'));
+        if (!$model) {
+            throw new NotFoundHttpException();
+        }
         $model->is_deleted = Item::IS_DELETED;
         $model->is_active = Item::IS_NOT_ACTIVE;
-        $slug = $model->slug . '_deleted_' . rand(0, 1000);
-        if (Item::find()->where(['slug' => $slug])->exists()) {
-            $slug = $model->slug . '_deleted_' . rand(0, 1000) . '_' . rand(0, 1000);
-        }
-        $model->slug = $slug;
+        $model->slug .= '_deleted_'.time();
         if ($model->save()) {
             return $this->redirect(Yii::$app->request->get('back'));
         }
@@ -358,9 +357,11 @@ class ItemController extends AdminController
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
         $model = ItemImage::findOne(['id' => $get['id']]);
-        $model->alt = Html::encode($get['alt']);
-        if ($model->save()) {
-            return ['status' => 'success'];
+        if ($model) {
+            $model->alt = Html::encode($get['alt']);
+            if ($model->save()) {
+                return ['status' => 'success'];
+            }
         }
         return ['status' => 'fail'];
     }
@@ -374,8 +375,7 @@ class ItemController extends AdminController
     {
         if (($model = Item::find()->where(['id' => $id])->one()) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
