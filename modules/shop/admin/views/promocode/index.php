@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'     => static function ($model) {
                     return $model->status === Promocode::STATUS_ACTIVE ? '<span class="green">Активен</span>' : '<span class="red">Отключен</span>';
                 },
+                'format'    => 'html',
                 'filter'    => Promocode::STATUS_LIST
             ],
 
