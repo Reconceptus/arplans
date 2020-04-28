@@ -38,7 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'percent_discount',
             'min_amount',
             'number_of_uses',
-            'used',
+            [
+                'attribute' => 'used',
+                'filter'    => false,
+                'label'     => 'Остаток',
+                'value'     => static function ($model) {
+                    return $model->number_of_uses - $model->used;
+                }
+            ],
             'start_date',
             'end_date',
             [
