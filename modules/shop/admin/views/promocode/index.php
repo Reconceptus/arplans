@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns'      => [
             ['class' => SerialColumn::class],
 
-            'id',
             'code',
             'fixed_discount',
             'percent_discount',
