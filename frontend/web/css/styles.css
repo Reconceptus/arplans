@@ -3302,24 +3302,24 @@ body.compensate-for-scrollbar {
 }
 
 @-webkit-keyframes anim_bg {
-  from {
+  0% {
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
   }
 
-  to {
+  100% {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
 }
 
 @keyframes anim_bg {
-  from {
+  0% {
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
   }
 
-  to {
+  100% {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
@@ -3339,6 +3339,7 @@ body.compensate-for-scrollbar {
 }
 
 .gradient:before {
+  will-change: transform;
   content: "";
   position: absolute;
   z-index: -1;
@@ -3351,8 +3352,14 @@ body.compensate-for-scrollbar {
   background: -webkit-gradient(linear, left top, right top, from(#63B6F7), color-stop(25%, #2196F3), color-stop(50%, #63B6F7), color-stop(75%, #2196F3), to(#63B6F7));
   background: -o-linear-gradient(left, #63B6F7 0%, #2196F3 25%, #63B6F7 50%, #2196F3 75%, #63B6F7 100%);
   background: linear-gradient(to right, #63B6F7 0%, #2196F3 25%, #63B6F7 50%, #2196F3 75%, #63B6F7 100%);
-  -webkit-animation: anim_bg 8s infinite linear;
-  animation: anim_bg 8s infinite linear;
+  -webkit-animation: anim_bg 8s infinite linear alternate;
+  animation: anim_bg 8s infinite linear alternate;
+}
+
+.mobile .gradient:before,
+.tablet .gradient:before {
+  -webkit-animation: none;
+  animation: none;
 }
 
 /* vendor */
