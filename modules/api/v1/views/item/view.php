@@ -48,7 +48,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_descri
                         </div>
                         <div class="estimate">
                             <a href="#" class="btn-add show-modal"
-                               data-modal="calculation"><span>Получить точную смету</span></a>
+                               data-modal="calculation"><span>Заказать расчет дома</span></a>
                         </div>
                     </div>
                 </div>

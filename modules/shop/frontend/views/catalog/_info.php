@@ -84,7 +84,7 @@ $price = $model->getPrice();
                     </ul>
                 </div>
                 <div class="estimate">
-                    <a href="#" class="btn-add show-modal" data-modal="calculation"><span>Получить точную смету</span></a>
+                    <a href="#" class="btn-add show-modal" data-modal="calculation"><span>Заказать расчет дома</span></a>
                 </div>
             </div>
         </div>

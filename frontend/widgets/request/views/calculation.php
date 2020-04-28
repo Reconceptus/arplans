@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CALCULATION) ?>
-                <?= Html::hiddenInput('Request[contact]', null) ?>
+                <?= Html::hiddenInput('Request[contact]', '-') ?>
                 <div class="modal-form--fields">
                     <div class="custom-form">
                         <div class="form-row-element">

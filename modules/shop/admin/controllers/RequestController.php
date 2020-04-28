@@ -4,9 +4,9 @@ namespace modules\shop\admin\controllers;
 
 
 use common\models\Request;
+use common\models\RequestSearch;
 use modules\admin\controllers\AdminController;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -44,11 +44,9 @@ class RequestController extends AdminController
     public function actionIndex()
     {
         Yii::$app->request->baseUrl = '/admin/modules';
-        $query = Request::find()->orderBy(['id'=>SORT_DESC]);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query
-        ]);
-        return $this->render('index', ['dataProvider' => $dataProvider]);
+        $searchModel = new RequestSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider]);
     }
 
     /**

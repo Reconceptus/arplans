@@ -1,13 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.08.2018
- * Time: 12:44
- */
-
-use modules\shop\models\Item;
+<?php use modules\shop\models\Item;
 use yii\data\ActiveDataProvider;
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -25,7 +18,7 @@ $columns = [
         'attribute' => 'image_id',
         'format'    => 'html',
         'options'   => ['style' => 'width:100px'],
-        'value'     => function ($model) {
+        'value'     => static function ($model) {
             return $model->image ? Html::img($model->image->image, ['class' => 'post-list-image-preview']) : '';
         },
         'filter'    => false
@@ -43,11 +36,11 @@ $columns = [
     ],
     'created_at',
     [
-        'class'    => 'yii\grid\ActionColumn',
+        'class'    => ActionColumn::class,
         'template' => '{delete}',
         'options'  => ['style' => 'width:100px'],
         'buttons'  => [
-            'delete' => function ($url, $model) {
+            'delete' => static function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to([
                     '/shop/item/delete',
                     'id'   => $model->id,
@@ -67,7 +60,7 @@ $columns = [
     [
         'dataProvider' => $dataProvider,
         'filterModel'  => $filterModel,
-        'rowOptions'   => function ($model, $key, $index, $grid) {
+        'rowOptions'   => static function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "' . Url::to(['/shop/item/update', 'id' => $model->id]) . '"'];
         },
         'layout'=>"{summary}\n{items}",
