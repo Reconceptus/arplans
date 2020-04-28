@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.10.2018
- * Time: 11:27
- */
 
+use frontend\widgets\request\Request;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $model \frontend\widgets\request\Request */
+/* @var $model Request */
 ?>
     <div class="modal" data-modal="calculation">
         <div class="bg close"></div>
@@ -26,8 +21,7 @@ use yii\widgets\ActiveForm;
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
                 <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CALCULATION) ?>
-                <?= Html::hiddenInput('Request[email]', null) ?>
-                <?= Html::hiddenInput('Request[phone]', '-') ?>
+                <?= Html::hiddenInput('Request[contact]', null) ?>
                 <div class="modal-form--fields">
                     <div class="custom-form">
                         <div class="form-row-element">
@@ -42,7 +36,12 @@ use yii\widgets\ActiveForm;
                         </div>
                         <div class="form-row-element">
                             <div class="input">
-                                <?= Html::activeTextInput($model, 'contact', ['placeholder' => '*Ваш телефон, e-mail или любой другой контакт']) ?>
+                                <?= Html::activeTextInput($model, 'email', ['placeholder' => '*Ваш e-mail']) ?>
+                            </div>
+                        </div>
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'phone', ['placeholder' => '*Ваш телефон']) ?>
                             </div>
                         </div>
                         <div class="form-row-element">
@@ -93,14 +92,16 @@ $js = <<<JS
         onfocusout: false,
         ignore: ".ignore",
         rules: {
-            'Request[contact]': {required: true},
+            'Request[email]': {required: true},
+            'Request[phone]': {required: true},
             'Request[name]': {required: true},
             'Request[region]': {required: true},
             'Request[text]': {required: true},
             'Request[accept]': {required: true}
         },
         messages: {
-           'Request[contact]': {required: ""},
+           'Request[email]': {required: ""},
+           'Request[phone]': {required: ""},
            'Request[name]': {required: ""},
            'Request[region]': {required: ""},
            'Request[text]': {required: ""},

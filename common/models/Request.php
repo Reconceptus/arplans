@@ -50,7 +50,7 @@ class Request extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param bool $insert
+     * @param  bool  $insert
      * @return bool
      */
     public function beforeSave($insert)

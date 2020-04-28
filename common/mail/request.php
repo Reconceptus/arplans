@@ -10,7 +10,7 @@
 use common\models\Request;
 
 /* @var $model Request */
-$type = intval($model->type);
+$type = (int) $model->type;
 ?>
 <?php if (isset($type)): ?>
     <?php if ($type === Request::PAGE_CALCULATION): ?>
@@ -39,8 +39,8 @@ $type = intval($model->type);
 <?php endif; ?>
     <h2>Текст</h2>
     <p><?= $model->text ?></p>
-<?php if (intval($model->url) > 0): ?>
-    <?php $item = \modules\shop\models\Item::findOne(intval($model->url));
+<?php if ((int) $model->url > 0): ?>
+    <?php $item = \modules\shop\models\Item::findOne((int) $model->url);
     ?>
     <?php if ($item): ?>
         Требуется просчитать смету на проект <a
