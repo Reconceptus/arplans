@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
         'rowOptions'   => static function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "'.Url::to(['/shop/item/update', 'id' => $model->id]).'"'];
+            return ['onclick' => 'window.location = "'.Url::to(['/shop/promocode/update', 'id' => $model->id]).'"'];
         },
         'columns'      => [
             ['class' => SerialColumn::class],
