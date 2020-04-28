@@ -1,5 +1,6 @@
 <?php
 
+use modules\shop\models\Promocode;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
@@ -30,6 +31,8 @@ $this->title = $model->isNewRecord ? 'Создание промокода' : 'Р
                 <?= $form->field($model, 'number_of_uses')->textInput() ?>
 
                 <?= $form->field($model, 'used')->textInput() ?>
+
+                <?= $form->field($model, 'status')->dropDownList(Promocode::STATUS_LIST) ?>
             </div>
         </div>
         <div class="row">

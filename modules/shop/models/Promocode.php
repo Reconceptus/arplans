@@ -14,12 +14,21 @@ use yii\db\ActiveRecord;
  * @property int $min_amount
  * @property int $number_of_uses
  * @property int $used
+ * @property int $status
  * @property string $text
  * @property string $start_date Первый день действия
  * @property string $end_date Последний день действия
  */
 class Promocode extends ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_DISABLED = 0;
+
+    const STATUS_LIST = [
+        self::STATUS_DISABLED => 'Неактивен',
+        self::STATUS_ACTIVE   => 'Aктивен'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +46,7 @@ class Promocode extends ActiveRecord
             [['start_date', 'end_date', 'number_of_uses', 'code'], 'required'],
             [['end_date'], 'validateDate'],
             [['fixed_discount', 'percent_discount'], 'validateDiscount'],
-            [['fixed_discount', 'min_amount', 'number_of_uses', 'used'], 'integer'],
+            [['fixed_discount', 'min_amount', 'number_of_uses', 'used', 'status'], 'integer'],
             [['percent_discount'], 'number'],
             [['text'], 'string'],
             [['start_date', 'end_date'], 'safe'],
@@ -75,6 +84,7 @@ class Promocode extends ActiveRecord
             'number_of_uses'   => 'Количество использований',
             'used'             => 'Использовано раз',
             'text'             => 'Текст',
+            'status'           => 'Статус',
             'start_date'       => 'Первый день действия',
             'end_date'         => 'Последний день действия',
         ];

@@ -21,6 +21,7 @@ class m200428_082752_create_promocode extends Migration
             'number_of_uses'   => $this->integer(),
             'used'             => $this->integer(),
             'text'             => $this->text(),
+            'status'           => $this->smallInteger(1),
             'start_date'       => $this->date()->comment('Первый день действия'),
             'end_date'         => $this->date()->comment('Последний день действия')
         ]);

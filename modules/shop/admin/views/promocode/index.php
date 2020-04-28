@@ -1,5 +1,6 @@
 <?php
 
+use modules\shop\models\Promocode;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\grid\SerialColumn;
@@ -40,9 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'used',
             'start_date',
             'end_date',
+            [
+                'attribute' => 'status',
+                'value'     => static function ($model) {
+                    return $model->status === Promocode::STATUS_ACTIVE ? '<span class="green">Активен</span>' : '<span class="red">Отключен</span>';
+                },
+                'filter'    => Promocode::STATUS_LIST
+            ],
 
             [
-                'class' => ActionColumn::class,
+                'class'    => ActionColumn::class,
                 'template' => '{delete}',
             ],
         ],
