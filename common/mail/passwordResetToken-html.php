@@ -85,8 +85,8 @@ $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/reset-password', 't
                                                 <table width="90%" cellspacing="0" cellpadding="0" border="0">
                                                     <tr>
                                                         <td align="center" style="height: 18px; font-size: 18px; line-height: 18px;">
-                                                            <a href="https://reconceptus.github.io/Arplans/dev/build/index.html" style="color: #21202e; text-decoration: none;" target="_blank">
-                                                                <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="https://reconceptus.github.io/Arplans/dev/build/assets/images/logo.png" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
+                                                            <a href="https://arplans.ru" style="color: #21202e; text-decoration: none;" target="_blank">
+                                                                <img width="170" height="45" title="ARPLANS" alt="ARPLANS" src="https://arplans.ru/images/logo.png" style="border:none; max-width: 170px; height: auto; max-height: 45px;">
                                                             </a>
                                                         </td>
                                                     </tr>
