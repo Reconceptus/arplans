@@ -151,7 +151,8 @@ class CartController extends Controller
                 if ($code) {
                     $date = date('Y-m-d');
                     $promocode = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
-                        ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])->one();
+                        ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])
+                        ->andWhere(['<', 'used', 'number_of_uses'])->one();
                     /* @var $promocode Promocode */
                     if ($promocode) {
                         if ($order->price > $promocode->min_amount) {
@@ -160,6 +161,9 @@ class CartController extends Controller
                             } else {
                                 $order->price_after_promocode = $order->price - ($order->price / 100 * $promocode->percent_discount);
                             }
+                            $order->promocode_id = $promocode->id;
+                            $promocode->used = $promocode->used++;
+                            $promocode->save();
                         }
                     }
                 }
@@ -218,13 +222,15 @@ class CartController extends Controller
         $code = Yii::$app->request->get('code');
         $date = date('Y-m-d');
         $code = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
-            ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])->one();
+            ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])
+            ->andWhere(['<', 'used', 'number_of_uses'])->one();
         /* @var $code Promocode */
         if ($code) {
             $type = $code->fixed_discount > 0 ? 1 : 2;
             $discount = (int) $code->fixed_discount > 0 ? $code->fixed_discount : $code->percent_discount;
-            return ['status'   => 'success', 'discount' => $discount, 'type' => $type, 'minimal' => $code->min_amount,
-                    'remnants' => $code->number_of_uses - $code->used
+            return [
+                'status'   => 'success', 'discount' => $discount, 'type' => $type, 'minimal' => $code->min_amount,
+                'remnants' => $code->number_of_uses - $code->used
             ];
         }
         return ['status' => 'fail'];
