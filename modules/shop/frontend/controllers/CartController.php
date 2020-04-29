@@ -151,7 +151,7 @@ class CartController extends Controller
                     $date = date('Y-m-d');
                     $promocode = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
                         ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])
-                        ->andWhere(['<', 'used', 'number_of_uses'])->one();
+                        ->andWhere('`number_of_uses`>`used`')->one();
                     /* @var $promocode Promocode */
                     if ($promocode) {
                         if ($order->price > $promocode->min_amount) {
@@ -224,7 +224,7 @@ class CartController extends Controller
         $date = date('Y-m-d');
         $code = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
             ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])
-            ->andWhere(['<', 'used', 'number_of_uses'])->one();
+            ->andWhere('`number_of_uses`>`used`')->one();
         /* @var $code Promocode */
         if ($code) {
             $type = $code->fixed_discount > 0 ? 1 : 2;

@@ -43,6 +43,7 @@ use yii\helpers\Html;
  * @property User $referrer
  * @property OrderItem[] $orderItems
  * @property Item[] $items
+ * @property Promocode $promocode
  * @property OrderService[] $orderServices
  * @property Service[] $services
  */
@@ -327,5 +328,10 @@ class Order extends ActiveRecord
     public static function getStatusName($status)
     {
         return self::STATUSES[$status];
+    }
+
+    public function getPromocode()
+    {
+        return $this->hasOne(Promocode::className(), ['id' => 'promocode_id']);
     }
 }

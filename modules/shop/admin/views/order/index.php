@@ -50,38 +50,46 @@ $columns = [
         'attribute' => 'created_at',
         'options'   => ['style' => 'width:190px;'],
         'filter'    =>
-            '<div style="min-width: 165px">' .
+            '<div style="min-width: 165px">'.
             DatePicker::widget([
                 'dateFormat' => 'dd.MM.yyyy',
                 'name'       => 'Order[from]',
                 'value'      => $order['from'] ? (new DateTime(Yii::$app->request->get('Order')['from']))->format('d.m.Y') : '',
                 'options'    => ['style' => 'width:80px; display: inline-block;font-size:13px', 'placeholder' => 'От']
-            ]) .
+            ]).
 
             DatePicker::widget([
                 'dateFormat' => 'dd.MM.yyyy',
                 'name'       => 'Order[to]',
                 'value'      => $order['to'] ? (new DateTime(Yii::$app->request->get('Order')['to']))->format('d.m.Y') : '',
                 'options'    => ['style' => 'width:80px; display: inline-block;font-size:13px', 'placeholder' => 'До']
-            ]) .
+            ]).
             '</div>',
         'value'     => function ($model) {
             return date('d m Y', strtotime($model->created_at));
         }
     ],
     [
+        'header' => 'Промокод',
+        'value'  => function ($model) {
+            /* @var $model Order */
+            $promocode = $model->promocode;
+            return $promocode ? $promocode->code.' на '.($promocode->fixed_discount ? $promocode->fixed_discount.'руб.' : $promocode->percent_discount.'%') : '';
+        }
+    ],
+    [
         'header' => 'Цена с промокодом',
         'value'  => function ($model) {
-            return $model->price_after_promocode??$model->price;
+            return $model->price_after_promocode ?? $model->price;
         }
     ],
     [
         'header'    => 'Сумма заказа',
         'attribute' => 'price',
         'filter'    =>
-            '<div style="min-width: 170px">' .
-            Html::textInput('Order[price_from]', $order['price_from'], ['style' => 'width:80px;display: inline-block;font-size:13px']) . ' ' .
-            Html::textInput('Order[price_to]', $order['price_to'], ['style' => 'width:80px;display: inline-block;font-size:13px']) .
+            '<div style="min-width: 170px">'.
+            Html::textInput('Order[price_from]', $order['price_from'], ['style' => 'width:80px;display: inline-block;font-size:13px']).' '.
+            Html::textInput('Order[price_to]', $order['price_to'], ['style' => 'width:80px;display: inline-block;font-size:13px']).
             '</div>',
     ],
     [
@@ -118,7 +126,7 @@ $columns = [
         'filterModel'  => $filterModel,
         'rowOptions'   => function ($model) {
             return [
-                'onclick' => 'window.location = "' . Url::to(['/shop/order/update', 'id' => $model->id]) . '"',
+                'onclick' => 'window.location = "'.Url::to(['/shop/order/update', 'id' => $model->id]).'"',
                 'style'   => $model->type === 1 && $model->user->partner ? 'color:blue' : ''
             ];
         },
