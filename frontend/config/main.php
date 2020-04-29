@@ -1,9 +1,9 @@
 <?php
 $params = array_merge(
-    require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
+    require __DIR__.'/../../common/config/params.php',
+    require __DIR__.'/../../common/config/params-local.php',
+    require __DIR__.'/params.php',
+    require __DIR__.'/params-local.php'
 );
 
 return [
@@ -62,6 +62,7 @@ return [
                 'shop/favorite'                                            => 'shop/favorite/index',
                 'shop/cart/delete'                                         => 'shop/cart/delete',
                 'shop/cart/add'                                            => 'shop/cart/add',
+                'shop/cart/promocode'                                      => 'shop/cart/promocode',
                 'shop/cart/order'                                          => 'shop/cart/order',
                 'shop/cart/change'                                         => 'shop/cart/change',
                 'shop/cart'                                                => 'shop/cart/index',

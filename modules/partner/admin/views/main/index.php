@@ -33,17 +33,17 @@ $this->title = 'Главная страница';
             <?= $form->field($model, 'main_page_text')->textarea(['rows' => 4]) ?>
             <?= $form->field($model, 'main_page_author')->dropDownList($users) ?>
             <?= $form->field($model, 'main_page_description')->textarea(['rows' => 4]) ?>
-            <? if ($model->main_page_video_1): ?>
+            <?php if ($model->main_page_video_1): ?>
                 <video width="200" height="120" controls="controls">
                     <source src="<?= $model->main_page_video_1 ?>">
                 </video>
-            <? endif; ?>
+            <?php endif; ?>
             <?= $form->field($model, 'main_page_video_1')->fileInput(['accept' => 'video/mp4']) ?>
-            <? if ($model->main_page_video_2): ?>
+            <?php if ($model->main_page_video_2): ?>
                 <video width="200" height="120" controls="controls">
                     <source src="<?= $model->main_page_video_2 ?>">
                 </video>
-            <? endif; ?>
+            <?php endif; ?>
             <?= $form->field($model, 'main_page_video_2')->fileInput(['accept' => 'video/webm']) ?>
             <div class="clearfix"></div>
             <?= $form->field($model, 'main_page_photo_1')->fileInput(['accept' => 'image/*']) ?>

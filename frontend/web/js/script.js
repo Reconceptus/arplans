@@ -120,7 +120,6 @@ $(function () {
         button.hide();
         var isGuest = button.data('guest');
         var items = [];
-        var services = [];
         var reEmail = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,5}$/i;
         $('.album-num').each(function (index, item) {
             items.push({
@@ -128,11 +127,6 @@ $(function () {
                 count: item.value,
                 change: $(item).closest('.compare-table--item').find('.order-change-materials').prop('checked') ? 1 : 0
             })
-        });
-        $('.cart-service').each(function (index, item) {
-            if ($(item).prop('checked')) {
-                services.push($(item).attr('data-id'));
-            }
         });
         var info = {
             'fio': $('#order-fio').val(),
@@ -142,6 +136,7 @@ $(function () {
             'city': $('#order-city').val(),
             'address': $('#order-address').val(),
             'village': $('#order-village').val(),
+            'promocode': $('#order-promocode').val(),
             'accept': $('#order-accept').prop('checked') ? 1 : 0
         };
         if (!info.accept) {
@@ -168,7 +163,6 @@ $(function () {
             data: {
                 items: items,
                 info: info,
-                services: services
             },
             success: function (data) {
                 if (data.status === 'success') {

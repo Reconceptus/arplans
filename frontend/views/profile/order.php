@@ -5,6 +5,7 @@
  * Date: 25.10.2018
  * Time: 15:47
  */
+
 /* @var $model \modules\shop\models\Order */
 
 use modules\shop\models\Order;
@@ -34,6 +35,14 @@ $services = ArrayHelper::map($model->services, 'id', 'name');
                 <dt><?= $model->price ?> руб.</dt>
             </dl>
         </div>
+        <?php if ($model->price_after_promocode < $model->price): ?>
+            <div class="compare-table--part part-total">
+                <dl>
+                    <dd>Цена с промокодом:</dd>
+                    <dt><?= $model->price_after_promocode ?></dt>
+                </dl>
+            </div>
+        <?php endif; ?>
         <?php if ($model->track): ?>
             <div class="compare-table--part part-total">
                 <dl>
@@ -48,12 +57,13 @@ $services = ArrayHelper::map($model->services, 'id', 'name');
                 <dt><?= Order::STATUSES[$model->status] ?></dt>
             </dl>
         </div>
-        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? Html::a('Оплатить', Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
+        <div class="compare-table--part part-total"><?= in_array($model->status, [Order::STATUS_NEW]) ? Html::a('Оплатить',
+                Url::to(['/shop/payment/index', 'order' => $model->id])) : '' ?></div>
     </div>
     <div class="compare-table--main">
         <?php foreach ($model->orderItems as $oi): ?>
             <?php $item = $oi->item;
-            $url = '/shop/' . $item->category->slug . '/' . $item->slug;
+            $url = '/shop/'.$item->category->slug.'/'.$item->slug;
             ?>
             <div class="compare-table--item">
                 <div class="compare-table--section">

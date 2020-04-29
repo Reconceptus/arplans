@@ -13,6 +13,7 @@ use common\models\Config;
 use common\models\User;
 use modules\shop\models\Cart;
 use modules\shop\models\Order;
+use modules\shop\models\Promocode;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -117,11 +118,10 @@ class CartController extends Controller
      */
     public function actionOrder()
     {
-
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
-        $info = $get['info'];
-        $email = $info['email'];
+        $info = ArrayHelper::getValue($get, 'info');
+        $email = ArrayHelper::getValue($info, 'email');
         if (Yii::$app->user->isGuest && User::findOne(['email' => $email])) {
             return [
                 'status'  => 'fail',
@@ -139,24 +139,43 @@ class CartController extends Controller
             } else {
                 $user = Yii::$app->user->identity;
             }
-            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'],
-                $info['village']);
-            if ($order) {
-                $amount += $order->addItems($get['items']);
+            if ($user) {
+                $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'],
+                    $info['village']);
+                if ($order) {
+                    $amount += $order->addItems($get['items']);
+                }
+                $order->price = $amount;
+                $order->price_after_promocode = $amount;
+                $code = ArrayHelper::getValue($info, 'code');
+                if ($code) {
+                    $date = date('Y-m-d');
+                    $promocode = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
+                        ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])->one();
+                    /* @var $promocode Promocode */
+                    if ($promocode) {
+                        if ($order->price > $promocode->min_amount) {
+                            if ($promocode->fixed_discount) {
+                                $order->price_after_promocode = $order->price - $promocode->fixed_discount;
+                            } else {
+                                $order->price_after_promocode = $order->price - ($order->price / 100 * $promocode->percent_discount);
+                            }
+                        }
+                    }
+                }
+                if ($order->save()) {
+                    Cart::clearUserCart($user->id);
+                    $transaction->commit();
+                    $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
+                    $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
+                    $mail->setTo($order->email);
+                    $mail->setBcc(Config::getValue('requestEmail'));
+                    $mail->setSubject('Новый заказ на сайте '.Yii::$app->request->getHostInfo());
+                    $mail->send();
+                    return ['status' => 'success', 'orderId' => $order->id];
+                }
+                Yii::info(Json::encode($order->getErrorSummary(true)));
             }
-            $order->price = $amount;
-            if ($order->save()) {
-                Cart::clearUserCart($user->id);
-                $transaction->commit();
-                $mail = Yii::$app->mailer->compose('new-order', ['model' => $order]);
-                $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
-                $mail->setTo($order->email);
-                $mail->setBcc(Config::getValue('requestEmail'));
-                $mail->setSubject('Новый заказ на сайте '.Yii::$app->request->getHostInfo());
-                $mail->send();
-                return ['status' => 'success', 'orderId' => $order->id];
-            }
-            Yii::info(Json::encode($order->getErrorSummary(true)));
         } catch (\Exception $e) {
             $transaction->rollBack();
             return ['status' => 'fail'];
@@ -188,5 +207,24 @@ class CartController extends Controller
             }
         }
         return ['status' => 'fail', 'message' => 'Ошибка при попытке изменить количество'];
+    }
+
+    /**
+     * @return array|string[]
+     */
+    public function actionPromocode()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $code = Yii::$app->request->get('code');
+        $date = date('Y-m-d');
+        $code = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
+            ->andWhere(['<=', 'start_date', $date])->andWhere(['>=', 'end_date', $date])->one();
+        /* @var $code Promocode */
+        if ($code) {
+            $type = $code->fixed_discount > 0 ? 1 : 2;
+            $discount = (int) $code->fixed_discount > 0 ? $code->fixed_discount : $code->percent_discount;
+            return ['status' => 'success', 'discount' => $discount, 'type' => $type];
+        }
+        return ['status' => 'fail'];
     }
 }
