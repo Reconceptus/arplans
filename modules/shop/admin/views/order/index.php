@@ -70,14 +70,9 @@ $columns = [
         }
     ],
     [
-        'header' => 'Услуги',
+        'header' => 'Цена с промокодом',
         'value'  => function ($model) {
-            $result = [];
-
-            foreach ($model->services as $service) {
-                $result[] = $service->name;
-            }
-            return implode('<br/>', $result);
+            return $model->price_after_promocode??$model->price;
         }
     ],
     [
