@@ -35,7 +35,13 @@ $type = (int) $model->type;
     <?php if ($model->region): ?>
         <p>Регион: <?= $model->region ?></p>
     <?php endif; ?>
-    <p>Контактная информация: <?= $model->contact ?></p>
+    <?php if ($model->email): ?>
+        <p>Email: <?= $model->email ?></p>
+    <?php endif; ?>
+    <?php if ($model->phone): ?>
+        <p>Phone: <?= $model->email ?></p>
+    <?php endif; ?>
+
 <?php endif; ?>
     <h2>Текст</h2>
     <p><?= $model->text ?></p>
