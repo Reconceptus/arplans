@@ -26,7 +26,7 @@ class m200428_082752_create_promocode extends Migration
             'end_date'         => $this->date()->comment('Последний день действия')
         ]);
         $this->addColumn('shop_order', 'promocode_id', $this->integer()->unsigned());
-        $this->addColumn('shop_order', 'price_after_promocode', $this->float());
+        $this->addColumn('shop_order', 'price_after_promocode', $this->decimal(14,2));
 
 
         $auth = Yii::$app->authManager;

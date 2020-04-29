@@ -2,6 +2,8 @@
 
 namespace modules\shop\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the model class for table "shop_order_item".
  *
@@ -11,6 +13,7 @@ namespace modules\shop\models;
  * @property int $count
  * @property int $change_material
  * @property string $price
+ * @property string $price_after_promocode
  * @property string $comment
  *
  * @property Item $item
@@ -34,7 +37,7 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             [['order_id', 'item_id', 'count'], 'required'],
             [['order_id', 'item_id', 'count'], 'integer'],
-            [['price'], 'number'],
+            [['price', 'price_after_promocode'], 'number'],
             [['change_material'], 'boolean'],
             [['comment'], 'string', 'max' => 800],
             [['order_id', 'item_id'], 'unique', 'targetAttribute' => ['order_id', 'item_id']],
@@ -49,18 +52,19 @@ class OrderItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'              => 'ID',
-            'order_id'        => 'Номер заказа',
-            'item_id'         => 'ID товара',
-            'count'           => 'Количество',
-            'price'           => 'Цена',
-            'comment'         => 'Комментарий',
-            'change_material' => 'Изменить материал',
+            'id'                    => 'ID',
+            'order_id'              => 'Номер заказа',
+            'item_id'               => 'ID товара',
+            'count'                 => 'Количество',
+            'price'                 => 'Цена',
+            'price_after_promocode' => 'Цена после промокода',
+            'comment'               => 'Комментарий',
+            'change_material'       => 'Изменить материал',
         ];
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItem()
     {
@@ -68,7 +72,7 @@ class OrderItem extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getOrder()
     {

@@ -44,7 +44,7 @@ class PaymentController extends Controller
             $itemsData[] = [
                 'description' => $item->item->name,
                 'quantity' => $item->count,
-                'amount' => ['currency' => 'RUB', 'value' => $item->price],
+                'amount' => ['currency' => 'RUB', 'value' => $item->price_after_promocode],
                 'vat_code' => 1,
             ];
         }

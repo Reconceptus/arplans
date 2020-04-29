@@ -255,6 +255,34 @@ class Order extends ActiveRecord
     }
 
     /**
+     * @param $promocode Promocode
+     */
+    public function updateItemsWithPromocode($promocode)
+    {
+        $orderPrice = $this->price - $this->price_after_promocode;
+        if ($promocode->fixed_discount) {
+            $percent = $promocode->fixed_discount / $this->price * 100;
+        } else {
+            $percent = $promocode->percent_discount;
+        }
+        $orderItems = $this->orderItems;
+        $count = count($orderItems)-1;
+        foreach ($orderItems as $k => $item) {
+            if($k!==$count) {
+                $discount = (int) ($item->price / 100 * $percent);
+                $itemPrice = $item->price - $discount;
+                $item->price_after_promocode = $itemPrice;
+                $item->save();
+                $orderPrice -= $discount;
+            }else{
+                $item->price_after_promocode = $item->price - $orderPrice;
+                $item->save();
+            }
+        }
+    }
+
+
+    /**
      * Добавление товаров к заказу
      * @param  array  $data
      * @return float|int
@@ -273,6 +301,7 @@ class Order extends ActiveRecord
                 $orderItem->item_id = (int) $item['id'];
                 $orderItem->count = (int) $item['count'];
                 $orderItem->price = $price;
+                $orderItem->price_after_promocode = $price;
                 if ((int) $item['change']) {
                     $orderItem->comment = 'Требуется изменить материал';
                     $orderItem->change_material = 1;

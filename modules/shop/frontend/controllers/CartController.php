@@ -163,6 +163,7 @@ class CartController extends Controller
                             $order->promocode_id = $promocode->id;
                             $promocode->used = ++$promocode->used;
                             $promocode->save();
+                            $order->updateItemsWithPromocode($promocode);
                         }
                     }else{
                         $order->price_after_promocode = $amount;

@@ -127,7 +127,7 @@ class Payment extends \yii\db\ActiveRecord
         $payment = new Payment();
         $payment->guid = uniqid('', true);
         $payment->order_id = $order->id;
-        $payment->amount = $order->price_after_promocode??$order->price;
+        $payment->amount = $order->price_after_promocode ? $order->price_after_promocode : $order->price;
         $payment->currency = 'RUB';
         $payment->user_id = Yii::$app->user->id;
         $payment->ip = Yii::$app->request->userIP;
