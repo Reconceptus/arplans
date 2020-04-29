@@ -146,7 +146,6 @@ class CartController extends Controller
                     $amount += $order->addItems($get['items']);
                 }
                 $order->price = $amount;
-                $order->price_after_promocode = $amount;
                 $code = ArrayHelper::getValue($info, 'code');
                 if ($code) {
                     $date = date('Y-m-d');
@@ -165,6 +164,8 @@ class CartController extends Controller
                             $promocode->used = $promocode->used++;
                             $promocode->save();
                         }
+                    }else{
+                        $order->price_after_promocode = $amount;
                     }
                 }
                 if ($order->save()) {
