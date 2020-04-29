@@ -223,7 +223,9 @@ class CartController extends Controller
         if ($code) {
             $type = $code->fixed_discount > 0 ? 1 : 2;
             $discount = (int) $code->fixed_discount > 0 ? $code->fixed_discount : $code->percent_discount;
-            return ['status' => 'success', 'discount' => $discount, 'type' => $type, 'minimal'=>$code->min_amount];
+            return ['status'   => 'success', 'discount' => $discount, 'type' => $type, 'minimal' => $code->min_amount,
+                    'remnants' => $code->number_of_uses - $code->used
+            ];
         }
         return ['status' => 'fail'];
     }

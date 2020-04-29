@@ -147,14 +147,18 @@ $(document).on('input', '#order-promocode', function () {
                 var discount = parseFloat(data.discount);
                 var minimal = parseInt(data.minimal);
                 var fullPrice = parseInt($('#totalsum').text());
+                var remnants = parseInt(data.remnants);
+                var text = '';
                 if(fullPrice > minimal){
                     var price = 0;
                     if(type===1){
                         price = fullPrice-discount;
+                        text = 'Промокод дает скидку '+discount+' руб. Осталось '+remnants+' использований. При использовании этого промокода цена заказа будет составлять '+price+' руб.'
                     }else if(type ===2){
                         price = fullPrice - (fullPrice/100*discount);
+                        text = 'Промокод дает скидку '+data.discount+'% . Осталось '+remnants+' использований. При использовании этого промокода цена заказа будет составлять '+price+' руб.'
                     }
-                    infotext.text('При использовании этого промокода цена заказа будет составлять '+price+' руб.');
+                    infotext.text(text);
                 }else{
                     infotext.text('Этот промокод может быть применен только при сумме заказа больше '+minimal+' руб.');
                 }
