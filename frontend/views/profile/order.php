@@ -35,11 +35,11 @@ $services = ArrayHelper::map($model->services, 'id', 'name');
                 <dt><?= $model->price ?> руб.</dt>
             </dl>
         </div>
-        <?php if ($model->price_after_promocode < $model->price): ?>
+        <?php if ($model->price_after_promocode && $model->price_after_promocode < $model->price): ?>
             <div class="compare-table--part part-total">
                 <dl>
                     <dd>Цена с промокодом:</dd>
-                    <dt><?= $model->price_after_promocode ?></dt>
+                    <dt><?= $model->price_after_promocode ?? $model->price ?> руб</dt>
                 </dl>
             </div>
         <?php endif; ?>
