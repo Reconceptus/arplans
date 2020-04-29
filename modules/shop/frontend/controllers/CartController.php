@@ -161,7 +161,7 @@ class CartController extends Controller
                                 $order->price_after_promocode = $order->price - ($order->price / 100 * $promocode->percent_discount);
                             }
                             $order->promocode_id = $promocode->id;
-                            $promocode->used = $promocode->used++;
+                            $promocode->used = ++$promocode->used;
                             $promocode->save();
                         }
                     }else{
