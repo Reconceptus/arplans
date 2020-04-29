@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 11:43
- */
 
 /* @var $models \modules\shop\widgets\cart\Cart[] */
 /* @var $services \modules\shop\models\Service[] */
@@ -13,7 +7,7 @@ $this->title = \modules\content\models\ContentBlock::getValue('cart_page_seo_tit
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('cart_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('cart_page_seo_description')]);
 
-$albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
+$albumPrice = (float) \common\models\Config::getValue('albumPrice');
 ?>
 <script>
     var albumPrice = <?=$albumPrice?>;
@@ -69,7 +63,6 @@ $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
                             </div>
                         </section>
                     </div>
-                    <?= $this->render('_additional', ['services' => $services]) ?>
                     <?= $this->render('_orderdata', ['models' => $models, 'user' => $user, 'albumPrice' => $albumPrice]) ?>
                 </div>
             </div>
@@ -80,7 +73,6 @@ $albumPrice = floatval(\common\models\Config::getValue('albumPrice'));
 <div class="section info-box ">
     <div class="content content--md">
         <div class="ready-projects--info">
-<!--            <h3 class="title">Безопасность при оплате</h3>-->
             <div class="info-box--text">
                 <?=\modules\content\models\ContentBlock::getValue('cart_description')?>
             </div>

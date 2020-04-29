@@ -257,6 +257,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param $country
      * @param $city
      * @param $address
+     * @param  string  $last_name
+     * @param  string  $first_name
+     * @param  string  $patronymic
      * @return User
      */
     public static function createUser($email, $password, $fio, $phone, $country, $city, $address, $last_name = '', $first_name = '', $patronymic = '')
@@ -268,7 +271,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user->generateAuthKey();
         $user->status = 10;
         if ($user->save()) {
-            $inv = intval(Yii::$app->request->cookies->getValue('inv'));
+            $inv = (int) Yii::$app->request->cookies->getValue('inv');
             if ($inv) {
                 $user->referrer_id = $inv;
                 Yii::$app->response->cookies->remove('inv');

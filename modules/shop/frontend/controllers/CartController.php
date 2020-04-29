@@ -13,8 +13,9 @@ use common\models\Config;
 use common\models\User;
 use modules\shop\models\Cart;
 use modules\shop\models\Order;
-use modules\shop\models\Service;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -29,16 +30,14 @@ class CartController extends Controller
     {
         $guid = Cart::setGuid();
         $models = Cart::find()->where(['guid' => $guid])->all();
-        $services = Service::find()->where(['in_cart' => 1])->all();
         $user = null;
         if (!Yii::$app->user->isGuest) {
             $user = Yii::$app->user->identity;
         }
 
         return $this->render('index', [
-            'models'   => $models,
-            'services' => $services,
-            'user'     => $user
+            'models' => $models,
+            'user'   => $user
         ]);
     }
 
@@ -123,8 +122,11 @@ class CartController extends Controller
         $get = Yii::$app->request->get();
         $info = $get['info'];
         $email = $info['email'];
-        if(Yii::$app->user->isGuest && User::findOne(['email'=>$email])){
-            return ['status'=>'fail', 'message'=>'Пользователь с таким email уже зарегистрирован, войдите и повторите заказ. Все товары останутся в вашей корзине<br/> <a href="/site/login" style="color:blue">Войти</a>'];
+        if (Yii::$app->user->isGuest && User::findOne(['email' => $email])) {
+            return [
+                'status'  => 'fail',
+                'message' => 'Пользователь с таким email уже зарегистрирован, войдите и повторите заказ. Все товары останутся в вашей корзине<br/> <a href="/site/login" style="color:blue">Войти</a>'
+            ];
         }
         $amount = 0;
         $connection = Yii::$app->db;
@@ -137,14 +139,10 @@ class CartController extends Controller
             } else {
                 $user = Yii::$app->user->identity;
             }
-            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'], $info['village']);
+            $order = Order::createOrder($info['fio'], $user, $info['email'], $info['phone'], $info['country'], $info['city'], $info['address'],
+                $info['village']);
             if ($order) {
                 $amount += $order->addItems($get['items']);
-                if (isset($get['services'])) {
-                    // убрано временно, пока решили не считать цену услуг
-//                    $amount +=
-                    $order->addServices($get['services']);
-                }
             }
             $order->price = $amount;
             if ($order->save()) {
@@ -154,13 +152,11 @@ class CartController extends Controller
                 $mail->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name]);
                 $mail->setTo($order->email);
                 $mail->setBcc(Config::getValue('requestEmail'));
-                $mail->setSubject('Новый заказ на сайте ' . Yii::$app->request->getHostInfo());
+                $mail->setSubject('Новый заказ на сайте '.Yii::$app->request->getHostInfo());
                 $mail->send();
                 return ['status' => 'success', 'orderId' => $order->id];
-            } else {
-                var_dump($order->errors);
-                die;
             }
+            Yii::info(Json::encode($order->getErrorSummary(true)));
         } catch (\Exception $e) {
             $transaction->rollBack();
             return ['status' => 'fail'];
@@ -176,16 +172,19 @@ class CartController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $get = Yii::$app->request->get();
         $albumPrice = Config::getValue('albumPrice');
-        if (isset($get['id']) && isset($get['count'])) {
-            $model = Cart::findOne(['id' => intval($get['id'])]);
-            $count = intval($get['count']);
-            if ($count >= 1) {
-                $model->count = intval($get['count']);
-            } else {
-                $model->count = 1;
-            }
-            if ($model->save()) {
-                return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice($albumPrice)];
+        $id = (int) ArrayHelper::getValue($get, 'id');
+        $count = (int) ArrayHelper::getValue($get, 'count');
+        if ($id && $count) {
+            $model = Cart::findOne(['id' => $id]);
+            if ($model) {
+                if ($count >= 1) {
+                    $model->count = $count;
+                } else {
+                    $model->count = 1;
+                }
+                if ($model->save()) {
+                    return ['status' => 'success', 'count' => $model->count, 'price' => $model->getLotPrice($albumPrice)];
+                }
             }
         }
         return ['status' => 'fail', 'message' => 'Ошибка при попытке изменить количество'];
