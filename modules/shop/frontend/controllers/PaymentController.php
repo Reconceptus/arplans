@@ -30,7 +30,7 @@ class PaymentController extends Controller
      */
     public function actionIndex()
     {
-        $orderId = intval(\Yii::$app->request->get('order'));
+        $orderId = (int) \Yii::$app->request->get('order');
         $order = Order::findOne(['id' => $orderId]);
         if (!$order) {
             throw new NotFoundHttpException();

@@ -146,7 +146,7 @@ class CartController extends Controller
                     $amount += $order->addItems($get['items']);
                 }
                 $order->price = $amount;
-                $code = ArrayHelper::getValue($info, 'code');
+                $code = ArrayHelper::getValue($info, 'promocode');
                 if ($code) {
                     $date = date('Y-m-d');
                     $promocode = Promocode::find()->where(['code' => $code, 'status' => Promocode::STATUS_ACTIVE])
