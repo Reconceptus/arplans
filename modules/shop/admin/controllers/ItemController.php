@@ -76,11 +76,6 @@ class ItemController extends AdminController
         }
         $dataProvider = new ActiveDataProvider([
                 'query' => $query,
-                'sort'  => [
-                    'defaultOrder' => [
-                        'created_at' => SORT_DESC
-                    ]
-                ],
             ]
         );
         $sortAttributes = array_merge($dataProvider->getSort()->attributes, [
@@ -98,6 +93,7 @@ class ItemController extends AdminController
         $dataProvider->setSort([
             'attributes' => $sortAttributes
         ]);
+        $dataProvider->sort->defaultOrder = ['id'=>SORT_DESC];
         return $this->render('category', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 
