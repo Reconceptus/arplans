@@ -34,6 +34,12 @@ $columns = [
         'attribute' => 'discount',
         'filter'    => false
     ],
+    [
+        'attribute' => 'stat.views',
+    ],
+    [
+        'attribute' => 'stat.purchases',
+    ],
     'created_at',
     [
         'class'    => ActionColumn::class,

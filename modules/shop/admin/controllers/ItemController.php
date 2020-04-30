@@ -68,7 +68,7 @@ class ItemController extends AdminController
     public function actionCategory($category_id)
     {
         Yii::$app->request->baseUrl = '/admin/modules';
-        $query = Item::find()->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
+        $query = Item::find()->joinWith('stat stat')->where(['category_id' => $category_id, 'is_deleted' => Item::IS_NOT_DELETED]);
         $filterModel = new Item();
         $filter = Yii::$app->request->get('Item');
         if (isset($filter['name'])) {
@@ -83,6 +83,21 @@ class ItemController extends AdminController
                 ],
             ]
         );
+        $sortAttributes = array_merge($dataProvider->getSort()->attributes, [
+            'stat.views' => [
+                'asc'   => ['stat.views' => SORT_ASC],
+                'desc'  => ['stat.views' => SORT_DESC],
+                'label' => 'Просмотров'
+            ],
+            'stat.purchases' => [
+                'asc'   => ['stat.purchases' => SORT_ASC],
+                'desc'  => ['stat.purchases' => SORT_DESC],
+                'label' => 'Продаж'
+            ],
+        ]);
+        $dataProvider->setSort([
+            'attributes' => $sortAttributes
+        ]);
         return $this->render('category', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 

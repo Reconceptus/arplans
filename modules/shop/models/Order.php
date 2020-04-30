@@ -266,15 +266,15 @@ class Order extends ActiveRecord
             $percent = $promocode->percent_discount;
         }
         $orderItems = $this->orderItems;
-        $count = count($orderItems)-1;
+        $count = count($orderItems) - 1;
         foreach ($orderItems as $k => $item) {
-            if($k!==$count) {
+            if ($k !== $count) {
                 $discount = (int) ($item->price / 100 * $percent);
                 $itemPrice = $item->price - $discount;
                 $item->price_after_promocode = $itemPrice;
                 $item->save();
                 $orderPrice -= $discount;
-            }else{
+            } else {
                 $item->price_after_promocode = $item->price - $orderPrice;
                 $item->save();
             }
@@ -308,6 +308,9 @@ class Order extends ActiveRecord
                 }
                 if ($orderItem->save()) {
                     $amount += $price;
+                    $stat = $orderItem->item->stat;
+                    ++$stat->purchases;
+                    $stat->save();
                 }
             }
         }

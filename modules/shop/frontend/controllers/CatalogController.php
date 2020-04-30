@@ -29,7 +29,7 @@ class CatalogController extends Controller
         $get = \Yii::$app->request->get();
 
         // Определяем категорию
-        $category = isset($get['category']) ? $get['category'] : '';
+        $category = ArrayHelper::getValue($get, 'category');
         if (!$category) {
             $category = Category::find()->where(['is_active' => Category::IS_ACTIVE])->one();
         } else {
@@ -66,6 +66,10 @@ class CatalogController extends Controller
         if (!$model) {
             throw new NotFoundHttpException('Товар не найден');
         }
+        /* @var $model Item*/
+        $stat = $model->stat;
+        ++$stat->views;
+        $stat->save();
         return $this->render('view', [
             'model'     => $model,
             'favorites' => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
