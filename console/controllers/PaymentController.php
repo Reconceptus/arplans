@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 10.07.2017
- * Time: 9:45
- */
-
 namespace console\controllers;
 
 use modules\shop\models\Payment;

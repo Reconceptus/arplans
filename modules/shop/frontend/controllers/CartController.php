@@ -162,10 +162,13 @@ class CartController extends Controller
                             }
                             $order->promocode_id = $promocode->id;
                             $promocode->used = ++$promocode->used;
+                            if ($promocode->used >= $promocode->number_of_uses) {
+                                $promocode->status = Promocode::STATUS_DISABLED;
+                            }
                             $promocode->save();
                             $order->updateItemsWithPromocode($promocode);
                         }
-                    }else{
+                    } else {
                         $order->price_after_promocode = $amount;
                     }
                 }
