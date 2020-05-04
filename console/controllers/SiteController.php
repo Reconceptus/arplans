@@ -3,6 +3,7 @@
 namespace console\controllers;
 
 use modules\shop\models\Promocode;
+use modules\shop\models\Selection;
 use yii\console\Controller;
 
 class SiteController extends Controller
@@ -18,5 +19,10 @@ class SiteController extends Controller
                 $model->save();
             }
         }
+    }
+
+    public function actionSelection()
+    {
+        Selection::collectAll();
     }
 }

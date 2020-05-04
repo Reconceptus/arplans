@@ -10,9 +10,12 @@ namespace modules\shop\frontend\controllers;
 
 use modules\content\models\ContentBlock;
 use modules\shop\models\Item;
+use modules\shop\models\Selection;
+use modules\shop\models\SelectionItem;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 
 class CompilationController extends Controller
@@ -54,7 +57,9 @@ class CompilationController extends Controller
 
     public function actionFree()
     {
-        $query = Item::find()->where(['is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED])->andWhere(['or', ['price' => 0], ['is', 'price', null]]);
+        $query = Item::find()->where(['is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED])->andWhere([
+            'or', ['price' => 0], ['is', 'price', null]
+        ]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
@@ -66,6 +71,27 @@ class CompilationController extends Controller
             'description'  => $description,
             'name'         => $name,
             'type'         => 'free'
+        ]);
+    }
+
+    public function actionSelection()
+    {
+        $slug = Yii::$app->request->get('slug');
+        $selection = Selection::find()->where(['slug' => $slug, 'status' => Selection::STATUS_ACTIVE])->one();
+        /* @var $selection Selection */
+        if (!$selection) {
+            throw new NotFoundHttpException();
+        }
+        $query = SelectionItem::find()->joinWith('item')->where([
+            'is_active' => Item::IS_ACTIVE, 'is_deleted' => Item::IS_NOT_DELETED
+        ])->andWhere(['selection_id' => $selection->id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('selection', [
+            'selection'    => $selection,
+            'dataProvider' => $dataProvider,
+            'favorites'    => Yii::$app->user->isGuest ? [] : Yii::$app->user->identity->getFavoriteIds(),
         ]);
     }
 }

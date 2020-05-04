@@ -79,7 +79,7 @@ class ItemController extends AdminController
             ]
         );
         $sortAttributes = array_merge($dataProvider->getSort()->attributes, [
-            'stat.views' => [
+            'stat.views'     => [
                 'asc'   => ['stat.views' => SORT_ASC],
                 'desc'  => ['stat.views' => SORT_DESC],
                 'label' => 'Просмотров'
@@ -93,7 +93,7 @@ class ItemController extends AdminController
         $dataProvider->setSort([
             'attributes' => $sortAttributes
         ]);
-        $dataProvider->sort->defaultOrder = ['id'=>SORT_DESC];
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC];
         return $this->render('category', ['dataProvider' => $dataProvider, 'filterModel' => $filterModel]);
     }
 

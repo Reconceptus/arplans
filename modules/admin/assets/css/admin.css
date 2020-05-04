@@ -337,3 +337,9 @@ ul {
 .red{
     color:red;
 }
+
+.grid-2-col {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}

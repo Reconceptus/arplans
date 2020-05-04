@@ -67,6 +67,7 @@ return [
                 'shop/cart/change'                                         => 'shop/cart/change',
                 'shop/cart'                                                => 'shop/cart/index',
                 'shop/catalog'                                             => 'shop/catalog',
+                'shop/selection/<slug:[a-zA-Z0-9\_\-]+>'                   => 'shop/compilation/selection',
                 'shop/payment/<slug:[a-zA-Z0-9\_\-]+>'                     => 'shop/payment/<slug>',
                 'shop/compilation/<slug:[a-zA-Z0-9\_\-]+>'                 => 'shop/compilation/<slug>',
                 'shop/<category:[a-zA-Z0-9\_\-]+>/<slug:[a-zA-Z0-9\_\-]+>' => 'shop/catalog/view',
