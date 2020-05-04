@@ -81,7 +81,7 @@ class Promocode extends ActiveRecord
             'fixed_discount'   => 'Скидка в рублях',
             'percent_discount' => 'Скидка в процентах',
             'min_amount'       => 'Минимальная сумма для применения',
-            'number_of_uses'   => 'Количество использований',
+            'number_of_uses'   => 'Лимит',
             'used'             => 'Использовано раз',
             'text'             => 'Текст',
             'status'           => 'Статус',
