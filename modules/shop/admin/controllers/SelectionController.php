@@ -122,7 +122,7 @@ class SelectionController extends AdminController
                 SelectionItem::deleteAll(['selection_id' => $model->id]);
             }
             $model->collect();
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
         $filters = Catalog::find()->where(['is', 'category_id', null])->all();
         return $this->render('form', [
