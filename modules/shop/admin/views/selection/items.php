@@ -25,11 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '{update} {view}',
+                'template' => '{update}',
                 'buttons'  => [
                     'update' => static function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['/shop/item/update', 'id' => $model->id]);
                     },
+                ]
+            ],
+            [
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons'  => [
                     'view' => static function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->url);
                     },
