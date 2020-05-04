@@ -33,15 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'slug',
             'description',
             'status',
-
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete} {view}',
+                'template' => '{update}',
+            ],
+            [
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{view}',
                 'buttons'  => [
                     'view' => static function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->url,['data-pjax'=>0]);
                     },
                 ]
+            ],
+            [
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{delete}',
             ],
         ],
     ]) ?>

@@ -119,7 +119,7 @@ class SelectionController extends AdminController
                 }
             }
             if (ArrayHelper::getValue($post, 'recollect')) {
-                SelectionItem::deleteAll(['selection_id' => $model->id]);
+                SelectionItem::deleteAll(['selection_id' => $model->id, 'status' => SelectionItem::STATUS_AUTO_ADDED]);
             }
             $model->collect();
             return $this->redirect(['index']);
