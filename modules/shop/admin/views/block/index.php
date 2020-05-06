@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => SerialColumn::class],
 
             'name',
-            'description',
             'slug',
             'status',
             [
