@@ -29,7 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'slug',
-            'status',
+            [
+                'attribute' => 'status',
+                'value'     => function ($model) {
+                    return $model->status ? 'Активна' : 'Отключена';
+                }
+            ],
             [
                 'class'    => ActionColumn::class,
                 'template' => '{update}'
