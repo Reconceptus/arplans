@@ -35,8 +35,14 @@ $js = <<<JS
 $(document).on('click', '.js-block-name', function (e) {
     var button = $(this);
     id = button.data('id');
+    var field = $('.js-item-selection[data-id="'+ id +'"]');
+    var isHidden = field.css('display')==='none';
     $('.js-item-selection').hide();
-    $('.js-item-selection[data-id="'+ id +'"]').show();
+    if(isHidden){
+        field.show();
+    }else{
+        field.hide();
+    }
 });
 
 var id = $model->id;
