@@ -14,17 +14,17 @@ $this->title = 'Выберите подборки, в которые входи�
     <div class="row">
         <div class="col-xs-12 grid-2-col">
             <?php foreach ($blocks as $block): ?>
-                <div class="block-section">
-                    <h4><?= $block->name ?></h4>
+                <div class="js-block-section">
+                    <h4 class="js-block-name" data-id="<?= $block->id ?>"><?= $block->name ?></h4>
+                    <span class="js-item-selection" data-id="<?= $block->id ?>" style="display: none">
                     <?php foreach ($block->selections as $selection): ?>
                         <label>
-                        <span class="js-item-selection">
                         <?= Html::checkbox('sel_'.$selection->id, array_key_exists($selection->id, $ins),
                             ['class' => 'js-selection-checkbox', 'data-id' => $selection->id]) ?>
                         <?= $selection->name ?>
-                            </span>
                         </label>
                     <?php endforeach; ?>
+                    </span>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -32,6 +32,13 @@ $this->title = 'Выберите подборки, в которые входи�
 
 <?php
 $js = <<<JS
+$(document).on('click', '.js-block-name', function (e) {
+    var button = $(this);
+    id = button.data('id');
+    $('.js-item-selection').hide();
+    $('.js-item-selection[data-id="'+ id +'"]').show();
+});
+
 var id = $model->id;
 $(document).on('click', '.js-selection-checkbox', function (e) {
     e.prependDefault;
