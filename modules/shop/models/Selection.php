@@ -4,7 +4,6 @@ namespace modules\shop\models;
 
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -38,12 +37,13 @@ use yii\helpers\Url;
  * @property int $sauna
  * @property int $gas_boiler
  * @property int $status
+ * @property int $block_id
  * @property string $created_at
  * @property string $updated_at
  *
  * @property SelectionItem[] $selectionItems
  * @property Item[] $items
- * @property Block[] $blocks
+ * @property Block $block
  * @property SelectionOption[] $options
  */
 class Selection extends ActiveRecord
@@ -90,7 +90,7 @@ class Selection extends ActiveRecord
             [
                 [
                     'min_bedrooms', 'max_bedrooms', 'min_bathrooms', 'max_bathrooms', 'min_area', 'max_area', 'one_floor', 'two_floor', 'mansard', 'pedestal',
-                    'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'status'
+                    'cellar', 'garage', 'double_garage', 'tent', 'terrace', 'balcony', 'light2', 'pool', 'sauna', 'gas_boiler', 'status', 'block_id'
                 ], 'integer'
             ],
             [['created_at', 'updated_at'], 'safe'],
@@ -131,6 +131,7 @@ class Selection extends ActiveRecord
             'sauna'         => 'Сауна',
             'gas_boiler'    => 'Газовая котельная',
             'status'        => 'Статус',
+            'block_id'      => 'Группа',
             'created_at'    => 'Добавлено',
             'updated_at'    => 'Изменено',
         ];
@@ -163,17 +164,9 @@ class Selection extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getBlockSelections()
+    public function getBlock()
     {
-        return $this->hasMany(BlockSelection::className(), ['selection_id' => 'id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getBlocks()
-    {
-        return $this->hasMany(Block::className(), ['id' => 'block_id'])->via('blockSelections');
+        return $this->hasOne(Block::className(), ['id' => 'block_id']);
     }
 
 
@@ -258,20 +251,5 @@ class Selection extends ActiveRecord
             }
         }
         return null;
-    }
-
-    /**
-     * @param $newBlocks
-     */
-    public function updateBlocks($newBlocks)
-    {
-        $oldBLocks = ArrayHelper::getColumn($this->blocks, 'id');
-        $blocksToInsert = array_diff($newBlocks, $oldBLocks);
-        $blocksToDelete = array_diff($oldBLocks, $newBlocks);
-        BlockSelection::deleteAll(['and', ['selection_id' => $this->id], ['block_id' => $blocksToDelete]]);
-        foreach ($blocksToInsert as $ins) {
-            $blockCat = new BlockSelection(['selection_id' => $this->id, 'block_id' => $ins]);
-            $blockCat->save();
-        }
     }
 }

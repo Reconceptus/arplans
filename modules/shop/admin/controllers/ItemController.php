@@ -371,6 +371,14 @@ class ItemController extends AdminController
         return ['status' => 'fail'];
     }
 
+    public function actionSelections(int $id)
+    {
+        $model = Item::findOne(['id' => $id]);
+        return $this->render('selections', [
+            'model' => $model
+        ]);
+    }
+
     /**
      * @param $id
      * @return Item|null/ActiveRecord

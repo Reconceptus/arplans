@@ -21,7 +21,6 @@ use yii\db\ActiveRecord;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property BlockSelection[] $blockSelections
  * @property Selection[] $selections
  */
 class Block extends ActiveRecord
@@ -87,16 +86,8 @@ class Block extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getBlockSelections()
-    {
-        return $this->hasMany(BlockSelection::className(), ['block_id' => 'id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
     public function getSelections()
     {
-        return $this->hasMany(Selection::className(), ['id' => 'selection_id'])->via('blockSelections');
+        return $this->hasMany(Selection::className(), ['block_id' => 'id']);
     }
 }

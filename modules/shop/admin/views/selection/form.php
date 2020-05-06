@@ -1,6 +1,5 @@
 <?php
 
-use kartik\select2\Select2;
 use modules\shop\models\Block;
 use modules\shop\models\Catalog;
 use modules\shop\models\Selection;
@@ -33,17 +32,7 @@ $this->title = $model->isNewRecord ? 'Добавление подборки' : '
         <div class="col-xs-10">
             <div class="row">
                 <div class="col-xs-10">
-                    <?= $form->field($model, 'blocks')->widget(Select2::classname(), [
-                        'data'          => $blocks,
-                        'value'         => ArrayHelper::map($model->blocks, 'name', 'name'),
-                        'language'      => 'ru',
-                        'options'       => ['placeholder' => 'Группы', 'multiple' => true],
-                        'pluginOptions' => [
-                            'allowClear'         => true,
-                            'tokenSeparators'    => [';'],
-                            'maximumInputLength' => 255
-                        ],
-                    ]) ?>
+                    <?= $form->field($model, 'block_id')->dropDownList(ArrayHelper::map(Block::find()->all(), 'id', 'name')) ?>
                 </div>
             </div>
             <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
