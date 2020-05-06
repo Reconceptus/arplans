@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'description',
-            'seo_title',
-            'seo_description',
+            'slug',
+            'status',
             [
                 'class'    => ActionColumn::class,
                 'template' => '{update}'
