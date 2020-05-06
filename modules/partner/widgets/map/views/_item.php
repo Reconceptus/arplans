@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 18.09.2018
- * Time: 10:11
- */
 /* @var $model \modules\partner\models\Village */
 ?>
 <div class="partners-list--item">

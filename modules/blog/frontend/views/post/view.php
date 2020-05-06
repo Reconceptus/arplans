@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 27.07.2018
- * Time: 10:44
- */
-
 /* @var $model \common\models\Post */
 /* @var $tags array */
 

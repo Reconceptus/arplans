@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 20.09.2018
- * Time: 13:12
- */
-
 /* @var $model \modules\partner\models\Builder */
 ?>
 <div class="custom-row-col col-sidebar tablet-hidden">

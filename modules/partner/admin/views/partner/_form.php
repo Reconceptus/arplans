@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 23.10.2018
- * Time: 16:54
- */
 
 use common\models\User;
 use yii\helpers\ArrayHelper;

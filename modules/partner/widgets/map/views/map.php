@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.09.2018
- * Time: 17:32
- */
 /* @var $models \modules\partner\models\Village[] */
 $builders = [];
 $coordinates = [];

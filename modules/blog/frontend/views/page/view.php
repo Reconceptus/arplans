@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adm
- * Date: 19.11.2018
- * Time: 16:21
- */
 /* @var $model \common\models\Page */
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);

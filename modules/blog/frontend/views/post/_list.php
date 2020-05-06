@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 26.07.2018
- * Time: 17:29
- */
 
 /* @var $model \common\models\Post */
 

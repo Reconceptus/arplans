@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 29.08.2018
- * Time: 16:22
- */
 
 use modules\shop\models\Item;
 

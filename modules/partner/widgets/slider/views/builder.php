@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 20.09.2018
- * Time: 12:42
- */
-
 /* @var $model \modules\partner\models\Builder */
 $index = 1;
 $mainImage = $model->getMainImage(true);

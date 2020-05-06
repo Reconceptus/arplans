@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.09.2018
- * Time: 17:33
- */
 
 namespace modules\partner\widgets\map;
 

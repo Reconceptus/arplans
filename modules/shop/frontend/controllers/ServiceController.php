@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 12.09.2018
- * Time: 9:53
- */
 
 namespace modules\shop\frontend\controllers;
 

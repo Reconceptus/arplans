@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 12:52
- */
 
 /* @var $services \modules\shop\models\Service[] */
 $services = \common\helpers\FormatHelper::divideArray($services)

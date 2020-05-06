@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 24.08.2018
- * Time: 10:08
- */
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */

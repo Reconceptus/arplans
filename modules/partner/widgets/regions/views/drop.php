@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.09.2018
- * Time: 11:22
- */
 /* @var $models \common\models\Region[] */
 /* @var $selector */
 $get = Yii::$app->request->resolve()[1];

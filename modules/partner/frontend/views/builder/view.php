@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 20.09.2018
- * Time: 11:50
- */
 
 /* @var $model \modules\partner\models\Builder */
 $this->title = $model->seo_title;

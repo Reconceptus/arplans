@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: suhov.a.s
- * Date: 26.07.2018
- * Time: 9:46
- */
 
 namespace modules\admin\assets;
 

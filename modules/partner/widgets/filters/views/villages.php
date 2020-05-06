@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.09.2018
- * Time: 17:18
- */
 $get = Yii::$app->request->get();
 ?>
 <div class="custom-row-col col-sidebar">

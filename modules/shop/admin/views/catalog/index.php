@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.08.2018
- * Time: 12:44
- */
-
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;

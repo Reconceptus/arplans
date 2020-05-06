@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 14.09.2018
- * Time: 16:28
- */
 
 namespace common\helpers;
 

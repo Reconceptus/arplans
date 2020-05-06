@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 24.08.2018
- * Time: 12:16
- */
 
 /* @var $model \modules\shop\models\Item */
 $ready = $model->getReady();

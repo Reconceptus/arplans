@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: adm
- * Date: 19.11.2018
- * Time: 10:56
- */
 
 /* @var $model \modules\shop\models\Order */
 ?>

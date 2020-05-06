@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 25.09.2018
- * Time: 9:48
- */
-
 namespace modules\api\v1\controllers;
 
 use yii\filters\auth\HttpBearerAuth;

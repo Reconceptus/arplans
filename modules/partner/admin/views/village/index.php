@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 19.09.2018
- * Time: 16:31
- */
 
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 19.09.2018
- * Time: 9:59
- */
-
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 /* @var $filterModel \modules\partner\models\Builder */

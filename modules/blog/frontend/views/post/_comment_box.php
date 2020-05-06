@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 02.08.2018
- * Time: 9:56
- */
 /* @var $model \common\models\Comment */
 ?>
 <div class="comment" data-id="<?= $model->id ?>">

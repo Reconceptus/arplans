@@ -45,7 +45,7 @@ class Block extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             [['status', 'sort'], 'integer'],
@@ -57,7 +57,7 @@ class Block extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels(): array
+    public function attributeLabels()
     {
         return [
             'id'              => 'ID',

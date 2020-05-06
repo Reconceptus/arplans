@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 19.09.2018
- * Time: 12:10
- */
 
 use common\models\Region;
 use vova07\imperavi\Widget;

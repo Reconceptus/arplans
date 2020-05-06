@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 15.10.2018
- * Time: 13:03
- */
-
 /* @var $models array */
 $coordinates = [];
 $icons = [];

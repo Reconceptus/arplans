@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 01.11.2018
- * Time: 12:59
- */
 
 use common\models\User;
 use modules\partner\models\Main;

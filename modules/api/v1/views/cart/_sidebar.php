@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 13:01
- */
 
 ?>
 <div class="custom-row-col col-sidebar">

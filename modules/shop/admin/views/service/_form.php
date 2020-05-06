@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 05.09.2018
- * Time: 15:20
- */
 
 use vova07\imperavi\Widget;
 use yii\helpers\Html;

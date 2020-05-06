@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 12:49
- */
 /* @var $model \modules\shop\models\Cart */
 /* @var $albumPrice float */
 $item = $model->item;

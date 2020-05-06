@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 12.10.2018
- * Time: 15:41
- */
-
 /* @var $model \modules\partner\models\Collaboration */
 
 /* @var $readyProjects \modules\partner\models\AboutReady[] */

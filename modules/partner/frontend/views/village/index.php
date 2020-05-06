@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.09.2018
- * Time: 17:19
- */
 
 /* @var $query */
 $reg = Yii::$app->request->get('region');

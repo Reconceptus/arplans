@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 08.10.2018
- * Time: 16:38
- */
 /* @var $models \modules\shop\models\Item[] */
 ?>
 <div class="content content--lg">

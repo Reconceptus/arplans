@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: suhov.a.s
- * Date: 24.07.2018
- * Time: 12:12
- */
-
 namespace modules\shop\admin\controllers;
 
 

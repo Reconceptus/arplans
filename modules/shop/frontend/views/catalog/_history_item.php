@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 08.10.2018
- * Time: 16:38
- */
 /* @var $model \modules\shop\models\Item */
 $image = $model->getMainImage(true);
 ?>

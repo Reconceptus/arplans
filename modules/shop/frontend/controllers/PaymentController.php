@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 10:42
- */
-
 namespace modules\shop\frontend\controllers;
 
 use modules\shop\models\Order;

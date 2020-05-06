@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 15.10.2018
- * Time: 15:51
- */
 
 /* @var $query */
 /* @var $models array */

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 03.09.2018
- * Time: 12:59
- */
 
 use modules\shop\models\Cart;
 
