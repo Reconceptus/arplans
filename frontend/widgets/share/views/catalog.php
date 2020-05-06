@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 20.08.2018
- * Time: 15:36
- */
 ?>
 <div class="sharing ">
     <div class="title">Поделиться</div>

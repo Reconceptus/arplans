@@ -2,6 +2,7 @@
 
 namespace modules\shop\models;
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -40,6 +41,7 @@ use yii\helpers\Url;
  *
  * @property SelectionItem[] $selectionItems
  * @property Item[] $items
+ * @property Block[] $blocks
  * @property SelectionOption[] $options
  */
 class Selection extends \yii\db\ActiveRecord
@@ -156,6 +158,22 @@ class Selection extends \yii\db\ActiveRecord
         return $this->hasMany(SelectionOption::className(), ['selection_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBlockSelections()
+    {
+        return $this->hasMany(BlockSelection::className(), ['selection_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBlocks()
+    {
+        return $this->hasMany(Block::className(), ['id' => 'block_id'])->via('blockSelections');
+    }
+
     public function collect()
     {
         $query = Item::find()->alias('i')->where(['i.is_deleted' => 0]);
@@ -237,5 +255,20 @@ class Selection extends \yii\db\ActiveRecord
             }
         }
         return null;
+    }
+
+    /**
+     * @param $newBlocks
+     */
+    public function updateBlocks($newBlocks)
+    {
+        $oldBLocks = ArrayHelper::getColumn($this->blocks, 'id');
+        $blocksToInsert = array_diff($newBlocks, $oldBLocks);
+        $blocksToDelete = array_diff($oldBLocks, $newBlocks);
+        BlockSelection::deleteAll(['and', ['selection_id' => $this->id], ['block_id' => $blocksToDelete]]);
+        foreach ($blocksToInsert as $ins) {
+            $blockCat = new BlockSelection(['selection_id' => $this->id, 'block_id' => $ins]);
+            $blockCat->save();
+        }
     }
 }

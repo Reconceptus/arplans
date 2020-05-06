@@ -3,6 +3,7 @@
 namespace modules\shop\admin\controllers;
 
 use modules\admin\controllers\AdminController;
+use modules\shop\models\Block;
 use modules\shop\models\Catalog;
 use modules\shop\models\Item;
 use modules\shop\models\Selection;
@@ -121,11 +122,15 @@ class SelectionController extends AdminController
             if (ArrayHelper::getValue($post, 'recollect')) {
                 SelectionItem::deleteAll(['selection_id' => $model->id, 'status' => SelectionItem::STATUS_AUTO_ADDED]);
             }
+            $newBlocks = ArrayHelper::getValue($post['Selection'], 'blocks');
+            $model->updateBlocks(is_array($newBlocks) ? $newBlocks : []);
             $model->collect();
             return $this->redirect(['index']);
         }
+        $blocks = ArrayHelper::map(Block::all(), 'id', 'name');
         $filters = Catalog::find()->where(['is', 'category_id', null])->all();
         return $this->render('form', [
+            'blocks'   => $blocks,
             'model'    => $model,
             'catalogs' => $filters
         ]);

@@ -1,5 +1,7 @@
 <?php
 
+use kartik\select2\Select2;
+use modules\shop\models\Block;
 use modules\shop\models\Catalog;
 use modules\shop\models\Selection;
 use yii\helpers\ArrayHelper;
@@ -7,6 +9,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
+/* @var $blocks Block[] */
 /* @var $catalogs Catalog[] */
 /* @var $model modules\shop\models\Selection */
 /* @var $form yii\widgets\ActiveForm */
@@ -28,6 +31,21 @@ $this->title = $model->isNewRecord ? 'Добавление подборки' : '
     </div>
     <div class="row">
         <div class="col-xs-10">
+            <div class="row">
+                <div class="col-xs-10">
+                    <?= $form->field($model, 'blocks')->widget(Select2::classname(), [
+                        'data'          => $blocks,
+                        'value'         => ArrayHelper::map($model->blocks, 'name', 'name'),
+                        'language'      => 'ru',
+                        'options'       => ['placeholder' => 'Группы', 'multiple' => true],
+                        'pluginOptions' => [
+                            'allowClear'         => true,
+                            'tokenSeparators'    => [';'],
+                            'maximumInputLength' => 255
+                        ],
+                    ]); ?>
+                </div>
+            </div>
             <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
         </div>
     </div>
