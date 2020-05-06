@@ -1,6 +1,8 @@
 <?php
 
+use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
@@ -23,22 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'rowOptions'   => function ($model, $key, $index, $grid) {
+        'rowOptions'   => static function ($model, $key, $index, $grid) {
             return ['onclick' => 'window.location = "'.Url::to(['/shop/selection/items', 'id' => $model->id]).'"'];
         },
         'filterModel'  => $searchModel,
         'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => SerialColumn::class],
             'name',
             'slug',
             'description',
             'status',
             [
-                'class'    => 'yii\grid\ActionColumn',
+                'class'    => ActionColumn::class,
                 'template' => '{update}',
             ],
             [
-                'class'    => 'yii\grid\ActionColumn',
+                'class'    => ActionColumn::class,
                 'template' => '{view}',
                 'buttons'  => [
                     'view' => static function ($url, $model) {
@@ -47,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             [
-                'class'    => 'yii\grid\ActionColumn',
+                'class'    => ActionColumn::class,
                 'template' => '{delete}',
             ],
         ],

@@ -10,9 +10,11 @@ use modules\shop\models\Category;
 use modules\shop\models\Item;
 use modules\shop\models\ItemImage;
 use modules\shop\models\ItemOption;
+use modules\shop\models\SelectionItem;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -372,13 +374,37 @@ class ItemController extends AdminController
         return ['status' => 'fail'];
     }
 
-    public function actionSelections(int $id)
+    public function actionSelection(int $id)
     {
         $model = Item::findOne(['id' => $id]);
+        if (!$model) {
+            throw new NotFoundHttpException();
+        }
         $blocks = Block::find()->all();
+        $ins = ArrayHelper::map(SelectionItem::find()->where(['item_id' => $model->id])->all(), 'selection_id', 'selection_id');
         return $this->render('selections', [
-            'model' => $model, 'blocks' => $blocks
+            'model' => $model, 'blocks' => $blocks, 'ins' => $ins
         ]);
+    }
+
+    public function actionItemSelection()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $post = Yii::$app->request->post();
+        $id = (int) ArrayHelper::getValue($post, 'id');
+        $selectionId = (int) ArrayHelper::getValue($post, 'selectionId');
+        if($id && $selectionId){
+            $item = SelectionItem::find()->where(['item_id'=>$id, 'selection_id'=>$selectionId])->one();
+            if($item){
+                $item->delete();
+                return ['status'=>'success', 'action'=>'remove'];
+            }
+            $item = new SelectionItem(['item_id'=>$id, 'selection_id'=>$selectionId]);
+            if($item->save()){
+                return ['status'=>'success', 'action'=>'add'];
+            }
+        }
+        return ['status'=>'fail'];
     }
 
     /**

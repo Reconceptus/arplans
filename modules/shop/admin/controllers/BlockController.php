@@ -49,6 +49,7 @@ class BlockController extends AdminController
         Yii::$app->request->baseUrl = '/admin/modules';
         $searchModel = new BlockSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['id'=>SORT_DESC];
 
         return $this->render('index', [
             'searchModel'  => $searchModel,

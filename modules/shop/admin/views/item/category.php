@@ -43,6 +43,15 @@ $columns = [
     'created_at',
     [
         'class'    => ActionColumn::class,
+        'template' => '{selections}',
+        'buttons'  => [
+            'selections' => static function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-list"></span>', ['selection', 'id' => $model->id], ['data-pjax' => 0]);
+            }
+        ]
+    ],
+    [
+        'class'    => ActionColumn::class,
         'template' => '{delete}',
         'options'  => ['style' => 'width:100px'],
         'buttons'  => [

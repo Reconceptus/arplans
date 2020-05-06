@@ -54,6 +54,7 @@ class SelectionController extends AdminController
         Yii::$app->request->baseUrl = '/admin/modules';
         $searchModel = new SelectionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['id'=>SORT_DESC];
 
         return $this->render('index', [
             'searchModel'  => $searchModel,
