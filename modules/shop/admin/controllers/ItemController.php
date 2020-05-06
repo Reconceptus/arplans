@@ -393,18 +393,18 @@ class ItemController extends AdminController
         $post = Yii::$app->request->post();
         $id = (int) ArrayHelper::getValue($post, 'id');
         $selectionId = (int) ArrayHelper::getValue($post, 'selectionId');
-        if($id && $selectionId){
-            $item = SelectionItem::find()->where(['item_id'=>$id, 'selection_id'=>$selectionId])->one();
-            if($item){
+        if ($id && $selectionId) {
+            $item = SelectionItem::find()->where(['item_id' => $id, 'selection_id' => $selectionId])->one();
+            if ($item) {
                 $item->delete();
-                return ['status'=>'success', 'action'=>'remove'];
+                return ['status' => 'success', 'action' => 'remove'];
             }
-            $item = new SelectionItem(['item_id'=>$id, 'selection_id'=>$selectionId]);
-            if($item->save()){
-                return ['status'=>'success', 'action'=>'add'];
+            $item = new SelectionItem(['item_id' => $id, 'selection_id' => $selectionId]);
+            if ($item->save()) {
+                return ['status' => 'success', 'action' => 'add'];
             }
         }
-        return ['status'=>'fail'];
+        return ['status' => 'fail'];
     }
 
     /**

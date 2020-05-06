@@ -31,6 +31,7 @@ $this->title = 'Выберите подборки, в которые входи�
     </div>
 
 <?php
+$id = $model->id;
 $js = <<<JS
 $(document).on('click', '.js-block-name', function (e) {
     var button = $(this);
@@ -45,10 +46,8 @@ $(document).on('click', '.js-block-name', function (e) {
     }
 });
 
-var id = $model->id;
 $(document).on('click', '.js-selection-checkbox', function (e) {
-    e.prependDefault;
-    e.stopPropagation();
+    var id = {$id}
     var button = $(this);
     var selectionId = button.data('id');
      $.post('item-selection', {id: id, selectionId:selectionId}).done(function(data) {
