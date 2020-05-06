@@ -122,7 +122,6 @@ class SelectionController extends AdminController
             if (ArrayHelper::getValue($post, 'recollect')) {
                 SelectionItem::deleteAll(['selection_id' => $model->id, 'status' => SelectionItem::STATUS_AUTO_ADDED]);
             }
-            $newBlocks = ArrayHelper::getValue($post['Selection'], 'blocks');
             $model->collect();
             return $this->redirect(['index']);
         }

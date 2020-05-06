@@ -172,6 +172,7 @@ class Selection extends ActiveRecord
 
     public function collect()
     {
+        return true;
         $query = Item::find()->alias('i')->where(['i.is_deleted' => 0]);
         foreach (self::SELECT_ATTRIBUTES as $attr) {
             if ($this->$attr) {
