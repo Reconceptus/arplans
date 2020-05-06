@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel modules\shop\models\BlockSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Blocks';
+$this->title = 'Группы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="block-index">
