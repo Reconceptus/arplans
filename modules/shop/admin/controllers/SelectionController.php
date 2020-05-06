@@ -123,7 +123,6 @@ class SelectionController extends AdminController
                 SelectionItem::deleteAll(['selection_id' => $model->id, 'status' => SelectionItem::STATUS_AUTO_ADDED]);
             }
             $newBlocks = ArrayHelper::getValue($post['Selection'], 'blocks');
-            $model->updateBlocks(is_array($newBlocks) ? $newBlocks : []);
             $model->collect();
             return $this->redirect(['index']);
         }
