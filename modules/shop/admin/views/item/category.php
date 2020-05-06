@@ -40,13 +40,12 @@ $columns = [
     [
         'attribute' => 'stat.purchases',
     ],
-    'created_at',
     [
         'class'    => ActionColumn::class,
         'template' => '{selections}',
         'buttons'  => [
             'selections' => static function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-list"></span>', ['selection', 'id' => $model->id], ['data-pjax' => 0]);
+                return Html::a('<span class="glyphicon glyphicon-list"></span>', ['selection', 'id' => $model->id], ['data-pjax' => 0]) .' ('.count($model->selectionItems).')';
             }
         ]
     ],
@@ -70,15 +69,16 @@ $columns = [
 ];
 ?>
 <h1><?= $this->title ?></h1>
-<?= Html::a('Добавить товар', Url::to(['/shop/item/create', 'category_id' => Yii::$app->request->get('category_id')]), ['class' => 'btn btn-admin add-big-button']) ?>
+<?= Html::a('Добавить товар', Url::to(['/shop/item/create', 'category_id' => Yii::$app->request->get('category_id')]),
+    ['class' => 'btn btn-admin add-big-button']) ?>
 <?= GridView::widget(
     [
         'dataProvider' => $dataProvider,
         'filterModel'  => $filterModel,
         'rowOptions'   => static function ($model, $key, $index, $grid) {
-            return ['onclick' => 'window.location = "' . Url::to(['/shop/item/update', 'id' => $model->id]) . '"'];
+            return ['onclick' => 'window.location = "'.Url::to(['/shop/item/update', 'id' => $model->id]).'"'];
         },
-        'layout'=>"{summary}\n{items}",
+        'layout'       => "{summary}\n{items}",
         'columns'      => $columns
     ]
 );
