@@ -4,6 +4,7 @@ namespace modules\shop\admin\controllers;
 
 use common\models\Translit;
 use modules\admin\controllers\AdminController;
+use modules\shop\models\Block;
 use modules\shop\models\Catalog;
 use modules\shop\models\Category;
 use modules\shop\models\Item;
@@ -374,8 +375,9 @@ class ItemController extends AdminController
     public function actionSelections(int $id)
     {
         $model = Item::findOne(['id' => $id]);
+        $blocks = Block::find()->all();
         return $this->render('selections', [
-            'model' => $model
+            'model' => $model, 'blocks' => $blocks
         ]);
     }
 

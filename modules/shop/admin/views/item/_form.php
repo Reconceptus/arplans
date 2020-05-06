@@ -1,14 +1,18 @@
 <?php
 
+use modules\shop\models\Catalog;
+use modules\shop\models\Item;
+use modules\shop\models\ItemImage;
 use vova07\imperavi\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 
-/* @var $model \modules\shop\models\Item */
-/* @var $catalogs \modules\shop\models\Catalog[] */
+/* @var $model Item */
+/* @var $catalogs Catalog[] */
 
 $this->title = $model->isNewRecord ? 'Добавление товара' : 'Редактирование товара';
 $viewPostClass = $model->isNewRecord ? 'btn btn-admin disabled' : 'btn btn-admin';
@@ -35,7 +39,7 @@ $bathrooms = [
     <p style="font-weight: bold">Фото</p>
     <div class="images-panel">
         <?php foreach ($model->images as $image): ?>
-            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_PHOTO): ?>
+            <?php if ($image->type === ItemImage::TYPE_PHOTO): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -43,7 +47,7 @@ $bathrooms = [
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
-            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PHOTO) ?>
+            <?= Html::hiddenInput('type', ItemImage::TYPE_PHOTO) ?>
             <div class="upload-input">
                 <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>
@@ -58,7 +62,7 @@ $bathrooms = [
     <p style="font-weight: bold">План</p>
     <div class="images-panel">
         <?php foreach ($model->images as $image): ?>
-            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_PLAN): ?>
+            <?php if ($image->type === ItemImage::TYPE_PLAN): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -66,7 +70,7 @@ $bathrooms = [
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
-            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_PLAN) ?>
+            <?= Html::hiddenInput('type', ItemImage::TYPE_PLAN) ?>
             <div class="upload-input">
                 <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>
@@ -105,7 +109,7 @@ $bathrooms = [
             <?php foreach ($catalogs as $catalog): ?>
                 <?php $iO = $model->getItemOptionCatalogItem($catalog->id);
                 $iOid = $iO ? $iO->id : null;
-                $items = \yii\helpers\ArrayHelper::map($catalog->catalogItems, 'id', 'name')
+                $items = ArrayHelper::map($catalog->catalogItems, 'id', 'name')
                 ?>
                 <?php if ($catalog->catalogItems): ?>
                     <div class="form-group">
@@ -199,7 +203,7 @@ $bathrooms = [
     <p style="font-weight: bold">Фото готового дома</p>
     <div class="images-panel">
         <?php foreach ($model->images as $image): ?>
-            <?php if ($image->type == \modules\shop\models\ItemImage::TYPE_READY): ?>
+            <?php if ($image->type === ItemImage::TYPE_READY): ?>
                 <?= $this->render('_image', ['model' => $image]) ?>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -207,7 +211,7 @@ $bathrooms = [
     <div class="clearfix"></div>
     <form name="uploader" enctype="multipart/form-data" method="POST">
         <div class="upload">
-            <?= Html::hiddenInput('type', \modules\shop\models\ItemImage::TYPE_READY) ?>
+            <?= Html::hiddenInput('type', ItemImage::TYPE_READY) ?>
             <div class="upload-input">
                 <?= Html::fileInput('images[]', '', ['class' => 'item-image-input', 'multiple' => true, 'accept' => 'image/*']) ?>
             </div>

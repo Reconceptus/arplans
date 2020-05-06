@@ -168,6 +168,7 @@ class SelectionController extends AdminController
      */
     public function actionDelete($id)
     {
+        Yii::$app->request->baseUrl = '/admin/modules';
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
