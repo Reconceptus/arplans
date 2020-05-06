@@ -6,6 +6,7 @@ use modules\admin\controllers\AdminController;
 use modules\shop\models\Block;
 use modules\shop\models\BlockSearch;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -100,6 +101,8 @@ class BlockController extends AdminController
      * @param  integer  $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws StaleObjectException
      */
     public function actionDelete($id)
     {

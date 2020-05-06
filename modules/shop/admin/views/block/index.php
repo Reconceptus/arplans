@@ -40,6 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{delete}'
             ],
         ],
-    ]); ?>
+    ]) ?>
     <?php Pjax::end(); ?>
 </div>

@@ -2,6 +2,8 @@
 
 namespace modules\shop\models;
 
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
@@ -44,7 +46,7 @@ use yii\helpers\Url;
  * @property Block[] $blocks
  * @property SelectionOption[] $options
  */
-class Selection extends \yii\db\ActiveRecord
+class Selection extends ActiveRecord
 {
     public const STATUS_DISABLED = 0;
     public const STATUS_ACTIVE = 1;
@@ -135,7 +137,7 @@ class Selection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getSelectionItems()
     {
@@ -143,7 +145,7 @@ class Selection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getItems()
     {
@@ -151,7 +153,7 @@ class Selection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getOptions()
     {
@@ -159,7 +161,7 @@ class Selection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getBlockSelections()
     {
@@ -167,12 +169,13 @@ class Selection extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getBlocks()
     {
         return $this->hasMany(Block::className(), ['id' => 'block_id'])->via('blockSelections');
     }
+
 
     public function collect()
     {

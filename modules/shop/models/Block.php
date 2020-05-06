@@ -3,6 +3,8 @@
 namespace modules\shop\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "shop_block".
@@ -20,8 +22,9 @@ use Yii;
  * @property string $updated_at
  *
  * @property BlockSelection[] $blockSelections
+ * @property Selection[] $selections
  */
-class Block extends \yii\db\ActiveRecord
+class Block extends ActiveRecord
 {
     public const STATUS_ACTIVE = 1;
     public const STATUS_DISABLED = 0;
@@ -34,7 +37,7 @@ class Block extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'shop_block';
     }
@@ -42,7 +45,7 @@ class Block extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['status', 'sort'], 'integer'],
@@ -54,7 +57,7 @@ class Block extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id'              => 'ID',
@@ -82,10 +85,18 @@ class Block extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getBlockSelections()
     {
         return $this->hasMany(BlockSelection::className(), ['block_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getSelections()
+    {
+        return $this->hasMany(Selection::className(), ['id' => 'selection_id'])->via('blockSelections');
     }
 }

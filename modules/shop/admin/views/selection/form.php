@@ -43,7 +43,7 @@ $this->title = $model->isNewRecord ? 'Добавление подборки' : '
                             'tokenSeparators'    => [';'],
                             'maximumInputLength' => 255
                         ],
-                    ]); ?>
+                    ]) ?>
                 </div>
             </div>
             <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>

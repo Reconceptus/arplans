@@ -2,12 +2,14 @@
 
 use modules\shop\models\Block;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model modules\shop\models\Block */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $this View */
+/* @var $model Block */
+/* @var $form ActiveForm */
 
+$selections = $model->selections;
 $this->title = $model->isNewRecord ? 'Создание группы' : 'Редактирование группы '.$model->name;
 ?>
 <div class="container">
@@ -38,6 +40,12 @@ $this->title = $model->isNewRecord ? 'Создание группы' : 'Реда
         </div>
 
         <?php ActiveForm::end(); ?>
+        <?php if ($selections): ?>
+            <h3>В группу входят подборки:</h3>
+            <?php foreach ($selections as $selection): ?>
+                <p><?= $selection->name ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
 
