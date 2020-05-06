@@ -18,8 +18,6 @@ $this->title = $model->isNewRecord ? 'Создание группы' : 'Реда
             <div class="col-xs-10">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
-
                 <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'status')->dropDownList(Block::STATUS_LIST) ?>
