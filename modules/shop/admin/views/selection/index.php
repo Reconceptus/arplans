@@ -33,19 +33,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => SerialColumn::class],
             'name',
             'slug',
-            'description',
+            [
+                'attribute' => 'description',
+                'value'     => static function ($model) {
+                    return mb_substr($model->description, 0, 150);
+                }
+            ],
             [
                 'attribute' => 'status',
-                'value'     => function ($model) {
+                'value'     => static function ($model) {
                     return $model->status === 1 ? 'активна' : 'отключена';
                 }
             ],
             [
                 'attribute' => 'block.name',
-            ],
-            [
-                'class'    => ActionColumn::class,
-                'template' => '{update}',
+                'label'     => 'Группа'
             ],
             [
                 'class'    => ActionColumn::class,
@@ -55,6 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a(count($model->selectionItems), $model->url, ['data-pjax' => 0]);
                     },
                 ]
+            ],
+            [
+                'class'    => ActionColumn::class,
+                'template' => '{update}',
             ],
             [
                 'class'    => ActionColumn::class,
