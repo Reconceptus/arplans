@@ -95,7 +95,8 @@ class Selection extends ActiveRecord
                 ], 'integer'
             ],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'slug', 'description'], 'string', 'max' => 255],
+            [['name', 'slug'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 10000],
         ];
     }
 

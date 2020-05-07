@@ -21,7 +21,7 @@ class m200430_101017_create_selection extends Migration
             'id'            => $this->primaryKey()->unsigned(),
             'name'          => $this->string(),
             'slug'          => $this->string(),
-            'description'   => $this->string(),
+            'description'   => $this->string(10000),
             'min_price'     => $this->decimal(14, 2),
             'max_price'     => $this->decimal(14, 2),
             'min_bedrooms'  => $this->smallInteger(),

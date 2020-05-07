@@ -35,7 +35,7 @@ $this->title = $model->isNewRecord ? 'Добавление подборки' : '
                     <?= $form->field($model, 'block_id')->dropDownList(ArrayHelper::map(Block::find()->all(), 'id', 'name')) ?>
                 </div>
             </div>
-            <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'rows'=>10]) ?>
         </div>
     </div>
 <!--    <div class="row">-->
