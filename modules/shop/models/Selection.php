@@ -38,6 +38,7 @@ use yii\helpers\Url;
  * @property int $gas_boiler
  * @property int $status
  * @property int $block_id
+ * @property string $blockName
  * @property string $created_at
  * @property string $updated_at
  *
@@ -135,6 +136,11 @@ class Selection extends ActiveRecord
             'created_at'    => 'Добавлено',
             'updated_at'    => 'Изменено',
         ];
+    }
+
+    public function getBlockName()
+    {
+        return $this->block->name;
     }
 
     /**

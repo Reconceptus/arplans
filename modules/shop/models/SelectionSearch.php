@@ -45,14 +45,23 @@ class SelectionSearch extends Selection
      */
     public function search($params)
     {
-        $query = Selection::find();
+        $query = Selection::find()->joinWith('block block');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $sortAttributes = array_merge($dataProvider->getSort()->attributes, [
+            'block.name' => [
+                'asc'   => ['block.name' => SORT_ASC],
+                'desc'  => ['block.name' => SORT_DESC],
+                'label' => 'Группа'
+            ],
+        ]);
+        $dataProvider->setSort([
+            'attributes' => $sortAttributes
+        ]);
         $this->load($params);
 
         if (!$this->validate()) {

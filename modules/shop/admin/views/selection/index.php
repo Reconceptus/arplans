@@ -34,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'slug',
             'description',
-            'status',
+            [
+                'attribute' => 'status',
+                'value'     => function ($model) {
+                    return $model->status === 1 ? 'активна' : 'отключена';
+                }
+            ],
+            [
+                'attribute' => 'block.name',
+            ],
             [
                 'class'    => ActionColumn::class,
                 'template' => '{update}',
@@ -44,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}',
                 'buttons'  => [
                     'view' => static function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->url,['data-pjax'=>0]);
+                        return Html::a(count($model->selectionItems), $model->url, ['data-pjax' => 0]);
                     },
                 ]
             ],
