@@ -8217,7 +8217,6 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 }
 
 .compare-table--total {
-  white-space: nowrap;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8471,6 +8470,17 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 .basket-form--ordering .ordering-submit {
   border-top: 1px solid #B2B9C1;
   background-color: #FFF9E1;
+}
+
+.basket-form--ordering .ordering-submit input {
+  background-color: #FFF;
+  height: 40px;
+  line-height: 40px;
+  color: #657482;
+  font-size: 3.5rem;
+  padding: 0 20px;
+  border: 1px solid RGBA(178, 185, 193, 0.5);
+  outline: none;
 }
 
 .basket-form--ordering .ordering-submit .form-title {
