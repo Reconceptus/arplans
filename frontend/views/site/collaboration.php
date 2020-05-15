@@ -1,17 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 17.10.2018
- * Time: 17:42
- */
 
-/* @var $model \modules\partner\models\Collaboration */
-/* @var $manager \common\models\Profile */
+use common\models\Profile;
+use frontend\widgets\recently\Recently;
+use frontend\widgets\request\Request;
+use modules\content\models\ContentBlock;
+use modules\partner\models\Collaboration;
+
+/* @var $model Collaboration */
+/* @var $manager Profile */
 $manager = $model->getManager();
-$this->title = \modules\content\models\ContentBlock::getValue('collaboration_page_seo_title');
-$this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('collaboration_page_seo_keywords')]);
-$this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('collaboration_page_seo_description')]);
+$this->title = ContentBlock::getValue('collaboration_page_seo_title');
+$this->registerMetaTag(['name' => 'keywords', 'content' => ContentBlock::getValue('collaboration_page_seo_keywords')]);
+$this->registerMetaTag(['name' => 'description', 'content' => ContentBlock::getValue('collaboration_page_seo_description')]);
 ?>
 
     <div class="section collaborate-head">
@@ -100,5 +100,5 @@ $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\m
         </div>
     </div>
 
-<?= \frontend\widgets\recently\Recently::widget() ?>
-<?= \frontend\widgets\request\Request::widget(['viewName' => 'partnership']) ?>
+<?= Recently::widget() ?>
+<?= Request::widget() ?>

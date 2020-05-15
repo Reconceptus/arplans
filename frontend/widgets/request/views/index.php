@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.10.2018
- * Time: 11:27
- */
 
 use yii\helpers\Html;
+use yii\web\Request;
 use yii\widgets\ActiveForm;
 
-/* @var $model \frontend\widgets\request\Request */
+/* @var $model Request */
 ?>
     <div class="modal" data-modal="consultation">
         <div class="bg close"></div>
@@ -25,15 +20,27 @@ use yii\widgets\ActiveForm;
                     'id'      => 'consultation-form',
                 ]); ?>
                 <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
-                <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_OTHER) ?>
-                <?= Html::hiddenInput('Request[email]', null) ?>
-                <?= Html::hiddenInput('Request[name]', '-') ?>
-                <?= Html::hiddenInput('Request[phone]', '-') ?>
+                <?= Html::hiddenInput('Request[contact]', '-') ?>
                 <div class="modal-form--fields">
                     <div class="custom-form">
                         <div class="form-row-element">
                             <div class="input">
-                                <?= Html::activeTextInput($model, 'contact', ['placeholder' => '*Ваш телефон, e-mail или любой другой контакт']) ?>
+                                <?= Html::activeDropDownList($model, 'type', \common\models\Request::TYPES_SELECT) ?>
+                            </div>
+                        </div>
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'name', ['placeholder' => '*Ваше имя']) ?>
+                            </div>
+                        </div>
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'email', ['placeholder' => '*Ваш email']) ?>
+                            </div>
+                        </div>
+                        <div class="form-row-element">
+                            <div class="input">
+                                <?= Html::activeTextInput($model, 'phone', ['placeholder' => '*Ваш телефон']) ?>
                             </div>
                         </div>
                         <div class="form-row-element">
@@ -85,12 +92,18 @@ $js = <<<JS
         onfocusout: false,
         ignore: ".ignore",
         rules: {
-            'Request[contact]': {required: true},
+            'Request[name]': {required: true},
+            'Request[email]': {required: true},
+            'Request[phone]': {required: true},
+            'Request[type]': {required: true},
             'Request[text]': {required: true},
             'Request[accept]': {required: true}
         },
         messages: {
-           'Request[contact]': {required: ""},
+          'Request[name]': {required: true},
+            'Request[email]': {required: true},
+            'Request[phone]': {required: true},
+            'Request[type]': {required: true},
            'Request[text]': {required: ""},
            'Request[accept]': {required: ""}
         },

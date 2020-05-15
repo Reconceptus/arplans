@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 16.10.2018
- * Time: 11:27
- */
 
 use yii\helpers\Html;
+use yii\web\Request;
 use yii\widgets\ActiveForm;
 
-/* @var $model \frontend\widgets\request\Request */
+/* @var $model Request */
 ?>
     <div class="modal" data-modal="partnership">
         <div class="bg close"></div>

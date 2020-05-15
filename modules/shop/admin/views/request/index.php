@@ -32,7 +32,6 @@ $columns = [
         'filter'=>Request::TYPES
     ],
     'name',
-    'contact',
     'email',
     'phone',
     'region',

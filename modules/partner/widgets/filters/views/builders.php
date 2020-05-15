@@ -1,4 +1,7 @@
 <?php
+
+use frontend\widgets\request\Request;
+
 $get = Yii::$app->request->get();
 ?>
     <div class="custom-row-col col-sidebar">
@@ -278,4 +281,4 @@ $get = Yii::$app->request->get();
             </div>
         </div>
     </div>
-<?= \frontend\widgets\request\Request::widget(['viewName' => 'partnership']) ?>
+<?= Request::widget() ?>

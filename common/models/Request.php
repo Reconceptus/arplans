@@ -25,14 +25,21 @@ use modules\partner\models\Partner;
  */
 class Request extends \yii\db\ActiveRecord
 {
-    const PAGE_CONTACT = 1;
-    const PAGE_OTHER = 2;
-    const PAGE_CALCULATION = 3;
-    const PAGE_PARTNER = 4;
-    const PAGE_API_CONS = 5;
-    const PAGE_API_CALC = 6;
+    public const PAGE_CONTACT = 1;
+    public const PAGE_OTHER = 2;
+    public const PAGE_CALCULATION = 3;
+    public const PAGE_PARTNER = 4;
+    public const PAGE_API_CONS = 5;
+    public const PAGE_API_CALC = 6;
 
-    const TYPES = [
+    public const TYPES_SELECT = [
+        self::PAGE_CONTACT     => 'Контактная форма',
+        self::PAGE_OTHER       => 'Консультация',
+        self::PAGE_CALCULATION => 'Запрос на смету',
+        self::PAGE_PARTNER     => 'Запрос на партнерство',
+    ];
+
+    public const TYPES = [
         self::PAGE_CONTACT     => 'Контактная форма',
         self::PAGE_OTHER       => 'Консультация',
         self::PAGE_CALCULATION => 'Запрос на смету',
