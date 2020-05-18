@@ -38,10 +38,10 @@ class Request extends \yii\db\ActiveRecord
 
 
     public const TYPES_SELECT = [
-        self::PAGE_CONTACT     => 'Контактная форма',
-        self::PAGE_OTHER       => 'Консультация',
+        self::PAGE_CONTACT     => 'Консультация по проекту',
+        self::PAGE_OTHER       => 'Консультация по услугам',
         self::PAGE_CALCULATION => 'Запрос на смету',
-        self::PAGE_PARTNER     => 'Запрос на партнерство',
+        self::PAGE_PARTNER     => 'Сотрудничество',
     ];
 
     public const TYPES = [

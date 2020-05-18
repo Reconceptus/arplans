@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
                     <div class="custom-form">
                         <div class="form-row-element">
                             <div class="input">
-                                <?= Html::activeDropDownList($model, 'type', \common\models\Request::TYPES_SELECT) ?>
+                                <?= Html::activeDropDownList($model, 'type', \common\models\Request::TYPES_SELECT, ['prompt' => 'Тема вопроса']) ?>
                             </div>
                         </div>
                         <div class="form-row-element">
