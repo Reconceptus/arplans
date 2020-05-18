@@ -38,12 +38,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?= Html::activePasswordInput($model, 'password', ['placeholder' => '*Пароль (не менее 6 знаков)']) ?>
                                 </div>
                             </div>
+                            <?= $form->field($model, 'reCaptcha',
+                                ['enableAjaxValidation' => false, 'enableClientValidation' => false])->widget(
+                                \himiklab\yii2\recaptcha\ReCaptcha3::className(), ['action' => '/site/signup']
+                            )->label(false) ?>
                         </div>
                         <div class="form-row-submit">
                             <div class="submit">
                                 <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn--lt', 'name' => 'signup-button']) ?>
                             </div>
                         </div>
+                        <span class="recaptcha-notify">This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+    <a href="https://policies.google.com/terms">Terms of Service</a> apply.</span>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
