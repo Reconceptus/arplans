@@ -2,7 +2,6 @@
 
 use common\models\Profile;
 use frontend\widgets\recently\Recently;
-use frontend\widgets\request\Request;
 use modules\content\models\ContentBlock;
 use modules\partner\models\Collaboration;
 
@@ -101,4 +100,3 @@ $this->registerMetaTag(['name' => 'description', 'content' => ContentBlock::getV
     </div>
 
 <?= Recently::widget() ?>
-<?= Request::widget() ?>

@@ -100,10 +100,10 @@ $js = <<<JS
             'Request[accept]': {required: true}
         },
         messages: {
-          'Request[name]': {required: true},
-            'Request[email]': {required: true},
-            'Request[phone]': {required: true},
-            'Request[type]': {required: true},
+          'Request[name]': {required: ""},
+            'Request[email]': {required: ""},
+            'Request[phone]': {required: ""},
+            'Request[type]': {required: ""},
            'Request[text]': {required: ""},
            'Request[accept]': {required: ""}
         },
