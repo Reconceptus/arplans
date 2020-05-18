@@ -99,6 +99,7 @@ $js = <<<JS
         onfocusout: false,
         ignore: ".ignore",
         rules: {
+            'Request[type]': {required: true},
             'Request[name]': {required: true},
             'Request[email]': {required: true},
             'Request[phone]': {required: true},
@@ -108,6 +109,7 @@ $js = <<<JS
             'Request[reCaptcha]': {required: true}
         },
         messages: {
+          'Request[type]': {required: ""},
           'Request[name]': {required: ""},
             'Request[email]': {required: ""},
             'Request[phone]': {required: ""},
