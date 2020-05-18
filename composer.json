@@ -25,7 +25,8 @@
         "yiisoft/yii2-httpclient": "*",
         "yandex-money/yandex-checkout-sdk-php": "^1.1",
         "yiisoft/yii2-redis": "^2.0",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "himiklab/yii2-recaptcha-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -16,6 +16,11 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'timeZone'            => 'Europe/Moscow',
     'components'          => [
+        'reCaptcha'        => [
+            'class'     => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
+            'siteKeyV3' => $params['recaptchaSite3'],
+            'secretV3'  => $params['recaptchaSecret3'],
+        ],
         'formatter'    => [
             'class'           => 'yii\i18n\Formatter',
             'defaultTimeZone' => 'Europe/Moscow',
