@@ -48,6 +48,10 @@ use yii\widgets\ActiveForm;
                                 <?= Html::activeTextarea($model, 'text', ['placeholder' => '*Ваше сообщение', 'rows' => 3]) ?>
                             </div>
                         </div>
+                        <?= $form->field($model, 'reCaptcha',
+                            ['enableAjaxValidation' => false, 'enableClientValidation' => false])->widget(
+                            \himiklab\yii2\recaptcha\ReCaptcha3::className(), ['action' => '/site/request']
+                        )->label(false) ?>
                         <div class="form-row-element">
                             <div class="file">
                                 <?= Html::activeFileInput($model, 'file', ['id' => 'supportFileUpload']) ?>
@@ -74,6 +78,9 @@ use yii\widgets\ActiveForm;
                             </div>
                         </div>
                     </div>
+                    <span class="recaptcha-notify">This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+    <a href="https://policies.google.com/terms">Terms of Service</a> apply.</span>
                 </div>
                 <div class="modal-form--submit">
                     <?= Html::submitButton('Отправить', ['class' => 'btn btn--lt submit-consult']) ?>
@@ -97,7 +104,8 @@ $js = <<<JS
             'Request[phone]': {required: true},
             'Request[type]': {required: true},
             'Request[text]': {required: true},
-            'Request[accept]': {required: true}
+            'Request[accept]': {required: true},
+            'Request[reCaptcha]': {required: true}
         },
         messages: {
           'Request[name]': {required: ""},
@@ -105,7 +113,8 @@ $js = <<<JS
             'Request[phone]': {required: ""},
             'Request[type]': {required: ""},
            'Request[text]': {required: ""},
-           'Request[accept]': {required: ""}
+           'Request[accept]': {required: ""},
+           'Request[reCaptcha]': {required: ""}
         },
         errorClass: 'invalid',
         highlight: function(element, errorClass) {

@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use himiklab\yii2\recaptcha\ReCaptchaValidator3;
 use modules\partner\models\Partner;
 
 /**
@@ -25,12 +26,16 @@ use modules\partner\models\Partner;
  */
 class Request extends \yii\db\ActiveRecord
 {
+    public const SCENARIO_NO_CAPTCHA = 'no_captcha';
+    public $reCaptcha;
+
     public const PAGE_CONTACT = 1;
     public const PAGE_OTHER = 2;
     public const PAGE_CALCULATION = 3;
     public const PAGE_PARTNER = 4;
     public const PAGE_API_CONS = 5;
     public const PAGE_API_CALC = 6;
+
 
     public const TYPES_SELECT = [
         self::PAGE_CONTACT     => 'Контактная форма',
@@ -81,7 +86,8 @@ class Request extends \yii\db\ActiveRecord
             [['type', 'partner_id'], 'integer'],
             [['accept'], 'compare', 'compareValue' => 1, 'message' => 'Необходимо подтвердить согласие на обработку данных'],
             [['name', 'contact', 'region', 'phone', 'url'], 'string', 'max' => 255],
-            [['email'], 'email']
+            [['email'], 'email'],
+            [['reCaptcha'], ReCaptchaValidator3::className(), 'except' => self::SCENARIO_NO_CAPTCHA],
         ];
     }
 

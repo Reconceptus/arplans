@@ -1,1 +1,12 @@
 /* common styles */
+.field-feedback-recaptcha {
+    visibility: hidden;
+}
+
+.grecaptcha-badge {
+    visibility: hidden;
+}
+
+.recaptcha-notify {
+    font-size: 10px;
+}
