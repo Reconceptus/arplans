@@ -7,9 +7,8 @@ use yii\helpers\ArrayHelper;
 $type = (int) $model->type;
 ?>
 <?php if ($type > 0): ?>
-    <h2><?= ArrayHelper::getValue(Request::TYPES_SELECT, 'type') ?></h2>
+    <h2><?= ArrayHelper::getValue(Request::TYPES_SELECT, $type) ?></h2>
 <?php endif; ?>
-
 
     <p>Имя: <?= $model->name ?></p>
     <p>Email: <?= $model->email ?></p>
