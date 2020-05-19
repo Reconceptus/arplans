@@ -87,6 +87,14 @@ $columns = [
             '</div>',
     ],
     [
+        'attribute' => 'status',
+        'header'    => 'Статус',
+        'filter'    => Html::dropDownList('Order[status]', $order['status'], array_merge([0 => ''], Order::getStatusList())),
+        'value'     => function ($model) {
+            return Order::getStatusName($model->status);
+        }
+    ],
+    [
         'header' => 'Сайт-партнер',
         'filter' => Html::dropDownList('Order[partner]', $order['partner'], $partners),
         'value'  => function ($model) {
@@ -101,14 +109,6 @@ $columns = [
             return $model->referrer_id ? $model->referrer->username : '';
         }
     ],
-    [
-        'attribute' => 'status',
-        'header'    => 'Статус',
-        'filter'    => Html::dropDownList('Order[status]', $order['status'], array_merge([0 => ''], Order::getStatusList())),
-        'value'     => function ($model) {
-            return Order::getStatusName($model->status);
-        }
-    ]
 ];
 ?>
     <h1><?= $this->title ?></h1>
