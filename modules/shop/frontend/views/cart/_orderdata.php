@@ -99,7 +99,7 @@ $totalSum = 0;
                     </div>
                     <div class="form-row-col col-50">
                         <div class="ordering-submit--title">К оплате:</div>
-                        <div class="ordering-submit--subtitle">товаров на сумму <span id="totalsum"><?= $totalSum ?>₽</span></div>
+                        <div class="ordering-submit--subtitle">товаров на сумму <span id="totalsum"><?= $totalSum ?></span>₽</div>
                         <div class="form-row-element">
                             <div class="input">
                                 <input type="text" placeholder="Промокод (если есть)" id="order-promocode">
