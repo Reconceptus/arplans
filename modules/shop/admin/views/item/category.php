@@ -42,6 +42,16 @@ $columns = [
     ],
     [
         'class'    => ActionColumn::class,
+        'template' => '{view}',
+        'buttons'  => [
+            'view' => static function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Yii::$app->request->getHostInfo().$model->url,
+                    ['data-pjax' => 0]);
+            }
+        ]
+    ],
+    [
+        'class'    => ActionColumn::class,
         'template' => '{selections}',
         'buttons'  => [
             'selections' => static function ($url, $model) {
