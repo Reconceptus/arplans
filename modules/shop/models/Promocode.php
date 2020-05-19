@@ -44,6 +44,7 @@ class Promocode extends ActiveRecord
     {
         return [
             [['start_date', 'end_date', 'number_of_uses', 'code'], 'required'],
+            [['code'], 'string', 'length' => [4, 100]],
             [['end_date'], 'validateDate'],
             [['fixed_discount', 'percent_discount'], 'validateDiscount'],
             [['fixed_discount', 'min_amount', 'number_of_uses', 'used', 'status'], 'integer'],

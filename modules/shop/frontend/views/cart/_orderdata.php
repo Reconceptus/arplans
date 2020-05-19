@@ -128,7 +128,7 @@ $(document).on('input', '#order-promocode', function () {
   var elem = $(this);
   var code = elem.val();
   var infotext = $('#js-promocode-info');   
-  if (code.length >= 5){
+  if (code.length >= 4){
    $.ajax({
         type: 'GET',
         url: '/shop/cart/promocode',
