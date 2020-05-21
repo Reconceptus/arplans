@@ -5,11 +5,10 @@
 /* @var $newComment \common\models\Comment */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->description]);
-$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getHostInfo().'/'.Yii::$app->request->getPathInfo()]);
 $this->title = $model->title;
 ?>
 

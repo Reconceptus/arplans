@@ -2,13 +2,11 @@
 
 /* @var $model \modules\partner\models\Builder */
 
-use yii\helpers\Url;
-
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 $backImage = $model->getBackImage(true);
-$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getHostInfo().'/'.Yii::$app->request->getPathInfo()]);
 ?>
 
     <div class="section partner-page--head">

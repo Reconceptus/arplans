@@ -2,15 +2,13 @@
 
 /* @var $query */
 
-use yii\helpers\Url;
-
 $reg = Yii::$app->request->get('region');
 
 $this->title = \modules\content\models\ContentBlock::getValue('village_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('village_page_seo_description')]);
 \yii\widgets\Pjax::begin();
-$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getHostInfo().'/'.Yii::$app->request->getPathInfo()]);
 $mapSelected = (bool)Yii::$app->request->get('selector');
 ?>
 <a name="map-anchor"></a>

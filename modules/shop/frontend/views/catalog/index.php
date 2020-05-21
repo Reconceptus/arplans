@@ -9,7 +9,6 @@
 use frontend\widgets\recently\Recently;
 use frontend\widgets\share\Share;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
@@ -21,7 +20,7 @@ $sort = Yii::$app->request->get('sort');
 $this->title = $category->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $category->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_description]);
-$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getHostInfo().'/'.Yii::$app->request->getPathInfo()]);
 ?>
 
     <div class="section bg-head">
