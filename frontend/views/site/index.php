@@ -11,6 +11,7 @@ use yii\web\View;
 $this->title = ContentBlock::getValue('main_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => ContentBlock::getValue('main_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => ContentBlock::getValue('main_page_seo_description')]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 $author = Main::getAuthorMain();
 ?>
     <script>

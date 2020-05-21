@@ -9,6 +9,7 @@
 use frontend\widgets\recently\Recently;
 use frontend\widgets\share\Share;
 use modules\shop\widgets\related\Related;
+use yii\helpers\Url;
 
 /* @var $model \modules\shop\models\Item */
 /* @var $favorites array */
@@ -17,6 +18,7 @@ $isInCart = array_key_exists($model->id, $inCart);
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 ?>
 <script>
     var ITEM_ID = "<?=$model->id?>";

@@ -6,10 +6,13 @@
  * Time: 10:17
  */
 
+use yii\helpers\Url;
+
 /* @var $model \modules\shop\models\Service */
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 ?>
     <div class="section service--head">
         <div class="content content--lg mobile-wide">

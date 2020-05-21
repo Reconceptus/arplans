@@ -1,10 +1,14 @@
 <?php
 
 /* @var $model \modules\partner\models\Village */
+
+use yii\helpers\Url;
+
 $this->title = $model->seo_title;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $model->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $model->seo_description]);
 $backImage = $model->getBackImage(true);
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 ?>
 
     <div class="section partner-page--head">

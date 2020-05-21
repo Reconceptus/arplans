@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
@@ -8,7 +9,7 @@ $reg = Yii::$app->request->get('region');
 $this->title = \modules\content\models\ContentBlock::getValue('builder_page_seo_title');
 $this->registerMetaTag(['name' => 'keywords', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_keywords')]);
 $this->registerMetaTag(['name' => 'description', 'content' => \modules\content\models\ContentBlock::getValue('builder_page_seo_description')]);
-
+$this->registerLinkTag(['rel' => 'canonical', 'href' => Url::canonical()]);
 \yii\widgets\Pjax::begin();
 ?>
 
