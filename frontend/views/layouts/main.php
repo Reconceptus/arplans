@@ -19,6 +19,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->registerMetaTag(['name' => 'og:image', 'content' => \modules\content\models\ContentBlock::getValue('share_image')]);?>
+    <?php $this->registerMetaTag(['name' => 'yandex-verification', 'content' => '90e2f52e45f65eb1']);?>
     <?php $this->head() ?>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
