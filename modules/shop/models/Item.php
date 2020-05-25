@@ -301,13 +301,13 @@ class Item extends \yii\db\ActiveRecord
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
-        $query = Item::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')->distinct()
+        $query = self::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')->distinct()
             ->leftJoin(ItemOption::tableName().' io', 'i.id=io.item_id')
             ->innerJoin(Category::tableName().' cat', 'i.category_id = cat.id')
             ->leftJoin(Catalog::tableName().' c', 'cat.id=c.category_id')
             ->where(['i.category_id' => $category->id])
-            ->andWhere(['i.is_active' => Item::IS_ACTIVE])
-            ->andWhere(['i.is_deleted' => Item::IS_NOT_DELETED]);
+            ->andWhere(['i.is_active' => self::IS_ACTIVE])
+            ->andWhere(['i.is_deleted' => self::IS_NOT_DELETED]);
 
         // Фильтруем их по get параметрам
         // Убираем из параметров категорию и страницы
@@ -317,6 +317,7 @@ class Item extends \yii\db\ActiveRecord
         unset($get['slug']);
         unset($get['id']);
         unset($get['inv']);
+        unset($get['_pjax']);
 
         // Этажи
         if (isset($get['floors']) && is_array($get['floors'])) {
