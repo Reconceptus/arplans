@@ -111,13 +111,14 @@ class CartController extends ActiveController
         $get = \Yii::$app->request->get();
         $id = $get['id'];
         $guid = $get['guid'];
-        if ($model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one()) {
+        $model = Cart::find()->where(['guid' => $guid, 'item_id' => $id])->one();
+        if ($model) {
             /* @var $model Cart */
             $price = $model->getLotPrice(Config::getValue('albumPrice'));
             $model->delete();
             return ['status' => 'success', 'price' => $price];
         }
-        return ['status' => 'fail', 'count' => $model->count];
+        return ['status' => 'fail'];
     }
 
     /**
