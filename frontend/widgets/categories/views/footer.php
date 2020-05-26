@@ -20,6 +20,6 @@
         <li><?= \yii\helpers\Html::a('Новинки', \yii\helpers\Url::to('/shop/compilation/new')) ?></li>
         <li><?= \yii\helpers\Html::a('Скидки', \yii\helpers\Url::to('/shop/compilation/discount')) ?></li>
         <li><?= \yii\helpers\Html::a('Бесплатные проекты', \yii\helpers\Url::to('/shop/compilation/free')) ?></li>
-        <li><?= \yii\helpers\Html::a('Мы подобрали для вам', \yii\helpers\Url::to('/compilations')) ?></li>
+        <li><?= \yii\helpers\Html::a('Мы подобрали для вас', \yii\helpers\Url::to('/compilations')) ?></li>
     </ul>
 </section>

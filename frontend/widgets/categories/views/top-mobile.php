@@ -82,6 +82,11 @@ use yii\helpers\Url;
                 <a href="/builder">Строители и материалы</a>
             </span>
     </li>
+    <li>
+            <span>
+                <a href="/compilations">Мы подобрали для вас</a>
+            </span>
+    </li>
 </ul>
 <div class="profile-menu">
     <ul>
