@@ -6237,6 +6237,16 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   color: #FFF;
 }
 
+.projects-compilation .add-service--list {
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.projects-compilation .contact-page--partners {
+  margin: 0;
+}
+
 .blog-slider.simple {
   padding: 40px 0 20px;
 }
@@ -10964,6 +10974,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     columns: 8 auto;
   }
 
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 2 auto;
+    -moz-columns: 2 auto;
+    columns: 2 auto;
+  }
+
   .profile-sales table th {
     font-size: 3.8rem;
   }
@@ -11553,6 +11569,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     -webkit-column-gap: 20px;
     -moz-column-gap: 20px;
     column-gap: 20px;
+  }
+
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
   }
 
   .contact-form--main {
@@ -12905,6 +12927,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     -webkit-columns: 5 auto;
     -moz-columns: 5 auto;
     columns: 5 auto;
+  }
+
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 2 auto;
+    -moz-columns: 2 auto;
+    columns: 2 auto;
   }
 }
 
@@ -14438,6 +14466,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     -moz-columns: 4 auto;
     columns: 4 auto;
   }
+
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 2 auto;
+    -moz-columns: 2 auto;
+    columns: 2 auto;
+  }
 }
 
 @media screen and (min-width: 601px) and (max-width: 767px) {
@@ -14488,6 +14522,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     -webkit-columns: 3 auto;
     -moz-columns: 3 auto;
     columns: 3 auto;
+  }
+
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
   }
 }
 
@@ -14712,6 +14752,12 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
     -webkit-columns: 6 auto;
     -moz-columns: 6 auto;
     columns: 6 auto;
+  }
+
+  .projects-compilation .contact-page--partners ul {
+    -webkit-columns: 2 auto;
+    -moz-columns: 2 auto;
+    columns: 2 auto;
   }
 
   .profile-sales table th {

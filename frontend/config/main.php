@@ -53,6 +53,7 @@ return [
             'enableStrictParsing' => true,
             'rules'               => [
                 ['class' => 'yii\rest\UrlRule', 'pluralize' => false, 'controller' => 'api/item'],
+                'collections'                                                    => 'site/collections',
                 'about'                                                    => 'site/about',
                 'collaboration'                                            => 'site/collaboration',
                 'contacts'                                                 => 'site/contacts',

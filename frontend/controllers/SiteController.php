@@ -16,6 +16,7 @@ use modules\partner\models\AboutReady;
 use modules\partner\models\Collaboration;
 use modules\partner\models\Partner;
 use modules\partner\models\Reviews;
+use modules\shop\models\Block;
 use Yii;
 use yii\base\Exception;
 use yii\filters\AccessControl;
@@ -150,9 +151,9 @@ class SiteController extends Controller
                 $mail = Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject(Request::TYPES[(int) ($model->type)]);
+                    ->setSubject(Request::TYPES[(int)($model->type)]);
                 if ($file) {
-                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName.'.'.$file->extension]);
+                    $mail->attachContent(file_get_contents($file->tempName), ['fileName' => $file->baseName . '.' . $file->extension]);
                 }
                 $mail->send();
                 return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
@@ -222,7 +223,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        $isRef = (int) Yii::$app->request->get('ref');
+        $isRef = (int)Yii::$app->request->get('ref');
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -280,14 +281,15 @@ class SiteController extends Controller
     /**
      * Resets password.
      *
-     * @param  string  $token
+     * @param string $token
      * @return mixed
      * @throws BadRequestHttpException
      */
     public
     function actionResetPassword(
         $token
-    ) {
+    )
+    {
         try {
             $model = new ResetPasswordForm($token);
         } catch (Exception $e) {
@@ -303,5 +305,11 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionCollections()
+    {
+        $blocks = Block::find()->where(['status' => Block::STATUS_ACTIVE])->all();
+        return $this->render('collections', ['blocks' => $blocks]);
     }
 }
