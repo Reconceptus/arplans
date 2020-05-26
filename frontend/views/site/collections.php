@@ -11,7 +11,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Подборки 
 
 <div class="section bg-head">
     <div class="content content--lg">
-        <div class="bg-head--main gradient"><h1 class="title title-lg"><?=$this->title?></h1></div>
+        <div class="bg-head--main gradient"><h1 class="title title-lg"><?= $this->title ?></h1></div>
     </div>
 </div>
 
@@ -25,7 +25,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Подборки 
                             <div class="add-service--header">
                                 <div class="check">
                                     <label>
-                                        <div><?= $block->name ?></div>
+                                        <div><?= $block->name ?> (<?= count($block->selections) ?>)</div>
                                     </label>
                                 </div>
                                 <span class="show-more"></span>
@@ -35,7 +35,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Подборки 
                                     <div class="contact-page--partners">
                                         <ul>
                                             <?php foreach ($block->selections as $selection): ?>
-                                                <li><a href="<?= $selection->url ?>"><?= $selection->name ?></a></li>
+                                                <li><a href="<?= $selection->url ?>"><?= $selection->name ?> (<?=count($selection->selectionItems)?>)</a></li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
