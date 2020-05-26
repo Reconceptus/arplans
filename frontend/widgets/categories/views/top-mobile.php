@@ -84,7 +84,7 @@ use yii\helpers\Url;
     </li>
     <li>
             <span>
-                <a href="/compilations">Мы подобрали для вас</a>
+                <a href="/collections">Коллекции</a>
             </span>
     </li>
 </ul>
