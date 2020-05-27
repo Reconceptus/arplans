@@ -26,8 +26,8 @@
             </a>
         </li>
         <li>
-            <a href="http://pinterest.com/pin/create/button/?url=<?= Yii::$app->request->getAbsoluteUrl() ?>" class="pin-it-button" count-layout="horizontal">
-                <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+            <a href="http://pinterest.com/pin/create/button/?url=<?= Yii::$app->request->getAbsoluteUrl() ?>" class="pin-it-button">
+                <img border="0" src="/images/pint.svg" title="Pin It" />
             </a>
         </li>
     </ul>
