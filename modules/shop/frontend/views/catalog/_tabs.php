@@ -125,7 +125,7 @@ $ready = $model->getReady();
                     <?= $model->build_price ?>
                     <div class="estimate">
                         <a href="#" class="btn-add show-modal"
-                           data-modal="calculation"><span>Заказать расчет дома</span></a>
+                           data-modal="consultation"><span>Заказать расчет дома</span></a>
                     </div>
                 </div>
                 <div class="custom-row-col col-50">
