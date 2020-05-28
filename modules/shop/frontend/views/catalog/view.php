@@ -61,7 +61,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getH
                         </div>
                         <div class="estimate">
                             <a href="#" class="btn-add show-modal"
-                               data-modal="consultation"><span>Заказать расчет дома</span></a>
+                               data-modal="calculation"><span>Заказать расчет дома</span></a>
                         </div>
                     </div>
                 </div>
@@ -95,3 +95,4 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getH
 
 <?= Related::widget(['model' => $model, 'favorites' => $favorites, 'inCart' => $inCart]) ?>
 <?= Recently::widget() ?>
+<?= \frontend\widgets\request\Request::widget(['viewName' => 'calculation']) ?>

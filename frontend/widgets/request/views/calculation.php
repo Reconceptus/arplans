@@ -1,10 +1,10 @@
 <?php
 
-use frontend\widgets\request\Request;
+use common\models\ContactForm;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $model Request */
+$model = new ContactForm();
 ?>
     <div class="modal" data-modal="calculation">
         <div class="bg close"></div>
@@ -19,9 +19,9 @@ use yii\widgets\ActiveForm;
                     'options' => ['enctype' => 'multipart/form-data'],
                     'id'      => 'calculation-form'
                 ]); ?>
-                <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
-                <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CALCULATION) ?>
-                <?= Html::hiddenInput('Request[contact]', '-') ?>
+                <?= Html::hiddenInput('ContactForm[url]', Yii::$app->request->getAbsoluteUrl()) ?>
+                <?= Html::hiddenInput('ContactForm[type]', \common\models\Request::PAGE_CALCULATION) ?>
+                <?= Html::hiddenInput('ContactForm[contact]', '-') ?>
                 <div class="modal-form--fields">
                     <div class="custom-form">
                         <div class="form-row-element">
@@ -51,8 +51,8 @@ use yii\widgets\ActiveForm;
                         </div>
                         <div class="form-row-element">
                             <div class="file">
-                                <?= Html::activeFileInput($model, 'file', ['id' => 'supportFileUpload']) ?>
-                                <label for="supportFileUpload">
+                                <?= Html::activeFileInput($model, 'file', ['id' => 'supportFileUploads']) ?>
+                                <label for="supportFileUploads">
                                     <i class="icon-loadFile">
                                         <svg xmlns="http://www.w3.org/2000/svg">
                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-file-change"/>
@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
                         <div class="form-row-element">
                             <div class="check">
                                 <label>
-                                    <input type="checkbox" name="Request[accept]">
+                                    <input type="checkbox" name="ContactForm[accept]">
                                     <span>Согласен на <a href="/page/privacy">обработку персональных данных</a></span>
                                 </label>
                             </div>
@@ -92,20 +92,20 @@ $js = <<<JS
         onfocusout: false,
         ignore: ".ignore",
         rules: {
-            'Request[email]': {required: true},
-            'Request[phone]': {required: true},
-            'Request[name]': {required: true},
-            'Request[region]': {required: true},
-            'Request[text]': {required: true},
-            'Request[accept]': {required: true}
+            'ContactForm[email]': {required: true},
+            'ContactForm[phone]': {required: true},
+            'ContactForm[name]': {required: true},
+            'ContactForm[region]': {required: true},
+            'ContactForm[text]': {required: true},
+            'ContactForm[accept]': {required: true}
         },
         messages: {
-           'Request[email]': {required: ""},
-           'Request[phone]': {required: ""},
-           'Request[name]': {required: ""},
-           'Request[region]': {required: ""},
-           'Request[text]': {required: ""},
-           'Request[accept]': {required: ""}
+           'ContactForm[email]': {required: ""},
+           'ContactForm[phone]': {required: ""},
+           'ContactForm[name]': {required: ""},
+           'ContactForm[region]': {required: ""},
+           'ContactForm[text]': {required: ""},
+           'ContactForm[accept]': {required: ""}
         },
         errorClass: 'invalid',
         highlight: function(element, errorClass) {

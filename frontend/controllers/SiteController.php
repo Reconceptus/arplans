@@ -153,6 +153,9 @@ class SiteController extends Controller
                 $post['ContactForm']['accept'] = 1;
             }
         }
+        if($model->type = Request::PAGE_CALCULATION){
+            $model->scenario = Request::SCENARIO_NO_CAPTCHA;
+        }
         if (Yii::$app->request->isAjax && $model->load($post)) {
             $file = UploadedFile::getInstance($model, 'file');
             if ($model->save()) {

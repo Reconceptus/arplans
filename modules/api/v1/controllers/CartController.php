@@ -45,7 +45,7 @@ class CartController extends ActiveController
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $get = \Yii::$app->request->get();
-        $itemId = intval($get['id']);
+        $itemId = (int)$get['id'];
         $cartId = $get['cart'];
         if ($cartId && $itemId) {
             $cart = Cart::find()->where(['guid' => $cartId, 'item_id' => $itemId])->one();
@@ -170,6 +170,7 @@ class CartController extends ActiveController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new Request();
+        $model->scenario = Request::SCENARIO_NO_CAPTCHA;
         $get = Yii::$app->request->get();
         if (!$get) {
             return ['status' => 'fail', 'message' => 'Ошибка при отправке данных'];
@@ -189,7 +190,7 @@ class CartController extends ActiveController
                 $mail = Yii::$app->mailer->compose('request', ['model' => $model])
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
                     ->setTo(Config::getValue('requestEmail'))
-                    ->setSubject(Request::TYPES[intval($model->type)]);
+                    ->setSubject(Request::TYPES[(int)$model->type]);
                 if ($partner->send_notify) {
                     $mail->setCc([$user->email]);
                 }
@@ -198,9 +199,8 @@ class CartController extends ActiveController
                 }
                 $mail->send();
                 return ['status' => 'success', 'message' => 'Ваш  запрос успешно отправлен. В ближайшее время мы с вами свяжемся'];
-            } else {
-                return ['status' => 'fail', 'message' => $model->getFirstErrors()];
             }
+            return ['status' => 'fail', 'message' => $model->getFirstErrors()];
         }
     }
 }
