@@ -9234,7 +9234,7 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 
 .project-page--slider {
   width: 100%;
-  padding-top: 75%;
+  padding-top: 60%;
   position: relative;
 }
 
@@ -11484,6 +11484,10 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
 
   .project-page--info .info li {
     padding: 0 10px 10px;
+  }
+
+  .project-page--slider {
+    padding-top: 75%;
   }
 
   .project-page--reviews {
