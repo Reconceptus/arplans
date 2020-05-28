@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Config;
+use common\models\ContactForm;
 use common\models\LoginForm;
 use common\models\Profile;
 use common\models\Request;
@@ -140,10 +141,17 @@ class SiteController extends Controller
     public function actionRequest()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $model = new Request();
         $post = Yii::$app->request->post();
-        if (isset($post['Request']['accept'])) {
-            $post['Request']['accept'] = 1;
+        if (isset($post['Request'])) {
+            $model = new Request();
+            if (isset($post['Request']['accept'])) {
+                $post['Request']['accept'] = 1;
+            }
+        }else{
+            $model = new ContactForm();
+            if (isset($post['ContactForm']['accept'])) {
+                $post['ContactForm']['accept'] = 1;
+            }
         }
         if (Yii::$app->request->isAjax && $model->load($post)) {
             $file = UploadedFile::getInstance($model, 'file');
@@ -169,7 +177,7 @@ class SiteController extends Controller
      */
     public function actionContacts()
     {
-        $request = new Request();
+        $request = new ContactForm();
         $model = About::getModel();
         $query = About::getFilteredQuery(Yii::$app->request->get());
         $partners = Partner::find()->where(['is_active' => Partner::IS_ACTIVE, 'is_deleted' => Partner::IS_NOT_DELETED])->all();

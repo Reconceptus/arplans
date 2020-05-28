@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $query */
-/* @var $request \common\models\Request */
+/* @var $request \common\models\ContactForm */
 /* @var $model \modules\partner\models\About */
 /* @var $partners \modules\partner\models\Partner[] */
 
@@ -73,9 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => ['enctype' => 'multipart/form-data'],
                             'id'      => 'contacts-form',
                         ]); ?>
-                        <?= Html::hiddenInput('Request[url]', Yii::$app->request->getAbsoluteUrl()) ?>
-                        <?= Html::hiddenInput('Request[type]', \common\models\Request::PAGE_CONTACT) ?>
-                        <?= Html::hiddenInput('Request[contact]', '-') ?>
+                        <?= Html::hiddenInput('ContactForm[url]', Yii::$app->request->getAbsoluteUrl()) ?>
+                        <?= Html::hiddenInput('ContactForm[type]', \common\models\Request::PAGE_CONTACT) ?>
+                        <?= Html::hiddenInput('ContactForm[contact]', '-') ?>
                         <div class="contact-form--wrap">
                             <div class="contact-form--main custom-form">
                                 <div class="form-row stretched">
@@ -102,6 +102,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <?= Html::activeTextInput($request, 'email', ['placeholder' => '*Ваш e-mail']) ?>
                                             </div>
                                         </div>
+                                        <?= $form->field($request, 'reCaptcha',
+                                            ['enableAjaxValidation' => false, 'enableClientValidation' => false])->widget(
+                                            \himiklab\yii2\recaptcha\ReCaptcha2::className()
+                                        )->label(false) ?>
                                     </div>
                                 </div>
                                 <div class="form-row centered">
@@ -138,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="form-row-element">
                                             <div class="check">
                                                 <label>
-                                                    <input type="checkbox" name="Request[accept]">
+                                                    <input type="checkbox" name="ContactForm[accept]">
                                                     <span>Согласен на <a href="/page/privacy">обработку персональных данных</a></span>
                                                 </label>
                                             </div>
@@ -209,16 +213,20 @@ $js = <<<JS
         onfocusout: false,
         ignore: ".ignore",
         rules: {
-            'Request[text]': {required: true},
-            'Request[name]': {required: true},
-            'Request[email]': {required: true},
-            'Request[accept]': {required: true}
+            'ContactForm[text]': {required: true},
+            'ContactForm[name]': {required: true},
+            'ContactForm[email]': {required: true},
+             'ContactForm[phone]': {required: true},
+            'ContactForm[accept]': {required: true},
+             'ContactForm[reCaptcha]': {required: true}
         },
         messages: {
-           'Request[text]': {required: ""},
-           'Request[name]': {required: ""},
-           'Request[email]': {required: ""},
-           'Request[accept]': {required: ""}
+           'ContactForm[text]': {required: ""},
+           'ContactForm[name]': {required: ""},
+           'ContactForm[email]': {required: ""},
+           'ContactForm[accept]': {required: ""},
+             'ContactForm[phone]': {required: ""},
+              'ContactForm[reCaptcha]': {required: ""}
         },
         errorClass: 'invalid',
         highlight: function(element, errorClass) {
@@ -249,6 +257,7 @@ $js = <<<JS
                             errors+=elem+'<br/>';
                           });
                           project.alertMessage('',errors);
+                            $('#senden-contacts').removeClass('senden')
                       }
                        return false;
                     },

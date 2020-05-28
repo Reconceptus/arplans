@@ -19,7 +19,9 @@ return [
         'reCaptcha'        => [
             'class'     => 'himiklab\yii2\recaptcha\ReCaptchaConfig',
             'siteKeyV3' => $params['recaptchaSite3'],
+            'siteKeyV2' => $params['recaptchaSite2'],
             'secretV3'  => $params['recaptchaSecret3'],
+            'secretV2'  => $params['recaptchaSecret2'],
         ],
         'formatter'    => [
             'class'           => 'yii\i18n\Formatter',

@@ -103,7 +103,6 @@ $js = <<<JS
             'Request[name]': {required: true},
             'Request[email]': {required: true},
             'Request[phone]': {required: true},
-            'Request[type]': {required: true},
             'Request[text]': {required: true},
             'Request[accept]': {required: true},
             'Request[reCaptcha]': {required: true}
@@ -113,7 +112,6 @@ $js = <<<JS
           'Request[name]': {required: ""},
             'Request[email]': {required: ""},
             'Request[phone]': {required: ""},
-            'Request[type]': {required: ""},
            'Request[text]': {required: ""},
            'Request[accept]': {required: ""},
            'Request[reCaptcha]': {required: ""}
@@ -141,6 +139,13 @@ $js = <<<JS
                   if(res.status==='success'){
                        $('[data-modal="consultation"]').addClass('successful');
                        $('#senden-cons').removeClass('senden');
+                  }else{
+                       var errors = "";
+                          $.each(res.message, function( i, elem ) {
+                            errors+=elem+'<br/>';
+                          });
+                          project.alertMessage('',errors);
+                            $('##senden-cons').removeClass('senden')
                   }
                 },
             
