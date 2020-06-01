@@ -145,7 +145,7 @@ class CartController extends ActiveController
                     }
                 }
                 $order->price = $amount;
-                $order->partner_percent = $amount / 100 * floatval(Config::getValue('partner_percent'));
+                $order->partner_percent = $amount / 100 * (float)Config::getValue('partner_percent');
                 $order->type = Order::TYPE_API;
                 if ($order->save()) {
                     Cart::clearUserCartByGuid($get['guid']);
@@ -177,7 +177,7 @@ class CartController extends ActiveController
         }
         if (isset($get['Request']['accept'])) {
             $get['Request']['accept'] = 1;
-        };
+        }
         $user = Yii::$app->user->identity;
         /* @var $user User */
         $partner = $user->partner;

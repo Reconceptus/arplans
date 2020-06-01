@@ -13,6 +13,7 @@ $type = (int) $model->type;
     <p>Имя: <?= $model->name ?></p>
     <p>Email: <?= $model->email ?></p>
     <p>Телефон: <?= $model->phone ?></p>
+    <p>Контакт: <?= $model->contact ?></p>
 <?php if ($model->region): ?>
     <p>Регион: <?= $model->region ?></p>
 <?php endif; ?>
