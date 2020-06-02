@@ -10969,9 +10969,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 8 auto;
-    -moz-columns: 8 auto;
-    columns: 8 auto;
+    -webkit-columns: 6 auto;
+    -moz-columns: 6 auto;
+    columns: 6 auto;
   }
 
   .projects-compilation .contact-page--partners ul {
@@ -11567,9 +11567,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 2 auto;
-    -moz-columns: 2 auto;
-    columns: 2 auto;
+    -webkit-columns: 1 auto;
+    -moz-columns: 1 auto;
+    columns: 1 auto;
     -webkit-column-gap: 20px;
     -moz-column-gap: 20px;
     column-gap: 20px;
@@ -12928,9 +12928,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 5 auto;
-    -moz-columns: 5 auto;
-    columns: 5 auto;
+    -webkit-columns: 3 auto;
+    -moz-columns: 3 auto;
+    columns: 3 auto;
   }
 
   .projects-compilation .contact-page--partners ul {
@@ -14466,9 +14466,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 4 auto;
-    -moz-columns: 4 auto;
-    columns: 4 auto;
+    -webkit-columns: 3 auto;
+    -moz-columns: 3 auto;
+    columns: 3 auto;
   }
 
   .projects-compilation .contact-page--partners ul {
@@ -14523,9 +14523,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 3 auto;
-    -moz-columns: 3 auto;
-    columns: 3 auto;
+    -webkit-columns: 2 auto;
+    -moz-columns: 2 auto;
+    columns: 2 auto;
   }
 
   .projects-compilation .contact-page--partners ul {
@@ -14753,9 +14753,9 @@ html:not([dir=rtl]) .range .noUi-horizontal .noUi-handle {
   }
 
   .contact-page--partners ul {
-    -webkit-columns: 6 auto;
-    -moz-columns: 6 auto;
-    columns: 6 auto;
+    -webkit-columns: 4 auto;
+    -moz-columns: 4 auto;
+    columns: 4 auto;
   }
 
   .projects-compilation .contact-page--partners ul {
