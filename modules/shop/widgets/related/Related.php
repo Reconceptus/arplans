@@ -22,10 +22,10 @@ class Related extends Widget
 
     public function run()
     {
-        $posibleParameters = ['floors', 'discount', 'is_new', 'free', 'rooms', 'min_area', 'maxarea', 'category'];
+        $possibleParameters = ['floors', 'discount', 'is_new', 'free', 'rooms', 'min_area', 'maxarea', 'category'];
         $get = Yii::$app->request->get();
         foreach ($get as $k => $param) {
-            if (!in_array($k, $posibleParameters, true)) {
+            if (!in_array($k, $possibleParameters, true)) {
                 unset($get[$k]);
             }
         }
