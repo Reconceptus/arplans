@@ -22,7 +22,14 @@ class Related extends Widget
 
     public function run()
     {
-        $models = Item::getFilteredQuery($this->model->category, Yii::$app->request->get())->andWhere(['!=', 'i.id', $this->model->id])->limit(4)->all();
+        $posibleParameters = ['floors', 'discount', 'is_new', 'free', 'rooms', 'min_area', 'maxarea', 'category'];
+        $get = Yii::$app->request->get();
+        foreach ($get as $k=>$param){
+            if(!in_array($k, $posibleParameters, true)){
+                unset($get[$k]);
+            }
+        }
+        $models = Item::getFilteredQuery($this->model->category, $get)->andWhere(['!=', 'i.id', $this->model->id])->limit(4)->all();
         if (!$models) {
             $models = Item::find()->where(['category_id' => $this->model->category_id])->andWhere(['is_active' => Item::IS_ACTIVE])->andWhere(['is_deleted' => Item::IS_NOT_DELETED])->limit(4)->all();
         }
