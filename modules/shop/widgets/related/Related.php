@@ -24,8 +24,8 @@ class Related extends Widget
     {
         $posibleParameters = ['floors', 'discount', 'is_new', 'free', 'rooms', 'min_area', 'maxarea', 'category'];
         $get = Yii::$app->request->get();
-        foreach ($get as $k=>$param){
-            if(!in_array($k, $posibleParameters, true)){
+        foreach ($get as $k => $param) {
+            if (!in_array($k, $posibleParameters, true)) {
                 unset($get[$k]);
             }
         }

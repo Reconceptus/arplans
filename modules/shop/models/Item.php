@@ -82,7 +82,7 @@ class Item extends \yii\db\ActiveRecord
     public function getUrl()
     {
         if ($this->_url === null) {
-            $this->_url = Url::to('/shop/'.$this->category->slug.'/'.$this->slug);
+            $this->_url = Url::to('/shop/' . $this->category->slug . '/' . $this->slug);
         }
         return $this->_url;
     }
@@ -294,17 +294,17 @@ class Item extends \yii\db\ActiveRecord
 
 
     /**
-     * @param  Category|ActiveRecord  $category
-     * @param  array  $get
+     * @param Category|ActiveRecord $category
+     * @param array $get
      * @return ActiveQuery
      */
     public static function getFilteredQuery(Category $category, array $get)
     {
         // Делаем выборку товаров
         $query = self::find()->alias('i')->select('i.*, (`i`.`price`-`i`.`discount`) as cost')->distinct()
-            ->leftJoin(ItemOption::tableName().' io', 'i.id=io.item_id')
-            ->innerJoin(Category::tableName().' cat', 'i.category_id = cat.id')
-            ->leftJoin(Catalog::tableName().' c', 'cat.id=c.category_id')
+            ->leftJoin(ItemOption::tableName() . ' io', 'i.id=io.item_id')
+            ->innerJoin(Category::tableName() . ' cat', 'i.category_id = cat.id')
+            ->leftJoin(Catalog::tableName() . ' c', 'cat.id=c.category_id')
             ->where(['i.category_id' => $category->id])
             ->andWhere(['i.is_active' => self::IS_ACTIVE])
             ->andWhere(['i.is_deleted' => self::IS_NOT_DELETED]);
@@ -323,7 +323,7 @@ class Item extends \yii\db\ActiveRecord
         if (isset($get['floors']) && is_array($get['floors'])) {
             $floors[] = 'or';
             foreach ($get['floors'] as $k => $floor) {
-                $floors[] = ['>', 'i.'.$k, 0];
+                $floors[] = ['>', 'i.' . $k, 0];
             }
             $query->andWhere($floors);
             unset($get['floors']);
@@ -429,8 +429,8 @@ class Item extends \yii\db\ActiveRecord
 
     /**
      * Добавляем условия по чекбоксам свойств товара к выборке
-     * @param  ActiveQuery  $query
-     * @param  array  $get
+     * @param ActiveQuery $query
+     * @param array $get
      * @return ActiveQuery
      */
     public static function addConditions(ActiveQuery $query, array $get)
@@ -440,12 +440,12 @@ class Item extends \yii\db\ActiveRecord
                 $query->andWhere(['>', $key, 0]);
             } else {
                 $values = [];
-                $query->joinWith('itemOptions io'.$key);
+                $query->joinWith('itemOptions io' . $key);
                 foreach ($item as $k => $value) {
                     $values[] = $k;
                 }
-                $query->andWhere(['io'.$key.'.catalog_id' => $key])->andWhere([
-                    'in', 'io'.$key.'.catalog_item_id', $values
+                $query->andWhere(['io' . $key . '.catalog_id' => $key])->andWhere([
+                    'in', 'io' . $key . '.catalog_item_id', $values
                 ]);
             }
         }
@@ -475,8 +475,8 @@ class Item extends \yii\db\ActiveRecord
     public function getIO($slug)
     {
         return ItemOption::find()->alias('io')
-            ->innerJoin(Item::tableName().' i', 'io.item_id=i.id')
-            ->innerJoin(Catalog::tableName().' c', 'io.catalog_id=c.id')
+            ->innerJoin(Item::tableName() . ' i', 'io.item_id=i.id')
+            ->innerJoin(Catalog::tableName() . ' c', 'io.catalog_id=c.id')
             ->where(['c.slug' => $slug, 'i.id' => $this->id])
             ->andWhere(['or', ['c.category_id' => $this->category_id], ['is', 'c.category_id', null]])
             ->one();
@@ -509,7 +509,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public static function findActiveItem($id)
     {
-        return self::find()->where(['id' => (int) $id, 'is_active' => self::IS_ACTIVE, 'is_deleted' => self::IS_NOT_DELETED])->one();
+        return self::find()->where(['id' => (int)$id, 'is_active' => self::IS_ACTIVE, 'is_deleted' => self::IS_NOT_DELETED])->one();
     }
 
 

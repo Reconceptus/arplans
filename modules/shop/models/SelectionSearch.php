@@ -100,9 +100,9 @@ class SelectionSearch extends Selection
             'updated_at'    => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'selection.name', $this->name])
+            ->andFilterWhere(['like', 'selection.slug', $this->slug])
+            ->andFilterWhere(['like', 'selection.description', $this->description]);
 
         return $dataProvider;
     }
