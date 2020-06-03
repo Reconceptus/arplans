@@ -26,7 +26,7 @@ class Item extends Widget
         $isInCart = array_key_exists($this->model->id, $this->inCart);
         $content = $this->render(($this->api ? 'api'.DIRECTORY_SEPARATOR : '') . $this->viewName, [
             'model'       => $this->model,
-            'get'         => $this->get,
+            'get'         => [],
             'favorites'   => $this->favorites,
             'sizeCatalog' => $this->sizeCatalog,
             'isInCart'    => $isInCart

@@ -10,6 +10,7 @@ namespace modules\shop\widgets\related;
 
 
 use modules\shop\models\Item;
+use Yii;
 use yii\base\Widget;
 
 class Related extends Widget
@@ -21,7 +22,7 @@ class Related extends Widget
 
     public function run()
     {
-        $models = Item::getFilteredQuery($this->model->category, \Yii::$app->request->get())->andWhere(['!=', 'i.id', $this->model->id])->limit(4)->all();
+        $models = Item::getFilteredQuery($this->model->category, Yii::$app->request->get())->andWhere(['!=', 'i.id', $this->model->id])->limit(4)->all();
         if (!$models) {
             $models = Item::find()->where(['category_id' => $this->model->category_id])->andWhere(['is_active' => Item::IS_ACTIVE])->andWhere(['is_deleted' => Item::IS_NOT_DELETED])->limit(4)->all();
         }
