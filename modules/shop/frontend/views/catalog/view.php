@@ -8,9 +8,10 @@
 
 use frontend\widgets\recently\Recently;
 use frontend\widgets\share\Share;
+use modules\shop\models\Item;
 use modules\shop\widgets\related\Related;
 
-/* @var $model \modules\shop\models\Item */
+/* @var $model Item */
 /* @var $favorites array */
 /* @var $inCart array */
 $isInCart = array_key_exists($model->id, $inCart);

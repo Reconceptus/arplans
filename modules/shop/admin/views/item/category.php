@@ -41,6 +41,9 @@ $columns = [
         'attribute' => 'stat.purchases',
     ],
     [
+        'attribute' => 'created_at',
+    ],
+    [
         'class'    => ActionColumn::class,
         'template' => '{view}',
         'buttons'  => [
