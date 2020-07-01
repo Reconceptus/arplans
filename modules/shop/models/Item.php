@@ -361,15 +361,15 @@ class Item extends \yii\db\ActiveRecord
         $minArea = (int)ArrayHelper::getValue($get, 'minarea');
         if ($minArea && $minArea!==40) {
             $query->andWhere(['>=', 'i.common_area', $minArea]);
-            unset($get['minarea']);
         }
+        unset($get['minarea']);
 
         // по максимальной площади
         $maxArea = (int)ArrayHelper::getValue($get, 'maxarea');
         if ($maxArea && $maxArea !== 300) {
             $query->andWhere(['<=', 'i.common_area', $maxArea]);
-            unset($get['maxarea']);
         }
+        unset($get['maxarea']);
         if (isset($get['sort'])) {
             unset($get['sort']);
         }

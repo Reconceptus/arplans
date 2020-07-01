@@ -6,8 +6,8 @@
  * Time: 15:29
  */
 $get = Yii::$app->request->get();
-$min = !empty($get['minarea']) ? intval($get['minarea']) : 0;
-$max = !empty($get['maxarea']) ? intval($get['maxarea']) : 0;
+$min = !empty($get['minarea']) ? (int) $get['minarea'] : 0;
+$max = !empty($get['maxarea']) ? (int) $get['maxarea'] : 0;
 ?>
     <script>
         var min = <?=$min?>;
