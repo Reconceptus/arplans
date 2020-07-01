@@ -10,12 +10,12 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
-<?php if ($exception->statusCode === 404): ?>
+<?php if (in_array($exception->statusCode, [404, 403], true)): ?>
     <div class="section">
         <div class="bg-head--error gradient">
             <div class="content content--sm">
-                <h1 class="title">404</h1>
-                <h2 class="subtitle">страница не существует,</h2>
+                <h1 class="title"><?=$exception->statusCode?></h1>
+                <h2 class="subtitle"><?=$message?></h2>
                 <h3 class="subtitle">вернитесь <a href="/">на главную</a></h3>
             </div>
         </div>
