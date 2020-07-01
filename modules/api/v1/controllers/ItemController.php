@@ -38,7 +38,7 @@ class ItemController extends ActiveController
             $categoriesArray = ArrayHelper::map($categories, 'id', 'name');
             if (isset($get['category'])) {
                 if (isset($categoriesArray) && array_key_exists($get['category'], $categoriesArray)) {
-                    $category = Category::findOne(['id' => intval($get['category'])]);
+                    $category = Category::findOne(['id' => (int) $get['category']]);
                 } else {
                     return ['status' => 'fail', 'message' => 'Категория не существует'];
                 }

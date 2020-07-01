@@ -15,7 +15,7 @@ $this->title = $name;
         <div class="bg-head--error gradient">
             <div class="content content--sm">
                 <h1 class="title"><?=$exception->statusCode?></h1>
-                <h2 class="subtitle"><?=$message?></h2>
+                <h2 class="subtitle"><?=nl2br(Html::encode($message))?></h2>
                 <h3 class="subtitle">вернитесь <a href="/">на главную</a></h3>
             </div>
         </div>
