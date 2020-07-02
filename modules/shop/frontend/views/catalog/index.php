@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 20.08.2018
- * Time: 14:57
- */
 
 use frontend\widgets\recently\Recently;
 use frontend\widgets\share\Share;
