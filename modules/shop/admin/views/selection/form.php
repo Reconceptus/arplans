@@ -12,10 +12,9 @@ use yii\widgets\ActiveForm;
 /* @var $catalogs Catalog[] */
 /* @var $model modules\shop\models\Selection */
 /* @var $form yii\widgets\ActiveForm */
-$this->title = $model->isNewRecord ? 'Добавление подборки' : 'Редактирование подборки';
 ?>
 
-<h1><?= $this->title ?></h1>
+<h1>Редактирование подборки</h1>
 <div class="selection-form">
 
     <?php $form = ActiveForm::begin(); ?>
