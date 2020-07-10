@@ -149,7 +149,7 @@ class PartnerController extends AdminController
      */
     public function actionConfig()
     {
-        $id = intval(Yii::$app->request->get('id'));
+        $id = (int) Yii::$app->request->get('id');
         if (!$id) {
             throw new NotFoundHttpException();
         }
@@ -180,13 +180,15 @@ class PartnerController extends AdminController
     public function actionCheckCategory()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $get = Yii::$app->request->get();
-        $model = PartnerCategory::find()->where(['category_id' => intval($get['category_id']), 'partner_id' => intval($get['partner_id'])])->one();
-        if (intval($get['checked']) === 1) {
+        $checked = (int)Yii::$app->request->get('checked');
+        $category_id = (int)Yii::$app->request->get('category_id');
+        $partner_id = (int)Yii::$app->request->get('partner_id');
+        $model = PartnerCategory::find()->where(['category_id' => $category_id, 'partner_id' => $partner_id])->one();
+        if ($checked === 1) {
             if (!$model) {
                 $model = new PartnerCategory();
-                $model->partner_id = intval($get['partner_id']);
-                $model->category_id = intval($get['category_id']);
+                $model->partner_id = $partner_id;
+                $model->category_id = $category_id;
                 if ($model->save()) {
                     return ['status' => 'success', 'checked' => 1];
                 }
