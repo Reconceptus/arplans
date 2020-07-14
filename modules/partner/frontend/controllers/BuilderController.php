@@ -40,7 +40,7 @@ class BuilderController extends Controller
     {
         $id = Yii::$app->request->get('id');
         $model = Builder::findOne(['id' => $id]);
-        if ($model->price_list) {
+        if ($model && $model->price_list) {
             $fileName = Yii::getAlias('@webroot') . $model->price_list;
             $extArr = explode('.', $model->price_list);
             $ext = end($extArr);

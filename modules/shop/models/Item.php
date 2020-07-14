@@ -320,6 +320,7 @@ class Item extends \yii\db\ActiveRecord
         unset($get['inv']);
         unset($get['_pjax']);
         unset($get['amp;maxarea']);
+        unset($get['Категории']);
 
         // Этажи
         if (isset($get['floors']) && is_array($get['floors'])) {
