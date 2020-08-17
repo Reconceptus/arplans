@@ -74,7 +74,7 @@ $item = $model->item;
             <div class="projects-item--actions">
                 <div class="price-box">
                     <div class="projects-item--part-title">Стоимость</div>
-                    <div class="price"><?= $model->getLotPrice($albumPrice) ?>
+                    <div class="price"><span class="js-cart-price"><?= $model->getLotPrice($albumPrice) ?></span>
                         &#8381;
                     </div>
                 </div>

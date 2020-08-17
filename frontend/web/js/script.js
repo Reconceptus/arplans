@@ -99,7 +99,7 @@ $(function () {
             },
             success: function (data) {
                 if (data.status === 'success') {
-                    container.find('.price').text(data.price);
+                    container.find('.js-cart-price').text(data.price);
                     var string = $("span.sum[data-id=" + id + "]");
                     string.text(data.price);
                     getAmount();
