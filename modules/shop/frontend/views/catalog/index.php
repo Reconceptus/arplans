@@ -12,6 +12,7 @@ use yii\widgets\ListView;
 /* @var $inCart array */
 $sort = Yii::$app->request->get('sort');
 $this->title = $category->seo_title;
+$name = $category->name;
 $this->registerMetaTag(['name' => 'keywords', 'content' => $category->seo_keywords]);
 $this->registerMetaTag(['name' => 'description', 'content' => $category->seo_description]);
 $this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getHostInfo().'/'.Yii::$app->request->getPathInfo()]);
@@ -20,7 +21,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getH
     <div class="section bg-head">
         <div class="content content--lg">
             <div class="bg-head--main gradient">
-                <h1 class="title title-lg"><?= $this->title ?></h1>
+                <h1 class="title title-lg"><?= $name ?></h1>
             </div>
         </div>
     </div>
