@@ -41,7 +41,7 @@ $price = $model->getPrice();
                                      xlink:href="#icon-feature"/>
                             </svg>
                         </i>
-                        <span>Замена материала стен и зеркальное отображение бесплатно</span>
+                        <span>Архитектурно-строительный комплект чертежей</span>
                     </div>
                 <?php endif; ?>
             </div>
