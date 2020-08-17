@@ -26,9 +26,5 @@ if (!$category) {
                 <?= Html::a($model->name, Url::to('/shop/' . $model->slug), ['class' => $category === $model->slug ? 'active' : '']) ?>
             </li>
         <?php endforeach; ?>
-
-            <li>
-                <?= Html::a('Индивидуальное проектирование', Url::to('/shop/service/individual'), ['class' => $slug === 'individual' ? 'active' : '']) ?>
-            </li>
     </ul>
 </nav>
