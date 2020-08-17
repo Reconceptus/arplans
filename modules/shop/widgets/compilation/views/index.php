@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: borod
- * Date: 29.08.2018
- * Time: 16:22
- */
 
 use modules\shop\models\Item;
 use yii\helpers\Html;
@@ -22,13 +16,13 @@ if (isset($get['category'])) {
     <div class="content content--lg mobile-hidden">
         <div class="projects-filters">
             <?= Html::a('скидки', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter' => "1"]) ?>
-            <?= Html::a('новые проекты', 'javascript:void(0);', ['class' => 'projects-filters--item current', 'data-filter' => "2"]) ?>
+            <?= Html::a('новые проекты домов', 'javascript:void(0);', ['class' => 'projects-filters--item current', 'data-filter' => "2"]) ?>
             <?= Html::a('бесплатно', 'javascript:void(0);', ['class' => 'projects-filters--item', 'data-filter' => "3"]) ?>
         </div>
     </div>
     <div class="content content--lg active" data-filter-box="2">
         <div class="projects-filters mobile-show">
-            <div class="projects-filters--item current">новые проекты</div>
+            <div class="projects-filters--item current">новые проекты домов</div>
         </div>
         <div class="projects-list col-4">
             <?php foreach ($models['new'] as $model): ?>
