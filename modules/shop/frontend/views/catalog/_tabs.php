@@ -29,7 +29,7 @@ $ready = $model->getReady();
             <?php if ($ready): ?>
                 <li class="tab05"><label for="tab05">Фото строительства</label></li>
             <?php endif; ?>
-            <li class="tab06"><label for="tab06">Доп. услуги</label></li>
+            <li class="tab06"><label for="tab06">Состав проекта</label></li>
         </ul>
     </nav>
     <div class="tabs-sections">
@@ -39,7 +39,7 @@ $ready = $model->getReady();
                     <div class="tab-main-slider" data-owl="plans">
                         <ul class="owl-carousel">
                             <?php foreach ($model->getPlans() as $k => $plan): ?>
-                            <?php /* @var $plan \modules\shop\models\ItemImage*/?>
+                                <?php /* @var $plan \modules\shop\models\ItemImage */ ?>
                                 <li class="plan-item">
                                     <img data-plan="<?= $plan->id ?>" src="<?= $plan->getThumb() ?>" alt="plan">
                                 </li>
@@ -88,8 +88,12 @@ $ready = $model->getReady();
                                 </tr>
                             <?php endif; ?>
                             <?php $floors = [];
-                            if ($model->one_floor) $floors[] = 'одноэтажный';
-                            if ($model->two_floor) $floors[] = 'двухэтажный';
+                            if ($model->one_floor) {
+                                $floors[] = 'одноэтажный';
+                            }
+                            if ($model->two_floor) {
+                                $floors[] = 'двухэтажный';
+                            }
                             ?>
                             <?php if ($floors): ?>
                                 <tr>
@@ -177,7 +181,41 @@ $ready = $model->getReady();
             </div>
         <?php endif; ?>
         <div class="tab-section tab-services tab06">
-            <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'index']) ?>
+            <div class="custom-row">
+                <div class="custom-row-col col-50">
+                    <h4 class="title">Архитектурные решения (АР)</h4>
+                    <ul>
+                        <li>Титульный лист</li>
+                        <li>Ведомость рабочих чертежей основного комплекта АР</li>
+                        <li>Пояснительная записка</li>
+                        <li>Эскизы дома в перспективе</li>
+                        <li>Планы этажей</li>
+                        <li>Экспликации этажей</li>
+                        <li>Разрезы</li>
+                        <li>Фасады (северный, восточный, южный, западный)</li>
+                        <li>Спецификация окон</li>
+                        <li>Спецификация дверей</li>
+                    </ul>
+                </div>
+                <div class="custom-row-col col-50">
+                    <h4 class="title">Конструктивные решения (КР)</h4>
+                    <ul>
+                        <li>Ведомость рабочих чертежей основного комплекта КР</li>
+                        <li>План фундамента</li>
+                        <li>Устройство фундамента, спецификация материалов фундамента</li>
+                        <li>Планы перекрытий этажей, спецификация элементов</li>
+                        <li>Устройство перекрытий</li>
+                        <li>Устройство стен</li>
+                        <li>Спецификация материалов стен</li>
+                        <li>Схема расположения лаг чердака (если есть)</li>
+                        <li>Схема расположения элементов стропил</li>
+                        <li>Спецификация элементов стропил</li>
+                        <li>Устройство стропильной системы</li>
+                        <li>Узлы устройства кровли</li>
+                        <li>План кровли</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
