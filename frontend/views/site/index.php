@@ -49,7 +49,7 @@ $author = Main::getAuthorMain();
         </div>
     </div>
 
-    <div class="section site-info">
+    <!-- <div class="section site-info">
         <div class="content content--lg">
             <div class="site-info--wrap">
                 <ul>
@@ -100,6 +100,71 @@ $author = Main::getAuthorMain();
                 </ul>
             </div>
         </div>
+    </div> -->
+    <br>
+    <div class="row_1psdiv">
+        <h2>Готовые проекты домов и коттеджей по цене от 15 000 рублей</h2>
+        <br>
+        <p>В бюро Арпланс предлагаем вам не просто красивые картинки «квадратных метров» мечты – занимаемся продажей реальных проектов домов и коттеджей по всей России. За 10 лет работы наши архитекторы научились предугадывать желания клиентов, поэтому планы в процессе сотрудничества можем адаптировать под конкретный запрос и предпочтения.</p>
+        <br>
+        <h2>Сохраните свои ресурсы – купите готовый проект дома</h2>
+        <br>
+        <div class="row_1ps">
+            <div class="col-md-1">
+                <i class="icon icon-delivery">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-delivery"/>
+                    </svg>
+                </i>
+            </div>
+            <div class="col-md-11">
+                <p class="bold_1ps">Экономим ваше время </p>
+                <p>Не ждите месяцами разработку плана, в базе бюро Арпланс больше 1 000 готовых проектов домов: деревянных, каркасных, каменных и комбинированных зданий. Получите чертежи в течение 3-5 рабочих дней после оформления.</p>
+                <p>При необходимости посоветуем застройщика в вашем регионе – у нас много партнеров по всей стране. </p>
+            </div>
+        </div>
+        <div class="row_1ps">
+            <div class="col-md-1">
+                <i class="icon icon-changes">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-changes"/>
+                    </svg>
+                </i>
+            </div>
+            <div class="col-md-11">
+                <p class="bold_1ps">Вносим изменения в проект</p>
+                <p>Проконсультируйтесь с опытными архитекторами, если хотите что-то поправить. Специалисты на связи с заказчиком 24/7.</p>
+                <p>Бесплатно адаптируем готовые проекты домов под материалы, отвечаем на вопросы, поясняем и даем рекомендации при строительстве – делаем все, чтобы «картинка» стала реальностью. Желаете построить «замок» по своему эскизу – наши конструкторы помогут и с этим. Срок – от 21 до 45 рабочих дней. Учтем все ваши предпочтения.</p>
+            </div>
+        </div>
+        <div class="row_1ps">
+            <div class="col-md-1">
+                <i class="icon icon-documents">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-documents"/>
+                    </svg>
+                </i>
+            </div>
+            <div class="col-md-11">
+                <p class="bold_1ps">Отправляем полный пакет документов</p>
+                <p>Смело контролируйте процесс строительства с готовым проектом дома – от фундамента до крыши.</p>
+                <p>Кроме красивых изображений, получите всю документацию: карты, схемы с архитектурными, функционально-технологическими решениями, измерения, заказ на материал.</p>
+            </div>
+        </div>
+        <div class="row_1ps">
+            <div class="col-md-1">
+                <i class="icon icon-money">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-money"/>
+                    </svg>
+                </i>
+            </div>
+            <div class="col-md-11">
+                <p class="bold_1ps">Ценим ваши вложения</p>
+                <p>Не тратьте четверть бюджета на создание документации с нуля, купите готовый проект дома или коттеджа – выйдет на 50% дешевле.</p>
+                <p>Следите за нашими ежемесячными и предпраздничными акциями – и заказывайте проект еще выгоднее.</p>
+            </div>
+        </div>
     </div>
 
 <?= Compilation::widget(['limit' => 8]) ?>
@@ -142,6 +207,7 @@ $author = Main::getAuthorMain();
             <div class="ready-projects--info">
                 <div class="info-box--text">
                     <?= ContentBlock::getValue('main_page_description') ?>
+                    <p class="strong_1ps"><strong>Готовые проекты домов – экономьте свое время</strong></p>
                 </div>
             </div>
         </div>
