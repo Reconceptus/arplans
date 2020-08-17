@@ -14,10 +14,6 @@
             </a>
             <a class="btn-round-min show-modal" data-modal="consultation">Консультация</a>
         </div>
-        <div class="compare-sidebar--info">
-            <div class="info-title">*Замена материала бесплатно</div>
-            <p>Укажите в заказе, что требуется изменение материала, мы свяжемся и уточним.</p>
-        </div>
         <div class="compare-list">
             <ul>
                 <li>
