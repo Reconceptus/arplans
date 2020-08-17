@@ -34,14 +34,6 @@ $item = $model->item;
             <div class="projects-item--part-title">Материал</div>
             <div class="projects-item--info">
                 <div><?= $item->getCatalogValue('walls') ?></div>
-                <div class="form-row-element">
-                    <div class="check">
-                        <label>
-                            <input type="checkbox" class="order-change-materials">
-                            <span>*Изменить материал</span>
-                        </label>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="compare-table--part part-count">

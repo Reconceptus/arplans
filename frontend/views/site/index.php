@@ -125,20 +125,6 @@ $author = Main::getAuthorMain();
         </div>
         <div class="row_1ps">
             <div class="col-md-1">
-                <i class="icon icon-changes">
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-changes"/>
-                    </svg>
-                </i>
-            </div>
-            <div class="col-md-11">
-                <p class="bold_1ps">Вносим изменения в проект</p>
-                <p>Проконсультируйтесь с опытными архитекторами, если хотите что-то поправить. Специалисты на связи с заказчиком 24/7.</p>
-                <p>Бесплатно адаптируем готовые проекты домов под материалы, отвечаем на вопросы, поясняем и даем рекомендации при строительстве – делаем все, чтобы «картинка» стала реальностью. Желаете построить «замок» по своему эскизу – наши конструкторы помогут и с этим. Срок – от 21 до 45 рабочих дней. Учтем все ваши предпочтения.</p>
-            </div>
-        </div>
-        <div class="row_1ps">
-            <div class="col-md-1">
                 <i class="icon icon-documents">
                     <svg xmlns="http://www.w3.org/2000/svg">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-site-documents"/>

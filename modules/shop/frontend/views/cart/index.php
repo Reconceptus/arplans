@@ -15,7 +15,7 @@ $albumPrice = (float) \common\models\Config::getValue('albumPrice');
 <div class="section basket-order">
     <div class="content content--lg">
         <div class="basket-form--section">
-            <h1 class="title title-sm">1. Проекты в корзине</h1>
+            <h1 class="title title-sm">Проекты в корзине</h1>
         </div>
         <div class="custom-row">
             <div class="custom-row-col col-elastic">
