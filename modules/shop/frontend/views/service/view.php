@@ -97,5 +97,5 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => Yii::$app->request->getH
         <?php endif; ?>
     </div>
 
-<?= \modules\shop\widgets\services\Services::widget(['id' => $model->id, 'viewName' => 'another']) ?>
+<?//= \modules\shop\widgets\services\Services::widget(['id' => $model->id, 'viewName' => 'another']) ?>
 <?= \frontend\widgets\recently\Recently::widget() ?>

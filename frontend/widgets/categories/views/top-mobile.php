@@ -40,18 +40,6 @@ use yii\helpers\Url;
             <?= Html::a('Блог', Url::to('/blog')) ?>
         </span>
     </li>
-    <?php if ($services): ?>
-        <li class="show-more-parent">
-            <span class="show-more">Услуги <span class="tick"></span></span>
-            <ul class="show-more-hidden">
-                <?php foreach ($services as $service): ?>
-                    <li>
-                        <?= Html::a($service->name, Url::to('/shop/service/' . $service->slug)) ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </li>
-    <?php endif; ?>
     <li>
             <span>
                 <a href="/contacts">Контакты</a>

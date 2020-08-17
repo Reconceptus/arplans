@@ -29,7 +29,6 @@
             <div class="footer-main--nav">
                 <?= \frontend\widgets\categories\Categories::widget(['viewName' => 'footer']) ?>
                 <?= \frontend\widgets\posts\Posts::widget(['viewName' => 'footer']) ?>
-                <?= \modules\shop\widgets\services\Services::widget(['viewName' => 'bottom']) ?>
                 <section class="section">
                     <h4 class="title">Arplans</h4>
                     <ul>

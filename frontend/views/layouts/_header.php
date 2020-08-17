@@ -4,7 +4,6 @@ use frontend\widgets\categories\Categories;
 use frontend\widgets\referral\Referral;
 use modules\content\models\ContentBlock;
 use modules\shop\widgets\cart\Cart;
-use modules\shop\widgets\services\Services;
 
 ?>
 <?= Referral::widget() ?>
@@ -20,7 +19,6 @@ use modules\shop\widgets\services\Services;
                         <ul>
                             <li><a href="#" class="show-modal " data-modal="consultation">Консультация</a></li>
                             <li><a href="/about" class="">О нас</a></li>
-                            <?= Services::widget(['viewName' => 'top']) ?>
                             <li><a href="/collaboration" class="">Сотрудничество</a></li>
                             <li><a href="/village" class="">Коттеджные поселки России</a></li>
                             <li><a href="/builder" class="">Строители и материалы</a></li>
