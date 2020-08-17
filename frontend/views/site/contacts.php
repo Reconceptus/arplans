@@ -169,7 +169,46 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
+    <div itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="ООО Арпланс">
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="ул. Чехова, д.2, оф. 2.8">
+            <meta itemprop="postalCode" content="150054">
+            <meta itemprop="addressLocality" content="Россия, г. Ярославль">
+        </div>
+        <meta itemprop="telephone" content="8-800-200-17-14">
+        <meta itemprop="email" content="arplans@yandex.ru">
+    </div>
+    <div itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Традиция">
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="ул. Матуринская 63а, офис 1">
+            <meta itemprop="postalCode" content="162602">
+            <meta itemprop="addressLocality" content="Россия, г. Череповец">
+        </div>
+        <meta itemprop="telephone" content="+7 (8202) 62-57-22">
+        <meta itemprop="email" content="info@traditsiya.su">
+    </div>
+    <div itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="СК Стандарты качества">
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="Выборгское шоссе 212. Павильон 11 А">
+            <meta itemprop="postalCode" content="197022">
+            <meta itemprop="addressLocality" content="Россия, г. Санкт-Петербург">
+        </div>
+        <meta itemprop="telephone" content="+7 (921) 417-27-62">
+        <meta itemprop="telephone" content="+7 (981) 181-00-68">
+    </div>
+    <div itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="SokolDom">
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <meta itemprop="streetAddress" content="ул. Валовая д. 37, строение 1">
+            <meta itemprop="postalCode" content="162602">
+            <meta itemprop="addressLocality" content="Россия, г. Москва">
+        </div>
+        <meta itemprop="telephone" content="8 951 733-73-73">
+        <meta itemprop="email" content="mail@sokoldom.com">
+    </div>
     <div class="big-header">
         <div class="content content--lg">
             <h2 class="title">Офисы продаж АРПЛАНС</h2>
