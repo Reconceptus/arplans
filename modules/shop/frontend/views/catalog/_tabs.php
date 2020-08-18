@@ -180,7 +180,7 @@ $ready = $model->getReady();
                 </div>
             </div>
         <?php endif; ?>
-        <div class="tab-section tab-services tab06">
+        <div class="tab-section tab-cost tab-services tab06">
             <div class="custom-row">
                 <div class="custom-row-col col-50">
                     <h4 class="title">Архитектурные решения (АР)</h4>
