@@ -221,7 +221,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                                         <div class="check">
                                                             <label>
                                                                 <input type="checkbox"
-                                                                       name="pool" <?= isset($get['gas_boiler']) ? 'checked' : '' ?>>
+                                                                       name="gas_boiler" <?= isset($get['gas_boiler']) ? 'checked' : '' ?>>
                                                                 <span>котельная</span>
                                                             </label>
                                                         </div>
