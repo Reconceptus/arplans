@@ -22,7 +22,7 @@ class ServiceController extends Controller
     {
         $slug = \Yii::$app->request->get('slug');
         $model = Service::findOne(['slug' => $slug]);
-        if (!$model) {
+        if (!$model || !$model->is_active || $model->is_deleted) {
             throw new NotFoundHttpException();
         }
         return $this->render('view', ['model' => $model]);
