@@ -30,12 +30,6 @@ $item = $model->item;
                 <div><?= $item->getCatalogValue('size') ?></div>
             </div>
         </div>
-        <div class="compare-table--part">
-            <div class="projects-item--part-title">Материал</div>
-            <div class="projects-item--info">
-                <div><?= $item->getCatalogValue('walls') ?></div>
-            </div>
-        </div>
         <div class="compare-table--part part-count">
             <div class="projects-item--part-title">**Количество альбомов</div>
             <div class="projects-item--info">

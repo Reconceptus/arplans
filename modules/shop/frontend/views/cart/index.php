@@ -39,11 +39,6 @@ $albumPrice = (float) \common\models\Config::getValue('albumPrice');
                                             Площадь
                                         </a>
                                     </div>
-                                    <div class="compare-table--part">
-                                        <a href="javascript:void(0);">
-                                            Материал
-                                        </a>
-                                    </div>
                                     <div class="compare-table--part part-count">
                                         <a href="javascript:void(0);">
                                             Количество альбомов
