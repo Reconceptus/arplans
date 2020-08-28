@@ -228,8 +228,6 @@ class TelegramTarget extends Target
      */
     private $messagesToRemove = [
         'Invalid auth key attempted for user',
-        'The verification code is incorrect',
-        'None of your requested content types is supported',
-        'Headers already sent'
+        'The verification code is incorrect'
     ];
 }
