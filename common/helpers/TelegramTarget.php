@@ -231,5 +231,6 @@ class TelegramTarget extends Target
         'The verification code is incorrect',
         'HeadersAlreadySentException',
         'Wrong password reset token',
+        'itemOptions ioamp;'
     ];
 }
