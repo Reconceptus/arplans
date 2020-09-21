@@ -229,6 +229,7 @@ class TelegramTarget extends Target
     private $messagesToRemove = [
         'Invalid auth key attempted for user',
         'The verification code is incorrect',
-        'yii\web\HeadersAlreadySentException: Headers already sent.'
+        'HeadersAlreadySentException',
+        'Wrong password reset token',
     ];
 }
