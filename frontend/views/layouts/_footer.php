@@ -50,7 +50,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom--copyright">© <?=\common\models\Config::getValue('footer_copyright')?></div>
-            <div class="footer-bottom--auth">Сделано <a href="http://reconcept.ru" target="_blank">Reconcept</a></div>
+            <div class="footer-bottom--auth">Сделано <a href="http://reconcept.ru" target="_blank" onclick="ym(5609182,'reachGoal','click_logo_reconcept_on_arplans')">Reconcept</a></div>
         </div>
     </div>
 </footer>
