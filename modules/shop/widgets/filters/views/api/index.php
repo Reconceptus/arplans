@@ -137,7 +137,7 @@ $rooms = isset($get['rooms']) ? $get['rooms'] : null;
                                                         <div class="check">
                                                             <label>
                                                                 <input type="checkbox" class="filter-checkbox"
-                                                                       name="floors[mansard]" <?= isset($get['floors']['mansard']) ? 'checked' : '' ?>>
+                                                                       name="mansard" <?= isset($get['mansard']) ? 'checked' : '' ?>>
                                                                 <span>с мансардой</span>
                                                             </label>
                                                         </div>
